@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "lkat": "apps/lkat",
+    "lkat-e2e": "apps/lkat-e2e"
+  }
+}
