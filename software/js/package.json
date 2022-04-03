@@ -9,6 +9,7 @@
   },
   "private": true,
   "dependencies": {
+    "@eventstore/db-client": "^3.3.0",
     "@nrwl/next": "13.9.6",
     "core-js": "^3.6.5",
     "next": "12.1.0",
