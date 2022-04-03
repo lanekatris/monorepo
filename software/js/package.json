@@ -9,7 +9,13 @@
   },
   "private": true,
   "dependencies": {
+    "@emotion/cache": "^11.7.1",
+    "@emotion/react": "^11.8.2",
+    "@emotion/server": "^11.4.0",
+    "@emotion/styled": "^11.8.1",
     "@eventstore/db-client": "^3.3.0",
+    "@mui/icons-material": "^5.5.1",
+    "@mui/material": "^5.5.3",
     "@nrwl/next": "13.9.6",
     "core-js": "^3.6.5",
     "next": "12.1.0",
