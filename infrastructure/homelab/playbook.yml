@@ -1,0 +1,23 @@
+---
+- hosts: homelab
+  roles:
+    - role: gepaplexx.microk8s
+      become: true
+      vars:
+        microk8s_plugins:
+          dashboard: true
+          storage: true
+  tasks:
+    - name: Install packages
+      become: true
+      ansible.builtin.package:
+        name:
+          - htop
+          - vim
+          - curl
+    - name: Install snap packages
+      become: true
+      snap:
+        classic: yes
+        name:
+          - microk8s
