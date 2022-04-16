@@ -30,6 +30,24 @@ export function IndexV2(props: IndexV2Props) {
             >
               Sign Up
             </a>
+            <a
+              href="#"
+              className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800"
+            >
+              Notes
+            </a>
+            <a
+              href="#"
+              className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800"
+            >
+              Articles
+            </a>
+            <a
+              href="#"
+              className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800"
+            >
+              About
+            </a>
           </div>
         </nav>
 
