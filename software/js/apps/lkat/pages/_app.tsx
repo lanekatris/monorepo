@@ -8,9 +8,9 @@ function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Welcome to site!</title>
+        <title>Lane's Site!</title>
       </Head>
-      <div className="app pattern h-screen bg-gray-900">
+      <div className="app pattern bg-gray-900 h-screen">
         <header className=" ">
           <div className="container px-6 mx-auto">
             <nav className="flex flex-col py-2 sm:flex-row sm:justify-between sm:items-center">
@@ -49,12 +49,12 @@ function CustomApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </main>
       </div>
-      <footer className="flex flex-col items-center justify-between px-6 py-4 bg-white dark:bg-gray-800 sm:flex-row">
+      <footer className="flex flex-col items-center justify-between px-6 py-4 bg-white dark:bg-gray-800 sm:flex-row ">
         <a
           href="#"
           className="text-xl font-bold text-gray-800 dark:text-white hover:text-gray-700 dark:hover:text-gray-300"
         >
-          Brand
+          Lane's Website
         </a>
 
         <p className="py-2 text-gray-800 dark:text-white sm:py-0">

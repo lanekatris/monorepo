@@ -6,8 +6,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export const getStaticProps = async () => {
-  // const p = path.join(__dirname, '../../articles');
-  // console.log('da path', p);
   const files = fs.readdirSync(path.join(process.cwd(), 'posts'));
   const posts = files.map((filename) => {
     const markdownWithMeta = fs.readFileSync(
@@ -31,36 +29,65 @@ export const getStaticProps = async () => {
 export interface ArticlesProps {}
 
 export function Articles({ posts }: ArticlesProps) {
+  console.log('posts', posts);
   return (
-    <div className="mt-5">
+    <div className="mt-5 pb-5">
       {posts.map((post, index) => (
-        <Link href={'/article/' + post.slug} passHref key={index}>
-          <div className="card mb-3 pointer" style={{ maxWidth: '540px' }}>
-            <div className="row g-0">
-              <div className="col-md-8">
-                <div className="card-body">
-                  <h5 className="card-title">{post.frontMatter.title}</h5>
-                  <p className="card-text">{post.frontMatter.description}</p>
-                  <p className="card-text">
-                    <small className="text-muted">
-                      {post.frontMatter.date}
-                    </small>
-                  </p>
+        <div
+          className="max-w-2xl mt-5 mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800"
+          key={index}
+        >
+          <Image
+            src={post.frontMatter.thumbnailUrl}
+            alt="thumbnail"
+            className="object-cover w-full h-64"
+            objectFit="cover"
+            width="700"
+            height="300"
+          />
+
+          <div className="p-6">
+            <div>
+              {(post.frontMatter.tags || []).map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs mr-2 font-medium text-blue-600 uppercase dark:text-blue-400"
+                >
+                  {tag}
+                </span>
+              ))}
+              <Link href={`/article/${post.slug}`}>
+                <a className="block mt-2 text-2xl font-semibold text-gray-800 transition-colors duration-200 transform dark:text-white hover:text-gray-600 hover:underline">
+                  {post.frontMatter.title}
+                </a>
+              </Link>
+              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                {post.frontMatter.description}
+              </p>
+            </div>
+
+            <div className="mt-4">
+              <div className="flex items-center">
+                <div className="flex items-center">
+                  <img
+                    className="object-cover h-10 rounded-full"
+                    src="https://images.unsplash.com/photo-1586287011575-a23134f797f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=48&q=60"
+                    alt="Avatar"
+                  />
+                  <a
+                    href="#"
+                    className="mx-2 font-semibold text-gray-700 dark:text-gray-200"
+                  >
+                    Jone Doe
+                  </a>
                 </div>
-              </div>
-              <div className="col-md-4 m-auto">
-                <Image
-                  src={post.frontMatter.thumbnailUrl}
-                  className="img-fluid mt-1 rounded-start"
-                  alt="thumbnail"
-                  width={500}
-                  height={400}
-                  objectFit="cover"
-                />
+                <span className="mx-1 text-xs text-gray-600 dark:text-gray-300">
+                  {post.frontMatter.date}
+                </span>
               </div>
             </div>
           </div>
-        </Link>
+        </div>
       ))}
     </div>
   );
