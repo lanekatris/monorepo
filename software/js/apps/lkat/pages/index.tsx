@@ -1,54 +1,77 @@
-import { Card, Container, Typography } from '@mui/material';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import ArticleIcon from '@mui/icons-material/Article';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import EmailIcon from '@mui/icons-material/Email';
-export function Index() {
-  return (
-    <Container maxWidth="sm">
-      <Card variant="outlined" sx={{ p: 2 }}>
-        <Typography variant="h5" alignContent="center" align="center">
-          Hi, I'm Lane Katris
-        </Typography>
-        <Typography align="center" gutterBottom>
-          Full stack engineer who enjoys the outdoors 🌲🗻
-        </Typography>
-        <Typography variant="h5" alignContent="center" align="center">
-          Work
-        </Typography>
-        <Typography align="center" gutterBottom>
-          I currently work at{' '}
-          <a href="https://www.ironnet.com/" target="_blank">
-            IronNet
-          </a>{' '}
-          as a full stack developer
-        </Typography>
+import './index.module.css';
+import Image from 'next/image';
 
-        <Typography
-          variant="h5"
-          gutterBottom
-          alignContent="center"
-          align="center"
-        >
-          Social
-        </Typography>
-        <Typography align="center">
-          <a href="https://github.com/lanekatris" target="_blank">
-            <GitHubIcon />
-          </a>
-          <a href="https://gitconnected.com/lanekatris">
-            <ArticleIcon />
-          </a>
-          <a href="https://www.linkedin.com/in/lane-katris-80610a44/">
-            <LinkedInIcon />
-          </a>
-          <a href="mailto:lanekatris@gmail.com">
-            <EmailIcon />
-          </a>
-        </Typography>
-      </Card>
-    </Container>
+/* eslint-disable-next-line */
+export interface IndexV2Props {}
+
+export function IndexV2(props: IndexV2Props) {
+  return (
+    <header className="bg-gray-900 pattern h-screen">
+      <div className="container px-6 mx-auto">
+        <nav className="flex flex-col py-2 sm:flex-row sm:justify-between sm:items-center">
+          <div></div>
+
+          <div className="flex items-center mt-2 -mx-2 sm:mt-0">
+            <a
+              href="#"
+              className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800"
+            >
+              Notes
+            </a>
+            <a
+              href="#"
+              className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800"
+            >
+              Articles
+            </a>
+            <a
+              href="#"
+              className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800"
+            >
+              About
+            </a>
+          </div>
+        </nav>
+
+        <div className="flex flex-col items-center py-6 lg:h-[32rem] lg:flex-row">
+          <div className="lg:w-1/2">
+            <h2 className="text-4xl font-semibold text-gray-100">
+              Hi, I'm Lane Katris
+            </h2>
+
+            <h3 className="text-2xl font-semibold text-gray-100">
+              Full stack engineer who enjoys the outdoors 🗻🧗
+              {/*<span className="text-blue-400">Guest</span>*/}
+            </h3>
+
+            <h3 className="text-2xl font-semibold text-gray-100 mt-3">
+              I currently work at{' '}
+              <a
+                className="text-blue-400"
+                href="https://ironnet.com"
+                target="_blank"
+              >
+                IronNet
+              </a>
+            </h3>
+
+            {/*<p className="mt-3 text-gray-100">*/}
+            {/*  Lorem ipsum dolor sit amet, consectetur adipiscing.*/}
+            {/*</p>*/}
+          </div>
+
+          <div className="flex mt-8 lg:w-1/2 lg:justify-end lg:mt-0">
+            <Image
+              className="object-cover w-full h-full max-w-2xl rounded-md"
+              src="/20200914_075553.jpg"
+              width="600"
+              height="400"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
   );
 }
 
-export default Index;
+export default IndexV2;
