@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import SyntaxHighlighter from 'react-syntax-highlighter';
+import Image from 'next/image';
 
 export const getStaticPaths = async () => {
   const files = fs.readdirSync(path.join(process.cwd(), 'posts'));
@@ -41,6 +42,18 @@ const components = {
       {props.children}
     </h3>
   ),
+  h1: (props) => (
+    <h1 className="text-xl font-bold text-gray-800 dark:text-white hover:text-gray-700 dark:hover:text-gray-300">
+      {props.children}
+    </h1>
+  ),
+  Image,
+  p: (props) => <p className="mt-5 mb-5">{props.children}</p>,
+  a: (props) => (
+    <a className="underline" href={props.href} target="_blank">
+      {props.children}
+    </a>
+  ),
 };
 
 /* eslint-disable-next-line */
@@ -71,7 +84,7 @@ export function Article(props: ArticleProps) {
       </div>
 
       <div className="mt-2">
-        <p className="text-2xl font-bold text-gray-700 dark:text-white">
+        <p className="text-4xl font-bold text-gray-700 dark:text-white mb-5">
           {title}
         </p>
         <MDXRemote {...mdxSource} components={components} />

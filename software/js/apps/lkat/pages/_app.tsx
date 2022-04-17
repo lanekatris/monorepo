@@ -10,8 +10,8 @@ function CustomApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Lane's Site!</title>
       </Head>
-      <div className="app pattern bg-gray-900 h-screen">
-        <header className=" ">
+      <div className="app pattern bg-gray-900 flex flex-col ">
+        <header className="flex">
           <div className="container px-6 mx-auto">
             <nav className="flex flex-col py-2 sm:flex-row sm:justify-between sm:items-center">
               <div>
@@ -23,12 +23,12 @@ function CustomApp({ Component, pageProps }: AppProps) {
               </div>
 
               <div className="flex items-center mt-2 -mx-2 sm:mt-0">
-                <a
-                  href="#"
-                  className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800"
-                >
-                  Notes
-                </a>
+                <Link href="/notes">
+                  <a className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800">
+                    Notes
+                  </a>
+                </Link>
+
                 <Link href="/articles">
                   <a className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800">
                     Articles
@@ -45,7 +45,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
             </nav>
           </div>
         </header>
-        <main className="container px-6 mx-auto">
+        <main className="container px-6 mx-auto flex flex-1 mb-5 justify-center">
           <Component {...pageProps} />
         </main>
       </div>

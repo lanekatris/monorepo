@@ -2,14 +2,14 @@ import styles from './index.module.css';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const getStaticProps = async () => {
-  const files = fs.readdirSync(path.join(process.cwd(), 'posts'));
+  const files = fs.readdirSync(path.join(process.cwd(), 'notes'));
   const posts = files.map((filename) => {
     const markdownWithMeta = fs.readFileSync(
-      path.join(process.cwd(), 'posts', filename),
+      path.join(process.cwd(), 'notes', filename),
       'utf-8'
     );
     const { data: frontMatter } = matter(markdownWithMeta);
@@ -20,19 +20,18 @@ export const getStaticProps = async () => {
   });
   return {
     props: {
-      posts,
+      notes: posts,
     },
   };
 };
 
 /* eslint-disable-next-line */
-export interface ArticlesProps {}
+export interface NotesProps {}
 
-export function Articles({ posts }: ArticlesProps) {
-  console.log('posts', posts);
+export function Notes({ notes }: NotesProps) {
   return (
     <div className="mt-5 pb-5">
-      {posts.map((post, index) => (
+      {notes.map((post, index) => (
         <div
           className="max-w-2xl mt-5 mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800"
           key={index}
@@ -68,19 +67,19 @@ export function Articles({ posts }: ArticlesProps) {
 
             <div className="mt-4">
               <div className="flex items-center">
-                {/*<div className="flex items-center">*/}
-                {/*  <img*/}
-                {/*    className="object-cover h-10 rounded-full"*/}
-                {/*    src="https://images.unsplash.com/photo-1586287011575-a23134f797f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=48&q=60"*/}
-                {/*    alt="Avatar"*/}
-                {/*  />*/}
-                {/*  <a*/}
-                {/*    href="#"*/}
-                {/*    className="mx-2 font-semibold text-gray-700 dark:text-gray-200"*/}
-                {/*  >*/}
-                {/*    Jone Doe*/}
-                {/*  </a>*/}
-                {/*</div>*/}
+                <div className="flex items-center">
+                  <img
+                    className="object-cover h-10 rounded-full"
+                    src="https://images.unsplash.com/photo-1586287011575-a23134f797f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=48&q=60"
+                    alt="Avatar"
+                  />
+                  <a
+                    href="#"
+                    className="mx-2 font-semibold text-gray-700 dark:text-gray-200"
+                  >
+                    Jone Doe
+                  </a>
+                </div>
                 <span className="mx-1 text-xs text-gray-600 dark:text-gray-300">
                   {post.frontMatter.date}
                 </span>
@@ -93,4 +92,4 @@ export function Articles({ posts }: ArticlesProps) {
   );
 }
 
-export default Articles;
+export default Notes;
