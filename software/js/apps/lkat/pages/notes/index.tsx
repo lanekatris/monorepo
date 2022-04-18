@@ -28,7 +28,7 @@ export const getStaticProps = async () => {
 /* eslint-disable-next-line */
 export interface NotesProps {}
 
-export function Notes({ notes }: NotesProps) {
+export function Notes({ notes }) {
   return (
     <div className="mt-5 pb-5">
       {notes.map((post, index) => (

@@ -59,7 +59,7 @@ const components = {
 /* eslint-disable-next-line */
 export interface ArticleProps {}
 
-export function Article(props: ArticleProps) {
+export function Article(props) {
   const {
     frontMatter: { title, date, tags },
     mdxSource,

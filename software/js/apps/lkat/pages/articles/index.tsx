@@ -33,7 +33,7 @@ export const getStaticProps = async () => {
 /* eslint-disable-next-line */
 export interface ArticlesProps {}
 
-export function Articles({ posts }: ArticlesProps) {
+export function Articles({ posts }) {
   console.log('posts', posts);
   return (
     <div className="mt-5 pb-5">
