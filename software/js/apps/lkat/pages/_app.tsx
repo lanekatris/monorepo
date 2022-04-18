@@ -57,12 +57,73 @@ function CustomApp({ Component, pageProps }: AppProps) {
           </a>
 
           <p className="py-2 text-gray-800 dark:text-white sm:py-0">
-            All rights reserved
+            © Copyright {new Date().getUTCFullYear()}. Lane Katris - Lkat
+            Industries, LLC
           </p>
 
           <div className="flex -mx-2">
             <a
-              href="#"
+              href="mailto:lanekatris@gmail.com"
+              className="mx-2 text-gray-600 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-300"
+              aria-label="LinkedIn"
+            >
+              <svg
+                className="w-5 h-5 fill-current"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 20H4C2.89543 20 2 19.1046 2 18V5.913C2.04661 4.84255 2.92853 3.99899 4 4H20C21.1046 4 22 4.89543 22 6V18C22 19.1046 21.1046 20 20 20ZM4 7.868V18H20V7.868L12 13.2L4 7.868ZM4.8 6L12 10.8L19.2 6H4.8Z"
+                  fill="#2E3A59"
+                ></path>
+              </svg>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/lane-katris-80610a44/"
+              target="_blank"
+              className="mx-2 text-gray-600 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-300"
+              aria-label="LinkedIn"
+            >
+              <svg
+                className="w-5 h-5 fill-current"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13 21H9V9H13V11C13.8526 9.91525 15.1456 9.26857 16.525 9.237C19.0056 9.25077 21.0072 11.2694 21 13.75V21H17V14.25C16.84 13.1326 15.8818 12.3036 14.753 12.306C14.2593 12.3216 13.7932 12.5378 13.4624 12.9046C13.1316 13.2715 12.9646 13.7573 13 14.25V21ZM7 21H3V9H7V21ZM5 7C3.89543 7 3 6.10457 3 5C3 3.89543 3.89543 3 5 3C6.10457 3 7 3.89543 7 5C7 5.53043 6.78929 6.03914 6.41421 6.41421C6.03914 6.78929 5.53043 7 5 7Z"
+                  fill="#2E3A59"
+                ></path>
+              </svg>
+            </a>
+            <a
+              href="https://www.youtube.com/channel/UC6APCLAuq3Egox7Z5kaWgEQ"
+              target="_blank"
+              className="mx-2 text-gray-600 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-300"
+              aria-label="YouTube"
+            >
+              <svg
+                className="w-5 h-5 fill-current"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.006 19.012H11.986C11.924 19.012 5.721 19 4.156 18.575C3.29543 18.3432 2.62335 17.6707 2.392 16.81C2.11058 15.2224 1.97469 13.6123 1.986 12C1.97873 10.385 2.11831 8.77271 2.403 7.183C2.64071 6.32151 3.30983 5.64595 4.169 5.4C5.691 5 11.723 5 11.979 5H12C12.063 5 18.282 5.012 19.831 5.437C20.6898 5.67001 21.3605 6.3411 21.593 7.2C21.8834 8.79354 22.0197 10.4113 22 12.031C22.007 13.644 21.8671 15.2543 21.582 16.842C21.3477 17.7016 20.6752 18.3726 19.815 18.605C18.295 19.008 12.262 19.012 12.006 19.012ZM10.006 9.005L10.001 15.005L15.213 12.005L10.006 9.005Z"
+                  fill="#2E3A59"
+                ></path>
+              </svg>
+            </a>
+            <a
+              href="https://www.reddit.com/user/loonison101"
+              target="_blank"
               className="mx-2 text-gray-600 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-300"
               aria-label="Reddit"
             >
@@ -77,7 +138,8 @@ function CustomApp({ Component, pageProps }: AppProps) {
             </a>
 
             <a
-              href="#"
+              href="https://www.facebook.com/lane.katris"
+              target="_blank"
               className="mx-2 text-gray-600 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-300"
               aria-label="Facebook"
             >
@@ -92,7 +154,8 @@ function CustomApp({ Component, pageProps }: AppProps) {
             </a>
 
             <a
-              href="#"
+              href="https://github.com/lanekatris"
+              target="_blank"
               className="mx-2 text-gray-600 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-300"
               aria-label="Github"
             >
