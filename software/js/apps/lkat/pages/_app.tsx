@@ -24,11 +24,11 @@ function CustomApp({ Component, pageProps }: AppProps) {
               </div>
 
               <div className="flex items-center mt-2 -mx-2 sm:mt-0">
-                <Link href="/notes">
-                  <a className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800">
-                    Notes
-                  </a>
-                </Link>
+                {/*<Link href="/notes">*/}
+                {/*  <a className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800">*/}
+                {/*    Notes*/}
+                {/*  </a>*/}
+                {/*</Link>*/}
 
                 <Link href="/articles">
                   <a className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800">
@@ -36,12 +36,12 @@ function CustomApp({ Component, pageProps }: AppProps) {
                   </a>
                 </Link>
 
-                <a
-                  href="#"
-                  className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800"
-                >
-                  About
-                </a>
+                {/*<a*/}
+                {/*  href="#"*/}
+                {/*  className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800"*/}
+                {/*>*/}
+                {/*  About*/}
+                {/*</a>*/}
               </div>
             </nav>
           </div>

@@ -19,6 +19,7 @@ export function Footer() {
       <div className="flex -mx-2">
         {footerData.map(({ href, label, type }) => (
           <a
+            key={type}
             href={href}
             className="mx-2 text-gray-600 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-300"
             aria-label={label}

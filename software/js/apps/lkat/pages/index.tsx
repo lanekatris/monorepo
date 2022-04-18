@@ -37,7 +37,7 @@ export function IndexV2(props: IndexV2Props) {
         <div className="flex mt-8 lg:w-1/2 lg:justify-end lg:mt-0 flex-col">
           <Image
             className="object-cover w-full h-full max-w-2xl rounded-md"
-            src="/20200914_075553.jpg"
+            src="https://dvg45c871tdz4.cloudfront.net/images/20200914_075553.jpg"
             width="600"
             height="400"
           />
