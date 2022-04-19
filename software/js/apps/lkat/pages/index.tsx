@@ -38,15 +38,15 @@ export function IndexV2(props: IndexV2Props) {
           />
         </div>
       </div>
-      <div className="container px-6 py-16 mx-auto text-center">
+      <div className="container px-6 py-8 mx-auto text-center">
         <div className="max-w-lg mx-auto">
           <h1 className="text-4xl font-semibold text-gray-100">
             My GitHub Commits
           </h1>
 
-          <p className="mt-6 text-gray-500 dark:text-gray-300">
+          <p className="mt-6 text-gray-300 dark:text-gray-300">
             Take this with a grain of salt, I'm moving my private repos to being
-            public. I'm bad about checking in secrets 🤷‍♂️
+            public. I'm bad about committing secrets 🤷‍♂️
           </p>
           <a href="https://github.com/lanekatris" target="_blank">
             <img
@@ -56,6 +56,39 @@ export function IndexV2(props: IndexV2Props) {
               width="600"
             />
           </a>
+        </div>
+      </div>
+
+      <div className="container px-6  mx-auto text-center">
+        <div className="max-w-lg mx-auto">
+          <h1 className="text-4xl font-semibold text-gray-100">My Projects</h1>
+
+          <p className="mt-6 text-gray-300 dark:text-gray-300">
+            A couple projects I have going on. Some require login, disregard
+            that
+          </p>
+          <div className="grid gap-6 mt-8 sm:grid-cols-2">
+            <div className="flex items-center text-gray-100 -px-3 dark:text-gray-200">
+              <svg
+                className="w-5 h-5 mx-3"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+
+              <a href="https://climb.rest" target="_blank">
+                https://climb.rest
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </>
