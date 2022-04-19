@@ -15,7 +15,6 @@ export function IndexV2(props: IndexV2Props) {
 
           <h3 className="text-2xl font-semibold text-gray-100">
             Full stack engineer who enjoys the outdoors 🗻🧗
-            {/*<span className="text-blue-400">Guest</span>*/}
           </h3>
 
           <h3 className="text-2xl font-semibold text-gray-100 mt-3">
@@ -28,10 +27,6 @@ export function IndexV2(props: IndexV2Props) {
               IronNet
             </a>
           </h3>
-
-          {/*<p className="mt-3 text-gray-100">*/}
-          {/*  Lorem ipsum dolor sit amet, consectetur adipiscing.*/}
-          {/*</p>*/}
         </div>
 
         <div className="flex mt-8 lg:w-1/2 lg:justify-end lg:mt-0 flex-col">
@@ -41,14 +36,26 @@ export function IndexV2(props: IndexV2Props) {
             width="600"
             height="400"
           />
-          {/*<div>*/}
-          {/*  <img*/}
-          {/*    className="mt-5"*/}
-          {/*    src="https://ghchart.rshah.org/lanekatris"*/}
-          {/*    alt="Lane's GitHub Contribution Chart"*/}
-          {/*    width="600"*/}
-          {/*  />*/}
-          {/*</div>*/}
+        </div>
+      </div>
+      <div className="container px-6 py-16 mx-auto text-center">
+        <div className="max-w-lg mx-auto">
+          <h1 className="text-4xl font-semibold text-gray-100">
+            My GitHub Commits
+          </h1>
+
+          <p className="mt-6 text-gray-500 dark:text-gray-300">
+            Take this with a grain of salt, I'm moving my private repos to being
+            public. I'm bad about checking in secrets 🤷‍♂️
+          </p>
+          <a href="https://github.com/lanekatris" target="_blank">
+            <img
+              className="mt-5"
+              src="https://ghchart.rshah.org/lanekatris"
+              alt="Lane's GitHub Contribution Chart"
+              width="600"
+            />
+          </a>
         </div>
       </div>
     </>
