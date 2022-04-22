@@ -1,0 +1,64 @@
+---
+title: Building this site AGAIN
+date: 'April 18, 2022'
+tags: ['blog']
+thumbnailUrl: 'https://dvg45c871tdz4.cloudfront.net/images/Screenshot-2022-04-18-232245.png'
+description: I'm hoping this is the last re-do of my website for a LONG time...
+---
+
+# The Old Site
+<Image src="https://dvg45c871tdz4.cloudfront.net/images/Screenshot-2022-04-18-232245.png" width="756" height="696"/>
+
+TODO: _There was a few previous iterations actually but I don't have screenshots readily available_
+
+# What Triggered This?
+Well indie blog caused this. That is a good thing though.
+
+Sometimes feedly (productivity link to come) gets boring. It's nice to see people's unique personal webistes that are software/design/etc. focused.
+
+# Goals
+- I want it to be pretty
+- I would like to scroll through it to reminisce (similart to TODO)
+- Central place for SSR type site along with auth guarded pages for server side getting data
+
+I thought about rolling with this [theme](https://github.com/thelearn-tech/hacker-theme) but [Meraki UI](https://merakiui.com/) won out on the theme battle with [Tailwind CSS](https://tailwindcss.com/).
+
+Since I like maps and outdoor activities the topo background was a no-brainer.
+
+I plan on using "Article" and "Notes" separation and combining them in a central feed you can filter. I also use Airtable to keep track of outdoor activities so I want to display some graph data on here.Airtable does it well but I'm also cheap and it's fun to mess with your own data.
+
+# Inspiration
+
+These blogs were fun to check out:
+- [https://adactio.com/journal](https://adactio.com/journal)
+- [https://snarfed.org](https://snarfed.org)
+
+# Handling Images
+If you search for _best practices_ for image handling on Vercel or Netlify you won't get much. They have components that render things performantly but what I wanted to know was storing them?
+
+I didn't want to clutter up my `git` repo with 6MB+ images.
+
+So, as "real" companies do I put them in a storage bucket and put a CDN in front of it. See below for how I use it in my workflow.
+
+# My Workflow
+Folks have content on their sites but don't talk much on _how it got there_. So I'll touch on that briefly:
+
+- Create a date prefixed `mdx` file
+- Open a Chrome tab with my private [S3 bucket](https://s3.console.aws.amazon.com/s3/buckets/lkat-blog)
+- Drag and drop images to S3 and build out image link in markdown
+
+Or you can use [this article](https://blog.spikeseed.cloud/mount-s3-as-a-disk/#mounting-an-s3-bucket-on-windows-server-2016) which mounts your
+`S3` bucket as a local mount using `rclone` which I think is easier; you just have to remember the mount command.
+
+Hot reloading `MDX` is a must, I'm working on that.
+
+# Technology Choice
+It all comes down to the bigger picture for me. I've gone through various iterations TODO
+
+Next.JS
+
+I do miss how GatsbyJS gives you all the  querying, aggregation, unifying api to access your source post examples.
+
+But overall I think the unified UI components, SSR, and authentication possibilities on certain pages was the selling point for Next.js. 
+Also with data access, I could have separate cloud functions but why bother when Next.js has `api` that makes it so easy. Plus these endpoints can be locked down.
+

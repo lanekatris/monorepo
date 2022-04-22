@@ -36,12 +36,11 @@ function CustomApp({ Component, pageProps }: AppProps) {
                   </a>
                 </Link>
 
-                {/*<a*/}
-                {/*  href="#"*/}
-                {/*  className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800"*/}
-                {/*>*/}
-                {/*  About*/}
-                {/*</a>*/}
+                {/*<Link href="/about">*/}
+                {/*  <a className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800">*/}
+                {/*    About*/}
+                {/*  </a>*/}
+                {/*</Link>*/}
               </div>
             </nav>
           </div>
