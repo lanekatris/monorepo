@@ -5,6 +5,9 @@ import path from 'path';
 import matter from 'gray-matter';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import Image from 'next/image';
+import ScoreCardImage from "../../components/disc-golf/score-card-image/score-card-image";
+import ScoreBadges from "../../components/disc-golf/score-badges/score-badges";
+import Alert from "../../components/alert/alert";
 
 export const getStaticPaths = async () => {
   const files = fs.readdirSync(path.join(process.cwd(), 'posts'));
@@ -37,6 +40,8 @@ export const getStaticProps = async ({ params: { slug } }) => {
 
 const components = {
   SyntaxHighlighter,
+  ScoreCardImage: ScoreCardImage,
+  Alert,
   h3: (props) => (
     <h3 className="text-xl font-bold text-gray-800 dark:text-white hover:text-gray-700 dark:hover:text-gray-300">
       {props.children}
@@ -54,6 +59,16 @@ const components = {
       {props.children}
     </a>
   ),
+  li: props => <>
+            <span><span
+    className="bg-indigo-100 text-indigo-500 w-4 h-4 mr-2 rounded-full inline-flex items-center justify-center">
+              <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"
+                   className="w-3 h-3" viewBox="0 0 24 24">
+                <path d="M20 6L9 17l-5-5"></path>
+              </svg>
+            </span>{props.children}</span>
+  </>,
+  ul: props => <nav className="mt-5 mb-5 flex flex-col sm:items-start sm:text-left text-center items-center space-y-2.5">{props.children}</nav>
 };
 
 /* eslint-disable-next-line */
@@ -61,12 +76,12 @@ export interface ArticleProps {}
 
 export function Article(props) {
   const {
-    frontMatter: { title, date, tags },
+    frontMatter: { title, date, tags, scores },
     mdxSource,
   } = props;
   console.log(props);
   return (
-    <div className="max-w-2xl px-8 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
+    <div className="mb-5 max-w-2xl px-8 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
       <div className="flex items-center justify-between">
         <span className="text-sm font-light text-gray-600 dark:text-gray-400">
           {date}
@@ -87,6 +102,12 @@ export function Article(props) {
         <p className="text-4xl font-bold text-gray-700 dark:text-white mb-5">
           {title}
         </p>
+        <div>
+          {(scores || []).length > 0 && <div>
+            DG Scores: {(scores || []).map((score, i) => <ScoreBadges key={i} score={score}/>)}
+          </div>}
+        </div>
+
         <MDXRemote {...mdxSource} components={components} />
       </div>
     </div>

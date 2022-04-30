@@ -9,7 +9,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Lane's Site!</title>
+        <title>Lane's Site</title>
       </Head>
       <div className="pattern bg-gray-900 min-h-screen">
         <header className="">
