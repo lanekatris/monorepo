@@ -21,3 +21,16 @@
         classic: yes
         name:
           - microk8s
+    - name: Add user to k8s groups
+      become: true
+      ansible.builtin.user:
+        name: lane
+        groups: microk8s
+        append: true
+    - name: Set owner of kube directory
+      become: true
+      ansible.builtin.file:
+        path: /home/lane/.kube
+        state: directory
+        recurse: yes
+        owner: lane

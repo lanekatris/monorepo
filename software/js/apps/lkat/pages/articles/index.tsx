@@ -23,7 +23,6 @@ export const getStaticProps = async () => {
       slug: filename.split('.')[0],
     };
   })
-    // .filter(({frontMatter:{draft}}) => !draft)
 
   const draftCount = posts.filter(x => x.frontMatter.draft).length;
 

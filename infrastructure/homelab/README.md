@@ -5,7 +5,12 @@ ansible-galaxy install gepaplexx.microk8s
 
 Go into WSL:
 
-`ANSIBLE_CONFIG=/mnt/c/Code/monorepo/infrastructure/homelab/ansible.cfg ansible-playbook playbook.yml -i hosts -kK`
+```shell
+cd /mnt/c/Code/monorepo/infrastructure/homelab/
+ANSIBLE_CONFIG=/mnt/c/Code/monorepo/infrastructure/homelab/ansible.cfg ansible-playbook playbook.yml -i hosts -kK
+```
+
+
 
 
 
