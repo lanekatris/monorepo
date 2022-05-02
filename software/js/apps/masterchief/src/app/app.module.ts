@@ -1,24 +1,23 @@
 import {Injectable, Module} from '@nestjs/common';
 
-import { AppController } from './app.controller';
-import {AppService, GetPlacesHandler} from './app.service';
+
 import {TypeOrmModule} from "@nestjs/typeorm";
-import {Place} from "./place.entity";
+
 import {CqrsModule} from "@nestjs/cqrs";
 import {ConfigModule, ConfigService} from "@nestjs/config";
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import {PlaceResolver} from "./place.resolver";
 
-const QueryHandlers = [GetPlacesHandler];
+import {EventsModule} from "./events/events.module";
+import {EventEntity} from "./events/event.entity";
 
 @Module({
   imports: [
+    EventsModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
       sortSchema: true,
-      // typePaths: ['./**/*.graphql']
     }),
     ConfigModule.forRoot(),
     //https://github.com/nestjs/nest/issues/1119
@@ -34,14 +33,14 @@ const QueryHandlers = [GetPlacesHandler];
         password: configService.get('DATABASE_PASSWORD'),
         database: configService.get('DATABASE_DATABASE'),
         synchronize: true,
-          entities: [Place],
+          entities: [EventEntity],
           ssl: {
             ca: process.env.SSL_CERT // https://stackoverflow.com/questions/56660312/cannot-connect-an-ssl-secured-database-to-typeorm
           }
       }}
     })
-    , TypeOrmModule.forFeature([Place]), CqrsModule],
-  controllers: [AppController],
-  providers: [AppService, ...QueryHandlers, PlaceResolver],
+    , CqrsModule],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
