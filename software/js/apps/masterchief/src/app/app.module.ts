@@ -33,7 +33,7 @@ const QueryHandlers = [GetPlacesHandler];
         username: configService.get('DATABASE_USERNAME'),
         password: configService.get('DATABASE_PASSWORD'),
         database: configService.get('DATABASE_DATABASE'),
-        synchronize: false,
+        synchronize: true,
           entities: [Place],
           ssl: {
             ca: process.env.SSL_CERT // https://stackoverflow.com/questions/56660312/cannot-connect-an-ssl-secured-database-to-typeorm

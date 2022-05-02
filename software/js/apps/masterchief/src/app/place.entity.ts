@@ -11,4 +11,8 @@ export class Place {
   @Field()
   @Column()
   name: string
+
+  @Field()
+  @Column()
+  state: string
 }
