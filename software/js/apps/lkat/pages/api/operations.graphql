@@ -1,0 +1,6 @@
+query places {
+  places {
+    id
+    name
+  }
+}

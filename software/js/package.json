@@ -5,7 +5,8 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "private": true,
   "dependencies": {
@@ -14,17 +15,23 @@
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.8.1",
     "@eventstore/db-client": "^3.3.0",
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/typescript-graphql-request": "^4.4.5",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.3",
+    "@nestjs/apollo": "^10.0.9",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^2.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/cqrs": "^8.0.3",
+    "@nestjs/graphql": "^10.0.10",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/typeorm": "^8.0.3",
     "@nrwl/next": "13.9.6",
     "@tailwindcss/typography": "^0.5.2",
+    "apollo-server-express": "^3.6.7",
     "core-js": "^3.6.5",
+    "graphql": "^16.4.0",
     "mysql2": "^2.3.3",
     "next": "12.1.0",
     "react": "17.0.2",
@@ -37,6 +44,10 @@
     "typeorm": "^0.2.45"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/introspection": "2.1.1",
+    "@graphql-codegen/typescript": "2.4.8",
+    "@graphql-codegen/typescript-operations": "2.3.5",
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.0.0",
     "@nrwl/cli": "13.9.6",
