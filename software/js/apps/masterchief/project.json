@@ -1,0 +1,52 @@
+{
+  "root": "apps/masterchief",
+  "sourceRoot": "apps/masterchief/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/masterchief",
+        "main": "apps/masterchief/src/main.ts",
+        "tsConfig": "apps/masterchief/tsconfig.app.json",
+        "assets": ["apps/masterchief/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/masterchief/src/environments/environment.ts",
+              "with": "apps/masterchief/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "masterchief:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/masterchief/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/masterchief"],
+      "options": {
+        "jestConfig": "apps/masterchief/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
