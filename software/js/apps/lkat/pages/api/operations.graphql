@@ -1,6 +1,12 @@
-query places {
-  places {
-    id
-    name
+query events {
+  events {
+    events{
+      id
+      aggregateId
+      type
+      created
+      data
+    }
   }
+
 }

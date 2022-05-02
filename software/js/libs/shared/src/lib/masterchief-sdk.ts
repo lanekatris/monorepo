@@ -2,11 +2,16 @@ import { GraphQLClient } from 'graphql-request';
 import * as Dom from 'graphql-request/dist/types.dom';
 import gql from 'graphql-tag';
 
-export const PlacesDocument = gql`
-    query places {
-  places {
-    id
-    name
+export const EventsDocument = gql`
+    query events {
+  events {
+    events {
+      id
+      aggregateId
+      type
+      created
+      data
+    }
   }
 }
     `;
@@ -18,8 +23,8 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    places(variables?: PlacesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PlacesQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<PlacesQuery>(PlacesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'places', 'query');
+    events(variables?: EventsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<EventsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<EventsQuery>(EventsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'events', 'query');
     }
   };
 }

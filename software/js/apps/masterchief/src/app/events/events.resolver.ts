@@ -9,7 +9,6 @@ export class EventsResolver {
 
   @Query(() => GetEventsResponse)
   async events(): Promise<GetEventsResponse> {
-    const entities = await this.queryBus.execute(new GetEventsRequest()) as GetEventsResponse;
-    return entities;
+    return await this.queryBus.execute(new GetEventsRequest()) as GetEventsResponse;
   }
 }

@@ -1,11 +1,7 @@
-import {getSdk} from "../../graphql";
-import {GraphQLClient} from "graphql-request";
-
-const client = new GraphQLClient('http://localhost:3333/graphql')
-const sdk = getSdk(client)
+import {masterChiefClient} from "@js/shared";
 
 export default async function handler(req, res) {
-  const idk = await sdk.places();
+  const idk = await masterChiefClient.events();
 
   res.status(200).json(idk);
 }
