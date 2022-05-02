@@ -11,6 +11,7 @@ const QueryHandlers = [GetPlacesHandler];
 
 @Module({
   imports: [ConfigModule.forRoot(),
+    //https://github.com/nestjs/nest/issues/1119
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
