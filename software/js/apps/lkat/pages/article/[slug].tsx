@@ -87,7 +87,7 @@ export function Article(props) {
           {date}
         </span>
         <div>
-          {tags.map((tag) => (
+          {tags && tags.length && tags.map((tag) => (
             <a
               key={tag}
               className="px-3 mr-2 py-1 text-sm font-bold text-gray-100 transition-colors duration-200 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
