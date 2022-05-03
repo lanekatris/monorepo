@@ -123,8 +123,8 @@ export function Articles({ posts, draftCount, noteCount }) {
                   post.slug
                 }`}
               >
-                <a className="block mt-2 text-2xl font-semibold text-gray-800 transition-colors duration-200 transform dark:text-white hover:text-gray-600 hover:underline">
-                  {post.frontMatter.note && <i>Note: </i>}
+                <a className="block mt-2 text-2xl font-semibold text-gray-600 transition-colors duration-200 transform dark:text-white hover:text-gray-600 hover:underline">
+                  {post.frontMatter.note && <span className="text-blue-600">Note: </span>}
                   {post.frontMatter.title}
                 </a>
               </Link>
@@ -148,7 +148,7 @@ export function Articles({ posts, draftCount, noteCount }) {
                 {/*    Jone Doe*/}
                 {/*  </a>*/}
                 {/*</div>*/}
-                <span className="mx-1 text-xs text-gray-600 dark:text-gray-300">
+                <span className="mx-1 text-xs text-gray-500 dark:text-gray-300">
                   {post.frontMatter.date}
                 </span>
               </div>
