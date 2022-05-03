@@ -1,18 +1,40 @@
 import feedlyData from '../../public/feedly.json';
 import { sumBy } from 'lodash';
 import { MetricCard } from '../../components/metric-card/metric-card';
+import csv from "csvtojson";
+import path from 'path';
+import groupBy from 'lodash/groupBy'
+import pick from 'lodash/pick'
+import min from 'lodash/min'
+import max from 'lodash/max'
+import minBy from 'lodash/minBy'
+import maxBy from 'lodash/maxBy'
+import { differenceInYears } from 'date-fns'
 
-export const getStaticProps = () => {
-  console.log('feedly', feedlyData.length);
+export const getStaticProps = async () => {
+  const p = path.resolve(__dirname, `../../../public/udisc-scorecards-05-03-2022.csv`)
+  const rounds = await csv().fromFile(p)
+  const final = rounds.filter(x => x.PlayerName === 'Lane').map(x => ({...x,
+  _parsedOverUnder: parseInt(x['+/-'])
+  }))
+
   return {
     props: {
+      roundsPlayed: final.length,
+      bestRound: minBy(final, '_parsedOverUnder')._parsedOverUnder,
+      worstRound: maxBy(final, '_parsedOverUnder')._parsedOverUnder,
+      yearsPlayed: differenceInYears(final[0].Date, final[final.length - 1].Date),
       groupCount: feedlyData.length,
+      final,
       feedCount: sumBy(feedlyData, (x) => x.numFeeds),
     },
   };
 };
 
-export default function DashboardPage({ groupCount, feedCount }) {
+export default function DashboardPage(props) {
+  const { groupCount, feedCount,final, roundsPlayed, bestRound, worstRound, yearsPlayed } =props;
+
+  console.log(props)
   return (
     <main className="container px-6 mx-auto max-w-2xl">
       <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
@@ -72,7 +94,6 @@ export default function DashboardPage({ groupCount, feedCount }) {
           target="_blank"
           rel="noreferrer"
           className="text-gray-900 dark:text-gray-100 underline"
-          target="_blank"
         >
           here
         </a>
@@ -81,6 +102,19 @@ export default function DashboardPage({ groupCount, feedCount }) {
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
         <MetricCard metric={groupCount} text="Feedly Groups" />
         <MetricCard metric={feedCount} text="Feedly Feeds" />
+      </div>
+
+      <h1 className="font-bold text-2xl md:text-3xl tracking-tight mb-4 text-black dark:text-white mt-10">
+        Disc Golf Stats
+      </h1>
+      <p className="text-gray-600 dark:text-gray-400 mb-4">
+        This data comes from <a href="https://udisc.com/" className="text-gray-900 dark:text-gray-100 underline" target="_blank" rel="noreferrer">UDisc</a>. I haven't always used the app and have missing rounds but I'm using the data they give me which isn't half bad. I'll dig into the data more as time goes on. Their app has nice stats but I wanted to analyze it here just 'cuz.
+      </p>
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
+        <MetricCard metric={roundsPlayed} text="Rounds Played" />
+        <MetricCard metric={bestRound} text="Best Round" color='green' />
+        <MetricCard metric={worstRound} text="Worst Round" color="red" />
+        <MetricCard metric={yearsPlayed} text="Years Played" />
       </div>
     </main>
   );
