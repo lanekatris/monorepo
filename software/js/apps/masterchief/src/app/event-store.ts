@@ -1,9 +1,10 @@
 import { EventStoreDBClient, FORWARDS, START } from '@eventstore/db-client';
 import { FactoryProvider } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import {ESDB} from "./constants";
 
 const eventStoreFactory: FactoryProvider = {
-  provide: 'esdb',
+  provide: ESDB,
   useFactory: async (config: ConfigService) => {
     const client = EventStoreDBClient.connectionString(config.get('ESDB_CONN'));
     await client.readAll({

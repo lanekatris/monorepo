@@ -9,12 +9,13 @@ import {
 import { Adventure, CreateAdventureInput } from './models/adventure';
 import { isSameDay } from 'date-fns';
 import { merge } from 'lodash';
+import {ESDB} from "../constants";
 
 @Injectable()
 export class AdventureService {
   private readonly logger = new Logger(AdventureService.name);
   constructor(
-    @Inject('esdb')
+    @Inject(ESDB)
     private client: EventStoreDBClient
   ) {}
 
