@@ -1,9 +1,9 @@
 import styles from './index.module.css';
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import {serialize} from "next-mdx-remote/serialize";
-import Article from "../article/[slug]";
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import { serialize } from 'next-mdx-remote/serialize';
+import Article from '../article/[slug]';
 
 export const getStaticPaths = async () => {
   const files = fs.readdirSync(path.join(process.cwd(), 'notes'));
@@ -38,7 +38,7 @@ export const getStaticProps = async ({ params: { slug } }) => {
 export interface NoteProps {}
 
 export function Note(props: NoteProps) {
-  return Article(props)
+  return Article(props);
 }
 
 export default Note;

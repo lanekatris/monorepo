@@ -5,9 +5,9 @@ import path from 'path';
 import matter from 'gray-matter';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import Image from 'next/image';
-import ScoreCardImage from "../../components/disc-golf/score-card-image/score-card-image";
-import ScoreBadges from "../../components/disc-golf/score-badges/score-badges";
-import Alert from "../../components/alert/alert";
+import ScoreCardImage from '../../components/disc-golf/score-card-image/score-card-image';
+import ScoreBadges from '../../components/disc-golf/score-badges/score-badges';
+import Alert from '../../components/alert/alert';
 
 export const getStaticPaths = async () => {
   const files = fs.readdirSync(path.join(process.cwd(), 'posts'));
@@ -59,16 +59,31 @@ const components = {
       {props.children}
     </a>
   ),
-  li: props => <>
-            <span><span
-    className="bg-indigo-100 text-indigo-500 w-4 h-4 mr-2 rounded-full inline-flex items-center justify-center">
-              <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"
-                   className="w-3 h-3" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-            </span>{props.children}</span>
-  </>,
-  ul: props => <nav className="mt-5 mb-5 flex flex-col sm:items-start sm:text-left text-center items-center space-y-2.5">{props.children}</nav>
+  li: (props) => (
+    <>
+      <span>
+        <span className="bg-indigo-100 text-indigo-500 w-4 h-4 mr-2 rounded-full inline-flex items-center justify-center">
+          <svg
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="3"
+            className="w-3 h-3"
+            viewBox="0 0 24 24"
+          >
+            <path d="M20 6L9 17l-5-5"></path>
+          </svg>
+        </span>
+        {props.children}
+      </span>
+    </>
+  ),
+  ul: (props) => (
+    <nav className="mt-5 mb-5 flex flex-col sm:items-start sm:text-left text-center items-center space-y-2.5">
+      {props.children}
+    </nav>
+  ),
 };
 
 /* eslint-disable-next-line */
@@ -87,14 +102,16 @@ export function Article(props) {
           {date}
         </span>
         <div>
-          {tags && tags.length && tags.map((tag) => (
-            <a
-              key={tag}
-              className="px-3 mr-2 py-1 text-sm font-bold text-gray-100 transition-colors duration-200 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
-            >
-              {tag}
-            </a>
-          ))}
+          {tags &&
+            tags.length &&
+            tags.map((tag) => (
+              <a
+                key={tag}
+                className="px-3 mr-2 py-1 text-sm font-bold text-gray-100 transition-colors duration-200 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
+              >
+                {tag}
+              </a>
+            ))}
         </div>
       </div>
 
@@ -103,9 +120,14 @@ export function Article(props) {
           {title}
         </p>
         <div>
-          {(scores || []).length > 0 && <div>
-            DG Scores: {(scores || []).map((score, i) => <ScoreBadges key={i} score={score}/>)}
-          </div>}
+          {(scores || []).length > 0 && (
+            <div>
+              DG Scores:{' '}
+              {(scores || []).map((score, i) => (
+                <ScoreBadges key={i} score={score} />
+              ))}
+            </div>
+          )}
         </div>
 
         <MDXRemote {...mdxSource} components={components} />

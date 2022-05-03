@@ -1,2 +1,2 @@
 export * from './lib/shared';
-export * from './lib/masterchief-client'
+export * from './lib/masterchief-client';

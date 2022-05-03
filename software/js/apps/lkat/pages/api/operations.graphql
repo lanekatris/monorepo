@@ -1,6 +1,6 @@
 query events {
   events {
-    events{
+    events {
       id
       aggregateId
       type
@@ -8,5 +8,4 @@ query events {
       data
     }
   }
-
 }

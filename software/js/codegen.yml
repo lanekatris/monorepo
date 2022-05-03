@@ -1,7 +1,7 @@
 overwrite: true
-schema: "http://localhost:3333/graphql"
-documents: "apps/lkat/**/*.graphql"
+schema: 'http://localhost:3333/graphql'
+documents: 'apps/lkat/**/*.graphql'
 generates:
   libs/shared/src/lib/masterchief-sdk.ts:
     plugins:
-      - "typescript-graphql-request"
+      - 'typescript-graphql-request'
