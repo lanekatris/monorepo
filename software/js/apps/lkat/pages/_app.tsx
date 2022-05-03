@@ -11,37 +11,18 @@ function CustomApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Lane's Site</title>
       </Head>
-      <div className="pattern bg-gray-900 min-h-screen">
-        <header className="">
-          <div className="container px-6 mx-auto">
-            <nav className="flex flex-col py-2 sm:flex-row sm:justify-between sm:items-center">
-              <div>
-                <Link href="/">
-                  <a className="text-2xl font-bold text-white lg:text-3xl">
-                    aka: "LKaT"
-                  </a>
-                </Link>
-              </div>
-
-              <div className="flex items-center mt-2 -mx-2 sm:mt-0">
-                {/*<Link href="/notes">*/}
-                {/*  <a className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800">*/}
-                {/*    Notes*/}
-                {/*  </a>*/}
-                {/*</Link>*/}
-
-                <Link href="/articles">
-                  <a className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800">
-                    Articles
-                  </a>
-                </Link>
-
-                {/*<Link href="/about">*/}
-                {/*  <a className="px-3 py-2 mx-2 text-sm font-semibold text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-gray-800">*/}
-                {/*    About*/}
-                {/*  </a>*/}
-                {/*</Link>*/}
-              </div>
+      <div className="min-h-screen ">
+        <header className="text-gray-600 body-font">
+          <div className="flex max-w-2xl mx-auto px-4">
+            <nav className="py-6 flex-1">
+              <Link href="/">
+                <a className="mr-5 hover:text-gray-900">Home</a>
+              </Link>
+            </nav>
+            <nav className="py-6 flex-1">
+              <Link href="/articles">
+                <a className="mr-5 hover:text-gray-900">Articles</a>
+              </Link>
             </nav>
           </div>
         </header>

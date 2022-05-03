@@ -9,7 +9,7 @@ import {
 import { Adventure, CreateAdventureInput } from './models/adventure';
 import { isSameDay } from 'date-fns';
 import { merge } from 'lodash';
-import {ESDB} from "../constants";
+import { ESDB } from '../constants';
 
 @Injectable()
 export class AdventureService {

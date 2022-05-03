@@ -55,7 +55,7 @@ const components = {
   Image,
   p: (props) => <p className="mt-5 mb-5">{props.children}</p>,
   a: (props) => (
-    <a className="underline" href={props.href} target="_blank">
+    <a className="underline" href={props.href} target="_blank" rel="noreferrer">
       {props.children}
     </a>
   ),
@@ -94,9 +94,9 @@ export function Article(props) {
     frontMatter: { title, date, tags, scores },
     mdxSource,
   } = props;
-  console.log(props);
+
   return (
-    <div className="mb-5 max-w-2xl px-8 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
+    <div className="mb-5 max-w-2xl px-8 py-4 mx-auto">
       <div className="flex items-center justify-between">
         <span className="text-sm font-light text-gray-600 dark:text-gray-400">
           {date}
@@ -107,7 +107,7 @@ export function Article(props) {
             tags.map((tag) => (
               <a
                 key={tag}
-                className="px-3 mr-2 py-1 text-sm font-bold text-gray-100 transition-colors duration-200 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
+                className="text-xs mr-2 font-medium text-blue-600 uppercase"
               >
                 {tag}
               </a>

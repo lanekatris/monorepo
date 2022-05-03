@@ -52,35 +52,32 @@ export function Articles({ posts, draftCount, noteCount }) {
   console.log('posts', posts);
   return (
     <div className="mt-5 pb-5">
-      <section className="text-white body-font">
+      <section className=" body-font">
         <div className="max-w-2xl container px-5 mx-auto">
           <div className="flex flex-wrap -m-4 text-center justify-center">
             <div className="p-4 sm:w-1/4 w-1/2">
-              <h2 className="title-font font-medium sm:text-4xl text-3xl text-white">
+              <h2 className="title-font font-medium sm:text-4xl text-3xl text-blue-500">
                 {draftCount}
               </h2>
-              <p className="leading-relaxed">Drafts</p>
+              <p className="leading-relaxed text-gray-500">Drafts</p>
             </div>
             <div className="p-4 sm:w-1/4 w-1/2">
-              <h2 className="title-font font-medium sm:text-4xl text-3xl text-white">
+              <h2 className="title-font font-medium sm:text-4xl text-3xl  text-blue-500">
                 {posts.length}
               </h2>
-              <p className="leading-relaxed">Articles</p>
+              <p className="leading-relaxed text-gray-500">Articles</p>
             </div>
             <div className="p-4 sm:w-1/4 w-1/2">
-              <h2 className="title-font font-medium sm:text-4xl text-3xl text-white">
+              <h2 className="title-font font-medium sm:text-4xl text-3xl  text-blue-500">
                 {noteCount}
               </h2>
-              <p className="leading-relaxed">Notes</p>
+              <p className="leading-relaxed text-gray-500">Notes</p>
             </div>
           </div>
         </div>
       </section>
       {posts.map((post, index) => (
-        <div
-          className="max-w-2xl mt-5 mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800"
-          key={index}
-        >
+        <div className="max-w-2xl mx-auto overflow-hidden " key={index}>
           {/*<Image*/}
           {/*  src={post.frontMatter.thumbnailUrl}*/}
           {/*  alt="thumbnail"*/}
@@ -90,19 +87,19 @@ export function Articles({ posts, draftCount, noteCount }) {
           {/*  height="300"*/}
           {/*/>*/}
 
-          <div className="p-6">
+          <div className="p-3 border-b-2 border-gray-200 border-opacity-60">
             <div>
               {(post.frontMatter.tags || []).map((tag) => (
                 <span
                   key={tag}
-                  className="text-xs mr-2 font-medium text-blue-600 uppercase dark:text-blue-400"
+                  className="text-xs mr-2 font-medium text-blue-600 uppercase "
                 >
                   {tag}
                 </span>
               ))}
               {(post.frontMatter.scores || []).length > 0 && (
                 <div>
-                  DG Scores:{' '}
+                  <span className="text-gray-500">DG Scores</span>:{' '}
                   {(post.frontMatter.scores || []).map((score, i) => (
                     <ScoreBadges key={i} score={score} />
                   ))}
@@ -110,7 +107,7 @@ export function Articles({ posts, draftCount, noteCount }) {
               )}
               {(post.frontMatter.grades || []).length > 0 && (
                 <div>
-                  Grades:{' '}
+                  <span className="text-gray-500">Grades</span>:{' '}
                   {(post.frontMatter.grades || []).map((grade) => (
                     <span
                       key={grade}
