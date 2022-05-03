@@ -21,6 +21,7 @@ export class GetEventsHandler implements IQueryHandler<GetEventsRequest, GetEven
 
   async execute(query: GetEventsRequest): Promise<GetEventsResponse> {
     const e = await this.repo.find();
+    console.log('events', e)
     return {
       events: e
     }
