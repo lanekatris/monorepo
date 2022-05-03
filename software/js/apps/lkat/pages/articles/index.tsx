@@ -87,7 +87,7 @@ export function Articles({ posts, draftCount, noteCount }) {
           {/*  height="300"*/}
           {/*/>*/}
 
-          <div className="p-3 border-b-2 border-gray-200 border-opacity-60">
+          <div className="p-3 border-b border-gray-200">
             <div>
               {(post.frontMatter.tags || []).map((tag) => (
                 <span
@@ -124,7 +124,9 @@ export function Articles({ posts, draftCount, noteCount }) {
                 }`}
               >
                 <a className="block mt-2 text-2xl font-semibold text-gray-600 transition-colors duration-200 transform dark:text-white hover:text-gray-600 hover:underline">
-                  {post.frontMatter.note && <span className="text-blue-600">Note: </span>}
+                  {post.frontMatter.note && (
+                    <span className="text-blue-600">Note: </span>
+                  )}
                   {post.frontMatter.title}
                 </a>
               </Link>

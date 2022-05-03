@@ -14,14 +14,15 @@ function CustomApp({ Component, pageProps }: AppProps) {
       <div className="min-h-screen ">
         <header className="text-gray-600 body-font">
           <div className="flex max-w-2xl mx-auto px-4">
-            <nav className="py-6 flex-1">
+            <nav className="py-6 flex-1 text-center">
               <Link href="/">
                 <a className="mr-5 hover:text-gray-900">Home</a>
               </Link>
-            </nav>
-            <nav className="py-6 flex-1">
               <Link href="/articles">
                 <a className="mr-5 hover:text-gray-900">Articles</a>
+              </Link>
+              <Link href="/dashboard">
+                <a className="mr-5 hover:text-gray-900">Dashboard</a>
               </Link>
             </nav>
           </div>
