@@ -18,11 +18,8 @@ export const getStaticProps = async () => {
   const articles = fs
     .readdirSync(path.join(process.cwd(), 'posts'))
     .map((article) => path.join(cwd, 'posts', article));
-  const notes = fs
-    .readdirSync(path.join(process.cwd(), 'notes'))
-    .map((article) => path.join(cwd, 'notes', article));
 
-  const all = articles.concat(notes);
+  const all = articles
 
   const posts = all.map((filename) => {
     const markdownWithMeta = fs.readFileSync(filename, 'utf-8');
@@ -39,7 +36,6 @@ export const getStaticProps = async () => {
   return {
     props: {
       draftCount,
-      noteCount: notes.length,
       posts: posts.filter(({ frontMatter: { draft } }) => !draft),
     },
   };
@@ -48,7 +44,7 @@ export const getStaticProps = async () => {
 /* eslint-disable-next-line */
 export interface ArticlesProps {}
 
-export function Articles({ posts, draftCount, noteCount }) {
+export function Articles({ posts, draftCount }) {
   console.log('posts', posts);
   return (
     <div className="mt-5 pb-5">
@@ -66,12 +62,6 @@ export function Articles({ posts, draftCount, noteCount }) {
                 {posts.length}
               </h2>
               <p className="leading-relaxed text-gray-500">Articles</p>
-            </div>
-            <div className="p-4 sm:w-1/4 w-1/2">
-              <h2 className="title-font font-medium sm:text-4xl text-3xl  text-blue-500">
-                {noteCount}
-              </h2>
-              <p className="leading-relaxed text-gray-500">Notes</p>
             </div>
           </div>
         </div>
@@ -137,19 +127,6 @@ export function Articles({ posts, draftCount, noteCount }) {
 
             <div className="mt-4">
               <div className="flex items-center">
-                {/*<div className="flex items-center">*/}
-                {/*  <img*/}
-                {/*    className="object-cover h-10 rounded-full"*/}
-                {/*    src="https://images.unsplash.com/photo-1586287011575-a23134f797f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=48&q=60"*/}
-                {/*    alt="Avatar"*/}
-                {/*  />*/}
-                {/*  <a*/}
-                {/*    href="#"*/}
-                {/*    className="mx-2 font-semibold text-gray-700 dark:text-gray-200"*/}
-                {/*  >*/}
-                {/*    Jone Doe*/}
-                {/*  </a>*/}
-                {/*</div>*/}
                 <span className="mx-1 text-xs text-gray-500 dark:text-gray-300">
                   {post.frontMatter.date}
                 </span>
