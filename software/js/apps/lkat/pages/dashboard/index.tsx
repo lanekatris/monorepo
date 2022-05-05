@@ -10,8 +10,8 @@ import max from 'lodash/max';
 import minBy from 'lodash/minBy';
 import maxBy from 'lodash/maxBy';
 import { differenceInYears } from 'date-fns';
-import uniqBy from 'lodash/uniqBy'
-import countBy from 'lodash/countBy'
+import uniqBy from 'lodash/uniqBy';
+import countBy from 'lodash/countBy';
 import chain from 'lodash/chain';
 import _ from 'lodash';
 
@@ -25,16 +25,24 @@ export const getStaticProps = async () => {
     .filter((x) => x.PlayerName === 'Lane')
     .map((x) => ({ ...x, _parsedOverUnder: parseInt(x['+/-']) }));
 
-  const a =path.resolve(
+  const a = path.resolve(
     __dirname,
-    `../../../public/Adventures-Exportable-05-03-2022.csv`);
-    const rawAdventures = await csv().fromFile(a);
+    `../../../public/Adventures-Exportable-05-03-2022.csv`
+  );
+  const rawAdventures = await csv().fromFile(a);
 
-    // const adventuresCount = countBy(rawAdventures, x => x.OutdoorActivity)
-  const adventuresCount = rawAdventures.map(x => x.OutdoorActivity.split(',')).flatMap(x => x)
+  // const adventuresCount = countBy(rawAdventures, x => x.OutdoorActivity)
+  const adventuresCount = rawAdventures
+    .map((x) => x.OutdoorActivity.split(','))
+    .flatMap((x) => x);
 
-  const top5 = _.chain(adventuresCount).countBy(x => x).toPairs().orderBy(x => x[1], ['desc']).take(5).map(x => ({name: x[0], value: x[1]})).value()
-
+  const top5 = _.chain(adventuresCount)
+    .countBy((x) => x)
+    .toPairs()
+    .orderBy((x) => x[1], ['desc'])
+    .take(5)
+    .map((x) => ({ name: x[0], value: x[1] }))
+    .value();
 
   return {
     props: {
@@ -66,8 +74,8 @@ export default function DashboardPage(props) {
     bestRound,
     worstRound,
     yearsPlayed,
-  adventuresCount,
-    top5
+    adventuresCount,
+    top5,
   } = props;
 
   // console.log(props);
@@ -91,7 +99,81 @@ export default function DashboardPage(props) {
         </p>
       </div>
 
-      <h1 className="font-bold text-2xl md:text-3xl tracking-tight mb-4 text-black dark:text-white">
+      <h1 className="font-bold text-2xl md:text-3xl tracking-tight mb-4 text-black dark:text-white mt-10">
+        💪 Activity Stats
+      </h1>
+      <p className="text-gray-600 dark:text-gray-400 mb-4">
+        This section is inspired by{' '}
+        <a
+          href="https://www.airtable.com/product/reporting"
+          className="text-gray-900 dark:text-gray-100 underline"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Airtable visualizations
+        </a>
+        . They have an awesome data management spreadsheet platform. I actually
+        pay for them. Their nicer charting features is limited for my plan;
+        which makes sense.
+        <br />
+        So I wanted to own more of the data and provide similar charts here just
+        because!
+      </p>
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
+        <MetricCard metric={adventuresCount} text="Adventures Logged" />
+      </div>
+      <h1 className="font-bold text-1xl md:text-1xl tracking-tight mb-4 text-black dark:text-white mt-10">
+        Most Played Sports
+      </h1>
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
+        {top5.map(({ name, value }) => (
+          <MetricCard key={name} metric={value} text={name} />
+        ))}
+      </div>
+
+      <h1 className="font-bold text-2xl md:text-3xl tracking-tight mb-4 text-black dark:text-white mt-10">
+        Disc Golf Stats
+      </h1>
+      <p className="text-gray-600 dark:text-gray-400 mb-4">
+        This data comes from{' '}
+        <a
+          href="https://udisc.com/"
+          className="text-gray-900 dark:text-gray-100 underline"
+          target="_blank"
+          rel="noreferrer"
+        >
+          UDisc
+        </a>
+        . I haven't always used the app and have missing rounds but I'm using
+        the data they give me which isn't half bad. I'll dig into the data more
+        as time goes on. Their app has nice stats but I wanted to analyze it
+        here just 'cuz.
+      </p>
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
+        <MetricCard metric={roundsPlayed} text="Rounds Played" />
+        <MetricCard metric={bestRound} text="Best Round" color="green" />
+        <MetricCard metric={worstRound} text="Worst Round" color="red" />
+        <MetricCard metric={yearsPlayed} text="Years Played" />
+      </div>
+
+      <h1 className="font-bold text-2xl md:text-3xl tracking-tight mb-4 text-black dark:text-white mt-10">
+        My GitHub Commits
+      </h1>
+
+      <p className="text-gray-600 dark:text-gray-400 mb-4">
+        Take this with a grain of salt, I'm moving my private repos to being
+        public. I'm bad about committing secrets 🤷‍♂️
+      </p>
+      <a href="https://github.com/lanekatris" target="_blank" rel="noreferrer">
+        <img
+          className="mt-5 mb-5"
+          src="https://ghchart.rshah.org/lanekatris"
+          alt="Lane's GitHub Contribution Chart"
+          width="600"
+        />
+      </a>
+
+      <h1 className="font-bold text-2xl md:text-3xl tracking-tight mb-4 text-black dark:text-white mt-10">
         Feedly Stats
       </h1>
       <p className="text-gray-600 dark:text-gray-400 mb-4">
@@ -138,61 +220,6 @@ export default function DashboardPage(props) {
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
         <MetricCard metric={groupCount} text="Feedly Groups" />
         <MetricCard metric={feedCount} text="Feedly Feeds" />
-      </div>
-
-      <h1 className="font-bold text-2xl md:text-3xl tracking-tight mb-4 text-black dark:text-white mt-10">
-        Disc Golf Stats
-      </h1>
-      <p className="text-gray-600 dark:text-gray-400 mb-4">
-        This data comes from{' '}
-        <a
-          href="https://udisc.com/"
-          className="text-gray-900 dark:text-gray-100 underline"
-          target="_blank"
-          rel="noreferrer"
-        >
-          UDisc
-        </a>
-        . I haven't always used the app and have missing rounds but I'm using
-        the data they give me which isn't half bad. I'll dig into the data more
-        as time goes on. Their app has nice stats but I wanted to analyze it
-        here just 'cuz.
-      </p>
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
-        <MetricCard metric={roundsPlayed} text="Rounds Played" />
-        <MetricCard metric={bestRound} text="Best Round" color="green" />
-        <MetricCard metric={worstRound} text="Worst Round" color="red" />
-        <MetricCard metric={yearsPlayed} text="Years Played" />
-      </div>
-      <h1 className="font-bold text-2xl md:text-3xl tracking-tight mb-4 text-black dark:text-white mt-10">
-        💪 Activity Stats
-      </h1>
-      <p className="text-gray-600 dark:text-gray-400 mb-4">
-        This section is inspired by{' '}
-        <a
-          href="https://www.airtable.com/product/reporting"
-          className="text-gray-900 dark:text-gray-100 underline"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Airtable visualizations
-        </a>
-        . They have an awesome data management spreadsheet platform. I actually
-        pay for them. Their nicer charting features is limited for my plan; which
-        makes sense.
-        <br />
-        So I wanted to own more of the data and provide similar charts here just
-        because!
-      </p>
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
-        <MetricCard metric={adventuresCount} text="Adventures Logged" />
-
-      </div>
-      <h1 className="font-bold text-1xl md:text-1xl tracking-tight mb-4 text-black dark:text-white mt-10">
-        Most Played Sports
-      </h1>
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
-        {top5.map(({name,value}) => <MetricCard key={name} metric={value} text={name} />)}
       </div>
     </main>
   );
