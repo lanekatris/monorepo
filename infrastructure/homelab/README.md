@@ -17,3 +17,5 @@ ANSIBLE_CONFIG=/mnt/c/Code/monorepo/infrastructure/homelab/ansible.cfg ansible-p
 #### Make Service LoadBalancer
 
 `sudo kubectl patch svc guestbook-ui -p '{"spec": {"type": "LoadBalancer"}}'`
+
+# Ansible

@@ -123,14 +123,14 @@ export function Articles({ posts, draftCount, noteCount }) {
                   post.slug
                 }`}
               >
-                <a className="block mt-2 text-2xl font-semibold text-gray-600 transition-colors duration-200 transform dark:text-white hover:text-gray-600 hover:underline">
+                <a className="block mt-2 text-2xl hover:underline">
                   {post.frontMatter.note && (
                     <span className="text-blue-600">Note: </span>
                   )}
                   {post.frontMatter.title}
                 </a>
               </Link>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+              <p className="mt-2 text-sm text-gray-500">
                 {post.frontMatter.description}
               </p>
             </div>

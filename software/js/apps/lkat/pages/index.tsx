@@ -32,8 +32,6 @@ export function IndexV2(props: IndexV2Props) {
     <>
       <section className="text-gray-600 body-font">
         <div className="container mx-auto flex px-5 py-6 items-center justify-center flex-col">
-          {/*<img className="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero"*/}
-          {/*     src="https://dummyimage.com/720x600" />*/}
 
           <Image
             className="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded"
@@ -42,7 +40,7 @@ export function IndexV2(props: IndexV2Props) {
             height="400"
           />
 
-          <div className="text-center lg:w-2/3 w-full mt-10">
+          <div className="text-center lg:w-1/2 w-full mt-10">
             <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-blue-500">
               Hi, I'm Lane Katris
             </h1>

@@ -21,6 +21,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
               <Link href="/articles">
                 <a className="mr-5 hover:text-gray-900">Articles</a>
               </Link>
+              <a href="https://mastodon.social/web/@lkat" target="_blank" rel="noreferrer" className="mr-5 hover:text-gray-900">Notes (Mastadon)</a>
               <Link href="/dashboard">
                 <a className="mr-5 hover:text-gray-900">Dashboard</a>
               </Link>
