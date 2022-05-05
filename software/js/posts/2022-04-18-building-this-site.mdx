@@ -1,10 +1,9 @@
 ---
-title: Building this site AGAIN
+title: Building My Website AGAIN
 date: 'April 18, 2022'
-tags: ['blog']
+tags: ['blog', 'Next.JS', 'Tailwind', 'Workflow']
 thumbnailUrl: 'https://dvg45c871tdz4.cloudfront.net/images/Screenshot-2022-04-18-232245.png'
 description: I'm hoping this is the last re-do of my website for a LONG time...
-draft: true
 ---
 
 # The Old Site
@@ -15,25 +14,28 @@ draft: true
   height="696"
 />
 
-TODO: _There was a few previous iterations actually but I don't have screenshots readily available_
+> I've had previous iterations of my website but don't have any screenshots of them 🙄
 
 # What Triggered This?
 
-Well indie blog caused this. That is a good thing though.
+Well [indie blog](https://indieblog.page/) and [indie web](https://indieweb.org/)  caused this. That is a good thing though
 
-Sometimes feedly (productivity link to come) gets boring. It's nice to see people's unique personal webistes that are software/design/etc. focused.
+Sometimes reading [Feedly](https://feedly.com/i/my) gets boring. It's nice to see people's unique personal websites that are software/design/etc. focused
 
 # Goals
 
 - I want it to be pretty
-- I would like to scroll through it to reminisce (similart to TODO)
+- I would like to scroll through it to reminisce
 - Central place for SSR type site along with auth guarded pages for server side getting data
+- The above helps with all my random projects too
 
-I thought about rolling with this [theme](https://github.com/thelearn-tech/hacker-theme) but [Meraki UI](https://merakiui.com/) won out on the theme battle with [Tailwind CSS](https://tailwindcss.com/).
+# Thoughts
 
-Since I like maps and outdoor activities the topo background was a no-brainer.
+I thought about rolling with this [theme](https://github.com/thelearn-tech/hacker-theme) but [Meraki UI](https://merakiui.com/) won out on the theme battle with [Tailwind CSS](https://tailwindcss.com/)
 
-I plan on using "Article" and "Notes" separation and combining them in a central feed you can filter. I also use Airtable to keep track of outdoor activities so I want to display some graph data on here.Airtable does it well but I'm also cheap and it's fun to mess with your own data.
+I decided to just do Articles, use [Mastadon](https://mastodon.social/web/@lkat) for Notes, and I'll add filters for the type of posts so the feed isn't too noisy for folks.
+I also use Airtable to keep track of outdoor activities so I want to display some graph data on here. Airtable does it well but I'm also cheap and it's fun to mess with your own data
+
 
 # Inspiration
 
@@ -46,36 +48,53 @@ These blogs were fun to check out:
 
 If you search for _best practices_ for image handling on Vercel or Netlify you won't get much. They have components that render things performantly but what I wanted to know was storing them?
 
-I didn't want to clutter up my `git` repo with 6MB+ images.
+I didn't want to clutter up my `git` repo with 6MB+ images
 
-So, as "real" companies do I put them in a storage bucket and put a CDN in front of it. See below for how I use it in my workflow.
+So, as "real" companies do I put them in a storage bucket and put a CDN in front of it
 
 # My Workflow
 
-Folks have content on their sites but don't talk much on _how it got there_. So I'll touch on that briefly:
+Folks have content on their sites but don't talk much on _how it got there_ or _their workflow_. So I'll touch on that briefly:
 
-- Create a date prefixed `mdx` file
-- Open a Chrome tab with my private [S3 bucket](https://s3.console.aws.amazon.com/s3/buckets/lkat-blog)
-- Drag and drop images to S3 and build out image link in markdown
+- Create a date prefixed `mdx` file with my favorite IDE [Webstorm](https://www.jetbrains.com/webstorm/)
+- (Optional) The FontMatter section at the top of the file, I add `draft: true` when I don't want it published
+- Open my file explorer to my [OneDrive](https://onedrive.live.com/) images
+- Mount my S3 bucket for any images I may add for an article with this command:
 
-Or you can use [this article](https://blog.spikeseed.cloud/mount-s3-as-a-disk/#mounting-an-s3-bucket-on-windows-server-2016) which mounts your
-`S3` bucket as a local mount using `rclone` which I think is easier; you just have to remember the mount command.
+<SyntaxHighlighter style="a11y-dark" language="powershell">rclone mount s3:lkat-blog S: --vfs-cache-mode full</SyntaxHighlighter>
 
-Hot reloading `MDX` is a must, I'm working on that.
+For the `rclone` setup mentioned above you can go see [this article](https://blog.spikeseed.cloud/mount-s3-as-a-disk/#mounting-an-s3-bucket-on-windows-server-2016) which mounts your
+`S3` bucket as a local mount using `rclone` which I think is easiest compared to the AWS console and uploading assets there; you just have to remember the mount command
+
+
+### Hot Reloading
+Hot reloading `MDX` is a must, I recently got that working with the following:
+<SyntaxHighlighter language="powershell">
+{`cd C:\\Code\\monorepo\\software\\js
+.\\node_modules\\.bin\\next-remote-watch ./posts -r .\\apps\\lkat`}
+</SyntaxHighlighter>
 
 # Technology Choice
 
-It all comes down to the bigger picture for me. I've gone through various iterations TODO
+It all comes down to the bigger picture for me. I've gone through various iterations with Gatsby, plain CRA, and SSR setups like NestJS
 
-Next.JS
+So it seems like Next.js can do SPA and SSR things so...
 
-I do miss how GatsbyJS gives you all the querying, aggregation, unifying api to access your source post examples.
+[//]: # (<Quote author="The Mandalorian">This is the way</Quote>)
+<div style={{width: '100%', height: 0, paddingBottom: '56%',position: 'relative'}}><iframe src="https://giphy.com/embed/6UFgdU9hirj1pAOJyN" width="100%" height="100%" style={{position:'absolute'}} frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/disneyplus-star-wars-starwars-the-book-of-boba-fett-6UFgdU9hirj1pAOJyN">via GIPHY</a></p>
 
-But overall I think the unified UI components, SSR, and authentication possibilities on certain pages was the selling point for Next.js.
-Also with data access, I could have separate cloud functions but why bother when Next.js has `api` that makes it so easy. Plus these endpoints can be locked down.
+I do miss how GatsbyJS gives you all the querying, aggregation, and unifying api to access your source data though
 
-# TODO
+But overall I think the unified UI components, SSR, and authentication possibilities on certain pages was the selling point for Next.js
 
-I currently do manual image resizing: https://www.inchcalculator.com/video-aspect-ratio-calculator/
-https://tailblocks.cc/
-https://merakiui.com/components/
+Also, for data access, I could have separate cloud functions but why bother when Next.js has `api` that makes it so easy. Plus these endpoints can be locked down
+
+# Improvements Needed
+
+- I currently do manual image resizing 😢 and have to figure out the ratio [here](https://www.inchcalculator.com/video-aspect-ratio-calculator/)
+
+### Tailwind CSS
+
+I don't know all the Tailwind CSS classes so I usually always need to have these open for inspiration/examples:
+- [https://tailblocks.cc/](https://tailblocks.cc/)
+- [https://merakiui.com/components/](https://merakiui.com/components/)

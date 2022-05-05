@@ -29,6 +29,7 @@
     "@nestjs/typeorm": "^8.0.3",
     "@nrwl/next": "13.9.6",
     "@tailwindcss/typography": "^0.5.2",
+    "@types/react-syntax-highlighter": "^15.5.1",
     "apollo-server-express": "^3.6.7",
     "core-js": "^3.6.5",
     "csvtojson": "^2.0.10",
