@@ -9,8 +9,5 @@ module.exports = {
     extend: {},
   },
   plugins: [require('@tailwindcss/typography')],
-  safelist:[
-    'text-red-500',
-    'text-green-500'
-  ]
+  safelist: ['text-red-500', 'text-green-500'],
 };

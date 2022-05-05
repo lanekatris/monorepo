@@ -9,13 +9,13 @@ export function IndexV2(props: IndexV2Props) {
     <>
       <div className="flex flex-col items-center py-6 lg:h-[32rem] lg:flex-row">
         <div className="lg:w-1/2">
-          <h2 className="text-4xl font-semibold">Hi, I'm Lane Katris</h2>
+          <h2 className="text-4xl font-semibold ">Hi, I'm Lane Katris</h2>
 
-          <h3 className="text-2xl font-semibold text-gray-500">
+          <h3 className="text-2xl font-semibold text-gray-400">
             Full stack engineer who enjoys the outdoors 🗻🧗
           </h3>
 
-          <h3 className="text-2xl font-semibold mt-3 text-gray-500">
+          <h3 className="text-2xl font-semibold mt-3 text-gray-400">
             I currently work at{' '}
             <a
               className="text-blue-400"
