@@ -19,7 +19,7 @@ export const getStaticProps = async () => {
     .readdirSync(path.join(process.cwd(), 'posts'))
     .map((article) => path.join(cwd, 'posts', article));
 
-  const all = articles
+  const all = articles;
 
   const posts = all.map((filename) => {
     const markdownWithMeta = fs.readFileSync(filename, 'utf-8');

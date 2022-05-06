@@ -2,16 +2,11 @@ import { GraphQLClient } from 'graphql-request';
 import * as Dom from 'graphql-request/dist/types.dom';
 import gql from 'graphql-tag';
 
-export const EventsDocument = gql`
-  query events {
-    events {
-      events {
-        id
-        aggregateId
-        type
-        created
-        data
-      }
+export const IdkDocument = gql`
+  query idk {
+    adventures {
+      date
+      activities
     }
   }
 `;
@@ -33,17 +28,17 @@ export function getSdk(
   withWrapper: SdkFunctionWrapper = defaultWrapper
 ) {
   return {
-    events(
-      variables?: EventsQueryVariables,
+    idk(
+      variables?: IdkQueryVariables,
       requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<EventsQuery> {
+    ): Promise<IdkQuery> {
       return withWrapper(
         (wrappedRequestHeaders) =>
-          client.request<EventsQuery>(EventsDocument, variables, {
+          client.request<IdkQuery>(IdkDocument, variables, {
             ...requestHeaders,
             ...wrappedRequestHeaders,
           }),
-        'events',
+        'idk',
         'query'
       );
     },

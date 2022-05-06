@@ -32,7 +32,6 @@ export function IndexV2(props: IndexV2Props) {
     <>
       <section className="text-gray-600 body-font">
         <div className="container mx-auto flex px-5 py-6 items-center justify-center flex-col">
-
           <Image
             className="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded"
             src="https://dvg45c871tdz4.cloudfront.net/images/20200914_075553.jpg"

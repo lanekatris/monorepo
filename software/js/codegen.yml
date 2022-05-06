@@ -5,3 +5,6 @@ generates:
   libs/shared/src/lib/masterchief-sdk.ts:
     plugins:
       - 'typescript-graphql-request'
+  libs/shared/src/lib/masterchief-sdk-json.json:
+    plugins:
+      - 'introspection'

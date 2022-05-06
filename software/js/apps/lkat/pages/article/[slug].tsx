@@ -12,7 +12,7 @@ import ScoreCardImage from '../../components/disc-golf/score-card-image/score-ca
 import ScoreBadges from '../../components/disc-golf/score-badges/score-badges';
 import Alert from '../../components/alert/alert';
 
-import './index.module.css'
+import './index.module.css';
 
 export const getStaticPaths = async () => {
   const files = fs.readdirSync(path.join(process.cwd(), 'posts'));
@@ -43,25 +43,36 @@ export const getStaticProps = async ({ params: { slug } }) => {
   };
 };
 
-const Quote = ({children, author}) => (
+const Quote = ({ children, author }) => (
   <blockquote className="relative p-4 text-xl italic border-l-4 bg-neutral-100 text-neutral-600 border-neutral-500 quote mb-5">
     {/*<div className="stylistic-quote-mark" aria-hidden="true">*/}
     {/*  &ldquo;*/}
     {/*</div>*/}
     <p className="mb-4">{children}</p>
-    {author && <cite className="flex items-center">
-
-      <div className="flex flex-col items-start">
-        <span className="mb-1 text-sm italic font-bold">- {author}</span>
-      </div>
-    </cite>}
+    {author && (
+      <cite className="flex items-center">
+        <div className="flex flex-col items-start">
+          <span className="mb-1 text-sm italic font-bold">- {author}</span>
+        </div>
+      </cite>
+    )}
   </blockquote>
-)
+);
 
-function CodeHighlighter({language = 'javascript', children}) {
-  return <SyntaxHighlighter PreTag={props =><pre className="mb-5" {...props}>{props.children}</pre>} language={language} style={codeColor}>
-    {children}
-  </SyntaxHighlighter>
+function CodeHighlighter({ language = 'javascript', children }) {
+  return (
+    <SyntaxHighlighter
+      PreTag={(props) => (
+        <pre className="mb-5" {...props}>
+          {props.children}
+        </pre>
+      )}
+      language={language}
+      style={codeColor}
+    >
+      {children}
+    </SyntaxHighlighter>
+  );
 }
 
 const components = {
@@ -112,11 +123,9 @@ const components = {
     </>
   ),
   ul: (props) => (
-    <nav className="mt-5 mb-5 flex flex-col space-y-2.5">
-      {props.children}
-    </nav>
+    <nav className="mt-5 mb-5 flex flex-col space-y-2.5">{props.children}</nav>
   ),
-  blockquote: (props) => <Quote>{props.children}</Quote>
+  blockquote: (props) => <Quote>{props.children}</Quote>,
 };
 
 /* eslint-disable-next-line */
@@ -152,7 +161,7 @@ export function Article(props) {
         <p className="text-4xl font-bold text-gray-700 dark:text-white mb-5">
           {title}
         </p>
-        <div>
+        <div className="mb-5">
           {(scores || []).length > 0 && (
             <div>
               DG Scores:{' '}

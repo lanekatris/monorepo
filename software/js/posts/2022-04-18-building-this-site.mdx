@@ -18,7 +18,7 @@ description: I'm hoping this is the last re-do of my website for a LONG time...
 
 # What Triggered This?
 
-Well [indie blog](https://indieblog.page/) and [indie web](https://indieweb.org/)  caused this. That is a good thing though
+Well [indie blog](https://indieblog.page/) and [indie web](https://indieweb.org/) caused this. That is a good thing though
 
 Sometimes reading [Feedly](https://feedly.com/i/my) gets boring. It's nice to see people's unique personal websites that are software/design/etc. focused
 
@@ -35,7 +35,6 @@ I thought about rolling with this [theme](https://github.com/thelearn-tech/hacke
 
 I decided to just do Articles, use [Mastadon](https://mastodon.social/web/@lkat) for Notes, and I'll add filters for the type of posts so the feed isn't too noisy for folks.
 I also use Airtable to keep track of outdoor activities so I want to display some graph data on here. Airtable does it well but I'm also cheap and it's fun to mess with your own data
-
 
 # Inspiration
 
@@ -61,16 +60,19 @@ Folks have content on their sites but don't talk much on _how it got there_ or _
 - Open my file explorer to my [OneDrive](https://onedrive.live.com/) images
 - Mount my S3 bucket for any images I may add for an article with this command:
 
-<SyntaxHighlighter style="a11y-dark" language="powershell">rclone mount s3:lkat-blog S: --vfs-cache-mode full</SyntaxHighlighter>
+<SyntaxHighlighter style="a11y-dark" language="powershell">
+  rclone mount s3:lkat-blog S: --vfs-cache-mode full
+</SyntaxHighlighter>
 
 For the `rclone` setup mentioned above you can go see [this article](https://blog.spikeseed.cloud/mount-s3-as-a-disk/#mounting-an-s3-bucket-on-windows-server-2016) which mounts your
 `S3` bucket as a local mount using `rclone` which I think is easiest compared to the AWS console and uploading assets there; you just have to remember the mount command
 
-
 ### Hot Reloading
+
 Hot reloading `MDX` is a must, I recently got that working with the following:
+
 <SyntaxHighlighter language="powershell">
-{`cd C:\\Code\\monorepo\\software\\js
+  {`cd C:\\Code\\monorepo\\software\\js
 .\\node_modules\\.bin\\next-remote-watch ./posts -r .\\apps\\lkat`}
 </SyntaxHighlighter>
 
@@ -80,8 +82,31 @@ It all comes down to the bigger picture for me. I've gone through various iterat
 
 So it seems like Next.js can do SPA and SSR things so...
 
-[//]: # (<Quote author="The Mandalorian">This is the way</Quote>)
-<div style={{width: '100%', height: 0, paddingBottom: '56%',position: 'relative'}}><iframe src="https://giphy.com/embed/6UFgdU9hirj1pAOJyN" width="100%" height="100%" style={{position:'absolute'}} frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/disneyplus-star-wars-starwars-the-book-of-boba-fett-6UFgdU9hirj1pAOJyN">via GIPHY</a></p>
+[//]: # '<Quote author="The Mandalorian">This is the way</Quote>'
+
+<div
+  style={{
+    width: '100%',
+    height: 0,
+    paddingBottom: '56%',
+    position: 'relative',
+  }}
+>
+  <iframe
+    src="https://giphy.com/embed/6UFgdU9hirj1pAOJyN"
+    width="100%"
+    height="100%"
+    style={{ position: 'absolute' }}
+    frameBorder="0"
+    class="giphy-embed"
+    allowFullScreen
+  ></iframe>
+</div>
+<p>
+  <a href="https://giphy.com/gifs/disneyplus-star-wars-starwars-the-book-of-boba-fett-6UFgdU9hirj1pAOJyN">
+    via GIPHY
+  </a>
+</p>
 
 I do miss how GatsbyJS gives you all the querying, aggregation, and unifying api to access your source data though
 
@@ -96,5 +121,6 @@ Also, for data access, I could have separate cloud functions but why bother when
 ### Tailwind CSS
 
 I don't know all the Tailwind CSS classes so I usually always need to have these open for inspiration/examples:
+
 - [https://tailblocks.cc/](https://tailblocks.cc/)
 - [https://merakiui.com/components/](https://merakiui.com/components/)
