@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import 'react-medium-image-zoom/dist/styles.css';
 
 export interface ScoreCardImageProps {
   fileNames: string[];
