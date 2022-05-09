@@ -12,3 +12,6 @@ https://developers.eventstore.com/clients/grpc/subscriptions.html#resolving-link
 cd c:\monorepo\software\js
 .\node_modules\.bin\graphql-codegen
 ```
+
+# Nx Dev
+`nx g @nrwl/next:page YOU_PAGE --project=lkat`
