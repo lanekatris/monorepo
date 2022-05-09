@@ -1,0 +1,36 @@
+---
+- hosts: homelab
+  roles:
+    - role: gepaplexx.microk8s
+      become: true
+      vars:
+        microk8s_plugins:
+          dashboard: true
+          storage: true
+  tasks:
+    - name: Install packages
+      become: true
+      ansible.builtin.package:
+        name:
+          - htop
+          - vim
+          - curl
+    - name: Install snap packages
+      become: true
+      snap:
+        classic: yes
+        name:
+          - microk8s
+    - name: Add user to k8s groups
+      become: true
+      ansible.builtin.user:
+        name: lane
+        groups: microk8s
+        append: true
+    - name: Set owner of kube directory
+      become: true
+      ansible.builtin.file:
+        path: /home/lane/.kube
+        state: directory
+        recurse: yes
+        owner: lane

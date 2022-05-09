@@ -1,0 +1,19 @@
+#query events {
+#  events {
+#    events {
+#      id
+#      aggregateId
+#      type
+#      created
+#      data
+#    }
+#  }
+#}
+
+query idk {
+  adventures {
+    # id
+    date
+    activities
+  }
+}
