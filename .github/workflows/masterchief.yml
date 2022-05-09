@@ -18,12 +18,12 @@ jobs:
       working-directory: ./software/js
     
     - name: Build masterchief (nest.js api)
-      run: nx build masterchief
+      run: ./node_modules/.bin/nx build masterchief
       working-directory: ./software/js
       
       
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file ./apps/masterchief/Dockerfile -t loonison101/masterchief
       working-directory: ./software/js
       
       
@@ -32,4 +32,11 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+        
+    -
+        name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: loonison101/masterchief:latest
 
