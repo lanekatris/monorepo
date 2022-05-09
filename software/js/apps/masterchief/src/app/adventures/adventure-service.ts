@@ -10,6 +10,7 @@ import { Adventure, CreateAdventureInput } from './models/adventure';
 import { isSameDay } from 'date-fns';
 import { merge } from 'lodash';
 import { ESDB } from '../constants';
+import {nanoid} from "nanoid";
 
 @Injectable()
 export class AdventureService {
@@ -63,8 +64,10 @@ export class AdventureService {
     const event = jsonEvent<AdventureCreated>({
       type: 'AdventureCreated',
       data: {
+        ...input,
+        id: nanoid(),
         date: input.date || new Date(),
-        activities: input.activities,
+        // activities: input.activities,
       },
     });
     await this.client.appendToStream('testies', event);

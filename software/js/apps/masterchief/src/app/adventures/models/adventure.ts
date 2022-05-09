@@ -10,6 +10,7 @@ import {MaintenanceTarget} from "../events/adventure-created";
 export enum AdventureActivity {
   OUTDOOR_ROCK_CLIMBING = 'Outdoor Rock Climbing',
   VOLLEYBALL = 'Volleyball',
+  DISC_GOLF = 'DiscGolf'
 }
 registerEnumType(AdventureActivity, {
   name: 'AdventureActivity',
@@ -38,6 +39,12 @@ export class CreateAdventureInput {
 
   @Field(() => [AdventureActivity])
   activities: AdventureActivity[];
+
+  @Field(() => String, {nullable:true})
+  name?: string
+
+  @Field(() => String, {nullable: true})
+  location?: string
 }
 
 @InputType()

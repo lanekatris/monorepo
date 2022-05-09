@@ -4,6 +4,9 @@ import {AdventureActivity, LogMaintenanceInput} from '../models/adventure';
 export type AdventureCreated = JSONEventType<
   'AdventureCreated',
   {
+    id: string,
+    name?: string,
+    location?: string,
     date: Date;
     activities: AdventureActivity[];
   }
