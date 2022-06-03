@@ -86,7 +86,7 @@ const components = {
     </h3>
   ),
   h2: (props) => (
-    <h2 className="text-xl font-bold text-gray-800 dark:text-white hover:text-gray-700 dark:hover:text-gray-300">
+    <h2 className="text-xl mb-5 font-bold text-gray-800 dark:text-white hover:text-gray-700 dark:hover:text-gray-300">
       {props.children}
     </h2>
   ),
