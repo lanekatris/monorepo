@@ -10,6 +10,7 @@ import Next from 'next';
 import { resolve } from 'path';
 import { AppController } from './test.controller';
 
+
 @Module({
   imports: [
     AdventuresModule,
