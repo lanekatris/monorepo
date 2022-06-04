@@ -43,7 +43,7 @@ export const getStaticProps = async ({ params: { slug } }) => {
   };
 };
 
-const Quote = ({ children, author }) => (
+const Quote = ({ children,  author = null }) => (
   <blockquote className="relative p-4 text-xl italic border-l-4 bg-neutral-100 text-neutral-600 border-neutral-500 quote mb-5">
     {/*<div className="stylistic-quote-mark" aria-hidden="true">*/}
     {/*  &ldquo;*/}

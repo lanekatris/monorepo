@@ -4,6 +4,8 @@ export interface ScoreCardImageProps {
   fileNames: string[];
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export function ScoreCardImage({ cards }: ScoreCardImageProps) {
   return (
     <div className="text-center grid gap-2 grid-cols-1 sm:grid-cols-2 my-2 w-full justify-center items-center">
