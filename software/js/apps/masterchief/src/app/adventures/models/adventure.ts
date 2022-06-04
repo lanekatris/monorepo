@@ -5,20 +5,29 @@ import {
   ObjectType,
   registerEnumType,
 } from '@nestjs/graphql';
-import {MaintenanceTarget} from "../events/adventure-created";
+import { MaintenanceTarget } from '../events/adventure-created';
 
 export enum AdventureActivity {
   OUTDOOR_ROCK_CLIMBING = 'Outdoor Rock Climbing',
   VOLLEYBALL = 'Volleyball',
-  DISC_GOLF = 'DiscGolf'
+  DISC_GOLF = 'DiscGolf',
 }
 registerEnumType(AdventureActivity, {
   name: 'AdventureActivity',
 });
 
 registerEnumType(MaintenanceTarget, {
-  name: 'MaintenanceTarget'
-})
+  name: 'MaintenanceTarget',
+});
+
+@ObjectType()
+export class Movie {
+  @Field(() => ID)
+  name: string;
+
+  @Field(() => Boolean)
+  watched: boolean;
+}
 
 @ObjectType()
 export class Adventure {
@@ -40,11 +49,11 @@ export class CreateAdventureInput {
   @Field(() => [AdventureActivity])
   activities: AdventureActivity[];
 
-  @Field(() => String, {nullable:true})
-  name?: string
+  @Field(() => String, { nullable: true })
+  name?: string;
 
-  @Field(() => String, {nullable: true})
-  location?: string
+  @Field(() => String, { nullable: true })
+  location?: string;
 }
 
 @InputType()
@@ -53,13 +62,13 @@ export class LogFoodInput {
   date?: Date;
 
   @Field(() => String)
-  name: string
+  name: string;
 
-  @Field(() => Boolean, {nullable: true})
-  usedBlackStone?: boolean
+  @Field(() => Boolean, { nullable: true })
+  usedBlackStone?: boolean;
 
-  @Field(() => String, {nullable: true})
-  location?: string
+  @Field(() => String, { nullable: true })
+  location?: string;
 }
 
 @InputType()
@@ -68,8 +77,26 @@ export class LogMaintenanceInput {
   date?: Date;
 
   @Field(() => String)
-  name: string
+  name: string;
 
   @Field(() => MaintenanceTarget)
-  target: MaintenanceTarget
+  target: MaintenanceTarget;
+}
+
+export enum MovieType {
+  Interested = 'interested',
+  Watched = 'watched',
+}
+
+registerEnumType(MovieType, {
+  name: 'MovieType',
+});
+
+@InputType()
+export class MovieInput {
+  @Field(() => String)
+  movieName: string;
+
+  @Field(() => MovieType)
+  type: MovieType;
 }
