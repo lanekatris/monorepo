@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AdventuresModule } from './adventures/adventures.module';
-
+import { HeroModule } from '../hero/hero.module';
 
 @Module({
   imports: [
@@ -15,6 +15,7 @@ import { AdventuresModule } from './adventures/adventures.module';
       sortSchema: true,
     }),
     ConfigModule.forRoot(),
+    HeroModule,
   ],
   controllers: [],
   providers: [],
