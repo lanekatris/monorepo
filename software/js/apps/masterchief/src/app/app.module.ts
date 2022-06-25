@@ -5,7 +5,10 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AdventuresModule } from './adventures/adventures.module';
 import { HeroModule } from '../hero/hero.module';
-import { ViewModule } from '../react/view.module';
+import { RenderModule } from 'nest-next';
+import Next from 'next';
+import { resolve } from 'path';
+import { AppController } from './test.controller';
 
 @Module({
   imports: [
@@ -17,9 +20,14 @@ import { ViewModule } from '../react/view.module';
     }),
     ConfigModule.forRoot(),
     HeroModule,
-    ViewModule,
+    RenderModule.forRootAsync(
+      Next({
+        dev: process.env.NODE_ENV !== 'production',
+        dir: resolve(__dirname),
+      })
+    ),
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}
