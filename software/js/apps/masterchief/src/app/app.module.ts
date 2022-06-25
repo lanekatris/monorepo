@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AdventuresModule } from './adventures/adventures.module';
 import { HeroModule } from '../hero/hero.module';
+import { ViewModule } from '../react/view.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { HeroModule } from '../hero/hero.module';
     }),
     ConfigModule.forRoot(),
     HeroModule,
+    ViewModule,
   ],
   controllers: [],
   providers: [],

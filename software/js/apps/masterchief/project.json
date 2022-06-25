@@ -10,7 +10,7 @@
         "outputPath": "dist/apps/masterchief",
         "main": "apps/masterchief/src/main.ts",
         "tsConfig": "apps/masterchief/tsconfig.app.json",
-        "assets": ["apps/masterchief/src/assets", "apps/masterchief/src/hero"],
+        "assets": ["apps/masterchief/src/assets", "apps/masterchief/src/hero", "apps/masterchief/src/pages"],
         "generatePackageJson": true
       },
       "configurations": {
