@@ -1,13 +1,12 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { ViewController } from './view.controller';
 import { ViewService } from './view.service';
-import { eventStoreFactory } from '../event-store';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [ConfigModule.forRoot()],
-  providers: [ViewService, eventStoreFactory],
+  providers: [ViewService],
   controllers: [ViewController],
 })
 export class ViewModule {}

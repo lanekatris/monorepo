@@ -23,6 +23,7 @@
   "dependencies": {
     "@apollo/client": "^3.6.9",
     "@eventstore/db-client": "^3.3.1",
+    "@hookform/error-message": "^2.0.0",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^2.1.0",
     "@nestjs/core": "^8.0.0",
