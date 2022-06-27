@@ -45,6 +45,9 @@ ENV NODE_ENV production
 # Running `npm ci` removes the existing node_modules directory and passing in --only=production ensures that only the production dependencies are installed. This ensures that the node_modules directory is as optimized as possible
 RUN npm ci --only=production && npm cache clean --force
 
+# Needed for next.js
+ENV NODE_ENV development
+RUN npm i typescript @types/react
 USER node
 
 ###################
@@ -57,5 +60,9 @@ FROM node:18-alpine As production
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 
+# Don't forget the client react stuff
+COPY --chown=node:node --from=build /usr/src/app/src/client ./dist/src/client
+
 # Start the server using the production build
-CMD [ "node", "dist/main.js" ]
+WORKDIR /dist
+CMD [ "node", "main.js" ]

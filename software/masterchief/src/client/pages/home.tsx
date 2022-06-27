@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NextPage } from 'next';
-import { DiscAdded } from './discAdded';
+import { DiscAdded } from '../components/discAdded';
 
 enum EventConfigGroup {
   DiscGolf = 'Disc Golf',
