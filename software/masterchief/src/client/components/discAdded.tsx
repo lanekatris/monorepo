@@ -11,7 +11,7 @@ export function DiscAdded() {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    axios.post('http://localhost:3000/dg/disc-added', data);
+    axios.post(`${process.env.NEXT_PUBLIC_API_URL}/dg/disc-added`, data);
   };
   console.log(errors);
 

@@ -29,7 +29,7 @@ export class DgController {
       },
     });
     await this.client.appendToStream('testies', event);
-    return true;
+    return res.send(true);
   }
 
   @Get('discs')
