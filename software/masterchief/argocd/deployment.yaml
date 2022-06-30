@@ -19,3 +19,8 @@ spec:
           name: masterchief
           ports:
             - containerPort: 3000
+          env:
+            - name: ESDB_CONN
+              value: esdb://admin:changeit@casgnclo0aeqbb9hn23g.mesdb.eventstore.cloud:2113
+            - name: NEXT_PUBLIC_API_URL
+              value: http://test.local
