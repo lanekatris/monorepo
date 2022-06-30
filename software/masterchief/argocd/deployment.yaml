@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: masterchief
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: masterchief
+  template:
+    metadata:
+      labels:
+        app: masterchief
+    spec:
+      containers:
+        - image: loonison101/masterchief:v2
+          name: masterchief
+          ports:
+            - containerPort: 3000
