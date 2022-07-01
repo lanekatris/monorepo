@@ -21,7 +21,7 @@ spec:
             - containerPort: 3000
           env:
             - name: ESDB_CONN
-              value: esdb://admin:changeit@casgnclo0aeqbb9hn23g.mesdb.eventstore.cloud:2113
+              value: esdb://esdb:2113
             - name: NEXT_PUBLIC_API_URL
               value: http://test.local
 ---
@@ -101,3 +101,18 @@ spec:
               value: "true"
             - name: EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP
               value: "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: esdb
+spec:
+  selector:
+    app: esdb
+  ports:
+    - protocol: TCP
+      port: 2113
+      targetPort: 2113
+    - protocol: TCP
+      port: 1113
+      targetPort: 1113
