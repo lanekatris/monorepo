@@ -34,6 +34,9 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: public
     nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: htpasswd
+    nginx.ingress.kubernetes.io/auth-realm: "Enter your credentials"
 spec:
   rules:
     - host: mc.lanekatris.com
