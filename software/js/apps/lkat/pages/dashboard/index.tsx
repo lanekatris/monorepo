@@ -15,57 +15,59 @@ import countBy from 'lodash/countBy';
 import chain from 'lodash/chain';
 import _ from 'lodash';
 
-export const getStaticProps = async () => {
-  const p = path.resolve(
-    __dirname,
-    `../../../public/udisc-scorecards-05-03-2022.csv`
-  );
-  const rounds = await csv().fromFile(p);
-  const final = rounds
-    .filter((x) => x.PlayerName === 'Lane')
-    .map((x) => ({ ...x, _parsedOverUnder: parseInt(x['+/-']) }));
-
-  const a = path.resolve(
-    __dirname,
-    `../../../public/Adventures-Exportable-05-03-2022.csv`
-  );
-  const rawAdventures = await csv().fromFile(a);
-
-  // const adventuresCount = countBy(rawAdventures, x => x.OutdoorActivity)
-  const adventuresCount = rawAdventures
-    .map((x) => x.OutdoorActivity.split(','))
-    .flatMap((x) => x);
-
-  const top5 = _.chain(adventuresCount)
-    .countBy((x) => x)
-    .toPairs()
-    .orderBy((x) => x[1], ['desc'])
-    .take(5)
-    .map((x) => ({ name: x[0], value: x[1] }))
-    .value();
-
-  return {
-    props: {
-      roundsPlayed: final.length,
-      // adventures,
-      rawAdventures,
-      adventuresCount: rawAdventures.length,
-      top5,
-
-      bestRound: minBy(final, '_parsedOverUnder')._parsedOverUnder,
-      worstRound: maxBy(final, '_parsedOverUnder')._parsedOverUnder,
-      yearsPlayed: differenceInYears(
-        final[0].Date,
-        final[final.length - 1].Date
-      ),
-      groupCount: feedlyData.length,
-      // final,
-      feedCount: sumBy(feedlyData, (x) => x.numFeeds),
-    },
-  };
-};
+// export const getStaticProps = async () => {
+//   const p = path.resolve(
+//     __dirname,
+//     `../../../public/udisc-scorecards-05-03-2022.csv`
+//   );
+//   const rounds = await csv().fromFile(p);
+//   const final = rounds
+//     .filter((x) => x.PlayerName === 'Lane')
+//     .map((x) => ({ ...x, _parsedOverUnder: parseInt(x['+/-']) }));
+//
+//   const a = path.resolve(
+//     __dirname,
+//     `../../../public/Adventures-Exportable-05-03-2022.csv`
+//   );
+//   const rawAdventures = await csv().fromFile(a);
+//
+//   // const adventuresCount = countBy(rawAdventures, x => x.OutdoorActivity)
+//   const adventuresCount = rawAdventures
+//     .map((x) => x.OutdoorActivity.split(','))
+//     .flatMap((x) => x);
+//
+//   const top5 = _.chain(adventuresCount)
+//     .countBy((x) => x)
+//     .toPairs()
+//     .orderBy((x) => x[1], ['desc'])
+//     .take(5)
+//     .map((x) => ({ name: x[0], value: x[1] }))
+//     .value();
+//
+//   return {
+//     props: {
+//       roundsPlayed: final.length,
+//       // adventures,
+//       rawAdventures,
+//       adventuresCount: rawAdventures.length,
+//       top5,
+//
+//       bestRound: minBy(final, '_parsedOverUnder')._parsedOverUnder,
+//       worstRound: maxBy(final, '_parsedOverUnder')._parsedOverUnder,
+//       yearsPlayed: differenceInYears(
+//         final[0].Date,
+//         final[final.length - 1].Date
+//       ),
+//       groupCount: feedlyData.length,
+//       // final,
+//       feedCount: sumBy(feedlyData, (x) => x.numFeeds),
+//     },
+//   };
+// };
 
 export default function DashboardPage(props) {
+  return <h1>fix this page</h1>;
+
   const {
     groupCount,
     feedCount,

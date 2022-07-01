@@ -6,9 +6,16 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ScoreBadges from '../../components/disc-golf/score-badges/score-badges';
 
-function reverseSort(a, b) {
-  // console.log('a', a)
-  // return -1 * a.slug.localeCompare(b.slug);
+interface BlogPost {
+  frontMatter: {
+    date: string;
+  }
+}
+
+function reverseSort(a: BlogPost, b: BlogPost) {
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   return new Date(b.frontMatter.date) - new Date(a.frontMatter.date);
 }
 
@@ -32,6 +39,8 @@ export const getStaticProps = async () => {
 
   const draftCount = posts.filter((x) => x.frontMatter.draft).length;
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   posts.sort(reverseSort);
   return {
     props: {

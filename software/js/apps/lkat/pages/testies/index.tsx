@@ -5,8 +5,8 @@ import styles from './index.module.css';
 // import {} from 'react-apollo-form/dist/lib/'
 
 // const jsonSchema = require('../../src/apollo-form-json-schema.json')
-import {GraphQLBridge} from 'uniforms-bridge-graphql'
-import { buildASTSchema, parse } from 'graphql';
+// import {GraphQLBridge} from 'uniforms-bridge-graphql'
+// import { buildASTSchema, parse } from 'graphql';
 // import {AutoForm} from 'uniforms'
 // import {AutoForm} from 'uniforms-bootstrap5'
 // import {AutoForm} from 'uniforms-semantic'

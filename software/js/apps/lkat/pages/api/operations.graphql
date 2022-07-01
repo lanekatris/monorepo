@@ -17,3 +17,10 @@ query idk {
     activities
   }
 }
+
+query moviesQueryMan {
+  movies {
+    name
+    watched
+  }
+}

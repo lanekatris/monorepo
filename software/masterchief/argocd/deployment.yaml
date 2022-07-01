@@ -1,0 +1,154 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: masterchief
+  namespace: default
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: masterchief
+  template:
+    metadata:
+      labels:
+        app: masterchief
+    spec:
+      containers:
+        - image: loonison101/masterchief:v2
+          imagePullPolicy: Always
+          name: masterchief
+          ports:
+            - containerPort: 3000
+          env:
+            - name: ESDB_CONN
+              value: esdb://esdb:2113?tls=false
+            - name: NEXT_PUBLIC_API_URL
+              value: http://mc.lanekatris.com
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: masterchief
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: public
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+spec:
+  rules:
+    - host: mc.lanekatris.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: masterchief
+                port:
+                  number: 3000
+            pathType: Prefix
+            path: /
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: masterchief
+  namespace: default
+spec:
+  selector:
+    app: masterchief
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: esdb-pv-claim
+  namespace: default
+spec:
+  storageClassName: microk8s-hostpath
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: esdb-logs-pv-claim
+  namespace: default
+spec:
+  storageClassName: microk8s-hostpath
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: esdb
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: esdb
+  template:
+    metadata:
+      labels:
+        app: esdb
+    spec:
+      volumes:
+        - name: esdb-pv
+          persistentVolumeClaim:
+            claimName: esdb-pv-claim
+        - name: esdb-logs-pv
+          persistentVolumeClaim:
+            claimName: esdb-logs-pv-claim
+      containers:
+        - image: eventstore/eventstore:20.10.2-buster-slim
+          name: esdb
+          ports:
+            - containerPort: 1113
+            - containerPort: 2113
+          volumeMounts:
+            - mountPath: /var/lib/eventstore
+              name: esdb-pv
+            - mountPath: /var/log/eventstore
+              name: esdb-logs-pv
+          env:
+            - name: EVENTSTORE_CLUSTER_SIZE
+              value: "1"
+            - name: EVENTSTORE_RUN_PROJECTIONS
+              value: all
+            - name: EVENTSTORE_START_STANDARD_PROJECTIONS
+              value: "true"
+            - name: EVENTSTORE_EXT_TCP_PORT
+              value: "1113"
+            - name: EVENTSTORE_HTTP_PORT
+              value: "2113"
+            - name: EVENTSTORE_INSECURE
+              value: "true"
+            - name: EVENTSTORE_ENABLE_EXTERNAL_TCP
+              value: "true"
+            - name: EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP
+              value: "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: esdb
+  namespace: default
+spec:
+  selector:
+    app: esdb
+  ports:
+    - name: esdb-http
+      port: 2113
+      targetPort: 2113
+    - name: esdb-grpc
+      port: 1113
+      targetPort: 1113
