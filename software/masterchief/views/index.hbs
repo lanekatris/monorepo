@@ -5,11 +5,10 @@
   <title>App</title>
 </head>
 <body>
-{{ discs }}
 <h1>Add Disc</h1>
-<form method="post">
+<form method="post" action="{{postUrl}}">
   <label>Brand
-    <input name="brand"/>
+    <input name="brand" autofocus/>
   </label>
   <label>Model
     <input name="model"/>
@@ -19,5 +18,11 @@
   </label>
   <input type="submit" />
 </form>
+<h1>Your Discs</h1>
+<ul>
+  {{#each discs}}
+    <li>{{this}}</li>
+  {{/each}}
+</ul>
 </body>
 </html>

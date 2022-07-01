@@ -5,15 +5,17 @@ import {
   Inject,
   Post,
   Render,
-  Req,
-  Res,
+  Response,
 } from '@nestjs/common';
-import { Request, Response } from 'express';
 import { EventStoreDBClient, jsonEvent, START } from '@eventstore/db-client';
 import { nanoid } from 'nanoid';
 import { ESDB } from '../constants';
 import { DiscAdded } from './types/disc-added';
 import { DgService } from './dg.service';
+
+export enum DgEvents {
+  DiscAdded = 'disc-added',
+}
 
 @Controller('dg')
 export class DgController {
@@ -24,8 +26,8 @@ export class DgController {
     private service: DgService,
   ) {}
 
-  @Post('/disc-added')
-  public async discAdded(@Body() body): Promise<string> {
+  @Post(DgEvents.DiscAdded)
+  public async discAdded(@Response() res, @Body() body): Promise<string> {
     const event = jsonEvent<DiscAdded>({
       type: 'disc-added',
       data: {
@@ -36,7 +38,7 @@ export class DgController {
       },
     });
     await this.client.appendToStream('testies', event);
-    return 'worked';
+    return res.redirect('/dg');
   }
 
   @Get('discs')
@@ -48,6 +50,9 @@ export class DgController {
   @Render('index')
   async testies() {
     const discs = await this.service.getDiscs();
-    return { discs: discs.map((x) => `${x.event.brand} - ${x.event.model}`) };
+    return {
+      discs: discs.map((x) => `${x.event.brand} - ${x.event.model}`),
+      postUrl: `dg/${DgEvents.DiscAdded}`,
+    };
   }
 }
