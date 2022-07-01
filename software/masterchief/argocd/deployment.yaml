@@ -25,6 +25,30 @@ spec:
             - name: NEXT_PUBLIC_API_URL
               value: http://test.local
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: esdb-pv-claim
+spec:
+  storageClassName: microk8s-hostpath
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: esdb-logs-pv-claim
+spec:
+  storageClassName: microk8s-hostpath
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
