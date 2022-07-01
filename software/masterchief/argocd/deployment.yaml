@@ -24,3 +24,54 @@ spec:
               value: esdb://admin:changeit@casgnclo0aeqbb9hn23g.mesdb.eventstore.cloud:2113
             - name: NEXT_PUBLIC_API_URL
               value: http://test.local
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: esdb
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: esdb
+  template:
+    metadata:
+      labels:
+        app: esdb
+    spec:
+      volumes:
+        - name: esdb-pv
+          persistentVolumeClaim:
+            claimName: esdb-pv-claim
+        - name: esdb-logs-pv
+          persistentVolumeClaim:
+            claimName: esdb-logs-pv-claim
+      containers:
+        - image: eventstore/eventstore:20.10.2-buster-slim
+          name: esdb
+          ports:
+            - containerPort: 1113
+            - containerPort: 2113
+          volumeMounts:
+            - mountPath: /var/lib/eventstore
+              name: esdb-pv
+            - mountPath: /var/log/eventstore
+              name: esdb-logs-pv
+          env:
+            - name: EVENTSTORE_CLUSTER_SIZE
+              value: "1"
+            - name: EVENTSTORE_RUN_PROJECTIONS
+              value: all
+            - name: EVENTSTORE_START_STANDARD_PROJECTIONS
+              value: "true"
+            - name: EVENTSTORE_EXT_TCP_PORT
+              value: "1113"
+            - name: EVENTSTORE_HTTP_PORT
+              value: "2113"
+            - name: EVENTSTORE_INSECURE
+              value: "true"
+            - name: EVENTSTORE_ENABLE_EXTERNAL_TCP
+              value: "true"
+            - name: EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP
+              value: "true"
