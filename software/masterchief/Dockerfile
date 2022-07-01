@@ -64,6 +64,8 @@ COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 # Don't forget the client react stuff
 #COPY --chown=node:node --from=build /usr/src/app/src/client ./dist/src/client
 
+COPY --chown=node:node --from=build /usr/src/app/views ./views
+
 # Start the server using the production build
 WORKDIR /dist
 CMD [ "node", "main.js" ]
