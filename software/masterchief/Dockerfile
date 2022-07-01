@@ -47,8 +47,8 @@ ENV NODE_ENV production
 RUN npm ci --only=production && npm cache clean --force
 
 # Needed for next.js
-ENV NODE_ENV development
-RUN npm i typescript @types/react
+#ENV NODE_ENV development
+#RUN npm i typescript @types/react
 USER node
 
 ###################
@@ -62,7 +62,7 @@ COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 
 # Don't forget the client react stuff
-COPY --chown=node:node --from=build /usr/src/app/src/client ./dist/src/client
+#COPY --chown=node:node --from=build /usr/src/app/src/client ./dist/src/client
 
 # Start the server using the production build
 WORKDIR /dist

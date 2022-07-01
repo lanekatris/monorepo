@@ -15,7 +15,7 @@ spec:
         app: masterchief
     spec:
       containers:
-        - image: loonison101/masterchief:v2
+        - image: loonison101/masterchief:latest
           imagePullPolicy: Always
           name: masterchief
           ports:
