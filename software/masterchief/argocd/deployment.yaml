@@ -24,7 +24,7 @@ spec:
             - name: ESDB_CONN
               value: esdb://esdb:2113?tls=false
             - name: NEXT_PUBLIC_API_URL
-              value: http://3.133.79.97:3000
+              value: http://mc.lanekatris.com
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
