@@ -112,8 +112,10 @@ spec:
     app: esdb
   ports:
     - protocol: TCP
+      name: esdb-http
       port: 2113
       targetPort: 2113
     - protocol: TCP
+      name: esdb-grpc
       port: 1113
       targetPort: 1113
