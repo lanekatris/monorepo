@@ -4,21 +4,19 @@ import { EventStoreDBClient, jsonEvent, START } from '@eventstore/db-client';
 import { nanoid } from 'nanoid';
 import { ESDB } from '../constants';
 import { DiscAdded } from './types/disc-added';
+import { DgService } from './dg.service';
 
 @Controller('dg')
 export class DgController {
   constructor(
     @Inject(ESDB)
     private client: EventStoreDBClient,
+    @Inject(DgService)
+    private service: DgService,
   ) {}
 
-  @Post('disc-added')
-  public async discAdded(
-    @Req() req: Request,
-    @Body() body,
-    @Res() res: Response,
-  ) {
-    console.log('from body', body);
+  @Post('/disc-added')
+  public async discAdded(@Body() body): Promise<string> {
     const event = jsonEvent<DiscAdded>({
       type: 'disc-added',
       data: {
@@ -29,26 +27,11 @@ export class DgController {
       },
     });
     await this.client.appendToStream('testies', event);
-    return res.send(true);
+    return 'worked';
   }
 
   @Get('discs')
-  public async getDiscs() {
-    const events = this.client.readStream<DiscAdded>('testies');
-    const discs = [];
-
-    let discNumber = 1;
-    for await (const { event } of events) {
-      switch (event.type) {
-        case 'disc-added':
-          discs.push({
-            event: event.data,
-            discNumber,
-          });
-          discNumber++;
-          break;
-      }
-    }
-    return discs;
+  public getDiscs() {
+    return this.service.getDiscs();
   }
 }

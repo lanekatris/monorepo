@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NextPage } from 'next';
 import { DiscAdded } from '../components/discAdded';
+import { DgService } from '../../server/dg/dg.service';
 
 enum EventConfigGroup {
   DiscGolf = 'Disc Golf',
@@ -24,6 +25,14 @@ const eventConfig = [
     ],
   },
 ];
+
+// export async function getServerSideProps(context) {
+//   // Get discs
+//   // const discs = await new DgService().getDiscs();
+//   return {
+//     props: {}, // will be passed to the page component as props
+//   };
+// }
 
 const Home: NextPage = () => {
   const [eventToCreate, setEventToCreate] = useState<EventName>(
