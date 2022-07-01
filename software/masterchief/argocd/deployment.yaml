@@ -22,7 +22,7 @@ spec:
             - containerPort: 3000
           env:
             - name: ESDB_CONN
-              value: esdb://esdb:2113
+              value: esdb://esdb:2113?tls=false
             - name: NEXT_PUBLIC_API_URL
               value: http://test.local
 ---
