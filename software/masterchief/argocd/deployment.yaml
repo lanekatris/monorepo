@@ -26,6 +26,26 @@ spec:
             - name: NEXT_PUBLIC_API_URL
               value: http://3.133.79.97:3000
 ---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: masterchief
+  annotations:
+    kubernetes.io/ingress.class: public
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+spec:
+  rules:
+    - host: mc.lanekatris.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: masterchief
+                port:
+                  number: 3000
+            pathType: Prefix
+            path: /
+---
 apiVersion: v1
 kind: Service
 metadata:
