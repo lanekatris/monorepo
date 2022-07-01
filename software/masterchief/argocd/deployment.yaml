@@ -27,6 +27,19 @@ spec:
               value: http://test.local
 ---
 apiVersion: v1
+kind: Service
+metadata:
+  name: masterchief
+  namespace: default
+spec:
+  selector:
+    app: masterchief
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: esdb-pv-claim
