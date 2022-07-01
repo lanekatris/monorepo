@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Inject, Post, Req, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Inject,
+  Post,
+  Render,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { Request, Response } from 'express';
 import { EventStoreDBClient, jsonEvent, START } from '@eventstore/db-client';
 import { nanoid } from 'nanoid';
@@ -33,5 +42,12 @@ export class DgController {
   @Get('discs')
   public getDiscs() {
     return this.service.getDiscs();
+  }
+
+  @Get()
+  @Render('index')
+  async testies() {
+    const discs = await this.service.getDiscs();
+    return { discs: discs.map((x) => `${x.event.brand} - ${x.event.model}`) };
   }
 }
