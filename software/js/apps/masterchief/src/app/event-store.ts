@@ -6,7 +6,9 @@ import { ESDB } from './constants';
 const eventStoreFactory: FactoryProvider = {
   provide: ESDB,
   useFactory: async (config: ConfigService) => {
+    console.log('esdb connection', config.get('ESDB_CONN'));
     const client = EventStoreDBClient.connectionString(config.get('ESDB_CONN'));
+
     await client.readAll({
       direction: FORWARDS,
       fromPosition: START,

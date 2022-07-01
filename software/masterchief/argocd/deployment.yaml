@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
         - image: loonison101/masterchief:v2
+          imagePullPolicy: Always
           name: masterchief
           ports:
             - containerPort: 3000
