@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Inject,
+  Logger,
   Param,
   Post,
   Render,
@@ -18,6 +19,8 @@ import {
 import { nanoid } from 'nanoid';
 import { ESDB } from '../constants';
 import { IsNotEmpty } from 'class-validator';
+import { ReadResp } from '@eventstore/db-client/generated/streams_pb';
+import StreamNotFound = ReadResp.StreamNotFound;
 
 export enum EventNames {
   ClimbSessionCreated = 'climb-session-created',
@@ -64,6 +67,7 @@ class RouteInputDto {
 
 @Controller('climb')
 export class ClimbController {
+  private readonly logger = new Logger(ClimbController.name);
   constructor(
     @Inject(ESDB)
     private client: EventStoreDBClient,
@@ -71,20 +75,22 @@ export class ClimbController {
   @Get()
   @Render('climb/index')
   async index() {
-    let events;
-    try {
-      events = this.client.readStream<ClimbSessionCreated>('climbs');
-    } catch {
-      return { climbs: [] };
-    }
-
+    const events = this.client.readStream<ClimbSessionCreated>('climbs');
     const climbs = [];
-    for await (const { event } of events) {
-      switch (event.type) {
-        case EventNames.ClimbSessionCreated:
-          climbs.unshift(event.data);
-          break;
+    try {
+      for await (const { event } of events) {
+        switch (event.type) {
+          case EventNames.ClimbSessionCreated:
+            climbs.unshift(event.data);
+            break;
+        }
       }
+    } catch (err) {
+      if (err.type === 'stream-not-found') {
+        this.logger.log('climbs stream not found');
+        return { climbs: [] };
+      }
+      throw err;
     }
     console.log('climbs', climbs);
     return {
