@@ -32,6 +32,10 @@ export class DgService {
         case EventNames.DiscRemoved:
           discs = discs.filter((x) => event.data.id !== x.event.id);
           break;
+        case EventNames.DiscsReset:
+          discs.length = 0;
+          discNumber = 1;
+          break;
       }
     }
     return discs;

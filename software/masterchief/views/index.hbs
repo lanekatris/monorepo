@@ -20,7 +20,7 @@
   </label>
   <input type="submit" />
 </form>
-<h1>Your Discs</h1>
+<h1>Your Discs ({{discs.length}})</h1>
 <a href="dg/discs" target="_blank">Discs Api</a>
 <ul>
   {{#each discs}}
@@ -32,5 +32,18 @@
     </li>
   {{/each}}
 </ul>
+<h1>Load Discs</h1>
+<form method="post" action="{{resetUrl}}">
+  <input type="submit" value="Reset ALL Discs" />
+</form>
+<h2>Upload Discs</h2>
+<p>Id, Brand, Model (Include Headers)</p>
+<form method="post" action="{{uploadUrl}}">
+  <input type="submit" value="Upload" />
+  <label>
+    <textarea name="data" rows="20" cols="20"></textarea>
+  </label>
+</form>
+
 </body>
 </html>
