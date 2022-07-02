@@ -71,7 +71,13 @@ export class ClimbController {
   @Get()
   @Render('climb/index')
   async index() {
-    const events = this.client.readStream<ClimbSessionCreated>('climbs');
+    let events;
+    try {
+      events = this.client.readStream<ClimbSessionCreated>('climbs');
+    } catch {
+      return { climbs: [] };
+    }
+
     const climbs = [];
     for await (const { event } of events) {
       switch (event.type) {
