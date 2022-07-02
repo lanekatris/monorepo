@@ -7,17 +7,25 @@ import {
   Render,
   Response,
 } from '@nestjs/common';
-import { EventStoreDBClient, jsonEvent, START } from '@eventstore/db-client';
+import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { nanoid } from 'nanoid';
 import { ESDB } from '../constants';
-import { DiscAdded } from './types/disc-added';
+import { DiscAdded, DiscRemoved, EventNames } from './types/disc-added';
 import { DgService } from './dg.service';
+import { IsNotEmpty } from 'class-validator';
 
-export enum DgEvents {
-  DiscAdded = 'disc-added',
+const CONTROLLER_NAME = 'dg';
+
+function prefixController(route: string) {
+  return `${CONTROLLER_NAME}/${route}`;
 }
 
-@Controller('dg')
+export class DiscRemovedDto {
+  @IsNotEmpty()
+  id: string;
+}
+
+@Controller(CONTROLLER_NAME)
 export class DgController {
   constructor(
     @Inject(ESDB)
@@ -26,10 +34,21 @@ export class DgController {
     private service: DgService,
   ) {}
 
-  @Post(DgEvents.DiscAdded)
-  public async discAdded(@Response() res, @Body() body): Promise<string> {
+  @Get()
+  @Render('index')
+  async index() {
+    const discs = await this.service.getDiscs();
+    return {
+      discs,
+      postUrl: prefixController(EventNames.DiscAdded),
+      deleteUrl: prefixController(EventNames.DiscRemoved),
+    };
+  }
+
+  @Post(EventNames.DiscAdded)
+  public async discAdded(@Response() res, @Body() body) {
     const event = jsonEvent<DiscAdded>({
-      type: 'disc-added',
+      type: EventNames.DiscAdded,
       data: {
         id: nanoid(),
         date: body.date || new Date(),
@@ -38,21 +57,25 @@ export class DgController {
       },
     });
     await this.client.appendToStream('testies', event);
-    return res.redirect('/dg');
+    return res.redirect(`/${CONTROLLER_NAME}`);
+  }
+
+  @Post(EventNames.DiscRemoved)
+  public async discRemoved(@Response() res, @Body() body: DiscRemovedDto) {
+    const { id } = body;
+    const event = jsonEvent<DiscRemoved>({
+      type: EventNames.DiscRemoved,
+      data: {
+        id,
+        date: new Date(),
+      },
+    });
+    await this.client.appendToStream('testies', event);
+    return res.redirect(`/${CONTROLLER_NAME}`);
   }
 
   @Get('discs')
   public getDiscs() {
     return this.service.getDiscs();
-  }
-
-  @Get()
-  @Render('index')
-  async testies() {
-    const discs = await this.service.getDiscs();
-    return {
-      discs: discs.map((x) => `${x.event.brand} - ${x.event.model}`),
-      postUrl: `dg/${DgEvents.DiscAdded}`,
-    };
   }
 }

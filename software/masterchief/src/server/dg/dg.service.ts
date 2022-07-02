@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { DiscAdded } from './types/disc-added';
+import { DgEvents, EventNames } from './types/disc-added';
 import { ESDB } from '../constants';
 import { EventStoreDBClient } from '@eventstore/db-client';
 
@@ -11,18 +11,26 @@ export class DgService {
   ) {}
 
   public async getDiscs() {
-    const events = this.client.readStream<DiscAdded>('testies');
-    const discs = [];
+    const events = this.client.readStream<DgEvents>('testies');
+    let discs = [];
 
     let discNumber = 1;
     for await (const { event } of events) {
       switch (event.type) {
-        case 'disc-added':
+        case EventNames.DiscAdded:
           discs.push({
             event: event.data,
             discNumber,
           });
           discNumber++;
+          break;
+
+        /**
+         * Don't decrement disc numbers. Once you add a disc it gets a forever incremented number
+         * and nobody else can take it
+         */
+        case EventNames.DiscRemoved:
+          discs = discs.filter((x) => event.data.id !== x.event.id);
           break;
       }
     }

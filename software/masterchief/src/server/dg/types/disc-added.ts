@@ -1,7 +1,12 @@
 import { JSONEventType } from '@eventstore/db-client';
 
+export enum EventNames {
+  DiscAdded = 'disc-added',
+  DiscRemoved = 'disc-removed',
+}
+
 export type DiscAdded = JSONEventType<
-  'disc-added',
+  EventNames.DiscAdded,
   {
     id: string;
     date: Date;
@@ -9,3 +14,13 @@ export type DiscAdded = JSONEventType<
     model: string;
   }
 >;
+
+export type DiscRemoved = JSONEventType<
+  EventNames.DiscRemoved,
+  {
+    id: string;
+    date: Date;
+  }
+>;
+
+export type DgEvents = DiscAdded | DiscRemoved;
