@@ -9,7 +9,13 @@
 <form method="post" action="climb/climb-session-created">
   <input type="submit" value="New Session" />
 </form>
-<h2>Your Climbs</h2>
+<h2>Your Climbs ({{climbs.length}})</h2>
+<ul>
 
+
+{{#each climbs}}
+  <li>{{this.date}} - <a href="climb/session/{{this.id}}">{{this.id}}</a></li>
+{{/each}}
+</ul>
 </body>
 </html>

@@ -1,1 +1,31 @@
-<h1>session here</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Masterchief</title>
+  <link rel="stylesheet" href="/climb-session.css" />
+</head>
+<body>
+<h1>Session {{sessionId}}</h1>
+<a href="/climb">All Climbs</a>
+<br/>
+<br/>
+{{#each model}}
+  <div class="grade">
+    <form method="post" action="{{../canceledUrl}}">
+      <input type="hidden" name="grade" value="{{this.grade}}"/>
+      <input type="hidden" name="sessionId" value="{{../sessionId}}"/>
+      <input type="submit" value="-" />
+    </form>
+    {{this.grade}}
+    <form method="post" action="{{../completedUrl}}">
+      <input type="hidden" name="grade" value="{{this.grade}}"/>
+      <input type="hidden" name="sessionId" value="{{../sessionId}}"/>
+      <input type="submit" value="+" />
+    </form>
+    {{this.count}}
+  </div>
+{{/each}}
+
+</body>
+</html>
