@@ -94,17 +94,8 @@ export class GeneratorController {
 
     const zip = new JSZip();
 
-    const states = [
-      State.WestVirginia,
-      State.Ohio,
-      State.Pennsylvania,
-      State.Maryland,
-      State.Virginia,
-      State.NorthCarolina,
-      State.Kentucky,
-      State.Tennessee,
-    ];
     const stateEntries = groupBy(entries, (x) => x.state);
+    const states = Object.keys(stateEntries);
 
     this.logger.log(`Creating files for ${states.length} states: ${states}`);
     states.forEach((state) => {
