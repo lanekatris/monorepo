@@ -4,6 +4,7 @@ export enum EventNames {
   DiscAdded = 'disc-added',
   DiscRemoved = 'disc-removed',
   DiscsReset = 'discs-reset',
+  CourseAdded = 'course-added',
 }
 
 export type DiscAdded = JSONEventType<
