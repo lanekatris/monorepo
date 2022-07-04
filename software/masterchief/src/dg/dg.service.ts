@@ -1,9 +1,10 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { DgEvents, EventNames } from './types/disc-added';
 import { ESDB } from '../constants';
-import { EventStoreDBClient } from '@eventstore/db-client';
+import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { CourseAdded } from './types/course-added';
 import { CoursePlayed } from './types/course-played';
+import { nanoid } from 'nanoid';
 
 @Injectable()
 export class DgService {
@@ -77,5 +78,19 @@ export class DgService {
       throw err;
     }
     return courseIds;
+  }
+
+  public async coursePlayed(pdgaCourseId: string): Promise<void> {
+    const playedCourseIds = await this.getPlayedCourses();
+    if (playedCourseIds.includes(pdgaCourseId)) return;
+
+    const event = jsonEvent<CoursePlayed>({
+      type: EventNames.CoursePlayed,
+      data: {
+        id: nanoid(),
+        courseId: pdgaCourseId,
+      },
+    });
+    await this.client.appendToStream('my-courses', event);
   }
 }
