@@ -40,12 +40,19 @@
   <input type="submit" value="Reset ALL Discs" />
 </form>
 <h2>Upload Discs</h2>
+<p>Usually you get this data from AirTable</p>
 <p>Id, Brand, Model (Include Headers)</p>
 <form method="post" action="{{uploadUrl}}">
   <input type="submit" value="Upload" />
   <label>
     <textarea name="data" rows="20" cols="20"></textarea>
   </label>
+</form>
+
+<h1>Load Your Played Rounds</h1>
+<form method="post" action="dg/generator/file" id="played-rounds-form" enctype="multipart/form-data">
+  <input type="file" id="file" name="file" />
+  <input type="submit"/>
 </form>
 
 </body>
