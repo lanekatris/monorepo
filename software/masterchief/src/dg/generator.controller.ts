@@ -1,10 +1,11 @@
 import {
+  Body,
   Controller,
   Get,
   Inject,
   Logger,
   Post,
-  Render,
+  Redirect,
   Response,
   StreamableFile,
   UploadedFile,
@@ -12,21 +13,16 @@ import {
 } from '@nestjs/common';
 import { format } from 'date-fns';
 import { createReadStream } from 'fs';
-import { groupBy, intersection, uniq } from 'lodash';
-import { State, StateAbbreviations } from './stateAbbreviations';
+import { groupBy } from 'lodash';
+import { StateAbbreviations } from './stateAbbreviations';
 import { join } from 'path';
 import { ESDB } from '../constants';
 import { Express } from 'express';
-import {
-  EventStoreDBClient,
-  jsonEvent,
-  JSONEventType,
-} from '@eventstore/db-client';
+import { EventStoreDBClient } from '@eventstore/db-client';
 import { EventNames } from './types/disc-added';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { DgService } from './dg.service';
-import { CoursePlayed } from './types/course-played';
-import { nanoid } from 'nanoid';
+import { CoursePlayedSource } from './types/course-played';
 import { UdiscScorecardEntry } from './types/udisc-scorecard-entry';
 
 const GeoJSON = require('geojson');
@@ -51,12 +47,96 @@ interface CsvEntry {
 export class GeneratorController {
   private readonly logger = new Logger(GeneratorController.name);
 
+  private readonly mappings = {
+    AOTG: 'ravens-ridge',
+    'Angry Beaver at Elon Park': 'elon-park-angry-beaver',
+    'Arapahoe Basin DGC': 'arapahoe-basin-disc-golf-course',
+    Bailey: 'bailey-disc-golf-course',
+    'Beaver Ranch Disc Golf Course': 'beaver-ranch-conifer',
+    'Beech Fork Championship 18': 'beech-fork-state-park-disc-golf-course',
+    'Beech Fork Family 9': 'beech-fork-state-park-disc-golf-course',
+    "Bird's Nest Disc Park": 'birds-nest-disc-park',
+    'Bluebird Putting Course': 'beaver-ranch-bluebird-putting-course',
+    'Buckhorn at Harris Lake County Park': 'buckhorn-harris-lake-county-park',
+    'Burr Oak': 'burr-oak-state-park',
+    'Casey R. Logan (OBX) DGC': 'casey-r-logan-disc-golf-course',
+    'Cedar Lakes Disc Golf': 'cedar-lakes-disc-golf-course',
+    'Colorado Mountain College - Glenwood':
+      'colorado-mountain-college-spring-valley',
+    'Dunbar City Park': 'dunbar-city-park-disc-golf-course',
+    'Eagles Nest  @ Alley Park': 'eagles-nest-dgc-0',
+    'Eastway Park': 'eastway-park-0', // this isn't in my csv
+    'Eleanor Park DGC': 'eleanor-park',
+    'Emory and Henry': 'emory-and-henry-college',
+    'Fayette County Park/4H DGC': 'fayette-county-park',
+    'Flat Rocks': 'flat-rocks-disc-golf-course',
+    'Goose Landing': 'goose-landing-richfield-park',
+    'Greenbrier State Forest': 'greenbrier-state-forest-disc-golf-course',
+    'Gunnison’s Edge Disc Golf Course': 'confluence-disc-golf-course',
+    'Jason Wintz Memorial DGC': 'jason-wintz-memorial-disc-golf-course',
+    'Moccasin Creek': 'moccasin-creek-disc-golf-course',
+    Mountaineer: 'mountaineer-disc-golf-course',
+    'Nevin Park': 'nevin-park-disc-golf-course',
+    'New London Tech DGC': 'new-london-tech',
+    'Ohio State University DGC': 'ohio-state-university',
+    'Ohio Valley University Disc Golf Course': 'ohio-valley-university',
+    Olathe: 'town-olathe-disc-golf-course',
+    'Paint Creek': 'paint-creek-state-park-disc-golf-course',
+    'Parchment Valley Winter Lake':
+      'parchment-valley-winter-lake-disc-golf-course',
+    'Patriot DGC': 'patriot-disc-golf-course-triad-park',
+    'Peak One': 'frisco-peninsula-rec-area',
+    'Pipestem State Park': 'pipestem-state-park-disc-golf-course',
+    'Plantation Ruins at Winget': 'plantation-ruins-winget',
+    'Project Bad Apple DGC': 'project-bad-apple-dgc',
+    'Redeemer - Blue': 'redeemer-park-disc-golf-course',
+    'Redeemer - White': 'redeemer-white-course',
+    'Redeemer - Yellow': 'redeemer-park-disc-golf-course',
+    'Renaissance Park - Gold': 'renaissance-park',
+    'Renaissance Park DGC - RenSke': 'renaissance-park-renske',
+    'Riverbottom disc golf park': 'baldridge-park',
+    'Rocky Mountain Village': 'easter-seals-disc-golf-course',
+    'Rolling Pines': 'rolling-pines-disc-golf-course',
+    'Rotary Park (Red)': 'rotary-park',
+    'Rotary Park (Yellow)Indian Rock': 'indian-rock-rotary-park',
+    'Sandusky Park': 'blackwater-creek',
+    'Scioto Grove DGC': 'scioto-grove',
+    'Seth Burton Memorial': 'seth-burton-memorial-disc-golf-course',
+    'Socastee Park': 'socastee-recreation-park',
+    'Sugar Hollow': 'sugar-hollow-dgc',
+    'Sugaw Creek Park DGC': 'sugaw-creek-park',
+    'THE Diavolo DGC @ New Hope Park': 'diavolo-new-hope-park',
+    'The Big Buckeye': 'big-buckeye-broughton',
+    'The Crossing Disc Golf Course': 'crossing',
+    'The Mountwood Monster': 'mountwood-monster',
+    'The SasQuatch': 'sasquatch-broughton-nature-and-wildlife-education-area',
+    'The Scrapyard DGC': 'scrapyard-idlewild-park',
+    'Valley Park': 'valley-park-dgc-0',
+    'Wine Cellar': 'wine-cellar-disc-golf-course',
+    'Woodchuck Ridge': 'woodchuck-ridge-disc-golf-course',
+  };
+
+  private readonly udiscCoursesNotInPdga = [
+    'Connection Point',
+    'GRACE PLACE DISC GOLF COURSE',
+    'Gianinetti Park DGC',
+    'Karmageddon',
+  ];
+
   constructor(
     @Inject(ESDB)
     private esdb: EventStoreDBClient,
     @Inject(DgService)
     private service: DgService,
   ) {}
+
+  // todo: psot body - make me class with validation
+  @Post(EventNames.CoursePlayed)
+  @Redirect('/dg')
+  async addManualCoursePlayed(@Body() body: { courseId: string }) {
+    console.log('body', body);
+    await this.service.coursePlayed(body.courseId, CoursePlayedSource.Manual);
+  }
 
   @Get('generate')
   async generate(
@@ -124,44 +204,23 @@ export class GeneratorController {
 
   @UseInterceptors(FileInterceptor('file'))
   @Post('file')
+  @Redirect('/dg')
   async uploadMyRounds(@UploadedFile() file: Express.Multer.File) {
     const contents = file.buffer.toString();
     const entries: UdiscScorecardEntry[] = await csv().fromString(contents);
     const groupedByRounds = groupBy(entries, (x) => x.Date);
     const rounds = Object.keys(groupedByRounds);
-    const courseNames = entries.map((x) => x.CourseName);
-    const uniqCourseNames = [...new Set(courseNames)];
 
     this.logger.log(`Total rounds: ${rounds.length}`);
 
     const allPdgaIds = await this.service.getAllCourseIds();
     this.logger.log(`All pdga ids length: ${allPdgaIds.length}`);
-
-    // UDisc -> PDGA id mapping
-    // const mappings = {
-    //   'Parchment Valley Winter Lake':
-    //     'parchment-valley-winter-lake-disc-golf-course',
-    //   'Orange Crush': 'orange-crush',
-    // };
-    // const mappingValues = Object.values(mappings);
-
-    // const playedCourseIds = await this.service.getPlayedCourses();
-
     const playerName = 'Lane';
-
-    // Is course known?
-    //    yes - create played event if doesn't already exist
-    // dynamically generate ids?
-
-    // const playedCourseNames: string[] = [];
-
-    // const addMe = new Set();
 
     const stats = {
       played: new Set(),
       unknown: new Set(),
       roundNames: new Set(),
-      // idk: []
     };
     entries.forEach((x) => {
       stats.roundNames.add(x.CourseName);
@@ -176,178 +235,35 @@ export class GeneratorController {
         continue;
       }
 
-      // const guessedIds = [
-      //   // round.CourseName.toLowerCase().replace(/ /g, '-') + '-disc-golf-course',
-      //   round.CourseName.toLowerCase().replace(/ /g, '-'),
-      // ];
-
       // You can't do multiple since the data could match both :(
       const guessedId = round.CourseName.toLowerCase().replace(/ /g, '-');
 
-      // const matchedValues = intersection(allPdgaIds, guessedIds);
-      // if (matchedValues.length > 1)
-      //   throw new Error(`This is impossible: ${matchedValues}`);
-
-      // const courseId = matchedValues[0];
-
-      const mappings = {
-        AOTG: 'ravens-ridge',
-        'Angry Beaver at Elon Park': 'elon-park-angry-beaver',
-        'Arapahoe Basin DGC': 'arapahoe-basin-disc-golf-course',
-        Bailey: 'bailey-disc-golf-course',
-        'Beaver Ranch Disc Golf Course': 'beaver-ranch-conifer',
-        'Beech Fork Championship 18': 'beech-fork-state-park-disc-golf-course',
-        'Beech Fork Family 9': 'beech-fork-state-park-disc-golf-course',
-        "Bird's Nest Disc Park": 'birds-nest-disc-park',
-        'Bluebird Putting Course': 'beaver-ranch-bluebird-putting-course',
-        'Buckhorn at Harris Lake County Park':
-          'buckhorn-harris-lake-county-park',
-        'Burr Oak': 'burr-oak-state-park',
-        'Casey R. Logan (OBX) DGC': 'casey-r-logan-disc-golf-course',
-        'Cedar Lakes Disc Golf': 'cedar-lakes-disc-golf-course',
-        'Colorado Mountain College - Glenwood':
-          'colorado-mountain-college-spring-valley',
-        'Dunbar City Park': 'dunbar-city-park-disc-golf-course',
-        'Eagles Nest  @ Alley Park': 'eagles-nest-dgc-0',
-        'Eastway Park': 'eastway-park-0', // this isn't in my csv
-        'Eleanor Park DGC': 'eleanor-park',
-        'Emory and Henry': 'emory-and-henry-college',
-        'Fayette County Park/4H DGC': 'fayette-county-park',
-        'Flat Rocks': 'flat-rocks-disc-golf-course',
-        'Goose Landing': 'goose-landing-richfield-park',
-        'Greenbrier State Forest': 'greenbrier-state-forest-disc-golf-course',
-        'Gunnison’s Edge Disc Golf Course': 'confluence-disc-golf-course',
-        'Jason Wintz Memorial DGC': 'jason-wintz-memorial-disc-golf-course',
-        'Moccasin Creek': 'moccasin-creek-disc-golf-course',
-        Mountaineer: 'mountaineer-disc-golf-course',
-        'Nevin Park': 'nevin-park-disc-golf-course',
-        'New London Tech DGC': 'new-london-tech',
-        'Ohio State University DGC': 'ohio-state-university',
-        'Ohio Valley University Disc Golf Course': 'ohio-valley-university',
-        Olathe: 'town-olathe-disc-golf-course',
-        'Paint Creek': 'paint-creek-state-park-disc-golf-course',
-        'Parchment Valley Winter Lake':
-          'parchment-valley-winter-lake-disc-golf-course',
-        'Patriot DGC': 'patriot-disc-golf-course-triad-park',
-        'Peak One': 'frisco-peninsula-rec-area',
-        'Pipestem State Park': 'pipestem-state-park-disc-golf-course',
-        'Plantation Ruins at Winget': 'plantation-ruins-winget',
-        'Project Bad Apple DGC': 'project-bad-apple-dgc',
-        'Redeemer - Blue': 'redeemer-park-disc-golf-course',
-        'Redeemer - White': 'redeemer-white-course',
-        'Redeemer - Yellow': 'redeemer-park-disc-golf-course',
-        'Renaissance Park - Gold': 'renaissance-park',
-        'Renaissance Park DGC - RenSke': 'renaissance-park-renske',
-        'Riverbottom disc golf park': 'baldridge-park',
-        'Rocky Mountain Village': 'easter-seals-disc-golf-course',
-        'Rolling Pines': 'rolling-pines-disc-golf-course',
-        'Rotary Park (Red)': 'rotary-park',
-        'Rotary Park (Yellow)Indian Rock': 'indian-rock-rotary-park',
-        'Sandusky Park': 'blackwater-creek',
-        'Scioto Grove DGC': 'scioto-grove',
-        'Seth Burton Memorial': 'seth-burton-memorial-disc-golf-course',
-        'Socastee Park': 'socastee-recreation-park',
-        'Sugar Hollow': 'sugar-hollow-dgc',
-        'Sugaw Creek Park DGC': 'sugaw-creek-park',
-        'THE Diavolo DGC @ New Hope Park': 'diavolo-new-hope-park',
-        'The Big Buckeye': 'big-buckeye-broughton',
-        'The Crossing Disc Golf Course': 'crossing',
-        'The Mountwood Monster': 'mountwood-monster',
-        'The SasQuatch':
-          'sasquatch-broughton-nature-and-wildlife-education-area',
-        'The Scrapyard DGC': 'scrapyard-idlewild-park',
-        'Valley Park': 'valley-park-dgc-0',
-        'Wine Cellar': 'wine-cellar-disc-golf-course',
-        'Woodchuck Ridge': 'woodchuck-ridge-disc-golf-course',
-      };
-
-      const udiscCoursesNotInPdga = [
-        'Connection Point',
-        'GRACE PLACE DISC GOLF COURSE',
-        'Gianinetti Park DGC',
-        'Karmageddon',
-      ];
-
       if (allPdgaIds.includes(guessedId)) {
         stats.played.add(guessedId);
-        await this.service.coursePlayed(guessedId);
+        await this.service.coursePlayed(
+          guessedId,
+          CoursePlayedSource.Scorecard,
+        );
       } else {
-        const lastTryCourseId = mappings[round.CourseName];
+        const lastTryCourseId = this.mappings[round.CourseName];
         if (lastTryCourseId) {
           stats.played.add(lastTryCourseId);
-          await this.service.coursePlayed(lastTryCourseId);
+          await this.service.coursePlayed(
+            lastTryCourseId,
+            CoursePlayedSource.Scorecard,
+          );
         } else {
-          if (udiscCoursesNotInPdga.includes(round.CourseName)) {
+          if (this.udiscCoursesNotInPdga.includes(round.CourseName)) {
             stats.played.add(round.CourseName);
-            await this.service.coursePlayed(round.CourseName);
+            await this.service.coursePlayed(
+              round.CourseName,
+              CoursePlayedSource.Scorecard,
+            );
           } else {
             stats.unknown.add(round.CourseName);
           }
         }
       }
-
-      // console.log('matched values', courseId);
-      //   if (matchedValues.length && !playedCourseIds.includes(matchedValues[0])) {
-      //     const event = jsonEvent<CoursePlayed>({
-      //       type: EventNames.CoursePlayed,
-      //       data: {
-      //         id: nanoid(),
-      //         courseId: matchedValues[0],
-      //       },
-      //     });
-      //     // await this.esdb.appendToStream('my-courses', event);
-      //     playedCourseIds.push(matchedValues[0]);
-      //     stats.played.add(matchedValues[0]);
-      //   } else {
-      //     // addMe.add(`${round.CourseName}`);
-      //     stats.unknown.add(round.CourseName);
-      //   }
-      //
-      //   // let's find the id
-      //   // const pdgaCourseId = mappings[round.CourseName];
-      //   // if (!pdgaCourseId) {
-      //   //   // const guessedPdgaCourseId =
-      //   //
-      //   //   const guessedIds = [
-      //   //     round.CourseName.toLowerCase().replace(/ /g, '-') +
-      //   //       '-disc-golf-course',
-      //   //     round.CourseName.toLowerCase().replace(/ /g, '-'),
-      //   //   ];
-      //   //
-      //   //   // if (Object.values(mappings).some(x => )) {
-      //   //   const matchedValues = intersection(allPdgaIds, guessedIds);
-      //   //   if (matchedValues.length) {
-      //   //     this.logger.warn(
-      //   //       `Generated this id: ${round.CourseName}:${matchedValues}, add it to your mappings`,
-      //   //     );
-      //   //     addMe.add(`${round.CourseName}:${matchedValues}`);
-      //   //   } else {
-      //   //     this.logger.error(
-      //   //       `You need to find the pdga id for udisc course name: ${round.CourseName} guess: ${guessedIds}`,
-      //   //     );
-      //   //   }
-      //   //
-      //   //   continue;
-      //   // }
-      //
-      //   // this.logger.log(`Create played course event for: ${round.CourseName}`);
-      //   // if (!playedCourseNames.includes(pdgaCourseId)) {
-      //   //   playedCourseNames.push(pdgaCourseId);
-      //   // }
     }
-
-    // this.logger.log(playedCourseNames);
-    // this.logger.log(`courses played: ${playedCourseNames.length}`);
-    // console.log('add me', addMe);
-
-    // 108 courses played by udisc
-    return {
-      played: [...stats.played].sort(),
-      unknown: [...stats.unknown].sort(),
-      roundNames: [...stats.roundNames].sort(),
-      playedLength: [...stats.played].length,
-      unknownLength: [...stats.unknown].length,
-      roundLength: [...stats.roundNames].length,
-    };
   }
 }

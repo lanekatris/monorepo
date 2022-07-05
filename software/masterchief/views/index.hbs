@@ -54,6 +54,26 @@
   <input type="file" id="file" name="file" />
   <input type="submit"/>
 </form>
+<h4>Or Add Manually Played Round</h4>
+<form method="post" action="dg/generator/course-played">
+  <label>PDGA Course ID:
+    <input type="text" name="courseId" />
+  </label>
+  <input type="submit"/>
+</form>
 
+<h4>Manually Added Rounds</h4>
+<ul>
+  {{#manuallyPlayedCourses}}
+    <li>{{this}}</li>
+  {{/manuallyPlayedCourses}}
+</ul>
+
+<h1>Your Played Courses ({{courses.length}})</h1>
+<ul>
+  {{#each courses}}
+    <li>{{this}}</li>
+  {{/each}}
+</ul>
 </body>
 </html>

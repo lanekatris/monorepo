@@ -58,8 +58,12 @@ export class DgController {
   @Render('index')
   async index() {
     const discs = await this.service.getDiscs();
+    const courses = await this.service.getPlayedCourses();
+    const manuallyPlayedCourses = await this.service.getManualPlayedCourses();
     return {
       discs,
+      courses,
+      manuallyPlayedCourses,
       postUrl: prefixController(EventNames.DiscAdded),
       deleteUrl: prefixController(EventNames.DiscRemoved),
       resetUrl: prefixController(EventNames.DiscsReset),

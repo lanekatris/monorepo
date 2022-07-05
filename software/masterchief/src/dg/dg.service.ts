@@ -3,7 +3,7 @@ import { DgEvents, EventNames } from './types/disc-added';
 import { ESDB } from '../constants';
 import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { CourseAdded } from './types/course-added';
-import { CoursePlayed } from './types/course-played';
+import { CoursePlayed, CoursePlayedSource } from './types/course-played';
 import { nanoid } from 'nanoid';
 
 @Injectable()
@@ -60,7 +60,7 @@ export class DgService {
 
   public async getPlayedCourses(): Promise<string[]> {
     const courseIds = [];
-    const events = this.client.readStream<CoursePlayed>('my-courses');
+    const events = this.client.readStream<CoursePlayed>('my-courses-2');
 
     try {
       for await (const { event } of events) {
@@ -77,10 +77,37 @@ export class DgService {
       }
       throw err;
     }
-    return courseIds;
+    return courseIds.sort();
   }
 
-  public async coursePlayed(pdgaCourseId: string): Promise<void> {
+  public async getManualPlayedCourses(): Promise<string[]> {
+    const courseIds = [];
+    const events = this.client.readStream<CoursePlayed>('my-courses-2');
+
+    try {
+      for await (const { event } of events) {
+        switch (event.type) {
+          case EventNames.CoursePlayed:
+            if (event.data.source === CoursePlayedSource.Manual)
+              courseIds.push(event.data.courseId);
+            break;
+        }
+      }
+    } catch (err) {
+      if (err.type === 'stream-not-found') {
+        this.logger.log('climbs stream not found');
+        return [];
+      }
+      throw err;
+    }
+    return courseIds.sort();
+  }
+
+  public async coursePlayed(
+    pdgaCourseId: string,
+    source: CoursePlayedSource,
+  ): Promise<void> {
+    // todo: this is very bad, don't do this
     const playedCourseIds = await this.getPlayedCourses();
     if (playedCourseIds.includes(pdgaCourseId)) return;
 
@@ -89,8 +116,9 @@ export class DgService {
       data: {
         id: nanoid(),
         courseId: pdgaCourseId,
+        source,
       },
     });
-    await this.client.appendToStream('my-courses', event);
+    await this.client.appendToStream('my-courses-2', event);
   }
 }
