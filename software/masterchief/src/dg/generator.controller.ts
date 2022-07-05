@@ -221,8 +221,9 @@ export class GeneratorController {
 
     this.logger.log(`Total rounds: ${rounds.length}`);
 
-    const allPdgaIds = await this.service.getAllCourseIds();
-    this.logger.log(`All pdga ids length: ${allPdgaIds.length}`);
+    const allPdgaCourses = await this.service.getAllCourses();
+    const allPdgaIds = allPdgaCourses.map((x) => x.id);
+    this.logger.log(`All pdga ids length: ${allPdgaCourses.length}`);
     const playerName = 'Lane';
 
     const stats = {

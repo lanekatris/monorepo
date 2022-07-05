@@ -6,6 +6,8 @@ import { CourseAdded } from './types/course-added';
 import { CoursePlayed, CoursePlayedSource } from './types/course-played';
 import { nanoid } from 'nanoid';
 import { CourseExcluded } from './types/course-excluded';
+import { getDistance } from 'geolib';
+import { CourseDistanceFromHome, DiscGolfCourse } from './types/course';
 
 @Injectable()
 export class DgService {
@@ -46,17 +48,39 @@ export class DgService {
     return discs;
   }
 
-  public async getAllCourseIds(): Promise<string[]> {
-    const allPdgaIds = [];
+  public async getAllCourses(): Promise<DiscGolfCourse[]> {
+    const courses: DiscGolfCourse[] = [];
+    const playedCourses = await this.getPlayedCourses();
+    const excludedCourses = await this.excludedCourses();
+
     const events = this.client.readStream<CourseAdded>('dg-testies-dataload');
     for await (const { event } of events) {
       switch (event.type) {
         case EventNames.CourseAdded:
-          allPdgaIds.push(event.data.id);
+          const { id, latitude, longitude, name } = event.data;
+          if (excludedCourses.includes(id)) break;
+          const distanceInMeters = getDistance(
+            {
+              latitude: process.env.HOME_LATITUDE,
+              longitude: process.env.HOME_LONGITUDE,
+            },
+            { latitude, longitude },
+          );
+          const hasPlayed = playedCourses.includes(id);
+          courses.push(
+            new DiscGolfCourse(
+              id,
+              name,
+              latitude,
+              longitude,
+              hasPlayed,
+              new CourseDistanceFromHome(distanceInMeters),
+            ),
+          );
           break;
       }
     }
-    return allPdgaIds;
+    return courses;
   }
 
   public async getPlayedCourses(): Promise<string[]> {

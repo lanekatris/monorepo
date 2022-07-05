@@ -87,6 +87,13 @@ export class DgController {
     };
   }
 
+  @Get('recommender')
+  @Render('dg/recommender')
+  async recommender() {
+    const allCourses = await this.service.getAllCourses();
+    return {};
+  }
+
   @Post(EventNames.DiscAdded)
   public async discAdded(@Response() res, @Body() body) {
     const event = jsonEvent<DiscAdded>({
@@ -149,5 +156,10 @@ export class DgController {
     await this.client.appendToStream('testies', events);
     this.logger.log(`Sent to db`);
     return res.redirect(`/${CONTROLLER_NAME}`);
+  }
+
+  @Get('api/courses')
+  public async allCourses() {
+    return this.service.getAllCourses();
   }
 }
