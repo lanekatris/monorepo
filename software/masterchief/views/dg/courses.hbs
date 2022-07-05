@@ -1,0 +1,52 @@
+<a href="/dg">Disc Golf Home Page</a>
+
+
+<fieldset>
+<h1>Load Your Played Rounds</h1>
+<form method="post" action="dg/generator/file" id="played-rounds-form" enctype="multipart/form-data">
+  <input type="file" id="file" name="file" />
+  <input type="submit"/>
+</form>
+<h4>Or Add Manually Played Round</h4>
+<form method="post" action="dg/generator/course-played">
+  <label>PDGA Course ID:
+    <input type="text" name="courseId" />
+  </label>
+  <input type="submit"/>
+</form>
+
+<h4>Manually Added Rounds</h4>
+<ul>
+  {{#manuallyPlayedCourses}}
+    <li>{{this}}</li>
+  {{/manuallyPlayedCourses}}
+</ul>
+</fieldset>
+
+<h4>Exclude Courses From Recommendations</h4>
+<form method="post" action="dg/generator/course-excluded">
+  <label>PDGA Course ID:
+    <input type="text" name="courseId" />
+  </label>
+  <label>Reason
+    <input type="text" name="reason" />
+  </label>
+  <input type="submit"/>
+</form>
+<h4>Excluded Courses ({{excludedCourses.length}})</h4>
+<ul>
+  {{#excludedCourses}}
+    <li>{{this}}</li>
+  {{/excludedCourses}}
+</ul>
+
+<h1>Data Generation</h1>
+<a href="dg/generator/generate">Generate GEO JSON</a>
+
+
+<h1>Your Played Courses ({{courses.length}})</h1>
+<ul>
+  {{#each courses}}
+    <li>{{this}}</li>
+  {{/each}}
+</ul>

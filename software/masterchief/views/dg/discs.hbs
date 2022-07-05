@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="/dg-index.css" />
+
+<a href="/dg">Disc Home Page</a>
+
+<h1>Add Disc</h1>
+
+<form method="post" action="{{postUrl}}">
+  <label>Brand
+    <input name="brand" autofocus/>
+  </label>
+  <label>Model
+    <input name="model"/>
+  </label>
+  <label>Date
+    <input name="date" />
+  </label>
+  <input type="submit" />
+</form>
+<h1>Your Discs ({{discs.length}})</h1>
+<a href="dg/discs" target="_blank">Discs Api</a>
+<ul>
+  {{#each discs}}
+    <li>({{this.discNumber}}) {{this.event.brand}} - {{this.event.model}}
+      <form class="delete-disc" method="post" action="{{../deleteUrl}}">
+        <input type="hidden" name="id" value="{{this.event.id}}" />
+        <input type="submit" value="Delete" />
+      </form>
+    </li>
+  {{/each}}
+</ul>
+<h1>Load Discs</h1>
+<form method="post" action="{{resetUrl}}">
+  <input type="submit" value="Reset ALL Discs" />
+</form>
+<h2>Upload Discs</h2>
+<p>Usually you get this data from AirTable</p>
+<p>Id, Brand, Model (Include Headers)</p>
+<form method="post" action="{{uploadUrl}}">
+  <input type="submit" value="Upload" />
+  <label>
+    <textarea name="data" rows="20" cols="20"></textarea>
+  </label>
+</form>

@@ -57,19 +57,33 @@ export class DgController {
   @Get()
   @Render('index')
   async index() {
+    return {};
+  }
+
+  @Get('discs')
+  @Render('dg/discs')
+  async discs() {
     const discs = await this.service.getDiscs();
+    return {
+      discs,
+      postUrl: prefixController(EventNames.DiscAdded),
+      resetUrl: prefixController(EventNames.DiscsReset),
+      uploadUrl: prefixController('bulk-upload'),
+    };
+  }
+
+  @Get('courses')
+  @Render('dg/courses')
+  async courses() {
     const courses = await this.service.getPlayedCourses();
     const manuallyPlayedCourses = await this.service.getManualPlayedCourses();
     const excludedCourses = await this.service.excludedCourses();
     return {
-      discs,
       courses,
       manuallyPlayedCourses,
       excludedCourses,
-      postUrl: prefixController(EventNames.DiscAdded),
+
       deleteUrl: prefixController(EventNames.DiscRemoved),
-      resetUrl: prefixController(EventNames.DiscsReset),
-      uploadUrl: prefixController('bulk-upload'),
     };
   }
 
@@ -135,10 +149,5 @@ export class DgController {
     await this.client.appendToStream('testies', events);
     this.logger.log(`Sent to db`);
     return res.redirect(`/${CONTROLLER_NAME}`);
-  }
-
-  @Get('discs')
-  public getDiscs() {
-    return this.service.getDiscs();
   }
 }
