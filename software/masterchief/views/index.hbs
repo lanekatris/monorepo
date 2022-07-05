@@ -69,6 +69,23 @@
   {{/manuallyPlayedCourses}}
 </ul>
 
+<h4>Exclude Courses From Recommendations</h4>
+<form method="post" action="dg/generator/course-excluded">
+  <label>PDGA Course ID:
+    <input type="text" name="courseId" />
+  </label>
+  <label>Reason
+  <input type="text" name="reason" />
+  </label>
+  <input type="submit"/>
+</form>
+<h4>Excluded Courses ({{excludedCourses.length}})</h4>
+<ul>
+  {{#excludedCourses}}
+    <li>{{this}}</li>
+  {{/excludedCourses}}
+</ul>
+
 <h1>Your Played Courses ({{courses.length}})</h1>
 <ul>
   {{#each courses}}

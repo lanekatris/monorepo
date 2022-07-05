@@ -7,6 +7,7 @@ export enum EventNames {
   CourseAdded = 'course-added',
   CourseMapped = 'course-mapped',
   CoursePlayed = 'course-played',
+  CourseExcluded = 'course-excluded',
 }
 
 export type DiscAdded = JSONEventType<

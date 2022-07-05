@@ -60,10 +60,12 @@ export class DgController {
     const discs = await this.service.getDiscs();
     const courses = await this.service.getPlayedCourses();
     const manuallyPlayedCourses = await this.service.getManualPlayedCourses();
+    const excludedCourses = await this.service.excludedCourses();
     return {
       discs,
       courses,
       manuallyPlayedCourses,
+      excludedCourses,
       postUrl: prefixController(EventNames.DiscAdded),
       deleteUrl: prefixController(EventNames.DiscRemoved),
       resetUrl: prefixController(EventNames.DiscsReset),

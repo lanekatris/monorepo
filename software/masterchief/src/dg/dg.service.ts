@@ -5,6 +5,7 @@ import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { CourseAdded } from './types/course-added';
 import { CoursePlayed, CoursePlayedSource } from './types/course-played';
 import { nanoid } from 'nanoid';
+import { CourseExcluded } from './types/course-excluded';
 
 @Injectable()
 export class DgService {
@@ -120,5 +121,42 @@ export class DgService {
       },
     });
     await this.client.appendToStream('my-courses-2', event);
+  }
+
+  public async courseExcluded(
+    courseId: string,
+    reason?: string,
+  ): Promise<void> {
+    const event = jsonEvent<CourseExcluded>({
+      type: EventNames.CourseExcluded,
+      data: {
+        id: nanoid(),
+        courseId,
+        reason,
+      },
+    });
+    await this.client.appendToStream('my-courses-2', event);
+  }
+
+  public async excludedCourses() {
+    const courseIds = [];
+    const events = this.client.readStream<CourseExcluded>('my-courses-2');
+
+    try {
+      for await (const { event } of events) {
+        switch (event.type) {
+          case EventNames.CourseExcluded:
+            courseIds.push(event.data.courseId);
+            break;
+        }
+      }
+    } catch (err) {
+      if (err.type === 'stream-not-found') {
+        this.logger.log('climbs stream not found');
+        return [];
+      }
+      throw err;
+    }
+    return courseIds.sort();
   }
 }

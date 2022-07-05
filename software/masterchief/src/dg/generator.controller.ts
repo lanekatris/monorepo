@@ -138,6 +138,14 @@ export class GeneratorController {
     await this.service.coursePlayed(body.courseId, CoursePlayedSource.Manual);
   }
 
+  @Post(EventNames.CourseExcluded)
+  @Redirect('/dg')
+  async courseExcluded(@Body() body: { courseId: string; reason?: string }) {
+    console.log('body', body);
+    const { courseId, reason } = body;
+    await this.service.courseExcluded(courseId, reason);
+  }
+
   @Get('generate')
   async generate(
     @Response({ passthrough: true }) res,
