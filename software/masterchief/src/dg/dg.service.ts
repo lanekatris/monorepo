@@ -9,6 +9,7 @@ import { CourseExcluded } from './types/course-excluded';
 import { getDistance } from 'geolib';
 import { CourseDistanceFromHome, DiscGolfCourse } from './types/course';
 
+const GeoJSON = require('geojson');
 @Injectable()
 export class DgService {
   private readonly logger = new Logger(DgService.name);
@@ -57,8 +58,8 @@ export class DgService {
     for await (const { event } of events) {
       switch (event.type) {
         case EventNames.CourseAdded:
-          const { id, latitude, longitude, name } = event.data;
-          if (excludedCourses.includes(id)) break;
+          const { id, latitude, longitude, name, state } = event.data;
+          // if (excludedCourses.includes(id)) break;
           const distanceInMeters = getDistance(
             {
               latitude: process.env.HOME_LATITUDE,
@@ -67,6 +68,7 @@ export class DgService {
             { latitude, longitude },
           );
           const hasPlayed = playedCourses.includes(id);
+          const excluded = excludedCourses.includes(id);
           courses.push(
             new DiscGolfCourse(
               id,
@@ -74,6 +76,8 @@ export class DgService {
               latitude,
               longitude,
               hasPlayed,
+              state,
+              excluded,
               new CourseDistanceFromHome(distanceInMeters),
             ),
           );
@@ -182,5 +186,25 @@ export class DgService {
       throw err;
     }
     return courseIds.sort();
+  }
+
+  public getGeoJson(courses: DiscGolfCourse[]) {
+    const filteredCourses = courses
+      .filter(({ hasPlayed }) => !hasPlayed)
+      .filter(({ excluded }) => !excluded);
+
+    const geoJsonObject = GeoJSON.parse(
+      filteredCourses.map((x) => ({
+        ...x,
+        icon: 'emoji-📀',
+        marker_type: 'outlined-icon',
+        marker_color: '#F42410',
+        marker_decoration: 'emoji-📀',
+      })),
+      {
+        Point: ['latitude', 'longitude'],
+      },
+    );
+    return geoJsonObject;
   }
 }

@@ -1,3 +1,5 @@
+import { StateAbbreviations } from '../stateAbbreviations';
+
 export class DiscGolfCourse {
   public constructor(
     public id: string,
@@ -5,6 +7,8 @@ export class DiscGolfCourse {
     public latitude: number,
     public longitude: number,
     public hasPlayed: boolean,
+    public state: StateAbbreviations,
+    public excluded: boolean,
     public distanceFromHome: CourseDistanceFromHome,
   ) {}
 }

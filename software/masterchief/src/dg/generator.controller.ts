@@ -18,12 +18,13 @@ import { StateAbbreviations } from './stateAbbreviations';
 import { join } from 'path';
 import { ESDB } from '../constants';
 import { Express } from 'express';
-import { EventStoreDBClient } from '@eventstore/db-client';
+import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { EventNames } from './types/disc-added';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { DgService } from './dg.service';
 import { CoursePlayedSource } from './types/course-played';
 import { UdiscScorecardEntry } from './types/udisc-scorecard-entry';
+import { CourseAdded } from './types/course-added';
 
 const GeoJSON = require('geojson');
 const csv = require('csvtojson');
@@ -76,6 +77,7 @@ export class GeneratorController {
     'Jason Wintz Memorial DGC': 'jason-wintz-memorial-disc-golf-course',
     'Moccasin Creek': 'moccasin-creek-disc-golf-course',
     Mountaineer: 'mountaineer-disc-golf-course',
+    'Mountaineer Disc Golf Course': 'mountaineer-disc-golf-course-0',
     'Nevin Park': 'nevin-park-disc-golf-course',
     'New London Tech DGC': 'new-london-tech',
     'Ohio State University DGC': 'ohio-state-university',
@@ -156,45 +158,49 @@ export class GeneratorController {
     this.logger.log(`courses.csv has ${entries.length} entries`);
 
     // load into esdb
-    // const dbResult = await this.client.appendToStream(
-    //   'dg-testies-dataload',
-    //   entries.map((entry) => {
-    //     return jsonEvent<CourseAdded>({
-    //       type: EventNames.CourseAdded,
-    //       data: {
-    //         id: entry.id,
-    //         name: entry.name,
-    //         latitude: entry.latitude,
-    //         longitude: entry.longitude,
-    //       },
-    //     });
-    //   }),
-    // );
-    // console.log('dbresult', dbResult);
+    const dbResult = await this.esdb.appendToStream(
+      'dg-testies-dataload',
+      entries.map((entry) => {
+        return jsonEvent<CourseAdded>({
+          type: EventNames.CourseAdded,
+          data: {
+            id: entry.id,
+            name: entry.name,
+            state: entry.state,
+            latitude: entry.latitude,
+            longitude: entry.longitude,
+          },
+        });
+      }),
+    );
+    console.log('dbresult', dbResult);
+
+    const allCourses = await this.service.getAllCourses();
 
     const folder = format(new Date(), 'y-LL-dd--hh-mm-ss');
     let i = 1;
 
     const zip = new JSZip();
 
-    const stateEntries = groupBy(entries, (x) => x.state);
+    const stateEntries = groupBy(allCourses, (x) => x.state);
     const states = Object.keys(stateEntries);
 
     this.logger.log(`Creating files for ${states.length} states: ${states}`);
     states.forEach((state) => {
       const entries = stateEntries[state];
-      const geoJsonObject = GeoJSON.parse(
-        entries.map((x) => ({
-          ...x,
-          icon: 'emoji-📀',
-          marker_type: 'outlined-icon',
-          marker_color: '#F42410',
-          marker_decoration: 'emoji-📀',
-        })),
-        {
-          Point: ['latitude', 'longitude'],
-        },
-      );
+      // const geoJsonObject = GeoJSON.parse(
+      //   entries.map((x) => ({
+      //     ...x,
+      //     icon: 'emoji-📀',
+      //     marker_type: 'outlined-icon',
+      //     marker_color: '#F42410',
+      //     marker_decoration: 'emoji-📀',
+      //   })),
+      //   {
+      //     Point: ['latitude', 'longitude'],
+      //   },
+      // );
+      const geoJsonObject = this.service.getGeoJson(entries);
       zip.file(`${state}-${folder}.json`, JSON.stringify(geoJsonObject));
       this.logger.log(`Added ${state} file to zip ${i}/${states.length}`);
       i++;
@@ -246,33 +252,58 @@ export class GeneratorController {
 
       // You can't do multiple since the data could match both :(
       const guessedId = round.CourseName.toLowerCase().replace(/ /g, '-');
+      const mappedValue = this.mappings[round.CourseName];
 
-      if (allPdgaIds.includes(guessedId)) {
+      // mapping check first because of the buildout or guessing could get you into trouble
+      if (mappedValue) {
+        stats.played.add(mappedValue);
+        await this.service.coursePlayed(
+          mappedValue,
+          CoursePlayedSource.Scorecard,
+        );
+        // check pdga ids
+      } else if (allPdgaIds.includes(guessedId)) {
         stats.played.add(guessedId);
         await this.service.coursePlayed(
           guessedId,
           CoursePlayedSource.Scorecard,
         );
+      } else if (this.udiscCoursesNotInPdga.includes(round.CourseName)) {
+        stats.played.add(round.CourseName);
+        await this.service.coursePlayed(
+          round.CourseName,
+          CoursePlayedSource.Scorecard,
+        );
       } else {
-        const lastTryCourseId = this.mappings[round.CourseName];
-        if (lastTryCourseId) {
-          stats.played.add(lastTryCourseId);
-          await this.service.coursePlayed(
-            lastTryCourseId,
-            CoursePlayedSource.Scorecard,
-          );
-        } else {
-          if (this.udiscCoursesNotInPdga.includes(round.CourseName)) {
-            stats.played.add(round.CourseName);
-            await this.service.coursePlayed(
-              round.CourseName,
-              CoursePlayedSource.Scorecard,
-            );
-          } else {
-            stats.unknown.add(round.CourseName);
-          }
-        }
+        stats.unknown.add(round.CourseName);
       }
+
+      // if (allPdgaIds.includes(guessedId)) {
+      //   stats.played.add(guessedId);
+      //   await this.service.coursePlayed(
+      //     guessedId,
+      //     CoursePlayedSource.Scorecard,
+      //   );
+      // } else {
+      // const lastTryCourseId = this.mappings[round.CourseName];
+      // if (lastTryCourseId) {
+      //   stats.played.add(lastTryCourseId);
+      //   await this.service.coursePlayed(
+      //     lastTryCourseId,
+      //     CoursePlayedSource.Scorecard,
+      //   );
+      // } else {
+      //   if (this.udiscCoursesNotInPdga.includes(round.CourseName)) {
+      //     stats.played.add(round.CourseName);
+      //     await this.service.coursePlayed(
+      //       round.CourseName,
+      //       CoursePlayedSource.Scorecard,
+      //     );
+      //   } else {
+      //     stats.unknown.add(round.CourseName);
+      //   }
+      // }
+      // }
     }
   }
 }
