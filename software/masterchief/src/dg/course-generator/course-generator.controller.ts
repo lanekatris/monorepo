@@ -77,12 +77,12 @@ export class CourseGeneratorController {
           );
           // we now need to parse our data and get attributes from it
         } else {
-          this.log.log(
-            `course html already in db: ${course.id} (${i}/${result.length} ${(
-              (i / result.length) *
-              100
-            ).toFixed(2)}%) - states ${state}: (${stateI}/${states.length})`,
-          );
+          // this.log.log(
+          //   `course html already in db: ${course.id} (${i}/${result.length} ${(
+          //     (i / result.length) *
+          //     100
+          //   ).toFixed(2)}%) - states ${state}: (${stateI}/${states.length})`,
+          // );
         }
         i++;
       }
@@ -90,5 +90,66 @@ export class CourseGeneratorController {
     }
 
     return 'kick';
+  }
+
+  @Get('kick2')
+  async kicktwo() {
+    // let stateI = 1;
+    const states = Object.values(StateAbbreviations);
+    const q = queue(async (input, callback) => {
+      const { state, stateI } = input;
+      // const result = await this.service.getCourses({ state });
+      const result = await new CoursesByStateService(
+        this.minioClient,
+      ).getCourses({ state });
+
+      this.log.log(
+        `Found ${result.length} courses for ${state} (${stateI}/${states.length})`,
+      );
+
+      // Let's load each individual's courses html
+      let i = 1;
+      for (const course of result) {
+        const courseHtml = await this.tryGetObject(
+          `dg-course-generator`,
+          `course/${course.id}.html`,
+        );
+        if (!courseHtml) {
+          this.log.log(
+            `course html not found, getting: ${course.id} (${i}/${
+              result.length
+            } ${((i / result.length) * 100).toFixed(
+              2,
+            )}%) - states ${state}: (${stateI}/${states.length})`,
+          );
+          const idk = await axios.get(
+            `https://www.pdga.com/${course.courseUrl}`,
+          );
+          await this.minioClient.client.putObject(
+            `dg-course-generator`,
+            `course/${course.id}.html`,
+            idk.data,
+          );
+          // we now need to parse our data and get attributes from it
+        } else {
+          // this.log.log(
+          //   `course html already in db: ${course.id} (${i}/${result.length} ${(
+          //     (i / result.length) *
+          //     100
+          //   ).toFixed(2)}%) - states ${state}: (${stateI}/${states.length})`,
+          // );
+        }
+        i++;
+      }
+      callback();
+    }, 50);
+
+    states.forEach((state, index) => {
+      q.push({ state, stateI: index });
+    });
+    await q.drain();
+    this.log.log(`Done getting all html`);
+
+    return 'take 2';
   }
 }

@@ -58,7 +58,7 @@ export class CoursesByStateService implements OnModuleInit {
 
     let response;
     if (htmlRecord) {
-      console.log(`Pulling from DB: ${objectName}`);
+      // console.log(`Pulling from DB: ${objectName}`);
       response = htmlRecord;
     } else {
       // Make get request
