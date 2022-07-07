@@ -25,6 +25,8 @@ spec:
               value: esdb://esdb:2113?tls=false
             - name: NEXT_PUBLIC_API_URL
               value: http://mc.lanekatris.com
+            - name: MINIO_URL
+              value: minio
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

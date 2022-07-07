@@ -9,7 +9,7 @@ import { MinioModule } from 'nestjs-minio-client';
   imports: [
     ConfigModule.forRoot(),
     MinioModule.register({
-      endPoint: 'localhost',
+      endPoint: process.env.MINIO_URL,
       port: 9000,
       useSSL: false,
       accessKey: 'minio-root-user',
