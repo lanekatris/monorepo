@@ -7,10 +7,11 @@ import {
   Post,
   Render,
   Response,
+  UseGuards,
 } from '@nestjs/common';
 import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { nanoid } from 'nanoid';
-import { ESDB } from '../constants';
+import { ESDB } from '../app/constants';
 import {
   DiscAdded,
   DiscRemoved,
@@ -19,6 +20,7 @@ import {
 } from './types/disc-added';
 import { DgService } from './dg.service';
 import { IsNotEmpty } from 'class-validator';
+import { GuardMe } from '../auth/guard-me.guard';
 
 const csv = require('csvtojson');
 
@@ -45,6 +47,7 @@ interface BulkUploadItem {
 }
 
 @Controller(CONTROLLER_NAME)
+@UseGuards(GuardMe)
 export class DgController {
   private readonly logger = new Logger(DgController.name);
   constructor(
@@ -55,7 +58,7 @@ export class DgController {
   ) {}
 
   @Get()
-  @Render('index')
+  @Render('dg/index')
   async index() {
     return {};
   }

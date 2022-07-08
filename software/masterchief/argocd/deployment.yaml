@@ -4,7 +4,7 @@ metadata:
   name: masterchief
   namespace: default
 spec:
-  replicas: 1
+  replicas: 1 # Change me to a higher number
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -27,6 +27,13 @@ spec:
               value: http://mc.lanekatris.com
             - name: MINIO_URL
               value: minio
+            - name: APP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mc-secret
+                  key: password
+                  optional: false
+
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -36,11 +43,6 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: public
     nginx.ingress.kubernetes.io/backend-protocol: HTTP
-
-    # https://www.howtogeek.com/devops/how-to-add-http-basic-authentication-to-a-kubernetes-nginx-ingress/
-    nginx.ingress.kubernetes.io/auth-type: basic
-    nginx.ingress.kubernetes.io/auth-secret: htpasswd # this was not done via this file
-    nginx.ingress.kubernetes.io/auth-realm: "Enter your credentials"
 spec:
   rules:
     - host: mc.lanekatris.com

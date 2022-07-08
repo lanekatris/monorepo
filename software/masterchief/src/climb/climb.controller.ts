@@ -8,19 +8,17 @@ import {
   Post,
   Render,
   Response,
+  UseGuards,
 } from '@nestjs/common';
 import {
   EventStoreDBClient,
-  FORWARDS,
   jsonEvent,
   JSONEventType,
-  START,
 } from '@eventstore/db-client';
 import { nanoid } from 'nanoid';
-import { ESDB } from '../constants';
+import { ESDB } from '../app/constants';
 import { IsNotEmpty } from 'class-validator';
-import { ReadResp } from '@eventstore/db-client/generated/streams_pb';
-import StreamNotFound = ReadResp.StreamNotFound;
+import { GuardMe } from '../auth/guard-me.guard';
 
 export enum EventNames {
   ClimbSessionCreated = 'climb-session-created',
@@ -66,6 +64,7 @@ class RouteInputDto {
 }
 
 @Controller('climb')
+@UseGuards(GuardMe)
 export class ClimbController {
   private readonly logger = new Logger(ClimbController.name);
   constructor(

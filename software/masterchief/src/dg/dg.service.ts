@@ -1,6 +1,6 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { DgEvents, EventNames } from './types/disc-added';
-import { ESDB } from '../constants';
+import { ESDB } from '../app/constants';
 import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { CourseAdded } from './types/course-added';
 import { CoursePlayed, CoursePlayedSource } from './types/course-played';

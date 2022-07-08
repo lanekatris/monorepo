@@ -1,4 +1,4 @@
-import { Controller, Get, Inject, Logger } from '@nestjs/common';
+import { Controller, Get, Inject, Logger, UseGuards } from '@nestjs/common';
 import { Client } from 'minio';
 import { StateAbbreviations } from '../stateAbbreviations';
 import { CoursesByStateService } from './courses-by-state.service';
@@ -6,6 +6,7 @@ import { MinioService } from 'nestjs-minio-client';
 import axios from 'axios';
 import { queue } from 'async';
 import { Course } from './course';
+import { GuardMe } from '../../auth/guard-me.guard';
 
 export const MINIO_CONNECTION = 'MINIO_CONNECTION';
 function streamToString(stream) {
@@ -18,6 +19,7 @@ function streamToString(stream) {
 }
 
 @Controller('dg/course-generator')
+@UseGuards(GuardMe)
 export class CourseGeneratorController {
   private readonly log = new Logger(CourseGeneratorController.name);
 

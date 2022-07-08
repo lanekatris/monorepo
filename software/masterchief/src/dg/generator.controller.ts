@@ -9,6 +9,7 @@ import {
   Response,
   StreamableFile,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { format } from 'date-fns';
@@ -16,7 +17,7 @@ import { createReadStream } from 'fs';
 import { groupBy } from 'lodash';
 import { StateAbbreviations } from './stateAbbreviations';
 import { join } from 'path';
-import { ESDB } from '../constants';
+import { ESDB } from '../app/constants';
 import { Express } from 'express';
 import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { EventNames } from './types/disc-added';
@@ -25,6 +26,7 @@ import { DgService } from './dg.service';
 import { CoursePlayedSource } from './types/course-played';
 import { UdiscScorecardEntry } from './types/udisc-scorecard-entry';
 import { CourseAdded } from './types/course-added';
+import { GuardMe } from '../auth/guard-me.guard';
 
 const GeoJSON = require('geojson');
 const csv = require('csvtojson');
@@ -45,6 +47,7 @@ interface CsvEntry {
 }
 
 @Controller('dg/generator')
+@UseGuards(GuardMe)
 export class GeneratorController {
   private readonly logger = new Logger(GeneratorController.name);
 

@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { DgController } from './dg.controller';
 import { ConfigModule } from '@nestjs/config';
-import { eventStoreFactory } from '../event-store';
+import { eventStoreFactory } from '../app/event-store';
 import { DgService } from './dg.service';
 import { GeneratorController } from './generator.controller';
-import { MulterModule } from '@nestjs/platform-express';
 import { CourseGeneratorModule } from './course-generator/course-generator.module';
 import { NestMinioModule } from 'nestjs-minio';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [
@@ -19,6 +19,7 @@ import { NestMinioModule } from 'nestjs-minio';
       secretKey: 'minio-root-password',
     }),
     CourseGeneratorModule,
+    AuthModule,
   ],
   providers: [eventStoreFactory, DgService],
   controllers: [DgController, GeneratorController],

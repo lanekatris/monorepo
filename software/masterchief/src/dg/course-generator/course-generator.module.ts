@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { CourseGeneratorController } from './course-generator.controller';
-import { NestMinioModule } from 'nestjs-minio';
 import { CoursesByStateService } from './courses-by-state.service';
 import { ConfigModule } from '@nestjs/config';
 import { MinioModule } from 'nestjs-minio-client';
+import { AuthModule } from '../../auth/auth.module';
 
 @Module({
   imports: [
@@ -15,8 +15,7 @@ import { MinioModule } from 'nestjs-minio-client';
       accessKey: 'minio-root-user',
       secretKey: 'minio-root-password',
     }),
-    // CoursesByState,
-    // CoursesByStateService,
+    AuthModule,
   ],
   providers: [CoursesByStateService],
   controllers: [CourseGeneratorController],
