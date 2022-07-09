@@ -7,6 +7,7 @@ import axios from 'axios';
 import { queue } from 'async';
 import { Course } from './course';
 import { GuardMe } from '../../auth/guard-me.guard';
+import { BUCKET_DG_COURSE_GENERATOR } from '../../app/constants';
 
 export const MINIO_CONNECTION = 'MINIO_CONNECTION';
 function streamToString(stream) {
@@ -58,7 +59,7 @@ export class CourseGeneratorController {
       let i = 1;
       for (const course of result) {
         const courseHtml = await this.tryGetObject(
-          `dg-course-generator`,
+          BUCKET_DG_COURSE_GENERATOR,
           `course/${course.id}.html`,
         );
         if (!courseHtml) {
@@ -73,7 +74,7 @@ export class CourseGeneratorController {
             `https://www.pdga.com/${course.courseUrl}`,
           );
           await this.minioClient.client.putObject(
-            `dg-course-generator`,
+            BUCKET_DG_COURSE_GENERATOR,
             `course/${course.id}.html`,
             idk.data,
           );
@@ -98,6 +99,7 @@ export class CourseGeneratorController {
   async kicktwo() {
     // let stateI = 1;
     const states = Object.values(StateAbbreviations);
+    // const states = [StateAbbreviations.WestVirginia];
     const q = queue(async (input, callback) => {
       const { state, stateI } = input;
       // const result = await this.service.getCourses({ state });
@@ -113,7 +115,7 @@ export class CourseGeneratorController {
       let i = 1;
       for (const course of result) {
         const courseHtml = await this.tryGetObject(
-          `dg-course-generator`,
+          BUCKET_DG_COURSE_GENERATOR,
           `course/${course.id}.html`,
         );
         if (!courseHtml) {
@@ -128,23 +130,15 @@ export class CourseGeneratorController {
             `https://www.pdga.com/${course.courseUrl}`,
           );
           await this.minioClient.client.putObject(
-            `dg-course-generator`,
+            BUCKET_DG_COURSE_GENERATOR,
             `course/${course.id}.html`,
             idk.data,
           );
-          // we now need to parse our data and get attributes from it
-        } else {
-          // this.log.log(
-          //   `course html already in db: ${course.id} (${i}/${result.length} ${(
-          //     (i / result.length) *
-          //     100
-          //   ).toFixed(2)}%) - states ${state}: (${stateI}/${states.length})`,
-          // );
         }
         i++;
       }
       callback();
-    }, 50);
+    }, 1);
 
     states.forEach((state, index) => {
       q.push({ state, stateI: index });

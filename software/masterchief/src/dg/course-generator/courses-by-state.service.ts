@@ -10,6 +10,7 @@ import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { Client } from 'minio';
 import { MINIO_CONNECTION } from './course-generator.controller';
 import { MinioService } from 'nestjs-minio-client';
+import { BUCKET_DG_COURSE_GENERATOR } from '../../app/constants';
 
 interface CoursesByStateInput {
   state: StateAbbreviations;
@@ -48,7 +49,7 @@ export class CoursesByStateService implements OnModuleInit {
     let htmlRecord;
     try {
       take2 = await this.minioClient.client.getObject(
-        `dg-course-generator`,
+        BUCKET_DG_COURSE_GENERATOR,
         objectName,
       );
       htmlRecord = await streamToString(take2);
@@ -65,7 +66,7 @@ export class CoursesByStateService implements OnModuleInit {
       console.log(`Pulling from: ${url}`);
       const html = await getHtml(url);
       await this.minioClient.client.putObject(
-        `dg-course-generator`,
+        BUCKET_DG_COURSE_GENERATOR,
         objectName,
         html,
       );
@@ -107,11 +108,11 @@ export class CoursesByStateService implements OnModuleInit {
 
   async onModuleInit(): Promise<void> {
     const bucketExists = await this.minioClient.client.bucketExists(
-      `dg-course-generator`,
+      BUCKET_DG_COURSE_GENERATOR,
     );
     if (!bucketExists) {
       await this.minioClient.client.makeBucket(
-        `dg-course-generator`,
+        BUCKET_DG_COURSE_GENERATOR,
         'us-east-1',
       );
     }
