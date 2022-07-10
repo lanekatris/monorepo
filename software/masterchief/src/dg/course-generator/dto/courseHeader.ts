@@ -36,8 +36,4 @@ export class CourseHeader {
   serializeLocation(): string {
     return `${this.name} ${this.city}, ${this.state} ${this.zip}`;
   }
-
-  get cacheKey() {
-    return `course/${this.id}.html`;
-  }
 }

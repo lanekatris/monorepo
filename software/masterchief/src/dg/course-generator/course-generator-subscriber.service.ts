@@ -21,6 +21,10 @@ import axios from 'axios';
 import { PdgaCourseCached } from './types/pdga-course.cached';
 import { Timeout } from '@nestjs/schedule';
 
+function getCourseHeaderCacheKey(courseId: string) {
+  return `course/${courseId}.html`;
+}
+
 @Injectable()
 export class CourseGeneratorSubscriberService {
   private readonly logger = new Logger(CourseGeneratorSubscriberService.name);
@@ -74,18 +78,18 @@ export class CourseGeneratorSubscriberService {
   ) {
     const isCached = await this.doesObjectExist(
       BUCKET_DG_COURSE_GENERATOR,
-      event.data.courseHeader.cacheKey,
+      getCourseHeaderCacheKey(event.data.courseHeader.id),
     );
     this.logger.log(
       `${event.data.courseHeader.name} is cached: ${isCached} in ${event.data.courseHeader.state}`,
     );
     if (!isCached) {
-      const url = `https://www.pdga.com/${event.data.courseHeader.courseUrl}`;
+      const url = `https://www.pdga.com${event.data.courseHeader.courseUrl}`;
       this.logger.warn(`Getting course html: ${url}`);
       const { data } = await axios.get(url);
       await this.minioClient.client.putObject(
         BUCKET_DG_COURSE_GENERATOR,
-        event.data.courseHeader.cacheKey,
+        getCourseHeaderCacheKey(event.data.courseHeader.id),
         data,
       );
     }
@@ -101,6 +105,7 @@ export class CourseGeneratorSubscriberService {
     await this.client.appendToStream(STREAM_COURSE_GENERATOR, cachedEvent);
   }
 
+  // Do not use OnModuleInit, that will cause the app to hang since it locks the thread I assume
   @Timeout(100)
   async subscribe() {
     try {
@@ -135,10 +140,8 @@ export class CourseGeneratorSubscriberService {
 
           await subscription.ack(event);
         } catch (error) {
-          this.logger.error(
-            `Failed processing event: ${error.toString()}`,
-            error,
-          );
+          console.error(error);
+          this.logger.error(`Failed processing event: ${error}`, error);
           await subscription.nack(PARK, error.toString(), event);
         }
       }
