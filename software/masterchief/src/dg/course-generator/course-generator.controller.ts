@@ -1,23 +1,37 @@
 import { Controller, Get, Inject, Logger, UseGuards } from '@nestjs/common';
-import { Client } from 'minio';
 import { StateAbbreviations } from '../stateAbbreviations';
 import { CoursesByStateService } from './courses-by-state.service';
 import { MinioService } from 'nestjs-minio-client';
 import axios from 'axios';
-import { queue } from 'async';
-import { Course } from './course';
 import { GuardMe } from '../../auth/guard-me.guard';
-import { BUCKET_DG_COURSE_GENERATOR } from '../../app/constants';
+import { ESDB, STREAM_COURSE_GENERATOR } from '../../app/constants';
+import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
+import { EventNames } from '../types/disc-added';
+import { nanoid } from 'nanoid';
+import { PdgaCourseCached } from './types/pdga-course.cached';
+import { PdgaSyncByStateRequested } from './types/pdga-sync-by-state.requested';
+import { PdgaCourseHeaderCreated } from './types/pdga-course-header.created';
 
-export const MINIO_CONNECTION = 'MINIO_CONNECTION';
-function streamToString(stream) {
-  const chunks = [];
-  return new Promise((resolve, reject) => {
-    stream.on('data', (chunk) => chunks.push(Buffer.from(chunk)));
-    stream.on('error', (err) => reject(err));
-    stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+axios.interceptors.request.use((request) => {
+  const url = new URL(request.url);
+
+  const params = new URLSearchParams(request.url);
+  const keysForDel = [];
+  params.forEach((value, key) => {
+    if (value == '' || value == 'All') {
+      keysForDel.push(key);
+    }
   });
-}
+
+  keysForDel.forEach((key) => {
+    params.delete(key);
+  });
+
+  console.log(
+    `Requesting: ${url.origin}/${url.pathname} with ${params.toString()}`,
+  );
+  return request;
+});
 
 @Controller('dg/course-generator')
 @UseGuards(GuardMe)
@@ -27,125 +41,58 @@ export class CourseGeneratorController {
   constructor(
     @Inject(CoursesByStateService) private service: CoursesByStateService,
     private readonly minioClient: MinioService,
+
+    @Inject(ESDB)
+    private esdb: EventStoreDBClient,
   ) {}
 
-  private async tryGetObject(bucket: string, objectName: string) {
-    let take2;
-    let htmlRecord;
-    try {
-      take2 = await this.minioClient.client.getObject(bucket, objectName);
-      htmlRecord = await streamToString(take2);
-    } catch (err) {
-      // console.error(err);
-    }
-    return htmlRecord;
+  @Get(EventNames.PdgaSyncByStateRequested)
+  async previewPdgaDataSync() {
+    this.log.log(`Sending Event: ${EventNames.PdgaSyncByStateRequested}`);
+    const states = Object.values(StateAbbreviations);
+    const events = states.map((state) =>
+      jsonEvent<PdgaSyncByStateRequested>({
+        type: EventNames.PdgaSyncByStateRequested,
+        data: {
+          id: nanoid(),
+          state,
+        },
+      }),
+    );
+    await this.esdb.appendToStream(STREAM_COURSE_GENERATOR, events);
+    return 'success';
   }
 
-  @Get()
-  async kick() {
-    // load data for one state then remove the state filter
-    // const states = [StateAbbreviations.Ohio, StateAbbreviations.WestVirginia];
-    const states = Object.values(StateAbbreviations);
+  @Get('pdga-sync-status')
+  async getSome() {
+    const events = this.esdb.readStream<
+      PdgaSyncByStateRequested | PdgaCourseHeaderCreated | PdgaCourseCached
+    >(STREAM_COURSE_GENERATOR);
 
-    let stateI = 1;
-    for (const state of states) {
-      const result = await this.service.getCourses({ state });
+    const model: { courseId: string; cached: boolean }[] = [];
+    for await (const { event } of events) {
+      switch (event.type) {
+        case EventNames.PdgaSyncByStateRequested:
+          break;
+        case EventNames.PdgaCourseHeaderCreated:
+          if (!model.find((x) => x.courseId === event.data.courseHeader.id)) {
+            model.push({ courseId: event.data.courseHeader.id, cached: false });
+          }
 
-      this.log.log(
-        `Found ${result.length} courses for ${state} (${stateI}/${states.length})`,
-      );
-
-      // Let's load each individual's courses html
-      let i = 1;
-      for (const course of result) {
-        const courseHtml = await this.tryGetObject(
-          BUCKET_DG_COURSE_GENERATOR,
-          `course/${course.id}.html`,
-        );
-        if (!courseHtml) {
-          this.log.log(
-            `course html not found, getting: ${course.id} (${i}/${
-              result.length
-            } ${((i / result.length) * 100).toFixed(
-              2,
-            )}%) - states ${state}: (${stateI}/${states.length})`,
-          );
-          const idk = await axios.get(
-            `https://www.pdga.com/${course.courseUrl}`,
-          );
-          await this.minioClient.client.putObject(
-            BUCKET_DG_COURSE_GENERATOR,
-            `course/${course.id}.html`,
-            idk.data,
-          );
-          // we now need to parse our data and get attributes from it
-        } else {
-          // this.log.log(
-          //   `course html already in db: ${course.id} (${i}/${result.length} ${(
-          //     (i / result.length) *
-          //     100
-          //   ).toFixed(2)}%) - states ${state}: (${stateI}/${states.length})`,
-          // );
-        }
-        i++;
+          break;
+        case EventNames.PdgaCourseCached:
+          const a = model.find((x) => x.courseId == event.data.courseId);
+          if (a) {
+            a.cached = true;
+          }
+          break;
       }
-      stateI++;
     }
-
-    return 'kick';
-  }
-
-  @Get('kick2')
-  async kicktwo() {
-    // let stateI = 1;
-    const states = Object.values(StateAbbreviations);
-    // const states = [StateAbbreviations.WestVirginia];
-    const q = queue(async (input, callback) => {
-      const { state, stateI } = input;
-      // const result = await this.service.getCourses({ state });
-      const result = await new CoursesByStateService(
-        this.minioClient,
-      ).getCourses({ state });
-
-      this.log.log(
-        `Found ${result.length} courses for ${state} (${stateI}/${states.length})`,
-      );
-
-      // Let's load each individual's courses html
-      let i = 1;
-      for (const course of result) {
-        const courseHtml = await this.tryGetObject(
-          BUCKET_DG_COURSE_GENERATOR,
-          `course/${course.id}.html`,
-        );
-        if (!courseHtml) {
-          this.log.log(
-            `course html not found, getting: ${course.id} (${i}/${
-              result.length
-            } ${((i / result.length) * 100).toFixed(
-              2,
-            )}%) - states ${state}: (${stateI}/${states.length})`,
-          );
-          const idk = await axios.get(
-            `https://www.pdga.com/${course.courseUrl}`,
-          );
-          await this.minioClient.client.putObject(
-            BUCKET_DG_COURSE_GENERATOR,
-            `course/${course.id}.html`,
-            idk.data,
-          );
-        }
-        i++;
-      }
-      callback();
-    }, 1);
-
-    states.forEach((state, index) => {
-      q.push({ state, stateI: index });
-    });
-    await q.drain();
-    this.log.log(`Done getting all html`);
-
-    return 'take 2';
+    return {
+      count: model.length,
+      cachedCount: model.filter((x) => x.cached).length,
+      nonCachedCount: model.filter((x) => !x.cached).length,
+      idk: model,
+    };
   }
 }

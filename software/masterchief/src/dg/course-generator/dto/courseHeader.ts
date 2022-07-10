@@ -1,4 +1,4 @@
-export class Course {
+export class CourseHeader {
   id: string;
 
   name: string;
@@ -12,16 +12,6 @@ export class Course {
   holeCount: number;
 
   rating?: number;
-
-  // rawLocationData?: string;
-  //
-  // foundLocationCount!: number;
-
-  latitude?: number;
-
-  longitude?: number;
-
-  html?: string;
 
   // eslint-disable-next-line max-len
   constructor(
@@ -45,5 +35,9 @@ export class Course {
 
   serializeLocation(): string {
     return `${this.name} ${this.city}, ${this.state} ${this.zip}`;
+  }
+
+  get cacheKey() {
+    return `course/${this.id}.html`;
   }
 }

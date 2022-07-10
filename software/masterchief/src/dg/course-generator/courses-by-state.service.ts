@@ -4,30 +4,22 @@ import {
   ExtractCoursesResponse,
 } from './html-to-courses';
 import { getHtml } from './get-html';
-import { Course } from './course';
+import { CourseHeader } from './dto/courseHeader';
 import { StateAbbreviations } from '../stateAbbreviations';
-import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
-import { Client } from 'minio';
-import { MINIO_CONNECTION } from './course-generator.controller';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import { MinioService } from 'nestjs-minio-client';
 import { BUCKET_DG_COURSE_GENERATOR } from '../../app/constants';
+import { streamToString } from '../../app/stream-to-string';
+import { getCourseListUrl } from './lib/get-course-list-url';
 
-interface CoursesByStateInput {
+export interface CoursesByStateInput {
   state: StateAbbreviations;
 }
 
-function streamToString(stream) {
-  const chunks = [];
-  return new Promise((resolve, reject) => {
-    stream.on('data', (chunk) => chunks.push(Buffer.from(chunk)));
-    stream.on('error', (err) => reject(err));
-    stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
-  });
-}
-
-function getUrl(state: StateAbbreviations, page: number): string {
-  const pageQuery = page === 0 ? '' : `&page=${page}`;
-  return `https://www.pdga.com/course-directory/advanced?title=&field_course_location_country=US&field_course_location_locality=&field_course_location_administrative_area=${state}&field_course_location_postal_code=&field_course_type_value=All&rating_value=All&field_course_holes_value=All&field_course_total_length_value=All&field_course_target_type_value=All&field_course_tee_type_value=All&field_location_type_value=All&field_course_camping_value=All&field_course_facilities_value=All&field_course_fees_value=All&field_course_handicap_value=All&field_course_private_value=All&field_course_signage_value=All&field_cart_friendly_value=All${pageQuery}`;
+export interface GetCoursesResult {
+  courseHeaders: CourseHeader[];
+  courseCount: number;
+  coursesToLoad?: CourseHeader[];
 }
 
 @Injectable()
@@ -42,7 +34,7 @@ export class CoursesByStateService implements OnModuleInit {
 
   private async downloadAndParseCourses(): Promise<ExtractCoursesResponse> {
     const { state } = this.input;
-    const url = getUrl(state, this.page);
+    const url = getCourseListUrl(state, this.page);
     // const htmlRecord = await htmlRepo.findOne({ state, page: this.page });
     const objectName = `grid/${state}-page-${this.page}.html`;
     let take2;
@@ -63,19 +55,13 @@ export class CoursesByStateService implements OnModuleInit {
       response = htmlRecord;
     } else {
       // Make get request
-      console.log(`Pulling from: ${url}`);
+      // console.log(`Pulling from: ${url}`);
       const html = await getHtml(url);
       await this.minioClient.client.putObject(
         BUCKET_DG_COURSE_GENERATOR,
         objectName,
         html,
       );
-      // await htmlRepo.save({
-      //   state,
-      //   page: this.page,
-      //   url,
-      //   html,
-      // });
       response = html;
     }
 
@@ -83,10 +69,12 @@ export class CoursesByStateService implements OnModuleInit {
     return extractCoursesFromHtml(response);
   }
 
-  public async getCourses(input: CoursesByStateInput): Promise<Course[]> {
+  public async getCourseHeaders(
+    input: CoursesByStateInput,
+  ): Promise<GetCoursesResult> {
     this.input = input;
     this.page = 0;
-    let courses: Course[] = [];
+    let courses: CourseHeader[] = [];
 
     let loadMore = true;
     while (loadMore) {
@@ -103,7 +91,10 @@ export class CoursesByStateService implements OnModuleInit {
       console.log(`Uniq killed: ${oldLength - courses.length} courses`);
     }
 
-    return courses;
+    return {
+      courseHeaders: courses,
+      courseCount: courses.length,
+    };
   }
 
   async onModuleInit(): Promise<void> {

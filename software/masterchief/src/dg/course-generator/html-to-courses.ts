@@ -1,8 +1,8 @@
 import cheerio from 'cheerio';
-import { Course } from './course';
+import { CourseHeader } from './dto/courseHeader';
 
 export interface ExtractCoursesResponse {
-  courses: Course[];
+  courses: CourseHeader[];
   hasMore: boolean;
 }
 
@@ -20,7 +20,7 @@ export function extractCoursesFromHtml(html: string): ExtractCoursesResponse {
   const $ = cheerio.load(html);
   const rows = $('tbody tr');
 
-  const courses: Course[] = [];
+  const courses: CourseHeader[] = [];
 
   rows.each((index: number, element: any) => {
     const el = $(element);
@@ -37,7 +37,7 @@ export function extractCoursesFromHtml(html: string): ExtractCoursesResponse {
     const zipReplacement = replacements.get(zip);
 
     courses.push(
-      new Course(
+      new CourseHeader(
         id,
         courseUrl,
         el.find('.views-field-title a').text(),

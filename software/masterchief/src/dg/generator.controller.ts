@@ -32,8 +32,6 @@ const GeoJSON = require('geojson');
 const csv = require('csvtojson');
 const JSZip = require('jszip');
 
-export const MINIO_CONNECTION = 'MINIO_CONNECTION';
-
 interface CsvEntry {
   id: string;
   name: string;
@@ -191,18 +189,6 @@ export class GeneratorController {
     this.logger.log(`Creating files for ${states.length} states: ${states}`);
     states.forEach((state) => {
       const entries = stateEntries[state];
-      // const geoJsonObject = GeoJSON.parse(
-      //   entries.map((x) => ({
-      //     ...x,
-      //     icon: 'emoji-📀',
-      //     marker_type: 'outlined-icon',
-      //     marker_color: '#F42410',
-      //     marker_decoration: 'emoji-📀',
-      //   })),
-      //   {
-      //     Point: ['latitude', 'longitude'],
-      //   },
-      // );
       const geoJsonObject = this.service.getGeoJson(entries);
       zip.file(`${state}-${folder}.json`, JSON.stringify(geoJsonObject));
       this.logger.log(`Added ${state} file to zip ${i}/${states.length}`);
@@ -280,33 +266,6 @@ export class GeneratorController {
       } else {
         stats.unknown.add(round.CourseName);
       }
-
-      // if (allPdgaIds.includes(guessedId)) {
-      //   stats.played.add(guessedId);
-      //   await this.service.coursePlayed(
-      //     guessedId,
-      //     CoursePlayedSource.Scorecard,
-      //   );
-      // } else {
-      // const lastTryCourseId = this.mappings[round.CourseName];
-      // if (lastTryCourseId) {
-      //   stats.played.add(lastTryCourseId);
-      //   await this.service.coursePlayed(
-      //     lastTryCourseId,
-      //     CoursePlayedSource.Scorecard,
-      //   );
-      // } else {
-      //   if (this.udiscCoursesNotInPdga.includes(round.CourseName)) {
-      //     stats.played.add(round.CourseName);
-      //     await this.service.coursePlayed(
-      //       round.CourseName,
-      //       CoursePlayedSource.Scorecard,
-      //     );
-      //   } else {
-      //     stats.unknown.add(round.CourseName);
-      //   }
-      // }
-      // }
     }
   }
 }

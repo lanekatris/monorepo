@@ -8,6 +8,9 @@ export enum EventNames {
   CourseMapped = 'course-mapped',
   CoursePlayed = 'course-played',
   CourseExcluded = 'course-excluded',
+  PdgaSyncByStateRequested = 'pdga-sync-by-state-requested',
+  PdgaCourseHeaderCreated = 'pdga-course-header-created',
+  PdgaCourseCached = 'pdga-course-cached',
 }
 
 export type DiscAdded = JSONEventType<
