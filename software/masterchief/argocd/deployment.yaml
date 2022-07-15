@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   replicas: 1 # Change me to a higher number
-  revisionHistoryLimit: 3
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
       app: masterchief
@@ -33,6 +33,18 @@ spec:
                   name: mc-secret
                   key: password
                   optional: false
+            - name: HOME_LATITUDE
+              valueFrom:
+                secretKeyRef:
+                  key: home_latitude
+                  name: mc-secret
+                  optional: false
+            - name: HOME_LONGITUDE
+              valueFrom:
+                secretKeyRef:
+                  key: home_longitude
+                  name: mc-secret
+                  optional false
 
 ---
 apiVersion: networking.k8s.io/v1

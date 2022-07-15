@@ -28,7 +28,7 @@ axios.interceptors.request.use((request) => {
   });
 
   console.log(
-    `Requesting: ${url.origin}/${url.pathname} with ${params.toString()}`,
+    `Requesting: ${url.origin}${url.pathname} with ${params.toString()}`,
   );
   return request;
 });

@@ -17,7 +17,7 @@ import { createReadStream } from 'fs';
 import { groupBy } from 'lodash';
 import { StateAbbreviations } from './stateAbbreviations';
 import { join } from 'path';
-import { ESDB } from '../app/constants';
+import { STREAM_DG_DATA_LOAD, ESDB } from '../app/constants';
 import { Express } from 'express';
 import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { EventNames } from './types/disc-added';
@@ -160,7 +160,7 @@ export class GeneratorController {
 
     // load into esdb
     const dbResult = await this.esdb.appendToStream(
-      'dg-testies-dataload',
+      STREAM_DG_DATA_LOAD,
       entries.map((entry) => {
         return jsonEvent<CourseAdded>({
           type: EventNames.CourseAdded,

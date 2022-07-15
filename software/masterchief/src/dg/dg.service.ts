@@ -1,6 +1,6 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { DgEvents, EventNames } from './types/disc-added';
-import { ESDB } from '../app/constants';
+import { STREAM_DG_DATA_LOAD, ESDB } from '../app/constants';
 import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { CourseAdded } from './types/course-added';
 import { CoursePlayed, CoursePlayedSource } from './types/course-played';
@@ -54,35 +54,43 @@ export class DgService {
     const playedCourses = await this.getPlayedCourses();
     const excludedCourses = await this.excludedCourses();
 
-    const events = this.client.readStream<CourseAdded>('dg-testies-dataload');
-    for await (const { event } of events) {
-      switch (event.type) {
-        case EventNames.CourseAdded:
-          const { id, latitude, longitude, name, state } = event.data;
-          // if (excludedCourses.includes(id)) break;
-          const distanceInMeters = getDistance(
-            {
-              latitude: process.env.HOME_LATITUDE,
-              longitude: process.env.HOME_LONGITUDE,
-            },
-            { latitude, longitude },
-          );
-          const hasPlayed = playedCourses.includes(id);
-          const excluded = excludedCourses.includes(id);
-          courses.push(
-            new DiscGolfCourse(
-              id,
-              name,
-              latitude,
-              longitude,
-              hasPlayed,
-              state,
-              excluded,
-              new CourseDistanceFromHome(distanceInMeters),
-            ),
-          );
-          break;
+    const events = this.client.readStream<CourseAdded>(STREAM_DG_DATA_LOAD);
+    try {
+      for await (const { event } of events) {
+        switch (event.type) {
+          case EventNames.CourseAdded:
+            const { id, latitude, longitude, name, state } = event.data;
+            // if (excludedCourses.includes(id)) break;
+            const distanceInMeters = getDistance(
+              {
+                latitude: process.env.HOME_LATITUDE,
+                longitude: process.env.HOME_LONGITUDE,
+              },
+              { latitude, longitude },
+            );
+            const hasPlayed = playedCourses.includes(id);
+            const excluded = excludedCourses.includes(id);
+            courses.push(
+              new DiscGolfCourse(
+                id,
+                name,
+                latitude,
+                longitude,
+                hasPlayed,
+                state,
+                excluded,
+                new CourseDistanceFromHome(distanceInMeters),
+              ),
+            );
+            break;
+        }
       }
+    } catch (err) {
+      if (err.type === 'stream-not-found') {
+        this.logger.log(`${STREAM_DG_DATA_LOAD} stream not found`);
+        return [];
+      }
+      throw err;
     }
     return courses;
   }

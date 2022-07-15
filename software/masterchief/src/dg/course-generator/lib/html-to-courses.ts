@@ -1,5 +1,5 @@
 import cheerio from 'cheerio';
-import { CourseHeader } from './dto/courseHeader';
+import { CourseHeader } from '../dto/courseHeader';
 
 export interface ExtractCoursesResponse {
   courses: CourseHeader[];

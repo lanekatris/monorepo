@@ -2,13 +2,17 @@ import { uniqBy } from 'lodash';
 import {
   extractCoursesFromHtml,
   ExtractCoursesResponse,
-} from './html-to-courses';
-import { getHtml } from './get-html';
+} from './lib/html-to-courses';
+import { getHtml } from './lib/get-html';
 import { CourseHeader } from './dto/courseHeader';
 import { StateAbbreviations } from '../stateAbbreviations';
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { MinioService } from 'nestjs-minio-client';
-import { BUCKET_DG_COURSE_GENERATOR } from '../../app/constants';
+import {
+  AWS_REGION,
+  BUCKET_DG_COURSE_GENERATOR,
+  STREAM_DG_DATA_LOAD,
+} from '../../app/constants';
 import { streamToString } from '../../app/stream-to-string';
 import { getCourseListUrl } from './lib/get-course-list-url';
 
@@ -98,14 +102,15 @@ export class CoursesByStateService implements OnModuleInit {
   }
 
   async onModuleInit(): Promise<void> {
-    const bucketExists = await this.minioClient.client.bucketExists(
-      BUCKET_DG_COURSE_GENERATOR,
-    );
-    if (!bucketExists) {
-      await this.minioClient.client.makeBucket(
-        BUCKET_DG_COURSE_GENERATOR,
-        'us-east-1',
+    const buckets = [STREAM_DG_DATA_LOAD, BUCKET_DG_COURSE_GENERATOR];
+
+    for (const bucketName of buckets) {
+      const bucketExists = await this.minioClient.client.bucketExists(
+        bucketName,
       );
+      if (!bucketExists) {
+        await this.minioClient.client.makeBucket(bucketName, AWS_REGION);
+      }
     }
   }
 }

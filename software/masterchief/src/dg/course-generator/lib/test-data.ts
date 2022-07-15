@@ -132,7 +132,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\\/","pathPrefix":"","setHasJsCookie
 <div class="region-inner region-branding-inner">
 <div class="branding-data clearfix">
 <div class="logo-img">
-<a href="/" rel="home" title=""><img src="https://www.pdga.com/sites/all/themes/pdga/logo.png" alt="" id="logo" /></a> </div>
+<a href="/software/masterchief/public" rel="home" title=""><img src="https://www.pdga.com/sites/all/themes/pdga/logo.png" alt="" id="logo" /></a> </div>
 </div>
 </div>
 </div><div class="grid-5 region region-user-bar" id="region-user-bar">
@@ -192,7 +192,7 @@ Search </h2>
 <div class="block-inner clearfix">
 <h2 class="block-title">Main Menu</h2>
 <div class="content clearfix">
-<ul class="nice-menu nice-menu-down nice-menu-main-menu" id="nice-menu-1"><li class="menu-5628 menu-path-front first odd "><a href="/">Home</a></li>
+<ul class="nice-menu nice-menu-down nice-menu-main-menu" id="nice-menu-1"><li class="menu-5628 menu-path-front first odd "><a href="/software/masterchief/public">Home</a></li>
 <li class="menu-5629 menuparent  menu-path-nolink  even "><div title="" class="nolink" tabindex="0">About</div><ul><li class="menu-5637 menu-path-node-21340 first odd "><a href="/introduction">What is Disc Golf?</a></li>
 <li class="menu-5638 menu-path-node-21339  even "><a href="/history">History</a></li>
 <li class="menu-54196 menu-path-node-286386  odd "><a href="/board-directors">Board of Directors</a></li>
@@ -699,7 +699,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\\/","pathPrefix":"","setHasJsCookie
 <div class="region-inner region-branding-inner">
 <div class="branding-data clearfix">
 <div class="logo-img">
-<a href="/" rel="home" title=""><img src="https://www.pdga.com/sites/all/themes/pdga/logo.png" alt="" id="logo" /></a> </div>
+<a href="/software/masterchief/public" rel="home" title=""><img src="https://www.pdga.com/sites/all/themes/pdga/logo.png" alt="" id="logo" /></a> </div>
 </div>
 </div>
 </div><div class="grid-5 region region-user-bar" id="region-user-bar">
@@ -759,7 +759,7 @@ Search </h2>
 <div class="block-inner clearfix">
 <h2 class="block-title">Main Menu</h2>
 <div class="content clearfix">
-<ul class="nice-menu nice-menu-down nice-menu-main-menu" id="nice-menu-1"><li class="menu-5628 menu-path-front first odd "><a href="/">Home</a></li>
+<ul class="nice-menu nice-menu-down nice-menu-main-menu" id="nice-menu-1"><li class="menu-5628 menu-path-front first odd "><a href="/software/masterchief/public">Home</a></li>
 <li class="menu-5629 menuparent  menu-path-nolink  even "><div title="" class="nolink" tabindex="0">About</div><ul><li class="menu-5637 menu-path-node-21340 first odd "><a href="/introduction">What is Disc Golf?</a></li>
 <li class="menu-5638 menu-path-node-21339  even "><a href="/history">History</a></li>
 <li class="menu-54196 menu-path-node-286386  odd "><a href="/board-directors">Board of Directors</a></li>

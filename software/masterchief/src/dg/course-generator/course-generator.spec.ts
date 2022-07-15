@@ -1,7 +1,7 @@
 import {
   TEST_COURSE_HTML_NO_PARKING_LOT,
   TEST_COURSE_HTML_WITH_PARKING_LOT,
-} from './test-data';
+} from './lib/test-data';
 import cheerio from 'cheerio';
 
 interface Coordinate {
