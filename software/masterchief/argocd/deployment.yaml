@@ -44,7 +44,7 @@ spec:
                 secretKeyRef:
                   key: home_longitude
                   name: mc-secret
-                  optional false
+                  optional: false
 
 ---
 apiVersion: networking.k8s.io/v1
