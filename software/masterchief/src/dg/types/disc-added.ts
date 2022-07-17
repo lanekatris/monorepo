@@ -11,6 +11,10 @@ export enum EventNames {
   PdgaSyncByStateRequested = 'pdga-sync-by-state-requested',
   PdgaCourseHeaderCreated = 'pdga-course-header-created',
   PdgaCourseCached = 'pdga-course-cached',
+  AdventureCreated = 'adventure-created',
+  AdventureDeleted = 'adventure-deleted',
+  AdventureImportStarted = 'adventure-import-started',
+  MaintenanceCreated = 'maintenance-created',
 }
 
 export type DiscAdded = JSONEventType<

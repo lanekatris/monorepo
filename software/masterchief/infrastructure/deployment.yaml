@@ -4,7 +4,7 @@ metadata:
   name: masterchief
   namespace: default
 spec:
-  replicas: 1 # Change me to a higher number
+  replicas: 3 # Change me to a higher number
   revisionHistoryLimit: 1
   selector:
     matchLabels:
@@ -53,36 +53,17 @@ spec:
                   optional: false
 
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: masterchief
-  namespace: default
-  annotations:
-    kubernetes.io/ingress.class: public
-    nginx.ingress.kubernetes.io/backend-protocol: HTTP
-spec:
-  rules:
-    - host: mc.lanekatris.com
-      http:
-        paths:
-          - backend:
-              service:
-                name: masterchief
-                port:
-                  number: 3000
-            pathType: Prefix
-            path: /
----
 apiVersion: v1
 kind: Service
 metadata:
   name: masterchief
   namespace: default
 spec:
+  type: NodePort
   selector:
     app: masterchief
   ports:
     - name: http
       port: 3000
       targetPort: 3000
+      nodePort: 3000

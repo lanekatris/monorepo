@@ -11,3 +11,7 @@ export enum Search {
   IndexDiscGolfCourseAutocomplete = 'testies2', //'disc_golf_course_autocomplete',
   ErrorIndexAlreadyExists = 'resource_already_exists_exception',
 }
+
+export enum Esdb {
+  StreamEvents = 'general-events',
+}

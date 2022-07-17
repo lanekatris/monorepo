@@ -82,12 +82,15 @@ metadata:
   name: esdb
   namespace: default
 spec:
+  type: NodePort
   selector:
     app: esdb
   ports:
     - name: esdb-http
       port: 2113
       targetPort: 2113
+      nodePort: 2113
     - name: esdb-grpc
       port: 1113
       targetPort: 1113
+      nodePort: 1113
