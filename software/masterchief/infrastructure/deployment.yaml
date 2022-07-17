@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: masterchief
+  namespace: default
+spec:
+  replicas: 1 # Change me to a higher number
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: masterchief
+  template:
+    metadata:
+      labels:
+        app: masterchief
+    spec:
+      containers:
+        - image: loonison101/masterchief:latest
+          imagePullPolicy: Always
+          name: masterchief
+          ports:
+            - containerPort: 3000
+          env:
+            - name: ESDB_CONN
+              value: esdb://esdb:2113?tls=false
+            - name: NEXT_PUBLIC_API_URL
+              value: http://mc.lanekatris.com
+            - name: MINIO_URL
+              value: minio
+            - name: APP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mc-secret
+                  key: password
+                  optional: false
+            - name: HOME_LATITUDE
+              valueFrom:
+                secretKeyRef:
+                  key: home_latitude
+                  name: mc-secret
+                  optional: false
+            - name: HOME_LONGITUDE
+              valueFrom:
+                secretKeyRef:
+                  key: home_longitude
+                  name: mc-secret
+                  optional: false
+            - name: ELASTIC_URL
+              valueFrom:
+                secretKeyRef:
+                  key: elastic_url
+                  name: mc-secret
+                  optional: false
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: masterchief
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: public
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+spec:
+  rules:
+    - host: mc.lanekatris.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: masterchief
+                port:
+                  number: 3000
+            pathType: Prefix
+            path: /
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: masterchief
+  namespace: default
+spec:
+  selector:
+    app: masterchief
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
