@@ -45,6 +45,12 @@ spec:
                   key: home_longitude
                   name: mc-secret
                   optional: false
+            - name: ELASTIC_URL
+              valueFrom:
+                secretKeyRef:
+                  key: elastic_url
+                  name: mc-secret
+                  optional: false
 
 ---
 apiVersion: networking.k8s.io/v1

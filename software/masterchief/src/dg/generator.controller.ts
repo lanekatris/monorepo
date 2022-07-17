@@ -135,7 +135,7 @@ export class GeneratorController {
 
   // todo: psot body - make me class with validation
   @Post(EventNames.CoursePlayed)
-  @Redirect('/dg')
+  @Redirect('/dg/courses')
   async addManualCoursePlayed(@Body() body: { courseId: string }) {
     console.log('body', body);
     await this.service.coursePlayed(body.courseId, CoursePlayedSource.Manual);

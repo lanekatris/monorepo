@@ -96,14 +96,19 @@ export class DgService {
   }
 
   public async getPlayedCourses(): Promise<string[]> {
-    const courseIds = [];
-    const events = this.client.readStream<CoursePlayed>('my-courses-2');
+    let courseIds = [];
+    const events = this.client.readStream<CoursePlayed | CourseExcluded>(
+      'my-courses-2',
+    );
 
     try {
       for await (const { event } of events) {
         switch (event.type) {
           case EventNames.CoursePlayed:
             courseIds.push(event.data.courseId);
+            break;
+          case EventNames.CourseExcluded:
+            courseIds = courseIds.filter((id) => id !== event.data.courseId);
             break;
         }
       }

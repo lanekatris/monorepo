@@ -85,7 +85,6 @@ export class DgController {
       courses,
       manuallyPlayedCourses,
       excludedCourses,
-
       deleteUrl: prefixController(EventNames.DiscRemoved),
     };
   }
