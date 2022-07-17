@@ -2,6 +2,12 @@
 
 
 <fieldset>
+  <h1>Search For Courses</h1>
+  <label for="search-courses">Name or ID: </label><input type="text" id="search-courses"/>
+  <ul id="search-courses-results"></ul>
+</fieldset>
+
+<fieldset>
 <h1>Load Your Played Rounds</h1>
 <form method="post" action="/dg/generator/file" id="played-rounds-form" enctype="multipart/form-data">
   <input type="file" id="file" name="file" />
@@ -50,3 +56,21 @@
     <li>{{this}}</li>
   {{/each}}
 </ul>
+
+<script type="application/javascript">
+  const searchResultsEl = document.getElementById('search-courses-results')
+  document.getElementById('search-courses').onkeyup = (e) => {
+    console.log('course search', e.target.value)
+    // get results
+    if (!e.target.value) {
+      searchResultsEl.innerHTML = ''
+      return;
+    }
+
+    fetch(`/dg/course-generator/courses/autocomplete?query=${e.target.value}`)
+      .then(response => response.json())
+      .then(courses => {
+        searchResultsEl.innerHTML = courses.map(({pdgaId, name}) => `<li>${name} (${pdgaId})</li>`).join('')
+      })
+  }
+</script>

@@ -7,6 +7,8 @@ import { MinioModule } from 'nestjs-minio-client';
 import { AuthModule } from '../../auth/auth.module';
 import { eventStoreFactory } from '../../app/event-store';
 import { CourseGeneratorSubscriberService } from './course-generator-subscriber.service';
+import { ElasticsearchModule } from '@nestjs/elasticsearch';
+import { CourseAutocompleteSubscriberService } from './course-autocomplete-subscriber.service';
 
 @Module({
   imports: [
@@ -20,11 +22,15 @@ import { CourseGeneratorSubscriberService } from './course-generator-subscriber.
       secretKey: 'minio-root-password',
     }),
     AuthModule,
+    ElasticsearchModule.register({
+      node: process.env.ELASTIC_URL,
+    }),
   ],
   providers: [
     CoursesByStateService,
     eventStoreFactory,
     CourseGeneratorSubscriberService,
+    CourseAutocompleteSubscriberService,
   ],
   controllers: [CourseGeneratorController],
 })

@@ -1,16 +1,25 @@
-import { Controller, Get, Inject, Logger, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Inject,
+  Logger,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { StateAbbreviations } from '../stateAbbreviations';
 import { CoursesByStateService } from './courses-by-state.service';
 import { MinioService } from 'nestjs-minio-client';
 import axios from 'axios';
 import { GuardMe } from '../../auth/guard-me.guard';
-import { ESDB, STREAM_COURSE_GENERATOR } from '../../app/constants';
+import { ESDB, Search, STREAM_COURSE_GENERATOR } from '../../app/constants';
 import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { EventNames } from '../types/disc-added';
 import { nanoid } from 'nanoid';
 import { PdgaCourseCached } from './types/pdga-course.cached';
 import { PdgaSyncByStateRequested } from './types/pdga-sync-by-state.requested';
 import { PdgaCourseHeaderCreated } from './types/pdga-course-header.created';
+import { ElasticsearchService } from '@nestjs/elasticsearch';
+import { PdgaCourseAutocomplete } from './types/pdga-course-autocomplete';
 
 axios.interceptors.request.use((request) => {
   const url = new URL(request.url);
@@ -44,6 +53,8 @@ export class CourseGeneratorController {
 
     @Inject(ESDB)
     private esdb: EventStoreDBClient,
+
+    private readonly elastic: ElasticsearchService,
   ) {}
 
   @Get(EventNames.PdgaSyncByStateRequested)
@@ -94,5 +105,24 @@ export class CourseGeneratorController {
       nonCachedCount: model.filter((x) => !x.cached).length,
       idk: model,
     };
+  }
+
+  @Get('courses/autocomplete')
+  async elasticTest(@Query('query') query) {
+    const result = await this.elastic.search({
+      index: Search.IndexDiscGolfCourseAutocomplete,
+      size: 10,
+      body: {
+        query: {
+          multi_match: {
+            query,
+            type: 'bool_prefix',
+            fields: ['name', 'pdgaId'],
+          },
+        },
+      },
+    });
+
+    return result.body.hits.hits.map((hit) => hit._source);
   }
 }
