@@ -1,43 +1,67 @@
-<link rel="stylesheet" href="/dg-index.css" />
 
-<a href="/dg">Disc Home Page</a>
 
-<h1>Add Disc</h1>
+<div class="main container">
 
-<form method="post" action="{{postUrl}}">
-  <label>Brand
-    <input name="brand" autofocus/>
-  </label>
-  <label>Model
-    <input name="model"/>
-  </label>
-  <label>Date
-    <input name="date" />
-  </label>
-  <input type="submit" />
-</form>
-<h1>Your Discs ({{discs.length}})</h1>
-<a href="dg/discs" target="_blank">Discs Api</a>
-<ul>
-  {{#each discs}}
-    <li>({{this.discNumber}}) {{this.event.brand}} - {{this.event.model}}
-      <form class="delete-disc" method="post" action="{{../deleteUrl}}">
-        <input type="hidden" name="id" value="{{this.event.id}}" />
-        <input type="submit" value="Delete" />
-      </form>
-    </li>
-  {{/each}}
-</ul>
-<h1>Load Discs</h1>
-<form method="post" action="{{resetUrl}}">
-  <input type="submit" value="Reset ALL Discs" />
-</form>
-<h2>Upload Discs</h2>
-<p>Usually you get this data from AirTable</p>
-<p>Id, Brand, Model (Include Headers)</p>
-<form method="post" action="{{uploadUrl}}">
-  <input type="submit" value="Upload" />
-  <label>
-    <textarea name="data" rows="20" cols="20"></textarea>
-  </label>
-</form>
+  <a href="/dg">Disc Home Page</a>
+
+  <h1>Add Disc</h1>
+
+  <form method="post" action="{{postUrl}}" class="form">
+    <fieldset class="form-group form-warning">
+      <label>BRAND:</label>
+      <input name="brand" autofocus placeholder="innova" class="form-control"/>
+    </fieldset>
+    <fieldset class="form-group form-warning">
+      <label>Model</label>
+      <input name="model" class="form-control" placeholder="sidewinder"/>
+    </fieldset>
+    <fieldset class="form-group form-warning">
+      <label>Date</label>
+      <input name="date" type="date" class="form-control" />
+    </fieldset>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary  btn-ghost btn-block">Submit</button>
+    </div>
+  </form>
+  <h1>Your Discs ({{discs.length}})</h1>
+  <a href="dg/discs" target="_blank">Discs Api</a>
+  <ul>
+    {{#each discs}}
+      <li>
+        <form class="delete-disc form" method="post" action="{{../deleteUrl}}">
+          ({{this.discNumber}}) {{this.event.brand}} - {{this.event.model}}
+          <input type="hidden" name="id" value="{{this.event.id}}" />
+          <input type="submit" value="Delete" class="hyperlink" />
+        </form>
+      </li>
+    {{/each}}
+  </ul>
+  <div class="card mb-3">
+    <header class="card-header">Load Discs</header>
+    <div class="card-content">
+      <div class="inner">
+        <form method="post" action="{{resetUrl}}">
+          <input type="submit" value="Reset ALL Discs" class="btn btn-error btn-ghost" />
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <header class="card-header">Upload Discs</header>
+    <div class="card-content">
+      <div class="inner">
+        <p>Usually you get this data from AirTable</p>
+        <p>Id, Brand, Model (Include Headers)</p>
+        <form method="post" action="{{uploadUrl}}">
+          <label>
+            <textarea name="data" class="form-control" style="height:250px;" placeholder="csv data..."></textarea>
+          </label>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-ghost btn-block">Upload</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

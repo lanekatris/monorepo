@@ -27,7 +27,7 @@ const csv = require('csvtojson');
 const CONTROLLER_NAME = 'dg';
 
 function prefixController(route: string) {
-  return `${CONTROLLER_NAME}/${route}`;
+  return `/${CONTROLLER_NAME}/${route}`;
 }
 
 export class DiscRemovedDto {
@@ -44,6 +44,7 @@ interface BulkUploadItem {
   Id: string;
   Brand: string;
   Model: string;
+  'Date Retrieved': string;
 }
 
 @Controller(CONTROLLER_NAME)
@@ -143,12 +144,14 @@ export class DgController {
     const entries: BulkUploadItem[] = await csv().fromString(data);
     this.logger.log(`Parsed, uploading to db`);
 
-    const events = entries.map(({ Model, Brand }) =>
+    const events = entries.map(({ Model, Brand, ...rest }) =>
       jsonEvent<DiscAdded>({
         type: EventNames.DiscAdded,
         data: {
           id: nanoid(),
-          date: new Date(),
+          date: rest['Date Retrieved']
+            ? new Date(rest['Date Retrieved'])
+            : null,
           brand: Brand,
           model: Model,
         },

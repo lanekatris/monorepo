@@ -3,3 +3,5 @@
 .env
 .next
 hugo.exe
+/.$my-setup.drawio.dtmp
+/.$my-setup.drawio.bkp

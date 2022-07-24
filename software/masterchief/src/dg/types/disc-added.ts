@@ -21,7 +21,7 @@ export type DiscAdded = JSONEventType<
   EventNames.DiscAdded,
   {
     id: string;
-    date: Date;
+    date?: Date;
     brand: string;
     model: string;
   }

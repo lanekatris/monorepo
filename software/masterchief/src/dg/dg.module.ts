@@ -23,5 +23,6 @@ import { AuthModule } from '../auth/auth.module';
   ],
   providers: [eventStoreFactory, DgService],
   controllers: [DgController, GeneratorController],
+  exports: [DgService],
 })
 export class DgModule {}

@@ -20,6 +20,14 @@ import {
 import { AdventureDeleted } from '../adventure/types/adventure-deleted';
 import { AdventureActivity } from '../adventure/types/adventure-activity';
 import { MaintenanceCreated } from '../general-events/general-events.controller';
+import { DgService } from '../dg/dg.service';
+import { format } from 'date-fns';
+
+interface FeedItem {
+  date: string;
+  name: string;
+  type: string;
+}
 
 @Controller()
 export class AppController {
@@ -28,6 +36,9 @@ export class AppController {
     @Inject(UserValidator) private service: UserValidator,
     @Inject(ESDB)
     private esdb: EventStoreDBClient,
+
+    @Inject(DgService)
+    private dgService: DgService,
   ) {}
 
   @Get()
@@ -39,8 +50,34 @@ export class AppController {
   @UseGuards(GuardMe)
   @Get('home')
   @Render('home')
-  home() {
-    return {};
+  async home() {
+    let events: FeedItem[] = [];
+
+    const generalEvents = await this.getAllGeneralEvents();
+    generalEvents.forEach((x) => {
+      events.push({ date: x.date, name: x.name, type: 'Adventure' });
+    });
+
+    // const events = await this.getAllGeneralEvents();
+    const discs = await this.dgService.getDiscs();
+    discs.forEach((x) => {
+      if (!x.event.date) {
+        this.logger.log(
+          `Ignoring disc ${x.event.brand}/${x.event.model} because there is no date associated`,
+        );
+        return;
+      }
+      events.push({
+        date: format(new Date(x.event.date), 'yyyy-LL-dd'),
+        name: `#${x.discNumber} ${x.event.brand}/${x.event.model}`,
+        type: 'Disc Added',
+      });
+    });
+    this.logger.log(`Home got ${events.length} events`);
+
+    events = events.sort((x, y) => y.date.localeCompare(x.date));
+
+    return { events };
   }
 
   // todo: move me out
