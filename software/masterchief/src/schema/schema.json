@@ -1,0 +1,144 @@
+{
+  "title": "Choose Event Type",
+  "type": "object",
+  "additionalProperties": false,
+  "definitions": {
+    "eventNames": {
+      "type": "string",
+      "title": "EventNames",
+      "enum": ["personal-record-climbing-created", "maintenance-created",  "adventure-created"]
+    }
+  },
+  "anyOf": [
+    {
+      "title": "Personal Record - Climbing Data",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "eventName",
+        "date"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "title": "Date"
+        },
+        "eventName": {
+          "$ref": "#/definitions/eventNames",
+          "default": "personal-record-climbing-created"
+        }
+      }
+    },
+    {
+      "title": "Maintenance Created Data",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "eventName",
+        "date"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "title": "Date"
+        },
+        "eventName": {
+          "$ref": "#/definitions/eventNames",
+          "default":  "maintenance-created"
+        }
+      }
+    },
+    {
+      "title": "Adventure Created Data",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "activities",
+        "eventName",
+        "date"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "title": "Date"
+        },
+        "activities": {
+          "type": "string",
+          "title": "Activities",
+          "enum": [
+            "backpacking",
+            "ball-golf",
+            "basketball",
+            "beach-pong",
+            "beer-pong",
+            "boat-tubing",
+            "bowling",
+            "camper-camping",
+            "camping",
+            "concert",
+            "cornhole",
+            "dh-mountain-biking",
+            "disc-golf",
+            "drinking-alcohol",
+            "escape-room",
+            "family-time",
+            "fishing",
+            "flag-football",
+            "fly-fishing",
+            "frisbee",
+            "hiking",
+            "horseshoes",
+            "hunting",
+            "indoor-bouldering",
+            "indoor-rope-climbing",
+            "indoor-trampoline-park",
+            "kayaking",
+            "life-event",
+            "maitenance",
+            "mountain-biking",
+            "movie-theatre",
+            "museum",
+            "outdoor-rock-climbing",
+            "overlanding",
+            "paintball",
+            "putt-putt-golf",
+            "road-biking",
+            "road-trip",
+            "snowboarding",
+            "softball",
+            "swimming",
+            "tennis",
+            "theme-park",
+            "volleyball",
+            "water-park",
+            "white-water-rafting"
+          ]
+        },
+
+        "eventName": {
+          "$ref": "#/definitions/eventNames",
+          "default":  "adventure-created"
+        }
+      }
+    }
+  ]
+}

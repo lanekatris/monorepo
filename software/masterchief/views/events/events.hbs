@@ -1,127 +1,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.css" integrity="sha256-jLWPhwkAHq1rpueZOKALBno3eKP3m4IMB131kGhAlRQ=" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js" integrity="sha256-XCdgoNaBjzkUaEJiauEq+85q/xi/2D4NcB3ZHwAapoM=" crossorigin="anonymous"></script>
 
-<!--<div class="card">-->
-<!--  <header class="card-header">Choose Event</header>-->
-<!--  <div class="card-content">-->
-<!--    <div class="inner">-->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src="https://unpkg.com/@rjsf/core/dist/react-jsonschema-form.js"></script>
 
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-<div class="container mx-auto flex">
-  <form>
-  <div class="bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full md:mt-0 relative z-10">
-    <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">Choose Event</h2>
-    <div class="relative mb-4">
-      <select name="eventName" id="event-name" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-        <optgroup label="Adventures">
-          <option value="adventure-created">Create Adventure</option>
-        </optgroup>
-        <optgroup label="Utility">
-          <option value="maintenance-created">Maintenance</option>
-          <option value="personal-record-climbing-created">Personal Record - Climbing</option>
-        </optgroup>
-      </select>
-    </div>
-    <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="submit">Submit</button>
-  </div>
-  </form>
-</div>
-
-{{#if showPersonalRecordClimbingCreated}}
-  <h1>fill me up</h1>
-  <form method="post" action="{{createPersonalRecordClimbingUrl}}">
-    <h2>Create Personal Climbing Record - Climbing</h2>
-    <label>
-      Name
-      <input name="name" required />
-    </label>
-    <label>
-      Date
-      <input name="date" type="date" />
-    </label>
-    <button type="submit">Submit</button>
-  </form>
-{{/if}}
-
-{{#if showMaintenanceCreated}}
-  <div class="container mx-auto flex">
-    <form method="post" action="{{createMaintenanceUrl}}">
-      <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">Create Maintenance</h2>
-      <div class="relative mb-4">
-        <label for="name" class="leading-7 text-lg text-gray-600">Name</label>
-        <input type="text" name="name" class="w-full text-xl bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-      </div>
-      <div class="datepicker relative form-floating mb-3 xl:w-96" data-mdb-toggle-button="false">
-        <label for="date" class="leading-7 text-lg text-gray-600">Date</label>
-        <input type="date"
-               name="date"
-               class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-               placeholder="Select a date" data-mdb-toggle="datepicker" />
-      </div>
-      <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="submit">Submit</button>
-    </form>
-  </div>
-{{/if}}
-
-{{#if showAdventureCreated}}
-  <div class="container mx-auto flex">
-    <form method="post" action="/adventure/upload" enctype="multipart/form-data">
-      <div class="bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full md:mt-0 relative z-10">
-        <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">Bulk Upload CSV</h2>
-        <input type="file" name="file" class="mb-5 w-full text-xl bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-        <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="submit">Submit</button>
-      </div>
-    </form>
-  </div>
-
-  <div class="container mx-auto flex">
-    <form method="post" action="{{createAdventureUrl}}">
-      <div class="bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full md:mt-0 relative z-10">
-        <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">Describe Adventure</h2>
-        <div class="relative mb-4">
-          <select class="form-select form-select-lg mb-3
-      appearance-none
-      block
-      w-full
-      px-4
-      py-2
-      text-xl
-      font-normal
-      text-gray-700
-      bg-white bg-clip-padding bg-no-repeat
-      border border-solid border-gray-300
-      rounded
-      transition
-      ease-in-out
-      m-0
-      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" name="activities" multiple>
-            <option value="{{AdventureActivity.IndoorBouldering}}">Indoor Bouldering</option>
-            <option value="{{AdventureActivity.DiscGolf}}">Disc Golf</option>
-            <option value="{{AdventureActivity.MountainBiking}}">Mountain Biking</option>
-            <option value="{{AdventureActivity.Volleyball}}">Sand Volleyball</option>
-          </select>
-        </div>
-        <div class="relative mb-4">
-          <label for="name" class="leading-7 text-lg text-gray-600">Name</label>
-          <input type="text" id="name" name="name" class="w-full text-xl bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-        </div>
-        <div class="datepicker relative form-floating mb-3 xl:w-96" data-mdb-toggle-button="false">
-          <label for="date" class="leading-7 text-lg text-gray-600">Date</label>
-          <input type="date"
-                 name="date"
-                 class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                 placeholder="Select a date" data-mdb-toggle="datepicker" />
-        </div>
-        <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="submit">Submit</button>
-      </div>
-    </form>
-  </div>
-{{/if}}
-
-
+<div id="app"></div>
 <div id="calendar"></div>
 
 <script>
@@ -153,4 +38,34 @@
 
     document.getElementById('event-name').value = '{{eventName}}'
   })
+</script>
+
+<script type="text/babel">
+  const Form = JSONSchemaForm.default;
+  const schema = {{{schema}}}
+  const uiSchema = {{{uiSchema}}}
+
+  const log = (type) => console.log.bind(console, type);
+
+  console.log(schema)
+
+  ReactDOM.render((
+    <Form schema={schema} uiSchema={uiSchema}
+          onChange={log("changed")}
+          onSubmit={({formData}) => {
+            const body = new URLSearchParams();
+            Object.keys(formData).forEach(key => {
+              body.append(key, formData[key])
+            })
+
+            fetch(`/general-events/${formData.eventName}`, {
+              method: 'post',
+              body
+            }).then(r => {
+              console.log(r);
+              // window.location.reload()
+            })
+          }}
+          onError={log("errors")} />
+  ), document.getElementById("app"));
 </script>

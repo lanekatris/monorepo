@@ -7,6 +7,8 @@ import {
   Render,
   UseGuards,
 } from '@nestjs/common';
+
+const fs = require('fs');
 import { GuardMe } from '../auth/guard-me.guard';
 import { UserValidator } from '../auth/user-validator.service';
 import { EventNames } from '../dg/types/disc-added';
@@ -25,12 +27,79 @@ import {
 } from '../general-events/general-events.controller';
 import { DgService } from '../dg/dg.service';
 import { format } from 'date-fns';
+import { compile } from 'json-schema-to-typescript';
 
 interface FeedItem {
   date: string;
   name: string;
   type: string;
 }
+
+// todo: move to own module
+const schema = {
+  title: 'Choose Event Type',
+  type: 'object',
+  anyOf: [
+    {
+      title: 'Personal Record - Climbing',
+      required: ['name', 'eventName'],
+      properties: {
+        name: { type: 'string', title: 'Name' },
+        date: { type: 'string', format: 'date', title: 'Date' },
+        eventName: {
+          type: 'string',
+          default: EventNames.PersonalRecordClimbingCreated,
+        },
+      },
+    },
+    {
+      title: 'Maintenance Created',
+      required: ['name', 'eventName'],
+      properties: {
+        name: { type: 'string', title: 'Name' },
+        date: { type: 'string', format: 'date', title: 'Date' },
+        eventName: {
+          type: 'string',
+          default: EventNames.MaintenanceCreated,
+        },
+      },
+    },
+    {
+      title: 'Adventure Created',
+      required: ['name', 'activities', 'eventName'],
+      properties: {
+        name: { type: 'string', title: 'Name' },
+        date: { type: 'string', format: 'date', title: 'Date' },
+        activities: {
+          type: 'string',
+          title: 'Activities',
+          enum: Object.values(AdventureActivity),
+        },
+        eventName: {
+          type: 'string',
+          default: EventNames.AdventureCreated,
+        },
+        // activities: {
+        //   type: 'array',
+        //   items: {
+        //     type: 'string',
+        //     enum: Object.keys(AdventureActivity),
+        //   },
+        // },
+      },
+    },
+  ],
+};
+console.log(JSON.stringify(schema, null, 2));
+// // @ts-ignore
+// compile(schema, 'Masterchief', { additionalProperties: false }).then((ts) => {
+//   console.log(ts);
+//   // fs.writeFileSync('masterchief.d.ts', ts);
+// });
+
+const uiSchema = {
+  eventName: { 'ui:widget': 'hidden' },
+};
 
 @Controller()
 export class AppController {
@@ -143,6 +212,7 @@ export class AppController {
       .reverse();
   }
 
+  // TODO: move this and delte unneeded code
   @UseGuards(GuardMe)
   @Get('events')
   @Render('events/events')
@@ -159,6 +229,8 @@ export class AppController {
       createMaintenanceUrl: `/general-events/${EventNames.MaintenanceCreated}`,
       createPersonalRecordClimbingUrl: `/general-events/${EventNames.PersonalRecordClimbingCreated}`,
       AdventureActivity: AdventureActivity,
+      schema: JSON.stringify(schema),
+      uiSchema: JSON.stringify(uiSchema),
       calendarEvents: JSON.stringify(
         generalEvents.map((e) => {
           const formatted = {
