@@ -19,7 +19,10 @@ import {
 } from '../adventure/types/adventure-created';
 import { AdventureDeleted } from '../adventure/types/adventure-deleted';
 import { AdventureActivity } from '../adventure/types/adventure-activity';
-import { MaintenanceCreated } from '../general-events/general-events.controller';
+import {
+  MaintenanceCreated,
+  PersonalRecordClimbingCreated,
+} from '../general-events/general-events.controller';
 import { DgService } from '../dg/dg.service';
 import { format } from 'date-fns';
 
@@ -87,6 +90,7 @@ export class AppController {
       | AdventureDeleted
       | AdventureImportStarted
       | MaintenanceCreated
+      | PersonalRecordClimbingCreated
     >(Esdb.StreamEvents);
     let generalEvents = [];
     try {
@@ -106,6 +110,16 @@ export class AppController {
             );
             break;
           case EventNames.MaintenanceCreated:
+            generalEvents.unshift({
+              data: {
+                id: event.data.id,
+                activities: [],
+                name: event.data.name,
+                date: event.data.date,
+              },
+            });
+            break;
+          case EventNames.PersonalRecordClimbingCreated:
             generalEvents.unshift({
               data: {
                 id: event.data.id,
@@ -138,9 +152,12 @@ export class AppController {
       eventName,
       showAdventureCreated: eventName === EventNames.AdventureCreated,
       showMaintenanceCreated: eventName === EventNames.MaintenanceCreated,
+      showPersonalRecordClimbingCreated:
+        eventName === EventNames.PersonalRecordClimbingCreated,
       createAdventureUrl: `/adventure/${EventNames.AdventureCreated}`,
       deleteAdventureUrl: `/adventure/${EventNames.AdventureDeleted}`,
       createMaintenanceUrl: `/general-events/${EventNames.MaintenanceCreated}`,
+      createPersonalRecordClimbingUrl: `/general-events/${EventNames.PersonalRecordClimbingCreated}`,
       AdventureActivity: AdventureActivity,
       calendarEvents: JSON.stringify(
         generalEvents.map((e) => {

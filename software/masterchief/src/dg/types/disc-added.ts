@@ -15,6 +15,7 @@ export enum EventNames {
   AdventureDeleted = 'adventure-deleted',
   AdventureImportStarted = 'adventure-import-started',
   MaintenanceCreated = 'maintenance-created',
+  PersonalRecordClimbingCreated = 'personal-record-climbing-created',
 }
 
 export type DiscAdded = JSONEventType<

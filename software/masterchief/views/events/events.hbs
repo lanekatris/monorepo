@@ -1,14 +1,14 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.css" integrity="sha256-jLWPhwkAHq1rpueZOKALBno3eKP3m4IMB131kGhAlRQ=" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js" integrity="sha256-XCdgoNaBjzkUaEJiauEq+85q/xi/2D4NcB3ZHwAapoM=" crossorigin="anonymous"></script>
 
-<div class="card">
-  <header class="card-header">Choose Event</header>
-  <div class="card-content">
-    <div class="inner">
+<!--<div class="card">-->
+<!--  <header class="card-header">Choose Event</header>-->
+<!--  <div class="card-content">-->
+<!--    <div class="inner">-->
 
-    </div>
-  </div>
-</div>
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
 <div class="container mx-auto flex">
   <form>
@@ -21,6 +21,7 @@
         </optgroup>
         <optgroup label="Utility">
           <option value="maintenance-created">Maintenance</option>
+          <option value="personal-record-climbing-created">Personal Record - Climbing</option>
         </optgroup>
       </select>
     </div>
@@ -28,6 +29,22 @@
   </div>
   </form>
 </div>
+
+{{#if showPersonalRecordClimbingCreated}}
+  <h1>fill me up</h1>
+  <form method="post" action="{{createPersonalRecordClimbingUrl}}">
+    <h2>Create Personal Climbing Record - Climbing</h2>
+    <label>
+      Name
+      <input name="name" required />
+    </label>
+    <label>
+      Date
+      <input name="date" type="date" />
+    </label>
+    <button type="submit">Submit</button>
+  </form>
+{{/if}}
 
 {{#if showMaintenanceCreated}}
   <div class="container mx-auto flex">
