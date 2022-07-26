@@ -27,6 +27,8 @@ spec:
               value: http://mc.lanekatris.com
             - name: MINIO_URL
               value: minio
+            - name: MINIO_PORT
+              value: "9000"
             - name: APP_PASSWORD
               valueFrom:
                 secretKeyRef:

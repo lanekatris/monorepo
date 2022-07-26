@@ -1,55 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Masterchief</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hack/0.8.1/hack.css" integrity="sha512-aKs7+Z3okpWvDV412JxbJDBGnC0i4GbFEH1VAYimNMdbOV9skiE3qyQpeWdI0jVW6HF0MsBUiewSjEqHt2M9Cg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hack/0.8.1/solarized-dark.css" integrity="sha512-UdnAnSaYx4f7nSk2twXm4Rk4GkUPyW9hk+nDwDYMjR6MQSFTuWLZpHK2iln9gepFU7RHex0pJMXLCD+j6k2j0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <style>
-    .hyperlink {
-      cursor: pointer;
-      color: #ff2e88;
-      text-decoration: none;
-      border-bottom: 1px solid #ff2e88;
-      background: none;
-      border-top: none;
-      border-left: none;
-      border-right: none;
-      padding: 0!important;
-    }
-
-    .hyperlink:hover {
-      background-color: #ff2e88;
-      color: #fff;
-    }
-
-    .mb-3 {
-      margin-bottom: 3em;
-    }
-
-  </style>
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+  <link rel="stylesheet" href="/shared.css">
 </head>
-<body class="">
-<header class="text-gray-600 body-font">
-  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-
-    <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-      <a class="mr-5 hover:text-gray-900" href="/">Home</a>
-<!--      <a class="mr-5 hover:text-gray-900" href="/auth/logout">Logout</a>-->
-      <a class="mr-5 hover:text-gray-900" href="https://blog.lanekatris.com" target="_blank">Blog</a>
-      <a class="mr-5 hover:text-gray-900" href="/home">Masterchief</a>
-    </nav>
-
-  </div>
-</header>
-<main class="hack solarized-dark">
-
-
-{{{body}}}
-</main>
-<!--<script src="https://cdn.tailwindcss.com"></script>-->
-
+<body>
+  <header class="no-padding">
+      <nav>
+        <ul></ul>
+        <ul>
+          <li><a  href="/">Home</a></li>
+          <li><a  href="https://blog.lanekatris.com" target="_blank">Blog</a></li>
+          <li><a href="/home">Masterchief</a></li>
+        </ul>
+        <ul></ul>
+      </nav>
+  </header>
+  <main class="container">
+    {{{body}}}
+  </main>
 </body>
 </html>

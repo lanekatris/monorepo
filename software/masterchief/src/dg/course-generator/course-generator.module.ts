@@ -16,7 +16,7 @@ import { CourseAutocompleteSubscriberService } from './course-autocomplete-subsc
     ConfigModule.forRoot(),
     MinioModule.register({
       endPoint: process.env.MINIO_URL,
-      port: 9000,
+      port: Number(process.env.MINIO_PORT),
       useSSL: false,
       accessKey: 'minio-root-user',
       secretKey: 'minio-root-password',

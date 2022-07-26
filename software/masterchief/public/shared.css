@@ -1,0 +1,11 @@
+:root {
+    --primary: #d81b60;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.no-padding {
+    padding: 0;
+}
