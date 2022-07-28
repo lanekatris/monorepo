@@ -14,91 +14,29 @@ import { UserValidator } from '../auth/user-validator.service';
 import { EventNames } from '../dg/types/disc-added';
 import { ESDB, Esdb } from './constants';
 import { EventStoreDBClient } from '@eventstore/db-client';
+import { AdventureImportStarted } from '../adventure/types/adventure-created';
+import { AdventureDeleted } from '../adventure/types/adventure-deleted';
+import { AdventureCreatedData } from '../schema/schema';
 import {
   AdventureCreated,
-  AdventureCreatedData,
-  AdventureImportStarted,
-} from '../adventure/types/adventure-created';
-import { AdventureDeleted } from '../adventure/types/adventure-deleted';
-import { AdventureActivity } from '../adventure/types/adventure-activity';
-import {
+  EventDeleted,
   MaintenanceCreated,
   PersonalRecordClimbingCreated,
 } from '../general-events/general-events.controller';
 import { DgService } from '../dg/dg.service';
 import { format } from 'date-fns';
 import { compile } from 'json-schema-to-typescript';
-
+import schema from '../schema/schema.json';
+import { nanoid } from 'nanoid';
 interface FeedItem {
   date: string;
   name: string;
   type: string;
 }
 
-// todo: move to own module
-const schema = {
-  title: 'Choose Event Type',
-  type: 'object',
-  anyOf: [
-    {
-      title: 'Personal Record - Climbing',
-      required: ['name', 'eventName'],
-      properties: {
-        name: { type: 'string', title: 'Name' },
-        date: { type: 'string', format: 'date', title: 'Date' },
-        eventName: {
-          type: 'string',
-          default: EventNames.PersonalRecordClimbingCreated,
-        },
-      },
-    },
-    {
-      title: 'Maintenance Created',
-      required: ['name', 'eventName'],
-      properties: {
-        name: { type: 'string', title: 'Name' },
-        date: { type: 'string', format: 'date', title: 'Date' },
-        eventName: {
-          type: 'string',
-          default: EventNames.MaintenanceCreated,
-        },
-      },
-    },
-    {
-      title: 'Adventure Created',
-      required: ['name', 'activities', 'eventName'],
-      properties: {
-        name: { type: 'string', title: 'Name' },
-        date: { type: 'string', format: 'date', title: 'Date' },
-        activities: {
-          type: 'string',
-          title: 'Activities',
-          enum: Object.values(AdventureActivity),
-        },
-        eventName: {
-          type: 'string',
-          default: EventNames.AdventureCreated,
-        },
-        // activities: {
-        //   type: 'array',
-        //   items: {
-        //     type: 'string',
-        //     enum: Object.keys(AdventureActivity),
-        //   },
-        // },
-      },
-    },
-  ],
-};
-console.log(JSON.stringify(schema, null, 2));
-// // @ts-ignore
-// compile(schema, 'Masterchief', { additionalProperties: false }).then((ts) => {
-//   console.log(ts);
-//   // fs.writeFileSync('masterchief.d.ts', ts);
-// });
-
 const uiSchema = {
   eventName: { 'ui:widget': 'hidden' },
+  id: { 'ui:widget': 'hidden' },
 };
 
 @Controller()
@@ -155,17 +93,19 @@ export class AppController {
   // todo: move me out
   private async getAllGeneralEvents(): Promise<AdventureCreatedData[]> {
     const events = this.esdb.readStream<
+      // | AdventureCreated
       | AdventureCreated
       | AdventureDeleted
       | AdventureImportStarted
       | MaintenanceCreated
       | PersonalRecordClimbingCreated
+      | EventDeleted
     >(Esdb.StreamEvents);
     let generalEvents = [];
     try {
       for await (const { event } of events) {
         switch (event.type) {
-          case EventNames.AdventureCreated:
+          case 'adventure-created':
             generalEvents.unshift(event);
             break;
           case EventNames.AdventureDeleted:
@@ -178,7 +118,7 @@ export class AppController {
               (e) => e.metadata.source !== 'CSV',
             );
             break;
-          case EventNames.MaintenanceCreated:
+          case 'maintenance-created':
             generalEvents.unshift({
               data: {
                 id: event.data.id,
@@ -188,7 +128,7 @@ export class AppController {
               },
             });
             break;
-          case EventNames.PersonalRecordClimbingCreated:
+          case 'personal-record-climbing-created':
             generalEvents.unshift({
               data: {
                 id: event.data.id,
@@ -197,6 +137,12 @@ export class AppController {
                 date: event.data.date,
               },
             });
+            break;
+          case 'event-deleted':
+            // console.log('event deleted man', )
+            generalEvents = generalEvents.filter(
+              (e) => e.data.id !== event.data.id,
+            );
             break;
         }
       }
@@ -213,35 +159,46 @@ export class AppController {
   }
 
   // TODO: move this and delte unneeded code
+  // todo: hide id,
+  //  todo: create a default for date
   @UseGuards(GuardMe)
   @Get('events')
   @Render('events/events')
-  async events(@Query('eventName') eventName: string) {
+  async events() {
     const generalEvents = await this.getAllGeneralEvents();
+    // const generalEvents = [];
     return {
-      eventName,
-      showAdventureCreated: eventName === EventNames.AdventureCreated,
-      showMaintenanceCreated: eventName === EventNames.MaintenanceCreated,
-      showPersonalRecordClimbingCreated:
-        eventName === EventNames.PersonalRecordClimbingCreated,
-      createAdventureUrl: `/adventure/${EventNames.AdventureCreated}`,
-      deleteAdventureUrl: `/adventure/${EventNames.AdventureDeleted}`,
-      createMaintenanceUrl: `/general-events/${EventNames.MaintenanceCreated}`,
-      createPersonalRecordClimbingUrl: `/general-events/${EventNames.PersonalRecordClimbingCreated}`,
-      AdventureActivity: AdventureActivity,
+      // eventName,
+      // showAdventureCreated: eventName === EventNames.AdventureCreated,
+      // showMaintenanceCreated: eventName === EventNames.MaintenanceCreated,
+      // showPersonalRecordClimbingCreated:
+      //   eventName === EventNames.PersonalRecordClimbingCreated,
+      // createAdventureUrl: `/adventure/${EventNames.AdventureCreated}`,
+      // deleteAdventureUrl: `/adventure/${EventNames.AdventureDeleted}`,
+      // createMaintenanceUrl: `/general-events/${EventNames.MaintenanceCreated}`,
+      // createPersonalRecordClimbingUrl: `/general-events/${EventNames.PersonalRecordClimbingCreated}`,
+      // AdventureActivity: AdventureActivity,
       schema: JSON.stringify(schema),
       uiSchema: JSON.stringify(uiSchema),
+      formData: JSON.stringify({
+        id: nanoid(),
+        // date: format(new Date(), 'LL/dd/yyyy'),'2022-07-27'
+        date: format(new Date(), 'yyyy-LL-dd'),
+      }),
       calendarEvents: JSON.stringify(
         generalEvents.map((e) => {
           const formatted = {
             id: e.id,
-            title: `${e.activities.join(', ')} ${e.name}`,
+            // title: e.activities?.length
+            //   ? `${e.activities} ${e.name}`
+            //   : `delete me: ${e.id}`,
+            title: `${e.activities} ${e.name}`,
             start: e.date,
             color: 'blue',
             textColor: 'white',
           };
           // return
-          if (e.activities.length === 0) {
+          if (e.activities?.length === 0) {
             formatted.color = 'yellow';
             formatted.textColor = 'black';
           }

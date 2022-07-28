@@ -16,23 +16,12 @@ import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { nanoid } from 'nanoid';
 import { format } from 'date-fns';
 import { Esdb, ESDB } from '../app/constants';
-import {
-  AdventureCreated,
-  AdventureImportStarted,
-} from './types/adventure-created';
+import { AdventureImportStarted } from './types/adventure-created';
 import { AdventureDeleted } from './types/adventure-deleted';
-import { AdventureActivity } from './types/adventure-activity';
+
 import { FileInterceptor } from '@nestjs/platform-express';
 
 const csv = require('csvtojson');
-
-export class CreateAdventureDto {
-  @IsNotEmpty()
-  @IsEnum(AdventureActivity, { each: true })
-  activities: AdventureActivity | AdventureActivity[];
-  name: string;
-  date: string;
-}
 
 export class DeleteAdventureDto {
   @IsNotEmpty()
@@ -58,27 +47,6 @@ export class AdventureController {
     private esdb: EventStoreDBClient,
   ) {}
 
-  @Post(EventNames.AdventureCreated)
-  @Redirect(`/events?eventName=${EventNames.AdventureCreated}`)
-  public async createAdventure(@Body() body: CreateAdventureDto) {
-    console.log('body', body);
-    const { date, activities, name } = body;
-    const event = jsonEvent<AdventureCreated>({
-      type: EventNames.AdventureCreated,
-      data: {
-        id: nanoid(),
-        date: date || format(new Date(), 'yyyy-LL-dd'),
-        activities: typeof activities === 'string' ? [activities] : activities,
-        name,
-      },
-      metadata: {
-        importId: nanoid(),
-        source: 'USER',
-      },
-    });
-    await this.esdb.appendToStream(Esdb.StreamEvents, event);
-  }
-
   @Post(EventNames.AdventureDeleted)
   @Redirect(`/events?eventName=${EventNames.AdventureCreated}`)
   public async deleteAdventure(@Body() body: DeleteAdventureDto) {
@@ -92,40 +60,40 @@ export class AdventureController {
     await this.esdb.appendToStream(Esdb.StreamEvents, event);
   }
 
-  @UseInterceptors(FileInterceptor('file'))
-  @Post('upload')
-  @Redirect(`/events?eventName=${EventNames.AdventureCreated}`)
-  async bulkUpload(@UploadedFile() file: Express.Multer.File) {
-    const contents = file.buffer.toString();
-    this.log.log(`Parsing CSV...`);
-    const entries: BulkUploadedAdventure[] = await csv().fromString(contents);
-    this.log.log(`CSV has ${entries.length} rows`);
-
-    const importId = nanoid();
-    const events = entries.map((entry) =>
-      jsonEvent<AdventureCreated>({
-        type: EventNames.AdventureCreated,
-        data: {
-          id: nanoid(),
-          date: format(new Date(entry.Date), 'yyyy-LL-dd'),
-          activities: entry.OutdoorActivity.split(',') as AdventureActivity[],
-          name: entry.Id,
-        },
-        metadata: {
-          importId,
-          source: 'CSV',
-        },
-      }),
-    );
-
-    const resetEvent = jsonEvent<AdventureImportStarted>({
-      type: EventNames.AdventureImportStarted,
-      data: {
-        id: importId,
-      },
-    });
-
-    this.log.log(`Appending ${events.length} events...`);
-    await this.esdb.appendToStream(Esdb.StreamEvents, [resetEvent, ...events]);
-  }
+  // @UseInterceptors(FileInterceptor('file'))
+  // @Post('upload')
+  // @Redirect(`/events?eventName=${EventNames.AdventureCreated}`)
+  // async bulkUpload(@UploadedFile() file: Express.Multer.File) {
+  //   const contents = file.buffer.toString();
+  //   this.log.log(`Parsing CSV...`);
+  //   const entries: BulkUploadedAdventure[] = await csv().fromString(contents);
+  //   this.log.log(`CSV has ${entries.length} rows`);
+  //
+  //   const importId = nanoid();
+  //   const events = entries.map((entry) =>
+  //     jsonEvent<AdventureCreated>({
+  //       type: EventNames.AdventureCreated,
+  //       data: {
+  //         id: nanoid(),
+  //         date: format(new Date(entry.Date), 'yyyy-LL-dd'),
+  //         activities: entry.OutdoorActivity.split(',') as AdventureActivity[],
+  //         name: entry.Id,
+  //       },
+  //       metadata: {
+  //         importId,
+  //         source: 'CSV',
+  //       },
+  //     }),
+  //   );
+  //
+  //   const resetEvent = jsonEvent<AdventureImportStarted>({
+  //     type: EventNames.AdventureImportStarted,
+  //     data: {
+  //       id: importId,
+  //     },
+  //   });
+  //
+  //   this.log.log(`Appending ${events.length} events...`);
+  //   await this.esdb.appendToStream(Esdb.StreamEvents, [resetEvent, ...events]);
+  // }
 }

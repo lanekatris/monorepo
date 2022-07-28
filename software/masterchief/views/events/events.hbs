@@ -25,8 +25,9 @@
       eventClick(info){
         if (confirm('Are you sure?')){
               const data = new URLSearchParams();
-              data.append('id', info.event.id)
-              fetch("{{deleteAdventureUrl}}", {
+              data.append('eventId', info.event.id)
+          // data.append('eventNamesNew', 'event-deleted')
+              fetch("/general-events/create-event", {
                 method: 'post',
                 body: data
               }).then(() => window.location.reload())
@@ -36,7 +37,7 @@
     });
     calendar.render();
 
-    document.getElementById('event-name').value = '{{eventName}}'
+    <!--document.getElementById('event-name').value = '{{eventName}}'-->
   })
 </script>
 
@@ -44,13 +45,14 @@
   const Form = JSONSchemaForm.default;
   const schema = {{{schema}}}
   const uiSchema = {{{uiSchema}}}
+  const defaultValues = {{{formData}}}
 
   const log = (type) => console.log.bind(console, type);
 
   console.log(schema)
 
   ReactDOM.render((
-    <Form schema={schema} uiSchema={uiSchema}
+    <Form schema={schema} uiSchema={uiSchema} formData={defaultValues}
           onChange={log("changed")}
           onSubmit={({formData}) => {
             const body = new URLSearchParams();
@@ -58,12 +60,12 @@
               body.append(key, formData[key])
             })
 
-            fetch(`/general-events/${formData.eventName}`, {
+            fetch(`/general-events/create-event`, {
               method: 'post',
               body
             }).then(r => {
               console.log(r);
-              // window.location.reload()
+              window.location.reload()
             })
           }}
           onError={log("errors")} />

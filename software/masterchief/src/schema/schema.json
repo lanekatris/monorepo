@@ -1,144 +1,202 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Choose Event Type",
   "type": "object",
-  "additionalProperties": false,
   "definitions": {
-    "eventNames": {
+    "eventNamesNew": {
+      "$comment": "This does NOT live on BaseEvent because we need default values for each type",
       "type": "string",
-      "title": "EventNames",
-      "enum": ["personal-record-climbing-created", "maintenance-created",  "adventure-created"]
+      "title": "EventNamesNew",
+      "enum": [
+        "personal-record-climbing-created",
+        "maintenance-created",
+        "adventure-created",
+        "event-deleted"
+      ]
+    },
+    "baseEvent": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "default": "default-id"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "title": "Date"
+        }
+      }
     }
   },
   "anyOf": [
     {
+      "type": "object",
       "title": "Personal Record - Climbing Data",
-      "additionalProperties": false,
-      "required": [
-        "name",
-        "eventName",
-        "date"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "title": "Name"
+      "allOf": [
+        {
+          "$ref": "#/definitions/baseEvent"
         },
-        "date": {
-          "type": "string",
-          "format": "date",
-          "title": "Date"
-        },
-        "eventName": {
-          "$ref": "#/definitions/eventNames",
-          "default": "personal-record-climbing-created"
+        {
+          "type": "object",
+          "required": [
+            "name",
+            "eventName"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Name"
+            },
+            "eventName": {
+              "$ref": "#/definitions/eventNamesNew",
+              "default": "personal-record-climbing-created"
+            }
+          }
         }
-      }
+      ]
     },
     {
+      "type": "object",
       "title": "Maintenance Created Data",
-      "additionalProperties": false,
-      "required": [
-        "id",
-        "name",
-        "eventName",
-        "date"
-      ],
-      "properties": {
-        "id": {
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/baseEvent"
         },
-        "name": {
-          "type": "string",
-          "title": "Name"
-        },
-        "date": {
-          "type": "string",
-          "format": "date",
-          "title": "Date"
-        },
-        "eventName": {
-          "$ref": "#/definitions/eventNames",
-          "default":  "maintenance-created"
+        {
+          "required": [
+            "name",
+            "equipment",
+            "eventName"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Name"
+            },
+            "equipment": {
+              "type": "string",
+              "enum": [
+                "truck",
+                "house",
+                "dads-house"
+              ]
+            },
+
+            "eventName": {
+              "$ref": "#/definitions/eventNamesNew",
+              "default": "maintenance-created"
+            }
+          }
         }
-      }
+      ]
     },
     {
+      "type": "object",
       "title": "Adventure Created Data",
-      "additionalProperties": false,
-      "required": [
-        "name",
-        "activities",
-        "eventName",
-        "date"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "title": "Name"
+      "allOf": [
+        {
+          "$ref": "#/definitions/baseEvent"
         },
-        "date": {
-          "type": "string",
-          "format": "date",
-          "title": "Date"
-        },
-        "activities": {
-          "type": "string",
-          "title": "Activities",
-          "enum": [
-            "backpacking",
-            "ball-golf",
-            "basketball",
-            "beach-pong",
-            "beer-pong",
-            "boat-tubing",
-            "bowling",
-            "camper-camping",
-            "camping",
-            "concert",
-            "cornhole",
-            "dh-mountain-biking",
-            "disc-golf",
-            "drinking-alcohol",
-            "escape-room",
-            "family-time",
-            "fishing",
-            "flag-football",
-            "fly-fishing",
-            "frisbee",
-            "hiking",
-            "horseshoes",
-            "hunting",
-            "indoor-bouldering",
-            "indoor-rope-climbing",
-            "indoor-trampoline-park",
-            "kayaking",
-            "life-event",
-            "maitenance",
-            "mountain-biking",
-            "movie-theatre",
-            "museum",
-            "outdoor-rock-climbing",
-            "overlanding",
-            "paintball",
-            "putt-putt-golf",
-            "road-biking",
-            "road-trip",
-            "snowboarding",
-            "softball",
-            "swimming",
-            "tennis",
-            "theme-park",
-            "volleyball",
-            "water-park",
-            "white-water-rafting"
-          ]
-        },
+        {
+          "required": [
+            "name",
+            "activities",
+            "eventName"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Name"
+            },
+            "activities": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "backpacking",
+                  "ball-golf",
+                  "basketball",
+                  "beach-pong",
+                  "beer-pong",
+                  "boat-tubing",
+                  "bowling",
+                  "camper-camping",
+                  "camping",
+                  "concert",
+                  "cornhole",
+                  "dh-mountain-biking",
+                  "disc-golf",
+                  "drinking-alcohol",
+                  "escape-room",
+                  "family-time",
+                  "fishing",
+                  "flag-football",
+                  "fly-fishing",
+                  "frisbee",
+                  "hiking",
+                  "horseshoes",
+                  "hunting",
+                  "indoor-bouldering",
+                  "indoor-rope-climbing",
+                  "indoor-trampoline-park",
+                  "kayaking",
+                  "life-event",
+                  "maitenance",
+                  "mountain-biking",
+                  "movie-theatre",
+                  "museum",
+                  "outdoor-rock-climbing",
+                  "overlanding",
+                  "paintball",
+                  "putt-putt-golf",
+                  "road-biking",
+                  "road-trip",
+                  "snowboarding",
+                  "softball",
+                  "swimming",
+                  "tennis",
+                  "theme-park",
+                  "volleyball",
+                  "water-park",
+                  "white-water-rafting"
+                ]
+              }
+            },
 
-        "eventName": {
-          "$ref": "#/definitions/eventNames",
-          "default":  "adventure-created"
+            "eventName": {
+              "$ref": "#/definitions/eventNamesNew",
+              "default": "adventure-created"
+            }
+          }
         }
-      }
+      ]
+    },
+    {
+      "type": "object",
+      "title": "Event Deleted Data",
+      "allOf": [
+        {
+          "$ref": "#/definitions/baseEvent"
+        },
+        {
+          "required": ["eventId", "eventName"],
+          "properties": {
+          "eventId": {
+            "title": "Event ID",
+            "type": "string"
+          },
+          "eventName": {
+            "$ref": "#/definitions/eventNamesNew",
+            "default": "event-deleted"
+          }
+          }
+        }
+      ]
     }
   ]
 }
