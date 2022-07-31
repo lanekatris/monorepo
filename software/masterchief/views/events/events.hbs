@@ -1,10 +1,10 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.css" integrity="sha256-jLWPhwkAHq1rpueZOKALBno3eKP3m4IMB131kGhAlRQ=" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js" integrity="sha256-XCdgoNaBjzkUaEJiauEq+85q/xi/2D4NcB3ZHwAapoM=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/main.css" integrity="sha256-jLWPhwkAHq1rpueZOKALBno3eKP3m4IMB131kGhAlRQ=" crossorigin="anonymous">
+<script src="/main.min.js" integrity="sha256-XCdgoNaBjzkUaEJiauEq+85q/xi/2D4NcB3ZHwAapoM=" crossorigin="anonymous"></script>
 
-<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-<script src="https://unpkg.com/@rjsf/core/dist/react-jsonschema-form.js"></script>
+<script crossorigin src="/react.production.min.js"></script>
+<script crossorigin src="/react-dom.production.min.js"></script>
+<script src="/babel.min.js"></script>
+<script src="/react-jsonschema-form.js"></script>
 
 <div id="app"></div>
 <div id="calendar"></div>
@@ -26,7 +26,7 @@
         if (confirm('Are you sure?')){
               const data = new URLSearchParams();
               data.append('eventId', info.event.id)
-          // data.append('eventNamesNew', 'event-deleted')
+          data.append('eventName', 'event-deleted')
               fetch("/general-events/create-event", {
                 method: 'post',
                 body: data

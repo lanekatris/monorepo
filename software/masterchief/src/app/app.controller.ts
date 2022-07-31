@@ -141,7 +141,7 @@ export class AppController {
           case 'event-deleted':
             // console.log('event deleted man', )
             generalEvents = generalEvents.filter(
-              (e) => e.data.id !== event.data.id,
+              (e) => e.data.id !== event.data.eventId,
             );
             break;
         }
