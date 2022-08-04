@@ -11,7 +11,8 @@ export type ChooseEventType =
   | UiAdventureCreated
   | UiEventDeleted
   | UiChildEvent
-  | UiMovieWatched;
+  | UiMovieWatched
+  | UiFoodAte;
 export type UiPersonalRecordClimbing = {
   name: Name;
   eventName: EventName;
@@ -25,7 +26,8 @@ export type EventName =
   | "adventure-created"
   | "event-deleted"
   | "child-event-created"
-  | "movie-watched";
+  | "movie-watched"
+  | "food-ate";
 export type Date = string;
 export type UiMaintenanceCreated = {
   name: Name1;
@@ -155,6 +157,9 @@ export type Name3 = string;
 export type Date3 = string;
 export type Name4 = string;
 export type Date4 = string;
+export type Name5 = string;
+export type Date5 = string;
+export type Homemade = boolean;
 
 export interface UiChildEvent {
   name: Name3;
@@ -166,5 +171,13 @@ export interface UiMovieWatched {
   name: Name4;
   eventName: EventName;
   date?: Date4;
+  [k: string]: unknown;
+}
+export interface UiFoodAte {
+  name?: Name5;
+  meal?: "breakfast" | "lunch" | "dinner" | "snack" | "drink";
+  date?: Date5;
+  eventName?: EventName;
+  homemade?: Homemade;
   [k: string]: unknown;
 }

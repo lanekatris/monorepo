@@ -13,7 +13,8 @@
         "adventure-created",
         "event-deleted",
         "child-event-created",
-        "movie-watched"
+        "movie-watched",
+        "food-ate"
       ]
     }
   },
@@ -217,6 +218,33 @@
           "type": "string",
           "format": "date",
           "title": "Date"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "title": "Ui Food Ate",
+      "required": [],
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "meal": {
+          "type": "string",
+          "enum": ["breakfast", "lunch", "dinner", "snack", "drink"]
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "title": "Date"
+        },
+        "eventName": {
+          "$ref": "#/definitions/eventName"
+        },
+        "homemade": {
+          "type": "boolean",
+          "title": "Homemade?"
         }
       }
     }

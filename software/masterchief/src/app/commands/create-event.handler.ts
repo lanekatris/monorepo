@@ -4,6 +4,7 @@ import {
   UiAdventureCreated,
   UiChildEvent,
   UiEventDeleted,
+  UiFoodAte,
   UiMaintenanceCreated,
   UiMovieWatched,
   UiPersonalRecordClimbing,
@@ -20,6 +21,7 @@ import { Inject, Logger } from '@nestjs/common';
 import { BaseEvent } from '../events/base-event';
 import { ChildEventCreated } from '../events/child-event';
 import { MovieWatched } from '../events/movie-watched';
+import { FoodAte } from '../events/food-ate';
 
 export class CreateEventCommand {
   constructor(public eventName: EventName, public body: { date?: string }) {}
@@ -42,6 +44,18 @@ export class CreateEventHandler implements ICommandHandler<CreateEventCommand> {
 
     let event;
     switch (eventName) {
+      case 'food-ate':
+        const { name, meal, homemade } = body as UiFoodAte;
+        event = jsonEvent<FoodAte>({
+          type: 'food-ate',
+          data: {
+            name,
+            meal,
+            homemade,
+            ...baseEventData,
+          },
+        });
+        break;
       case 'personal-record-climbing-created': {
         const { name } = body as UiPersonalRecordClimbing;
         event = jsonEvent<PersonalRecordClimbingCreated>({
@@ -59,7 +73,6 @@ export class CreateEventHandler implements ICommandHandler<CreateEventCommand> {
         event = jsonEvent<MaintenanceCreated>({
           type: 'maintenance-created',
           data: {
-            // ...(rest as MaintenanceCreatedData),
             name,
             equipment,
             ...baseEventData,
@@ -128,7 +141,6 @@ export class CreateEventHandler implements ICommandHandler<CreateEventCommand> {
     if (event) {
       this.log.log(`Appending event to stream`);
       await this.esdb.appendToStream(Esdb.StreamEvents, event);
-      // console.log('event to create', event.data);
     } else {
       this.log.log(`NOT appending event to stream`);
     }

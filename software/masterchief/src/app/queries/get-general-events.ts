@@ -13,6 +13,7 @@ import { EventStoreDBClient } from '@eventstore/db-client';
 import { EventDeleted } from '../events/event-deleted';
 import { ChildEventCreated } from '../events/child-event';
 import { MovieWatched } from '../events/movie-watched';
+import { FoodAte } from '../events/food-ate';
 
 @Injectable()
 export class GetGeneralEvents {
@@ -31,6 +32,7 @@ export class GetGeneralEvents {
       | EventDeleted
       | ChildEventCreated
       | MovieWatched
+      | FoodAte
     >(Esdb.StreamEvents);
     let generalEvents = [];
     try {
@@ -90,6 +92,16 @@ export class GetGeneralEvents {
                 id: event.data.id,
                 activities: [],
                 name: `Watched: ${event.data.name}`,
+                date: event.data.date,
+              },
+            });
+            break;
+          case 'food-ate':
+            generalEvents.unshift({
+              data: {
+                id: event.data.id,
+                activities: [],
+                name: `${event.data.name} (Homemade: ${event.data.homemade})`,
                 date: event.data.date,
               },
             });
