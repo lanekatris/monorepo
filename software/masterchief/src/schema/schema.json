@@ -3,43 +3,25 @@
   "title": "Choose Event Type",
   "type": "object",
   "definitions": {
-    "eventNamesNew": {
+    "eventName": {
       "$comment": "This does NOT live on BaseEvent because we need default values for each type",
       "type": "string",
-      "title": "EventNamesNew",
+      "title": "Event Name",
       "enum": [
         "personal-record-climbing-created",
         "maintenance-created",
         "adventure-created",
-        "event-deleted"
+        "event-deleted",
+        "child-event-created",
+        "movie-watched"
       ]
-    },
-    "baseEvent": {
-      "type": "object",
-      "required": [
-        "id"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "default": "default-id"
-        },
-        "date": {
-          "type": "string",
-          "format": "date",
-          "title": "Date"
-        }
-      }
     }
   },
   "anyOf": [
     {
       "type": "object",
-      "title": "Personal Record - Climbing Data",
+      "title": "Ui Personal Record - Climbing",
       "allOf": [
-        {
-          "$ref": "#/definitions/baseEvent"
-        },
         {
           "type": "object",
           "required": [
@@ -52,8 +34,12 @@
               "title": "Name"
             },
             "eventName": {
-              "$ref": "#/definitions/eventNamesNew",
-              "default": "personal-record-climbing-created"
+              "$ref": "#/definitions/eventName"
+            },
+            "date": {
+              "type": "string",
+              "format": "date",
+              "title": "Date"
             }
           }
         }
@@ -61,11 +47,8 @@
     },
     {
       "type": "object",
-      "title": "Maintenance Created Data",
+      "title": "Ui Maintenance Created",
       "allOf": [
-        {
-          "$ref": "#/definitions/baseEvent"
-        },
         {
           "required": [
             "name",
@@ -85,10 +68,13 @@
                 "dads-house"
               ]
             },
-
+            "date": {
+              "type": "string",
+              "format": "date",
+              "title": "Date"
+            },
             "eventName": {
-              "$ref": "#/definitions/eventNamesNew",
-              "default": "maintenance-created"
+              "$ref": "#/definitions/eventName"
             }
           }
         }
@@ -96,11 +82,8 @@
     },
     {
       "type": "object",
-      "title": "Adventure Created Data",
+      "title": "Ui Adventure Created",
       "allOf": [
-        {
-          "$ref": "#/definitions/baseEvent"
-        },
         {
           "required": [
             "name",
@@ -112,8 +95,14 @@
               "type": "string",
               "title": "Name"
             },
+            "date": {
+              "type": "string",
+              "format": "date",
+              "title": "Date"
+            },
             "activities": {
               "type": "array",
+              "uniqueItems": true,
               "minItems": 1,
               "items": {
                 "type": "string",
@@ -169,8 +158,7 @@
             },
 
             "eventName": {
-              "$ref": "#/definitions/eventNamesNew",
-              "default": "adventure-created"
+              "$ref": "#/definitions/eventName"
             }
           }
         }
@@ -178,11 +166,8 @@
     },
     {
       "type": "object",
-      "title": "Event Deleted Data",
+      "title": "Ui Event Deleted",
       "allOf": [
-        {
-          "$ref": "#/definitions/baseEvent"
-        },
         {
           "required": ["eventId", "eventName"],
           "properties": {
@@ -191,12 +176,49 @@
             "type": "string"
           },
           "eventName": {
-            "$ref": "#/definitions/eventNamesNew",
-            "default": "event-deleted"
+            "$ref": "#/definitions/eventName"
           }
           }
         }
       ]
+    },
+    {
+      "type": "object",
+      "title": "Ui Child Event",
+      "required": ["name", "eventName"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "eventName": {
+          "$ref": "#/definitions/eventName"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "title": "Date"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "title": "Ui Movie Watched",
+      "required": ["name", "eventName"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "eventName": {
+          "$ref": "#/definitions/eventName"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "title": "Date"
+        }
+      }
     }
   ]
 }

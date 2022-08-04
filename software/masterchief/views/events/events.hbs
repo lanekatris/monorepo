@@ -27,7 +27,7 @@
               const data = new URLSearchParams();
               data.append('eventId', info.event.id)
           data.append('eventName', 'event-deleted')
-              fetch("/general-events/create-event", {
+              fetch("/create-event", {
                 method: 'post',
                 body: data
               }).then(() => window.location.reload())
@@ -60,7 +60,7 @@
               body.append(key, formData[key])
             })
 
-            fetch(`/general-events/create-event`, {
+            fetch(`/create-event`, {
               method: 'post',
               body
             }).then(r => {

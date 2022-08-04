@@ -8,7 +8,10 @@ import { ClimbModule } from '../climb/climb.module';
 import { AuthModule } from '../auth/auth.module';
 import { AppController } from './app.controller';
 import { AdventureModule } from '../adventure/adventure.module';
-import { GeneralEventsModule } from '../general-events/general-events.module';
+import { GetGeneralEvents } from './queries/get-general-events';
+import { CqrsModule } from '@nestjs/cqrs';
+import { QueryHandlers } from './queries';
+import { CommandHandlers } from './commands';
 
 @Module({
   imports: [
@@ -17,9 +20,15 @@ import { GeneralEventsModule } from '../general-events/general-events.module';
     ClimbModule,
     AuthModule,
     AdventureModule,
-    GeneralEventsModule,
+    CqrsModule,
   ],
   controllers: [AppController],
-  providers: [AppService, eventStoreFactory],
+  providers: [
+    AppService,
+    eventStoreFactory,
+    GetGeneralEvents,
+    ...QueryHandlers,
+    ...CommandHandlers,
+  ],
 })
 export class AppModule {}

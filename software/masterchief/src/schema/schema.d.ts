@@ -6,36 +6,39 @@
  */
 
 export type ChooseEventType =
-  | PersonalRecordClimbingData
-  | MaintenanceCreatedData
-  | AdventureCreatedData
-  | EventDeletedData;
-export type PersonalRecordClimbingData = BaseEvent & {
+  | UiPersonalRecordClimbing
+  | UiMaintenanceCreated
+  | UiAdventureCreated
+  | UiEventDeleted
+  | UiChildEvent
+  | UiMovieWatched;
+export type UiPersonalRecordClimbing = {
   name: Name;
-  eventName: EventNamesNew;
+  eventName: EventName;
+  date?: Date;
   [k: string]: unknown;
 };
-export type Date = string;
 export type Name = string;
-export type EventNamesNew =
+export type EventName =
   | "personal-record-climbing-created"
   | "maintenance-created"
   | "adventure-created"
-  | "event-deleted";
-export type MaintenanceCreatedData = BaseEvent & {
+  | "event-deleted"
+  | "child-event-created"
+  | "movie-watched";
+export type Date = string;
+export type UiMaintenanceCreated = {
   name: Name1;
   equipment: "truck" | "house" | "dads-house";
-  eventName: EventNamesNew1;
+  date?: Date1;
+  eventName: EventName;
   [k: string]: unknown;
 };
 export type Name1 = string;
-export type EventNamesNew1 =
-  | "personal-record-climbing-created"
-  | "maintenance-created"
-  | "adventure-created"
-  | "event-deleted";
-export type AdventureCreatedData = BaseEvent & {
+export type Date1 = string;
+export type UiAdventureCreated = {
   name: Name2;
+  date?: Date2;
   /**
    * @minItems 1
    */
@@ -137,29 +140,31 @@ export type AdventureCreatedData = BaseEvent & {
       | "white-water-rafting"
     )[]
   ];
-  eventName: EventNamesNew2;
+  eventName: EventName;
   [k: string]: unknown;
 };
 export type Name2 = string;
-export type EventNamesNew2 =
-  | "personal-record-climbing-created"
-  | "maintenance-created"
-  | "adventure-created"
-  | "event-deleted";
-export type EventDeletedData = BaseEvent & {
+export type Date2 = string;
+export type UiEventDeleted = {
   eventId: EventID;
-  eventName: EventNamesNew3;
+  eventName: EventName;
   [k: string]: unknown;
 };
 export type EventID = string;
-export type EventNamesNew3 =
-  | "personal-record-climbing-created"
-  | "maintenance-created"
-  | "adventure-created"
-  | "event-deleted";
+export type Name3 = string;
+export type Date3 = string;
+export type Name4 = string;
+export type Date4 = string;
 
-export interface BaseEvent {
-  id: string;
-  date?: Date;
+export interface UiChildEvent {
+  name: Name3;
+  eventName: EventName;
+  date?: Date3;
+  [k: string]: unknown;
+}
+export interface UiMovieWatched {
+  name: Name4;
+  eventName: EventName;
+  date?: Date4;
   [k: string]: unknown;
 }

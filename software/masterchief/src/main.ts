@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser';
 import { engine } from 'express-handlebars';
 import { HandleUnauthorizedFilter } from './auth/handle-unauthorized.filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { LoggingInterceptor } from './app/logging.interceptor';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.useStaticAssets(join(__dirname, '..', 'public'));
@@ -24,6 +25,7 @@ async function bootstrap() {
   );
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HandleUnauthorizedFilter());
+  app.useGlobalInterceptors(new LoggingInterceptor());
   app.use(cookieParser());
 
   app.disable('x-powered-by');
