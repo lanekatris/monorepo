@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AdventureController } from './adventure.controller';
 import { AuthModule } from '../auth/auth.module';
-import { eventStoreFactory } from '../app/event-store';
+import { eventStoreFactory } from '../app/utils/event-store';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({

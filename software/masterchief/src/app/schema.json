@@ -14,7 +14,8 @@
         "event-deleted",
         "child-event-created",
         "movie-watched",
-        "food-ate"
+        "food-ate",
+        "note-taken"
       ]
     }
   },
@@ -66,7 +67,8 @@
               "enum": [
                 "truck",
                 "house",
-                "dads-house"
+                "dads-house",
+                "frenchy"
               ]
             },
             "date": {
@@ -245,6 +247,28 @@
         "homemade": {
           "type": "boolean",
           "title": "Homemade?"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "title": "Ui Note Taken",
+      "required": [
+        "body",
+        "eventName"
+      ],
+      "properties": {
+        "body": {
+          "type": "string",
+          "title": "Name"
+        },
+        "eventName": {
+          "$ref": "#/definitions/eventName"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "title": "Date"
         }
       }
     }

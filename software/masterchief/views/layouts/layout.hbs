@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Masterchief</title>
-  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+  <link rel="stylesheet" href="/pico.min.css">
   <link rel="stylesheet" href="/shared.css">
 </head>
 <body>
+  <progress id="global-progress" class="fixed non-visible"></progress>
   <header class="no-padding">
       <nav>
         <ul></ul>
@@ -23,5 +24,31 @@
   <main class="container">
     {{{body}}}
   </main>
+  <script>
+    window.mc = {
+      showGlobalLoader() {
+        const el = document.getElementById('global-progress')
+        el.classList.remove('non-visible')
+        el.classList.add('visible')
+      },
+      hideGlobalLoader() {
+        const el = document.getElementById('global-progress')
+        el.classList.remove('visible')
+        el.classList.add('non-visible')
+      }
+    }
+
+    document.querySelectorAll('form').forEach(el => {
+      el.addEventListener('submit', () => {
+        mc.showGlobalLoader()
+      })
+    })
+
+    document.querySelectorAll('a').forEach(el => {
+      el.addEventListener('click', () => {
+        mc.showGlobalLoader()
+      })
+    })
+  </script>
 </body>
 </html>

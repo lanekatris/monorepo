@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { nanoid } from 'nanoid';
-import { ESDB } from '../app/constants';
+import { ESDB } from '../app/utils/constants';
 import {
   DiscAdded,
   DiscRemoved,
@@ -21,6 +21,7 @@ import {
 import { DgService } from './dg.service';
 import { IsNotEmpty } from 'class-validator';
 import { GuardMe } from '../auth/guard-me.guard';
+import { ApiOperation } from '@nestjs/swagger';
 
 const csv = require('csvtojson');
 
@@ -83,6 +84,7 @@ export class DgController {
     const manuallyPlayedCourses = await this.service.getManualPlayedCourses();
     const excludedCourses = await this.service.excludedCourses();
     return {
+      totalCoursesPlayed: manuallyPlayedCourses.length + courses.length,
       courses,
       manuallyPlayedCourses,
       excludedCourses,
@@ -136,6 +138,7 @@ export class DgController {
     return res.redirect(`/${CONTROLLER_NAME}`);
   }
 
+  @ApiOperation({ summary: 'Creates many discs from a CSV' })
   @Post('bulk-upload')
   public async bulkUpload(@Body() body: BulkUploadDto, @Response() res) {
     const { data } = body;

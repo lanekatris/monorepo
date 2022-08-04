@@ -15,7 +15,7 @@ import { IsEnum, IsNotEmpty } from 'class-validator';
 import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { nanoid } from 'nanoid';
 import { format } from 'date-fns';
-import { Esdb, ESDB } from '../app/constants';
+import { Esdb, ESDB } from '../app/utils/constants';
 import { AdventureImportStarted } from './types/adventure-created';
 import { AdventureDeleted } from './types/adventure-deleted';
 

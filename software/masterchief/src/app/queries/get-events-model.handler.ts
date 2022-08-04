@@ -1,6 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { format } from 'date-fns';
-import schema from '../../schema/schema.json';
+import schema from '../schema.json';
 import { nanoid } from 'nanoid';
 import { GetGeneralEvents } from './get-general-events';
 
@@ -8,6 +8,9 @@ export class GetEventsModelQuery {}
 const uiSchema = {
   // eventName: { 'ui:widget': 'hidden' },
   // id: { 'ui:widget': 'hidden' },
+  body: {
+    'ui:widget': 'textarea',
+  },
 };
 
 @QueryHandler(GetEventsModelQuery)

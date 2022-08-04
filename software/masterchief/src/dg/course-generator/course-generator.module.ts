@@ -5,7 +5,7 @@ import { CoursesByStateService } from './courses-by-state.service';
 import { ConfigModule } from '@nestjs/config';
 import { MinioModule } from 'nestjs-minio-client';
 import { AuthModule } from '../../auth/auth.module';
-import { eventStoreFactory } from '../../app/event-store';
+import { eventStoreFactory } from '../../app/utils/event-store';
 import { CourseGeneratorSubscriberService } from './course-generator-subscriber.service';
 import { ElasticsearchModule } from '@nestjs/elasticsearch';
 import { CourseAutocompleteSubscriberService } from './course-autocomplete-subscriber.service';

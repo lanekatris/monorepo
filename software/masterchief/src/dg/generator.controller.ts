@@ -17,7 +17,7 @@ import { createReadStream } from 'fs';
 import { groupBy } from 'lodash';
 import { StateAbbreviations } from './stateAbbreviations';
 import { join } from 'path';
-import { STREAM_DG_DATA_LOAD, ESDB } from '../app/constants';
+import { STREAM_DG_DATA_LOAD, ESDB } from '../app/utils/constants';
 import { Express } from 'express';
 import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { EventNames } from './types/disc-added';
@@ -27,6 +27,7 @@ import { CoursePlayedSource } from './types/course-played';
 import { UdiscScorecardEntry } from './types/udisc-scorecard-entry';
 import { CourseAdded } from './types/course-added';
 import { GuardMe } from '../auth/guard-me.guard';
+import { ApiOperation } from '@nestjs/swagger';
 
 const GeoJSON = require('geojson');
 const csv = require('csvtojson');
@@ -205,9 +206,13 @@ export class GeneratorController {
     return new StreamableFile(zipData);
   }
 
+  // todo: Fire off singular events instead of doing everything here or only do one query for all pdga ids instead of n+1a
+  @ApiOperation({
+    summary: `Upload Udisc played rounds CSV file to capture your played courses. Doesn't support players with the same name`,
+  })
   @UseInterceptors(FileInterceptor('file'))
   @Post('file')
-  @Redirect('/dg')
+  @Redirect('/dg/courses')
   async uploadMyRounds(@UploadedFile() file: Express.Multer.File) {
     const contents = file.buffer.toString();
     const entries: UdiscScorecardEntry[] = await csv().fromString(contents);
@@ -232,8 +237,9 @@ export class GeneratorController {
 
     for (const key of rounds) {
       const round = groupedByRounds[key].find(
-        (x) => x.PlayerName === playerName,
+        (x) => x.PlayerName.includes(playerName), // Supports doubles
       );
+      // This can happen if you play doubles since they format the player names differently
       if (!round) {
         this.logger.warn(`Round not found ${key} and ${playerName}`);
         continue;
@@ -267,5 +273,9 @@ export class GeneratorController {
         stats.unknown.add(round.CourseName);
       }
     }
+    stats.unknown.forEach((x) => {
+      this.logger.warn(`Unknown course: ${x}`);
+    });
+    // console.log(stats);
   }
 }

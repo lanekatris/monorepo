@@ -1,33 +1,75 @@
 <div class="main container">
-  <h1>Welcome to Masterchief</h1>
+  <h1 class="text-center">Welcome to Masterchief</h1>
 
-  <div class="card mb-3">
-    <header class="card-header">Links</header>
-    <div class="card-content">
-      <div class="inner">
-        <ul>
-          <li><a href="/climb">Go Climbing</a></li>
-          <li><a href="/dg">Throw Some Plastic</a></li>
-          <li><a href="/events">Log Your Actions</a></li>
-        </ul>
-      </div>
+  <section>
+    <h4>Links</h4>
+    <div class="grid">
+      <a href="/climb">Go Climbing</a>
+      <a href="/dg">Throw Some Plastic</a>
+      <a href="/events">Log Your Actions</a>
+      <a href="/api">Swagger Definition</a>
     </div>
-  </div>
+  </section>
 
-  <div class="card">
-    <header class="card-header">Feed</header>
-    <div class="card-contents">
-      <div class="inner">
-        <p>Timeline goes here</p>
-        <ul>
-          <li>EXAMPLE: NOTE - Halo Infinite runs like crap when you get it from the Microsoft store. Just install it via Steam</li>
-          {{#each events}}
-            {{#if this.name}}
-              <li>{{this.type}}: {{this.date}} - {{this.name}}</li>
-            {{/if}}
-          {{/each}}
-        </ul>
-      </div>
-    </div>
-  </div>
+  <h4>Feed</h4>
+  <ul>
+    {{#each events}}
+      <li>
+        {{#if this.showDiscGolfIcon}}
+          <img class="width-30" src="/frisbee-player-svgrepo-com.svg" />
+        {{/if}}
+        {{#if this.showNoteIcon}}
+          <img class="width-30" src="/sticky-note-svgrepo-com.svg" />
+        {{/if}}
+        {{#if this.showFoodIcon}}
+          <img class="width-30" src="/food-svgrepo-com.svg" />
+        {{/if}}
+        {{#if this.showMaitenance}}
+          <img class="width-30" src="/wrench-svgrepo-com.svg" />
+        {{/if}}
+        {{#if this.showKid}}
+          <img class="width-30" src="/baby-svgrepo-com.svg" />
+        {{/if}}
+
+        {{#if this.showMovie}}
+          <img class="width-30" src="/movie-camera-svgrepo-com.svg"/>
+        {{/if}}
+
+        {{#if this.showVolleyball}}
+          <img class="width-30" src="/volleyball-svgrepo-com.svg" />
+        {{/if}}
+
+        {{#if this.showConcert}}
+          <img class="width-30" src="/music-svgrepo-com.svg" />
+        {{/if}}
+
+        {{#if this.showClimb}}
+          <img class="width-30" src="/climbing-svgrepo-com.svg" />
+        {{/if}}
+
+        {{#if this.showSnowboarding}}
+          <img class="width-30" src="/snowboard-silhouette-svgrepo-com.svg" />
+        {{/if}}
+
+        {{#if this.showGolf}}
+          <img class="width-30" src="/golf-svgrepo-com.svg" />
+        {{/if}}
+
+        <!--                -->
+        <!--                -->
+        <!--                <img class="width-30" src="/add-svgrepo-com.svg" />-->
+        {{this.eventName}}: {{this.data.date}} - {{this.data.name}}{{this.data.body}}
+        <!--                <div>{{#testies}}asd{{/testies}}</div>-->
+      </li>
+    {{/each}}
+  </ul>
+<!--  <div class="card">-->
+<!--    <header class="card-header">Feed</header>-->
+<!--    <div class="card-contents">-->
+<!--      <div class="inner">-->
+<!--        <p>Timeline</p>-->
+<!--        -->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 </div>

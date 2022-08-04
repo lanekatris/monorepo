@@ -11,7 +11,9 @@ import {
 import { LoginDto } from './login.dto';
 import { UserValidator } from './user-validator.service';
 import { GuardMe } from './guard-me.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   private readonly logger = new Logger(AuthController.name);
@@ -26,7 +28,7 @@ export class AuthController {
     }
 
     this.logger.log(`Password is wrong or doesn't exist, rendering login page`);
-    return res.render('auth/login', { layout: false });
+    return res.render('auth/login');
   }
 
   @Post('login')

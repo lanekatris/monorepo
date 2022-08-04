@@ -19,7 +19,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "gen": "json2ts -i src/schema/schema.json -o src/schema/schema.d.ts"
+    "gen": "json2ts -i src/app/schema.json -o src/app/schema.d.ts"
   },
   "dependencies": {
     "@elastic/elasticsearch": "~7.4.0",

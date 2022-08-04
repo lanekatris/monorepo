@@ -1,4 +1,4 @@
-import { EventName } from '../../schema/schema';
+import { EventName } from '../schema';
 import { JSONType } from '@eventstore/db-client';
 import { MetadataType } from '@eventstore/db-client/dist/types/events';
 

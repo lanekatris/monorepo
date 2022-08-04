@@ -1,5 +1,5 @@
 import { BaseEvent } from './base-event';
-import { UiFoodAte } from '../../schema/schema';
+import { UiFoodAte } from '../schema';
 import { BaseJsonEvent } from './base-json-event';
 import { JSONType } from '@eventstore/db-client';
 

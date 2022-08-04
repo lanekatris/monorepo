@@ -1,5 +1,5 @@
 import { BaseJsonEvent } from './base-json-event';
-import { UiEventDeleted } from '../../schema/schema';
+import { UiEventDeleted } from '../schema';
 import { BaseEvent } from './base-event';
 import { JSONType } from '@eventstore/db-client';
 

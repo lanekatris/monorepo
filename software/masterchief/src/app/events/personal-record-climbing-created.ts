@@ -1,5 +1,5 @@
 import { BaseJsonEvent } from './base-json-event';
-import { UiPersonalRecordClimbing } from '../../schema/schema';
+import { UiPersonalRecordClimbing } from '../schema';
 import { BaseEvent } from './base-event';
 
 export interface PersonalRecordClimbingData

@@ -11,7 +11,11 @@ import { CoursesByStateService } from './courses-by-state.service';
 import { MinioService } from 'nestjs-minio-client';
 import axios from 'axios';
 import { GuardMe } from '../../auth/guard-me.guard';
-import { ESDB, Search, STREAM_COURSE_GENERATOR } from '../../app/constants';
+import {
+  ESDB,
+  Search,
+  STREAM_COURSE_GENERATOR,
+} from '../../app/utils/constants';
 import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { EventNames } from '../types/disc-added';
 import { nanoid } from 'nanoid';

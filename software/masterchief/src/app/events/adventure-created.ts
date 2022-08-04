@@ -1,5 +1,5 @@
 import { BaseJsonEvent } from './base-json-event';
-import { UiAdventureCreated } from '../../schema/schema';
+import { UiAdventureCreated } from '../schema';
 import { JSONType } from '@eventstore/db-client';
 import { BaseEvent } from './base-event';
 

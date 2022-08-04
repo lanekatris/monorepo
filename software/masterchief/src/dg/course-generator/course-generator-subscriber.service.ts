@@ -3,7 +3,7 @@ import {
   BUCKET_DG_COURSE_GENERATOR,
   ESDB,
   STREAM_COURSE_GENERATOR,
-} from '../../app/constants';
+} from '../../app/utils/constants';
 import {
   EventStoreDBClient,
   EventTypeToRecordedEvent,

@@ -1,7 +1,11 @@
 import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { Timeout } from '@nestjs/schedule';
 import { ElasticsearchService } from '@nestjs/elasticsearch';
-import { ESDB, Search, STREAM_COURSE_GENERATOR } from '../../app/constants';
+import {
+  ESDB,
+  Search,
+  STREAM_COURSE_GENERATOR,
+} from '../../app/utils/constants';
 import {
   EventStoreDBClient,
   PARK,

@@ -2,36 +2,50 @@
 
 <div class="main container">
 
-  <a href="/dg">Disc Home Page</a>
-
-  <h1>Add Disc</h1>
-
-  <form method="post" action="{{postUrl}}" class="form">
-    <fieldset class="form-group form-warning">
-      <label>BRAND:</label>
-      <input name="brand" autofocus placeholder="innova" class="form-control"/>
-    </fieldset>
-    <fieldset class="form-group form-warning">
-      <label>Model</label>
-      <input name="model" class="form-control" placeholder="sidewinder"/>
-    </fieldset>
-    <fieldset class="form-group form-warning">
-      <label>Date</label>
-      <input name="date" type="date" class="form-control" />
-    </fieldset>
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary  btn-ghost btn-block">Submit</button>
+  <section>
+    <div class="grid">
+      <a href="/dg">Disc Home Page</a>
+      <a href="dg/discs" target="_blank">Discs Api</a>
+      <div></div>
     </div>
-  </form>
+  </section>
+
+  <section>
+    <details>
+      <summary>Add Disc</summary>
+      <p>
+      <form method="post" action="{{postUrl}}" class="form">
+        <fieldset class="form-group form-warning">
+          <label>BRAND:</label>
+          <input name="brand" autofocus placeholder="innova" class="form-control"/>
+        </fieldset>
+        <fieldset class="form-group form-warning">
+          <label>Model</label>
+          <input name="model" class="form-control" placeholder="sidewinder"/>
+        </fieldset>
+        <fieldset class="form-group form-warning">
+          <label>Date</label>
+          <input name="date" type="date" class="form-control" />
+        </fieldset>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary  btn-ghost btn-block">Submit</button>
+        </div>
+      </form>
+      </p>
+    </details>
+  </section>
+
   <h1>Your Discs ({{discs.length}})</h1>
-  <a href="dg/discs" target="_blank">Discs Api</a>
+
   <ul>
     {{#each discs}}
-      <li>
+      <li class="grid">
+        <div>({{this.discNumber}}) {{this.event.brand}} - {{this.event.model}}</div>
+        <div></div>
         <form class="delete-disc form" method="post" action="{{../deleteUrl}}">
-          ({{this.discNumber}}) {{this.event.brand}} - {{this.event.model}}
+
           <input type="hidden" name="id" value="{{this.event.id}}" />
-          <input type="submit" value="Delete" class="hyperlink" />
+          <input type="submit" value="Delete" class="outline" />
         </form>
       </li>
     {{/each}}

@@ -12,8 +12,8 @@ import {
   AWS_REGION,
   BUCKET_DG_COURSE_GENERATOR,
   STREAM_DG_DATA_LOAD,
-} from '../../app/constants';
-import { streamToString } from '../../app/stream-to-string';
+} from '../../app/utils/constants';
+import { streamToString } from '../../app/utils/stream-to-string';
 import { getCourseListUrl } from './lib/get-course-list-url';
 
 export interface CoursesByStateInput {

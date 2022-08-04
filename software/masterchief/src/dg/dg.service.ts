@@ -1,6 +1,6 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { DgEvents, EventNames } from './types/disc-added';
-import { STREAM_DG_DATA_LOAD, ESDB } from '../app/constants';
+import { STREAM_DG_DATA_LOAD, ESDB } from '../app/utils/constants';
 import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { CourseAdded } from './types/course-added';
 import { CoursePlayed, CoursePlayedSource } from './types/course-played';
@@ -26,7 +26,7 @@ export class DgService {
     for await (const { event } of events) {
       switch (event.type) {
         case EventNames.DiscAdded:
-          discs.push({
+          discs.unshift({
             event: event.data,
             discNumber,
           });

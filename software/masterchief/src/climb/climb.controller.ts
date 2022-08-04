@@ -16,9 +16,10 @@ import {
   JSONEventType,
 } from '@eventstore/db-client';
 import { nanoid } from 'nanoid';
-import { ESDB } from '../app/constants';
+import { ESDB } from '../app/utils/constants';
 import { IsNotEmpty } from 'class-validator';
 import { GuardMe } from '../auth/guard-me.guard';
+import { ApiTags } from '@nestjs/swagger';
 
 export enum EventNames {
   ClimbSessionCreated = 'climb-session-created',
@@ -63,6 +64,7 @@ class RouteInputDto {
   sessionId: string;
 }
 
+@ApiTags('climbing')
 @Controller('climb')
 @UseGuards(GuardMe)
 export class ClimbController {

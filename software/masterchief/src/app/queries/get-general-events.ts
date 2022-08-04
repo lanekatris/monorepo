@@ -7,13 +7,14 @@ import { AdventureDeleted } from '../../adventure/types/adventure-deleted';
 import { AdventureImportStarted } from '../../adventure/types/adventure-created';
 import { MaintenanceCreated } from '../events/maintenance-created';
 import { PersonalRecordClimbingCreated } from '../events/personal-record-climbing-created';
-import { ESDB, Esdb } from '../constants';
+import { ESDB, Esdb } from '../utils/constants';
 import { EventNames } from '../../dg/types/disc-added';
 import { EventStoreDBClient } from '@eventstore/db-client';
 import { EventDeleted } from '../events/event-deleted';
 import { ChildEventCreated } from '../events/child-event';
 import { MovieWatched } from '../events/movie-watched';
 import { FoodAte } from '../events/food-ate';
+import { NoteTaken } from '../events/note-taken';
 
 @Injectable()
 export class GetGeneralEvents {
@@ -23,7 +24,6 @@ export class GetGeneralEvents {
   ) {}
   async get(): Promise<AdventureCreatedData[]> {
     const events = this.esdb.readStream<
-      // | AdventureCreated
       | AdventureCreated
       | AdventureDeleted
       | AdventureImportStarted
@@ -33,6 +33,7 @@ export class GetGeneralEvents {
       | ChildEventCreated
       | MovieWatched
       | FoodAte
+      | NoteTaken
     >(Esdb.StreamEvents);
     let generalEvents = [];
     try {
@@ -102,6 +103,16 @@ export class GetGeneralEvents {
                 id: event.data.id,
                 activities: [],
                 name: `${event.data.name} (Homemade: ${event.data.homemade})`,
+                date: event.data.date,
+              },
+            });
+            break;
+          case 'note-taken':
+            generalEvents.unshift({
+              data: {
+                id: event.data.id,
+                activities: [],
+                name: `NOTE: ${event.data.body}`,
                 date: event.data.date,
               },
             });

@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import { Logger } from '@nestjs/common';
 import { DgService } from '../../dg/dg.service';
 import { GetGeneralEvents } from './get-general-events';
+import { EventName } from '../schema';
 
 export class GetHomeModelQuery {}
 export interface FeedItem {

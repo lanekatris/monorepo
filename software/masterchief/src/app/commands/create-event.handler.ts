@@ -7,8 +7,9 @@ import {
   UiFoodAte,
   UiMaintenanceCreated,
   UiMovieWatched,
+  UiNoteTaken,
   UiPersonalRecordClimbing,
-} from '../../schema/schema';
+} from '../schema';
 import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { PersonalRecordClimbingCreated } from '../events/personal-record-climbing-created';
 import { nanoid } from 'nanoid';
@@ -16,12 +17,13 @@ import { format } from 'date-fns';
 import { MaintenanceCreated } from '../events/maintenance-created';
 import { AdventureCreated } from '../events/adventure-created';
 import { EventDeleted } from '../events/event-deleted';
-import { ESDB, Esdb } from '../constants';
+import { ESDB, Esdb } from '../utils/constants';
 import { Inject, Logger } from '@nestjs/common';
 import { BaseEvent } from '../events/base-event';
 import { ChildEventCreated } from '../events/child-event';
 import { MovieWatched } from '../events/movie-watched';
 import { FoodAte } from '../events/food-ate';
+import { NoteTaken } from '../events/note-taken';
 
 export class CreateEventCommand {
   constructor(public eventName: EventName, public body: { date?: string }) {}
@@ -52,6 +54,16 @@ export class CreateEventHandler implements ICommandHandler<CreateEventCommand> {
             name,
             meal,
             homemade,
+            ...baseEventData,
+          },
+        });
+        break;
+      case 'note-taken':
+        const { body: actualBody } = body as UiNoteTaken;
+        event = jsonEvent<NoteTaken>({
+          type: 'note-taken',
+          data: {
+            body: actualBody,
             ...baseEventData,
           },
         });
