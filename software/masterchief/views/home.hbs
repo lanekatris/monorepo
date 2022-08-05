@@ -1,18 +1,39 @@
 <div class="main container">
-  <h1 class="text-center">Welcome to Masterchief</h1>
+<!--  <h1 class="text-center">Welcome to Masterchief</h1>-->
 
+<!--  <section>-->
+<!--    <h4>Links</h4>-->
+<!--    <div class="grid">-->
+<!--      <a href="/climb">Go Climbing</a>-->
+<!--      <a href="/dg">Throw Some Plastic</a>-->
+<!--      <a href="/events">Log Your Actions</a>-->
+<!--      <a href="/api">Swagger Definition</a>-->
+<!--    </div>-->
+<!--  </section>-->
+<h4>Actions</h4>
   <section>
-    <h4>Links</h4>
-    <div class="grid">
-      <a href="/climb">Go Climbing</a>
-      <a href="/dg">Throw Some Plastic</a>
-      <a href="/events">Log Your Actions</a>
-      <a href="/api">Swagger Definition</a>
-    </div>
+    <details>
+      <summary>Links</summary>
+      <p>
+        <ul>
+          <li><a href="/climb">Go Climbing</a></li>
+          <li><a href="/dg">Throw Some Plastic</a></li>
+          <li><a href="/events">Log Your Actions</a></li>
+          <li><a href="/api">Swagger Definition</a></li>
+        </ul>
+
+      </p>
+    </details>
+    <details>
+      <summary>Create Event</summary>
+      <p>
+        <div id="app"></div>
+      </p>
+    </details>
   </section>
 
-  <h4>Feed</h4>
-  <ul>
+  <h4>Feed ({{events.length}})</h4>
+  <ul class="feed">
     {{#each events}}
       <li>
         {{#if this.showDiscGolfIcon}}
@@ -55,21 +76,53 @@
           <img class="width-30" src="/golf-svgrepo-com.svg" />
         {{/if}}
 
-        <!--                -->
-        <!--                -->
-        <!--                <img class="width-30" src="/add-svgrepo-com.svg" />-->
-        {{this.eventName}}: {{this.data.date}} - {{this.data.name}}{{this.data.body}}
-        <!--                <div>{{#testies}}asd{{/testies}}</div>-->
+        {{this.data.date}} - {{this.data.name}}{{this.data.body}}
+        <form class="inline" method="post" action="/create-event">
+          <input type="hidden" name="eventId" value="{{this.data.id}}" />
+          <input type="hidden" name="eventName" value="event-deleted" />
+          <input type="hidden" name="redirect" value="/home" />
+          <a href="#" onclick="this.closest('form').submit();return false;">Delete</a>
+        </form>
+        <pre>{{this.eventName}}</pre>
+
       </li>
     {{/each}}
   </ul>
-<!--  <div class="card">-->
-<!--    <header class="card-header">Feed</header>-->
-<!--    <div class="card-contents">-->
-<!--      <div class="inner">-->
-<!--        <p>Timeline</p>-->
-<!--        -->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
 </div>
+<script crossorigin src="/react.production.min.js"></script>
+<script crossorigin src="/react-dom.production.min.js"></script>
+<script src="/babel.min.js"></script>
+<script src="/react-jsonschema-form.js"></script>
+<script type="text/babel">
+  const Form = JSONSchemaForm.default;
+  const schema = {{{schema}}}
+  const uiSchema = {
+    body: {
+      'ui:widget': 'textarea',
+    },
+  }
+
+  const log = (type) => console.log.bind(console, type);
+
+  console.log(schema)
+
+  ReactDOM.render((
+    <Form schema={schema} uiSchema={uiSchema}
+          onChange={log("changed")}
+          onSubmit={({formData}) => {
+            const body = new URLSearchParams();
+            Object.keys(formData).forEach(key => {
+              body.append(key, formData[key])
+            })
+
+            fetch(`/create-event`, {
+              method: 'post',
+              body
+            }).then(r => {
+              console.log(r);
+              window.location.reload()
+            })
+          }}
+          onError={log("errors")} />
+  ), document.getElementById("app"));
+</script>

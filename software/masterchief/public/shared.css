@@ -29,3 +29,16 @@
 .width-30 {
     width: 30px;
 }
+
+.feed li pre, .feed li a {
+    visibility: hidden;
+    display: inline;
+}
+
+.feed li:hover pre, .feed li:hover a {
+    visibility: visible;
+}
+
+.inline {
+    display: inline;
+}

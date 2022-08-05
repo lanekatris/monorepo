@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Render, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Render,
+  UseGuards,
+  Response,
+} from '@nestjs/common';
 
 import { GuardMe } from '../auth/guard-me.guard';
 
@@ -9,6 +17,7 @@ import { CreateEventCommand } from './commands/create-event.handler';
 import { EventName } from './schema';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { GetFeedQuery } from './queries/get-feed.handler';
+import schema from './schema.json';
 
 @Controller()
 export class AppController {
@@ -48,6 +57,7 @@ export class AppController {
     }));
 
     return {
+      schema: JSON.stringify(schema),
       events: formatted,
     };
   }
@@ -71,9 +81,19 @@ export class AppController {
   @ApiTags('events')
   @UseGuards(GuardMe)
   @Post('create-event')
-  async createEvent(@Body() input: { eventName: EventName }) {
-    const { eventName, ...body } = input;
-    return this.commandBus.execute(new CreateEventCommand(eventName, body));
+  async createEvent(
+    @Body() input: { eventName: EventName; redirect?: string },
+    @Response() res,
+  ) {
+    const { eventName, redirect, ...body } = input;
+    const result = await this.commandBus.execute(
+      new CreateEventCommand(eventName, body),
+    );
+
+    if (redirect) {
+      return res.redirect(redirect);
+    }
+    return res.status(200).json(result);
   }
 
   @ApiTags('wip')
