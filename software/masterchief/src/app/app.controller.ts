@@ -51,7 +51,8 @@ export class AppController {
       showConcert: x.data.activities?.includes('concert'),
       showClimb:
         x.eventName === 'personal-record-climbing-created' ||
-        x.data.activities?.includes('Indoor Bouldering'),
+        x.data.activities?.includes('Indoor Bouldering') ||
+        x.data.activities?.includes('indoor-bouldering'),
       showSnowboarding: x.data.activities?.includes('Snowboarding'),
       showGolf: x.data.activities?.includes('Ball Golf'),
     }));
