@@ -35,7 +35,7 @@ export type EventName =
 export type Date = string;
 export type UiMaintenanceCreated = {
   name: Name1;
-  equipment: "truck" | "house" | "dads-house" | "frenchy";
+  equipment: "truck" | "house" | "dads-house" | "frenchy" | "kia";
   date?: Date1;
   eventName: EventName;
   [k: string]: unknown;
