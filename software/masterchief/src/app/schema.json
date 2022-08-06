@@ -15,7 +15,8 @@
         "child-event-created",
         "movie-watched",
         "food-ate",
-        "note-taken"
+        "note-taken",
+        "hair-cut"
       ]
     }
   },
@@ -258,6 +259,28 @@
       ],
       "properties": {
         "body": {
+          "type": "string",
+          "title": "Name"
+        },
+        "eventName": {
+          "$ref": "#/definitions/eventName"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "title": "Date"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "title": "Ui Hair Cut",
+      "required": [
+        "body",
+        "eventName"
+      ],
+      "properties": {
+        "name": {
           "type": "string",
           "title": "Name"
         },

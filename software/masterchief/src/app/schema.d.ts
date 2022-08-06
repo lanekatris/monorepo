@@ -13,7 +13,8 @@ export type ChooseEventType =
   | UiChildEvent
   | UiMovieWatched
   | UiFoodAte
-  | UiNoteTaken;
+  | UiNoteTaken
+  | UiHairCut;
 export type UiPersonalRecordClimbing = {
   name: Name;
   eventName: EventName;
@@ -29,7 +30,8 @@ export type EventName =
   | "child-event-created"
   | "movie-watched"
   | "food-ate"
-  | "note-taken";
+  | "note-taken"
+  | "hair-cut";
 export type Date = string;
 export type UiMaintenanceCreated = {
   name: Name1;
@@ -164,6 +166,8 @@ export type Date5 = string;
 export type Homemade = boolean;
 export type Name6 = string;
 export type Date6 = string;
+export type Name7 = string;
+export type Date7 = string;
 
 export interface UiChildEvent {
   name: Name3;
@@ -189,5 +193,11 @@ export interface UiNoteTaken {
   body: Name6;
   eventName: EventName;
   date?: Date6;
+  [k: string]: unknown;
+}
+export interface UiHairCut {
+  name?: Name7;
+  eventName: EventName;
+  date?: Date7;
   [k: string]: unknown;
 }
