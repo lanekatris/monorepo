@@ -52,10 +52,10 @@ export class CourseAutocompleteSubscriberService implements OnModuleInit {
         try {
           switch (event.event.type) {
             case EventNames.PdgaCourseHeaderCreated:
-              const { name, id } = event.event.data.courseHeader;
+              const { name, id, city, state } = event.event.data.courseHeader;
               const doc: PdgaCourseAutocomplete = {
                 pdgaId: id,
-                name,
+                name: `${name} (${city}, ${state})`,
               };
               await this.elastic.update({
                 index: Search.IndexDiscGolfCourseAutocomplete,

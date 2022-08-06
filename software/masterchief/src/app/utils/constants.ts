@@ -8,7 +8,7 @@ export const STREAM_COURSE_GENERATOR = 'dg-course-generator';
 export const AWS_REGION = 'us-east-1';
 
 export enum Search {
-  IndexDiscGolfCourseAutocomplete = 'testies2', //'disc_golf_course_autocomplete',
+  IndexDiscGolfCourseAutocomplete = 'disc_golf_course_autocomplete',
   ErrorIndexAlreadyExists = 'resource_already_exists_exception',
 }
 
