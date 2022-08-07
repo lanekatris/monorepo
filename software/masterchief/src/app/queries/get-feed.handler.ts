@@ -15,6 +15,7 @@ import { FoodAte } from '../events/food-ate';
 import { NoteTaken } from '../events/note-taken';
 import { EventNames } from '../../dg/types/disc-added';
 import { EventType } from '@eventstore/db-client/dist/types/events';
+import { NoteUploaded } from '../events/note-uploaded';
 
 export class GetFeedQuery {}
 
@@ -47,6 +48,7 @@ export class GetFeedHandler implements IQueryHandler<GetFeedQuery> {
       | MovieWatched
       | FoodAte
       | NoteTaken
+      | NoteUploaded
     >(Esdb.StreamEvents);
 
     let filteredEvents = [];
@@ -68,6 +70,9 @@ export class GetFeedHandler implements IQueryHandler<GetFeedQuery> {
           filteredEvents = filteredEvents.filter(
             (x) => x.metadata.source !== 'CSV',
           );
+          break;
+        case 'note-uploaded':
+          // intentional noop
           break;
         default:
           filteredEvents.push(event);
