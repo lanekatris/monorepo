@@ -24,7 +24,7 @@ export class CourseAutocompleteSubscriberService implements OnModuleInit {
     @Inject(ESDB)
     private esdb: EventStoreDBClient,
   ) {}
-  // subscribe to esdb events
+
   @Timeout(100)
   async subscribe() {
     try {
@@ -83,7 +83,6 @@ export class CourseAutocompleteSubscriberService implements OnModuleInit {
     }
   }
 
-  // todo: on module init, create the index
   async onModuleInit(): Promise<void> {
     await this.createIndices();
     await this.createMappings();

@@ -11,6 +11,10 @@ import { GetGeneralEvents } from './queries/get-general-events';
 import { CqrsModule } from '@nestjs/cqrs';
 import { QueryHandlers } from './queries';
 import { CommandHandlers } from './commands';
+import { MinioModule } from 'nestjs-minio-client';
+import { Subscribers } from './subscribers';
+import { ElasticsearchModule } from '@nestjs/elasticsearch';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -20,6 +24,18 @@ import { CommandHandlers } from './commands';
     AuthModule,
     AdventureModule,
     CqrsModule,
+    ScheduleModule.forRoot(),
+    MinioModule.register({
+      global: true, // Needed for child modules to reference
+      endPoint: process.env.MINIO_URL,
+      port: Number(process.env.MINIO_PORT),
+      useSSL: false,
+      accessKey: 'minio-root-user',
+      secretKey: 'minio-root-password',
+    }),
+    ElasticsearchModule.register({
+      node: process.env.ELASTIC_URL,
+    }),
   ],
   controllers: [AppController],
   providers: [
@@ -27,6 +43,8 @@ import { CommandHandlers } from './commands';
     GetGeneralEvents,
     ...QueryHandlers,
     ...CommandHandlers,
+    ...Subscribers,
   ],
+  exports: [ElasticsearchModule],
 })
 export class AppModule {}

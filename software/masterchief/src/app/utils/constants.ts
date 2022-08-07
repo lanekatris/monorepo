@@ -10,8 +10,13 @@ export const AWS_REGION = 'us-east-1';
 export enum Search {
   IndexDiscGolfCourseAutocomplete = 'disc_golf_course_autocomplete',
   ErrorIndexAlreadyExists = 'resource_already_exists_exception',
+  IndexNotes = 'notes',
 }
 
 export enum Esdb {
   StreamEvents = 'general-events',
+}
+
+export enum McStorage {
+  NotesBucket = 'notes',
 }

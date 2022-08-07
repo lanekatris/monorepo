@@ -12,7 +12,6 @@ import {
   persistentSubscriptionToStreamSettingsFromDefaults,
 } from '@eventstore/db-client';
 import { CoursesByStateService } from './courses-by-state.service';
-import { MinioService } from 'nestjs-minio-client';
 import { PdgaSyncByStateRequested } from './types/pdga-sync-by-state.requested';
 import { PdgaCourseHeaderCreated } from './types/pdga-course-header.created';
 import { EventNames } from '../types/disc-added';
@@ -20,6 +19,7 @@ import { nanoid } from 'nanoid';
 import axios from 'axios';
 import { PdgaCourseCached } from './types/pdga-course.cached';
 import { Timeout } from '@nestjs/schedule';
+import { MinioService } from 'nestjs-minio-client';
 
 function getCourseHeaderCacheKey(courseId: string) {
   return `course/${courseId}.html`;

@@ -23,7 +23,6 @@ import { PdgaCourseCached } from './types/pdga-course.cached';
 import { PdgaSyncByStateRequested } from './types/pdga-sync-by-state.requested';
 import { PdgaCourseHeaderCreated } from './types/pdga-course-header.created';
 import { ElasticsearchService } from '@nestjs/elasticsearch';
-import { PdgaCourseAutocomplete } from './types/pdga-course-autocomplete';
 
 axios.interceptors.request.use((request) => {
   const url = new URL(request.url);

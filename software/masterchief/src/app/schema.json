@@ -16,7 +16,8 @@
         "movie-watched",
         "food-ate",
         "note-taken",
-        "hair-cut"
+        "hair-cut",
+        "note-uploaded"
       ]
     }
   },

@@ -11,6 +11,7 @@ import { MinioService } from 'nestjs-minio-client';
 import {
   AWS_REGION,
   BUCKET_DG_COURSE_GENERATOR,
+  McStorage,
   STREAM_DG_DATA_LOAD,
 } from '../../app/utils/constants';
 import { streamToString } from '../../app/utils/stream-to-string';
@@ -102,7 +103,11 @@ export class CoursesByStateService implements OnModuleInit {
   }
 
   async onModuleInit(): Promise<void> {
-    const buckets = [STREAM_DG_DATA_LOAD, BUCKET_DG_COURSE_GENERATOR];
+    const buckets = [
+      STREAM_DG_DATA_LOAD,
+      BUCKET_DG_COURSE_GENERATOR,
+      McStorage.NotesBucket,
+    ];
 
     for (const bucketName of buckets) {
       const bucketExists = await this.minioClient.client.bucketExists(

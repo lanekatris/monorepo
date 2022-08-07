@@ -6,24 +6,32 @@ import {
   Render,
   UseGuards,
   Response,
+  UseInterceptors,
+  UploadedFiles,
+  Query,
 } from '@nestjs/common';
 
 import { GuardMe } from '../auth/guard-me.guard';
 
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { GetHomeModelQuery } from './queries/get-home-model.handler';
 import { GetEventsModelQuery } from './queries/get-events-model.handler';
 import { CreateEventCommand } from './commands/create-event.handler';
 import { EventName } from './schema';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { GetFeedQuery } from './queries/get-feed.handler';
 import schema from './schema.json';
+import { FilesInterceptor } from '@nestjs/platform-express';
+
+import { UploadPixelNotesCommand } from './commands/upload-pixel-notes.handler';
+import { ElasticsearchService } from '@nestjs/elasticsearch';
+import { Search } from './utils/constants';
 
 @Controller()
 export class AppController {
   constructor(
     private readonly queryBus: QueryBus,
     private readonly commandBus: CommandBus,
+    private readonly elastic: ElasticsearchService,
   ) {}
 
   @ApiOperation({ summary: 'Non authed landing page' })
@@ -103,5 +111,47 @@ export class AppController {
   @Render('wip/workflows')
   workflows() {
     return {};
+  }
+
+  @UseInterceptors(FilesInterceptor('files'))
+  @ApiTags('wip')
+  @UseGuards(GuardMe)
+  @Post('pixel-recorder-upload')
+  async uploadPixelRecordings(
+    @UploadedFiles() files: Array<Express.Multer.File>,
+  ) {
+    await this.commandBus.execute(
+      new UploadPixelNotesCommand(
+        files.map((file) => ({
+          name: file.originalname,
+          contents: file.buffer,
+        })),
+      ),
+    );
+
+    return 'success';
+  }
+
+  @ApiTags('wip')
+  @UseGuards(GuardMe)
+  @Get('notes/search')
+  async searchNotes(@Query('query') query) {
+    const result = await this.elastic.search({
+      index: Search.IndexNotes,
+      size: 10,
+      body: {
+        query: {
+          multi_match: {
+            query,
+            type: 'bool_prefix',
+            fields: ['body'],
+          },
+        },
+      },
+    });
+    return {
+      total: result.body.hits.total.value,
+      hits: result.body.hits.hits,
+    };
   }
 }

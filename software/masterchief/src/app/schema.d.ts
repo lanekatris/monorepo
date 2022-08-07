@@ -31,7 +31,8 @@ export type EventName =
   | "movie-watched"
   | "food-ate"
   | "note-taken"
-  | "hair-cut";
+  | "hair-cut"
+  | "note-uploaded";
 export type Date = string;
 export type UiMaintenanceCreated = {
   name: Name1;
