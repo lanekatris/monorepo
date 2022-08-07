@@ -14,11 +14,11 @@
 <a href="/climb" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600 text-3xl">All Climbs</a>
 
 {{#each model}}
-<section class="text-gray-600 body-font overflow-hidden">
+<section class="">
   <div class="container py-5 mx-auto">
     <div class="-my-8 divide-y-2 divide-gray-100">
-      <div class="py-8 flex flex-wrap md:flex-nowrap items-center">
-        <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col text-right">
+      <div class="" style="display:flex;justify-content: space-between;align-items:end;">
+        <div style="flex:1">
           <form method="post" action="{{../canceledUrl}}">
             <input type="hidden" name="grade" value="{{this.grade}}"/>
             <input type="hidden" name="sessionId" value="{{../sessionId}}"/>
@@ -29,10 +29,10 @@
             </button>
           </form>
         </div>
-        <div class="md:flex-grow">
+        <div style="flex:1">
           <h1 class="text-7xl font-medium text-gray-900 title-font mb-2 text-center">{{this.grade}} ({{this.count}})</h1>
         </div>
-        <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+        <div style="flex:1">
           <form method="post" action="{{../completedUrl}}" class="flex">
             <input type="hidden" name="grade" value="{{this.grade}}"/>
             <input type="hidden" name="sessionId" value="{{../sessionId}}"/>
