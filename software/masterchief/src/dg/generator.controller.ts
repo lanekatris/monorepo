@@ -14,7 +14,7 @@ import {
 } from '@nestjs/common';
 import { format } from 'date-fns';
 import { createReadStream } from 'fs';
-import { groupBy } from 'lodash';
+import { groupBy, chunk } from 'lodash';
 import { StateAbbreviations } from './stateAbbreviations';
 import { join } from 'path';
 import { STREAM_DG_DATA_LOAD, ESDB } from '../app/utils/constants';
@@ -150,34 +150,38 @@ export class GeneratorController {
     await this.service.courseExcluded(courseId, reason);
   }
 
+  @ApiOperation({
+    summary: 'Generates a GeoJSON zip file for disc golf courses',
+  })
   @Get('generate')
   async generate(
     @Response({ passthrough: true }) res,
   ): Promise<StreamableFile> {
-    this.logger.log(`Starting GeoJSON generation...`);
-    const fileStream = createReadStream(join(__dirname, 'courses.csv'));
-    const entries: CsvEntry[] = await csv().fromStream(fileStream);
-    this.logger.log(`courses.csv has ${entries.length} entries`);
-
-    // load into esdb
-    const dbResult = await this.esdb.appendToStream(
-      STREAM_DG_DATA_LOAD,
-      entries.map((entry) => {
-        return jsonEvent<CourseAdded>({
-          type: EventNames.CourseAdded,
-          data: {
-            id: entry.id,
-            name: entry.name,
-            state: entry.state,
-            latitude: entry.latitude,
-            longitude: entry.longitude,
-          },
-        });
-      }),
-    );
-    console.log('dbresult', dbResult);
+    this.logger.log(`Starting GeoJSON generation, loading courses...`);
+    // const fileStream = createReadStream(join(__dirname, 'courses.csv'));
+    // const entries: CsvEntry[] = await csv().fromStream(fileStream);
+    // this.logger.log(`courses.csv has ${entries.length} entries`);
+    //
+    // // load into esdb
+    // const dbResult = await this.esdb.appendToStream(
+    //   STREAM_DG_DATA_LOAD,
+    //   entries.map((entry) => {
+    //     return jsonEvent<CourseAdded>({
+    //       type: EventNames.CourseAdded,
+    //       data: {
+    //         id: entry.id,
+    //         name: entry.name,
+    //         state: entry.state,
+    //         latitude: entry.latitude,
+    //         longitude: entry.longitude,
+    //       },
+    //     });
+    //   }),
+    // );
+    // console.log('dbresult', dbResult);
 
     const allCourses = await this.service.getAllCourses();
+    this.logger.log(`${allCourses.length} courses loaded`);
 
     const folder = format(new Date(), 'y-LL-dd--hh-mm-ss');
     let i = 1;
@@ -190,9 +194,19 @@ export class GeneratorController {
     this.logger.log(`Creating files for ${states.length} states: ${states}`);
     states.forEach((state) => {
       const entries = stateEntries[state];
-      const geoJsonObject = this.service.getGeoJson(entries);
-      zip.file(`${state}-${folder}.json`, JSON.stringify(geoJsonObject));
-      this.logger.log(`Added ${state} file to zip ${i}/${states.length}`);
+      // Split by 1000 to be compatible with Gaia
+      const chunks = chunk(entries, 1000);
+      chunks.forEach((chunk, chunkIndex) => {
+        const geoJsonObject = this.service.getGeoJson(entries);
+        zip.file(
+          `${state}-${folder}-${chunkIndex}.json`,
+          JSON.stringify(geoJsonObject),
+        );
+        this.logger.log(
+          `Added ${state} file chunk ${chunkIndex} to zip ${i}/${states.length}`,
+        );
+      });
+
       i++;
     });
 
