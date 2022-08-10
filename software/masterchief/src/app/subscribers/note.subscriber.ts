@@ -9,7 +9,7 @@ import {
 } from '@eventstore/db-client';
 import { NoteUploaded } from '../events/note-uploaded';
 import { MinioService } from 'nestjs-minio-client';
-import JSZip, { loadAsync } from 'JSZip';
+import JSZip, { loadAsync } from 'jszip';
 import { streamToBuffer } from '../utils/stream-to-string';
 
 interface Note {

@@ -13,6 +13,8 @@ import { UserValidator } from './user-validator.service';
 import { GuardMe } from './guard-me.guard';
 import { ApiTags } from '@nestjs/swagger';
 
+const NINETY_DAYS = 1000 * 60 * 60 * 24 * 90;
+
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
@@ -35,7 +37,7 @@ export class AuthController {
   login(@Response() res, @Body() input: LoginDto) {
     if (this.service.validatePassword(input.password)) {
       this.logger.log(`Password valid, writing cookie`);
-      res.cookie(GuardMe.COOKIE_NAME, input.password);
+      res.cookie(GuardMe.COOKIE_NAME, input.password, { maxAge: NINETY_DAYS });
     }
 
     this.logger.log(`Redirecting to homepage`);

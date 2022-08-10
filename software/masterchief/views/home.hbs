@@ -69,6 +69,10 @@
           <img class="width-30" src="/golf-svgrepo-com.svg" />
         {{/if}}
 
+        {{#if this.showMedkit}}
+          <img class="width-30" src="/medkit-solid-svgrepo-com.svg"/>
+        {{/if}}
+
         {{this.data.date}} - {{this.data.name}}{{this.data.body}}
         <form class="inline" method="post" action="/create-event">
           <input type="hidden" name="eventId" value="{{this.data.id}}" />

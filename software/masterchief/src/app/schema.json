@@ -17,7 +17,8 @@
         "food-ate",
         "note-taken",
         "hair-cut",
-        "note-uploaded"
+        "note-uploaded",
+        "health-observation"
       ]
     }
   },
@@ -278,7 +279,7 @@
       "type": "object",
       "title": "Ui Hair Cut",
       "required": [
-        "body",
+        "name",
         "eventName"
       ],
       "properties": {
@@ -293,6 +294,31 @@
           "type": "string",
           "format": "date",
           "title": "Date"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "title": "Ui Health Observation",
+      "required": ["body"],
+      "properties": {
+        "body": {
+          "type": "string",
+          "title": "Name"
+        },
+        "eventName": {
+          "$ref": "#/definitions/eventName"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "title": "Date"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

@@ -6,6 +6,7 @@ import {
   UiEventDeleted,
   UiFoodAte,
   UiHairCut,
+  UiHealthObservation,
   UiMaintenanceCreated,
   UiMovieWatched,
   UiNoteTaken,
@@ -26,6 +27,7 @@ import { MovieWatched } from '../events/movie-watched';
 import { FoodAte } from '../events/food-ate';
 import { NoteTaken } from '../events/note-taken';
 import { HairCut } from '../events/hair-cut';
+import { HealthObservation } from '../events/health-observation';
 
 export class CreateEventCommand {
   constructor(public eventName: EventName, public body: { date?: string }) {}
@@ -152,6 +154,18 @@ export class CreateEventHandler implements ICommandHandler<CreateEventCommand> {
           type: 'movie-watched',
           data: {
             name,
+            ...baseEventData,
+          },
+        });
+        break;
+      }
+      case 'health-observation': {
+        const { body: actualBody, tags } = body as UiHealthObservation;
+        event = jsonEvent<HealthObservation>({
+          type: 'health-observation',
+          data: {
+            body: actualBody,
+            tags,
             ...baseEventData,
           },
         });

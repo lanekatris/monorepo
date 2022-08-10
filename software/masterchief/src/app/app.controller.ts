@@ -63,6 +63,7 @@ export class AppController {
         x.data.activities?.includes('indoor-bouldering'),
       showSnowboarding: x.data.activities?.includes('Snowboarding'),
       showGolf: x.data.activities?.includes('Ball Golf'),
+      showMedkit: x.eventName === 'health-observation',
     }));
 
     return {
