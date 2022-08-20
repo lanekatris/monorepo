@@ -171,7 +171,7 @@ export type Name6 = string;
 export type Date6 = string;
 export type Name7 = string;
 export type Date7 = string;
-export type Name8 = string;
+export type Body = string;
 export type Date8 = string;
 
 export interface UiChildEvent {
@@ -207,7 +207,7 @@ export interface UiHairCut {
   [k: string]: unknown;
 }
 export interface UiHealthObservation {
-  body: Name8;
+  body: Body;
   eventName?: EventName;
   date?: Date8;
   tags?: string[];

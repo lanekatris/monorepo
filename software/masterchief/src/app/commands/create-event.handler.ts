@@ -160,12 +160,15 @@ export class CreateEventHandler implements ICommandHandler<CreateEventCommand> {
         break;
       }
       case 'health-observation': {
-        const { body: actualBody, tags } = body as UiHealthObservation;
+        const { body: actualBody, tags: stringTags } =
+          body as UiHealthObservation;
+
         event = jsonEvent<HealthObservation>({
           type: 'health-observation',
           data: {
             body: actualBody,
-            tags,
+            // @ts-ignore
+            tags: stringTags?.split(','),
             ...baseEventData,
           },
         });

@@ -304,7 +304,7 @@
       "properties": {
         "body": {
           "type": "string",
-          "title": "Name"
+          "title": "Body"
         },
         "eventName": {
           "$ref": "#/definitions/eventName"

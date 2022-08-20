@@ -25,6 +25,7 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { UploadPixelNotesCommand } from './commands/upload-pixel-notes.handler';
 import { ElasticsearchService } from '@nestjs/elasticsearch';
 import { Search } from './utils/constants';
+import { isArray } from 'lodash';
 
 @Controller()
 export class AppController {
@@ -47,6 +48,9 @@ export class AppController {
     const events = await this.queryBus.execute(new GetFeedQuery());
     const formatted = events.map((x) => ({
       ...x,
+      tags: isArray(x.data.tags)
+        ? x.data.tags.map((x) => `#${x}`).join(',')
+        : x.data.tags,
       showDiscGolfIcon:
         x.data.activities?.includes('Disc-Golf') ||
         x.data.activities?.includes('disc-golf'),
