@@ -43,7 +43,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder().setTitle('Masterchief').build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('swagger-ui', app, document);
 
   await app.listen(3000);
   console.log('listening on port 3000');

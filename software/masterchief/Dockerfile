@@ -52,6 +52,20 @@ RUN npm ci --only=production --legacy-peer-deps && npm cache clean --force
 USER node
 
 ###################
+# Build frontend
+###################
+FROM node:18-alpine As frontend-build
+
+WORKDIR /usr/src/app
+
+COPY frontend ./
+
+RUN npm ci --legacy-peer-deps
+
+RUN npm run build
+
+
+###################
 # PRODUCTION
 ###################
 
@@ -66,6 +80,9 @@ COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 
 COPY --chown=node:node --from=build /usr/src/app/views ./views
 COPY --chown=node:node --from=build /usr/src/app/public ./public
+
+# copy frontend over
+COPY --chown=node:node --from=frontend-build /usr/src/app/dist ./frontend/dist
 
 # Start the server using the production build
 WORKDIR /dist

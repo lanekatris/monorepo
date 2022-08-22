@@ -15,7 +15,11 @@ import { MinioModule } from 'nestjs-minio-client';
 import { Subscribers } from './subscribers';
 import { ElasticsearchModule } from '@nestjs/elasticsearch';
 import { ScheduleModule } from '@nestjs/schedule';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
+const spaPath = join(__dirname, '..', '..', '..', 'frontend', 'dist');
+console.log('spapath', spaPath);
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -35,6 +39,10 @@ import { ScheduleModule } from '@nestjs/schedule';
     }),
     ElasticsearchModule.register({
       node: process.env.ELASTIC_URL,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(spaPath),
+      exclude: ['/api*'],
     }),
   ],
   controllers: [AppController],

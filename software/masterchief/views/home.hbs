@@ -115,7 +115,7 @@
               body.append(key, formData[key])
             })
 
-            fetch(`/create-event`, {
+            fetch(`/api/create-event`, {
               method: 'post',
               body
             }).then(r => {
@@ -139,7 +139,7 @@
       return;
     }
 
-    fetch(`/notes/search?query=${e.target.value}`)
+    fetch(`/api/notes/search?query=${e.target.value}`)
       .then(response => response.json())
       .then(response => {
         searchTitle.innerHTML = `Notes Search (${response.hits.length})`
