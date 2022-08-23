@@ -11,16 +11,18 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { LoggingInterceptor } from './app/utils/logging.interceptor';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  app.useStaticAssets(join(__dirname, '..', 'public'));
-  app.setBaseViewsDir(join(__dirname, '..', 'views'));
+  app.setGlobalPrefix('api');
+
+  app.useStaticAssets(join(__dirname, '../..', 'public'));
+  app.setBaseViewsDir(join(__dirname, '../..', 'views'));
   app.setViewEngine('hbs');
   app.engine(
     'hbs',
     engine({
       extname: 'hbs',
       defaultLayout: 'layout',
-      layoutsDir: join(__dirname, '..', 'views', 'layouts'),
-      partialsDir: join(__dirname, '..', 'views', 'partials'),
+      layoutsDir: join(__dirname, '../..', 'views', 'layouts'),
+      partialsDir: join(__dirname, '../..', 'views', 'partials'),
       helpers: {
         testies() {
           return 'help';
@@ -46,6 +48,6 @@ async function bootstrap() {
   SwaggerModule.setup('swagger-ui', app, document);
 
   await app.listen(3000);
-  console.log('listening on port 3000');
+  console.log('listening on port 3000', __dirname);
 }
 bootstrap();
