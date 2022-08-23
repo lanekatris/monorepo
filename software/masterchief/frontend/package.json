@@ -10,13 +10,16 @@
   },
   "dependencies": {
     "@picocss/pico": "^1.5.3",
+    "@rjsf/core": "^4.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-highlight-words": "^0.18.0",
     "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@types/react-highlight-words": "^0.16.4",
     "@vitejs/plugin-react": "^2.0.1",
     "typescript": "^4.6.4",
     "vite": "^3.0.7"

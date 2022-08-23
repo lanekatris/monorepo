@@ -1,6 +1,7 @@
 import './App.css';
 import '@picocss/pico/css/pico.min.css';
 import { Link } from 'react-router-dom';
+import { ROUTE_FEED } from './constants';
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
                 </summary>
                 <ul role="listbox">
                   <li>
-                    <a href="/api/home">Masterchief</a>
+                    <Link to={ROUTE_FEED}>Masterchief</Link>
                   </li>
                   <li>
                     <a href="/api/events">Calendar Events</a>
