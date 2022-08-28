@@ -32,15 +32,15 @@ export class GetHomeModelHandler implements IQueryHandler<GetHomeModelQuery> {
     // const events = await this.getAllGeneralEvents();
     const discs = await this.dgService.getDiscs();
     discs.forEach((x) => {
-      if (!x.event.date) {
+      if (!x.date) {
         this.logger.log(
-          `Ignoring disc ${x.event.brand}/${x.event.model} because there is no date associated`,
+          `Ignoring disc ${x.brand}/${x.model} because there is no date associated`,
         );
         return;
       }
       events.push({
-        date: format(new Date(x.event.date), 'yyyy-LL-dd'),
-        name: `#${x.discNumber} ${x.event.brand}/${x.event.model}`,
+        date: format(new Date(x.date), 'yyyy-LL-dd'),
+        name: `#${x.number} ${x.brand}/${x.model}`,
         type: 'Disc Added',
       });
     });

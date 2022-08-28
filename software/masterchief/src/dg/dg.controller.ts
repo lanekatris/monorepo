@@ -70,7 +70,10 @@ export class DgController {
   async discs() {
     const discs = await this.service.getDiscs();
     return {
-      discs,
+      discs: discs.map((d) => ({
+        event: d,
+        discNumber: d.number,
+      })),
       postUrl: prefixController(EventNames.DiscAdded),
       resetUrl: prefixController(EventNames.DiscsReset),
       uploadUrl: prefixController('bulk-upload'),

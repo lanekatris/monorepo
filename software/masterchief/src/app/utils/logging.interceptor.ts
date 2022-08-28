@@ -18,11 +18,17 @@ export class LoggingInterceptor implements NestInterceptor {
     return next.handle().pipe(
       tap(() => {
         const res: http.ServerResponse = ctx.getResponse();
-        this.logger.log(
-          `[${req.method} ${req.url}] ${res.statusCode} ${
-            Date.now() - start
-          }ms`,
-        );
+
+        // GraphQL doesn't have req
+        if (req) {
+          this.logger.log(
+            `[${req.method} ${req.url}] ${res.statusCode} ${
+              Date.now() - start
+            }ms`,
+          );
+        } else {
+          this.logger.log(`/graphql`);
+        }
       }),
     );
   }

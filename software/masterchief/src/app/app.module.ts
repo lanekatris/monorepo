@@ -17,6 +17,8 @@ import { ElasticsearchModule } from '@nestjs/elasticsearch';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 const spaPath = join(__dirname, '..', '..', '..', 'frontend', 'dist');
 console.log('spapath', spaPath);
@@ -42,7 +44,12 @@ console.log('spapath', spaPath);
     }),
     ServeStaticModule.forRoot({
       rootPath: join(spaPath),
-      exclude: ['/api*'],
+      exclude: ['/api*', '/graphql'],
+    }),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: true,
+      sortSchema: true,
     }),
   ],
   controllers: [AppController],

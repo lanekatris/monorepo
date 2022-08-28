@@ -6,10 +6,11 @@ import { DgService } from './dg.service';
 import { GeneratorController } from './generator.controller';
 import { CourseGeneratorModule } from './course-generator/course-generator.module';
 import { AuthModule } from '../auth/auth.module';
+import { DgResolver } from './dg.resolver';
 
 @Module({
   imports: [ConfigModule.forRoot(), CourseGeneratorModule, AuthModule],
-  providers: [eventStoreFactory, DgService],
+  providers: [eventStoreFactory, DgService, DgResolver],
   controllers: [DgController, GeneratorController],
   exports: [DgService],
 })

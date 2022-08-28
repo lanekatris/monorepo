@@ -8,8 +8,46 @@ import { nanoid } from 'nanoid';
 import { CourseExcluded } from './types/course-excluded';
 import { getDistance } from 'geolib';
 import { CourseDistanceFromHome, DiscGolfCourse } from './types/course';
+import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql';
 
 const GeoJSON = require('geojson');
+
+// export enum DiscBrand {
+//   Innova'innova',
+// }
+//
+// export enum DiscModel {
+//   Thunderbird='Thunderbird',
+// }
+//
+// registerEnumType(DiscBrand, {
+//   name: 'DiscBrand',
+// });
+//
+// registerEnumType(DiscModel, {
+//   name: 'DiscModel',
+// });
+
+@ObjectType()
+export class Disc {
+  @Field(() => ID)
+  @Field()
+  id: string;
+  @Field()
+  date: string;
+  // @Field(() => DiscBrand)
+  @Field()
+  brand: string;
+  // @Field(() => DiscModel)
+  @Field()
+  model: string;
+  @Field()
+  number: number;
+
+  @Field({ nullable: true })
+  color?: string;
+}
+
 @Injectable()
 export class DgService {
   private readonly logger = new Logger(DgService.name);
@@ -18,17 +56,22 @@ export class DgService {
     private client: EventStoreDBClient,
   ) {}
 
-  public async getDiscs() {
+  public async getDiscs(): Promise<Disc[]> {
     const events = this.client.readStream<DgEvents>('testies');
-    let discs = [];
+    let discs: Disc[] = [];
 
     let discNumber = 1;
     for await (const { event } of events) {
       switch (event.type) {
         case EventNames.DiscAdded:
           discs.unshift({
-            event: event.data,
-            discNumber,
+            // event: event.data,
+            // discNumber,
+            id: event.data.id,
+            date: event.data.date.toString(),
+            brand: event.data.brand,
+            model: event.data.model,
+            number: discNumber,
           });
           discNumber++;
           break;
@@ -38,7 +81,7 @@ export class DgService {
          * and nobody else can take it
          */
         case EventNames.DiscRemoved:
-          discs = discs.filter((x) => event.data.id !== x.event.id);
+          discs = discs.filter((x) => event.data.id !== x.id);
           break;
         case EventNames.DiscsReset:
           discs.length = 0;
