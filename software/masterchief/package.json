@@ -19,7 +19,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "gen": "json2ts -i src/app/schema.json -o src/app/schema.d.ts"
+    "gen": "json2ts -i src/app/schema.json -o src/app/schema.d.ts",
+    "gen2": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@elastic/elasticsearch": "~7.4.0",
@@ -65,7 +66,11 @@
     "rxjs": "^7.2.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^2.11.8",
+    "@graphql-codegen/cli": "2.11.8",
+    "@graphql-codegen/introspection": "2.2.1",
+    "@graphql-codegen/typescript": "2.7.3",
+    "@graphql-codegen/typescript-operations": "2.5.3",
+    "@graphql-codegen/typescript-react-apollo": "3.3.3",
     "@nestjs/cli": "^8.0.0",
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.0.0",

@@ -1,0 +1,9 @@
+query discs {
+    discs {
+        id
+        brand
+        model
+        number
+        color
+    }
+}
