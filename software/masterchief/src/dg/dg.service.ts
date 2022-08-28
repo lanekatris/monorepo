@@ -12,6 +12,15 @@ import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql';
 
 const GeoJSON = require('geojson');
 
+export enum DiscStatus {
+  Unknown,
+  InBag,
+  Lost,
+}
+registerEnumType(DiscStatus, {
+  name: 'DiscStatus',
+});
+
 // export enum DiscBrand {
 //   Innova'innova',
 // }
@@ -35,14 +44,15 @@ export class Disc {
   id: string;
   @Field()
   date: string;
-  // @Field(() => DiscBrand)
   @Field()
   brand: string;
-  // @Field(() => DiscModel)
   @Field()
   model: string;
   @Field()
   number: number;
+
+  @Field(() => DiscStatus)
+  status: DiscStatus;
 
   @Field({ nullable: true })
   color?: string;
@@ -65,13 +75,12 @@ export class DgService {
       switch (event.type) {
         case EventNames.DiscAdded:
           discs.unshift({
-            // event: event.data,
-            // discNumber,
             id: event.data.id,
             date: event.data.date.toString(),
             brand: event.data.brand,
             model: event.data.model,
             number: discNumber,
+            status: DiscStatus.Unknown,
           });
           discNumber++;
           break;
@@ -87,6 +96,13 @@ export class DgService {
           discs.length = 0;
           discNumber = 1;
           break;
+        case EventNames.DiscLost: {
+          const disc = discs.find((x) => x.id === event.data.discId);
+          if (disc) {
+            disc.status = DiscStatus.Lost;
+          }
+          break;
+        }
       }
     }
     return discs;
