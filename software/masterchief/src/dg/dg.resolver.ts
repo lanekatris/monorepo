@@ -13,6 +13,7 @@ import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { DgService, Disc, DiscStatus } from './dg.service';
 import { EventNames } from './types/disc-added';
 import { DiscLost } from './types/disc-lost';
+import { DiscStatusUpdated } from './types/disc-status-updated';
 
 // @ObjectType({ description: 'Blog post testies' })
 // export class BlogPost {
@@ -38,7 +39,13 @@ export class DiscsInput {
   statuses?: DiscStatus[];
 }
 
-@Resolver((of) => Disc)
+@InputType()
+export class DiscStatusInput extends DiscLostInput {
+  @Field(() => DiscStatus)
+  status: DiscStatus;
+}
+
+@Resolver(() => Disc)
 export class DgResolver {
   private readonly logger = new Logger(DgResolver.name);
 
@@ -49,7 +56,7 @@ export class DgResolver {
     private service: DgService,
   ) {}
 
-  @Query((returns) => [Disc])
+  @Query(() => [Disc])
   async discs(
     @Args('input', { nullable: true }) input?: DiscsInput,
   ): Promise<Disc[]> {
@@ -60,7 +67,7 @@ export class DgResolver {
     return discs;
   }
 
-  @Mutation((returns) => Disc, { nullable: true })
+  @Mutation(() => Disc, { nullable: true })
   async discLost(@Args('input') input: DiscLostInput): Promise<Disc> {
     const { discId } = input;
 
@@ -77,6 +84,31 @@ export class DgResolver {
         date: new Date(),
       },
     });
+    await this.client.appendToStream('testies', event);
+
+    const discs = await this.service.getDiscs();
+    return discs.find((x) => x.id === discId);
+  }
+
+  @Mutation(() => Disc, { nullable: true })
+  async discStatus(@Args('input') input: DiscStatusInput): Promise<Disc> {
+    const { discId, status } = input;
+
+    const discsFirst = await this.service.getDiscs();
+    if (!discsFirst.find((x) => x.id === discId)) {
+      this.logger.warn(`Disc not found for id: ${discId}, not doing anything`);
+      return null;
+    }
+
+    const event = jsonEvent<DiscStatusUpdated>({
+      type: EventNames.DiscStatusUpdated,
+      data: {
+        discId,
+        date: new Date(),
+        status,
+      },
+    });
+
     await this.client.appendToStream('testies', event);
 
     const discs = await this.service.getDiscs();

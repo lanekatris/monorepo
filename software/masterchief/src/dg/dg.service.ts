@@ -73,6 +73,14 @@ export class DgService {
     let discNumber = 1;
     for await (const { event } of events) {
       switch (event.type) {
+        case EventNames.DiscStatusUpdated: {
+          const disc = discs.find((x) => x.id === event.data.discId);
+          if (disc) {
+            disc.status = event.data.status;
+          }
+          break;
+        }
+
         case EventNames.DiscAdded:
           discs.unshift({
             id: event.data.id,
