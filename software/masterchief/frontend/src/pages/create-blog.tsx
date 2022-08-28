@@ -2,7 +2,7 @@ import MDEditor from '@uiw/react-md-editor';
 import { useState } from 'react';
 
 export default function CreateBlogPage() {
-  const [value, setValue] = useState('**Hello world!!!**');
+  const [value, setValue] = useState<string | undefined>();
   return (
     <div className="container" data-color-mode="dark">
       <h1>Create Bog Post</h1>
