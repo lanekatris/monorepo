@@ -77,7 +77,7 @@
         {{#if this.tags}}
           - Tags: {{this.tags}}
         {{/if}}
-        <form class="inline" method="post" action="/create-event">
+        <form class="inline" method="post" action="/api/create-event?redirect=/api/home">
           <input type="hidden" name="eventId" value="{{this.data.id}}" />
           <input type="hidden" name="eventName" value="event-deleted" />
           <input type="hidden" name="redirect" value="/home" />
