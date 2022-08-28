@@ -23,6 +23,42 @@ export type Disc = {
   id: Scalars['String'];
   model: Scalars['String'];
   number: Scalars['Float'];
+  status: DiscStatus;
+};
+
+export type DiscLostInput = {
+  discId: Scalars['ID'];
+};
+
+export enum DiscStatus {
+  InBag = 'InBag',
+  Lost = 'Lost',
+  Unknown = 'Unknown'
+}
+
+export type DiscStatusInput = {
+  discId: Scalars['ID'];
+  status: DiscStatus;
+};
+
+export type DiscsInput = {
+  statuses?: InputMaybe<Array<DiscStatus>>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  discLost?: Maybe<Disc>;
+  discStatus?: Maybe<Disc>;
+};
+
+
+export type MutationDiscLostArgs = {
+  input: DiscLostInput;
+};
+
+
+export type MutationDiscStatusArgs = {
+  input: DiscStatusInput;
 };
 
 export type Query = {
@@ -30,10 +66,22 @@ export type Query = {
   discs: Array<Disc>;
 };
 
+
+export type QueryDiscsArgs = {
+  input?: InputMaybe<DiscsInput>;
+};
+
 export type DiscsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type DiscsQuery = { __typename?: 'Query', discs: Array<{ __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null }> };
+export type DiscsQuery = { __typename?: 'Query', discs: Array<{ __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus }> };
+
+export type SetDiscStatusMutationVariables = Exact<{
+  input: DiscStatusInput;
+}>;
+
+
+export type SetDiscStatusMutation = { __typename?: 'Mutation', discStatus?: { __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus } | null };
 
 
 export const DiscsDocument = gql`
@@ -44,6 +92,7 @@ export const DiscsDocument = gql`
     model
     number
     color
+    status
   }
 }
     `;
@@ -74,3 +123,41 @@ export function useDiscsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Disc
 export type DiscsQueryHookResult = ReturnType<typeof useDiscsQuery>;
 export type DiscsLazyQueryHookResult = ReturnType<typeof useDiscsLazyQuery>;
 export type DiscsQueryResult = Apollo.QueryResult<DiscsQuery, DiscsQueryVariables>;
+export const SetDiscStatusDocument = gql`
+    mutation setDiscStatus($input: DiscStatusInput!) {
+  discStatus(input: $input) {
+    id
+    brand
+    model
+    number
+    color
+    status
+  }
+}
+    `;
+export type SetDiscStatusMutationFn = Apollo.MutationFunction<SetDiscStatusMutation, SetDiscStatusMutationVariables>;
+
+/**
+ * __useSetDiscStatusMutation__
+ *
+ * To run a mutation, you first call `useSetDiscStatusMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSetDiscStatusMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [setDiscStatusMutation, { data, loading, error }] = useSetDiscStatusMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useSetDiscStatusMutation(baseOptions?: Apollo.MutationHookOptions<SetDiscStatusMutation, SetDiscStatusMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SetDiscStatusMutation, SetDiscStatusMutationVariables>(SetDiscStatusDocument, options);
+      }
+export type SetDiscStatusMutationHookResult = ReturnType<typeof useSetDiscStatusMutation>;
+export type SetDiscStatusMutationResult = Apollo.MutationResult<SetDiscStatusMutation>;
+export type SetDiscStatusMutationOptions = Apollo.BaseMutationOptions<SetDiscStatusMutation, SetDiscStatusMutationVariables>;

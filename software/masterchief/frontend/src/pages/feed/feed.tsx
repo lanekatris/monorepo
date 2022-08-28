@@ -2,9 +2,6 @@ import NoteSearcher from '../../components/note-searcher/note-searcher';
 import { useDiscsQuery } from '../../graphql';
 
 export default function FeedPage() {
-  const { data, loading, error } = useDiscsQuery();
-
-  console.log({ data, loading, error });
   return (
     <div className="main container">
       <h4>Actions</h4>

@@ -5,5 +5,20 @@ query discs {
         model
         number
         color
+        status
     }
+}
+
+mutation setDiscStatus($input: DiscStatusInput!) {
+    discStatus(input: $input){
+    id
+    brand
+    model
+    number
+    color
+    status
+
+
+}
+
 }
