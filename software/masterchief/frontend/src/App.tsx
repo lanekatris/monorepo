@@ -64,10 +64,12 @@ function App() {
       </header>
       <section>
         <div className="text-center">
-          <img
-            alt="Me on top of Grays Peak, a 14er in Colorado"
-            src="https://ik.imagekit.io/lkat//tr:w-0.2/grays-peak-resized-1_Jn1kTLuiK"
-          />
+          <div style={{ height: 245, width: 500 }}>
+            <img
+              alt="Me on top of Grays Peak, a 14er in Colorado"
+              src="https://ik.imagekit.io/lkat//tr:w-0.2/grays-peak-resized-1_Jn1kTLuiK"
+            />
+          </div>
           <div>
             <h1>Hey, I'm Lane Katris</h1>
             <p>
