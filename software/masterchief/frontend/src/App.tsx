@@ -1,7 +1,7 @@
 import './App.css';
 import '@picocss/pico/css/pico.min.css';
 import { Link } from 'react-router-dom';
-import { ROUTE_FEED } from './constants';
+import { ROUTE_CREATE_BLOG, ROUTE_FEED } from './constants';
 
 function App() {
   return (
@@ -54,6 +54,9 @@ function App() {
                   </li>
                   <li>
                     <a href="/api/swagger-ui">Swagger Definition</a>
+                  </li>
+                  <li>
+                    <Link to={ROUTE_CREATE_BLOG}>Create Blog Post</Link>
                   </li>
                 </ul>
               </details>
