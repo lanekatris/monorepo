@@ -30,6 +30,7 @@ export default function NoteSearcher() {
             <Highlighter
               searchWords={[term]}
               autoEscape
+              // @ts-ignore
               textToHighlight={result._source.body}
             />
           </li>
