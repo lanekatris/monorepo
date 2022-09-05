@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="start:dev" type="js.build_tools.npm" nameIsGenerated="true">
+  <configuration default="false" name="Masterchief Server" type="js.build_tools.npm">
     <package-json value="$PROJECT_DIR$/software/masterchief/package.json" />
     <command value="run" />
     <scripts>

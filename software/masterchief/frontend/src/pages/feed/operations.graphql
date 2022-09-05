@@ -1,24 +1,26 @@
-query discs {
-    discs {
-        id
-        brand
-        model
-        number
-        color
-        status
-    }
-}
-
-mutation setDiscStatus($input: DiscStatusInput!) {
-    discStatus(input: $input){
+fragment AllDiscProps on Disc {
     id
     brand
     model
     number
     color
     status
-
-
 }
 
+query discs {
+    discs {
+        ...AllDiscProps
+    }
+}
+
+mutation setDiscStatus($input: DiscStatusInput!) {
+    discStatus(input: $input){
+        ...AllDiscProps
+    }
+}
+
+mutation setDiscColor($input: DiscColorInput!) {
+    discColor(input: $input){
+        ...AllDiscProps
+    }
 }

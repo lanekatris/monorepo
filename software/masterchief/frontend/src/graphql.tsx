@@ -26,6 +26,11 @@ export type Disc = {
   status: DiscStatus;
 };
 
+export type DiscColorInput = {
+  color: Scalars['String'];
+  discId: Scalars['ID'];
+};
+
 export type DiscLostInput = {
   discId: Scalars['ID'];
 };
@@ -47,8 +52,14 @@ export type DiscsInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  discColor?: Maybe<Disc>;
   discLost?: Maybe<Disc>;
   discStatus?: Maybe<Disc>;
+};
+
+
+export type MutationDiscColorArgs = {
+  input: DiscColorInput;
 };
 
 
@@ -71,6 +82,8 @@ export type QueryDiscsArgs = {
   input?: InputMaybe<DiscsInput>;
 };
 
+export type AllDiscPropsFragment = { __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus };
+
 export type DiscsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -83,19 +96,30 @@ export type SetDiscStatusMutationVariables = Exact<{
 
 export type SetDiscStatusMutation = { __typename?: 'Mutation', discStatus?: { __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus } | null };
 
+export type SetDiscColorMutationVariables = Exact<{
+  input: DiscColorInput;
+}>;
 
+
+export type SetDiscColorMutation = { __typename?: 'Mutation', discColor?: { __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus } | null };
+
+export const AllDiscPropsFragmentDoc = gql`
+    fragment AllDiscProps on Disc {
+  id
+  brand
+  model
+  number
+  color
+  status
+}
+    `;
 export const DiscsDocument = gql`
     query discs {
   discs {
-    id
-    brand
-    model
-    number
-    color
-    status
+    ...AllDiscProps
   }
 }
-    `;
+    ${AllDiscPropsFragmentDoc}`;
 
 /**
  * __useDiscsQuery__
@@ -126,15 +150,10 @@ export type DiscsQueryResult = Apollo.QueryResult<DiscsQuery, DiscsQueryVariable
 export const SetDiscStatusDocument = gql`
     mutation setDiscStatus($input: DiscStatusInput!) {
   discStatus(input: $input) {
-    id
-    brand
-    model
-    number
-    color
-    status
+    ...AllDiscProps
   }
 }
-    `;
+    ${AllDiscPropsFragmentDoc}`;
 export type SetDiscStatusMutationFn = Apollo.MutationFunction<SetDiscStatusMutation, SetDiscStatusMutationVariables>;
 
 /**
@@ -161,3 +180,36 @@ export function useSetDiscStatusMutation(baseOptions?: Apollo.MutationHookOption
 export type SetDiscStatusMutationHookResult = ReturnType<typeof useSetDiscStatusMutation>;
 export type SetDiscStatusMutationResult = Apollo.MutationResult<SetDiscStatusMutation>;
 export type SetDiscStatusMutationOptions = Apollo.BaseMutationOptions<SetDiscStatusMutation, SetDiscStatusMutationVariables>;
+export const SetDiscColorDocument = gql`
+    mutation setDiscColor($input: DiscColorInput!) {
+  discColor(input: $input) {
+    ...AllDiscProps
+  }
+}
+    ${AllDiscPropsFragmentDoc}`;
+export type SetDiscColorMutationFn = Apollo.MutationFunction<SetDiscColorMutation, SetDiscColorMutationVariables>;
+
+/**
+ * __useSetDiscColorMutation__
+ *
+ * To run a mutation, you first call `useSetDiscColorMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSetDiscColorMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [setDiscColorMutation, { data, loading, error }] = useSetDiscColorMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useSetDiscColorMutation(baseOptions?: Apollo.MutationHookOptions<SetDiscColorMutation, SetDiscColorMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SetDiscColorMutation, SetDiscColorMutationVariables>(SetDiscColorDocument, options);
+      }
+export type SetDiscColorMutationHookResult = ReturnType<typeof useSetDiscColorMutation>;
+export type SetDiscColorMutationResult = Apollo.MutationResult<SetDiscColorMutation>;
+export type SetDiscColorMutationOptions = Apollo.BaseMutationOptions<SetDiscColorMutation, SetDiscColorMutationVariables>;

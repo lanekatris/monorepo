@@ -21,22 +21,6 @@ registerEnumType(DiscStatus, {
   name: 'DiscStatus',
 });
 
-// export enum DiscBrand {
-//   Innova'innova',
-// }
-//
-// export enum DiscModel {
-//   Thunderbird='Thunderbird',
-// }
-//
-// registerEnumType(DiscBrand, {
-//   name: 'DiscBrand',
-// });
-//
-// registerEnumType(DiscModel, {
-//   name: 'DiscModel',
-// });
-
 @ObjectType()
 export class Disc {
   @Field(() => ID)
@@ -73,6 +57,12 @@ export class DgService {
     let discNumber = 1;
     for await (const { event } of events) {
       switch (event.type) {
+        case EventNames.DiscColorUpdated:
+          const disc = discs.find((x) => x.id === event.data.discId);
+          if (disc) {
+            disc.color = event.data.color;
+          }
+          break;
         case EventNames.DiscStatusUpdated: {
           const disc = discs.find((x) => x.id === event.data.discId);
           if (disc) {

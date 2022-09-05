@@ -5,7 +5,7 @@ import { ROUTE_CREATE_BLOG, ROUTE_FEED } from './constants';
 
 function App() {
   return (
-    <div className="container" data-theme="dark">
+    <div className="home container" data-theme="dark">
       <progress id="global-progress" className="fixed non-visible"></progress>
       <header className="no-padding">
         <nav>
