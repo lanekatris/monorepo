@@ -17,11 +17,18 @@ import { ESDB } from '../app/utils/constants';
 import { DiscColorUpdated } from './types/disc-color-updated';
 import { nanoid } from 'nanoid';
 import { isDate } from 'lodash';
+import { DiscBrandUpdated } from './types/disc-brand-updated';
 
 @InputType()
 export class DiscLostInput {
   @Field(() => ID)
   discId: string;
+}
+
+@InputType()
+export class DiscBrandInput extends DiscLostInput {
+  @Field()
+  brand: string;
 }
 
 @InputType()
@@ -135,9 +142,34 @@ export class DgMutationsResolver {
     return discs.find((x) => x.id === discId);
   }
 
+  @Mutation(() => Disc, { nullable: true })
+  async discBrand(@Args('input') input: DiscBrandInput): Promise<Disc> {
+    const { discId, brand } = input;
+
+    const discsFirst = await this.service.getDiscs();
+    if (!discsFirst.find((x) => x.id === discId)) {
+      this.logger.warn(`Disc not found for id: ${discId}, not doing anything`);
+      return null;
+    }
+
+    const event = jsonEvent<DiscBrandUpdated>({
+      type: EventNames.DiscBrandUpdated,
+      data: {
+        discId,
+        brand,
+        date: new Date(),
+      },
+    });
+
+    await this.client.appendToStream('testies', event);
+
+    const discs = await this.service.getDiscs();
+    return discs.find((x) => x.id === discId);
+  }
+
   @Mutation(() => Disc)
   async discCreate(@Args('input') input: DiscCreateInput): Promise<Disc> {
-    const { date, brand, model } = input;
+    const { date, brand, model, color } = input;
     const discId = nanoid();
     const event = jsonEvent<DiscAdded>({
       type: EventNames.DiscAdded,
@@ -146,6 +178,7 @@ export class DgMutationsResolver {
         date: isDate(date) ? date : new Date(),
         brand,
         model,
+        color,
       },
     });
     await this.client.appendToStream('testies', event);

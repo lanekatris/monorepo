@@ -60,12 +60,20 @@ export class DgService {
     let discNumber = 1;
     for await (const { event } of events) {
       switch (event.type) {
-        case EventNames.DiscColorUpdated:
+        case EventNames.DiscColorUpdated: {
           const disc = discs.find((x) => x.id === event.data.discId);
           if (disc) {
             disc.color = event.data.color;
           }
           break;
+        }
+        case EventNames.DiscBrandUpdated: {
+          const disc = discs.find((x) => x.id === event.data.discId);
+          if (disc) {
+            disc.brand = event.data.brand;
+          }
+          break;
+        }
         case EventNames.DiscStatusUpdated: {
           const disc = discs.find((x) => x.id === event.data.discId);
           if (disc) {
@@ -82,6 +90,7 @@ export class DgService {
             model: event.data.model,
             number: discNumber,
             status: DiscStatus.Unknown,
+            color: event.data.color,
           });
           discNumber++;
           break;

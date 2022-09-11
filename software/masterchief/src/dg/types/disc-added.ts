@@ -2,6 +2,7 @@ import { JSONEventType } from '@eventstore/db-client';
 import { DiscLost } from './disc-lost';
 import { DiscStatusUpdated } from './disc-status-updated';
 import { DiscColorUpdated } from './disc-color-updated';
+import { DiscBrandUpdated } from './disc-brand-updated';
 
 export enum EventNames {
   DiscAdded = 'disc-added',
@@ -22,6 +23,7 @@ export enum EventNames {
   PersonalRecordClimbingCreated = 'personal-record-climbing-created',
   DiscStatusUpdated = 'disc-status-updated',
   DiscColorUpdated = 'disc-color-updated',
+  DiscBrandUpdated = 'disc-brand-updated',
 }
 
 export type DiscAdded = JSONEventType<
@@ -31,6 +33,7 @@ export type DiscAdded = JSONEventType<
     date?: Date;
     brand: string;
     model: string;
+    color?: string;
   }
 >;
 
@@ -50,4 +53,5 @@ export type DgEvents =
   | DiscsReset
   | DiscLost
   | DiscStatusUpdated
-  | DiscColorUpdated;
+  | DiscColorUpdated
+  | DiscBrandUpdated;

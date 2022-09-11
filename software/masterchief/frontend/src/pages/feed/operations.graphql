@@ -38,3 +38,9 @@ mutation discRemove($input: DiscRemoveInput!){
         deleted
     }
 }
+
+mutation discBrand($input: DiscBrandInput!){
+    discBrand(input: $input){
+        ...AllDiscProps
+    }
+}

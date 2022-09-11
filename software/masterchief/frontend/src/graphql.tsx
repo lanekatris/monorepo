@@ -21,11 +21,16 @@ export type Disc = {
   brand: Scalars['String'];
   color?: Maybe<Scalars['String']>;
   date: Scalars['String'];
-  deleted: Scalars['Boolean'];
+  deleted?: Maybe<Scalars['Boolean']>;
   id: Scalars['String'];
   model: Scalars['String'];
   number: Scalars['Float'];
   status: DiscStatus;
+};
+
+export type DiscBrandInput = {
+  brand: Scalars['String'];
+  discId: Scalars['ID'];
 };
 
 export type DiscColorInput = {
@@ -65,11 +70,17 @@ export type DiscsInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  discBrand?: Maybe<Disc>;
   discColor?: Maybe<Disc>;
   discCreate: Disc;
   discLost?: Maybe<Disc>;
   discRemove: Disc;
   discStatus?: Maybe<Disc>;
+};
+
+
+export type MutationDiscBrandArgs = {
+  input: DiscBrandInput;
 };
 
 
@@ -107,40 +118,47 @@ export type QueryDiscsArgs = {
   input?: InputMaybe<DiscsInput>;
 };
 
-export type AllDiscPropsFragment = { __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus, deleted: boolean };
+export type AllDiscPropsFragment = { __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus, deleted?: boolean | null };
 
 export type DiscsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type DiscsQuery = { __typename?: 'Query', discs: Array<{ __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus, deleted: boolean }> };
+export type DiscsQuery = { __typename?: 'Query', discs: Array<{ __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus, deleted?: boolean | null }> };
 
 export type SetDiscStatusMutationVariables = Exact<{
   input: DiscStatusInput;
 }>;
 
 
-export type SetDiscStatusMutation = { __typename?: 'Mutation', discStatus?: { __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus, deleted: boolean } | null };
+export type SetDiscStatusMutation = { __typename?: 'Mutation', discStatus?: { __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus, deleted?: boolean | null } | null };
 
 export type SetDiscColorMutationVariables = Exact<{
   input: DiscColorInput;
 }>;
 
 
-export type SetDiscColorMutation = { __typename?: 'Mutation', discColor?: { __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus, deleted: boolean } | null };
+export type SetDiscColorMutation = { __typename?: 'Mutation', discColor?: { __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus, deleted?: boolean | null } | null };
 
 export type DiscCreateMutationVariables = Exact<{
   input: DiscCreateInput;
 }>;
 
 
-export type DiscCreateMutation = { __typename?: 'Mutation', discCreate: { __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus, deleted: boolean } };
+export type DiscCreateMutation = { __typename?: 'Mutation', discCreate: { __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus, deleted?: boolean | null } };
 
 export type DiscRemoveMutationVariables = Exact<{
   input: DiscRemoveInput;
 }>;
 
 
-export type DiscRemoveMutation = { __typename?: 'Mutation', discRemove: { __typename?: 'Disc', id: string, deleted: boolean } };
+export type DiscRemoveMutation = { __typename?: 'Mutation', discRemove: { __typename?: 'Disc', id: string, deleted?: boolean | null } };
+
+export type DiscBrandMutationVariables = Exact<{
+  input: DiscBrandInput;
+}>;
+
+
+export type DiscBrandMutation = { __typename?: 'Mutation', discBrand?: { __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus, deleted?: boolean | null } | null };
 
 export const AllDiscPropsFragmentDoc = gql`
     fragment AllDiscProps on Disc {
@@ -320,3 +338,36 @@ export function useDiscRemoveMutation(baseOptions?: Apollo.MutationHookOptions<D
 export type DiscRemoveMutationHookResult = ReturnType<typeof useDiscRemoveMutation>;
 export type DiscRemoveMutationResult = Apollo.MutationResult<DiscRemoveMutation>;
 export type DiscRemoveMutationOptions = Apollo.BaseMutationOptions<DiscRemoveMutation, DiscRemoveMutationVariables>;
+export const DiscBrandDocument = gql`
+    mutation discBrand($input: DiscBrandInput!) {
+  discBrand(input: $input) {
+    ...AllDiscProps
+  }
+}
+    ${AllDiscPropsFragmentDoc}`;
+export type DiscBrandMutationFn = Apollo.MutationFunction<DiscBrandMutation, DiscBrandMutationVariables>;
+
+/**
+ * __useDiscBrandMutation__
+ *
+ * To run a mutation, you first call `useDiscBrandMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDiscBrandMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [discBrandMutation, { data, loading, error }] = useDiscBrandMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useDiscBrandMutation(baseOptions?: Apollo.MutationHookOptions<DiscBrandMutation, DiscBrandMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DiscBrandMutation, DiscBrandMutationVariables>(DiscBrandDocument, options);
+      }
+export type DiscBrandMutationHookResult = ReturnType<typeof useDiscBrandMutation>;
+export type DiscBrandMutationResult = Apollo.MutationResult<DiscBrandMutation>;
+export type DiscBrandMutationOptions = Apollo.BaseMutationOptions<DiscBrandMutation, DiscBrandMutationVariables>;
