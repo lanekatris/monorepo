@@ -44,3 +44,9 @@ mutation discBrand($input: DiscBrandInput!){
         ...AllDiscProps
     }
 }
+
+mutation discUpdate($input: DiscUpdateInput!){
+    discUpdate(input: $input){
+        ...AllDiscProps
+    }
+}

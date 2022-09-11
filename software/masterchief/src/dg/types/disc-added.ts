@@ -3,6 +3,7 @@ import { DiscLost } from './disc-lost';
 import { DiscStatusUpdated } from './disc-status-updated';
 import { DiscColorUpdated } from './disc-color-updated';
 import { DiscBrandUpdated } from './disc-brand-updated';
+import { DiscUpdated } from './disc-updated';
 
 export enum EventNames {
   DiscAdded = 'disc-added',
@@ -24,6 +25,7 @@ export enum EventNames {
   DiscStatusUpdated = 'disc-status-updated',
   DiscColorUpdated = 'disc-color-updated',
   DiscBrandUpdated = 'disc-brand-updated',
+  DiscUpdated = 'disc-updated',
 }
 
 export type DiscAdded = JSONEventType<
@@ -54,4 +56,5 @@ export type DgEvents =
   | DiscLost
   | DiscStatusUpdated
   | DiscColorUpdated
-  | DiscBrandUpdated;
+  | DiscBrandUpdated
+  | DiscUpdated;

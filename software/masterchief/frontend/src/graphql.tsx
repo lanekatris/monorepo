@@ -64,6 +64,12 @@ export type DiscStatusInput = {
   status: DiscStatus;
 };
 
+export type DiscUpdateInput = {
+  brand?: InputMaybe<Scalars['String']>;
+  id: Scalars['ID'];
+  model?: InputMaybe<Scalars['String']>;
+};
+
 export type DiscsInput = {
   statuses?: InputMaybe<Array<DiscStatus>>;
 };
@@ -76,6 +82,7 @@ export type Mutation = {
   discLost?: Maybe<Disc>;
   discRemove: Disc;
   discStatus?: Maybe<Disc>;
+  discUpdate?: Maybe<Disc>;
 };
 
 
@@ -106,6 +113,11 @@ export type MutationDiscRemoveArgs = {
 
 export type MutationDiscStatusArgs = {
   input: DiscStatusInput;
+};
+
+
+export type MutationDiscUpdateArgs = {
+  input: DiscUpdateInput;
 };
 
 export type Query = {
@@ -159,6 +171,13 @@ export type DiscBrandMutationVariables = Exact<{
 
 
 export type DiscBrandMutation = { __typename?: 'Mutation', discBrand?: { __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus, deleted?: boolean | null } | null };
+
+export type DiscUpdateMutationVariables = Exact<{
+  input: DiscUpdateInput;
+}>;
+
+
+export type DiscUpdateMutation = { __typename?: 'Mutation', discUpdate?: { __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus, deleted?: boolean | null } | null };
 
 export const AllDiscPropsFragmentDoc = gql`
     fragment AllDiscProps on Disc {
@@ -371,3 +390,36 @@ export function useDiscBrandMutation(baseOptions?: Apollo.MutationHookOptions<Di
 export type DiscBrandMutationHookResult = ReturnType<typeof useDiscBrandMutation>;
 export type DiscBrandMutationResult = Apollo.MutationResult<DiscBrandMutation>;
 export type DiscBrandMutationOptions = Apollo.BaseMutationOptions<DiscBrandMutation, DiscBrandMutationVariables>;
+export const DiscUpdateDocument = gql`
+    mutation discUpdate($input: DiscUpdateInput!) {
+  discUpdate(input: $input) {
+    ...AllDiscProps
+  }
+}
+    ${AllDiscPropsFragmentDoc}`;
+export type DiscUpdateMutationFn = Apollo.MutationFunction<DiscUpdateMutation, DiscUpdateMutationVariables>;
+
+/**
+ * __useDiscUpdateMutation__
+ *
+ * To run a mutation, you first call `useDiscUpdateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDiscUpdateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [discUpdateMutation, { data, loading, error }] = useDiscUpdateMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useDiscUpdateMutation(baseOptions?: Apollo.MutationHookOptions<DiscUpdateMutation, DiscUpdateMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DiscUpdateMutation, DiscUpdateMutationVariables>(DiscUpdateDocument, options);
+      }
+export type DiscUpdateMutationHookResult = ReturnType<typeof useDiscUpdateMutation>;
+export type DiscUpdateMutationResult = Apollo.MutationResult<DiscUpdateMutation>;
+export type DiscUpdateMutationOptions = Apollo.BaseMutationOptions<DiscUpdateMutation, DiscUpdateMutationVariables>;

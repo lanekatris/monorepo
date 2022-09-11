@@ -8,7 +8,12 @@ import { nanoid } from 'nanoid';
 import { CourseExcluded } from './types/course-excluded';
 import { getDistance } from 'geolib';
 import { CourseDistanceFromHome, DiscGolfCourse } from './types/course';
-import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql';
+import {
+  Field,
+  ID,
+  ObjectType,
+  registerEnumType,
+} from '@nestjs/graphql';
 
 const GeoJSON = require('geojson');
 
@@ -60,6 +65,17 @@ export class DgService {
     let discNumber = 1;
     for await (const { event } of events) {
       switch (event.type) {
+        case EventNames.DiscUpdated:
+          const disc = discs.find((x) => x.id === event.data.discId);
+          if (disc) {
+            Object.keys(event.data).forEach((key) => {
+              if (event.data[key]) {
+                disc[key] = event.data[key];
+              }
+            });
+          }
+
+          break;
         case EventNames.DiscColorUpdated: {
           const disc = discs.find((x) => x.id === event.data.discId);
           if (disc) {

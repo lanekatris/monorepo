@@ -8,7 +8,7 @@ import DiscColor from './disc-color';
 import orderBy from 'lodash/orderBy';
 import { AddDisc } from '../components/addDisc';
 import { DeleteDisc } from '../components/deleteDisc';
-import { EditableBrand } from '../components/editableBrand';
+import { EditableDiscField } from '../components/editableDiscField';
 
 export default function DiscsPage() {
   const { data, loading, error, refetch, called } = useDiscsQuery({
@@ -241,8 +241,17 @@ export default function DiscsPage() {
           .map((disc) => (
             <div key={disc.id}>
               {disc.number} - [
-              <EditableBrand brand={disc.brand} discId={disc.id} />
-              ] <DiscColor color={disc.color} /> {disc.model}{' '}
+              <EditableDiscField
+                name="brand"
+                value={disc.brand}
+                discId={disc.id}
+              />
+              ] <DiscColor color={disc.color} />{' '}
+              <EditableDiscField
+                name="model"
+                value={disc.model}
+                discId={disc.id}
+              />{' '}
               <i>{disc.status}</i>
               {dropdowns.map((dropdown) => (
                 <nav

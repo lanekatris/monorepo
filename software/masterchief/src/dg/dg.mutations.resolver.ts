@@ -18,6 +18,7 @@ import { DiscColorUpdated } from './types/disc-color-updated';
 import { nanoid } from 'nanoid';
 import { isDate } from 'lodash';
 import { DiscBrandUpdated } from './types/disc-brand-updated';
+import { DiscUpdated } from './types/disc-updated';
 
 @InputType()
 export class DiscLostInput {
@@ -57,6 +58,18 @@ export class DiscCreateInput {
 
 @InputType()
 export class DiscRemoveInput extends DiscLostInput {}
+
+@InputType()
+export class DiscUpdateInput {
+  @Field(() => ID)
+  id: string;
+
+  @Field({ nullable: true })
+  model?: string;
+
+  @Field({ nullable: true })
+  brand?: string;
+}
 
 @Resolver(() => Disc)
 export class DgMutationsResolver {
@@ -165,6 +178,26 @@ export class DgMutationsResolver {
 
     const discs = await this.service.getDiscs();
     return discs.find((x) => x.id === discId);
+  }
+
+  // todo: get rid of the other mutations for now, don't need 'em
+  @Mutation(() => Disc, { nullable: true })
+  async discUpdate(
+    @Args('input') input: DiscUpdateInput,
+  ): Promise<Partial<Disc>> {
+    const { id } = input;
+    const event = jsonEvent<DiscUpdated>({
+      type: EventNames.DiscUpdated,
+      data: {
+        ...input,
+        discId: id,
+      },
+    });
+
+    await this.client.appendToStream('testies', event); // todo: use constant
+
+    const discs = await this.service.getDiscs();
+    return discs.find((x) => x.id === id);
   }
 
   @Mutation(() => Disc)
