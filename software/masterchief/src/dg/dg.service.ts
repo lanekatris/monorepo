@@ -8,12 +8,7 @@ import { nanoid } from 'nanoid';
 import { CourseExcluded } from './types/course-excluded';
 import { getDistance } from 'geolib';
 import { CourseDistanceFromHome, DiscGolfCourse } from './types/course';
-import {
-  Field,
-  ID,
-  ObjectType,
-  registerEnumType,
-} from '@nestjs/graphql';
+import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql';
 
 const GeoJSON = require('geojson');
 
