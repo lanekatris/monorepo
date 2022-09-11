@@ -53,6 +53,8 @@ spec:
                   key: elastic_url
                   name: mc-secret
                   optional: false
+            - name: VITE_GRAPHQL_URL
+              value: https://lanekatris.com/graphql
 
 ---
 apiVersion: v1

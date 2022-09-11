@@ -15,9 +15,9 @@ import {
 import CreateBlogPage from './pages/create-blog';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import DiscsPage from './pages/discs';
-
+console.log('url man', import.meta.env.VITE_GRAPHQL_URL);
 const client = new ApolloClient({
-  uri: 'http://localhost:3000/graphql',
+  uri: import.meta.env.VITE_GRAPHQL_URL,
   cache: new InMemoryCache(),
 });
 
