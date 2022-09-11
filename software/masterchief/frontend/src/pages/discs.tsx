@@ -5,7 +5,7 @@ import {
   useSetDiscStatusMutation,
 } from '../graphql';
 import DiscColor from './disc-color';
-import orderBy from 'lodash/orderBy';
+import { orderBy } from 'lodash';
 import { AddDisc } from '../components/addDisc';
 import { DeleteDisc } from '../components/deleteDisc';
 import { EditableDiscField } from '../components/editableDiscField';
