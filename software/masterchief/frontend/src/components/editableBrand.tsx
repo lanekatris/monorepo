@@ -1,6 +1,5 @@
-import { useRef } from 'react';
 import { useDiscBrandMutation } from '../graphql';
-import ContentEditable from 'react-contenteditable';
+import { InlineEditableField } from './inlineEditableField';
 
 export function EditableBrand({
   brand,
@@ -9,29 +8,21 @@ export function EditableBrand({
   brand: string;
   discId: string;
 }) {
-  const newBrand = useRef(brand);
   const [update, { loading: saving }] = useDiscBrandMutation();
-
   return (
-    <ContentEditable
-      className="inline"
-      html={newBrand.current}
-      disabled={saving}
-      onChange={(e) => (newBrand.current = e.target.value)}
-      onBlur={() => {
-        if (brand === newBrand.current) {
-          console.log('the same brand, not doing anything');
-          return;
-        }
+    <InlineEditableField
+      value={brand}
+      onUpdate={(newValue: string) => {
         update({
           variables: {
             input: {
               discId,
-              brand: newBrand.current,
+              brand: newValue,
             },
           },
         });
       }}
+      saving={saving}
     />
   );
 }
