@@ -12,13 +12,14 @@ import { DiscLost } from './types/disc-lost';
 import { DiscAdded, DiscRemoved, EventNames } from './types/disc-added';
 import { DiscStatusUpdated } from './types/disc-status-updated';
 
-import { Inject, Logger } from '@nestjs/common';
+import { Inject, Logger, UseGuards } from '@nestjs/common';
 import { ESDB } from '../app/utils/constants';
 import { DiscColorUpdated } from './types/disc-color-updated';
 import { nanoid } from 'nanoid';
 import { isDate } from 'lodash';
 import { DiscBrandUpdated } from './types/disc-brand-updated';
 import { DiscUpdated } from './types/disc-updated';
+import { GuardMe } from '../auth/guard-me.guard';
 
 @InputType()
 export class DiscLostInput {
@@ -72,6 +73,7 @@ export class DiscUpdateInput {
 }
 
 @Resolver(() => Disc)
+@UseGuards(GuardMe)
 export class DgMutationsResolver {
   private readonly logger = new Logger(DgMutationsResolver.name);
 

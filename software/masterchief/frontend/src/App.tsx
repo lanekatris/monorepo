@@ -1,7 +1,7 @@
 import './App.css';
 import '@picocss/pico/css/pico.min.css';
 import { Link } from 'react-router-dom';
-import { ROUTE_CREATE_BLOG, ROUTE_FEED } from './constants';
+import { ROUTE_CREATE_BLOG, ROUTE_DISCS, ROUTE_FEED } from './constants';
 
 function App() {
   return (
@@ -41,7 +41,7 @@ function App() {
                     <hr />
                   </li>
                   <li>
-                    <a href="/api/dg/discs">Disc Directory</a>
+                    <Link to={ROUTE_DISCS}>Disc Directory</Link>
                   </li>
                   <li>
                     <a href="/api/dg/courses">Courses Played</a>
