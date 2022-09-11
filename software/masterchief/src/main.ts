@@ -37,12 +37,12 @@ async function bootstrap() {
 
   app.disable('x-powered-by');
 
-  const whitelist = ['localhost:5173']; //https://morioh.com/p/bad87f42e5dd
-  app.enableCors({
-    origin: 'http://localhost:3001',
-    methods: '*',
-    credentials: true,
-  });
+  // const whitelist = ['localhost:5173']; //https://morioh.com/p/bad87f42e5dd
+  // app.enableCors({
+  //   origin: 'http://localhost:3001',
+  //   methods: '*',
+  //   credentials: true,
+  // });
 
   const config = new DocumentBuilder().setTitle('Masterchief').build();
   const document = SwaggerModule.createDocument(app, config);
