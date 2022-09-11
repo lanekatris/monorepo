@@ -40,6 +40,9 @@ export class Disc {
 
   @Field({ nullable: true })
   color?: string;
+
+  @Field({ nullable: true })
+  deleted?: boolean;
 }
 
 @Injectable()
@@ -74,7 +77,7 @@ export class DgService {
         case EventNames.DiscAdded:
           discs.unshift({
             id: event.data.id,
-            date: event.data.date.toString(),
+            date: event.data.date?.toString(),
             brand: event.data.brand,
             model: event.data.model,
             number: discNumber,
@@ -82,13 +85,9 @@ export class DgService {
           });
           discNumber++;
           break;
-
-        /**
-         * Don't decrement disc numbers. Once you add a disc it gets a forever incremented number
-         * and nobody else can take it
-         */
         case EventNames.DiscRemoved:
           discs = discs.filter((x) => event.data.id !== x.id);
+          discNumber--;
           break;
         case EventNames.DiscsReset:
           discs.length = 0;

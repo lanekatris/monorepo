@@ -9,12 +9,15 @@ import {
 import { DgService, Disc, DiscStatus } from './dg.service';
 import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { DiscLost } from './types/disc-lost';
-import { EventNames } from './types/disc-added';
+import { DiscAdded, DiscRemoved, EventNames } from './types/disc-added';
 import { DiscStatusUpdated } from './types/disc-status-updated';
 
 import { Inject, Logger } from '@nestjs/common';
 import { ESDB } from '../app/utils/constants';
 import { DiscColorUpdated } from './types/disc-color-updated';
+import { nanoid } from 'nanoid';
+import { isDate } from 'lodash';
+
 @InputType()
 export class DiscLostInput {
   @Field(() => ID)
@@ -32,6 +35,21 @@ export class DiscColorInput extends DiscLostInput {
   @Field()
   color: string;
 }
+
+@InputType()
+export class DiscCreateInput {
+  @Field(() => Date, { nullable: true })
+  date?: Date;
+  @Field()
+  brand: string;
+  @Field()
+  model: string;
+  @Field({ nullable: true })
+  color?: string;
+}
+
+@InputType()
+export class DiscRemoveInput extends DiscLostInput {}
 
 @Resolver(() => Disc)
 export class DgMutationsResolver {
@@ -115,5 +133,43 @@ export class DgMutationsResolver {
 
     const discs = await this.service.getDiscs();
     return discs.find((x) => x.id === discId);
+  }
+
+  @Mutation(() => Disc)
+  async discCreate(@Args('input') input: DiscCreateInput): Promise<Disc> {
+    const { date, brand, model } = input;
+    const discId = nanoid();
+    const event = jsonEvent<DiscAdded>({
+      type: EventNames.DiscAdded,
+      data: {
+        id: discId,
+        date: isDate(date) ? date : new Date(),
+        brand,
+        model,
+      },
+    });
+    await this.client.appendToStream('testies', event);
+
+    const discs = await this.service.getDiscs();
+    return discs.find((x) => x.id === discId);
+  }
+
+  @Mutation(() => Disc)
+  async discRemove(
+    @Args('input') input: DiscRemoveInput,
+  ): Promise<Partial<Disc>> {
+    const { discId } = input;
+    const event = jsonEvent<DiscRemoved>({
+      type: EventNames.DiscRemoved,
+      data: {
+        date: new Date(),
+        id: discId,
+      },
+    });
+    await this.client.appendToStream('testies', event);
+    return {
+      id: discId,
+      deleted: true,
+    };
   }
 }

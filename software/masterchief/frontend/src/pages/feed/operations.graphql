@@ -5,6 +5,7 @@ fragment AllDiscProps on Disc {
     number
     color
     status
+    deleted
 }
 
 query discs {
@@ -22,5 +23,18 @@ mutation setDiscStatus($input: DiscStatusInput!) {
 mutation setDiscColor($input: DiscColorInput!) {
     discColor(input: $input){
         ...AllDiscProps
+    }
+}
+
+mutation discCreate($input: DiscCreateInput!){
+    discCreate(input: $input){
+        ...AllDiscProps
+    }
+}
+
+mutation discRemove($input: DiscRemoveInput!){
+    discRemove(input: $input) {
+        id
+        deleted
     }
 }
