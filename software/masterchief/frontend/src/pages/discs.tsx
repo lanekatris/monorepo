@@ -9,6 +9,7 @@ import { orderBy } from 'lodash';
 import { AddDisc } from '../components/addDisc';
 import { DeleteDisc } from '../components/deleteDisc';
 import { EditableDiscField } from '../components/editableDiscField';
+import Layout from '../components/layout';
 
 export default function DiscsPage() {
   const { data, loading, error, refetch, called } = useDiscsQuery({
@@ -221,7 +222,7 @@ export default function DiscsPage() {
   ];
 
   return (
-    <div className="main container">
+    <Layout>
       <h2>Your Discs {data?.discs.length && `(${data?.discs.length})`}</h2>
 
       <AddDisc onSave={() => refetch()} />
@@ -291,6 +292,6 @@ export default function DiscsPage() {
             </div>
           ))}
       </div>
-    </div>
+    </Layout>
   );
 }

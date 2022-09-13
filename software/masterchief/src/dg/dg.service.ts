@@ -24,7 +24,6 @@ registerEnumType(DiscStatus, {
 @ObjectType()
 export class Disc {
   @Field(() => ID)
-  @Field()
   id: string;
   @Field()
   date: string;

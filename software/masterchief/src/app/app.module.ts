@@ -19,9 +19,10 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { AppQueriesResolver } from './app.queries.resolver';
 
 const spaPath = join(__dirname, '..', '..', '..', 'frontend', 'dist');
-console.log('spapath', spaPath);
+
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -59,6 +60,7 @@ console.log('spapath', spaPath);
     ...QueryHandlers,
     ...CommandHandlers,
     ...Subscribers,
+    AppQueriesResolver,
   ],
   exports: [ElasticsearchModule],
 })

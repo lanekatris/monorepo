@@ -16,13 +16,20 @@ export type Scalars = {
   DateTime: any;
 };
 
+export type ChildEvent = FeedEvent & {
+  __typename?: 'ChildEvent';
+  date: Scalars['String'];
+  id: Scalars['ID'];
+  name: Scalars['String'];
+};
+
 export type Disc = {
   __typename?: 'Disc';
   brand: Scalars['String'];
   color?: Maybe<Scalars['String']>;
   date: Scalars['String'];
   deleted?: Maybe<Scalars['Boolean']>;
-  id: Scalars['String'];
+  id: Scalars['ID'];
   model: Scalars['String'];
   number: Scalars['Float'];
   status: DiscStatus;
@@ -74,6 +81,54 @@ export type DiscsInput = {
   statuses?: InputMaybe<Array<DiscStatus>>;
 };
 
+export enum EventName {
+  AdventureCreated = 'AdventureCreated',
+  AdventureDeleted = 'AdventureDeleted',
+  AdventureImportStarted = 'AdventureImportStarted',
+  ChildEventCreated = 'ChildEventCreated',
+  CourseAdded = 'CourseAdded',
+  CourseExcluded = 'CourseExcluded',
+  CourseMapped = 'CourseMapped',
+  CoursePlayed = 'CoursePlayed',
+  DiscAdded = 'DiscAdded',
+  DiscBrandUpdated = 'DiscBrandUpdated',
+  DiscColorUpdated = 'DiscColorUpdated',
+  DiscLost = 'DiscLost',
+  DiscRemoved = 'DiscRemoved',
+  DiscStatusUpdated = 'DiscStatusUpdated',
+  DiscUpdated = 'DiscUpdated',
+  DiscsReset = 'DiscsReset',
+  EventDeleted = 'EventDeleted',
+  HealthObservation = 'HealthObservation',
+  MaintenanceCreated = 'MaintenanceCreated',
+  PdgaCourseCached = 'PdgaCourseCached',
+  PdgaCourseHeaderCreated = 'PdgaCourseHeaderCreated',
+  PdgaSyncByStateRequested = 'PdgaSyncByStateRequested',
+  PersonalRecordClimbingCreated = 'PersonalRecordClimbingCreated'
+}
+
+export type FeedEvent = {
+  date: Scalars['String'];
+  id: Scalars['ID'];
+};
+
+export type FeedInput = {
+  types: Array<EventName>;
+};
+
+export type FeedResponse = {
+  __typename?: 'FeedResponse';
+  events: Array<FeedEvent>;
+  total: Scalars['Int'];
+};
+
+export type HealthObservationEvent = FeedEvent & {
+  __typename?: 'HealthObservationEvent';
+  date: Scalars['String'];
+  id: Scalars['ID'];
+  name: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   discBrand?: Maybe<Disc>;
@@ -123,11 +178,23 @@ export type MutationDiscUpdateArgs = {
 export type Query = {
   __typename?: 'Query';
   discs: Array<Disc>;
+  feed: FeedResponse;
 };
 
 
 export type QueryDiscsArgs = {
   input?: InputMaybe<DiscsInput>;
+};
+
+
+export type QueryFeedArgs = {
+  input: FeedInput;
+};
+
+export type UnknownEvent = FeedEvent & {
+  __typename?: 'UnknownEvent';
+  date: Scalars['String'];
+  id: Scalars['ID'];
 };
 
 export type AllDiscPropsFragment = { __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus, deleted?: boolean | null };
@@ -178,6 +245,13 @@ export type DiscUpdateMutationVariables = Exact<{
 
 
 export type DiscUpdateMutation = { __typename?: 'Mutation', discUpdate?: { __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus, deleted?: boolean | null } | null };
+
+export type FeedQueryVariables = Exact<{
+  input: FeedInput;
+}>;
+
+
+export type FeedQuery = { __typename?: 'Query', feed: { __typename?: 'FeedResponse', total: number, events: Array<{ __typename: 'ChildEvent', name: string, id: string, date: string } | { __typename: 'HealthObservationEvent', name: string, id: string, date: string } | { __typename: 'UnknownEvent', id: string, date: string }> } };
 
 export const AllDiscPropsFragmentDoc = gql`
     fragment AllDiscProps on Disc {
@@ -423,3 +497,49 @@ export function useDiscUpdateMutation(baseOptions?: Apollo.MutationHookOptions<D
 export type DiscUpdateMutationHookResult = ReturnType<typeof useDiscUpdateMutation>;
 export type DiscUpdateMutationResult = Apollo.MutationResult<DiscUpdateMutation>;
 export type DiscUpdateMutationOptions = Apollo.BaseMutationOptions<DiscUpdateMutation, DiscUpdateMutationVariables>;
+export const FeedDocument = gql`
+    query feed($input: FeedInput!) {
+  feed(input: $input) {
+    total
+    events {
+      __typename
+      id
+      date
+      ... on HealthObservationEvent {
+        name
+      }
+      ... on ChildEvent {
+        name
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useFeedQuery__
+ *
+ * To run a query within a React component, call `useFeedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFeedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFeedQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useFeedQuery(baseOptions: Apollo.QueryHookOptions<FeedQuery, FeedQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FeedQuery, FeedQueryVariables>(FeedDocument, options);
+      }
+export function useFeedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FeedQuery, FeedQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FeedQuery, FeedQueryVariables>(FeedDocument, options);
+        }
+export type FeedQueryHookResult = ReturnType<typeof useFeedQuery>;
+export type FeedLazyQueryHookResult = ReturnType<typeof useFeedLazyQuery>;
+export type FeedQueryResult = Apollo.QueryResult<FeedQuery, FeedQueryVariables>;

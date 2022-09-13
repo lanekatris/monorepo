@@ -26,6 +26,9 @@ export enum EventNames {
   DiscColorUpdated = 'disc-color-updated',
   DiscBrandUpdated = 'disc-brand-updated',
   DiscUpdated = 'disc-updated',
+  HealthObservation = 'health-observation',
+  EventDeleted = 'event-deleted',
+  ChildEventCreated = 'child-event-created',
 }
 
 export type DiscAdded = JSONEventType<

@@ -12,6 +12,8 @@ export function InlineEditableField({
 }) {
   const newValue = useRef(value);
 
+  // todo: useeffect here that keeps track of the value passed in so its not stale
+
   return (
     <ContentEditable
       className="inline"

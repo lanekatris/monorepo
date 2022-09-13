@@ -17,5 +17,41 @@ const eventStoreFactory: FactoryProvider = {
   },
   inject: [ConfigService],
 };
+export type Event<
+  EventType extends string = string,
+  EventData extends Record<string, unknown> = Record<string, unknown>,
+> = Readonly<{
+  type: Readonly<EventType>;
+  data: Readonly<EventData>;
+}>;
 
+export type Command<
+  CommandType extends string = string,
+  CommandData extends Record<string, unknown> = Record<string, unknown>,
+> = Readonly<{
+  type: Readonly<CommandType>;
+  data: Readonly<CommandData>;
+}>;
+
+export type Decider<State, Command, EventType extends Event> = {
+  decide: (command: Command, state: State) => EventType | EventType[];
+  evolve: (currentState: State, event: EventType) => State;
+  getInitialState: () => State;
+};
+
+export const readStream = async <EventType extends Event>(
+  eventStore: EventStoreDBClient,
+  streamId: string,
+) => {
+  const events = [];
+  for await (const { event } of eventStore.readStream<EventType>(streamId)) {
+    if (!event) continue;
+
+    events.push(<EventType>{
+      type: event.type,
+      data: event.data,
+    });
+  }
+  return events;
+};
 export { eventStoreFactory };

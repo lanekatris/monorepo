@@ -50,3 +50,20 @@ mutation discUpdate($input: DiscUpdateInput!){
         ...AllDiscProps
     }
 }
+
+query feed($input: FeedInput!) {
+    feed(input: $input){
+        total
+        events {
+            __typename
+            id
+            date
+            ... on HealthObservationEvent {
+                name
+            }
+            ... on ChildEvent {
+                name
+            }
+        }
+    }
+}
