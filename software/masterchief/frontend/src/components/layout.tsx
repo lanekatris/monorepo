@@ -6,7 +6,7 @@ export default function Layout({
   children,
   className = '',
 }: {
-  children: ReactElement | ReactElement[] | undefined;
+  children: any;
   className?: string;
 }) {
   return (
