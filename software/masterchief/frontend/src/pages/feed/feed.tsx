@@ -3,7 +3,11 @@ import Layout from '../../components/layout';
 import Select, { StylesConfig } from 'react-select';
 import { useState } from 'react';
 
-const options = Object.values(EventName).map((x) => ({ value: x, label: x }));
+export const eventNameOptions: { value: EventName; label: EventName }[] =
+  Object.values(EventName).map((x) => ({
+    value: x,
+    label: x,
+  }));
 
 const colourStyles: StylesConfig = {
   container: (styles) => ({
@@ -22,7 +26,6 @@ export default function FeedPage() {
       },
     },
   });
-  console.log('data', data);
 
   return (
     <Layout>
@@ -56,34 +59,42 @@ export default function FeedPage() {
       {/*</section>*/}
 
       <h4>Feed ({loading ? '...' : data?.feed?.total})</h4>
-      <div style={{ display: 'flex' }}>
-        <Select
-          styles={colourStyles}
-          // value={filteredTypes}
-          options={options}
-          isMulti
-          onChange={(newValue) => {
-            // @ts-ignore
-            setFilteredTypes(newValue.map((x) => x.value as EventName));
-          }}
-          // className="basic-multi-select"
-          // classNamePrefix="select"
-        />
-        <a
-          href="#"
-          role="button"
-          className="outline"
-          onClick={() => {
-            refetch({
-              input: {
-                types: filteredTypes,
-              },
-            });
-          }}
-        >
-          Go
-        </a>
-      </div>
+      {error && <article>{JSON.stringify(error, null, 2)}</article>}
+      <section>
+        <details>
+          <summary>Filter Events</summary>
+          <div>
+            <div style={{ display: 'flex' }}>
+              <Select
+                styles={colourStyles}
+                // value={filteredTypes}
+                options={eventNameOptions}
+                isMulti
+                onChange={(newValue) => {
+                  // @ts-ignore
+                  setFilteredTypes(newValue.map((x) => x.value as EventName));
+                }}
+                // className="basic-multi-select"
+                // classNamePrefix="select"
+              />
+              <a
+                href="#"
+                role="button"
+                className="outline"
+                onClick={() => {
+                  refetch({
+                    input: {
+                      types: filteredTypes,
+                    },
+                  });
+                }}
+              >
+                Go
+              </a>
+            </div>
+          </div>
+        </details>
+      </section>
 
       <ul className="feed" style={{ marginTop: 25 }}>
         {data?.feed.events.map((event) => (

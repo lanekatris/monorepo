@@ -29,6 +29,7 @@ export enum EventNames {
   HealthObservation = 'health-observation',
   EventDeleted = 'event-deleted',
   ChildEventCreated = 'child-event-created',
+  NoteTaken = 'note-taken',
 }
 
 export type DiscAdded = JSONEventType<

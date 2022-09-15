@@ -67,3 +67,7 @@ query feed($input: FeedInput!) {
         }
     }
 }
+
+query latestEventNames {
+    latestEventNames
+}

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ROUTE_CREATE_BLOG, ROUTE_DISCS, ROUTE_FEED } from '../constants';
 import { ReactElement } from 'react';
+import CreateEvent from './create-event';
 
 export default function Layout({
   children,
@@ -75,6 +76,7 @@ export default function Layout({
           </ul>
           <ul></ul>
         </nav>
+        {document.cookie.includes('password=') && <CreateEvent />}
       </header>
       {children}
     </div>

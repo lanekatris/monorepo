@@ -101,6 +101,7 @@ export enum EventName {
   EventDeleted = 'EventDeleted',
   HealthObservation = 'HealthObservation',
   MaintenanceCreated = 'MaintenanceCreated',
+  NoteTaken = 'NoteTaken',
   PdgaCourseCached = 'PdgaCourseCached',
   PdgaCourseHeaderCreated = 'PdgaCourseHeaderCreated',
   PdgaSyncByStateRequested = 'PdgaSyncByStateRequested',
@@ -179,6 +180,7 @@ export type Query = {
   __typename?: 'Query';
   discs: Array<Disc>;
   feed: FeedResponse;
+  latestEventNames: Array<EventName>;
 };
 
 
@@ -252,6 +254,11 @@ export type FeedQueryVariables = Exact<{
 
 
 export type FeedQuery = { __typename?: 'Query', feed: { __typename?: 'FeedResponse', total: number, events: Array<{ __typename: 'ChildEvent', name: string, id: string, date: string } | { __typename: 'HealthObservationEvent', name: string, id: string, date: string } | { __typename: 'UnknownEvent', id: string, date: string }> } };
+
+export type LatestEventNamesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LatestEventNamesQuery = { __typename?: 'Query', latestEventNames: Array<EventName> };
 
 export const AllDiscPropsFragmentDoc = gql`
     fragment AllDiscProps on Disc {
@@ -543,3 +550,35 @@ export function useFeedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FeedQ
 export type FeedQueryHookResult = ReturnType<typeof useFeedQuery>;
 export type FeedLazyQueryHookResult = ReturnType<typeof useFeedLazyQuery>;
 export type FeedQueryResult = Apollo.QueryResult<FeedQuery, FeedQueryVariables>;
+export const LatestEventNamesDocument = gql`
+    query latestEventNames {
+  latestEventNames
+}
+    `;
+
+/**
+ * __useLatestEventNamesQuery__
+ *
+ * To run a query within a React component, call `useLatestEventNamesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLatestEventNamesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLatestEventNamesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useLatestEventNamesQuery(baseOptions?: Apollo.QueryHookOptions<LatestEventNamesQuery, LatestEventNamesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<LatestEventNamesQuery, LatestEventNamesQueryVariables>(LatestEventNamesDocument, options);
+      }
+export function useLatestEventNamesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LatestEventNamesQuery, LatestEventNamesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<LatestEventNamesQuery, LatestEventNamesQueryVariables>(LatestEventNamesDocument, options);
+        }
+export type LatestEventNamesQueryHookResult = ReturnType<typeof useLatestEventNamesQuery>;
+export type LatestEventNamesLazyQueryHookResult = ReturnType<typeof useLatestEventNamesLazyQuery>;
+export type LatestEventNamesQueryResult = Apollo.QueryResult<LatestEventNamesQuery, LatestEventNamesQueryVariables>;

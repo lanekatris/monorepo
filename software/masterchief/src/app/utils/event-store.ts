@@ -1,4 +1,9 @@
-import { EventStoreDBClient, FORWARDS, START } from '@eventstore/db-client';
+import {
+  EventStoreDBClient,
+  FORWARDS,
+  ReadStreamOptions,
+  START,
+} from '@eventstore/db-client';
 import { FactoryProvider } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
@@ -42,9 +47,14 @@ export type Decider<State, Command, EventType extends Event> = {
 export const readStream = async <EventType extends Event>(
   eventStore: EventStoreDBClient,
   streamId: string,
+  streamOptions?: ReadStreamOptions,
 ) => {
   const events = [];
-  for await (const { event } of eventStore.readStream<EventType>(streamId)) {
+  for await (const { event } of eventStore.readStream<EventType>(
+    streamId,
+    streamOptions,
+  )) {
+    console.log('idk man', event);
     if (!event) continue;
 
     events.push(<EventType>{
