@@ -4,7 +4,7 @@ metadata:
   name: masterchief
   namespace: default
 spec:
-  replicas: 3 # Change me to a higher number
+  replicas: 3
   revisionHistoryLimit: 1
   selector:
     matchLabels:
@@ -15,7 +15,7 @@ spec:
         app: masterchief
     spec:
       containers:
-        - image: loonison101/masterchief:latest
+        - image: loonison101/masterchief:51e5d7230e4bdf8d0d93358475d1cb4401a617ff
           imagePullPolicy: Always
           name: masterchief
           ports:
@@ -28,7 +28,7 @@ spec:
             - name: MINIO_URL
               value: minio
             - name: MINIO_PORT
-              value: "9000"
+              value: '9000'
             - name: APP_PASSWORD
               valueFrom:
                 secretKeyRef:
