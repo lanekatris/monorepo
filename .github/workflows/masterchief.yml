@@ -32,8 +32,8 @@ jobs:
       with:
         valueFile: 'infrastructure/lkat-cluster/masterchief.yaml'
         propertyPath: '$.spec.template.spec.containers[0].image'
-        value: ${{ env.GITHUB_SHA }}
+        value: loonison101/masterchief:${{ github.sha }}
         branch: wip
         targetBranch: wip
         createPR: false
-        message: 'GH updated image version to ${{ env.GITHUB_SHA }}'
+        message: 'GH updated image version to loonison101/masterchief:${{ github.sha }}'
