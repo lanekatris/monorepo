@@ -26,3 +26,14 @@ jobs:
         tags: loonison101/masterchief:latest
         context: ./software/masterchief
         file: ./software/masterchief/Dockerfile
+
+    - name: Update image version in k8s deployment yaml
+      uses: fjogeleit/yaml-update-action@main
+      with:
+        valueFile: ./infrastructure/lkat-cluster/masterchief.yaml
+        propertyPath: 'spec.template.spec.containers[0].image'
+        value: ${{ env.GITHUB_SHA }}
+        branch: wip
+        targetBranch: wip
+        createPR: false
+        message: 'GH updated image version to ${{ env.GITHUB_SHA }}'
