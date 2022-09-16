@@ -31,7 +31,7 @@ jobs:
       uses: fjogeleit/yaml-update-action@main
       with:
         valueFile: ./infrastructure/lkat-cluster/masterchief.yaml
-        propertyPath: 'spec.template.spec.containers[0].image'
+        propertyPath: '$.spec.template.spec.containers[0].image'
         value: ${{ env.GITHUB_SHA }}
         branch: wip
         targetBranch: wip
