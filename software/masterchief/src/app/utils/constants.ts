@@ -15,6 +15,7 @@ export enum Search {
 
 export enum Esdb {
   StreamEvents = 'general-events',
+  StreamBlog = 'blog-test',
 }
 
 export enum McStorage {

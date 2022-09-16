@@ -34,6 +34,8 @@ export enum EventNames {
   EventMessageUpdated = 'event-message-updated',
   EventTagCreated = 'event-tag-created',
   EventTagRemoved = 'event-tag-removed',
+  ArticleEdited = 'article-edited',
+  ArticleEditedLink = 'article-edited-link',
 }
 
 export type DiscAdded = JSONEventType<

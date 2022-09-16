@@ -1,6 +1,9 @@
 import { Inject, UseGuards } from '@nestjs/common';
 import { GuardMe } from '../auth/guard-me.guard';
 import {
+  Article,
+  ArticleEdited,
+  ArticleEditedLink,
   EventMessageUpdated,
   EventTagCreated,
   EventTagRemoved,
@@ -10,9 +13,10 @@ import { Args, Field, InputType, Mutation, Resolver } from '@nestjs/graphql';
 import { EventStoreDBClient, jsonEvent } from '@eventstore/db-client';
 import { EventDeleted } from './events/event-deleted';
 import { nanoid } from 'nanoid';
-import { format } from 'date-fns';
 import { Esdb, ESDB } from './utils/constants';
 import { EventNames } from '../dg/types/disc-added';
+import { generateDate } from './utils';
+import { readStream } from './utils/event-store';
 
 @InputType()
 export class EventEditMessageInput {
@@ -38,6 +42,18 @@ export class EventRemoveTagInput {
   tagId: string;
 }
 
+@InputType()
+export class ArticleEditedInput implements Partial<Article> {
+  @Field()
+  body: string;
+  @Field({ nullable: true })
+  date?: string;
+  @Field({ nullable: true })
+  slug?: string;
+  @Field({ nullable: true })
+  title?: string;
+}
+
 @Resolver(() => FeedEvent)
 @UseGuards(GuardMe)
 export class AppMutationResolver {
@@ -49,7 +65,7 @@ export class AppMutationResolver {
       type: 'event-deleted',
       data: {
         id: nanoid(),
-        date: format(new Date(), 'yyyy-LL-dd'),
+        date: generateDate(),
         eventId,
       },
     });
@@ -70,7 +86,7 @@ export class AppMutationResolver {
         id: nanoid(),
         eventId,
         message,
-        date: format(new Date(), 'yyyy-LL-dd'),
+        date: generateDate(),
       },
     });
     await this.esdb.appendToStream(Esdb.StreamEvents, event);
@@ -87,7 +103,7 @@ export class AppMutationResolver {
       data: {
         id: nanoid(),
         eventId,
-        date: format(new Date(), 'yyyy-LL-dd'),
+        date: generateDate(),
         tag,
       },
     });
@@ -105,11 +121,54 @@ export class AppMutationResolver {
       data: {
         id: nanoid(),
         eventId,
-        date: format(new Date(), 'yyyy-LL-dd'),
+        date: generateDate(),
         tagId,
       },
     });
     await this.esdb.appendToStream(Esdb.StreamEvents, event);
     return true;
+  }
+
+  @Mutation(() => Article)
+  async articleCreate(
+    @Args('input') input: ArticleEditedInput,
+  ): Promise<Article> {
+    console.log('input', input);
+
+    const event = jsonEvent<ArticleEdited>({
+      type: EventNames.ArticleEdited,
+      data: {
+        date: generateDate(),
+        id: nanoid(),
+        body: input.body,
+      },
+    });
+
+    const streamName = `article-${event.data.id}`;
+    await this.esdb.appendToStream(streamName, event);
+
+    const event2 = jsonEvent<ArticleEditedLink>({
+      type: EventNames.ArticleEditedLink,
+      data: {
+        id: nanoid(),
+        date: generateDate(),
+        articleId: event.data.id,
+      },
+    });
+    await this.esdb.appendToStream(Esdb.StreamEvents, event2);
+    // const events = await readStream(this.esdb, '$ce-article', {
+    //   resolveLinkTos: true,
+    // });
+    // console.log(
+    //   'events',
+    //   events,
+    //   events.map((x) => x.data.toString()),
+    // );
+
+    const a = new Article();
+    a.id = nanoid();
+    a.date = new Date().toISOString();
+    a.body = '# hi';
+    return a;
   }
 }

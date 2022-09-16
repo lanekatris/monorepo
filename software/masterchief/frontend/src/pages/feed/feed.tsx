@@ -15,8 +15,11 @@ import { MdChildFriendly } from 'react-icons/md';
 import { useEventNames } from '../../components/use-event-names';
 import { BsCameraReels } from 'react-icons/bs';
 import { InlineEditableTag } from '../../components/inlineEditableField';
+import { format, parseISO } from 'date-fns';
 
-import { AiOutlineTag } from 'react-icons/all';
+import { AiOutlineTag, BiNote, FaBlogger } from 'react-icons/all';
+import { getIsoDatePart, isIsoDate } from '../../utils';
+import { Link } from 'react-router-dom';
 export const eventNameOptions: { value: EventName; label: EventName }[] =
   Object.values(EventName).map((x) => ({
     value: x,
@@ -44,43 +47,16 @@ export default function FeedPage() {
   const options = useEventNames();
   const [removeTag] = useEventRemoveTagMutation();
 
-  const grouped = groupBy(data?.feed.events, (x) => x.date);
-  console.log('grouped', grouped);
+  const grouped = groupBy(data?.feed.events, (x) => {
+    return isIsoDate(x.date) ? getIsoDatePart(x.date) : x.date;
+  });
+  // console.log('grouped', grouped);
 
   return (
     <Layout>
-      {/*<h4>Actions</h4>*/}
-      {/*<section>*/}
-      {/*  <details>*/}
-      {/*    <summary>Create Event</summary>*/}
-      {/*    <p>*/}
-      {/*      <div id="app"></div>*/}
-      {/*    </p>*/}
-      {/*  </details>*/}
-      {/*  <details>*/}
-      {/*    <summary>Upload Pixel Notes</summary>*/}
-      {/*    <p>*/}
-      {/*      <form*/}
-      {/*        method="post"*/}
-      {/*        action="/pixel-recorder-upload"*/}
-      {/*        encType="multipart/form-data"*/}
-      {/*      >*/}
-      {/*        <input type="file" name="files" multiple />*/}
-      {/*        <input type="submit" />*/}
-      {/*      </form>*/}
-      {/*    </p>*/}
-      {/*  </details>*/}
-      {/*  <details>*/}
-      {/*    <summary id="notes-title">Notes Search</summary>*/}
-      {/*    <p>*/}
-      {/*      <NoteSearcher />*/}
-      {/*    </p>*/}
-      {/*  </details>*/}
-      {/*</section>*/}
-
       <h4>Feed ({loading ? '...' : data?.feed?.total})</h4>
       {error && <article>{JSON.stringify(error, null, 2)}</article>}
-      <section>
+      <section style={{ marginBottom: 0 }}>
         <details>
           <summary>Filter Events</summary>
           <div>
@@ -94,8 +70,6 @@ export default function FeedPage() {
                   // @ts-ignore
                   setFilteredTypes(newValue.map((x) => x.value as EventName));
                 }}
-                // className="basic-multi-select"
-                // classNamePrefix="select"
               />
               <a
                 href="#"
@@ -116,16 +90,36 @@ export default function FeedPage() {
         </details>
       </section>
 
-      <ul className="feed" style={{ marginTop: 25 }}>
+      <div className="feed">
         {Object.keys(grouped).map((key) => (
-          <li key={key}>
+          <div key={key}>
             <b>{key}</b>
-            <ul>
+            <ul style={{ marginBottom: 0 }}>
               {grouped[key].map((event) => (
-                <li key={event.id} style={{ listStyle: 'none' }}>
+                <li
+                  key={event.id}
+                  className="hoverable"
+                  style={{
+                    listStyle: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
                   {event.__typename === 'HealthObservationEvent' && (
                     <>
-                      <TbAmbulance />
+                      <TbAmbulance style={{ marginRight: 5 }} />
+                      {isIsoDate(event.date) && (
+                        <pre
+                          style={{
+                            display: 'flex',
+                            marginBottom: 0,
+                            padding: 5,
+                            marginRight: 5,
+                          }}
+                        >
+                          {format(parseISO(event.date), 'kk:mmaaa')}
+                        </pre>
+                      )}
                       <EditableEventMessage
                         value={event.name}
                         eventId={event.id}
@@ -134,7 +128,7 @@ export default function FeedPage() {
                   )}
                   {event.__typename === 'ChildEvent' && (
                     <>
-                      <MdChildFriendly />
+                      <MdChildFriendly style={{ marginRight: 5 }} />
                       <EditableEventMessage
                         value={event.name}
                         eventId={event.id}
@@ -144,7 +138,7 @@ export default function FeedPage() {
                   {event.__typename === 'UnknownEvent' && 'Unknown Event'}
                   {event.__typename === 'MovieWatchedEvent' && (
                     <>
-                      <BsCameraReels />
+                      <BsCameraReels style={{ marginRight: 5 }} />
                       <EditableEventMessage
                         value={event.name}
                         eventId={event.id}
@@ -153,24 +147,54 @@ export default function FeedPage() {
                       {/*<ReactTags />*/}
                     </>
                   )}
+                  {event.__typename === 'NoteTakenEvent' && (
+                    <>
+                      <BiNote style={{ maginRight: 5 }} />
+                      {isIsoDate(event.date) && (
+                        <pre
+                          style={{
+                            display: 'flex',
+                            marginBottom: 0,
+                            padding: 5,
+                            marginRight: 5,
+                          }}
+                        >
+                          {format(parseISO(event.date), 'kk:mmaaa')}
+                        </pre>
+                      )}
+                      <EditableEventMessage
+                        value={event.body}
+                        eventId={event.id}
+                      />
+                    </>
+                  )}
+                  {event.__typename === 'ArticleEditedLinkFeedEvent' && (
+                    <>
+                      <FaBlogger style={{ marginRight: 5 }} />
+                      {isIsoDate(event.date) && (
+                        <pre
+                          style={{
+                            display: 'flex',
+                            marginBottom: 0,
+                            padding: 5,
+                            marginRight: 5,
+                          }}
+                        >
+                          {format(parseISO(event.date), 'kk:mmaaa')}
+                        </pre>
+                      )}
+                      Article: <Link to="/blog/create">{event.articleId}</Link>
+                    </>
+                  )}
                   <div
                     style={{
                       display: 'inline-flex',
                       alignItems: 'center',
-                      marginLeft: 15,
+                      marginLeft: 5,
                     }}
                   >
-                    {/*<AiOutlineTag />*/}
-                    {/*<pre>hi</pre> <pre style={{ marginLeft: 5 }}>there</pre>*/}
                     {event.tags &&
                       event.tags.map((tag) => (
-                        // <pre style={{ display: 'flex', marginLeft: 10 }}>
-                        //   <InlineEditableTag
-                        //     value={tag.name}
-                        //     key={tag.id}
-                        //     eventId={event.id}
-                        //   />
-                        // </pre>
                         <a
                           // href="#"
                           key={tag.id}
@@ -207,15 +231,11 @@ export default function FeedPage() {
                         });
                       }}
                     />
-                    {/*<pre style={{ display: 'flex' }}>*/}
-                    {/*  <InlineEditableTag value="testies1" />*/}
-                    {/*</pre>*/}
-                    {/*<pre style={{ display: 'flex' }}>*/}
-                    {/*  <InlineEditableTag value="testies2" />*/}
-                    {/*</pre>*/}
                   </div>
+                  <span style={{ marginLeft: 5 }} className="feed-item-hidden">
+                    |
+                  </span>
                   <a
-                    href="#"
                     style={{ marginLeft: 5 }}
                     className="feed-item-hidden"
                     onClick={async () => {
@@ -233,13 +253,12 @@ export default function FeedPage() {
                   >
                     Delete
                   </a>
-                  {/*<InlineEditableTags />*/}
                 </li>
               ))}
             </ul>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </Layout>
   );
 }

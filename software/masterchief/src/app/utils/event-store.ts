@@ -49,12 +49,14 @@ export const readStream = async <EventType extends Event>(
   streamId: string,
   streamOptions?: ReadStreamOptions,
 ) => {
+  console.log('options', streamOptions);
   const events = [];
-  for await (const { event } of eventStore.readStream<EventType>(
+  for await (const r of eventStore.readStream<EventType>(
     streamId,
     streamOptions,
   )) {
-    // console.log('idk man', event);
+    const { event } = r;
+    console.log('idk man', r);
     if (!event) continue;
 
     events.push(<EventType>{

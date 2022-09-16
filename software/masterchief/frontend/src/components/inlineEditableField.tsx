@@ -38,13 +38,19 @@ export function InlineEditableTag({ value, className, eventId, onUpdate }) {
   const newValue = useRef(value);
   const [add] = useEventAddTagMutation();
   return (
-    <div className={className} style={{ display: 'flex' }}>
+    <div
+      className={className}
+      style={{ display: 'flex', alignItems: 'center', marginLeft: 5 }}
+    >
       <AiOutlineTag />
       <ContentEditable
         html={newValue.current}
         onChange={(e) => (newValue.current = e.target.value)}
         onBlur={async () => {
-          console.log('save me');
+          if (newValue.current === 'Add Tag') {
+            console.log('no changes, not adding');
+            return;
+          }
           await add({
             variables: {
               input: {

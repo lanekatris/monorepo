@@ -5,7 +5,6 @@ import { EventStoreDBClient, JSONEventType } from '@eventstore/db-client';
 import { Field, ID, Int, InterfaceType, ObjectType } from '@nestjs/graphql';
 import { readStream } from '../utils/event-store';
 import { EventNames } from '../../dg/types/disc-added';
-import { nanoid } from 'nanoid';
 
 export class GetFeedQueryV2 {
   constructor(public types: EventNames[]) {}
@@ -51,6 +50,24 @@ export abstract class FeedEvent {
 
   @Field(() => [Tag], { nullable: true })
   tags?: Tag[];
+}
+
+@ObjectType({ implements: () => [FeedEvent] })
+export class Article implements FeedEvent {
+  @Field()
+  date: string;
+  dbType: EventNames = EventNames.ArticleEdited;
+  @Field(() => ID)
+  id: string;
+
+  @Field({ nullable: true })
+  title?: string;
+
+  @Field({ nullable: true })
+  slug?: string;
+
+  @Field()
+  body: string;
 }
 
 @ObjectType({ implements: () => [FeedEvent] })
@@ -111,6 +128,42 @@ export class MovieWatchedEvent implements FeedEvent {
 }
 
 @ObjectType({ implements: () => [FeedEvent] })
+export class NoteTakenEvent implements FeedEvent {
+  @Field()
+  date: string;
+  dbType: EventNames;
+  @Field(() => ID)
+  id: string;
+  @Field()
+  body: string;
+
+  constructor(id: string, body: string, date: string) {
+    this.id = id;
+    this.body = body;
+    this.date = date;
+    this.dbType = EventNames.NoteTaken;
+  }
+}
+
+@ObjectType({ implements: () => [FeedEvent] })
+export class ArticleEditedLinkFeedEvent implements FeedEvent {
+  @Field()
+  date: string;
+  dbType: EventNames = EventNames.ArticleEditedLink;
+  @Field(() => ID)
+  id: string;
+  @Field()
+  articleId: string;
+
+  constructor(id: string, articleId: string, date: string) {
+    this.id = id;
+    this.articleId = articleId;
+    this.date = date;
+    this.dbType = EventNames.NoteTaken;
+  }
+}
+
+@ObjectType({ implements: () => [FeedEvent] })
 export class UnknownEvent implements FeedEvent {
   constructor(public id: string, public date: string) {}
 
@@ -146,6 +199,52 @@ export type EventTagRemoved = JSONEventType<
   }
 >;
 
+export type NoteTaken = JSONEventType<
+  EventNames.NoteTaken,
+  {
+    id: string;
+    date: string;
+    body: string;
+  }
+>;
+
+// export type Testies = BinaryEventType<EventNames.ArticleEdited>;
+
+export type ArticleEdited = JSONEventType<
+  EventNames.ArticleEdited,
+  {
+    id: string;
+    date: string;
+    body: string;
+  }
+>;
+
+export type ArticleEditedLink = JSONEventType<
+  EventNames.ArticleEditedLink,
+  {
+    id: string;
+    date: string;
+    articleId: string;
+  }
+>;
+
+// export type BinaryIdk = BinaryEventType<EventNames.ArticleEdited>;
+
+// export const idk: LinkEvent = {
+//   data: undefined,
+//   metadata: {},
+//   type: '$>',
+// };
+
+// export const idsss = EventData<
+//   EventNames.EventMessageUpdated,
+//   {
+//     id: string;
+//   }
+// >;
+//
+// const;
+
 export type LanesCustomEvents =
   | {
       type: EventNames.HealthObservation;
@@ -180,7 +279,9 @@ export type LanesCustomEvents =
       };
     }
   | EventTagCreated
-  | EventTagRemoved;
+  | EventTagRemoved
+  | NoteTaken
+  | ArticleEditedLink;
 // | {
 //     type: EventNames.EventMessageUpdated;
 //     data: {
@@ -196,6 +297,23 @@ const evolve = (
   event: LanesCustomEvents,
 ): FeedEvent[] => {
   switch (event.type) {
+    case EventNames.ArticleEditedLink: {
+      currentState.push(
+        new ArticleEditedLinkFeedEvent(
+          event.data.id,
+          event.data.articleId,
+          event.data.date,
+        ),
+      );
+      break;
+    }
+
+    case EventNames.NoteTaken: {
+      currentState.push(
+        new NoteTakenEvent(event.data.id, event.data.body, event.data.date),
+      );
+      break;
+    }
     case EventNames.EventTagRemoved: {
       const existingEvent = currentState.find(
         (x) => x.id === event.data.eventId,
@@ -266,6 +384,10 @@ const evolve = (
         if ('name' in existingEvent) {
           // @ts-ignore
           existingEvent.name = event.data.message;
+        }
+        if ('body' in existingEvent) {
+          // @ts-ignore
+          existingEvent.body = event.data.message;
         }
       }
       console.log('nothing');

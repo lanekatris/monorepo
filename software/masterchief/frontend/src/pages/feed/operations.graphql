@@ -71,6 +71,12 @@ query feed($input: FeedInput!) {
             ... on MovieWatchedEvent {
                 name
             }
+            ... on NoteTakenEvent {
+                body
+            }
+            ... on ArticleEditedLinkFeedEvent {
+                articleId
+            }
         }
     }
 }

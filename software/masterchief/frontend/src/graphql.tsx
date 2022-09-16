@@ -16,6 +16,33 @@ export type Scalars = {
   DateTime: any;
 };
 
+export type Article = FeedEvent & {
+  __typename?: 'Article';
+  body: Scalars['String'];
+  date: Scalars['String'];
+  deleted?: Maybe<Scalars['Boolean']>;
+  id: Scalars['ID'];
+  slug?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Tag>>;
+  title?: Maybe<Scalars['String']>;
+};
+
+export type ArticleEditedInput = {
+  body: Scalars['String'];
+  date?: InputMaybe<Scalars['String']>;
+  slug?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
+};
+
+export type ArticleEditedLinkFeedEvent = FeedEvent & {
+  __typename?: 'ArticleEditedLinkFeedEvent';
+  articleId: Scalars['String'];
+  date: Scalars['String'];
+  deleted?: Maybe<Scalars['Boolean']>;
+  id: Scalars['ID'];
+  tags?: Maybe<Array<Tag>>;
+};
+
 export type ChildEvent = FeedEvent & {
   __typename?: 'ChildEvent';
   date: Scalars['String'];
@@ -97,6 +124,8 @@ export enum EventName {
   AdventureCreated = 'AdventureCreated',
   AdventureDeleted = 'AdventureDeleted',
   AdventureImportStarted = 'AdventureImportStarted',
+  ArticleEdited = 'ArticleEdited',
+  ArticleEditedLink = 'ArticleEditedLink',
   ChildEventCreated = 'ChildEventCreated',
   CourseAdded = 'CourseAdded',
   CourseExcluded = 'CourseExcluded',
@@ -166,6 +195,7 @@ export type MovieWatchedEvent = FeedEvent & {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  articleCreate: Article;
   discBrand?: Maybe<Disc>;
   discColor?: Maybe<Disc>;
   discCreate: Disc;
@@ -177,6 +207,11 @@ export type Mutation = {
   eventEditMessage: Scalars['Boolean'];
   eventRemove: Scalars['Boolean'];
   eventRemoveTag: Scalars['Boolean'];
+};
+
+
+export type MutationArticleCreateArgs = {
+  input: ArticleEditedInput;
 };
 
 
@@ -232,6 +267,15 @@ export type MutationEventRemoveArgs = {
 
 export type MutationEventRemoveTagArgs = {
   input: EventRemoveTagInput;
+};
+
+export type NoteTakenEvent = FeedEvent & {
+  __typename?: 'NoteTakenEvent';
+  body: Scalars['String'];
+  date: Scalars['String'];
+  deleted?: Maybe<Scalars['Boolean']>;
+  id: Scalars['ID'];
+  tags?: Maybe<Array<Tag>>;
 };
 
 export type Query = {
@@ -319,7 +363,7 @@ export type FeedQueryVariables = Exact<{
 }>;
 
 
-export type FeedQuery = { __typename?: 'Query', feed: { __typename?: 'FeedResponse', total: number, events: Array<{ __typename: 'ChildEvent', name: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'HealthObservationEvent', name: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'MovieWatchedEvent', name: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'UnknownEvent', id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null }> } };
+export type FeedQuery = { __typename?: 'Query', feed: { __typename?: 'FeedResponse', total: number, events: Array<{ __typename: 'Article', id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'ArticleEditedLinkFeedEvent', articleId: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'ChildEvent', name: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'HealthObservationEvent', name: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'MovieWatchedEvent', name: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'NoteTakenEvent', body: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'UnknownEvent', id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null }> } };
 
 export type LatestEventNamesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -618,6 +662,12 @@ export const FeedDocument = gql`
       }
       ... on MovieWatchedEvent {
         name
+      }
+      ... on NoteTakenEvent {
+        body
+      }
+      ... on ArticleEditedLinkFeedEvent {
+        articleId
       }
     }
   }

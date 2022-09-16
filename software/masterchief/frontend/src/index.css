@@ -35,7 +35,7 @@
   /*display: inline;*/
 }
 
-.feed div:hover .feed-item-hidden, .feed li:hover .feed-item-hidden {
+.feed .hoverable:hover .feed-item-hidden, .feed .hoverable:hover .feed-item-hidden {
   visibility: visible;
 }
 

@@ -21,7 +21,6 @@ import {
   LanesCustomEvents,
 } from './queries/get-feed-v2.handler';
 import { EventNames } from '../dg/types/disc-added';
-import { DiscLostInput } from '../dg/dg.mutations.resolver';
 import { readStream } from './utils/event-store';
 
 registerEnumType(EventNames, {
@@ -33,6 +32,11 @@ export class FeedInput {
   @Field(() => [EventNames])
   types: EventNames[];
 }
+
+const excludedLatestEventNames: EventNames[] = [
+  EventNames.EventMessageUpdated,
+  EventNames.EventTagRemoved,
+];
 
 @Resolver(() => FeedEvent)
 @UseGuards(GuardMe)
@@ -60,6 +64,10 @@ export class AppQueriesResolver {
       Esdb.StreamEvents,
       { maxCount: 10, direction: BACKWARDS, fromRevision: END },
     );
-    return uniq(events.map(({ type }) => type));
+    return uniq(
+      events
+        .filter((x) => !excludedLatestEventNames.includes(x.type))
+        .map(({ type }) => type),
+    );
   }
 }

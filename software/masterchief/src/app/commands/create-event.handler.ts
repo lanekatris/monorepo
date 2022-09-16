@@ -28,6 +28,7 @@ import { FoodAte } from '../events/food-ate';
 import { NoteTaken } from '../events/note-taken';
 import { HairCut } from '../events/hair-cut';
 import { HealthObservation } from '../events/health-observation';
+import { generateDate } from '../utils';
 
 export class CreateEventCommand {
   constructor(public eventName: EventName, public body: { date?: string }) {}
@@ -45,7 +46,7 @@ export class CreateEventHandler implements ICommandHandler<CreateEventCommand> {
 
     const baseEventData: BaseEvent = {
       id: nanoid(),
-      date: body.date || format(new Date(), 'yyyy-LL-dd'),
+      date: body.date || generateDate(),
     };
 
     let event;

@@ -14,6 +14,11 @@ import { useEventNames } from './use-event-names';
  *
  */
 
+const eventNameMapp: { [key in EventName]?: string } = {
+  [EventName.NoteTaken]: 'note-taken',
+  [EventName.HealthObservation]: 'health-observation',
+};
+
 export default function CreateEvent() {
   const [option, setOption] = useState<{
     value: EventName;
@@ -23,11 +28,16 @@ export default function CreateEvent() {
 
   const targetSchema = schema.anyOf.find((x) => x.title === option?.value);
 
-  console.log('create-event', { option, targetSchema });
+  // console.log('create-event', { option, targetSchema });
 
   // @ts-ignore
   const mapping: { [key in EventName]: ReactElement } = {
     HealthObservation: (
+      <>
+        <textarea name="body" placeholder="I saw this and that..." />
+      </>
+    ),
+    NoteTaken: (
       <>
         <textarea name="body" placeholder="I saw this and that..." />
       </>
@@ -49,13 +59,59 @@ export default function CreateEvent() {
         />
       </p>
 
-      <form method="post" action="http://localhost:3000/api/create-event">
+      <form
+        method="post"
+        action={`${import.meta.env.VITE_API_URL}/create-event`}
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log('submit form ', e);
+          // @ts-ignore
+          const formData = new FormData(document.querySelector('form'));
+
+          const d = formData.get('date2');
+          if (d !== '') {
+            // @ts-ignore
+            const [hour, minute] = formData.get('time2')!.split(':');
+            const formattedHour = (
+              parseInt(hour) +
+              new Date().getTimezoneOffset() / 60
+            )
+              .toString()
+              .padStart(2, '0');
+
+            console.log('final', `${d}T${formattedHour}:${minute}.000Z`);
+
+            formData.delete('date2');
+            formData.delete('time2');
+            formData.set('date', `${d}T${formattedHour}:${minute}.000Z`);
+            // @ts-ignore
+            document.querySelector(
+              'input[name="date"]',
+              // @ts-ignore
+            ).value = `${d}T${formattedHour}:${minute}.000Z`;
+          } else {
+            formData.delete('date2');
+            formData.delete('time2');
+          }
+
+          for (const pair of formData.entries()) {
+            console.log(pair);
+          }
+          // @ts-ignore
+          document.querySelector('form').submit();
+        }}
+      >
         {/*{mapping[option?.value]}*/}
         {option && mapping[option.value]}
         {option && (
           <>
             {/*<input type="hidden" name="eventName" value={option.value} />*/}
-            <input type="hidden" name="eventName" value="health-observation" />
+            <input
+              type="hidden"
+              name="eventName"
+              value={eventNameMapp[option.value]}
+            />
+            <input type="hidden" name="date" value="" />
             <input
               type="hidden"
               name="redirect"
@@ -74,8 +130,8 @@ export default function CreateEvent() {
                   </p>
                   <label>Date/Time</label>
                   <div style={{ display: 'flex' }}>
-                    <input type="date" />
-                    <input type="time" />
+                    <input type="date" name="date2" />
+                    <input type="time" name="time2" />
                   </div>
                 </div>
               </details>

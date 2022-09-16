@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ROUTE_CREATE_BLOG, ROUTE_DISCS, ROUTE_FEED } from '../constants';
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import CreateEvent from './create-event';
 
 export default function Layout({
@@ -10,8 +10,9 @@ export default function Layout({
   children: any;
   className?: string;
 }) {
+  const [show, setShow] = useState(false);
   return (
-    <div className={`container ${className}`} data-theme="dark">
+    <div className={`container ${className}`}>
       <progress id="global-progress" className="fixed non-visible"></progress>
       <header className="no-padding">
         <nav>
@@ -73,10 +74,15 @@ export default function Layout({
                 </ul>
               </details>
             </li>
+            {document.cookie.includes('password=') && (
+              <li>
+                <a onClick={() => setShow(!show)}>Create Event</a>
+              </li>
+            )}
           </ul>
           <ul></ul>
         </nav>
-        {document.cookie.includes('password=') && <CreateEvent />}
+        {show && <CreateEvent />}
       </header>
       {children}
     </div>
