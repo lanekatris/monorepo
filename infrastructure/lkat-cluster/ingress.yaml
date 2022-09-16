@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: http-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: public
+  labels:
+    app: eventstore-admin
+spec:
+  rules:
+    - host: tracker.climb.rest
+      http:
+        paths:
+          - path: /idk
+            pathType: Prefix
+            backend:
+              service:
+                name: eventstore-admin
+                port:
+                  number: 2113

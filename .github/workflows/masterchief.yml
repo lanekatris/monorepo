@@ -19,13 +19,13 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Build and push
-      uses: docker/build-push-action@v3
-      with:
-        push: true
-        tags: loonison101/masterchief:latest
-        context: ./software/masterchief
-        file: ./software/masterchief/Dockerfile
+#    - name: Build and push
+#      uses: docker/build-push-action@v3
+#      with:
+#        push: true
+#        tags: loonison101/masterchief:latest
+#        context: ./software/masterchief
+#        file: ./software/masterchief/Dockerfile
 
     - name: Update image version in k8s deployment yaml
       uses: fjogeleit/yaml-update-action@main
