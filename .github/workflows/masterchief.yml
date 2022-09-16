@@ -30,7 +30,7 @@ jobs:
     - name: Update image version in k8s deployment yaml
       uses: fjogeleit/yaml-update-action@main
       with:
-        valueFile: ./infrastructure/lkat-cluster/masterchief.yaml
+        valueFile: 'infrastructure/lkat-cluster/masterchief.yaml'
         propertyPath: '$.spec.template.spec.containers[0].image'
         value: ${{ env.GITHUB_SHA }}
         branch: wip
