@@ -33,6 +33,7 @@ export function InlineEditableField({
   );
 }
 
+// @ts-ignore
 export function InlineEditableTag({ value, className, eventId, onUpdate }) {
   const newValue = useRef(value);
   const [add] = useEventAddTagMutation();

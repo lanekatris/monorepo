@@ -14,11 +14,8 @@ import { TbAmbulance } from 'react-icons/tb';
 import { MdChildFriendly } from 'react-icons/md';
 import { useEventNames } from '../../components/use-event-names';
 import { BsCameraReels } from 'react-icons/bs';
-import {
-  InlineEditableTag,
-  InlineEditableTags,
-} from '../../components/inlineEditableField';
-import { WithContext as ReactTags } from 'react-tag-input';
+import { InlineEditableTag } from '../../components/inlineEditableField';
+
 import { AiOutlineTag } from 'react-icons/all';
 export const eventNameOptions: { value: EventName; label: EventName }[] =
   Object.values(EventName).map((x) => ({
