@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: masterchief-container
-          image: loonison101/masterchief:5f9bc110695f311323d33f34f808a73856384d35
+          image: loonison101/masterchief:086af237b9b472423e558839bbd6d9e806512f7c
           imagePullPolicy: Always
           ports:
             - containerPort: 3333
