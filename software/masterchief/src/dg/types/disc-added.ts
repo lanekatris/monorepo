@@ -30,6 +30,10 @@ export enum EventNames {
   EventDeleted = 'event-deleted',
   ChildEventCreated = 'child-event-created',
   NoteTaken = 'note-taken',
+  MovieWatched = 'movie-watched',
+  EventMessageUpdated = 'event-message-updated',
+  EventTagCreated = 'event-tag-created',
+  EventTagRemoved = 'event-tag-removed',
 }
 
 export type DiscAdded = JSONEventType<

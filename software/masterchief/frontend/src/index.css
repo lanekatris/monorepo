@@ -30,12 +30,12 @@
   width: 30px;
 }
 
-.feed li pre, .feed li a, .feed li .feed-item-hidden, .feed .feed-item-hidden {
+.feed .feed-item-hidden {
   visibility: hidden;
-  display: inline;
+  /*display: inline;*/
 }
 
-.feed li:hover pre, .feed li:hover a, .feed div:hover .feed-item-hidden {
+.feed div:hover .feed-item-hidden, .feed li:hover .feed-item-hidden {
   visibility: visible;
 }
 

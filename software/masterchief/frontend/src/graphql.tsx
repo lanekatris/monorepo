@@ -19,8 +19,10 @@ export type Scalars = {
 export type ChildEvent = FeedEvent & {
   __typename?: 'ChildEvent';
   date: Scalars['String'];
+  deleted?: Maybe<Scalars['Boolean']>;
   id: Scalars['ID'];
   name: Scalars['String'];
+  tags?: Maybe<Array<Tag>>;
 };
 
 export type Disc = {
@@ -81,6 +83,16 @@ export type DiscsInput = {
   statuses?: InputMaybe<Array<DiscStatus>>;
 };
 
+export type EventAddTagInput = {
+  eventId: Scalars['String'];
+  tag: Scalars['String'];
+};
+
+export type EventEditMessageInput = {
+  eventId: Scalars['String'];
+  message: Scalars['String'];
+};
+
 export enum EventName {
   AdventureCreated = 'AdventureCreated',
   AdventureDeleted = 'AdventureDeleted',
@@ -99,8 +111,12 @@ export enum EventName {
   DiscUpdated = 'DiscUpdated',
   DiscsReset = 'DiscsReset',
   EventDeleted = 'EventDeleted',
+  EventMessageUpdated = 'EventMessageUpdated',
+  EventTagCreated = 'EventTagCreated',
+  EventTagRemoved = 'EventTagRemoved',
   HealthObservation = 'HealthObservation',
   MaintenanceCreated = 'MaintenanceCreated',
+  MovieWatched = 'MovieWatched',
   NoteTaken = 'NoteTaken',
   PdgaCourseCached = 'PdgaCourseCached',
   PdgaCourseHeaderCreated = 'PdgaCourseHeaderCreated',
@@ -108,9 +124,16 @@ export enum EventName {
   PersonalRecordClimbingCreated = 'PersonalRecordClimbingCreated'
 }
 
+export type EventRemoveTagInput = {
+  eventId: Scalars['String'];
+  tagId: Scalars['String'];
+};
+
 export type FeedEvent = {
   date: Scalars['String'];
+  deleted?: Maybe<Scalars['Boolean']>;
   id: Scalars['ID'];
+  tags?: Maybe<Array<Tag>>;
 };
 
 export type FeedInput = {
@@ -126,8 +149,19 @@ export type FeedResponse = {
 export type HealthObservationEvent = FeedEvent & {
   __typename?: 'HealthObservationEvent';
   date: Scalars['String'];
+  deleted?: Maybe<Scalars['Boolean']>;
   id: Scalars['ID'];
   name: Scalars['String'];
+  tags?: Maybe<Array<Tag>>;
+};
+
+export type MovieWatchedEvent = FeedEvent & {
+  __typename?: 'MovieWatchedEvent';
+  date: Scalars['String'];
+  deleted?: Maybe<Scalars['Boolean']>;
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  tags?: Maybe<Array<Tag>>;
 };
 
 export type Mutation = {
@@ -139,6 +173,10 @@ export type Mutation = {
   discRemove: Disc;
   discStatus?: Maybe<Disc>;
   discUpdate?: Maybe<Disc>;
+  eventAddTag: Scalars['Boolean'];
+  eventEditMessage: Scalars['Boolean'];
+  eventRemove: Scalars['Boolean'];
+  eventRemoveTag: Scalars['Boolean'];
 };
 
 
@@ -176,6 +214,26 @@ export type MutationDiscUpdateArgs = {
   input: DiscUpdateInput;
 };
 
+
+export type MutationEventAddTagArgs = {
+  input: EventAddTagInput;
+};
+
+
+export type MutationEventEditMessageArgs = {
+  input: EventEditMessageInput;
+};
+
+
+export type MutationEventRemoveArgs = {
+  eventId: Scalars['String'];
+};
+
+
+export type MutationEventRemoveTagArgs = {
+  input: EventRemoveTagInput;
+};
+
 export type Query = {
   __typename?: 'Query';
   discs: Array<Disc>;
@@ -190,13 +248,21 @@ export type QueryDiscsArgs = {
 
 
 export type QueryFeedArgs = {
-  input: FeedInput;
+  input?: InputMaybe<FeedInput>;
+};
+
+export type Tag = {
+  __typename?: 'Tag';
+  id: Scalars['String'];
+  name: Scalars['String'];
 };
 
 export type UnknownEvent = FeedEvent & {
   __typename?: 'UnknownEvent';
   date: Scalars['String'];
+  deleted?: Maybe<Scalars['Boolean']>;
   id: Scalars['ID'];
+  tags?: Maybe<Array<Tag>>;
 };
 
 export type AllDiscPropsFragment = { __typename?: 'Disc', id: string, brand: string, model: string, number: number, color?: string | null, status: DiscStatus, deleted?: boolean | null };
@@ -253,12 +319,40 @@ export type FeedQueryVariables = Exact<{
 }>;
 
 
-export type FeedQuery = { __typename?: 'Query', feed: { __typename?: 'FeedResponse', total: number, events: Array<{ __typename: 'ChildEvent', name: string, id: string, date: string } | { __typename: 'HealthObservationEvent', name: string, id: string, date: string } | { __typename: 'UnknownEvent', id: string, date: string }> } };
+export type FeedQuery = { __typename?: 'Query', feed: { __typename?: 'FeedResponse', total: number, events: Array<{ __typename: 'ChildEvent', name: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'HealthObservationEvent', name: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'MovieWatchedEvent', name: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'UnknownEvent', id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null }> } };
 
 export type LatestEventNamesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type LatestEventNamesQuery = { __typename?: 'Query', latestEventNames: Array<EventName> };
+
+export type EventRemoveMutationVariables = Exact<{
+  eventId: Scalars['String'];
+}>;
+
+
+export type EventRemoveMutation = { __typename?: 'Mutation', eventRemove: boolean };
+
+export type EventEditMessageMutationVariables = Exact<{
+  input: EventEditMessageInput;
+}>;
+
+
+export type EventEditMessageMutation = { __typename?: 'Mutation', eventEditMessage: boolean };
+
+export type EventAddTagMutationVariables = Exact<{
+  input: EventAddTagInput;
+}>;
+
+
+export type EventAddTagMutation = { __typename?: 'Mutation', eventAddTag: boolean };
+
+export type EventRemoveTagMutationVariables = Exact<{
+  input: EventRemoveTagInput;
+}>;
+
+
+export type EventRemoveTagMutation = { __typename?: 'Mutation', eventRemoveTag: boolean };
 
 export const AllDiscPropsFragmentDoc = gql`
     fragment AllDiscProps on Disc {
@@ -512,10 +606,17 @@ export const FeedDocument = gql`
       __typename
       id
       date
+      tags {
+        id
+        name
+      }
       ... on HealthObservationEvent {
         name
       }
       ... on ChildEvent {
+        name
+      }
+      ... on MovieWatchedEvent {
         name
       }
     }
@@ -582,3 +683,127 @@ export function useLatestEventNamesLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type LatestEventNamesQueryHookResult = ReturnType<typeof useLatestEventNamesQuery>;
 export type LatestEventNamesLazyQueryHookResult = ReturnType<typeof useLatestEventNamesLazyQuery>;
 export type LatestEventNamesQueryResult = Apollo.QueryResult<LatestEventNamesQuery, LatestEventNamesQueryVariables>;
+export const EventRemoveDocument = gql`
+    mutation eventRemove($eventId: String!) {
+  eventRemove(eventId: $eventId)
+}
+    `;
+export type EventRemoveMutationFn = Apollo.MutationFunction<EventRemoveMutation, EventRemoveMutationVariables>;
+
+/**
+ * __useEventRemoveMutation__
+ *
+ * To run a mutation, you first call `useEventRemoveMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEventRemoveMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [eventRemoveMutation, { data, loading, error }] = useEventRemoveMutation({
+ *   variables: {
+ *      eventId: // value for 'eventId'
+ *   },
+ * });
+ */
+export function useEventRemoveMutation(baseOptions?: Apollo.MutationHookOptions<EventRemoveMutation, EventRemoveMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<EventRemoveMutation, EventRemoveMutationVariables>(EventRemoveDocument, options);
+      }
+export type EventRemoveMutationHookResult = ReturnType<typeof useEventRemoveMutation>;
+export type EventRemoveMutationResult = Apollo.MutationResult<EventRemoveMutation>;
+export type EventRemoveMutationOptions = Apollo.BaseMutationOptions<EventRemoveMutation, EventRemoveMutationVariables>;
+export const EventEditMessageDocument = gql`
+    mutation eventEditMessage($input: EventEditMessageInput!) {
+  eventEditMessage(input: $input)
+}
+    `;
+export type EventEditMessageMutationFn = Apollo.MutationFunction<EventEditMessageMutation, EventEditMessageMutationVariables>;
+
+/**
+ * __useEventEditMessageMutation__
+ *
+ * To run a mutation, you first call `useEventEditMessageMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEventEditMessageMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [eventEditMessageMutation, { data, loading, error }] = useEventEditMessageMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useEventEditMessageMutation(baseOptions?: Apollo.MutationHookOptions<EventEditMessageMutation, EventEditMessageMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<EventEditMessageMutation, EventEditMessageMutationVariables>(EventEditMessageDocument, options);
+      }
+export type EventEditMessageMutationHookResult = ReturnType<typeof useEventEditMessageMutation>;
+export type EventEditMessageMutationResult = Apollo.MutationResult<EventEditMessageMutation>;
+export type EventEditMessageMutationOptions = Apollo.BaseMutationOptions<EventEditMessageMutation, EventEditMessageMutationVariables>;
+export const EventAddTagDocument = gql`
+    mutation eventAddTag($input: EventAddTagInput!) {
+  eventAddTag(input: $input)
+}
+    `;
+export type EventAddTagMutationFn = Apollo.MutationFunction<EventAddTagMutation, EventAddTagMutationVariables>;
+
+/**
+ * __useEventAddTagMutation__
+ *
+ * To run a mutation, you first call `useEventAddTagMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEventAddTagMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [eventAddTagMutation, { data, loading, error }] = useEventAddTagMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useEventAddTagMutation(baseOptions?: Apollo.MutationHookOptions<EventAddTagMutation, EventAddTagMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<EventAddTagMutation, EventAddTagMutationVariables>(EventAddTagDocument, options);
+      }
+export type EventAddTagMutationHookResult = ReturnType<typeof useEventAddTagMutation>;
+export type EventAddTagMutationResult = Apollo.MutationResult<EventAddTagMutation>;
+export type EventAddTagMutationOptions = Apollo.BaseMutationOptions<EventAddTagMutation, EventAddTagMutationVariables>;
+export const EventRemoveTagDocument = gql`
+    mutation eventRemoveTag($input: EventRemoveTagInput!) {
+  eventRemoveTag(input: $input)
+}
+    `;
+export type EventRemoveTagMutationFn = Apollo.MutationFunction<EventRemoveTagMutation, EventRemoveTagMutationVariables>;
+
+/**
+ * __useEventRemoveTagMutation__
+ *
+ * To run a mutation, you first call `useEventRemoveTagMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEventRemoveTagMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [eventRemoveTagMutation, { data, loading, error }] = useEventRemoveTagMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useEventRemoveTagMutation(baseOptions?: Apollo.MutationHookOptions<EventRemoveTagMutation, EventRemoveTagMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<EventRemoveTagMutation, EventRemoveTagMutationVariables>(EventRemoveTagDocument, options);
+      }
+export type EventRemoveTagMutationHookResult = ReturnType<typeof useEventRemoveTagMutation>;
+export type EventRemoveTagMutationResult = Apollo.MutationResult<EventRemoveTagMutation>;
+export type EventRemoveTagMutationOptions = Apollo.BaseMutationOptions<EventRemoveTagMutation, EventRemoveTagMutationVariables>;

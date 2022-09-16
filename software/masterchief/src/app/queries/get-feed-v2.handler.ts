@@ -1,10 +1,11 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { Inject } from '@nestjs/common';
 import { Esdb, ESDB } from '../utils/constants';
-import { EventStoreDBClient } from '@eventstore/db-client';
+import { EventStoreDBClient, JSONEventType } from '@eventstore/db-client';
 import { Field, ID, Int, InterfaceType, ObjectType } from '@nestjs/graphql';
 import { readStream } from '../utils/event-store';
 import { EventNames } from '../../dg/types/disc-added';
+import { nanoid } from 'nanoid';
 
 export class GetFeedQueryV2 {
   constructor(public types: EventNames[]) {}
@@ -24,6 +25,18 @@ export class FeedResponse {
   }
 }
 
+@ObjectType()
+export class Tag {
+  @Field()
+  id: string;
+  @Field()
+  name: string;
+  constructor(id: string, name: string) {
+    this.id = id;
+    this.name = name;
+  }
+}
+
 @InterfaceType()
 export abstract class FeedEvent {
   @Field(() => ID)
@@ -32,6 +45,12 @@ export abstract class FeedEvent {
   date: string;
 
   dbType: EventNames;
+
+  @Field({ nullable: true })
+  deleted?: boolean;
+
+  @Field(() => [Tag], { nullable: true })
+  tags?: Tag[];
 }
 
 @ObjectType({ implements: () => [FeedEvent] })
@@ -73,11 +92,59 @@ export class ChildEvent implements FeedEvent {
 }
 
 @ObjectType({ implements: () => [FeedEvent] })
+export class MovieWatchedEvent implements FeedEvent {
+  @Field()
+  date: string;
+  @Field(() => ID)
+  id: string;
+  @Field()
+  name: string;
+
+  dbType: EventNames;
+
+  constructor(id: string, name: string, date: string, dbType: EventNames) {
+    this.id = id;
+    this.name = name;
+    this.date = date;
+    this.dbType = dbType;
+  }
+}
+
+@ObjectType({ implements: () => [FeedEvent] })
 export class UnknownEvent implements FeedEvent {
   constructor(public id: string, public date: string) {}
 
   dbType: EventNames;
 }
+
+export type EventMessageUpdated = JSONEventType<
+  EventNames.EventMessageUpdated,
+  {
+    id: string;
+    date: string;
+    eventId: string;
+    message: string;
+  }
+>;
+export type EventTagCreated = JSONEventType<
+  EventNames.EventTagCreated,
+  {
+    id: string;
+    date: string;
+    eventId: string;
+    tag: string;
+  }
+>;
+
+export type EventTagRemoved = JSONEventType<
+  EventNames.EventTagRemoved,
+  {
+    id: string;
+    date: string;
+    eventId: string;
+    tagId: string;
+  }
+>;
 
 export type LanesCustomEvents =
   | {
@@ -102,13 +169,70 @@ export type LanesCustomEvents =
         date: string;
         name: string;
       };
-    };
+    }
+  | EventMessageUpdated
+  | {
+      type: EventNames.MovieWatched;
+      data: {
+        id: string;
+        date: string;
+        name: string;
+      };
+    }
+  | EventTagCreated
+  | EventTagRemoved;
+// | {
+//     type: EventNames.EventMessageUpdated;
+//     data: {
+//       id: string;
+//       date: string;
+//       eventId: string;
+//       message: string;
+//     };
+//   };
 
 const evolve = (
   currentState: FeedEvent[],
   event: LanesCustomEvents,
 ): FeedEvent[] => {
   switch (event.type) {
+    case EventNames.EventTagRemoved: {
+      const existingEvent = currentState.find(
+        (x) => x.id === event.data.eventId,
+      );
+      if (existingEvent?.tags) {
+        existingEvent.tags = existingEvent.tags.filter(
+          (x) => x.id !== event.data.tagId,
+        );
+      }
+      break;
+    }
+    case EventNames.EventTagCreated: {
+      const existingEvent = currentState.find(
+        (x) => x.id === event.data.eventId,
+      );
+      if (existingEvent) {
+        // const existingTag = existingEvent.tags.find(x => x.id === event.data.)
+        if (existingEvent.tags) {
+          existingEvent.tags.push(new Tag(event.data.id, event.data.tag));
+        } else {
+          existingEvent.tags = [new Tag(event.data.id, event.data.tag)];
+        }
+      }
+      break;
+    }
+    case EventNames.MovieWatched: {
+      currentState.push(
+        new MovieWatchedEvent(
+          event.data.id,
+          event.data.name,
+          event.data.date,
+          event.type,
+        ),
+      );
+      break;
+    }
+
     case 'health-observation':
       currentState.push(
         new HealthObservationEvent(
@@ -132,6 +256,21 @@ const evolve = (
         ),
       );
       break;
+    case EventNames.EventMessageUpdated: {
+      // find it, if it exists edit it
+      const existingEvent = currentState.find(
+        (x) => x.id === event.data.eventId,
+      );
+      if (existingEvent) {
+        console.log('do work', { existingEvent, event });
+        if ('name' in existingEvent) {
+          // @ts-ignore
+          existingEvent.name = event.data.message;
+        }
+      }
+      console.log('nothing');
+      break;
+    }
 
     default:
       break;

@@ -1,21 +1,17 @@
-import Select, { StylesConfig } from 'react-select';
-import { eventNameOptions } from '../pages/feed/feed';
-import { SingleValue } from 'react-select/animated';
+import Select from 'react-select';
 import { ReactElement, useState } from 'react';
-import { EventName, useLatestEventNamesQuery } from '../graphql';
-
-import validator from '@rjsf/validator-ajv6';
-import Form from '@rjsf/core';
+import { EventName } from '../graphql';
 import CreatableSelect from 'react-select/creatable';
 
 import schema from '../pages/feed/schema.json';
+import { useEventNames } from './use-event-names';
 
 /**
  * Goal: Ability to create events as easy as possible
  *    recent events
  *    at least sort by recently used events
  *    type the kind of event you want, then it renders
- * @constructor
+ *
  */
 
 export default function CreateEvent() {
@@ -23,24 +19,7 @@ export default function CreateEvent() {
     value: EventName;
     label: EventName;
   }>();
-
-  const { data } = useLatestEventNamesQuery();
-
-  const options = [
-    {
-      label: 'Recent',
-      options: (data?.latestEventNames || []).map((x) => ({
-        label: x,
-        value: x,
-      })),
-    },
-    {
-      label: 'All',
-      options: eventNameOptions,
-    },
-  ];
-
-  // const normalizedEventName = option?.value.replace('Ui ', '').replace(' ', '');
+  const options = useEventNames();
 
   const targetSchema = schema.anyOf.find((x) => x.title === option?.value);
 

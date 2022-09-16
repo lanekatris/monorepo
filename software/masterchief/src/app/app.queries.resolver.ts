@@ -44,8 +44,12 @@ export class AppQueriesResolver {
   ) {}
 
   @Query(() => FeedResponse)
-  async feed(@Args('input') input: FeedInput): Promise<FeedResponse> {
-    const events = await this.queryBus.execute(new GetFeedQueryV2(input.types));
+  async feed(
+    @Args('input', { nullable: true }) input?: FeedInput,
+  ): Promise<FeedResponse> {
+    const events = await this.queryBus.execute(
+      new GetFeedQueryV2(input?.types || []),
+    );
     return new FeedResponse(events);
   }
 

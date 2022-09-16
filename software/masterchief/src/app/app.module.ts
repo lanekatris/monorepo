@@ -20,6 +20,7 @@ import { join } from 'path';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AppQueriesResolver } from './app.queries.resolver';
+import { AppMutationResolver } from './app.mutation.resolver';
 
 const spaPath = join(__dirname, '..', '..', '..', 'frontend', 'dist');
 
@@ -61,6 +62,7 @@ const spaPath = join(__dirname, '..', '..', '..', 'frontend', 'dist');
     ...CommandHandlers,
     ...Subscribers,
     AppQueriesResolver,
+    AppMutationResolver,
   ],
   exports: [ElasticsearchModule],
 })

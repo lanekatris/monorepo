@@ -1,5 +1,7 @@
 import { useRef } from 'react';
 import ContentEditable from 'react-contenteditable';
+import { AiOutlineTag } from 'react-icons/all';
+import { useEventAddTagMutation } from '../graphql';
 
 export function InlineEditableField({
   value,
@@ -29,4 +31,33 @@ export function InlineEditableField({
       }}
     />
   );
+}
+
+export function InlineEditableTag({ value, className, eventId, onUpdate }) {
+  const newValue = useRef(value);
+  const [add] = useEventAddTagMutation();
+  return (
+    <div className={className} style={{ display: 'flex' }}>
+      <AiOutlineTag />
+      <ContentEditable
+        html={newValue.current}
+        onChange={(e) => (newValue.current = e.target.value)}
+        onBlur={async () => {
+          console.log('save me');
+          await add({
+            variables: {
+              input: {
+                eventId,
+                tag: newValue.current,
+              },
+            },
+          });
+          newValue.current = 'Add Tag';
+          onUpdate?.();
+        }}
+      />
+    </div>
+  );
+
+  // return <a>Tags</a>;
 }

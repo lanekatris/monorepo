@@ -58,10 +58,17 @@ query feed($input: FeedInput!) {
             __typename
             id
             date
+            tags {
+                id
+                name
+            }
             ... on HealthObservationEvent {
                 name
             }
             ... on ChildEvent {
+                name
+            }
+            ... on MovieWatchedEvent {
                 name
             }
         }
@@ -70,4 +77,20 @@ query feed($input: FeedInput!) {
 
 query latestEventNames {
     latestEventNames
+}
+
+mutation eventRemove($eventId: String!) {
+    eventRemove(eventId: $eventId)
+}
+
+mutation eventEditMessage($input: EventEditMessageInput!) {
+    eventEditMessage(input: $input)
+}
+
+mutation eventAddTag($input: EventAddTagInput!){
+    eventAddTag(input: $input)
+}
+
+mutation eventRemoveTag($input: EventRemoveTagInput!){
+    eventRemoveTag(input: $input)
 }
