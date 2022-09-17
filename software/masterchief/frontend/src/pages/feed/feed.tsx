@@ -149,7 +149,7 @@ export default function FeedPage() {
                   )}
                   {event.__typename === 'NoteTakenEvent' && (
                     <>
-                      <BiNote style={{ maginRight: 5 }} />
+                      <BiNote style={{ marginRight: 5 }} />
                       {isIsoDate(event.date) && (
                         <pre
                           style={{
