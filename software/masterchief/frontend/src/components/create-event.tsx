@@ -115,7 +115,7 @@ export default function CreateEvent() {
             <input
               type="hidden"
               name="redirect"
-              value="http://localhost:5173/feed"
+              value={`${import.meta.env.VITE_ROOT_URL}/feed`}
             />
             <button className="outline" type="submit">
               Create
