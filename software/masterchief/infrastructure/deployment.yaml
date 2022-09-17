@@ -15,7 +15,7 @@ spec:
         app: masterchief
     spec:
       containers:
-        - image: loonison101/masterchief:51e5d7230e4bdf8d0d93358475d1cb4401a617ff
+        - image: loonison101/masterchief:c53021141fe3639168b48b813f2f87ff6d9aeaf5
           imagePullPolicy: Always
           name: masterchief
           ports:
