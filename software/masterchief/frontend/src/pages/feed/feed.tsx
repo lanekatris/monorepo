@@ -17,7 +17,13 @@ import { BsCameraReels } from 'react-icons/bs';
 import { InlineEditableTag } from '../../components/inlineEditableField';
 import { format, parseISO } from 'date-fns';
 
-import { AiOutlineTag, BiNote, FaBlogger, FaWrench } from 'react-icons/all';
+import {
+  AiOutlineTag,
+  BiNote,
+  BiRefresh,
+  FaBlogger,
+  FaWrench,
+} from 'react-icons/all';
 import { getIsoDatePart, isIsoDate } from '../../utils';
 import { Link } from 'react-router-dom';
 export const eventNameOptions: { value: EventName; label: EventName }[] =
@@ -54,7 +60,19 @@ export default function FeedPage() {
 
   return (
     <Layout>
-      <h4>Feed ({loading ? '...' : data?.feed?.total})</h4>
+      <h4>
+        Feed ({loading ? '...' : data?.feed?.total}){' '}
+        <BiRefresh
+          style={{ cursor: 'pointer' }}
+          onClick={() =>
+            refetch({
+              input: {
+                types: filteredTypes,
+              },
+            })
+          }
+        />
+      </h4>
       {error && <article>{JSON.stringify(error, null, 2)}</article>}
       <section style={{ marginBottom: 0 }}>
         <details>

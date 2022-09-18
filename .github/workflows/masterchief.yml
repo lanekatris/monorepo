@@ -36,4 +36,4 @@ jobs:
         branch: wip
         targetBranch: wip
         createPR: false
-        message: 'GH updated image version to loonison101/masterchief:${{ github.sha }}'
+        message: 'GH updated image version'

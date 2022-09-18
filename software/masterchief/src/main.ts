@@ -3,6 +3,7 @@ import { AppModule } from './app/app.module';
 import { join } from 'path';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ValidationPipe } from '@nestjs/common';
+import compression from 'compression';
 // import * as cookieParser from 'cookie-parser';
 import cookieParser from 'cookie-parser';
 import { engine } from 'express-handlebars';
@@ -36,6 +37,8 @@ async function bootstrap() {
   app.use(cookieParser());
 
   app.disable('x-powered-by');
+
+  app.use(compression());
 
   // const whitelist = ['localhost:5173']; //https://morioh.com/p/bad87f42e5dd
   // app.enableCors({
