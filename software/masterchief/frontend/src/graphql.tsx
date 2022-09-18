@@ -184,6 +184,16 @@ export type HealthObservationEvent = FeedEvent & {
   tags?: Maybe<Array<Tag>>;
 };
 
+export type MaintenanceCreatedEvent = FeedEvent & {
+  __typename?: 'MaintenanceCreatedEvent';
+  date: Scalars['String'];
+  deleted?: Maybe<Scalars['Boolean']>;
+  equipment?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  tags?: Maybe<Array<Tag>>;
+};
+
 export type MovieWatchedEvent = FeedEvent & {
   __typename?: 'MovieWatchedEvent';
   date: Scalars['String'];
@@ -363,7 +373,7 @@ export type FeedQueryVariables = Exact<{
 }>;
 
 
-export type FeedQuery = { __typename?: 'Query', feed: { __typename?: 'FeedResponse', total: number, events: Array<{ __typename: 'Article', id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'ArticleEditedLinkFeedEvent', articleId: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'ChildEvent', name: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'HealthObservationEvent', name: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'MovieWatchedEvent', name: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'NoteTakenEvent', body: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'UnknownEvent', id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null }> } };
+export type FeedQuery = { __typename?: 'Query', feed: { __typename?: 'FeedResponse', total: number, events: Array<{ __typename: 'Article', id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'ArticleEditedLinkFeedEvent', articleId: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'ChildEvent', name: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'HealthObservationEvent', name: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'MaintenanceCreatedEvent', equipment?: string | null, name: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'MovieWatchedEvent', name: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'NoteTakenEvent', body: string, id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null } | { __typename: 'UnknownEvent', id: string, date: string, tags?: Array<{ __typename?: 'Tag', id: string, name: string }> | null }> } };
 
 export type LatestEventNamesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -668,6 +678,10 @@ export const FeedDocument = gql`
       }
       ... on ArticleEditedLinkFeedEvent {
         articleId
+      }
+      ... on MaintenanceCreatedEvent {
+        equipment
+        name
       }
     }
   }

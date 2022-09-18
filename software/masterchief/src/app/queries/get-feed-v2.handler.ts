@@ -2,7 +2,14 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { Inject } from '@nestjs/common';
 import { Esdb, ESDB } from '../utils/constants';
 import { EventStoreDBClient, JSONEventType } from '@eventstore/db-client';
-import { Field, ID, Int, InterfaceType, ObjectType } from '@nestjs/graphql';
+import {
+  Field,
+  ID,
+  Int,
+  InterfaceType,
+  ObjectType,
+  registerEnumType,
+} from '@nestjs/graphql';
 import { readStream } from '../utils/event-store';
 import { EventNames } from '../../dg/types/disc-added';
 
@@ -159,7 +166,37 @@ export class ArticleEditedLinkFeedEvent implements FeedEvent {
     this.id = id;
     this.articleId = articleId;
     this.date = date;
-    this.dbType = EventNames.NoteTaken;
+  }
+}
+
+// export enum MaintenanceEquipment {
+//   Truck = 'truck',
+//   House = 'house',
+//   DadsHouse = 'dads-house',
+//   Frenchy = 'frenchy',
+//   Kia = 'kia',
+//   HondaBlueCar = 'honda blue car',
+//   EquinoxCar = 'equinox car',
+// }
+// registerEnumType(MaintenanceEquipment, { name: 'MaintenanceEquipment' });
+@ObjectType({ implements: () => [FeedEvent] })
+export class MaintenanceCreatedEvent implements FeedEvent {
+  @Field()
+  date: string;
+  dbType: EventNames = EventNames.MaintenanceCreated;
+  @Field(() => ID)
+  id: string;
+  @Field()
+  name: string;
+  // @Field(() => MaintenanceEquipment, { nullable: true })
+  @Field({ nullable: true })
+  equipment?: string;
+
+  constructor(id: string, name: string, equipment: string, date: string) {
+    this.id = id;
+    this.date = date;
+    this.name = name;
+    this.equipment = equipment;
   }
 }
 
@@ -228,22 +265,15 @@ export type ArticleEditedLink = JSONEventType<
   }
 >;
 
-// export type BinaryIdk = BinaryEventType<EventNames.ArticleEdited>;
-
-// export const idk: LinkEvent = {
-//   data: undefined,
-//   metadata: {},
-//   type: '$>',
-// };
-
-// export const idsss = EventData<
-//   EventNames.EventMessageUpdated,
-//   {
-//     id: string;
-//   }
-// >;
-//
-// const;
+export type MaintenanceCreated = JSONEventType<
+  EventNames.MaintenanceCreated,
+  {
+    id: string;
+    date: string;
+    name: string;
+    equipment: string;
+  }
+>;
 
 export type LanesCustomEvents =
   | {
@@ -281,7 +311,8 @@ export type LanesCustomEvents =
   | EventTagCreated
   | EventTagRemoved
   | NoteTaken
-  | ArticleEditedLink;
+  | ArticleEditedLink
+  | MaintenanceCreated;
 // | {
 //     type: EventNames.EventMessageUpdated;
 //     data: {
@@ -297,6 +328,17 @@ const evolve = (
   event: LanesCustomEvents,
 ): FeedEvent[] => {
   switch (event.type) {
+    case EventNames.MaintenanceCreated: {
+      currentState.push(
+        new MaintenanceCreatedEvent(
+          event.data.id,
+          event.data.name,
+          event.data.equipment,
+          event.data.date,
+        ),
+      );
+      break;
+    }
     case EventNames.ArticleEditedLink: {
       currentState.push(
         new ArticleEditedLinkFeedEvent(
@@ -380,7 +422,6 @@ const evolve = (
         (x) => x.id === event.data.eventId,
       );
       if (existingEvent) {
-        console.log('do work', { existingEvent, event });
         if ('name' in existingEvent) {
           // @ts-ignore
           existingEvent.name = event.data.message;
@@ -390,7 +431,6 @@ const evolve = (
           existingEvent.body = event.data.message;
         }
       }
-      console.log('nothing');
       break;
     }
 

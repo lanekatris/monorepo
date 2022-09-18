@@ -100,6 +100,7 @@ export class AppController {
     @Response() res,
   ) {
     const { eventName, redirect, ...body } = input;
+    console.log('input', input);
     const result = await this.commandBus.execute(
       new CreateEventCommand(eventName, body),
     );

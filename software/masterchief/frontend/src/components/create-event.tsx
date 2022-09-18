@@ -17,6 +17,7 @@ import { useEventNames } from './use-event-names';
 const eventNameMapp: { [key in EventName]?: string } = {
   [EventName.NoteTaken]: 'note-taken',
   [EventName.HealthObservation]: 'health-observation',
+  [EventName.MaintenanceCreated]: 'maintenance-created',
 };
 
 export default function CreateEvent() {
@@ -40,6 +41,19 @@ export default function CreateEvent() {
     NoteTaken: (
       <>
         <textarea name="body" placeholder="I saw this and that..." />
+      </>
+    ),
+    MaintenanceCreated: (
+      <>
+        <textarea name="name" placeholder="I fixed this..." />
+        <input type="text" name="equipment" />
+        {/*<select name="equipment">*/}
+        {/*  {Object.values(MaintenanceEquipment).map((x) => (*/}
+        {/*    <option key={x} value={x}>*/}
+        {/*      {x}*/}
+        {/*    </option>*/}
+        {/*  ))}*/}
+        {/*</select>*/}
       </>
     ),
   };

@@ -17,7 +17,7 @@ import { BsCameraReels } from 'react-icons/bs';
 import { InlineEditableTag } from '../../components/inlineEditableField';
 import { format, parseISO } from 'date-fns';
 
-import { AiOutlineTag, BiNote, FaBlogger } from 'react-icons/all';
+import { AiOutlineTag, BiNote, FaBlogger, FaWrench } from 'react-icons/all';
 import { getIsoDatePart, isIsoDate } from '../../utils';
 import { Link } from 'react-router-dom';
 export const eventNameOptions: { value: EventName; label: EventName }[] =
@@ -184,6 +184,28 @@ export default function FeedPage() {
                         </pre>
                       )}
                       Article: <Link to="/blog/create">{event.articleId}</Link>
+                    </>
+                  )}
+                  {event.__typename === 'MaintenanceCreatedEvent' && (
+                    <>
+                      <FaWrench style={{ marginRight: 5 }} />
+                      {isIsoDate(event.date) && (
+                        <pre
+                          style={{
+                            display: 'flex',
+                            marginBottom: 0,
+                            padding: 5,
+                            marginRight: 5,
+                          }}
+                        >
+                          {format(parseISO(event.date), 'kk:mmaaa')}
+                        </pre>
+                      )}
+                      <EditableEventMessage
+                        value={event.name}
+                        eventId={event.id}
+                      />{' '}
+                      - {event.equipment}
                     </>
                   )}
                   <div

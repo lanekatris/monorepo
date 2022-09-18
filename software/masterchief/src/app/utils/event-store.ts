@@ -56,7 +56,6 @@ export const readStream = async <EventType extends Event>(
     streamOptions,
   )) {
     const { event } = r;
-    console.log('idk man', r);
     if (!event) continue;
 
     events.push(<EventType>{
