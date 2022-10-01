@@ -4,14 +4,24 @@
   "license": "MIT",
   "scripts": {},
   "private": true,
-  "dependencies": {},
   "devDependencies": {
+    "@docusaurus/module-type-aliases": "2.0.0-beta.13",
     "@nrwl/cli": "14.8.2",
     "@nrwl/js": "14.8.2",
     "@nrwl/nx-cloud": "latest",
     "@nrwl/workspace": "14.8.2",
+    "@nx-plus/docusaurus": "^14.1.0",
     "nx": "14.8.2",
     "prettier": "^2.6.2",
     "typescript": "~4.8.2"
+  },
+  "dependencies": {
+    "@docusaurus/core": "2.0.0-beta.13",
+    "@docusaurus/preset-classic": "2.0.0-beta.13",
+    "@mdx-js/react": "^1.6.21",
+    "clsx": "^1.1.1",
+    "prism-react-renderer": "^1.2.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   }
 }

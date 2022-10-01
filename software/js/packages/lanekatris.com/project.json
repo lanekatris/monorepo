@@ -1,0 +1,21 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "lanekatris.com",
+  "projectType": "application",
+  "sourceRoot": "packages/lanekatris.com/src",
+  "targets": {
+    "build": {
+      "executor": "@nx-plus/docusaurus:browser",
+      "options": {
+        "outputPath": "dist/packages/lanekatris.com"
+      }
+    },
+    "serve": {
+      "executor": "@nx-plus/docusaurus:dev-server",
+      "options": {
+        "port": 3000
+      }
+    }
+  },
+  "tags": []
+}
