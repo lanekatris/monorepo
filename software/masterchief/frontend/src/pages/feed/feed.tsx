@@ -23,6 +23,7 @@ import {
   BiRefresh,
   FaBlogger,
   FaWrench,
+  BsFilterCircle,
 } from 'react-icons/all';
 import { getIsoDatePart, isIsoDate } from '../../utils';
 import { Link } from 'react-router-dom';
@@ -52,11 +53,11 @@ export default function FeedPage() {
   const [remove] = useEventRemoveMutation();
   const options = useEventNames();
   const [removeTag] = useEventRemoveTagMutation();
+  const [showFilters, setShowFilters] = useState(false);
 
   const grouped = groupBy(data?.feed.events, (x) => {
     return isIsoDate(x.date) ? getIsoDatePart(x.date) : x.date;
   });
-  // console.log('grouped', grouped);
 
   return (
     <Layout>
@@ -72,41 +73,48 @@ export default function FeedPage() {
             })
           }
         />
+        <BsFilterCircle
+          style={{ cursor: 'pointer' }}
+          onClick={() => setShowFilters(!showFilters)}
+        />
       </h4>
       {error && <article>{JSON.stringify(error, null, 2)}</article>}
-      <section style={{ marginBottom: 0 }}>
-        <details>
-          <summary>Filter Events</summary>
-          <div>
-            <div style={{ display: 'flex' }}>
-              <Select
-                styles={colourStyles}
-                // value={filteredTypes}
-                options={options}
-                isMulti
-                onChange={(newValue) => {
-                  // @ts-ignore
-                  setFilteredTypes(newValue.map((x) => x.value as EventName));
-                }}
-              />
-              <a
-                href="#"
-                role="button"
-                className="outline"
-                onClick={() => {
-                  refetch({
-                    input: {
-                      types: filteredTypes,
-                    },
-                  });
-                }}
-              >
-                Go
-              </a>
-            </div>
-          </div>
-        </details>
-      </section>
+      {showFilters && (
+        <div style={{ display: 'flex' }}>
+          <Select
+            styles={colourStyles}
+            // value={filteredTypes}
+            options={options}
+            isMulti
+            onChange={(newValue) => {
+              // @ts-ignore
+              setFilteredTypes(newValue.map((x) => x.value as EventName));
+            }}
+          />
+          <a
+            href="#"
+            role="button"
+            className="outline"
+            onClick={() => {
+              refetch({
+                input: {
+                  types: filteredTypes,
+                },
+              });
+            }}
+          >
+            Go
+          </a>
+        </div>
+      )}
+      {/*<section style={{ marginBottom: 0 }}>*/}
+      {/*  <details>*/}
+      {/*    <summary>Filter Events</summary>*/}
+      {/*    <div>*/}
+      {/*      */}
+      {/*    </div>*/}
+      {/*  </details>*/}
+      {/*</section>*/}
 
       <div className="feed">
         {Object.keys(grouped).map((key) => (
