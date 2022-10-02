@@ -44,6 +44,7 @@ I actually enjoy the WordPress style of CMS driving your blog. I don't want to n
 - RSS out of the box
 - Don't have to worry about styling
 - Search is easy to add!
+- Just working with files and directories is easier... right? `#dontoverengineer`
 - Lets me do raw React and does all the Markdown niceness like [Admonitions](https://docusaurus.io/docs/markdown-features/admonitions), didn't even know this was available
 - More reasons to come...
 
