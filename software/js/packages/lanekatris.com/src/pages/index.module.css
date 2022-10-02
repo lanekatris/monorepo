@@ -21,3 +21,19 @@
   align-items: center;
   justify-content: center;
 }
+
+.centered {
+  text-align:center
+}
+
+.stuff {
+  text-align: center;
+  font-size:1.7em;
+  padding: .8em;
+  margin: 0 auto;
+  max-width: 25em;
+}
+
+.listnone {
+  list-style: none;
+}

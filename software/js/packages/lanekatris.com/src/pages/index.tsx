@@ -11,16 +11,11 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro"
-          >
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
+        <h1 className="hero__title">Hey, I'm {siteConfig.title}</h1>
+        <img
+          alt="Me on top of Grays Peak, a 14er in Colorado"
+          src="https://ik.imagekit.io/lkat//tr:w-0.2/grays-peak-resized-1_Jn1kTLuiK"
+        />
       </div>
     </header>
   );
@@ -29,13 +24,45 @@ function HomepageHeader() {
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />"
-    >
+    <Layout title={siteConfig.title}>
       <HomepageHeader />
       <main>
-        <HomepageFeatures />
+        <div className={styles.stuff}>
+          <p>
+            {' '}
+            I'm a senior full stack engineer at{' '}
+            <a
+              href="https://www.ironnet.com/"
+              target="_blank"
+              className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
+            >
+              IronNet
+            </a>{' '}
+            who enjoys climbing 🧗, team sports 🏀, disc golf 💿, etc.
+          </p>
+          <p>
+            <ul className={styles.listnone}>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/lane-katris-80610a44/"
+                  target="_blank"
+                >
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a href="https://gitconnected.com/lanekatris" target="_blank">
+                  Resume
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/lanekatris" target="_blank">
+                  GitHub
+                </a>
+              </li>
+            </ul>
+          </p>
+        </div>
       </main>
     </Layout>
   );
