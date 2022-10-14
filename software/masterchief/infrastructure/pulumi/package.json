@@ -5,6 +5,7 @@
         "@types/node": "^14"
     },
     "dependencies": {
+        "@aws-sdk/client-eventbridge": "^3.186.0",
         "@aws-sdk/client-sns": "^3.186.0",
         "@pulumi/aws": "^5.0.0",
         "@pulumi/aws-apigateway": "^0.0.11",

@@ -1,22 +1,30 @@
 import * as aws from '@pulumi/aws';
 import * as pulumi from '@pulumi/pulumi';
 import { SNSClient, PublishCommand } from '@aws-sdk/client-sns';
+import * as apigateway from '@pulumi/aws-apigateway';
+import { APIGatewayEvent } from 'aws-lambda';
+import {
+  EventBridgeClient,
+  PutEventsCommand,
+} from '@aws-sdk/client-eventbridge';
 
 const config = new pulumi.Config();
 
-const api = new aws.apigatewayv2.Api('api', {
-  protocolType: 'HTTP',
-});
-
-// Create a stage and set it to deploy automatically.
-const stage = new aws.apigatewayv2.Stage('stage', {
-  apiId: api.id,
-  name: pulumi.getStack(),
-  autoDeploy: true,
-});
-
-// Create an event bus.
 const bus = new aws.cloudwatch.EventBus('bus');
+
+enum EventNames {
+  GraphicsDriverRead = 'graphics-driver-read',
+}
+
+enum EventSource {
+  Arbiter = 'Arbiter',
+}
+
+interface GraphicsDriverRead {
+  YourVersion: string;
+  LatestVersion: string;
+  Source: string;
+}
 
 // Create an event rule to watch for events.
 const rule = new aws.cloudwatch.EventRule('rule', {
@@ -24,66 +32,95 @@ const rule = new aws.cloudwatch.EventRule('rule', {
 
   // Specify the event pattern to watch for.
   eventPattern: JSON.stringify({
-    source: ['my-event-source'],
+    source: [EventSource.Arbiter],
   }),
 });
 
-// Define a policy granting API Gateway permission to publish to EventBridge.
-const apiGatewayRole = new aws.iam.Role('api-gateway-role', {
-  assumeRolePolicy: {
-    Version: '2012-10-17',
-    Statement: [
-      {
-        Action: 'sts:AssumeRole',
-        Effect: 'Allow',
-        Principal: {
-          Service: 'apigateway.amazonaws.com',
-        },
-      },
+// Create a Lambda Function
+const publishToQueueLambda = new aws.lambda.CallbackFunction(
+  'publish-to-event-bridge-lambda',
+  {
+    policies: [
+      aws.iam.ManagedPolicies.CloudWatchLogsFullAccess,
+      'arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess', // doesn't exist as an enum 🤷
     ],
+
+    runtime: 'nodejs16.x',
+    callback: async (ev: APIGatewayEvent) => {
+      console.log('event', ev);
+
+      if (!ev.body)
+        return {
+          statusCode: 400,
+          body: 'No data submitted',
+        };
+
+      if (!ev.isBase64Encoded) {
+        return {
+          statusCode: 400,
+          body: 'The body is not base 64, not sure what to do',
+        };
+      }
+
+      const body: GraphicsDriverRead = JSON.parse(
+        new Buffer(ev.body, 'base64').toString('ascii'),
+      );
+
+      const client = new EventBridgeClient({});
+      const command = new PutEventsCommand({
+        Entries: [
+          {
+            EventBusName: bus.name.get(),
+            Detail: JSON.stringify(body),
+            DetailType: EventNames.GraphicsDriverRead,
+            Source: EventSource.Arbiter,
+          },
+        ],
+      });
+      const response = await client.send(command);
+      console.log('response', response);
+      return {
+        statusCode: 200,
+        body: JSON.stringify(response), // has to be string
+      };
+    },
   },
-  managedPolicyArns: ['arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess'],
+);
+
+// Define an endpoint that invokes a lambda to handle requests
+const api = new apigateway.RestAPI('api', {
+  routes: [
+    {
+      path: `/${EventNames.GraphicsDriverRead}`,
+      method: 'POST',
+      eventHandler: publishToQueueLambda,
+      apiKeyRequired: true,
+    },
+  ],
+  apiKeySource: 'HEADER',
 });
 
-// Create an API Gateway integration to forward requests to EventBridge.
-const integration = new aws.apigatewayv2.Integration('integration', {
-  apiId: api.id,
+export const url = api.url;
 
-  // The integration type and subtype.
-  integrationType: 'AWS_PROXY',
-  integrationSubtype: 'EventBridge-PutEvents',
-  credentialsArn: apiGatewayRole.arn,
-
-  // The body of the request to be sent to EventBridge. Note the
-  // event source matches pattern defined on the EventRule, and the
-  // Detail expression, which just forwards the body of the original
-  // API Gateway request (i.e., the uploaded document).
-  requestParameters: {
-    EventBusName: bus.name,
-    Source: 'my-event-source',
-    DetailType: 'my-detail-type',
-    Detail: '$request.body',
-  },
+// Create an API key to manage usage
+const apiKey = new aws.apigateway.ApiKey('api-key');
+// Define usage plan for an API stage
+const usagePlan = new aws.apigateway.UsagePlan('usage-plan', {
+  apiStages: [
+    {
+      apiId: api.api.id,
+      stage: api.stage.stageName,
+    },
+  ],
+});
+// Associate the key to the plan
+new aws.apigateway.UsagePlanKey('usage-plan-key', {
+  keyId: apiKey.id,
+  keyType: 'API_KEY',
+  usagePlanId: usagePlan.id,
 });
 
-// Finally, define the route.
-const route = new aws.apigatewayv2.Route('route', {
-  apiId: api.id,
-  routeKey: 'POST /uploads',
-  target: pulumi.interpolate`integrations/${integration.id}`,
-});
-// ...
-
-// Create a Lambda function handler with permission to log to CloudWatch.
-const lambda = new aws.lambda.CallbackFunction('lambda', {
-  runtime: 'nodejs16.x',
-  policies: [aws.iam.ManagedPolicies.CloudWatchLogsFullAccess],
-  callback: async (event: any) => {
-    // For now, just log the event, including the uploaded document.
-    // That'll be enough to verify everything's working.
-    console.log({ source: event.source, detail: event.detail });
-  },
-});
+export const apiKeyValue = apiKey.value;
 
 const topic = new aws.sns.Topic('mytopic');
 const topicSubscription = new aws.sns.TopicSubscription('my-t-subscription', {
@@ -97,38 +134,30 @@ const sendEmailLambda = new aws.lambda.CallbackFunction('send-email', {
     aws.iam.ManagedPolicies.CloudWatchLogsFullAccess,
     aws.iam.ManagedPolicies.AmazonSNSFullAccess,
   ],
-  callback: async (event: any) => {
+  callback: async (event: { detail: GraphicsDriverRead }) => {
+    const { YourVersion, LatestVersion } = event.detail;
+    if (YourVersion === LatestVersion) {
+      console.log('Versions match, not doing anything');
+      return;
+    }
+
     const client = new SNSClient({});
     const arnToSend = topic.arn.get();
+    const message = `Your Nvidia Graphics Driver (${YourVersion}) is Out of Date. Latest: ${LatestVersion}`;
     const command = new PublishCommand({
-      Message: 'testies',
-      Subject: 'im a subject',
+      Message: message,
+      Subject: message,
       TopicArn: arnToSend,
     });
     const response = await client.send(command);
-    console.log({ source: event.source, detail: event.detail, response });
+    console.log('response', response);
   },
-});
-
-// Create an EventBridge target associating the event rule with the function.
-const lambdaTarget = new aws.cloudwatch.EventTarget('lambda-target', {
-  arn: lambda.arn,
-  rule: rule.name,
-  eventBusName: bus.name,
 });
 
 const lambaTargetEmail = new aws.cloudwatch.EventTarget('lambda-email-target', {
   arn: sendEmailLambda.arn,
   rule: rule.name,
   eventBusName: bus.name,
-});
-
-// Give EventBridge permission to invoke the function.
-const lambdaPermission = new aws.lambda.Permission('lambda-permission', {
-  action: 'lambda:InvokeFunction',
-  principal: 'events.amazonaws.com',
-  function: lambda.arn,
-  sourceArn: rule.arn,
 });
 
 const lambdaPermissionEmail = new aws.lambda.Permission(
@@ -140,6 +169,3 @@ const lambdaPermissionEmail = new aws.lambda.Permission(
     sourceArn: rule.arn,
   },
 );
-
-// Export the API Gateway URL to give us something to POST to.
-export const url = pulumi.interpolate`${api.apiEndpoint}/${stage.name}`;
