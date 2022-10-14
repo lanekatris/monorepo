@@ -1,5 +1,8 @@
+using System.Net.Http.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
+using Newtonsoft.Json;
 using NvAPIWrapper;
 
 namespace NvidiaTestDemo;
@@ -52,6 +55,9 @@ public class Worker : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        var apiKey = Environment.GetEnvironmentVariable("ARBITER_API_KEY");
+        if (string.IsNullOrEmpty(apiKey)) throw new Exception("ARBITER_API_KEY not in environment");
+        
         while (!stoppingToken.IsCancellationRequested)
         {
             var latestVersion = await GetLatestVersion();
@@ -61,9 +67,16 @@ public class Worker : BackgroundService
             _logger.LogInformation("nvidia " + NVIDIA.DriverVersion + " --- " + NVIDIA.DriverBranchVersion + " --- " + NVIDIA.InterfaceVersionString);
             _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
 
-            // new HttpClient().PostAsync("https://49k5qibsy9.execute-api.us-east-2.amazonaws.com/dev/uploads")
+            // new HttpClient().PostAsync("https://2ukhlyth8a.execute-api.us-east-2.amazonaws.com/stage/graphics-driver-read")
 
-            var sevenDays = TimeSpan.FromDays(7).TotalMilliseconds;
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("x-api-key", apiKey);
+            var payload = new GraphicsDriverRead(NVIDIA.DriverVersion.ToString(), latestVersion.ToString());
+            var serialized = JsonConvert.SerializeObject(payload);
+            var result = await client.PostAsync("https://2ukhlyth8a.execute-api.us-east-2.amazonaws.com/stage/graphics-driver-read", new StringContent(serialized), stoppingToken);
+            _logger.LogInformation("result from lambda: " + await result.Content.ReadAsStringAsync(stoppingToken));
+
+            var sevenDays = TimeSpan.FromDays(1).TotalMilliseconds;
             await Task.Delay(Convert.ToInt32(sevenDays), stoppingToken);
         }
     }
