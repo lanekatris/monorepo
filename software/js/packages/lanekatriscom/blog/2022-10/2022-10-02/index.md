@@ -3,7 +3,7 @@ title: Final form of this website?
 tags: [redo, blog]
 ---
 
-![Catepillar evolutino to butterfly](./evolution.webp)
+![Catepillar evolutino to butterfly](evolution.webp)
 Source [discoverwildlife.com](https://www.discoverwildlife.com/animal-facts/insects-invertebrates/how-does-a-caterpillar-turn-into-a-butterfly)
 
 Once again I'm redoing this website.

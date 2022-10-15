@@ -17,6 +17,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import DiscsPage from './pages/discs';
 import ResumePage from './pages/resume/resume';
 import Layout from './components/layout';
+import { DumpPage } from './pages/dump';
 console.log('url man', import.meta.env.VITE_GRAPHQL_URL);
 const client = new ApolloClient({
   uri: import.meta.env.VITE_GRAPHQL_URL,
@@ -33,6 +34,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <Route path={ROUTE_DAD} element={<DadPage />}></Route>
           <Route path={ROUTE_DISCS} element={<DiscsPage />} />
           <Route path={ROUTE_CREATE_BLOG} element={<CreateBlogPage />}></Route>
+          <Route path="/dump" element={<DumpPage />}></Route>
           <Route path="/" element={<App />}></Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

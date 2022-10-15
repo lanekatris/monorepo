@@ -61,6 +61,12 @@ const config = {
           //   label: 'GitHub',
           //   position: 'right',
           // },
+          {
+            type: 'doc',
+            docId: 'projects/climb-rest',
+            position: 'left',
+            label: 'Projects',
+          },
         ],
       },
       footer: {
