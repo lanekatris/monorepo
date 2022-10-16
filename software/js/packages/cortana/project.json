@@ -1,0 +1,40 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "cortana",
+  "projectType": "application",
+  "sourceRoot": "packages/cortana/src",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/cortana/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx vitest --run",
+        "cwd": "packages/cortana"
+      }
+    },
+    "up": {
+      "executor": "@wanews/nx-pulumi:up",
+      "options": {
+        "buildTargets": [
+          {
+            "project": "poc",
+            "target": "build"
+          }
+        ]
+      }
+    },
+    "destroy": {
+      "executor": "@wanews/nx-pulumi:destroy"
+    },
+    "refresh": {
+      "executor": "@wanews/nx-pulumi:refresh"
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["poc"]
+}

@@ -54,6 +54,12 @@
         "jestConfig": "packages/poc/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["nx run poc-infrastructure:up"]
+      }
     }
   },
   "tags": []
