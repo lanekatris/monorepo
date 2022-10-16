@@ -63,6 +63,10 @@ So this nx.dev stuff has bitten me again. I think keeping everything in one type
 
 My thought is I'll just start everything from a pulumi TS folder to keep things simple since you should focus things on deploying and hosting them... not code organization which means NOTHING if it doesn't do anything.
 
+# Paradigm Now
+
+Going to revolve everything around pulumi
+
 # Commands
 ```
 mkdir quickstart && cd quickstart && pulumi new aws-typescript
