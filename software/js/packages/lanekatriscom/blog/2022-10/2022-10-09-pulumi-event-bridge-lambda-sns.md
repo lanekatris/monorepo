@@ -43,7 +43,7 @@ This gives some nice sample data on what to post to Event Bridge. It was nice to
             "resource2"
          ],
          "DetailType":"myDetailType"
-      },
+      }
 ```
 
 
@@ -53,3 +53,19 @@ New .NET 6 way to run a windows service: https://www.youtube.com/watch?v=aHC-4iv
 
 # Windows Service Notes
 If you use environment variables, be sure to set at the SYSTEM level. This matters based on what user your service runs as.
+
+# Issues
+
+I knew I was going to have problems with putting everything in a monorepo. So I created everything and when I go to deploy via pulumi from within nx.dev
+I get a cannot find module tslib...
+
+So this nx.dev stuff has bitten me again. I think keeping everything in one typescript project may be best.
+
+My thought is I'll just start everything from a pulumi TS folder to keep things simple since you should focus things on deploying and hosting them... not code organization which means NOTHING if it doesn't do anything.
+
+# Commands
+```
+mkdir quickstart && cd quickstart && pulumi new aws-typescript
+
+pulumi logs --follow
+```
