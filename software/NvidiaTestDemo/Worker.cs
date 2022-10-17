@@ -7,6 +7,8 @@ using NvAPIWrapper;
 
 namespace NvidiaTestDemo;
 
+// Log location: C:\ProgramData\Arbiter
+// dotnet publish -o publish -c Release -r win-x64 -p:PublishSingleFile=True --self-contained
 public class GraphicsDriverRead
 {
     public GraphicsDriverRead(string yourVersion, string latestVersion)
@@ -56,7 +58,8 @@ public class Worker : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         var apiKey = Environment.GetEnvironmentVariable("ARBITER_API_KEY");
-        if (string.IsNullOrEmpty(apiKey)) throw new Exception("ARBITER_API_KEY not in environment");
+        var apiUrl = Environment.GetEnvironmentVariable("ARBITER_URL");
+        if (string.IsNullOrEmpty(apiKey) || string.IsNullOrEmpty(apiUrl)) throw new Exception("ARBITER_API_KEY or ARBITER_URL not in environment");
         
         while (!stoppingToken.IsCancellationRequested)
         {
@@ -73,7 +76,7 @@ public class Worker : BackgroundService
             client.DefaultRequestHeaders.Add("x-api-key", apiKey);
             var payload = new GraphicsDriverRead(NVIDIA.DriverVersion.ToString(), latestVersion.ToString());
             var serialized = JsonConvert.SerializeObject(payload);
-            var result = await client.PostAsync("https://2ukhlyth8a.execute-api.us-east-2.amazonaws.com/stage/graphics-driver-read", new StringContent(serialized), stoppingToken);
+            var result = await client.PostAsync(apiUrl, new StringContent(serialized), stoppingToken);
             _logger.LogInformation("result from lambda: " + await result.Content.ReadAsStringAsync(stoppingToken));
 
             var sevenDays = TimeSpan.FromDays(1).TotalMilliseconds;
