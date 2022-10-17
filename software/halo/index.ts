@@ -8,6 +8,7 @@ import {
   EventBridgeClient,
   PutEventsCommand,
 } from "@aws-sdk/client-eventbridge";
+import { rhinofitSyncData } from "./rhinofit/rhinofitSyncData";
 
 const config = new pulumi.Config();
 
@@ -85,6 +86,18 @@ const publishToQueueLambda = new aws.lambda.CallbackFunction(
         body: JSON.stringify(response), // has to be string
       };
     },
+  }
+);
+
+const rhinofitCustomerName = config
+  .require("rhinofit.customer-1")
+  .replace(/ /g, "-");
+const rhinofitSyncDataLambda = new aws.lambda.CallbackFunction(
+  `rhinofit-sync-data-${rhinofitCustomerName}`,
+  {
+    policies: [],
+    runtime: "nodejs16.x",
+    callback: rhinofitSyncData,
   }
 );
 

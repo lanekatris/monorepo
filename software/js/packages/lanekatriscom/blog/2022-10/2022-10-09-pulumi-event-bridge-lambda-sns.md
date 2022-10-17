@@ -63,9 +63,13 @@ So this nx.dev stuff has bitten me again. I think keeping everything in one type
 
 My thought is I'll just start everything from a pulumi TS folder to keep things simple since you should focus things on deploying and hosting them... not code organization which means NOTHING if it doesn't do anything.
 
+As I try to make things "simple" like pure functions you run into issues of how does your application logic get config? Pulumi is for infrastructure. I guess I could set an environment variable...
+
 # Paradigm Now
 
 Going to revolve everything around pulumi
+
+Or I could use serverless.yml for nice local development support... and use pulumi for all other infrastructure? - https://nishabe.medium.com/nestjs-serverless-lambda-aws-in-shortest-steps-e914300faed5 
 
 # Commands
 ```
