@@ -3,12 +3,14 @@ import * as pulumi from "@pulumi/pulumi";
 import { SNSClient, PublishCommand } from "@aws-sdk/client-sns";
 import * as apigateway from "@pulumi/aws-apigateway";
 import { APIGatewayEvent } from "aws-lambda";
-import "tslib";
+import AWS from "aws-sdk";
+
 import {
   EventBridgeClient,
   PutEventsCommand,
 } from "@aws-sdk/client-eventbridge";
 import { rhinofitSyncData } from "./rhinofit/rhinofitSyncData";
+import { v4 as uuidv4 } from "uuid";
 
 const config = new pulumi.Config();
 
@@ -49,8 +51,6 @@ const publishToQueueLambda = new aws.lambda.CallbackFunction(
 
     runtime: "nodejs16.x",
     callback: async (ev: APIGatewayEvent) => {
-      console.log("event", ev);
-
       if (!ev.body)
         return {
           statusCode: 400,
@@ -65,7 +65,7 @@ const publishToQueueLambda = new aws.lambda.CallbackFunction(
       }
 
       const body: GraphicsDriverRead = JSON.parse(
-        new Buffer(ev.body, "base64").toString("ascii")
+        Buffer.from(ev.body, "base64").toString()
       );
 
       const client = new EventBridgeClient({});
@@ -174,6 +174,63 @@ const lambaTargetEmail = new aws.cloudwatch.EventTarget("lambda-email-target", {
   rule: rule.name,
   eventBusName: bus.name,
 });
+
+const db = new aws.dynamodb.Table("events", {
+  attributes: [{ name: "id", type: "S" }],
+  hashKey: "id",
+  readCapacity: 1,
+  writeCapacity: 1,
+});
+
+// todo: trigger when event submitted to event bridge -> dynamo
+const copyEventsToDyanmo = new aws.lambda.CallbackFunction(
+  "copy-events-to-dynamo",
+  {
+    runtime: "nodejs16.x",
+    policies: [
+      aws.iam.ManagedPolicies.CloudWatchLogsFullAccess,
+      aws.iam.ManagedPolicies.AmazonDynamoDBFullAccess,
+    ],
+    callback: async (event: {
+      detail: GraphicsDriverRead;
+      "detail-type": string;
+    }) => {
+      // console.log("copy events to dynamo", ev);
+      console.log(`Copying event to dynamo table: ${db.name.get()}...`);
+      const docClient = new AWS.DynamoDB.DocumentClient();
+      await docClient
+        .put({
+          TableName: db.name.get(),
+          Item: {
+            id: uuidv4(),
+            eventName: event["detail-type"],
+            date: new Date().toISOString(),
+            data: event.detail,
+          },
+        })
+        .promise();
+    },
+  }
+);
+
+const copyEventsToDyanmoTarget = new aws.cloudwatch.EventTarget(
+  "copy-events-target",
+  {
+    arn: copyEventsToDyanmo.arn,
+    rule: rule.name,
+    eventBusName: bus.name,
+  }
+);
+
+const lambdaPermissionCopyToDynamo = new aws.lambda.Permission(
+  "lambda-permission-copy-to-dynamo",
+  {
+    action: "lambda:InvokeFunction",
+    principal: "events.amazonaws.com",
+    function: copyEventsToDyanmo.arn,
+    sourceArn: rule.arn,
+  }
+);
 
 const lambdaPermissionEmail = new aws.lambda.Permission(
   "lambda-permission-email",

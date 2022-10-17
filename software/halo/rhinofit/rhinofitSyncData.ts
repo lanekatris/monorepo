@@ -35,4 +35,4 @@ export async function rhinofitSyncData(): Promise<ApiGatewayResult> {
 }
 
 // console.log(rhinofitSyncData());
-rhinofitSyncData();
+// rhinofitSyncData();

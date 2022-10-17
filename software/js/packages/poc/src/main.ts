@@ -1,3 +1,6 @@
-import { gravemind } from '@js/gravemind';
+// import esdbExport from './app/one-offs/esdb-export';
 
-console.log('Hello World!!!!', gravemind());
+(async () => {
+  // await esdbExport();
+  console.log('Done baby');
+})();

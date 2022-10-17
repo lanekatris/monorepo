@@ -54,6 +54,8 @@ New .NET 6 way to run a windows service: https://www.youtube.com/watch?v=aHC-4iv
 # Windows Service Notes
 If you use environment variables, be sure to set at the SYSTEM level. This matters based on what user your service runs as.
 
+Unless something breaks, (Event Viewer helps there) you need to view logs somewhere to know what your background app is doing: https://github.com/serilog/serilog-sinks-file
+
 # Issues
 
 I knew I was going to have problems with putting everything in a monorepo. So I created everything and when I go to deploy via pulumi from within nx.dev
@@ -64,6 +66,8 @@ So this nx.dev stuff has bitten me again. I think keeping everything in one type
 My thought is I'll just start everything from a pulumi TS folder to keep things simple since you should focus things on deploying and hosting them... not code organization which means NOTHING if it doesn't do anything.
 
 As I try to make things "simple" like pure functions you run into issues of how does your application logic get config? Pulumi is for infrastructure. I guess I could set an environment variable...
+
+Proxy integration doesn't work from the Pulumi example because their SDK versions didn't support API Keys because they use HTTP Api Gateway instead of REST.
 
 # Paradigm Now
 
@@ -77,3 +81,7 @@ mkdir quickstart && cd quickstart && pulumi new aws-typescript
 
 pulumi logs --follow
 ```
+
+# Making Serverless Developer Experience Easier
+
+If you subscribe to new events you need to know the format of said events so you can generate them with [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-local-generate-event.html) use [@types/aws-lambda](https://www.npmjs.com/package/@types/aws-lambda)
