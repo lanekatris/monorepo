@@ -11,6 +11,7 @@ import {
 } from "@aws-sdk/client-eventbridge";
 import { rhinofitSyncData } from "./rhinofit/rhinofitSyncData";
 import { v4 as uuidv4 } from "uuid";
+import getInboxLambda from "./inbox/getInbox";
 
 const config = new pulumi.Config();
 
@@ -22,6 +23,10 @@ enum EventNames {
 
 enum EventSource {
   Arbiter = "Arbiter",
+}
+
+export enum Routes {
+  GetInbox = "inbox",
 }
 
 interface GraphicsDriverRead {
@@ -101,6 +106,15 @@ const rhinofitSyncDataLambda = new aws.lambda.CallbackFunction(
   }
 );
 
+const getInboxLambdaPulumi = new aws.lambda.CallbackFunction("get-inbox", {
+  policies: [
+    aws.iam.ManagedPolicies.CloudWatchLogsFullAccess,
+    aws.iam.ManagedPolicies.AmazonDynamoDBFullAccess,
+  ],
+  runtime: "nodejs16.x",
+  callback: getInboxLambda,
+});
+
 // Define an endpoint that invokes a lambda to handle requests
 const api = new apigateway.RestAPI("api", {
   routes: [
@@ -109,6 +123,12 @@ const api = new apigateway.RestAPI("api", {
       method: "POST",
       eventHandler: publishToQueueLambda,
       apiKeyRequired: true,
+    },
+    {
+      path: `/${Routes.GetInbox}`,
+      method: "GET",
+      apiKeyRequired: true,
+      eventHandler: getInboxLambdaPulumi,
     },
   ],
   apiKeySource: "HEADER",
@@ -175,7 +195,14 @@ const lambaTargetEmail = new aws.cloudwatch.EventTarget("lambda-email-target", {
   eventBusName: bus.name,
 });
 
-const db = new aws.dynamodb.Table("events", {
+const dynamoTableEvents = new aws.dynamodb.Table("events", {
+  attributes: [{ name: "id", type: "S" }],
+  hashKey: "id",
+  readCapacity: 1,
+  writeCapacity: 1,
+});
+
+const dyanmoTableInbox = new aws.dynamodb.Table("inbox", {
   attributes: [{ name: "id", type: "S" }],
   hashKey: "id",
   readCapacity: 1,
@@ -196,11 +223,13 @@ const copyEventsToDyanmo = new aws.lambda.CallbackFunction(
       "detail-type": string;
     }) => {
       // console.log("copy events to dynamo", ev);
-      console.log(`Copying event to dynamo table: ${db.name.get()}...`);
+      console.log(
+        `Copying event to dynamo table: ${dynamoTableEvents.name.get()}...`
+      );
       const docClient = new AWS.DynamoDB.DocumentClient();
       await docClient
         .put({
-          TableName: db.name.get(),
+          TableName: dynamoTableEvents.name.get(),
           Item: {
             id: uuidv4(),
             eventName: event["detail-type"],

@@ -6,7 +6,7 @@ import { addDays } from "date-fns";
 import { getReservations, GetReservationsQuery } from "./getReservations";
 import { ActivityProcessorService } from "./ActivityProcessorService";
 
-interface ApiGatewayResult {
+export interface ApiGatewayResult {
   statusCode: number;
   body: string;
 }
