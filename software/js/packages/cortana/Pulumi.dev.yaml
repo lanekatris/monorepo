@@ -1,4 +1,0 @@
-config:
-  aws:region: us-east-1
-  cortana:email:
-    secure: AAABAKOu059iyFSXPM3p1dB8cNN1kvk9SZHCRGoJAF3v13Zq2Aeq2VGrbHD4B38urcun9w==
