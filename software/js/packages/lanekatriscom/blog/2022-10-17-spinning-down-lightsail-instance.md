@@ -1,5 +1,10 @@
 # Spinning Down my Lightsail Instance
 
+![](DALLE2022-10-1716.07.52dismantlingfactory.png)
+
+
+
+
 ## Why?
 
 > I've scratched the itch for K8S, it is now time to be as cloud native as possible. **I'm tired of working on infrastructure** and not banging out my small-ish personal projects
@@ -93,3 +98,21 @@ sudo du -sh /var/snap/microk8s/common/default-storage/*
 591M    /var/snap/microk8s/common/default-storage/default-minio-pv-claim-pvc-8355ec9a-f576-43e9-8f9d-e46320022b68
 ```
 
+
+# DNS Transfer
+
+Manage your DNS here: https://dcc.godaddy.com/control/lanekatris.com/dns
+
+I bought my domain from GoDaddy long ago and I want to host on Netlify for various reasons since for now I just want to host a SPA there.
+
+I'm using Docusaurus so no need for Vercel in my mind
+
+So I'm going to have Netlify take over my DNS by transferring my nameservers to Netlify
+
+![GoDaddy nameservers pointed to Netlify](20221017160236.png)
+
+# Deleting Lightsail VM
+
+You can view your instances here to stop/start: https://lightsail.aws.amazon.com/ls/webapp/home/instances
+
+I don't want to do this just yet. I think I want to see what I depend on and then when more comfortable I'll actualy hard delete the VM and its data.
