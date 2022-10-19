@@ -26,7 +26,7 @@ public class Testies : IJob
     {
         _logger = logger;
     }
-    
+
     private async Task<int> GetLatestVersion()
     {
         var redirectUrl = await new HttpClient().GetStringAsync("https://www.nvidia.com/Download/processDriver.aspx?psid=120&pfid=933&rpf=1&osid=135&lid=1&lang=en-us&ctk=0&dtid=1&dtcid=1");
@@ -42,11 +42,11 @@ public class Testies : IJob
 
         return int.Parse(latestValue);
     }
-    
-    public async Task Execute(IJobExecutionContext context)
+
+    public Task Execute(IJobExecutionContext context)
     {
         // var latestVersion = await GetLatestVersion();
-        _logger.Log(LogLevel.Information, "Testies said hi :) "+ NVIDIA.DriverVersion);
+        _logger.Log(LogLevel.Information, "Testies said hi :) " + NVIDIA.DriverVersion);
         using var db = new WebDbContext();
 
         var result = db.LkatEvents.ToList();

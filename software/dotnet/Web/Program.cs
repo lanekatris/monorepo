@@ -2,13 +2,18 @@ using NvAPIWrapper;
 using Quartz;
 using Serilog;
 using Serilog.Events;
+using Serilog.Templates;
 using Web.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// https://nblumhardt.com/2021/06/customize-serilog-text-output/
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-    .WriteTo.Console()
+    .Enrich.FromLogContext()
+    .WriteTo.Console(new ExpressionTemplate(
+        "[{@t:HH:mm:ss} {@l:u3} " +
+        "{Substring(SourceContext, LastIndexOf(SourceContext, '.') + 1)}] {@m}\n{@x}"))
     .CreateLogger();
 
 builder.Host.UseSerilog();
