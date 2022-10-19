@@ -21,9 +21,22 @@ public class WebDbContext : DbContext
         => options.UseSqlite($"Data Source={DbPath}");
 }
 
+// Keep get set to make EF happy
 public class LkatEvent
 {
+    public LkatEvent()
+    {
+        
+    }
+    
+    public LkatEvent(string name)
+    {
+        this.Id = Guid.NewGuid();
+        this.Date = DateTime.Now;
+        this.Name = name;
+    }
+    
     public Guid Id { get; set; }
     public DateTime Date { get; set; }
-    public string Name { get; set; }
+    public string? Name { get; set; }
 }

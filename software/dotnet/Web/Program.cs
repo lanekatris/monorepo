@@ -3,6 +3,7 @@ using Quartz;
 using Serilog;
 using Serilog.Events;
 using Serilog.Templates;
+using Web.Jobs;
 using Web.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,7 +26,7 @@ builder.Services.AddQuartz(q =>
 {
     q.UseMicrosoftDependencyInjectionJobFactory();
 
-    q.ScheduleJob<Testies>(trigger =>
+    q.ScheduleJob<CheckForNewerGraphicsDriver>(trigger =>
         trigger.WithIdentity("idk mann testies")
             .WithSimpleSchedule(x => x.WithIntervalInSeconds(5).RepeatForever()).WithDescription("why description"));
 });
@@ -34,6 +35,8 @@ builder.Services.AddQuartzServer(options =>
 {
     options.WaitForJobsToComplete = true;
 });
+
+builder.Services.AddTransient<ILkatApi, LkatApi>();
 
 var app = builder.Build();
 
