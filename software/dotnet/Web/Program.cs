@@ -1,5 +1,8 @@
+using NvAPIWrapper;
+using Quartz;
 using Serilog;
 using Serilog.Events;
+using Web.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +15,20 @@ builder.Host.UseSerilog();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddQuartz(q =>
+{
+    q.UseMicrosoftDependencyInjectionJobFactory();
+
+    q.ScheduleJob<Testies>(trigger =>
+        trigger.WithIdentity("idk mann testies")
+            .WithSimpleSchedule(x => x.WithIntervalInSeconds(5).RepeatForever()).WithDescription("why description"));
+});
+
+builder.Services.AddQuartzServer(options =>
+{
+    options.WaitForJobsToComplete = true;
+});
 
 var app = builder.Build();
 
@@ -35,5 +52,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.UseSerilogRequestLogging();
+
+NVIDIA.Initialize();
 
 app.Run();
