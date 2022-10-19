@@ -47,6 +47,11 @@ public class Testies : IJob
     {
         // var latestVersion = await GetLatestVersion();
         _logger.Log(LogLevel.Information, "Testies said hi :) "+ NVIDIA.DriverVersion);
+        using var db = new WebDbContext();
+
+        var result = db.LkatEvents.ToList();
+        _logger.Log(LogLevel.Information, "found x results: " + result.Count);
+
         //
         // var apiKey = Environment.GetEnvironmentVariable("ARBITER_API_KEY");
         // var apiUrl = Environment.GetEnvironmentVariable("ARBITER_URL");
