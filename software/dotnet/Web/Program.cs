@@ -10,6 +10,10 @@ using Web.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var folder = Environment.SpecialFolder.LocalApplicationData;
+var path = Environment.GetFolderPath(folder);
+var logDbPath = System.IO.Path.Join(path, "logs.db");
+
 // https://nblumhardt.com/2021/06/customize-serilog-text-output/
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
@@ -17,6 +21,7 @@ Log.Logger = new LoggerConfiguration()
     .WriteTo.Console(new ExpressionTemplate(
         "[{@t:HH:mm:ss} {@l:u3} " +
         "{Substring(SourceContext, LastIndexOf(SourceContext, '.') + 1)}] {@m}\n{@x}"))
+    .WriteTo.SQLite(logDbPath)
     .CreateLogger();
 
 builder.Host.UseSerilog();
@@ -26,6 +31,7 @@ builder.Services.AddControllersWithViews();
 
 //https://learn.microsoft.com/en-us/ef/core/dbcontext-configuration/
 builder.Services.AddDbContext<WebDbContext>(options => options.UseSqlite());
+builder.Services.AddDbContext<LogDbContext>(options => options.UseSqlite($"Data Source={logDbPath}"));
 
 builder.Services.AddQuartz(q =>
 {
