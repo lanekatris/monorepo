@@ -7,12 +7,19 @@ public class WebDbContext : DbContext
     public DbSet<LkatEvent> LkatEvents { get; set; }
     public string DbPath { get; }
 
+// todo: I can probably remove this and do it in program.cs 🤷
     public WebDbContext()
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;
         var path = Environment.GetFolderPath(folder);
         DbPath = System.IO.Path.Join(path, "lkat.db");
-        // Console.WriteLine("db path: " + DbPath);
+    }
+
+    public WebDbContext(DbContextOptions<WebDbContext> options) : base(options)
+    {
+        var folder = Environment.SpecialFolder.LocalApplicationData;
+        var path = Environment.GetFolderPath(folder);
+        DbPath = System.IO.Path.Join(path, "lkat.db");
     }
 
     // The following configures EF to create a Sqlite database file in the

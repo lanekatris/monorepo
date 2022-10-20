@@ -1,8 +1,10 @@
+using Microsoft.EntityFrameworkCore;
 using NvAPIWrapper;
 using Quartz;
 using Serilog;
 using Serilog.Events;
 using Serilog.Templates;
+using Web;
 using Web.Jobs;
 using Web.Models;
 
@@ -22,13 +24,20 @@ builder.Host.UseSerilog();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//https://learn.microsoft.com/en-us/ef/core/dbcontext-configuration/
+builder.Services.AddDbContext<WebDbContext>(options => options.UseSqlite());
+
 builder.Services.AddQuartz(q =>
 {
     q.UseMicrosoftDependencyInjectionJobFactory();
 
     q.ScheduleJob<CheckForNewerGraphicsDriver>(trigger =>
-        trigger.WithIdentity("idk mann testies")
-            .WithSimpleSchedule(x => x.WithIntervalInSeconds(5).RepeatForever()).WithDescription("why description"));
+        trigger.WithIdentity("Check Graphics Driver Version")
+            .WithSimpleSchedule(x => x.WithIntervalInHours(4).RepeatForever()));
+
+    q.ScheduleJob<ObsidianRootFileCount>(trigger =>
+        trigger.WithIdentity("Check Obsidian root file count")
+            .WithSimpleSchedule(x => x.WithIntervalInHours(4).RepeatForever()));
 });
 
 builder.Services.AddQuartzServer(options =>
@@ -64,3 +73,5 @@ app.UseSerilogRequestLogging();
 NVIDIA.Initialize();
 
 app.Run();
+
+// dotnet publish -o publish -c Release -r win-x64 -p:PublishSingleFile=True

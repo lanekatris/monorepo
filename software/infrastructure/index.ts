@@ -35,15 +35,43 @@ interface GraphicsDriverRead {
   Source: string;
 }
 
-// Create an event rule to watch for events.
-const rule = new aws.cloudwatch.EventRule("rule", {
-  eventBusName: bus.name,
+interface DirectoryFilesCounted {
+  Count: number;
+  Source: string;
+}
 
-  // Specify the event pattern to watch for.
-  eventPattern: JSON.stringify({
-    source: [EventSource.Arbiter],
-  }),
-});
+// ==============================================================
+
+const matchAllFromArbiterRule = new aws.cloudwatch.EventRule(
+  "arbiter-match-all-events",
+  {
+    eventBusName: bus.name,
+    eventPattern: JSON.stringify({
+      source: [EventSource.Arbiter],
+    }),
+  }
+);
+
+const matchGraphicsDriverRead = new aws.cloudwatch.EventRule(
+  "arbiter-match-graphics-driver-read",
+  {
+    eventBusName: bus.name,
+    eventPattern: JSON.stringify({
+      "detail-type": [EventNames.GraphicsDriverRead],
+    }),
+  }
+);
+
+const matchDirectoryFilesCount = new aws.cloudwatch.EventRule(
+  "arbiter-match-directory-files-counted",
+  {
+    eventBusName: bus.name,
+    eventPattern: JSON.stringify({
+      "detail-type": ["directory-files-counted"],
+    }),
+  }
+);
+// ==============================================================
 
 // Create a Lambda Function
 const publishToQueueLambda = new aws.lambda.CallbackFunction(
@@ -94,6 +122,58 @@ const publishToQueueLambda = new aws.lambda.CallbackFunction(
   }
 );
 
+interface PublishToQueueInput {
+  detail: any;
+  detailType: string;
+  source: string;
+}
+
+const publishToQueueLambdaTwo = new aws.lambda.CallbackFunction(
+  "publish-to-event-bridge-two",
+  {
+    policies: [
+      aws.iam.ManagedPolicies.CloudWatchLogsFullAccess,
+      "arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess", // doesn't exist as an enum 🤷
+    ],
+    runtime: "nodejs16.x",
+    callback: async (ev: APIGatewayEvent) => {
+      if (!ev.body)
+        return {
+          statusCode: 400,
+          body: "No data submitted",
+        };
+
+      if (!ev.isBase64Encoded) {
+        return {
+          statusCode: 400,
+          body: "The body is not base 64, not sure what to do",
+        };
+      }
+      const { detail, detailType, source }: PublishToQueueInput = JSON.parse(
+        Buffer.from(ev.body, "base64").toString()
+      );
+      console.log("event v2 data", { detail, detailType, source });
+      const client = new EventBridgeClient({});
+      const command = new PutEventsCommand({
+        Entries: [
+          {
+            EventBusName: bus.name.get(),
+            Detail: JSON.stringify(detail),
+            DetailType: detailType,
+            Source: source,
+          },
+        ],
+      });
+      const response = await client.send(command);
+      console.log("response", response);
+      return {
+        statusCode: 200,
+        body: JSON.stringify(response), // has to be string
+      };
+    },
+  }
+);
+
 const rhinofitCustomerName = config
   .require("rhinofit.customer-1")
   .replace(/ /g, "-");
@@ -123,6 +203,12 @@ const api = new apigateway.RestAPI("api", {
       method: "POST",
       eventHandler: publishToQueueLambda,
       apiKeyRequired: true,
+    },
+    {
+      path: `/publish`,
+      method: "POST",
+      apiKeyRequired: true,
+      eventHandler: publishToQueueLambdaTwo,
     },
     {
       path: `/${Routes.GetInbox}`,
@@ -189,11 +275,50 @@ const sendEmailLambda = new aws.lambda.CallbackFunction("send-email", {
   },
 });
 
+const sendEmailAboutObsidianLambda = new aws.lambda.CallbackFunction(
+  "send-email-about-obsidian",
+  {
+    runtime: "nodejs16.x",
+    policies: [
+      aws.iam.ManagedPolicies.CloudWatchLogsFullAccess,
+      aws.iam.ManagedPolicies.AmazonSNSFullAccess,
+    ],
+    callback: async (event: { detail: DirectoryFilesCounted }) => {
+      // console.log("send email about obsidian hit", event);
+      const { Source, Count } = event.detail;
+      if (Count <= 10) {
+        console.log(`File count is ${Count}, not doing anything`);
+        return;
+      }
+      console.log("Sending SNS email...");
+      const client = new SNSClient({});
+      const arnToSend = topic.arn.get();
+      const message = `Your obsidian vault root needs cleaned up. You have ${Count} files in there.`;
+      const command = new PublishCommand({
+        Message: message,
+        Subject: message,
+        TopicArn: arnToSend,
+      });
+      const response = await client.send(command);
+      console.log("response", response);
+    },
+  }
+);
+
 const lambaTargetEmail = new aws.cloudwatch.EventTarget("lambda-email-target", {
   arn: sendEmailLambda.arn,
-  rule: rule.name,
+  rule: matchGraphicsDriverRead.name,
   eventBusName: bus.name,
 });
+
+const lambdaTargetObsidianEmail = new aws.cloudwatch.EventTarget(
+  "lambda-obisidan-email-target",
+  {
+    arn: sendEmailAboutObsidianLambda.arn,
+    rule: matchDirectoryFilesCount.name,
+    eventBusName: bus.name,
+  }
+);
 
 const dynamoTableEvents = new aws.dynamodb.Table("events", {
   attributes: [{ name: "id", type: "S" }],
@@ -246,7 +371,7 @@ const copyEventsToDyanmoTarget = new aws.cloudwatch.EventTarget(
   "copy-events-target",
   {
     arn: copyEventsToDyanmo.arn,
-    rule: rule.name,
+    rule: matchAllFromArbiterRule.name,
     eventBusName: bus.name,
   }
 );
@@ -257,7 +382,7 @@ const lambdaPermissionCopyToDynamo = new aws.lambda.Permission(
     action: "lambda:InvokeFunction",
     principal: "events.amazonaws.com",
     function: copyEventsToDyanmo.arn,
-    sourceArn: rule.arn,
+    sourceArn: matchAllFromArbiterRule.arn,
   }
 );
 
@@ -267,6 +392,16 @@ const lambdaPermissionEmail = new aws.lambda.Permission(
     action: "lambda:InvokeFunction",
     principal: "events.amazonaws.com",
     function: sendEmailLambda.arn,
-    sourceArn: rule.arn,
+    sourceArn: matchGraphicsDriverRead.arn,
+  }
+);
+
+const lambdaPermissionObisidanEmail = new aws.lambda.Permission(
+  "lambda-obsidian-permission-email",
+  {
+    action: "lambda:InvokeFunction",
+    principal: "events.amazonaws.com",
+    function: sendEmailAboutObsidianLambda.arn,
+    sourceArn: matchDirectoryFilesCount.arn,
   }
 );

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Web.Models;
 
 namespace Web.Controllers;
@@ -7,15 +8,19 @@ namespace Web.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly WebDbContext _db;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, WebDbContext db)
     {
         _logger = logger;
+        _db = db;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var events = await _db.LkatEvents.OrderByDescending(x => x.Date).Take(1000).ToListAsync();
+        
+        return View(events);
     }
 
     public IActionResult Privacy()
@@ -28,4 +33,11 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+
+    public IActionResult FileCount()
+    {
+        var files = Directory.GetFiles(@"C:\Users\looni\OneDrive\Documents\vault1", "*.md", SearchOption.TopDirectoryOnly);
+        return Json(files);
+
+    } 
 }

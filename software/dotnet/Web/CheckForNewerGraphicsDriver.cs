@@ -13,12 +13,14 @@ public class CheckForNewerGraphicsDriver : IJob
 {
     private readonly ILogger<CheckForNewerGraphicsDriver> _logger;
     private readonly ILkatApi _lkatApi;
+    private readonly WebDbContext _db;
     private readonly string _eventName = "graphics-driver-read-submitted";
 
-    public CheckForNewerGraphicsDriver(ILogger<CheckForNewerGraphicsDriver> logger, ILkatApi lkatApi)
+    public CheckForNewerGraphicsDriver(ILogger<CheckForNewerGraphicsDriver> logger, ILkatApi lkatApi, WebDbContext db)
     {
         _logger = logger;
         _lkatApi = lkatApi;
+        _db = db;
     }
 
     private async Task<int> GetLatestVersion()
@@ -50,12 +52,10 @@ public class CheckForNewerGraphicsDriver : IJob
     
     private async Task<bool> ShouldSendEvent()
     {
-        await using var db = new WebDbContext();
-        
         var start = DateTime.Today;
         var end = DateTime.Today.AddDays(1);
         
-        var query = db.LkatEvents. Where(x =>
+        var query = _db.LkatEvents. Where(x =>
             (x.Date >= start && x.Date < end) && x.Name == "graphics-driver-read-submitted"
         );
 
@@ -70,9 +70,8 @@ public class CheckForNewerGraphicsDriver : IJob
         {
             _logger.Log(LogLevel.Information, "Sending event...");
             await _lkatApi.GraphicsDriverRead(ev);
-            await using var db = new WebDbContext();
-            db.LkatEvents.Add(new LkatEvent(_eventName));
-            await db.SaveChangesAsync();
+            _db.LkatEvents.Add(new LkatEvent(_eventName));
+            await _db.SaveChangesAsync();
         }
         else
         {

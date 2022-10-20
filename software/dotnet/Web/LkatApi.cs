@@ -5,6 +5,21 @@ namespace Web.Models;
 public interface ILkatApi
 {
     Task GraphicsDriverRead(GraphicsDriverRead ev);
+    Task DirectoryFilesCounted(PublishInput ev);
+}
+
+public class PublishInput
+{
+    public object detail { get; set; }
+    public string detailType { get; set; }
+    public string source { get; }
+
+    public PublishInput(object ev, string dt)
+    {
+        detail = ev;
+        detailType = dt;
+        source = "Arbiter";
+    }
 }
 
 public class LkatApi : ILkatApi
@@ -28,6 +43,13 @@ public class LkatApi : ILkatApi
     {
        var serialized = JsonConvert.SerializeObject(ev);
         var result = await _client.PostAsync("graphics-driver-read", new StringContent(serialized));
+        _logger.LogInformation("result from lambda: " + await result.Content.ReadAsStringAsync());
+    }
+
+    public async Task DirectoryFilesCounted(PublishInput ev)
+    {
+        var serialized = JsonConvert.SerializeObject(ev);
+        var result = await _client.PostAsync("publish", new StringContent(serialized));
         _logger.LogInformation("result from lambda: " + await result.Content.ReadAsStringAsync());
     }
 }
