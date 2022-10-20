@@ -38,6 +38,9 @@ builder.Services.AddQuartz(q =>
     q.ScheduleJob<ObsidianRootFileCount>(trigger =>
         trigger.WithIdentity("Check Obsidian root file count")
             .WithSimpleSchedule(x => x.WithIntervalInHours(4).RepeatForever()));
+
+    q.ScheduleJob<Healthcheck>(trigger =>
+        trigger.WithIdentity("Healthcheck").WithSimpleSchedule(x => x.WithIntervalInMinutes(5).RepeatForever()));
 });
 
 builder.Services.AddQuartzServer(options =>

@@ -7,7 +7,7 @@ public class WebDbContext : DbContext
     public DbSet<LkatEvent> LkatEvents { get; set; }
     public string DbPath { get; }
 
-// todo: I can probably remove this and do it in program.cs 🤷
+    // todo: I can probably remove this and do it in program.cs 🤷
     public WebDbContext()
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;
@@ -33,16 +33,16 @@ public class LkatEvent
 {
     public LkatEvent()
     {
-        
+
     }
-    
+
     public LkatEvent(string name)
     {
         this.Id = Guid.NewGuid();
         this.Date = DateTime.Now;
         this.Name = name;
     }
-    
+
     public Guid Id { get; set; }
     public DateTime Date { get; set; }
     public string? Name { get; set; }

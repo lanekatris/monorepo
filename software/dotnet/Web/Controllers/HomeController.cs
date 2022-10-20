@@ -19,7 +19,6 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         var events = await _db.LkatEvents.OrderByDescending(x => x.Date).Take(1000).ToListAsync();
-        
         return View(events);
     }
 
@@ -39,5 +38,5 @@ public class HomeController : Controller
         var files = Directory.GetFiles(@"C:\Users\looni\OneDrive\Documents\vault1", "*.md", SearchOption.TopDirectoryOnly);
         return Json(files);
 
-    } 
+    }
 }

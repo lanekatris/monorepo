@@ -43,20 +43,20 @@ public class CheckForNewerGraphicsDriver : IJob
     {
         var doesNotExists = await ShouldSendEvent();
         if (!doesNotExists) return new ShouldSubmitEventResponse();
-        
+
         var latestVersion = await GetLatestVersion();
         if (NVIDIA.DriverVersion == latestVersion) return new ShouldSubmitEventResponse();
-        
+
         return new ShouldSubmitEventResponse(new GraphicsDriverRead(NVIDIA.DriverVersion.ToString(), latestVersion.ToString()));
     }
-    
+
     private async Task<bool> ShouldSendEvent()
     {
         var start = DateTime.Today;
         var end = DateTime.Today.AddDays(1);
-        
-        var query = _db.LkatEvents. Where(x =>
-            (x.Date >= start && x.Date < end) && x.Name == "graphics-driver-read-submitted"
+
+        var query = _db.LkatEvents.Where(x =>
+           (x.Date >= start && x.Date < end) && x.Name == _eventName
         );
 
         var exists = await query.AnyAsync();
@@ -92,10 +92,10 @@ public class CheckForNewerGraphicsDriver : IJob
         {
             _logger.Log(LogLevel.Information, "Not sending event because ShouldSubmitEvent false");
         }
-        
+
         _logger.Log(LogLevel.Information, "Done");
     }
-    
+
     private class ShouldSubmitEventResponse
     {
         public GraphicsDriverRead? Ev { get; }
@@ -111,6 +111,6 @@ public class CheckForNewerGraphicsDriver : IJob
             ShouldSubmit = true;
         }
 
-        public bool ShouldSubmit { get;  }
+        public bool ShouldSubmit { get; }
     }
 }

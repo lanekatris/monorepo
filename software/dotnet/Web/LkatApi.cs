@@ -41,7 +41,7 @@ public class LkatApi : ILkatApi
 
     public async Task GraphicsDriverRead(GraphicsDriverRead ev)
     {
-       var serialized = JsonConvert.SerializeObject(ev);
+        var serialized = JsonConvert.SerializeObject(ev);
         var result = await _client.PostAsync("graphics-driver-read", new StringContent(serialized));
         _logger.LogInformation("result from lambda: " + await result.Content.ReadAsStringAsync());
     }
