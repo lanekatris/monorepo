@@ -1,0 +1,90 @@
+<section>
+  <div class="grid text-center">
+    <a href="/dg">Disc Golf Home Page</a>
+    <a href="/dg/generator/generate">Generate GeoJSON</a>
+  </div>
+</section>
+<article><h1 class="no-margin">Total Courses Played: {{totalCoursesPlayed}}</h1></article>
+
+<section>
+  <details>
+    <summary>Search For Courses (Source: TODO)</summary>
+    <p>
+      <label for="search-courses">Name or ID: </label><input type="text" id="search-courses"/>
+      <ul id="search-courses-results"></ul>
+    </p>
+  </details>
+  <details>
+    <summary>Load Your Played Rounds</summary>
+    <p>
+    <form method="post" action="/dg/generator/file" id="played-rounds-form" enctype="multipart/form-data">
+      <input type="file" id="file" name="file" required />
+      <input type="submit"/>
+    </form>
+    <h4>Or Add Manually Played Round</h4>
+    <form method="post" action="/dg/generator/course-played">
+      <label>PDGA Course ID:
+        <input type="text" name="courseId" />
+      </label>
+      <input type="submit"/>
+    </form>
+    </p>
+  </details>
+  <details>
+    <summary>Exclude Courses From Recommendations</summary>
+    <p>
+    <form method="post" action="/dg/generator/course-excluded">
+      <label>PDGA Course ID:
+        <input type="text" name="courseId" />
+      </label>
+      <label>Reason
+        <input type="text" name="reason" />
+      </label>
+      <input type="submit"/>
+    </form>
+    </p>
+  </details>
+</section>
+
+<section>
+  <del>
+    <h4>Excluded Courses</h4>
+    <ul>
+      {{#excludedCourses}}
+        <li>{{this}}</li>
+      {{/excludedCourses}}
+    </ul>
+  </del>
+
+  <h4>Manually Added Course ({{manuallyPlayedCourses.length}})</h4>
+  <ul>
+    {{#manuallyPlayedCourses}}
+      <li>{{this}}</li>
+    {{/manuallyPlayedCourses}}
+  </ul>
+
+  <h4>Your Played Courses ({{courses.length}})</h4>
+  <ul>
+    {{#each courses}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+</section>
+
+<script type="application/javascript">
+  const searchResultsEl = document.getElementById('search-courses-results')
+  document.getElementById('search-courses').onkeyup = (e) => {
+    console.log('course search', e.target.value)
+    // get results
+    if (!e.target.value) {
+      searchResultsEl.innerHTML = ''
+      return;
+    }
+
+    fetch(`/dg/course-generator/courses/autocomplete?query=${e.target.value}`)
+      .then(response => response.json())
+      .then(courses => {
+        searchResultsEl.innerHTML = courses.map(({pdgaId, name}) => `<li>${name} (${pdgaId})</li>`).join('')
+      })
+  }
+</script>

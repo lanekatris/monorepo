@@ -1,0 +1,17 @@
+@media (min-width: 1200px){
+    .home.container {
+        max-width: 500px !important;
+    }
+}
+
+@media (min-width: 992px){
+    .home.container {
+        max-width: 500px !important;
+    }
+}
+
+@media (min-width: 768px){
+    .home.container {
+        max-width: 500px !important;
+    }
+}

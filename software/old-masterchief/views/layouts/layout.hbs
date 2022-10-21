@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Masterchief</title>
+  <link rel="stylesheet" href="/pico.min.css">
+  <link rel="stylesheet" href="/shared.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧗‍♂️</text></svg>">
+</head>
+<body>
+  <progress id="global-progress" class="fixed non-visible"></progress>
+  <header class="no-padding">
+      <nav>
+        <ul></ul>
+        <ul>
+
+          <li><a  href="/">Home</a></li>
+          <li><a  href="https://blog.lanekatris.com" target="_blank">Blog</a></li>
+          <li>
+            <details role="list" dir="rtl">
+              <summary aria-haspopup="listbox" role="link">Projects</summary>
+              <ul role="listbox">
+                <li><a href="/home">Masterchief</a></li>
+                <li><a href="/events">Calendar Events</a></li>
+                <li><hr/></li>
+                <li><a href="/climb">Climb Tracker</a></li>
+                <li><hr/></li>
+                <li><a href="/dg/discs">Disc Directory</a></li>
+                <li><a href="/dg/courses">Courses Played</a></li>
+                <li><a href="/dg/recommender">Course Recommender</a></li>
+                <li><hr/></li>
+                <li><a href="/api">Swagger Definition</a></li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+        <ul></ul>
+      </nav>
+  </header>
+  <main class="container">
+    {{{body}}}
+  </main>
+  <script>
+    window.mc = {
+      showGlobalLoader() {
+        const el = document.getElementById('global-progress')
+        el.classList.remove('non-visible')
+        el.classList.add('visible')
+      },
+      hideGlobalLoader() {
+        const el = document.getElementById('global-progress')
+        el.classList.remove('visible')
+        el.classList.add('non-visible')
+      }
+    }
+
+    document.querySelectorAll('form').forEach(el => {
+      el.addEventListener('submit', () => {
+        mc.showGlobalLoader()
+      })
+    })
+
+    document.querySelectorAll('a').forEach(el => {
+      el.addEventListener('click', () => {
+        mc.showGlobalLoader()
+      })
+    })
+  </script>
+</body>
+</html>

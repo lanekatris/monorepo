@@ -1,0 +1,81 @@
+
+
+<div class="main container">
+
+  <section>
+    <div class="grid">
+      <a href="/dg">Disc Home Page</a>
+      <a href="dg/discs" target="_blank">Discs Api</a>
+      <div></div>
+    </div>
+  </section>
+
+  <section>
+    <details>
+      <summary>Add Disc</summary>
+      <p>
+      <form method="post" action="{{postUrl}}" class="form">
+        <fieldset class="form-group form-warning">
+          <label>BRAND:</label>
+          <input name="brand" autofocus placeholder="innova" class="form-control"/>
+        </fieldset>
+        <fieldset class="form-group form-warning">
+          <label>Model</label>
+          <input name="model" class="form-control" placeholder="sidewinder"/>
+        </fieldset>
+        <fieldset class="form-group form-warning">
+          <label>Date</label>
+          <input name="date" type="date" class="form-control" />
+        </fieldset>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary  btn-ghost btn-block">Submit</button>
+        </div>
+      </form>
+      </p>
+    </details>
+  </section>
+
+  <h1>Your Discs ({{discs.length}})</h1>
+
+  <ul>
+    {{#each discs}}
+      <li class="grid">
+        <div>({{this.discNumber}}) {{this.event.brand}} - {{this.event.model}}</div>
+        <div></div>
+        <form class="delete-disc form" method="post" action="{{../deleteUrl}}">
+
+          <input type="hidden" name="id" value="{{this.event.id}}" />
+          <input type="submit" value="Delete" class="outline" />
+        </form>
+      </li>
+    {{/each}}
+  </ul>
+  <div class="card mb-3">
+    <header class="card-header">Load Discs</header>
+    <div class="card-content">
+      <div class="inner">
+        <form method="post" action="{{resetUrl}}">
+          <input type="submit" value="Reset ALL Discs" class="btn btn-error btn-ghost" />
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <header class="card-header">Upload Discs</header>
+    <div class="card-content">
+      <div class="inner">
+        <p>Usually you get this data from AirTable</p>
+        <p>Id, Brand, Model (Include Headers)</p>
+        <form method="post" action="{{uploadUrl}}">
+          <label>
+            <textarea name="data" class="form-control" style="height:250px;" placeholder="csv data..."></textarea>
+          </label>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-ghost btn-block">Upload</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

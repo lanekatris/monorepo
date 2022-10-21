@@ -1,0 +1,9 @@
+FROM node:18-alpine As frontend-build
+
+WORKDIR /usr/src/app
+
+COPY frontend ./
+
+RUN npm ci --legacy-peer-deps
+
+RUN npm run build

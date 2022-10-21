@@ -1,0 +1,6 @@
+config:
+  aws:region: us-east-1
+  halo:email:
+    secure: AAABAMFs7pdTh4eP839Ltk3k0XSLV2ZcJfOZT/QTTdL0iSkzvgbge+twzGGqC1o+2jfliA==
+  halo:rhinofit.customer-1:
+    secure: AAABAP5Obze9/huoZu6HylfTL62pZl6Up2Lhw5yHbLoBRQ93/VI0A5rSuCdddNA=
