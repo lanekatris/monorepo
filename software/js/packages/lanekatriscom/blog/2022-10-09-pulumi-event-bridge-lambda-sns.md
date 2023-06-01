@@ -56,6 +56,18 @@ If you use environment variables, be sure to set at the SYSTEM level. This matte
 
 Unless something breaks, (Event Viewer helps there) you need to view logs somewhere to know what your background app is doing: https://github.com/serilog/serilog-sinks-file
 
+https://www.technipages.com/delete-services#:~:text=You%20can%20also%20remove%20services,%2C%20then%20press%20%E2%80%9CEnter%E2%80%9C.
+run as admin
+`sc delete Arbiter`
+
+# No service, just run exe on startup
+When you build the exe it listens on 5000
+// dotnet publish -o publish -c Release -r win-x64 -p:PublishSingleFile=True  
+// http://localhost:5000
+
+Run on Startup
+https://support.microsoft.com/en-us/windows/add-an-app-to-run-automatically-at-startup-in-windows-10-150da165-dcd9-7230-517b-cf3c295d89dd
+
 # Issues
 
 I knew I was going to have problems with putting everything in a monorepo. So I created everything and when I go to deploy via pulumi from within nx.dev

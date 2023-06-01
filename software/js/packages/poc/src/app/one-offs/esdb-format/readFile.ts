@@ -1,7 +1,7 @@
 import { Entry, EsdbResponse } from './types';
 const fs = require('fs');
 
-export function readFile(path: string): Promise<Entry[]> {
+export function readFile(path: string): Promise<EsdbResponse> {
   return new Promise((resolve, reject) => {
     fs.readFile(path, (err, data) => {
       if (err) {
@@ -9,7 +9,7 @@ export function readFile(path: string): Promise<Entry[]> {
       }
 
       const r: EsdbResponse = JSON.parse(data);
-      resolve(r.entries);
+      resolve(r);
     });
   });
 }

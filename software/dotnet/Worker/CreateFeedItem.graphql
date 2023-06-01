@@ -1,0 +1,9 @@
+﻿mutation CreateFeedItem($input: FeedItemCreateInput!) {
+  feedItemCreate(input: $input) {
+    id
+    created
+    type
+    message
+    data
+  }
+}

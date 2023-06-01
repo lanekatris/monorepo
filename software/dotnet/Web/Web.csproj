@@ -4,29 +4,40 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <AssemblyName>bootstrap</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="htmlagilitypack" Version="1.11.46" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        <PrivateAssets>all</PrivateAssets>
-      </PackageReference>
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.10" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-      <PackageReference Include="NvAPIWrapper.Net" Version="0.8.1.101" />
-      <PackageReference Include="Quartz" Version="3.5.0" />
-      <PackageReference Include="Quartz.AspNetCore" Version="3.5.0" />
-      <PackageReference Include="Quartz.Extensions.DependencyInjection" Version="3.5.0" />
-      <PackageReference Include="Serilog" Version="2.12.0" />
-      <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
-      <PackageReference Include="Serilog.Expressions" Version="3.4.1" />
-      <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
-      <PackageReference Include="serilog.sinks.sqlite" Version="5.5.0" />
+        <PackageReference Include="Amazon.Lambda.AspNetCoreServer.Hosting" Version="1.3.1" />
+        <PackageReference Include="AWSSDK.SimpleNotificationService" Version="3.7.100.16" />
+        <PackageReference Include="AWSSDK.SQS" Version="3.7.2.120" />
+        <PackageReference Include="DotNetCore.AspNetCore" Version="16.80.0" />
+        <PackageReference Include="HotChocolate.AspNetCore" Version="13.0.0-rc.1" />
+        <PackageReference Include="HotChocolate.Data" Version="13.0.0-rc.1" />
+        <PackageReference Include="HotChocolate.Data.Marten" Version="13.0.0-rc.1" />
+        <PackageReference Include="Marten.AspNetCore" Version="5.11.0" />
+        <PackageReference Include="MediatR" Version="11.0.0" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="OpenGraph-Net" Version="4.0.1" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Design" Version="1.1.2" />
+        <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
+        <PackageReference Include="Serilog.Expressions" Version="3.4.1" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Jobs" />
+      <Folder Include="Db" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Contracts\Contracts.csproj" />
     </ItemGroup>
 
 </Project>

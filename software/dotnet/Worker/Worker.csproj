@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <PublishSingleFile>true</PublishSingleFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Amazon.Sqs" Version="0.23.1" />
+      <PackageReference Include="AWSSDK.S3" Version="3.7.103.50" />
+      <PackageReference Include="AWSSDK.SQS" Version="3.7.2.120" />
+      <PackageReference Include="htmlagilitypack" Version="1.11.46" />
+      <PackageReference Include="Markdig" Version="0.30.4" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        <PrivateAssets>all</PrivateAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.10" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+      <PackageReference Include="NvAPIWrapper.Net" Version="0.8.1.101" />
+      <PackageReference Include="Quartz" Version="3.5.0" />
+      <PackageReference Include="Quartz.AspNetCore" Version="3.5.0" />
+      <PackageReference Include="Quartz.Extensions.DependencyInjection" Version="3.5.0" />
+      <PackageReference Include="Serilog" Version="2.12.0" />
+      <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
+      <PackageReference Include="Serilog.Expressions" Version="3.4.1" />
+      <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+      <PackageReference Include="serilog.sinks.sqlite" Version="5.5.0" />
+      <PackageReference Include="StrawberryShake.CodeGeneration.CSharp.Analyzers" Version="12.15.2" />
+      <PackageReference Include="StrawberryShake.Transport.Http" Version="12.15.2" />
+      <PackageReference Include="YamlDotNet" Version="13.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Events" />
+      <Folder Include="Jobs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Contracts\Contracts.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <GraphQL Remove="Generated\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <GraphQLConfig Remove="Generated\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Generated\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Generated\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Generated\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="Generated\**" />
+    </ItemGroup>
+
+</Project>

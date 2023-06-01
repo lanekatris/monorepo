@@ -1,11 +1,20 @@
 {
-    "name": "halo",
+    "name": "lkat-js-infrastructure",
     "main": "index.ts",
+    "scripts": {
+        "build": "tsc"
+    },
     "devDependencies": {
+        "@types/axios": "^0.14.0",
         "@types/lodash": "^4.14.186",
+        "@types/mocha": "^10.0.1",
         "@types/node": "^14",
         "@types/request-promise": "^4.1.48",
-        "@types/uuid": "^8.3.4"
+        "@types/uuid": "^8.3.4",
+        "assert": "^2.0.0",
+        "dotenv": "^16.0.3",
+        "mocha": "^10.2.0",
+        "ts-node": "^10.9.1"
     },
     "dependencies": {
         "@aws-sdk/client-dynamodb": "^3.190.0",
@@ -21,8 +30,8 @@
         "lodash": "^4.17.21",
         "nanoid": "^4.0.0",
         "node-html-parser": "^6.1.1",
+        "pg": "^8.11.0",
         "request-promise": "^4.2.6",
-        "ts-node": "^10.9.1",
         "uuid": "^9.0.0"
     }
 }

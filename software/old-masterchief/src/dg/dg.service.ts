@@ -95,7 +95,7 @@ export class DgService {
         case EventNames.DiscAdded:
           discs.unshift({
             id: event.data.id,
-            date: event.data.date?.toString(),
+            date: event.data.date?.toString() || '',
             brand: event.data.brand,
             model: event.data.model,
             number: discNumber,

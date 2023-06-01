@@ -1,0 +1,37 @@
+mutation createFeedItem($input: FeedItemCreateInput!){
+  feedItemCreate(input: $input){
+    created
+    data
+    id
+    message
+    tags
+    type
+  }
+}
+
+mutation vehicleDriven($input: VehicleDrivenInput!){
+  vehicleDriven(input: $input) {
+    id
+    lastDriven
+  }
+}
+
+query vehicles {
+  vehicles {
+    id
+    lastDriven
+    name
+    userId
+  }
+}
+
+mutation vehicleNameUpdated($input: VehicleNameUpdatedInput!){
+  vehicleNameUpdated(input: $input){
+    id
+    name
+  }
+}
+
+mutation sleepComputer {
+  sleepComputer
+}

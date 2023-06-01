@@ -1,0 +1,36 @@
+﻿#  https://dev.to/memark/running-a-graphql-api-in-net-6-on-aws-lambda-17oc
+service: graphql-lambda
+
+provider:
+  name: aws
+  region: us-east-1
+  httpApi:
+    payload: "2.0"
+  lambdaHashingVersion: 20201221
+  apiGateway:
+    apiKeys:
+      - firstClient
+  iam:
+    role:
+      managedPolicies:
+        - 'arn:aws:iam::aws:policy/AmazonSNSFullAccess'
+        - 'arn:aws:iam::aws:policy/AmazonSQSFullAccess'
+functions:
+  api:
+    runtime: provided.al2
+    timeout: 30 # planetscale mysql is fast, but bit.io postgres needs longer than 10 seconds
+    package:
+      artifact: dist/idk.zip
+      individually: true
+    handler: required-but-ignored
+    environment:
+      LKAT_DB: ${env:LKAT_DB}
+      EVERYTHING_DB_CONN: ${env:EVERYTHING_DB_CONN}
+    events:
+      - http:
+          path: /{proxy+}
+          method: any
+          private: true
+          cors:
+            origin: '*'
+            headers: '*'

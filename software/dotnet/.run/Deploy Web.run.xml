@@ -1,0 +1,6 @@
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Deploy Web" type="PowerShellRunType" factoryName="PowerShell" scriptUrl="C:\Code\monorepo\software\dotnet\Web\build.ps1" workingDirectory="C:\Code\monorepo\software\dotnet\Web" executablePath="$PROJECT_DIR$/../../../../Windows/System32/WindowsPowerShell/v1.0/powershell.exe">
+    <envs />
+    <method v="2" />
+  </configuration>
+</component>

@@ -1,0 +1,8 @@
+config:
+  aws:region: us-east-1
+  infrastructure:EVERYTHING_DB_CONN:
+    secure: AAABAK7/xhSoJQqfvn/Jty7vizgyZhjLQdsv9LqkYtlQ4LWGhtC8VAC3tOu1ZzdIu6ptlsJbh9RWdao4E/9KVLjKPw1ObZMUOQW3y39idaWhWXQDRzygI6r+gM1atjf/iI2K7ZlHUFowlywLfdZjn1GSCiMpLYR/9PM7MBD6cI8pcvk4VAs/T/3IsZ4=
+  infrastructure:LKAT_DB:
+    secure: AAABAAmtfmw10U7i+a99GodsTf7yf7kHloj3mSf9DlgI0f5sLGe6TvSkjGLKeK9sfylKhdAONzAwXHZTpRS8An/JciqsFaELLd9wkS3hqDjDjoXCD4Wa5iU8oBLpbmISxiZVXxFEjEWcxek1aNEfpmml5+Y5d6ecFO9V4FO2atVuSPe3YHVgC+IzOkWrQxFf4NcjF6tUb82Dlng5Cg9SsDs+5HBgBB0ghF4jvG/D4r6d+A==
+  infrastructure:MY_EMAIL:
+    secure: AAABALfU1FGq3FGsC9arI8DMFBuXfu8aAr2DvxKAwneH/dukAGHk6/QCZGOFezcwCT3b7g==

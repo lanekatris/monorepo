@@ -43,4 +43,10 @@ Remember - Pulumi doesn't work well inside nx.dev monrepo
 			- loonisoncom ❌
 			- poc ✅
 	- NvidiaTestDemo ✅ (Needs renamed) .NET
-	- 
+
+
+### Javascript Monorepo Woes
+
+I love the idea of a monorepo for TypeScript but you get dependency issues like Docusaurus not supporting React 18 but Next.js does. This breaks `npm install`. So what do you do? Well right now I'm just `--legacy-peer-install`'ing right now
+
+https://github.com/facebook/docusaurus/issues/7264

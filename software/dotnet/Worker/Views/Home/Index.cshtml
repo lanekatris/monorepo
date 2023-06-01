@@ -1,0 +1,27 @@
+﻿@model Worker.Controllers.IndexModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <div class="text-center">
+        <h1 class="display-4">Events</h1>
+    </div>
+    <ol>
+        @foreach (var lkatEvent in Model.Events)
+        {
+            <li>@lkatEvent.Date - @lkatEvent.Name</li>
+        }
+    </ol>
+    <div class="text-center">
+        <h1 class="display-4">Logs</h1>
+    </div>
+     <ul>
+            @foreach (var log in Model.Logs)
+            {
+                <li>@log.Timestamp @log.id @log.Level @log.RenderedMessage</li>
+            }
+        </ul>
+              
+</div>

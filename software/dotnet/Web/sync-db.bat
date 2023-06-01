@@ -1,0 +1,1 @@
+dotnet ef dbcontext scaffold "Name=ConnectionStrings:LkatDb"  Pomelo.EntityFrameworkCore.MySql -o Db -c "LkatContext" -f --no-build

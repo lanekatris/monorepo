@@ -1,0 +1,308 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  feed(where: FeedFilterInput order: [FeedSortInput!]): [Feed!]!
+  maintenance(where: MaintenanceFilterInput order: [MaintenanceSortInput!]): [Maintenance!]!
+  place("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: AttributedPlaceFilterInput order: [AttributedPlaceSortInput!]): PlaceConnection
+  bookmark("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: BookmarkFilterInput order: [BookmarkSortInput!]): BookmarkConnection
+  sysInfo: String!
+}
+
+type Mutation {
+  bookmarkCreate(url: String! tags: [String!]): Bookmark!
+  bookmarkRead(id: Int!): Bookmark!
+  feedItemCreate(input: FeedItemCreateInput!): Feed!
+}
+
+input FeedFilterInput {
+  and: [FeedFilterInput!]
+  or: [FeedFilterInput!]
+  id: ComparableInt32OperationFilterInput
+  created: ComparableDateTimeOperationFilterInput
+  type: StringOperationFilterInput
+  message: StringOperationFilterInput
+  data: StringOperationFilterInput
+  tags: StringOperationFilterInput
+}
+
+input FeedSortInput {
+  id: SortEnumType
+  created: SortEnumType
+  type: SortEnumType
+  message: SortEnumType
+  data: SortEnumType
+  tags: SortEnumType
+}
+
+input MaintenanceFilterInput {
+  and: [MaintenanceFilterInput!]
+  or: [MaintenanceFilterInput!]
+  id: ComparableInt32OperationFilterInput
+  created: ComparableNullableOfDateTimeOperationFilterInput
+  name: StringOperationFilterInput
+  property: StringOperationFilterInput
+  price: ComparableNullableOfSingleOperationFilterInput
+}
+
+input MaintenanceSortInput {
+  id: SortEnumType
+  created: SortEnumType
+  name: SortEnumType
+  property: SortEnumType
+  price: SortEnumType
+}
+
+input AttributedPlaceFilterInput {
+  and: [AttributedPlaceFilterInput!]
+  or: [AttributedPlaceFilterInput!]
+  id: ComparableInt32OperationFilterInput
+  name: StringOperationFilterInput
+  tags: StringOperationFilterInput
+  visited: BooleanOperationFilterInput
+  state: StringOperationFilterInput
+  city: StringOperationFilterInput
+  zip: StringOperationFilterInput
+  elevation: ComparableNullableOfInt32OperationFilterInput
+  notes: StringOperationFilterInput
+  isStatePark: ComparableInt32OperationFilterInput
+}
+
+input AttributedPlaceSortInput {
+  id: SortEnumType
+  name: SortEnumType
+  tags: SortEnumType
+  visited: SortEnumType
+  state: SortEnumType
+  city: SortEnumType
+  zip: SortEnumType
+  elevation: SortEnumType
+  notes: SortEnumType
+  isStatePark: SortEnumType
+}
+
+input BookmarkFilterInput {
+  and: [BookmarkFilterInput!]
+  or: [BookmarkFilterInput!]
+  id: ComparableInt32OperationFilterInput
+  created: ComparableDateTimeOperationFilterInput
+  name: StringOperationFilterInput
+  tags: StringOperationFilterInput
+  meta: StringOperationFilterInput
+  imageUrl: StringOperationFilterInput
+  url: StringOperationFilterInput
+  status: StringOperationFilterInput
+}
+
+input BookmarkSortInput {
+  id: SortEnumType
+  created: SortEnumType
+  name: SortEnumType
+  tags: SortEnumType
+  meta: SortEnumType
+  imageUrl: SortEnumType
+  url: SortEnumType
+  status: SortEnumType
+}
+
+"A connection to a list of items."
+type PlaceConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [PlaceEdge!]
+  "A flattened list of the nodes."
+  nodes: [AttributedPlace!]
+  totalCount: Int!
+}
+
+"A connection to a list of items."
+type BookmarkConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [BookmarkEdge!]
+  "A flattened list of the nodes."
+  nodes: [Bookmark!]
+  totalCount: Int!
+}
+
+input ComparableInt32OperationFilterInput {
+  eq: Int
+  neq: Int
+  in: [Int!]
+  nin: [Int!]
+  gt: Int
+  ngt: Int
+  gte: Int
+  ngte: Int
+  lt: Int
+  nlt: Int
+  lte: Int
+  nlte: Int
+}
+
+input ComparableDateTimeOperationFilterInput {
+  eq: DateTime
+  neq: DateTime
+  in: [DateTime!]
+  nin: [DateTime!]
+  gt: DateTime
+  ngt: DateTime
+  gte: DateTime
+  ngte: DateTime
+  lt: DateTime
+  nlt: DateTime
+  lte: DateTime
+  nlte: DateTime
+}
+
+input StringOperationFilterInput {
+  and: [StringOperationFilterInput!]
+  or: [StringOperationFilterInput!]
+  eq: String
+  neq: String
+  contains: String
+  ncontains: String
+  in: [String]
+  nin: [String]
+  startsWith: String
+  nstartsWith: String
+  endsWith: String
+  nendsWith: String
+}
+
+enum SortEnumType {
+  ASC
+  DESC
+}
+
+input ComparableNullableOfDateTimeOperationFilterInput {
+  eq: DateTime
+  neq: DateTime
+  in: [DateTime]
+  nin: [DateTime]
+  gt: DateTime
+  ngt: DateTime
+  gte: DateTime
+  ngte: DateTime
+  lt: DateTime
+  nlt: DateTime
+  lte: DateTime
+  nlte: DateTime
+}
+
+input ComparableNullableOfSingleOperationFilterInput {
+  eq: Float
+  neq: Float
+  in: [Float]
+  nin: [Float]
+  gt: Float
+  ngt: Float
+  gte: Float
+  ngte: Float
+  lt: Float
+  nlt: Float
+  lte: Float
+  nlte: Float
+}
+
+input BooleanOperationFilterInput {
+  eq: Boolean
+  neq: Boolean
+}
+
+input ComparableNullableOfInt32OperationFilterInput {
+  eq: Int
+  neq: Int
+  in: [Int]
+  nin: [Int]
+  gt: Int
+  ngt: Int
+  gte: Int
+  ngte: Int
+  lt: Int
+  nlt: Int
+  lte: Int
+  nlte: Int
+}
+
+"Information about pagination in a connection."
+type PageInfo {
+  "Indicates whether more edges exist following the set defined by the clients arguments."
+  hasNextPage: Boolean!
+  "Indicates whether more edges exist prior the set defined by the clients arguments."
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+}
+
+type AttributedPlace {
+  id: Int!
+  name: String
+  tags: String
+  visited: Boolean
+  state: String
+  city: String
+  zip: String
+  elevation: Int
+  notes: String
+  isStatePark: Int!
+}
+
+"An edge in a connection."
+type PlaceEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: AttributedPlace!
+}
+
+type Bookmark {
+  id: Int!
+  created: DateTime!
+  name: String
+  tags: String
+  meta: String
+  imageUrl: String
+  url: String
+  status: String
+}
+
+"An edge in a connection."
+type BookmarkEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Bookmark!
+}
+
+type Maintenance {
+  id: Int!
+  created: DateTime
+  name: String!
+  property: String!
+  price: Float
+}
+
+type Feed {
+  id: Int!
+  created: DateTime!
+  type: String!
+  message: String
+  data: String
+  tags: String!
+}
+
+"The `DateTime` scalar represents an ISO-8601 compliant date time type."
+scalar DateTime
+
+input FeedItemCreateInput {
+  type: String!
+  message: String
+  data: String
+}

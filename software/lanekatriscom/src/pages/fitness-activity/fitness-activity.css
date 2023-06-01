@@ -1,0 +1,8 @@
+.goal-met {
+    border: 2px solid green !important;
+}
+
+.react-calendar__month-view__weekNumbers {
+    background-color: #f3f3f3;
+    border-right: 5px solid #9f9f9f;
+}

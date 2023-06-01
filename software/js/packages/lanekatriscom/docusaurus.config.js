@@ -16,6 +16,10 @@ const config = {
   organizationName: 'facebook', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
 
+  customFields: {
+    graphqlUrl: process.env.GRAPHQL_URL,
+  },
+
   presets: [
     [
       'classic',
@@ -28,6 +32,9 @@ const config = {
         },
         blog: {
           showReadingTime: true,
+          feedOptions: {
+            type: 'all',
+          },
           // Please change this to your repo.
           // editUrl:
           //   'https://github.com/facebook/docusaurus/edit/main/website/blog/',
@@ -42,6 +49,29 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      algolia: {
+        // The application ID provided by Algolia
+        appId: 'EPCI37ZWE6',
+
+        // Public API key: it is safe to commit it
+        apiKey: '98e016b217098f56c24a5c615143af66',
+
+        indexName: 'lanekatriscom',
+
+        // Optional: see doc section below
+        contextualSearch: true,
+
+        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+        // externalUrlRegex: 'external\\.com|domain\\.com',
+
+        // Optional: Algolia search parameters
+        searchParameters: {},
+
+        // Optional: path for search page that enabled by default (`false` to disable it)
+        searchPagePath: 'search',
+
+        //... other Algolia params
+      },
       navbar: {
         title: 'Lane Katris',
         logo: {

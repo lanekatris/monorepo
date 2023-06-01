@@ -1,0 +1,18 @@
+mutation createFitnessActivity($input: ActivityLogCreatedInput!){
+    activityLogCreate(input: $input) {
+        id
+    }
+}
+
+mutation createFitnessActivities($input: [ActivityLogCreatedInput!]!) {
+    activityLogsCreate(input: $input) {
+        id
+    }
+}
+
+query getFitnessActivityActivityLogs($input: ActivityLogFilterInput) {
+    activityLogs(where: $input) {
+        id
+        date
+    }
+}
