@@ -1,17 +1,28 @@
-## Running next.js with hot reloading for mdx
+# Google Location Parsing
 
-`.\node_modules\.bin\next-remote-watch ./posts -r .\apps\lkat`
+How to run
 
-## Documentation
+`node_modules\.bin\nx.cmd serve poc`
 
-https://developers.eventstore.com/clients/grpc/subscriptions.html#resolving-link-to-s
+Open `~/.testies.csv` in excel
 
-## GraphQL Codegen
+Create exclude column with these values:
 
-```shell
-cd c:\monorepo\software\js
-.\node_modules\.bin\graphql-codegen
-```
+Burger King
 
-# Nx Dev
-`nx g @nrwl/next:page YOU_PAGE --project=lkat`
+
+With this formula
+
+`=COUNTIF(Excludes!A$2:A$35,[@name])>0`
+
+Filter Column 1 with the formula to only show false values
+
+Filter name column for NO blank values
+
+Make sure you split windows and put exclude values on a different sheet
+
+I made a backup after I got to 200+ exclusions because my code just blindly overwrites. Maybe I should add a timestamp to the file name... that would help with file locks from excell as well...
+
+I decided to do exclusions in Excel and not in code as I needed an easy UI to do this and doing with code is slow and error prone
+
+

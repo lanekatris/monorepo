@@ -2,7 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ wip ]
 
 jobs:
 
@@ -12,33 +12,28 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    
-    - name: Install npm dependencies
-      run: npm ci
-      working-directory: ./software/js
-    
-    - name: Build masterchief (nest.js api)
-      run: ./node_modules/.bin/nx build masterchief
-      working-directory: ./software/js
-      
-      
-#     - name: Build the Docker image
-#       run: docker build . --file ./apps/masterchief/Dockerfile -t loonison101/masterchief
-#       working-directory: ./software/js
-      
-      
+
     - name: Login to DockerHub
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-        
-    -
-        name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          push: true
-          tags: loonison101/masterchief:latest
-          context: ./software/js
-          file: ./software/js/apps/masterchief/Dockerfile
 
+    - name: Build and push
+      uses: docker/build-push-action@v3
+      with:
+        push: true
+        tags: loonison101/masterchief:${{ github.sha }}
+        context: ./software/masterchief
+        file: ./software/masterchief/Dockerfile
+
+    - name: Update image version in k8s deployment yaml
+      uses: fjogeleit/yaml-update-action@main
+      with:
+        valueFile: 'software/masterchief/infrastructure/deployment.yaml'
+        propertyPath: '$.spec.template.spec.containers[0].image'
+        value: loonison101/masterchief:${{ github.sha }}
+        branch: wip
+        targetBranch: wip
+        createPR: false
+        message: 'GH updated image version'

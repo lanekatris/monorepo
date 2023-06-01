@@ -1,0 +1,32 @@
+query getGoalLog {
+    goalLog(input: {
+        start: "2023-01-22T03:00:00Z"
+    }) {
+        entries {
+            weekName
+            completed
+            completedGoalCount
+            uncompleteGoalCount
+            goalCount
+            isThisWeek
+        }
+        totalWeeksCompleted
+        totalWeeksUncompleted
+    }
+}
+
+query getGoals {
+    goals {
+        ...goalFragment
+    }
+}
+
+fragment goalFragment on Goal {
+    id
+    created
+    type
+    frequency
+    targetCount
+    tags
+    name
+}

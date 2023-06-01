@@ -1,0 +1,85 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
+  &lt;Assembly Path="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.16\ref\net6.0\System.Runtime.InteropServices.dll" /&gt;&#xD;
+&lt;/AssemblyExplorer&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=060958c7_002D1c6d_002D4256_002Dba01_002D8b7384984718/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="HappyPathGetGoalStatuses #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B44F8429-B07B-480B-AA88-817E2FFB1991::net6.0::Tests.Tests.HappyPathGetGoalStatuses&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0e0561b7_002D3798_002D4bc6_002Db761_002D5ffb5a0d6f8d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1 #4" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B44F8429-B07B-480B-AA88-817E2FFB1991::net6.0::Tests.Tests.Test1&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0e59e493_002Dd661_002D46c4_002D9fcf_002D7c8b068fe841/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ShouldBeTodaysDateFormatted" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::B9AED1BE-AC3A-459C-AEF2-E87EAF5CBD2D::net6.0::LambdaEmptyServerless1.Tests.FunctionTest.TestGetMethod&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=191ed0dd_002Dfebb_002D4afa_002Db65e_002De1069d241f3a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B44F8429-B07B-480B-AA88-817E2FFB1991::net6.0::Tests.Tests.Test1&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1c58868e_002D1230_002D46b3_002D8743_002D83ce15068f92/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1 #5" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B44F8429-B07B-480B-AA88-817E2FFB1991::net6.0::Tests.Tests.Test1&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5bf163d5_002Db535_002D4d69_002Db314_002Dde5f5036fe96/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1 #7" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B44F8429-B07B-480B-AA88-817E2FFB1991::net6.0::Tests.Tests.Test1&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6d98541c_002Dd74f_002D475c_002D8e99_002Dc88013bb4934/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1 #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B44F8429-B07B-480B-AA88-817E2FFB1991::net6.0::Tests.Tests.Test1&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=959fd794_002D1414_002D4482_002D8637_002D466914324cde/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1 #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B44F8429-B07B-480B-AA88-817E2FFB1991::net6.0::Tests.Tests.Test1&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=983caf17_002D33bb_002D475c_002D9b70_002Dd41f25e241a0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Session #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::B9AED1BE-AC3A-459C-AEF2-E87EAF5CBD2D::net6.0::LambdaEmptyServerless1.Tests.FunctionTest.TestGetMethod&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B9AED1BE-AC3A-459C-AEF2-E87EAF5CBD2D::net6.0::LambdaEmptyServerless1.Tests.FunctionTest.DriveVehicleReminderTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B44F8429-B07B-480B-AA88-817E2FFB1991::net6.0::Tests.Tests.HappyPathGoals&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B44F8429-B07B-480B-AA88-817E2FFB1991::net6.0::Tests.Tests.HappyPathGetGoalStatuses&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ce995c38_002D8b3b_002D4469_002D9a53_002D33eb50db7b94/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1 #8" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B44F8429-B07B-480B-AA88-817E2FFB1991::net6.0::Tests.Tests.Test1&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=cfa586aa_002D9a70_002D48ff_002D9cfe_002D77d413a274ef/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="HappyPathGetGoalStatuses" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B44F8429-B07B-480B-AA88-817E2FFB1991::net6.0::Tests.Tests.HappyPathGetGoalStatuses&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f4651c96_002D4ee4_002D47d4_002D9bfd_002De6c7c33178d1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1 #6" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::B9AED1BE-AC3A-459C-AEF2-E87EAF5CBD2D::net6.0::LambdaEmptyServerless1.Tests.FunctionTest.TestGetMethod&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B9AED1BE-AC3A-459C-AEF2-E87EAF5CBD2D::net6.0::LambdaEmptyServerless1.Tests.FunctionTest.DriveVehicleReminderTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B44F8429-B07B-480B-AA88-817E2FFB1991::net6.0::Tests.Tests.HappyPathGoals&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=fb5b13cc_002D5e7f_002D477b_002Da8c9_002Da500a652ed6b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TestGetMethod" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::B9AED1BE-AC3A-459C-AEF2-E87EAF5CBD2D::net6.0::LambdaEmptyServerless1.Tests.FunctionTest.TestGetMethod&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B9AED1BE-AC3A-459C-AEF2-E87EAF5CBD2D::net6.0::LambdaEmptyServerless1.Tests.FunctionTest.DriveVehicleReminderTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B44F8429-B07B-480B-AA88-817E2FFB1991::net6.0::Tests.Tests.HappyPathGoals&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ffb11e45_002D5d61_002D446c_002Daeaa_002Dbf9cb3b3204a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::B9AED1BE-AC3A-459C-AEF2-E87EAF5CBD2D::net6.0::LambdaEmptyServerless1.Tests.FunctionTest.TestGetMethod&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B9AED1BE-AC3A-459C-AEF2-E87EAF5CBD2D::net6.0::LambdaEmptyServerless1.Tests.FunctionTest.DriveVehicleReminderTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B44F8429-B07B-480B-AA88-817E2FFB1991::net6.0::Tests.Tests.HappyPathGoals&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B44F8429-B07B-480B-AA88-817E2FFB1991::net6.0::Tests.Tests.HappyPathGetGoalStatuses&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	</wpf:ResourceDictionary>

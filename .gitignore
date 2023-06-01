@@ -2,3 +2,8 @@
 .env.local
 .env
 .next
+hugo.exe
+/.$my-setup.drawio.dtmp
+/.$my-setup.drawio.bkp
+.obsidian
+.DS_Store

@@ -16,33 +16,10 @@ spec:
     spec:
       containers:
         - name: masterchief-container
-          image: loonison101/masterchief
+          image: loonison101/masterchief:086af237b9b472423e558839bbd6d9e806512f7c
           imagePullPolicy: Always
           ports:
             - containerPort: 3333
           env:
             - name: ESDB_CONN
               value: esdb://admin:changeit@esdb-eventstore:1113
-# tcp://eventstore.default.svc.cluster.local:1113
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: http-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    kubernetes.io/ingress.class: public
-  labels:
-    app: eventstore-admin
-spec:
-  rules:
-    - host: tracker.climb.rest
-      http:
-        paths:
-        - path: /idk
-          pathType: Prefix
-          backend:
-            service:
-              name: eventstore-admin
-              port:
-                number: 2113

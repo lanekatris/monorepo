@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="/main.css" integrity="sha256-jLWPhwkAHq1rpueZOKALBno3eKP3m4IMB131kGhAlRQ=" crossorigin="anonymous">
+<script src="/main.min.js" integrity="sha256-XCdgoNaBjzkUaEJiauEq+85q/xi/2D4NcB3ZHwAapoM=" crossorigin="anonymous"></script>
+
+<script crossorigin src="/react.production.min.js"></script>
+<script crossorigin src="/react-dom.production.min.js"></script>
+<script src="/babel.min.js"></script>
+<script src="/react-jsonschema-form.js"></script>
+
+<div id="app"></div>
+<div id="calendar"></div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    var calendarEl = document.getElementById('calendar');
+    const events = {{{calendarEvents}}}
+    console.log(events)
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      headerToolbar: {
+        left: 'dayGridMonth,timeGridWeek,timeGridDay',
+        center: 'title',
+        right: 'today prevYear,prev,next,nextYear'
+      },
+      initialView: 'dayGridMonth',
+      height: 650,
+      eventClick(info){
+        if (confirm('Are you sure?')){
+              const data = new URLSearchParams();
+              data.append('eventId', info.event.id)
+          data.append('eventName', 'event-deleted')
+              fetch("/create-event", {
+                method: 'post',
+                body: data
+              }).then(() => window.location.reload())
+        }
+      },
+      events
+    });
+    calendar.render();
+
+    <!--document.getElementById('event-name').value = '{{eventName}}'-->
+  })
+</script>
+
+<script type="text/babel">
+  const Form = JSONSchemaForm.default;
+  const schema = {{{schema}}}
+  const uiSchema = {{{uiSchema}}}
+  const defaultValues = {{{formData}}}
+
+  const log = (type) => console.log.bind(console, type);
+
+  console.log(schema)
+
+  ReactDOM.render((
+    <Form schema={schema} uiSchema={uiSchema} formData={defaultValues}
+          onChange={log("changed")}
+          onSubmit={({formData}) => {
+            const body = new URLSearchParams();
+            Object.keys(formData).forEach(key => {
+              body.append(key, formData[key])
+            })
+
+            fetch(`/create-event`, {
+              method: 'post',
+              body
+            }).then(r => {
+              console.log(r);
+              window.location.reload()
+            })
+          }}
+          onError={log("errors")} />
+  ), document.getElementById("app"));
+</script>
