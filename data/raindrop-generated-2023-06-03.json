@@ -1,5 +1,15 @@
 [
   {
+    "title": "DeviceScript | DeviceScript",
+    "description": "TypeScript for Tiny IoT Devices",
+    "url": "https://microsoft.github.io/devicescript/",
+    "folder": "Cool Software",
+    "tags": "",
+    "created": "2023-05-30T21:26:03.632Z",
+    "cover": "",
+    "highlights": ""
+  },
+  {
     "title": "charmbracelet/glow: Render markdown on the CLI, with pizzazz! 💅🏻",
     "description": "Render markdown on the CLI, with pizzazz! 💅🏻. Contribute to charmbracelet/glow development by creating an account on GitHub.",
     "url": "https://github.com/charmbracelet/glow",
@@ -61,7 +71,7 @@
   },
   {
     "title": "Create, view & edit bookmarks - Computer - Google Chrome Help",
-    "description": "Let Chrome remember your favorite and frequently visited websites.\r\nWhen you sync to Chrome,&nbsp;you get saved items, like bookmarks and passwords, on all your devices.",
+    "description": "Let Chrome remember your favorite and frequently visited websites.\nWhen you sync to Chrome,&nbsp;you get saved items, like bookmarks and passwords, on all your devices.",
     "url": "https://support.google.com/chrome/answer/188842?hl=en&co=GENIE.Platform%3DDesktop",
     "folder": "Random",
     "tags": "",
@@ -108,26 +118,6 @@
     "created": "2023-04-22T12:24:11.088Z",
     "cover": "https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/1_2_code_when_you_need_1e3d2d39d7_1_4e28ae04e4.png",
     "highlights": ""
-  },
-  {
-    "title": "VIM Select Entire Line",
-    "description": "How do you select a single line in VIM, when your cursor as at some random point along that line?\r\n\r\nI know you can do (v, $) to get to the end of the line, or (v, ^) to get to the start, but when yo...",
-    "url": "https://stackoverflow.com/questions/18666376/vim-select-entire-line",
-    "folder": "Unsorted",
-    "tags": "",
-    "created": "2023-04-16T13:05:39.930Z",
-    "cover": "https://cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon@2.png?v=73d79a89bded",
-    "highlights": "Highlight:Capital V selects the current line in one key stroke; two, if you include the \"shift\" in shift+v."
-  },
-  {
-    "title": "recommended low impedence voltage horses - Google Search",
-    "description": "",
-    "url": "https://www.google.com/search?q=recommended+low+impedence+voltage+horses&rlz=1C1GCEA_enUS928US928&oq=recommended+low+impedence+voltage+horses&aqs=chrome..69i57j33i10i160l5j33i10i22i29i30.4636j0j7&sourceid=chrome&ie=UTF-8",
-    "folder": "Unsorted",
-    "tags": "",
-    "created": "2023-04-15T12:17:15.837Z",
-    "cover": "",
-    "highlights": "Highlight:As long as the amperage is adequate, horses can be controlled with as little as 2,000 volts, but to make the fence more memorable and easier to maintain, a minimum of 3,000 volts is recommended."
   },
   {
     "title": "The Terminal (2004) - IMDb",
@@ -270,16 +260,6 @@
     "highlights": ""
   },
   {
-    "title": "Why backlogs are harmful, why they never shrink, and what to do instead",
-    "description": "Do you remember your backlog ever shrinking? Of course you don’t. Backlogs never shrink.",
-    "url": "https://lucasfcosta.com/2023/02/07/backlogs-are-useless.html",
-    "folder": "Unsorted",
-    "tags": "",
-    "created": "2023-02-14T12:45:23.980Z",
-    "cover": "https://lucasfcosta.com/assets/backlogs/waste.png",
-    "highlights": "Highlight:In reality, a product manager’s job is not to create as many tickets as possible but to delete as many as they can and avoid unnecessary work at all costs."
-  },
-  {
     "title": "Nietzsche's 66 Best Aphorisms",
     "description": "It can be easier to grasp Nietzsche's big ideas by studying his aphorisms -- succinct yet insightful statements -- which he intentionally penned at times.",
     "url": "https://www.artofmanliness.com/character/knowledge-of-men/nietzsches-66-best-aphorisms/",
@@ -321,7 +301,7 @@
   },
   {
     "title": "What is the meaning of \"make death proud to take us\" by Shakespeare?",
-    "description": "Answer (1 of 3): \r\n CLEOPATRA \r\nNo more, but e'en a woman, and commanded\r\nBy such poor passion as the maid that milks\r\nAnd does the meanest chares. It were for me\r\nTo throw my sceptre at the injurious gods;\r\nTo tell them that this world did equal theirs\r\nTill they had stol'n our jewel. All's but naught...",
+    "description": "Answer (1 of 3): \n CLEOPATRA \nNo more, but e'en a woman, and commanded\nBy such poor passion as the maid that milks\nAnd does the meanest chares. It were for me\nTo throw my sceptre at the injurious gods;\nTo tell them that this world did equal theirs\nTill they had stol'n our jewel. All's but naught...",
     "url": "https://www.quora.com/What-is-the-meaning-of-make-death-proud-to-take-us-by-Shakespeare-1",
     "folder": "Quotes",
     "tags": "",
@@ -510,16 +490,6 @@
     "highlights": ""
   },
   {
-    "title": "SUPERCHARGED COLLAGEN™ (Connective Tissue & Joint Support)",
-    "description": "Supercharged collagen is research-based tendon, ligament, and joint support supplement for elite athletes, injury rehabilitation, and joint health. Ideal for power athletes, like runners and climbers. Supports finger strength and connective tissue health.",
-    "url": "https://physivantage.com/products/supercharged-collagen",
-    "folder": "To Buy",
-    "tags": "",
-    "created": "2022-12-24T16:10:49.932Z",
-    "cover": "https://cdn.shopify.com/s/files/1/0068/6751/7493/products/SC-Unflavored-WHITE_600x.jpg?v=1661392592",
-    "highlights": "Highlight:Vanilla, Chocolate, Peach Mango"
-  },
-  {
     "title": "Backstage Software Catalog and Developer Platform · An open platform for building developer portals",
     "description": "An open platform for building developer portals",
     "url": "https://backstage.io/",
@@ -551,7 +521,7 @@
   },
   {
     "title": "C# and AWS Lambdas, Part 3 – Pulumi IaC for Web API and an API Gateway | no dogma blog",
-    "description": "In this the third in a series of posts on using .NET in AWS Lambdas I build on the previous post where I connected a Http Gateway to a Lambda running a Web API application. In that post I built the infrastructure by hand, i.e. via the GUI, pointing and clicking.\r\n\r\nIn this post, I will show how to build everything with Pulumi.",
+    "description": "In this the third in a series of posts on using .NET in AWS Lambdas I build on the previous post where I connected a Http Gateway to a Lambda running a Web API application. In that post I built the infrastructure by hand, i.e. via the GUI, pointing and clicking.\n\nIn this post, I will show how to build everything with Pulumi.",
     "url": "https://nodogmablog.bryanhogan.net/2021/02/c-and-aws-lambdas-part-3-pulumi-iac-for-web-api-and-an-api-gateway/",
     "folder": "blog pages",
     "tags": "",
@@ -2191,7 +2161,7 @@
   },
   {
     "title": "Download Book",
-    "description": "Climb Injury-Free  \r\n \r\n  \r\nThe Book \r\n\r\nHas injury prevented you from climbing harder? Whether you’re a professional athlete or a novice climber, “Climb Injury-Free” is the guide that will teach you how to climb stronger and pain-free. The book features the “Rock Rehab Pyramid.” A step-by-step rehabilitation and injury prevention system designed specifically",
+    "description": "Climb Injury-Free  \n \n  \nThe Book \n\nHas injury prevented you from climbing harder? Whether you’re a professional athlete or a novice climber, “Climb Injury-Free” is the guide that will teach you how to climb stronger and pain-free. The book features the “Rock Rehab Pyramid.” A step-by-step rehabilitation and injury prevention system designed specifically",
     "url": "https://theclimbingdoctor.com/",
     "folder": "Climbing",
     "tags": "",
