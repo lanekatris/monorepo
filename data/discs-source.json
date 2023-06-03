@@ -1,5 +1,20 @@
 [
   {
+    "brand": "Dynamic Discs",
+    "color": "Grey",
+    "model": "Escape",
+    "number": 95,
+    "status": "In Bag"
+  },
+  {
+    "brand": "Dynamic Discs",
+    "color": "Green",
+    "created": null,
+    "model": "Truth",
+    "number": 94,
+    "status": "In Bag"
+  },
+  {
     "brand": "Innova",
     "color": "Purple",
     "created": null,
@@ -30,7 +45,8 @@
     "number": 91,
     "price": 17.99,
     "weight": 173,
-    "status": "Unknown"
+    "status": "In Bag",
+    "notes": "Got in Charlotte as a backup for yellow zone for putting in windy conditions"
   },
   {
     "brand": "MVP",
@@ -85,7 +101,7 @@
     "number": 86,
     "price": null,
     "weight": null,
-    "status": "Unknown"
+    "status": "In Bag"
   },
   {
     "brand": "Dynamic Discs",
@@ -107,7 +123,7 @@
     "number": 84,
     "price": null,
     "weight": null,
-    "status": "Unknown"
+    "status": "In Bag"
   },
   {
     "brand": "Dynamic Discs",
@@ -118,7 +134,7 @@
     "number": 83,
     "price": null,
     "weight": null,
-    "status": "Unknown"
+    "status": "In Bag"
   },
   {
     "brand": "Innova",
@@ -129,7 +145,7 @@
     "number": 82,
     "price": null,
     "weight": null,
-    "status": "Unknown"
+    "status": "Lost"
   },
   {
     "brand": "Dynamic discs",
@@ -151,7 +167,7 @@
     "number": 80,
     "price": null,
     "weight": null,
-    "status": "Unknown"
+    "status": "In Bag"
   },
   {
     "brand": "Discraft",
@@ -173,29 +189,30 @@
     "number": 78,
     "price": null,
     "weight": null,
-    "status": "Unknown"
+    "status": "In Bag"
   },
   {
     "brand": "Innova",
-    "color": null,
+    "color": "Red",
     "created": "2022-9-6",
     "discType": "DISC",
     "model": "Rhyno",
     "number": 77,
     "price": null,
     "weight": null,
-    "status": "Unknown"
+    "status": "In Bag"
   },
   {
     "brand": "Innova",
     "color": "Blue",
     "created": "2022-8-19",
     "discType": "DISC",
-    "model": "star mystere",
+    "model": "Mystere",
+    "plastic": "Star",
     "number": 76,
     "price": null,
     "weight": null,
-    "status": "Unknown"
+    "status": "In Bag"
   },
   {
     "brand": "Innova",
@@ -217,7 +234,7 @@
     "number": 74,
     "price": 19,
     "weight": 173,
-    "status": "Unknown"
+    "status": "In Bag"
   },
   {
     "brand": "Innova",
@@ -239,7 +256,7 @@
     "number": 72,
     "price": 16,
     "weight": null,
-    "status": "Unknown"
+    "status": "In Bag"
   },
   {
     "brand": "MVP",
@@ -272,7 +289,7 @@
     "number": 69,
     "price": 19,
     "weight": 166,
-    "status": "Unknown"
+    "status": "Lost"
   },
   {
     "brand": "Innova",
@@ -283,7 +300,7 @@
     "number": 68,
     "price": null,
     "weight": null,
-    "status": "Unknown"
+    "status": "In Bag"
   },
   {
     "brand": "Innova",
@@ -305,7 +322,7 @@
     "number": 66,
     "price": null,
     "weight": null,
-    "status": "Unknown"
+    "status": "In Bag"
   },
   {
     "brand": "Dynamic Discs",
@@ -327,7 +344,7 @@
     "number": 64,
     "price": null,
     "weight": 180,
-    "status": "Unknown"
+    "status": "In Bag"
   },
   {
     "brand": "Innova",
@@ -338,7 +355,7 @@
     "number": 63,
     "price": null,
     "weight": 175,
-    "status": "Unknown"
+    "status": "In Bag"
   },
   {
     "brand": "Innova",
@@ -382,7 +399,7 @@
     "number": 59,
     "price": null,
     "weight": null,
-    "status": "Unknown"
+    "status": "In Bag"
   },
   {
     "brand": "Dynamic Discs",
@@ -426,7 +443,7 @@
     "number": 55,
     "price": null,
     "weight": 173,
-    "status": "Unknown"
+    "status": "In Bag"
   },
   {
     "brand": "Dynamic Discs",
@@ -514,7 +531,8 @@
     "number": 47,
     "price": null,
     "weight": null,
-    "status": "Unknown"
+    "status": "In Bag",
+    "notes": "The red disc..."
   },
   {
     "brand": "Innova",
@@ -580,7 +598,7 @@
     "number": 41,
     "price": 15,
     "weight": 175,
-    "status": "Unknown"
+    "status": "In Bag"
   },
   {
     "brand": "Innova",
@@ -954,7 +972,7 @@
     "number": 7,
     "price": 9.99,
     "weight": 175,
-    "status": "Unknown"
+    "status": "In Bag"
   },
   {
     "brand": "Innova",
