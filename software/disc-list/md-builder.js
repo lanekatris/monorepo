@@ -4,33 +4,19 @@ function p(line){
     return `| ${line} |`
 }
 
-function c(line){
-    return line.replace(/\n/g, '').replace(/\|/g, '')
-}
-
-function u(line) {
-    return `[Link](${line})`
-}
-
-function i(line){
-    return `![](${line})`
-}
-
-function d(line){
-    const date = new Date(Date.parse(line))
-    return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`
-}
-
 class MdBuilder {
     data = [];
+    handleRowAdd = null;
     
     addHeader(names) {
         this.data.push(p(names.join('|')))
         this.data.push(p(Array.from({length:names.length}, () => '---').join('|')))
+        return this;
     }
 
     newLine() {
         this.data.push('')
+        return this
     }
 
     addRow(arrayOfData) {
@@ -44,6 +30,19 @@ class MdBuilder {
 
     addUpdatedRow() {
         this.data.push(`**Updated**: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
+        return this;
+    }
+
+    onRowAdded(cb) {
+        this.handleRowAdd = cb;
+        return this;
+    }
+
+    addRows(arrayOfData) {
+        const self = this;
+        arrayOfData.forEach(x => {
+            self.addRow(self.handleRowAdd(x))
+        })
         return this;
     }
 
