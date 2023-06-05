@@ -49,6 +49,12 @@ class MdBuilder {
     toFile(filePath){
         fs.writeFileSync(filePath, this.data.join('\n'))
     }
+
+    reset() {
+        this.data.length = 0
+        this.handleRowAdd = null
+        return this
+    }
 }
 
 module.exports = {

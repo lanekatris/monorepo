@@ -3,3 +3,4 @@
 *.crt
 *.key
 config.json
+*.bin

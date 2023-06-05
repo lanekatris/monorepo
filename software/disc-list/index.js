@@ -53,7 +53,8 @@ const gearTotalPrice = gearList.reduce((previous, current) => {
     return previous + (current.price || 0)
 }, 0)
 
-new MdBuilder()
+builder
+    .reset()
     .addUpdatedRow()
     .addRawRow(`> Spent at least **~$${gearTotalPrice} on disc golf gear...`)
     .newLine()
