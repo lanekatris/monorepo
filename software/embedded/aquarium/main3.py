@@ -33,9 +33,9 @@ ssl_params = {"key": key, "cert": cert, "server_side": False}
 
 info = os.uname()
 
-temp_pin = machine.Pin(36)
+temp_pin = machine.Pin(7)
 temp_onewire = ds18x20.DS18X20(onewire.OneWire(temp_pin))
-float_pin = machine.Pin(37, machine.Pin.IN, machine.Pin.PULL_UP)
+float_pin = machine.Pin(17, machine.Pin.IN, machine.Pin.PULL_UP)
 
 roms = temp_onewire.scan()
 print("found devices:", roms)
