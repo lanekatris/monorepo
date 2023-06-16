@@ -3,13 +3,13 @@ import machine
 import onewire, ds18x20
 
 # the device is on GPIO12
-dat = machine.Pin(36)
+dat = machine.Pin(7)
 
 # create the onewire object
 ds = ds18x20.DS18X20(onewire.OneWire(dat))
 
 # float sensor
-fl = machine.Pin(37, machine.Pin.IN, machine.Pin.PULL_UP)
+fl = machine.Pin(17, machine.Pin.IN, machine.Pin.PULL_UP)
 
 # scan for devices on the bus
 roms = ds.scan()
