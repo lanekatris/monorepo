@@ -8,4 +8,4 @@ def get_temperature(pin_num):
     roms = ds.scan()
     ds.convert_temp()
     time.sleep_ms(1000)
-    return (ds.read_import machinetemp(roms[0]) * 1.8) + 32
+    return (ds.read_temp(roms[0]) * 1.8) + 32

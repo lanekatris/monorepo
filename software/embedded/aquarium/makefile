@@ -10,3 +10,7 @@ run-test:
 	ampy -p /dev/ttyACM0 run ./testies.py
 repl:
 	putty -serial /dev/ttyACM0
+copy:
+	ampy -p /dev/ttyACM0 put ./floatsensor.py
+	ampy -p /dev/ttyACM0 put ./tempsensor.py
+	ampy -p /dev/ttyACM0 put ./umqtt
