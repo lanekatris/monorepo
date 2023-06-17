@@ -1,5 +1,13 @@
 [
   {
+    "brand": "Innova",
+    "color": "White",
+    "model": "Mystere",
+    "plastic": "Halo",
+    "number": 96,
+    "status": "In Bag"
+  },
+  {
     "brand": "Dynamic Discs",
     "color": "Grey",
     "model": "Escape",
