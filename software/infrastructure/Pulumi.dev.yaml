@@ -5,11 +5,11 @@ config:
   halo:netlifyBuildUrl:
     secure: AAABANEAsams6MVSjBloSbcIM7rBlDwtKtZxmTNMIzorA+52aUtFLNZwfSJJWAXViy2n6o1WEdw/Fdipbb80TF7A3+joGUwI+J0322l0SwwdZIYUajwyfE5UX9g=
   halo:pgDatabase:
-    secure: AAABANUqD0x0DyaA5jY4WE20S6idEGXjSA0EAoQ6PRFezcYdY1I5aeMmVdqv+BxNQWr6d6Y=
+    secure: AAABAHZbCDo0m3Jn+ZnsL+2wrsYGrtrBq3Fg4s7F8wSehuyeWAo=
   halo:pgHost:
-    secure: AAABACM+ujDA1tE+AWhVj5Ekx4CafmClBs2xnwMj+JaqgrbbJkaFziA=
+    secure: AAABANBxJf/YziowDlLRqkbBc2Q4gFtaTXLpSLXrDSH8rmvUJpMpeR5Jl2SP/DmgazzbEdZSJMvJ6gXCq7V0HZS13n5xv2BhHiJUwITvTTB+Lzs=
   halo:pgPassword:
-    secure: AAABABv+/OqetWVQ8CNOscYp/m76OXT96szsQGSkjI3cGx60SbxAJH/uJG6UMxhjuHkYdGl/jRGps2eY2c8ljA==
+    secure: AAABAOqXcPZKyx9g6X97lMMSvjsar9aDQCL0RYO39RkMsZmmG22j3IxVLKM=
   halo:pgPort:
     secure: AAABAIp329QdHodMYeVl7HtySLKQSzmuKhdkm5UOiP82BDD8
   halo:pgUser:
