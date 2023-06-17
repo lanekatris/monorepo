@@ -11,6 +11,12 @@ run-test:
 repl:
 	putty -serial /dev/ttyACM0
 copy:
-	ampy -p /dev/ttyACM0 put ./floatsensor.py
-	ampy -p /dev/ttyACM0 put ./tempsensor.py
-	ampy -p /dev/ttyACM0 put ./umqtt
+	ampy -b 115200 -p /dev/ttyACM0 put ./floatsensor.py
+	ampy -b 115200 -p /dev/ttyACM0 put ./tempsensor.py
+	ampy -b 115200 -p /dev/ttyACM0 put ./umqtt
+	ampy -b 115200 -p /dev/ttyACM0 put ./config.json
+	ampy -b 115200 -p /dev/ttyACM0 put ./config.py
+	ampy -b 115200 -p /dev/ttyACM0 put ./wifi.py
+	ampy -b 115200 -p /dev/ttyACM0 put ./cert.pem.crt
+	ampy -b 115200 -p /dev/ttyACM0 put ./private.pem.key
+	ampy -b 115200 -p /dev/ttyACM0 put ./main.py
