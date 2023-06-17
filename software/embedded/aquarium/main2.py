@@ -6,6 +6,7 @@ import config
 import wifi
 import tempsensor
 import floatsensor
+from machine import Timer
 
 from umqtt.simple import MQTTClient
 
@@ -41,7 +42,7 @@ def mqtt_publish(client, topic=topic_pub, message=""):
     print(message)
 
 
-while True:
+def go(t):
     try:
         mqtt = mqtt_connect()
     except Exception as e:
@@ -78,7 +79,13 @@ while True:
         print("Unable to publish message.")
         print(e)
 
-    # Wait for 30 minutes before checking for messages and publishing a new update.
-    print("Sleep for 30 minutes")
-    # time.sleep(60 * 30)
-    time.sleep(10)
+    try:
+        mqtt.disconnect()
+    except Exception as e:
+        print("Unable to disconnect")
+        print(e)
+
+t0 = Timer(0)
+t0.init(period=1800000, mode=Timer.PERIODIC, callback=go)
+print("Timer set. Wait for logs")
+go("")
