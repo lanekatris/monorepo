@@ -5,6 +5,7 @@ import time
 import board
 from adafruit_neotrellis.neotrellis import NeoTrellis
 import json
+import btree
 
 # create the i2c object for the trellis
 i2c_bus = board.I2C()  # uses board.SCL and board.SDA
@@ -26,6 +27,8 @@ BLUE = (0, 0, 255)
 PURPLE = (180, 0, 255)
 
 
+
+
 # this will be called when button events are received
 def blink(event):
     # turn the LED on when a rising edge is detected
@@ -34,7 +37,10 @@ def blink(event):
     # turn the LED off when a falling edge is detected
     elif event.edge == NeoTrellis.EDGE_FALLING:
         trellis.pixels[event.number] = OFF
-    print(json.dumps(event))
+        print(event.number)
+
+
+
 
 
 for i in range(16):
@@ -56,5 +62,5 @@ for i in range(16):
 while True:
     # call the sync function call any triggered callbacks
     trellis.sync()
-    # the trellis can only be read every 17 millisecons or so
+    # the trellis can only be read every 17 milliseconds or so
     time.sleep(0.02)
