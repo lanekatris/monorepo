@@ -131,7 +131,8 @@
     "number": 83,
     "price": null,
     "weight": null,
-    "status": "In Bag"
+    "status": "In Bag",
+    "aces": 1
   },
   {
     "brand": "Innova",
@@ -181,7 +182,8 @@
     "number": 78,
     "price": null,
     "weight": null,
-    "status": "In Bag"
+    "status": "Lost",
+    "aces": 1
   },
   {
     "brand": "Innova",
