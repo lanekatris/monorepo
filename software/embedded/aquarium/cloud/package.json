@@ -1,0 +1,27 @@
+{
+    "name": "lkat-js-infrastructure",
+    "main": "index.ts",
+    "scripts": {
+        "build": "tsc",
+        "test": "mocha -r dotenv/config --require ts-node/register test/**/*.spec.ts"
+    },
+    "devDependencies": {
+
+        "@types/mocha": "^10.0.1",
+        "@types/node": "^14",
+
+        "assert": "^2.0.0",
+        "dotenv": "^16.0.3",
+        "mocha": "^10.2.0",
+        "ts-node": "^10.9.1"
+    },
+    "dependencies": {
+
+        "@pulumi/aws": "^5.17.0",
+
+        "@pulumi/pulumi": "^3.43.1",
+
+        "pg": "^8.11.0"
+
+    }
+}
