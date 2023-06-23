@@ -7,7 +7,7 @@ export async function checkWaterLevel() : Promise<boolean> {
     });
     await client.connect();
 
-    const sql = `select * from metric where created_timestamp::date = now()::date and sensor_type = 'float' and value = 0 order by id desc limit 1`;
+    const sql = `select * from metric where created_timestamp::date = now()::date and sensor_type = 'float' and value = 1 order by id desc limit 1`;
     const {rows} = await client.query(sql)
     await client.end()
 
