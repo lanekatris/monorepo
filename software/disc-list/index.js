@@ -2,12 +2,14 @@ const sourceFile = require('../../data/discs-source.json')
 const {MdBuilder} = require('./md-builder')
 const _ = require('lodash');
 
+console.log('Running...')
+
 const totalPrice = sourceFile.reduce((previous, current) => {
     return previous + (current.price || 0)
 }, 0)
 
 function serialize(disc) {
-    return [disc.number, disc.brand, disc.model, disc.status, disc.color, disc.created, disc.notes]
+    return [disc.number, disc.brand, disc.model, disc.plastic, disc.status, disc.color, disc.created, disc.notes]
 }
 
 const builder = new MdBuilder();
@@ -40,7 +42,7 @@ Object.keys(colors).forEach(color => {
 builder.newLine()
 
 builder.addRawRow('### Discs').newLine()
-builder.addHeader(['Number', 'Brand', 'Model', 'Status', 'Color', 'Created', 'Notes'])
+builder.addHeader(['Number', 'Brand', 'Model', 'Plastic' ,'Status', 'Color', 'Created', 'Notes'])
 sourceFile.forEach(disc => {
     builder.addRow(serialize(disc))
 })
@@ -64,3 +66,5 @@ builder
     .onRowAdded(gear => [gear.name, gear.price, gear.date])
     .addRows(gearList)
     .toFile(gearListFilePath)
+
+console.log('Done.')
