@@ -45,7 +45,8 @@ sourceFile.forEach(disc => {
     builder.addRow(serialize(disc))
 })
 
-builder.toFile('C:\\Users\\looni\\OneDrive\\Documents\\vault1\\Public\\Disc List.md')
+const toFilePath = process.platform === 'linux' ? '/home/lane/Documents/lkat-vault/Public/Disc List.md' : 'C:\\Users\\looni\\OneDrive\\Documents\\vault1\\Public\\Disc List.md'
+builder.toFile(toFilePath)
 
 // Generate DG Gear List
 const gearList = require('../../data/gear-list-disc-golf-source.json')
@@ -53,6 +54,7 @@ const gearTotalPrice = gearList.reduce((previous, current) => {
     return previous + (current.price || 0)
 }, 0)
 
+const gearListFilePath = process.platform === 'linux' ? '/home/lane/Documents/lkat-vault/Public/Disc Golf Gear List.md' : 'C:\\Users\\looni\\OneDrive\\Documents\\vault1\\Public\\Disc Golf Gear List.md'
 builder
     .reset()
     .addUpdatedRow()
@@ -61,4 +63,4 @@ builder
     .addHeader(['Name', 'Price', 'Date'])
     .onRowAdded(gear => [gear.name, gear.price, gear.date])
     .addRows(gearList)
-    .toFile('C:\\Users\\looni\\OneDrive\\Documents\\vault1\\Public\\Disc Golf Gear List.md')
+    .toFile(gearListFilePath)

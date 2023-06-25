@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"runtime"
 )
 
 func fileCount(path string) (int, error) {
@@ -22,10 +23,19 @@ func fileCount(path string) (int, error) {
 	return i, nil
 }
 
+func isLinux() bool {
+	return runtime.GOOS == "linux"
+}
+
+
 func main() {
 	r := gin.Default()
 	r.GET("/ping", func(c *gin.Context) {
-		obsidianFiles, _ := fileCount("C:\\Users\\looni\\OneDrive\\Documents\\vault1")
+	obsidianPath := "C:\\Users\\looni\\OneDrive\\Documents\\vault1"
+	if (isLinux()) {
+		obsidianPath = "/home/lane/Documents/lkat-vault"
+	}
+		obsidianFiles, _ := fileCount(obsidianPath)
 		videos, _ := os.ReadDir("E:\\video-temp")
 
 		c.JSON(200, gin.H{
@@ -33,6 +43,7 @@ func main() {
 				"obsidianVaultRoot": obsidianFiles,
 				"videosToProcess":   len(videos),
 			},
+			"seperator": obsidianPath,
 		})
 	})
 
