@@ -1,6 +1,24 @@
 [
   {
     "brand": "Innova",
+    "color": "Yellow",
+    "model": "Sidewinder",
+    "plastic": "Star",
+    "number": 98,
+    "status": "In Bag",
+    "weight": 173
+  },
+  {
+    "brand": "Dynamic Discs",
+    "color": "Orange",
+    "model": "Truth",
+    "plastic": "Burst",
+    "number": 97,
+    "status": "In Bag",
+    "weight": 174
+  },
+  {
+    "brand": "Innova",
     "color": "White",
     "model": "Mystere",
     "plastic": "Halo",
