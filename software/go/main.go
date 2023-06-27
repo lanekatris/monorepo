@@ -27,14 +27,13 @@ func isLinux() bool {
 	return runtime.GOOS == "linux"
 }
 
-
 func main() {
 	r := gin.Default()
 	r.GET("/ping", func(c *gin.Context) {
-	obsidianPath := "C:\\Users\\looni\\OneDrive\\Documents\\vault1"
-	if (isLinux()) {
-		obsidianPath = "/home/lane/Documents/lkat-vault"
-	}
+		obsidianPath := "C:\\Users\\looni\\OneDrive\\Documents\\vault1"
+		if isLinux() {
+			obsidianPath = "/home/lane/Documents/lkat-vault"
+		}
 		obsidianFiles, _ := fileCount(obsidianPath)
 		videos, _ := os.ReadDir("E:\\video-temp")
 
@@ -48,11 +47,16 @@ func main() {
 	})
 
 	r.GET("/sleep", func(c *gin.Context) {
-		cmd := exec.Command("rundll32.exe", "powrprof.dll,SetSuspendState", "0,1,0")
+		var cmd *exec.Cmd
+		if isLinux() {
+			cmd = exec.Command("systemctl", "suspend")
+		} else {
+			cmd = exec.Command("rundll32.exe", "powrprof.dll,SetSuspendState", "0,1,0")
+		}
 		if err := cmd.Run(); err != nil {
-			//log.Fatal(err)
 			c.JSON(500, err)
 		}
+
 		c.JSON(200, "success")
 	})
 
