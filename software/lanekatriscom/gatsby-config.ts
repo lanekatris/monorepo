@@ -19,7 +19,6 @@ const config: GatsbyConfig = {
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     "gatsby-plugin-netlify",
-    "gatsby-plugin-apollo",
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -55,14 +54,14 @@ const config: GatsbyConfig = {
       },
     },
     "gatsby-theme-material-ui",
-    {
-      resolve: "gatsby-source-graphql",
-      options: {
-        typeName: "LKAT",
-        fieldName: "lkat",
-        url: process.env.GATSBY_API_URL,
-      },
-    },
+    // {
+    //   resolve: "gatsby-source-graphql",
+    //   options: {
+    //     typeName: "LKAT",
+    //     fieldName: "lkat",
+    //     url: process.env.GATSBY_API_URL,
+    //   },
+    // },
   ],
 };
 

@@ -54,18 +54,7 @@ const projects = [
   },
 ];
 
-const IndexPage = ({
-  data,
-}: {
-  data: {
-    lkat: {
-      goals: Goal[];
-      goalLog: GetGoalLogsResult;
-    };
-  };
-}) => {
-  console.log("index d", data);
-
+const IndexPage = () => {
   return (
     <Layout>
       <Container maxWidth="sm">
@@ -101,7 +90,6 @@ const IndexPage = ({
               </ListItem>
             ))}
           </List>
-          <FitnessGoals goals={data.lkat.goals} goalLog={data.lkat.goalLog} />
         </Box>
         <Box sx={{ textAlign: "center" }}>
           <img
@@ -115,31 +103,3 @@ const IndexPage = ({
 };
 
 export default IndexPage;
-export const pageQuery = graphql`
-  query {
-    lkat {
-      goals {
-        id
-        created
-        type
-        frequency
-        targetCount
-        tags
-        name
-      }
-      goalLog(input: { start: "2023-01-22T03:00:00Z" }) {
-        __typename
-        entries {
-          weekName
-          completed
-          completedGoalCount
-          uncompleteGoalCount
-          goalCount
-          isThisWeek
-        }
-        totalWeeksCompleted
-        totalWeeksUncompleted
-      }
-    }
-  }
-`;
