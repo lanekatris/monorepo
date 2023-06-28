@@ -58,18 +58,6 @@ export default function ClimbSessionPage() {
             Climb: abc-123
           </Typography>
         </Box>
-        {/*<Typography variant="subtitle2" align="center">*/}
-        {/*  Your Sessions*/}
-        {/*/!*</Typography>*!/*/}
-        {/*<ClimbSessions />*/}
-        {/*<List>*/}
-        {/*  {GRADES.map((x) => (*/}
-        {/*    <ListItem key={x}>*/}
-        {/*      <ListItemText primary={x} />*/}
-        {/*    </ListItem>*/}
-        {/*  ))}*/}
-        {/*</List>*/}
-        {/*<Grid container>*/}
         <FormGroup>
           <FormControlLabel
             control={
@@ -80,24 +68,17 @@ export default function ClimbSessionPage() {
                 }
               />
             }
-            // label="View Format (Normal/Simple)"
             label={`Viewing ${viewFormat}`}
           />
-          {/*<FormControlLabel disabled control={<Switch />} label="Disabled" />*/}
         </FormGroup>
         {model.map(({ grade, attempts, climbs, color }) => (
           <Grid
             container
-            // rowSpacing={7}
             spacing={0}
-            // justifyContent="space-between"
             justifyContent="center"
             alignItems="center"
             key={grade}
           >
-            {/*<Grid xs={12}>*/}
-            {/*  <Typography>{grade}</Typography>*/}
-            {/*</Grid>*/}
             {viewFormat === "simple" && (
               <Grid item>
                 <Chip variant="filled" label={grade} color={color} />
@@ -127,19 +108,11 @@ export default function ClimbSessionPage() {
                 </IconButton>
               </Grid>
             )}
-            {/*{viewFormat === "simple" && (*/}
-            {/*  <Grid item xs={2}>*/}
-            {/*    /!*<Typography sx={{ fontSize: "2em" }}>-</Typography>*!/*/}
-            {/*  </Grid>*/}
-            {/*)}*/}
             {viewFormat === "normal" && (
               <Grid item>
                 <Typography sx={{ fontSize: "3em" }}>{climbs}</Typography>
               </Grid>
             )}
-            {/*<Grid item xs={2}>*/}
-            {/*  */}
-            {/*</Grid>*/}
             <Grid item>
               <IconButton
                 onClick={() => {
@@ -147,7 +120,6 @@ export default function ClimbSessionPage() {
                   const find = c.find((x) => x.grade === grade);
                   // @ts-ignore
                   find.attempts++;
-                  // find.climbs++;
                   setModel(c);
                 }}
               >
@@ -182,10 +154,8 @@ export default function ClimbSessionPage() {
                 )}
               </IconButton>
             </Grid>
-            {/*<Divider />*/}
           </Grid>
         ))}
-        {/*</Grid>*/}
       </Container>
     </Layout>
   );

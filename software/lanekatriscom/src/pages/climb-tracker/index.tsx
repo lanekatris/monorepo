@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "gatsby";
 import {
-  Box,
+  Box, Button,
   Chip,
   Container,
   List,
@@ -11,20 +11,50 @@ import {
 } from "@mui/material";
 import { Layout } from "../discs";
 
+import { persistQueryClient } from '@tanstack/react-query-persist-client'
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister'
+import {QueryClient, QueryClientProvider, useMutation, useQuery} from '@tanstack/react-query'
+
+
+const queryClient = new QueryClient()
+
+interface ClimbSession {
+    id: string;
+    name: string;
+    date: string;
+}
+
 function ClimbSessions() {
+  const addSession = () => {
+
+    queryClient.setQueryData<ClimbSession[]>(['climbs'], state => [
+        {
+            id: new Date().toISOString(),
+            name: 'Climb Session ' + new Date().toISOString(),
+            date: new Date().toISOString()
+        },
+        ...(state || []), ])
+  }
+  const result = useQuery(['climbs'], () => queryClient.getQueryData<ClimbSession[]>(['climbs']) || [])
+    console.log(result)
   return (
-    <List>
-      <ListItem alignItems="center">
-        <Link to={`/climb-tracker/asdf-1234`}>
-          <ListItemText primary="Climb Session 2023-01-31" />
-        </Link>
-      </ListItem>
-      {/*<ListItem alignItems="center">*/}
-      {/*  <ListItemText primary="Climb Session 2023-01-31" />*/}
-      {/*</ListItem>*/}
-    </List>
+      <>
+        <List>
+
+
+            {result.data?.map(session => <ListItem alignItems={"center"} key={session.id}><Link to={`/climb-tracker/${session.id}`}>
+                <ListItemText primary={session.name} /></Link></ListItem>)}
+
+        </List>
+        <Button onClick={() => addSession()}>Add Session</Button>
+      </>
+
   );
 }
+
+
+const localStoragePersister = createSyncStoragePersister({storage:window.localStorage})
+persistQueryClient({queryClient,persister: localStoragePersister})
 
 export default function ClimbTrackerPage() {
   return (
@@ -41,7 +71,9 @@ export default function ClimbTrackerPage() {
         <Typography variant="subtitle2" align="center">
           Your Sessions
         </Typography>
+        <QueryClientProvider client={queryClient} >
         <ClimbSessions />
+        </QueryClientProvider>
       </Container>
     </Layout>
   );
