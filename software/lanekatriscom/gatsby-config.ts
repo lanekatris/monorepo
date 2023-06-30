@@ -54,6 +54,14 @@ const config: GatsbyConfig = {
       },
     },
     "gatsby-theme-material-ui",
+    {
+      resolve: 'gatsby-source-pg',
+      options: {
+        connectionString: process.env.POSTGRES_CONN_STRING,
+        schema: 'public',
+        refetchInterval: 60,
+      }
+    }
     // {
     //   resolve: "gatsby-source-graphql",
     //   options: {

@@ -9,9 +9,9 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { darkTheme } from "./index";
-import { Layout } from "./discs";
 import { Link } from "gatsby";
 import { navigate } from "gatsby-link";
+import {Layout} from "./layout";
 
 export default function LoginPage() {
   const [token, setToken] = useState("");

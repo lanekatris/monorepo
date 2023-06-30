@@ -13,9 +13,9 @@ import {
 import { StaticImage } from "gatsby-plugin-image";
 import { Link } from "gatsby-theme-material-ui";
 import FitnessGoals from "../fitness/fitness-goals";
-import { Layout } from "./discs";
 import { graphql } from "gatsby";
 import { GetGoalLogsResult, Goal } from "../gql/generated";
+import {Layout} from "./layout";
 
 export const darkTheme = createTheme({
   palette: {

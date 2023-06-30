@@ -1,6 +1,5 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { Layout } from "../discs";
 import {
   Box,
   Container,
@@ -12,6 +11,7 @@ import {
 import pluralize from "pluralize";
 import { Link } from "gatsby";
 import { navigate } from "gatsby";
+import {Layout} from "../layout";
 
 export default function BlogListPage({ data }) {
   console.log("data", data);

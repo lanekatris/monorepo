@@ -1,6 +1,5 @@
 import * as React from "react";
 import { graphql } from "gatsby";
-import { Layout } from "../discs";
 import {
   Alert,
   Box,
@@ -16,6 +15,7 @@ import { Link } from "gatsby";
 import styled from "styled-components";
 import RehypeReact from "rehype-react";
 import { useState } from "react";
+import {Layout} from "../layout";
 // export const Content = styled.div`
 //   display: flex;
 //   flex: 1;

@@ -19,7 +19,9 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import ElderlyIcon from "@mui/icons-material/Elderly";
 import { Link } from "gatsby";
-import { Layout } from "../discs";
+import {useQuery, useQueryClient} from "@tanstack/react-query";
+import {ClimbSession} from "./index";
+import {Layout} from "../layout";
 const GRADES = [0, 1, 2, 3, 4, 5, 6, 7];
 
 const gradeColor = {
@@ -33,7 +35,11 @@ const gradeColor = {
   7: "error",
 };
 
-export default function ClimbSessionPage() {
+export default function ClimbSessionPage({id}:{id:string}) {
+  const queryClient = useQueryClient()
+  const data = useQuery<ClimbSession | undefined>(['climb', id], x => queryClient.getQueryData<ClimbSession[]>(['climbs']).find(x => x.id === id))
+  console.log('single',data)
+
   const [model, setModel] = useState(
     GRADES.map((grade) => ({
       grade: `V${grade}`,
@@ -44,6 +50,7 @@ export default function ClimbSessionPage() {
     }))
   );
   const [viewFormat, setViewFormat] = useState<"normal" | "simple">("simple");
+
   return (
     <Layout>
       <Container maxWidth="sm" sx={{ paddingBottom: 10 }}>
@@ -55,7 +62,7 @@ export default function ClimbSessionPage() {
             Sessions
           </Link>
           <Typography align="center" variant="h4">
-            Climb: abc-123
+            Climb: {data?.data?.name}
           </Typography>
         </Box>
         <FormGroup>

@@ -9,29 +9,98 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { Layout } from "../discs";
 
 import { persistQueryClient } from '@tanstack/react-query-persist-client'
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister'
-import {QueryClient, QueryClientProvider, useMutation, useQuery} from '@tanstack/react-query'
+import {QueryClient, QueryClientProvider, useMutation, useQuery, useQueryClient} from '@tanstack/react-query'
+import {Layout} from "../layout";
 
 
-const queryClient = new QueryClient()
+type ClimbGrade = 'V0' | 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'V7' | 'V8'
+interface ClimbRecording {
+    completions: number
+    attempts: number
+}
 
-interface ClimbSession {
+export interface ClimbSession {
     id: string;
     name: string;
     date: string;
+    climbs: {[k in ClimbGrade]: ClimbRecording}
 }
 
 function ClimbSessions() {
+    const queryClient = useQueryClient()
   const addSession = () => {
 
     queryClient.setQueryData<ClimbSession[]>(['climbs'], state => [
         {
             id: new Date().toISOString(),
-            name: 'Climb Session ' + new Date().toISOString(),
-            date: new Date().toISOString()
+            name: new Date().toISOString(),
+            date: new Date().toISOString(),
+            climbs: {
+                V0: {
+                    completions: 0,
+                    attempts: 0
+                },
+
+                V1: {
+                    completions: 0,
+                    attempts: 0
+                },
+
+
+                V2: {
+                    completions: 0,
+                    attempts: 0
+                },
+
+
+
+                V3: {
+                    completions: 0,
+                    attempts: 0
+                },
+
+
+
+                V4: {
+                    completions: 0,
+                    attempts: 0
+                },
+
+
+
+
+                V5: {
+                    completions: 0,
+                    attempts: 0
+                },
+
+
+
+
+                V6: {
+                    completions: 0,
+                    attempts: 0
+                },
+
+
+
+
+                V7: {
+                    completions: 0,
+                    attempts: 0
+                },
+
+
+
+
+                V8: {
+                    completions: 0,
+                    attempts: 0
+                }
+            }
         },
         ...(state || []), ])
   }
@@ -53,8 +122,7 @@ function ClimbSessions() {
 }
 
 
-const localStoragePersister = createSyncStoragePersister({storage:window.localStorage})
-persistQueryClient({queryClient,persister: localStoragePersister})
+
 
 export default function ClimbTrackerPage() {
   return (
@@ -71,9 +139,7 @@ export default function ClimbTrackerPage() {
         <Typography variant="subtitle2" align="center">
           Your Sessions
         </Typography>
-        <QueryClientProvider client={queryClient} >
         <ClimbSessions />
-        </QueryClientProvider>
       </Container>
     </Layout>
   );
