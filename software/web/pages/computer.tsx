@@ -39,7 +39,6 @@ export default function ComputerInfoPage({info}: InferGetServerSidePropsType<typ
             e.preventDefault();
             console.log('submit', ref.current!.value)
             await fetch('/api/sleep', {
-                // contentType: 'application/json',
                 method: 'POST',
                 body: JSON.stringify({password: ref.current!.value})
             })
@@ -47,9 +46,6 @@ export default function ComputerInfoPage({info}: InferGetServerSidePropsType<typ
             <input placeholder="password" type="password" ref={ref}/>
             <button type="submit">Go to sleep</button>
         </form>
-        {/*<button onClick={() => {*/}
-
-        {/*}}>Sleep</button>*/}
 
         </>
 }
