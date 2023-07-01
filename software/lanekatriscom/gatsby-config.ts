@@ -54,22 +54,25 @@ const config: GatsbyConfig = {
       },
     },
     "gatsby-theme-material-ui",
-    {
-      resolve: 'gatsby-source-pg',
-      options: {
-        connectionString: process.env.POSTGRES_CONN_STRING,
-        schema: 'public',
-        refetchInterval: 60,
-      }
-    }
     // {
-    //   resolve: "gatsby-source-graphql",
+    //   resolve: 'gatsby-source-pg',
     //   options: {
-    //     typeName: "LKAT",
-    //     fieldName: "lkat",
-    //     url: process.env.GATSBY_API_URL,
-    //   },
+    //     connectionString: process.env.POSTGRES_CONN_STRING,
+    //     schema: 'public',
+    //     refetchInterval: 60,
+    //   }
     // },
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "LKAT",
+        fieldName: "lkat",
+        url: process.env.HASURA_GRAPHQL_URL,
+        headers: {
+          'x-hasura-admin-secret': process.env.HASURA_GRAPHQL_KEY
+        }
+      },
+    },
   ],
 };
 
