@@ -1,0 +1,19 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="lkat" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="go" />
+    <working_directory value="$PROJECT_DIR$" />
+    <parameters value="-o lkat" />
+    <EXTENSION ID="software.aws.toolkits.jetbrains.core.execution.GoAwsConnectionRunConfigurationExtension">
+      <option name="credential" />
+      <option name="region" />
+      <option name="useCurrentConnection" value="false" />
+    </EXTENSION>
+    <kind value="FILE" />
+    <package value="go" />
+    <directory value="$PROJECT_DIR$" />
+    <filePath value="$PROJECT_DIR$/main.go" />
+    <output_directory value="$USER_HOME$/MyPrograms/computer-api" />
+    <option name="run" value="false" />
+    <method v="2" />
+  </configuration>
+</component>

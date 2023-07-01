@@ -37,7 +37,7 @@ const gradeColor = {
 
 export default function ClimbSessionPage({id}:{id:string}) {
   const queryClient = useQueryClient()
-  const data = useQuery<ClimbSession | undefined>(['climb', id], x => queryClient.getQueryData<ClimbSession[]>(['climbs']).find(x => x.id === id))
+  const data = useQuery<ClimbSession | undefined>(['climb', id], x => (queryClient.getQueryData<ClimbSession[]>(['climbs']) || []).find(x => x.id === id))
   console.log('single',data)
 
   const [model, setModel] = useState(

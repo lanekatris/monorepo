@@ -12,9 +12,6 @@ import {
 } from "@mui/material";
 import { StaticImage } from "gatsby-plugin-image";
 import { Link } from "gatsby-theme-material-ui";
-import FitnessGoals from "../fitness/fitness-goals";
-import { graphql } from "gatsby";
-import { GetGoalLogsResult, Goal } from "../gql/generated";
 import {Layout} from "./layout";
 
 export const darkTheme = createTheme({
@@ -38,16 +35,16 @@ const links = [
   },
   {
     name: "Blog",
-    url: "/blog",
+    url: "https://publish.obsidian.md/lanekatris/Public/Welcome",
   },
 ];
 
 const projects = [
   { name: "Admin Login", url: "/login" },
-  {
-    name: "Discs",
-    url: "/discs",
-  },
+  // {
+  //   name: "Discs",
+  //   url: "/discs",
+  // },
   {
     name: "Climb Tracker",
     url: "/climb-tracker",
