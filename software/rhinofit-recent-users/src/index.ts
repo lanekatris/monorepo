@@ -5,8 +5,11 @@ import {getNameFromActivity} from "./getNameFromActivity";
 import {namesToMarkdown} from "./namesToMarkdown";
 import {getActivities} from "./getActivities";
 import fs from 'fs'
+import {finishJob, startJob} from "./jobs";
 
 (async () => {
+
+    const job = await startJob();
 
     const cookies = await login()
 
@@ -23,4 +26,5 @@ import fs from 'fs'
     const markdown = namesToMarkdown(names)
     fs.writeFileSync(filePath, markdown)
     console.log('Wrote file', filePath)
+    await finishJob(job.id)
 })()

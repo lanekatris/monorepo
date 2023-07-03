@@ -43,8 +43,10 @@ export default function ComputerInfoPage({info}: InferGetServerSidePropsType<typ
                 body: JSON.stringify({password: ref.current!.value})
             })
         }}>
-            <input placeholder="password" type="password" ref={ref}/>
-            <button type="submit">Go to sleep</button>
+            <input type="password" ref={ref} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                Go to sleep
+            </button>
         </form>
 
         </>

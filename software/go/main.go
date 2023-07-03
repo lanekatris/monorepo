@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"net/http"
@@ -29,6 +30,7 @@ func isLinux() bool {
 
 func main() {
 	r := gin.Default()
+	r.Use(cors.Default())
 	r.GET("/ping", func(c *gin.Context) {
 		obsidianPath := "C:\\Users\\looni\\OneDrive\\Documents\\vault1"
 		if isLinux() {
@@ -68,5 +70,15 @@ func main() {
 		c.Data(http.StatusOK, "application/json", out)
 	})
 
+	r.GET("/recent-gym-users", func(c *gin.Context) {
+		cmd := exec.Command("npm", "start")
+		cmd.Dir = "/home/lane/git/monorepo/software/rhinofit-recent-users"
+		out, err := cmd.Output()
+		if err != nil {
+			c.JSON(500, err)
+		}
+		//c.JSON(200, out)
+		c.Data(http.StatusOK, "application/json", out)
+	})
 	r.Run() // listen and serve on 0.0.0.0:8080
 }

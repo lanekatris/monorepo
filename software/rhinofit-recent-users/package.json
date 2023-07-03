@@ -26,6 +26,7 @@
     "date-fns": "^2.30.0",
     "dotenv": "^16.3.1",
     "node-html-parser": "^6.1.5",
+    "pg": "^8.11.1",
     "querystring": "^0.2.1",
     "request": "^2.88.2"
   }

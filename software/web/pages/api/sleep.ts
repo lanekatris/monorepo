@@ -11,7 +11,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         return res.status(401).json(false);
     }
 
-    // Intentionally do not wait
     await fetch('https://linux.loonison.com/sleep', {
         headers: {
             'CF-Access-Client-Id': process.env.CLOUDFLARE_CLIENT_ID!,
