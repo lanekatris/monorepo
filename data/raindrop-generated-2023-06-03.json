@@ -1051,7 +1051,7 @@
   },
   {
     "title": "Is it possible to hide extension resources in the Chrome web inspector network tab?",
-    "description": "When I'm viewing the downloaded resources for a page in the Chrome web inspector, I also see the HTML/JS/CSS requested by certain extensions.\r\nIn the example above, indicator.html, indicator.js and",
+    "description": "When I'm viewing the downloaded resources for a page in the Chrome web inspector, I also see the HTML/JS/CSS requested by certain extensions.\nIn the example above, indicator.html, indicator.js and",
     "url": "https://stackoverflow.com/questions/16436369/is-it-possible-to-hide-extension-resources-in-the-chrome-web-inspector-network-t",
     "folder": "Unsorted",
     "tags": "",

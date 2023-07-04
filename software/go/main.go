@@ -77,8 +77,24 @@ func main() {
 		if err != nil {
 			c.JSON(500, err)
 		}
-		//c.JSON(200, out)
 		c.Data(http.StatusOK, "application/json", out)
+	})
+
+	r.GET("/disable-monitors", func(c *gin.Context) {
+		cmd, err := exec.Command("disable-monitors.sh").Output()
+		if err != nil {
+			c.JSON(500, err)
+		} else {
+
+			c.Data(http.StatusOK, "application/json", cmd)
+		}
+	})
+	r.GET("/enable-monitors", func(c *gin.Context) {
+		cmd, err := exec.Command("enable-monitors.sh").Output()
+		if err != nil {
+			c.JSON(500, err)
+		}
+		c.Data(http.StatusOK, "application/json", cmd)
 	})
 	r.Run() // listen and serve on 0.0.0.0:8080
 }

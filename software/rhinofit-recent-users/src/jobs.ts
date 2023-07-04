@@ -7,13 +7,13 @@ interface DbJob {
     finished: Date
 }
 
-export async function startJob(): Promise<DbJob> {
+export async function startJob(appName: string = 'Rhinofit Recent Users'): Promise<DbJob> {
     console.log('Starting job...')
     const client = new Client({
         ssl: true
     });
     await client.connect();
-    const result = await client.query('INSERT INTO job (name) VALUES ($1) RETURNING *', ['Rhinofit Recent Users']);
+    const result = await client.query('INSERT INTO job (name) VALUES ($1) RETURNING *', [appName]);
     await client.end();
     console.log(`Job ${result.rows[0].id} started.`)
     return result.rows[0];

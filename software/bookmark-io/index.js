@@ -1,5 +1,7 @@
 const csv=require('csvtojson')
 const fs = require('fs')
+const jobs = require("./jobs");
+require('dotenv').config();
 
 function p(line){
     return `| ${line} |`
@@ -31,6 +33,7 @@ const columns = ['title', 'description','url','folder','tags','created']
 
 // TODO: Make something like a: MarkdownBuilder so the API looks a bit nicer than the randomness below
 async function go() {
+    const job = await jobs.startJob('Raindrop IO')
     const jsonArray=await csv().fromFile(sourceFile);
     jsonArray.sort((a,b) => Date.parse(b.created) - Date.parse(a.created))
     console.log(jsonArray[0])
@@ -56,6 +59,7 @@ async function go() {
     const fileContents = fileArray.join('\n')
     fs.writeFileSync(targetObsidianFile, fileContents)
     fs.writeFileSync(targetGeneratedFile, JSON.stringify(jsonArray, null, 2))
+    await jobs.finishJob(job.id)
 }
 
 go();

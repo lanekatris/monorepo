@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # xrandr --listmonitors
 # Monitors: 3
 # 0: +*HDMI-1 3440/800x1440/335+0+0  HDMI-1
