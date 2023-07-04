@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { StaticImage } from "gatsby-plugin-image";
 import { Link } from "gatsby-theme-material-ui";
-import {Layout} from "./layout";
+import {Layout} from "../components/layout";
 
 export const darkTheme = createTheme({
   palette: {
@@ -40,15 +40,19 @@ const links = [
 ];
 
 const projects = [
-  { name: "Admin Login", url: "/login" },
+  // { name: "Admin Login", url: "/login" },
   // {
   //   name: "Discs",
   //   url: "/discs",
   // },
+  // {
+  //   name: "Climb Tracker",
+  //   url: "/climb-tracker",
+  // },
   {
-    name: "Climb Tracker",
-    url: "/climb-tracker",
-  },
+    name: 'Climb.Rest',
+    url: 'https://climb.rest'
+  }
 ];
 
 const IndexPage = () => {

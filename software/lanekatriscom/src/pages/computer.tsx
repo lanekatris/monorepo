@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Layout} from "./layout";
+import {Layout} from "../components/layout";
 import {Container, Typography} from "@mui/material";
 export default function() {
     const [computerInfo,setComputerInfo] = useState()

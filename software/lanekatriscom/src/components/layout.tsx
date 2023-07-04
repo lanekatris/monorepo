@@ -1,5 +1,5 @@
 import {CssBaseline, ThemeProvider} from "@mui/material";
-import {darkTheme} from "./index";
+import {darkTheme} from "../pages";
 import React from "react";
 import {Children} from "./children";
 

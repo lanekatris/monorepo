@@ -62,17 +62,17 @@ const config: GatsbyConfig = {
     //     refetchInterval: 60,
     //   }
     // },
-    {
-      resolve: "gatsby-source-graphql",
-      options: {
-        typeName: "LKAT",
-        fieldName: "lkat",
-        url: process.env.HASURA_GRAPHQL_URL,
-        headers: {
-          'x-hasura-admin-secret': process.env.HASURA_GRAPHQL_KEY
-        }
-      },
-    },
+    // {
+    //   resolve: "gatsby-source-graphql",
+    //   options: {
+    //     typeName: "LKAT",
+    //     fieldName: "lkat",
+    //     url: process.env.HASURA_GRAPHQL_URL,
+    //     headers: {
+    //       'x-hasura-admin-secret': process.env.HASURA_GRAPHQL_KEY
+    //     }
+    //   },
+    // },
   ],
 };
 
