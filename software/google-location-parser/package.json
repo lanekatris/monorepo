@@ -17,5 +17,9 @@
     "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@json2csv/plainjs": "^7.0.1",
+    "glob": "^10.3.1"
   }
 }
