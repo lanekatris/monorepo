@@ -183,12 +183,176 @@ const excludes = [
 'The Home Depot',
 
 
+    `Valley Gem Sternwheeler`,
+    `Flamingo Las Vegas`,
+    `John Glenn Columbus International Airport`,
+    `Hyatt Regency Denver at Colorado Convention Center`,
+    `Charleston Town Center`,
+    `Water Stone Outdoors`,
+    `Belpre Plaza Shopping Center`,
+    `The Original Pizza Place`,
+    `"Spaces - California, Irvine - Spaces - Intersect Irvine"`,
+    `Rich Oil`,
+    `KFC`,
+    `Jackson County Courthouse`,
+    `Family Dollar`,
+    `Cracker Barrel Old Country Store`,
+    `CAMC Memorial Hospital`,
+    `bp`,
+    `UPS Customer Center`,
+    `Third Street Deli & Catering`,
+    `The Freefolk Brewery`,
+    `The Custard Stand Webster Springs`,
+    `The Colorado Convention Center`,
+    `Sonic Drive-In`,
+    `Ripley City Barber`,
+    `Residence Inn by Marriott Charlotte Steele Creek`,
+    `Logan's Roadhouse`,
+    `Jackson Foot & Ankle Clinic`,
+    `Hibachi Japanese Steakhouse`,
+    `Hall's Tires`,
+    `Five Guys`,
+    `Dough Boyz Pizzeria`,
+    `Walgreens`,
+    `Shoney's`,
+    `Roadhouse 2081`,
+    `Planet Fitness`,
+    `Kohl's Parkersburg`,
+    `Jessica L Matheny, MD`,
+    `Jackson County Library`,
+    `Jackson County Junior Fair`,
+    `Go Mart`,
+    `Enterprise Rent-A-Car`,
+    `C.J.Maggie's`,
+    `United Bank`,
+    `Sunoco Gas Station`,
+    `Residence Inn by Marriott Charlotte Northlake`,
+    `Play It Again Sports`,
+    `LongHorn Steakhouse`,
+    `Little General Store`,
+    `"Lifetite Metal Products, LLC"`,
+    `Harmar Tavern`,
+    `Hardee's`,
+    `H&R Block`,
+    `Flying Dogs`,
+    `Express Oil`,
+    `Duchess`,
+    `Dr. James G. Gaal, MD`,
+    `Best Buy`,
+    `BB&T`,
+    `AT&T Store`,
+    `Yokum's Grocery and Deli`,
+    `Waybright Funeral Home`,
+    `Waybright Car Wash`,
+    `WVUP Jackson County Center`,
+    `The Ski Barn`,
+    `SUBWAY®Restaurants`,
+`Ripley Fire Rescue`,
+`Residence Inn by Marriott Charlotte Airport`,
+`REI`,
+`Queen Bee`,
+`Pizza Hut`,
+`Pilot Travel Center`,
+`PetSmart`,
+`Par Mar 18`,
+`Papa John's Pizza`,
+`Ollie's Bargain Outlet`,
+`Miguels Pizza`,
+`Micro Center`,
+`MedExpress Urgent Care`,
+`Marietta College`,
+`Jimmy John's`,
+`Jeweler's Touch`,
+`Jackson County Assessor Office`,
+`IHOP`,
+`Habitat For Humanity`,
+`Greyhound: Bus Stop`,
+`Graceland Shopping Center`,
+`Go Mart Food Store`,
+`Fruth Pharmacy`,
+`Einstein Bros. Bagels`,
+`East Of Chicago Pizza Company`,
+`Dunkin'`,
+`Dough Boyz Pizzaria`,
+`Donatos Pizza`,
+`Domino's Pizza`,
+`Cozumel Mexican Grill-Ripley`,
+`Big Lots`,
+`AutoZone`,
+`Applebee's`,
+`ALDI`,
+`Woody's Restaurant`,
+`White Castle Vegas`,
+`West Union Bank`,
+`Walmart Supercenter #2293 Evergreen`,
+`Walmart Neighborhood Market`,
+`Walmart`,
+`Waffle Cabin @ Looking Glass / Olympia`,
+`U-Haul Neighborhood Dealer`,
+`The UPS Store`,
+`Target`,
+`TGI Fridays`,
+`Suzi's Hamburgers`,
+`Sunoco`,
+`Stoked Coffee`,
+`Steak 'n Shake`,
+
+
+    `Waffle Cabin Winter Park Village`,
+    `Ski Barn`,
+    `Inn at Snowshoe`,
+    `Firehouse Subs Grand Central Ave`,
+    `River Town Grill`,
+    `O'Neills`,
+    `Napoli's Pizza`,
+    `Black Sheep`,
+    `Beckley Travel Plaza`,
+    `Beckley Omelet Shoppe`,
+    `Whiskey Taco`,
+    `UNO Pizzeria & Grill`,
+    `Tuque's Bar and Grill`,
+    `The Pizza Place (NorthSide)`,
+    `The Custard Stand`,
+    `Sunrise Restaurant`,
+    `Stray Cat Cafe`,
+    `South Beach Grill`,
+    `Sold Sisters Realty`,
+    `Smokehouse BBQ`,
+    `Shoe Show`,
+    `Shoe Dept.`,
+        `Sheetz #585`,
+`Sheetz #467`,
+`Sheetz #364`,
+`Sheetz #212`,
+`Sheetz #180`,
+`Sheetz #175`,
+`SUNOCO`,
+`Rural King`,
+`Ruby Tuesday`,
+`Red Robin Burger Works`,
+`Quiznos`,
+`Quaker Steak & Lube`,
+`Pure Kitchen`,
+`Pure Eats`,
+`Public Parking`,
+
+
+
 
 ]
 
-
+interface CsvLineItem {
+    placeId: string
+    confidence: string
+    name: string | undefined
+    address: string
+    lat: number
+    long: number
+    durationStart: Date
+    durationEnd: Date
+}
 let headerAdded = true
-function step1(filePath: string) {
+function step1(filePath: string) : CsvLineItem[] {
 
 // load json file
 // const raw =  fs.readFileSync('/home/lane/git/monorepo/software/google-location-parser/Takeout/Location History/Semantic Location History/2023/2023_JANUARY.json')
@@ -205,50 +369,67 @@ function step1(filePath: string) {
 
     // console.log(`${visits.length} place visits`)
 
-    if (!visits.length) {
-        // if (header) console.warn('what the heck', filePath)
-        return ''
-    }
+    return visits.map(x => (
+        {
+            placeId: x.placeVisit.location.placeId,
+            confidence: x.placeVisit.placeConfidence,
+            name: x.placeVisit.location.name,
+            address: x.placeVisit.location.address,
+            lat: x.placeVisit.location.latitudeE7,
+            long: x.placeVisit.location.longitudeE7,
+            durationStart: x.placeVisit.duration.startTimestamp,
+            durationEnd: x.placeVisit.duration.endTimestamp,
+        }
+    ))
+
+    // if (!visits.length) {
+    //     // if (header) console.warn('what the heck', filePath)
+    //     return ''
+    // }
 
 
-    const parser = new Parser({header: headerAdded})
-    const csv = parser.parse(visits.map(x =>({
-        placeId: x.placeVisit.location.placeId,
-        confidence: x.placeVisit.placeConfidence,
-        name: x.placeVisit.location.name,
-        address: x.placeVisit.location.address,
-        lat: x.placeVisit.location.latitudeE7,
-        long: x.placeVisit.location.longitudeE7,
-        durationStart: x.placeVisit.duration.startTimestamp,
-        durationEnd: x.placeVisit.duration.endTimestamp,
-    })))
+    // const parser = new Parser({header: headerAdded})
+    // const csv = parser.parse(visits.map(x =>({
+    //     placeId: x.placeVisit.location.placeId,
+    //     confidence: x.placeVisit.placeConfidence,
+    //     name: x.placeVisit.location.name,
+    //     address: x.placeVisit.location.address,
+    //     lat: x.placeVisit.location.latitudeE7,
+    //     long: x.placeVisit.location.longitudeE7,
+    //     durationStart: x.placeVisit.duration.startTimestamp,
+    //     durationEnd: x.placeVisit.duration.endTimestamp,
+    // })))
 
-    if (headerAdded){
-        // console.log('added header', csv)
-        headerAdded = false
-    }
+
+
+    // if (headerAdded){
+    //     // console.log('added header', csv)
+    //     headerAdded = false
+    // }
 
 // parse json
 //     console.log(csv)
 
-    return csv;
+    // return csv;
     // fs.writeFileSync('visits.csv', csv)
 }
 
 async function step2() {
-    let wholeFile = ''
+    // let wholeFile = ''
 
     const files = await glob('/home/lane/git/monorepo/software/google-location-parser/Takeout/Location History/Semantic Location History/**/*.json')
     files.reverse()
 
+    let lines: CsvLineItem[] = []
     for (let i = 0; i < files.length; i++) {
         const file = files[i]
         const newData = step1(file)
-        if (i == 0 && newData.length) {
-            wholeFile = newData
-        } else if (newData.length) {
-            wholeFile += EOL + newData
-        }
+        lines = [...lines, ...newData]
+        // if (i == 0 && newData.length) {
+        //     wholeFile = newData
+        // } else if (newData.length) {
+        //     wholeFile += EOL + newData
+        // }
         // wholeFile += newData
     }
 
@@ -257,7 +438,10 @@ async function step2() {
     //     wholeFile += newData
     // })
 
-    fs.writeFileSync('visits.csv', wholeFile)
+    const parser = new Parser();
+    const csv = parser.parse(lines)
+
+    fs.writeFileSync('visits.csv', csv)
     // console.log('files', files)
     console.log('file written')
 }
