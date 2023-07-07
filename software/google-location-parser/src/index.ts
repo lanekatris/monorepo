@@ -4,8 +4,9 @@ import fs from 'fs'
 // import glob from 'glob'
 // const glob = require('glob')
 import {glob} from 'glob'
-import { EOL } from "os";
-
+// import parser from 'parse-address'
+// import { EOL } from "os";
+const parser = require('parse-address')
 // interface PlaceVisit {
 //
 // }
@@ -789,6 +790,7 @@ function step1(filePath: string) : CsvLineItem[] {
             long: x.placeVisit.location.longitudeE7,
             durationStart: x.placeVisit.duration.startTimestamp,
             durationEnd: x.placeVisit.duration.endTimestamp,
+            ...parser.parseLocation(x.placeVisit.location.address)
         }
     ))
 
