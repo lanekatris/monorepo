@@ -39,7 +39,7 @@ export async function getServerSideProps(): Promise<{props: {jobs: Job[]}}> {
     }
 }
 
-function formatDate(date: string | null) {
+export function formatDate(date: string | null) {
     if (!date) return 'n/a'
     const d = new Date(date)
     return d.toLocaleDateString('en-us') + ' ' + d.toLocaleTimeString('en-us')
