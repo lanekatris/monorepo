@@ -180,7 +180,7 @@
     "number": 80,
     "price": null,
     "weight": null,
-    "status": "In Bag"
+    "status": "Backup"
   },
   {
     "brand": "Discraft",
@@ -262,7 +262,7 @@
     "number": 72,
     "price": 16,
     "weight": null,
-    "status": "In Bag"
+    "status": "Backup"
   },
   {
     "brand": "MVP",
@@ -352,7 +352,7 @@
     "number": 63,
     "price": null,
     "weight": 175,
-    "status": "In Bag"
+    "status": "Backup"
   },
   {
     "brand": "Innova",
@@ -392,7 +392,7 @@
     "number": 59,
     "price": null,
     "weight": null,
-    "status": "In Bag"
+    "status": "Backup"
   },
   {
     "brand": "Dynamic Discs",
@@ -402,7 +402,7 @@
     "number": 58,
     "price": null,
     "weight": null,
-    "status": "Unknown"
+    "status": "In Bag"
   },
   {
     "brand": "Dynamic Discs",
