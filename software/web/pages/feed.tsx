@@ -25,7 +25,7 @@ export async function getServerSideProps(): Promise<{props: {events: Event[]}}> 
     });
     await client.connect();
 
-    const data = await client.query('SELECT * FROM events ORDER BY id desc');
+    const data = await client.query('SELECT * FROM events ORDER BY event_timestamp desc');
     const rows = data.rows as DbEvent[];
 
     // console.log('res', rows)
