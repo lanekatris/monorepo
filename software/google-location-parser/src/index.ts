@@ -7,6 +7,7 @@ import {glob} from 'glob'
 // import parser from 'parse-address'
 // import { EOL } from "os";
 const parser = require('parse-address')
+const { exec } = require("child_process");
 // interface PlaceVisit {
 //
 // }
@@ -747,10 +748,110 @@ const excludes = [
     `A Taste of Memphis`,
 
 
+    `A Place At the Beach III`,
+    `A Place At the Beach III`,
+    `Eagle Fireworks, Inc.`,
+    `TJ Chumps`,
+    `Beaver Valley Shopping Center`,
+    `Fresenius Kidney Care Indian Hills`,
+
+`1st Choice Cabin Rentals`,
+    `Another Round Disc Golf And Tap Room`,
+    `Antlers Cafe & Bar`,
+    `Apex Nature Park`,
+    `ChIJ2xcg8mLMSYgRqCj1ujkbCac`,
+    `LG #2030 FAYETTEVILLE`,
+`LG #4090 MARMET`,
+`LG #5300 BURNSVILLE`,
+    `Lakeview Shopping Center`,
+    `Ohio River Museum`,
+
+    `Ripley Elementary School`,
+    `Old Dad's General Store`
+
+
+]
+
+// const mappings: ActivityMap[] = [
+//     {placeId: 'ChIJ8yTY12_TSIgRKN2NQBP8Kyg', activity: 'Indoor Rock Climbing'}
+// ]
+const discGolf = [
+
+    `ChIJ0TsnCi1zSIgRAGAYJafWHyU`,
+    `ChIJQ0I4ToQfVIgRJtbR4d984rk`,
+    `ChIJk-8NPt0yT4gRwr-QJ1OasKk`,
+    `ChIJ0eh4-wTKSYgR96imZWra7Lg`,
+    `ChIJcU2CR_v9RYgRM6wYkLzM2tA`,
+    `ChIJzxKDbErMSYgRx0PcBXSOUO0`,
+    `ChIJ2_RWhjXMSYgR8mu8Fusj-hw`,
+    `ChIJW7yrR3QaSYgRqJBvTh-QoFY`,
+    `ChIJtxuC-E3wTogRS_849rzuakQ`,
+    `ChIJs2Nxc8ygVogRonIjK0rRQBU`,
+    `ChIJdXtXwudKSIgRMc0-Xe3tu5o`,
+    `ChIJHXHDfbV9SogR_eL55oYy800`,
+    `ChIJC-6UcALKSYgRL2YQshLXcf8`,
+    'ChIJicpxKVPwTogROZc1eh4JmgQ',
+    'ChIJq9XjGtW7SYgRuQGMcS16YO0',
+    `ChIJrXLV9AUIRogRgq8RYNgIaA4`,
+    `ChIJP4-kzA4IRogRcFcipnuqQds`,
+    `ChIJ-zF4FpsJRogRfgUW9qHeEEo`,
+    'ChIJawZSACDNSIgRYWy9Ew7JjAw',
+    `ChIJOaElKfjlSIgRxXmh9AF5GfI`
 
 
 
 ]
+const mappings: ActivityMap = {
+    'ChIJ8yTY12_TSIgRKN2NQBP8Kyg': 'Indoor Rock Climbing',
+    'ChIJ6Q86pPSVTogRzbf7-lmS3zE': 'Water Park',
+    'ChIJXTi4a1H6MIgR3237iegzTnc': 'Concert',
+    'ChIJ134-Tp--TogROVZBpDojEBg': 'Mountain Biking',
+    'ChIJL4iUU01xS4gRoEncTSUh52U': 'Snowboarding',
+    'ChIJwTbSBIvLSYgRULy8c2vteW8': 'Basketball',
+    'ChIJkajlrhjTSIgRXSvsoEBnBQo': 'Disc Golf',
+    'ChIJ85KhQ5PlSIgRlEfdfSLvwOo': 'Disc Golf',
+    'ChIJ80JW9E9LSIgRO467Z9qDE44':'Tennis',
+    'ChIJ_5ABFmo7UYgRpy2hPF2npUU':'Paintball',
+    'ChIJb33YF_lfaocRTNu6b1mbolk':'Snowboarding',
+    'ChIJe_Tv8YztSIgRMaGe-nmggc0': 'Paintball',
+    'ChIJs5a1dl8tT4gRs8wDoXd6jnU': 'Disc Golf',
+    'ChIJz72UWfd8NYgRVVp_-CjgBBw': 'Disc Golf',
+    'ChIJ0fE3lrNeSIgRtoOUtait5Kg': 'Disc Golf',
+    'ChIJIw_eaH_LSYgRifhxcFUnqWs': 'Disc Golf',
+    'ChIJP7QemUUKR4gRt5ryABZp-qY': 'Disc Golf',
+    'ChIJP6Rcy_v3QIgRybzj7tte_RA': 'Water Park',
+    'ChIJ358FNm59NYgRxS48i_BsvjM': 'Indoor Rock Climbing',
+    'ChIJVSKSIsamVogRUdBH85lRt2Q': 'Disc Golf',
+    'ChIJg6zkHuvLSYgRAxzLHIraHLg': 'Volleyball',
+    'ChIJTU8y3Ru8TogRFaGpSI2OP48': 'Outdoor Rock Climbing',
+    'ChIJFR83roacOIgRMUkMcS0I-N4': 'Paintball',
+    'ChIJk2x2czQryYARPGYH9ROqOGs': 'Kayaking',
+    'ChIJeyN-c5PuSIgRWBsRCQN1iR8': 'Volleyball',
+    'ChIJ4Y_04MwsT4gRfY7HcN0d_gM': 'Movie',
+    'ChIJjyZmdnfvSIgRWre-CTPJ1Eg': 'Basketball',
+    'ChIJTekU5jidS4gRl038sVFhJpM': 'Snowboarding',
+    'ChIJvWJXy7twS4gRNBIyaYhQ2L0': 'Snowboarding',
+    'ChIJnVLRrblwS4gR-C3fu8CVKo0': 'Snowboarding',
+    'ChIJiY4nzvzWtIkRAKC20R7NA_E': 'Kayaking',
+    'ChIJRaNyKPNMSIgRpo5DbSXrz8U': 'Volleyball',
+    'ChIJaT6hdvFMSIgRR1GRykS5A5M': 'Tennis',
+    'ChIJEfLRVfTlSIgR9LldztBpshA': 'Disc Golf',
+    'ChIJbU_pDHLvSIgRXAJqBYEzq-A': 'Fishing',
+    'ChIJbdeUQ8_jSogRkbcP9ceLZGk': 'Camping',
+    'ChIJm1jY5etwS4gRPIgTetsQweo': 'Snowboarding',
+    'ChIJq6qqqk53S4gRPQRKKoPAcTg': 'Snowboarding',
+    'ChIJN6kJdqIkS4gRRiM_zajtyWk': 'Hiking',
+    'ChIJL1ZgCaVwS4gR_tni2OnblBo': 'Snowboarding',
+    'ChIJrQTAQpZwS4gRZXPgz09kS0s': 'Snowboarding',
+    'ChIJjxWZC8hqSIgRPQEHq-1DsY4': 'Backpacking',
+    'ChIJ9wFIipB6tYkRxwkmnaT98r0': 'Camping'
+
+    // ...discGolf.map(x => )
+
+}
+discGolf.forEach(x => {
+    mappings[x] = 'Disc Golf'
+})
 
 interface CsvLineItem {
     placeId: string
@@ -762,7 +863,12 @@ interface CsvLineItem {
     durationStart: Date
     durationEnd: Date
 }
-let headerAdded = true
+
+interface ActivityMap {
+    // placeId: string
+    [key: string] : string //'Indoor Rock Climbing' | 'Disc Golf'
+}
+
 function step1(filePath: string) : CsvLineItem[] {
 
 // load json file
@@ -789,8 +895,11 @@ function step1(filePath: string) : CsvLineItem[] {
             lat: x.placeVisit.location.latitudeE7,
             long: x.placeVisit.location.longitudeE7,
             durationStart: x.placeVisit.duration.startTimestamp,
+            durationStartDate: new Date(x.placeVisit.duration.startTimestamp).toISOString().split('T')[0],
             durationEnd: x.placeVisit.duration.endTimestamp,
-            ...parser.parseLocation(x.placeVisit.location.address)
+            durationEndDate: new Date(x.placeVisit.duration.endTimestamp).toISOString().split('T')[0],
+            ...parser.parseLocation(x.placeVisit.location.address),
+            activityType: mappings[x.placeVisit.location.placeId] || ''
         }
     ))
 
@@ -856,6 +965,12 @@ async function step2() {
     fs.writeFileSync('visits.csv', csv)
     // console.log('files', files)
     console.log('file written')
+
+    exec(`sqlite3 visits.db "drop table tab1"`, () => {
+        exec(`sqlite3 visits.db ".import --csv ./visits.csv tab1"`, () => {
+            console.log('done loading into sqlite')
+        })
+    })
 
 }
 
