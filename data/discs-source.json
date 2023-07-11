@@ -1,6 +1,15 @@
 [
   {
     "brand": "Innova",
+    "color": "Red",
+    "model": "IT",
+    "plastic": "Star",
+    "number": 99,
+    "status": "In Bag",
+    "weight": 173
+  },
+  {
+    "brand": "Innova",
     "color": "Yellow",
     "model": "Sidewinder",
     "plastic": "Star",
