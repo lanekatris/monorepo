@@ -5,9 +5,11 @@ import (
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"os"
 	"os/exec"
 	"runtime"
+	"time"
 )
 
 func fileCount(path string) (int, error) {
@@ -96,5 +98,31 @@ func main() {
 		}
 		c.Data(http.StatusOK, "application/json", cmd)
 	})
+	r.GET("/inbox/submit", func(c *gin.Context) {
+		idk := c.Query("url")
+		url, err := url.Parse(idk)
+		if err != nil {
+			c.JSON(500, err)
+		}
+
+		folder := "/home/lane/Documents/lkat-vault/"
+		date := time.Now().Format("2006-01-02")
+		fileName := date + " Read Later: " + url.Host + " .md"
+		fullPath := folder + fileName
+
+		data := []byte(idk)
+		err = os.WriteFile(fullPath, data, 0644)
+		if err != nil {
+			c.JSON(500, err)
+		}
+
+		c.JSON(http.StatusOK, fullPath)
+	})
 	r.Run() // listen and serve on 0.0.0.0:8080
+}
+
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
 }
