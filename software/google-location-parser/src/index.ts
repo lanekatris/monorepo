@@ -844,7 +844,8 @@ const mappings: ActivityMap = {
     'ChIJL1ZgCaVwS4gR_tni2OnblBo': 'Snowboarding',
     'ChIJrQTAQpZwS4gRZXPgz09kS0s': 'Snowboarding',
     'ChIJjxWZC8hqSIgRPQEHq-1DsY4': 'Backpacking',
-    'ChIJ9wFIipB6tYkRxwkmnaT98r0': 'Camping'
+    'ChIJ9wFIipB6tYkRxwkmnaT98r0': 'Camping',
+    'ChIJBwa8iRQ1_4gRmiPbgxV26CE': 'Hiking'
 
     // ...discGolf.map(x => )
 
@@ -869,7 +870,7 @@ interface ActivityMap {
     [key: string] : string //'Indoor Rock Climbing' | 'Disc Golf'
 }
 
-function step1(filePath: string) : CsvLineItem[] {
+function loadAndExcludeVisitsFromFile(filePath: string) : CsvLineItem[] {
 
 // load json file
 // const raw =  fs.readFileSync('/home/lane/git/monorepo/software/google-location-parser/Takeout/Location History/Semantic Location History/2023/2023_JANUARY.json')
@@ -944,7 +945,7 @@ async function step2() {
     let lines: CsvLineItem[] = []
     for (let i = 0; i < files.length; i++) {
         const file = files[i]
-        const newData = step1(file)
+        const newData = loadAndExcludeVisitsFromFile(file)
         lines = [...lines, ...newData]
         // if (i == 0 && newData.length) {
         //     wholeFile = newData
