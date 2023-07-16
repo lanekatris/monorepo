@@ -5,10 +5,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"net/http"
-	"net/url"
 	"os"
 	"os/exec"
 	"runtime"
+	"strconv"
 	"time"
 )
 
@@ -99,19 +99,16 @@ func main() {
 		c.Data(http.StatusOK, "application/json", cmd)
 	})
 	r.GET("/inbox/submit", func(c *gin.Context) {
-		idk := c.Query("url")
-		url, err := url.Parse(idk)
-		if err != nil {
-			c.JSON(500, err)
-		}
+		url := c.Query("url")
 
 		folder := "/home/lane/Documents/lkat-vault/"
-		date := time.Now().Format("2006-01-02")
-		fileName := date + " Read Later: " + url.Host + " .md"
+		datePrefix := time.Now().Format("2006-01-02")
+		unixDate := strconv.FormatInt(time.Now().Unix(), 10)
+		fileName := datePrefix + " Read Later - " + unixDate + ".md"
 		fullPath := folder + fileName
 
-		data := []byte(idk)
-		err = os.WriteFile(fullPath, data, 0644)
+		noteBody := []byte(url)
+		err := os.WriteFile(fullPath, noteBody, 0644)
 		if err != nil {
 			c.JSON(500, err)
 		}
