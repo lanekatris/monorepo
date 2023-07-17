@@ -7,11 +7,18 @@ export default function UdiscScorecardUpload(){
         <br />
         <form onSubmit={(e) =>{
             e.preventDefault()
+            if (!fileRef.current?.files) return
+
             const body = new FormData();
-            console.log('ref', fileRef.current.files[0])
-            // body.append('file', fileRef.current?.files?.[0])
             body.append('file', fileRef.current.files[0])
             fetch('/api/upload-udisc-scorecard', {method: 'POST', body})
+                .then(x => {
+                    if (x.status === 200) {
+                        alert('Upload successful')
+                    } else {
+                        alert('Upload failed')
+                    }
+                })
         }}>
             <input type="file" ref={fileRef} />
             <br />
