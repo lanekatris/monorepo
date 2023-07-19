@@ -82,6 +82,49 @@ func main() {
 		c.Data(http.StatusOK, "application/json", out)
 	})
 
+	r.GET("/udisc-scorecards", func(c *gin.Context) {
+		cmd := exec.Command("npm", "run", "scorecards")
+		cmd.Dir = "/home/lane/git/monorepo/software/js"
+		out, err := cmd.Output()
+		if err != nil {
+			c.JSON(500, err)
+		}
+		c.Data(http.StatusOK, "application/json", out)
+	})
+
+	// raindrop
+	r.GET("/raindrop-io", func(c *gin.Context) {
+		cmd := exec.Command("npm", "start")
+		cmd.Dir = "/home/lane/git/monorepo/software/bookmark-io"
+		out, err := cmd.Output()
+		if err != nil {
+			c.JSON(500, err)
+		}
+		c.Data(http.StatusOK, "application/json", out)
+	})
+
+	// disc list
+	r.GET("/disc-list", func(c *gin.Context) {
+		cmd := exec.Command("npm", "start")
+		cmd.Dir = "/home/lane/git/monorepo/software/disc-list"
+		out, err := cmd.Output()
+		if err != nil {
+			c.JSON(500, err)
+		}
+		c.Data(http.StatusOK, "application/json", out)
+	})
+
+	// update obsidian client
+	r.GET("/deploy-obsidian-client", func(c *gin.Context) {
+		cmd := exec.Command("cp", "/home/lane/git/monorepo/software/obsidian-client/obsidian-client.js", "/home/lane/Documents/lkat-vault/_admin/Scripts/")
+		//cmd.Dir = "/home/lane/git/monorepo/software/js"
+		out, err := cmd.Output()
+		if err != nil {
+			c.JSON(500, err)
+		}
+		c.Data(http.StatusOK, "application/json", out)
+	})
+
 	r.GET("/disable-monitors", func(c *gin.Context) {
 		cmd, err := exec.Command("disable-monitors.sh").Output()
 		if err != nil {
