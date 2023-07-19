@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
 	"io/ioutil"
-	"lkat/pb"
+	"lkat/pkg/pb"
 	"net/http"
 	"os"
 	"os/exec"

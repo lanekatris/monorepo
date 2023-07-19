@@ -1,5 +1,5 @@
 proto:
-	protoc all.proto --go_out=./ --go-grpc_out=./
+	protoc proto/* --go_out=./ --go-grpc_out=./
 
 lkat:
 	go build -o bin/lkat ./cmd/lkat/main.go

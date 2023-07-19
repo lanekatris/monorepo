@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"google.golang.org/grpc"
-	"lkat/pb"
+	pb "lkat/pkg/pb"
 )
 
 var rootCmd = &cobra.Command{
