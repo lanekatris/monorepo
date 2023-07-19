@@ -1,6 +1,5 @@
 syntax = "proto3";
 
-//package protopackage;
 option go_package = "/pb";
 
 message PingRequest {
