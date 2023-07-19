@@ -1,16 +1,33 @@
 package main
 
 import (
+	"context"
+	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"google.golang.org/grpc"
 	"io/ioutil"
+	"lkat/pb"
 	"net/http"
 	"os"
 	"os/exec"
-	"runtime"
 	"strconv"
 	"time"
+
+	//"lanekatris.com/lkat"
+	"log"
+	"net"
+	"runtime"
 )
+
+type ServerIdk struct {
+	pb.LkatServiceServer
+}
+
+func (s *ServerIdk) Ping(ctx context.Context, in *pb.PingRequest) (*pb.PongResponse, error) {
+	fmt.Println("recieved ping request: " + in.WhoAmI)
+	return &pb.PongResponse{Idk: "hi there " + in.WhoAmI}, nil
+}
 
 func fileCount(path string) (int, error) {
 	i := 0
@@ -158,7 +175,26 @@ func main() {
 
 		c.JSON(http.StatusOK, fullPath)
 	})
-	r.Run() // listen and serve on 0.0.0.0:8080
+	go r.Run() // listen and serve on 0.0.0.0:8080
+
+	lis, err := net.Listen("tcp", ":8081")
+	if err != nil {
+		//log.Fatalf("failed to listen %v", err)
+		panic(err)
+	}
+
+	fmt.Println("Firing up grpc...")
+
+	//s := Server{}
+	//s := grpc.NewServer()
+
+	grpcServer := grpc.NewServer()
+	pb.RegisterLkatServiceServer(grpcServer, &ServerIdk{})
+	//grpcServer.RegisterService(s)
+	if err := grpcServer.Serve(lis); err != nil {
+		log.Fatalf("failed to listen %v", err)
+	}
+	fmt.Println("Grpc listening on 8081")
 }
 
 func check(e error) {

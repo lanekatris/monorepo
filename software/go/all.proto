@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+//package protopackage;
+option go_package = "/pb";
+
+message PingRequest {
+  string whoAmI = 1;
+}
+
+message PongResponse {
+  string idk = 1;
+}
+
+service LkatService {
+  rpc Ping(PingRequest) returns (PongResponse) {}
+}
