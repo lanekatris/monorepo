@@ -14,3 +14,6 @@ clean:
 	rm -f ./main
 	rm -f ./lkat
 	rm -rf bin/*.*
+
+deploy: generate
+	cp ./bin/* /home/lane/MyPrograms/computer-api

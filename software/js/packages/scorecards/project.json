@@ -1,7 +1,7 @@
 {
-  "name": "ingest-udisc-scorecards",
+  "name": "scorecards",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/ingest-udisc-scorecards/src",
+  "sourceRoot": "packages/scorecards/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -10,12 +10,12 @@
       "defaultConfiguration": "production",
       "options": {
         "platform": "node",
-        "outputPath": "dist/packages/ingest-udisc-scorecards",
+        "outputPath": "dist/packages/scorecards",
         "format": ["cjs"],
         "bundle": false,
-        "main": "packages/ingest-udisc-scorecards/src/main.ts",
-        "tsConfig": "packages/ingest-udisc-scorecards/tsconfig.app.json",
-        "assets": ["packages/ingest-udisc-scorecards/src/assets"],
+        "main": "packages/scorecards/src/main.ts",
+        "tsConfig": "packages/scorecards/tsconfig.app.json",
+        "assets": ["packages/scorecards/src/assets"],
         "generatePackageJson": true,
         "esbuildOptions": {
           "sourcemap": true,
@@ -40,14 +40,14 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "ingest-udisc-scorecards:build"
+        "buildTarget": "scorecards:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "ingest-udisc-scorecards:build:development"
+          "buildTarget": "scorecards:build:development"
         },
         "production": {
-          "buildTarget": "ingest-udisc-scorecards:build:production"
+          "buildTarget": "scorecards:build:production"
         }
       }
     },
@@ -55,14 +55,14 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/ingest-udisc-scorecards/**/*.ts"]
+        "lintFilePatterns": ["packages/scorecards/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/ingest-udisc-scorecards/jest.config.ts",
+        "jestConfig": "packages/scorecards/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {

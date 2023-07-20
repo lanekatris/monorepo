@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "scorecards": "nx build ingest-udisc-scorecards && node ./dist/packages/ingest-udisc-scorecards/main.js"
+    "scorecards": "nx build scorecards && node ./dist/packages/scorecards/main.js"
   },
   "private": true,
   "devDependencies": {
