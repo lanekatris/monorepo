@@ -2,7 +2,9 @@
   "name": "@js/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "scorecards": "nx build ingest-udisc-scorecards && node ./dist/packages/ingest-udisc-scorecards/main.js"
+  },
   "private": true,
   "devDependencies": {
     "@nx/cypress": "16.5.3",

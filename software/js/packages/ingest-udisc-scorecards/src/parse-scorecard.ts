@@ -1,7 +1,7 @@
 // const csv=require('csvtojson')
-import * as csv from 'csvtojson';
+import csv from 'csvtojson';
 // const groupBy = require('lodash.groupby')
-import * as groupBy from 'lodash.groupby';
+import groupBy from 'lodash.groupby';
 // import * as md from 'markdown-table';
 import { Align, getMarkdownTable } from 'markdown-table-ts';
 

@@ -27,7 +27,7 @@ function d(line){
 const date = '2023-06-03'
 const sourceFile = `../../data/raindrop-source-${date}.csv`
 const targetGeneratedFile = `../../data/raindrop-generated-${date}.json`
-const targetObsidianFile = 'C:\\Users\\looni\\OneDrive\\Documents\\vault1\\Public\\Raindrop IO.md'
+const targetObsidianFile = process.env.platform === 'win32' ? 'C:\\Users\\looni\\OneDrive\\Documents\\vault1\\Public\\Raindrop IO.md' : '/home/lane/Documents/lkat-vault/Public/Raindrop IO.md'
 const publicUrlPrefix = 'https://github.com/lanekatris/monorepo'
 const columns = ['title', 'description','url','folder','tags','created']
 

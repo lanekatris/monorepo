@@ -1,7 +1,7 @@
 {
-  "name": "obsidian-client",
+  "name": "ingest-udisc-scorecards",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/obsidian-client/src",
+  "sourceRoot": "packages/ingest-udisc-scorecards/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -10,12 +10,12 @@
       "defaultConfiguration": "production",
       "options": {
         "platform": "node",
-        "outputPath": "dist/packages/obsidian-client",
+        "outputPath": "dist/packages/ingest-udisc-scorecards",
         "format": ["cjs"],
         "bundle": false,
-        "main": "packages/obsidian-client/src/main.ts",
-        "tsConfig": "packages/obsidian-client/tsconfig.app.json",
-        "assets": ["packages/obsidian-client/src/assets"],
+        "main": "packages/ingest-udisc-scorecards/src/main.ts",
+        "tsConfig": "packages/ingest-udisc-scorecards/tsconfig.app.json",
+        "assets": ["packages/ingest-udisc-scorecards/src/assets"],
         "generatePackageJson": true,
         "esbuildOptions": {
           "sourcemap": true,
@@ -40,14 +40,14 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "obsidian-client:build"
+        "buildTarget": "ingest-udisc-scorecards:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "obsidian-client:build:development"
+          "buildTarget": "ingest-udisc-scorecards:build:development"
         },
         "production": {
-          "buildTarget": "obsidian-client:build:production"
+          "buildTarget": "ingest-udisc-scorecards:build:production"
         }
       }
     },
@@ -55,14 +55,14 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/obsidian-client/**/*.ts"]
+        "lintFilePatterns": ["packages/ingest-udisc-scorecards/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/obsidian-client/jest.config.ts",
+        "jestConfig": "packages/ingest-udisc-scorecards/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
