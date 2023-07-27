@@ -1,24 +1,9 @@
 version: '3'
 services:
-  # homeassistant:
-  #   container_name: homeassistant
-  #   image: "ghcr.io/home-assistant/home-assistant:stable"
-  #   volumes:
-  #     - /home/lane/hass:/config
-  #     - /etc/localtime:/etc/localtime:ro
-  #   restart: unless-stopped
-  #   privileged: true
-  #   network_mode: host
-  #   ports:
-  #     - 8123:8123
-  # https://github.com/ad3m3r5/scratch-map
-  scratch-map:
-    container_name: scratch-map
-    image: ad3m3r5/scratch-map:latest
-    volumes:
-      - /home/lane/scratch-map:/data
+  nocodb:
+    image: nocodb/nocodb:latest
     ports:
-      - 6600:8080
-    environment:
-      - DBLOCATION=/data
-      - PORT=8080
+      - "8080:8080"
+    restart: always
+    volumes:
+      - /home/lane/nocodb:/usr/app/data/  

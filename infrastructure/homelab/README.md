@@ -11,7 +11,8 @@ ANSIBLE_CONFIG=/mnt/c/Code/monorepo/infrastructure/homelab/ansible.cfg ansible-p
 ```
 
 
-
+Running on the actual server:
+`ansible-playbook  playbook.yml -i hosts -kK`
 
 
 #### Make Service LoadBalancer
