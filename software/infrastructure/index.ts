@@ -4,6 +4,8 @@ import * as pulumi from "@pulumi/pulumi";
 
 const topic = new aws.sns.Topic("mytopic");
 
+export const topicArn = topic.arn;
+
 const config = new pulumi.Config();
 const formUrl = config.requireSecret('didYouAdventureForm')
 
@@ -38,6 +40,24 @@ const didYouAdventureEmailLambda = new aws.lambda.CallbackFunction('didYouAdvent
 })
 
 
-// 21 == 9pm EST and EST is +4 hr of UTC
 const didYouAdventureSchedule: aws.cloudwatch.EventRuleEventSubscription = aws.cloudwatch.onSchedule(
   'didYouAdventureSchedule', 'cron(0 1 * * ? *)',didYouAdventureEmailLambda)
+
+
+const n8nUser = new aws.iam.User('n8nUser')
+const n8nAccessKey = new aws.iam.AccessKey('n8nAccessKey', {user: n8nUser.name})
+
+export const n8n = n8nAccessKey
+
+const n8nPolicy = aws.iam.getPolicyDocument({
+  statements: [{
+    effect: 'Allow',
+    actions: ['sns:Publish', 'sns:ListTopics'],
+    resources: ['*']
+  }]
+})
+const n8nUserPolicy = new aws.iam.UserPolicy('n8nUserPolicy', {
+user: n8nUser.name,
+  policy: n8nPolicy.then(n8nPolicy => n8nPolicy.json),
+})
+

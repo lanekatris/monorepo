@@ -35,6 +35,14 @@ idk.refreshAll = async ({ obsidian }) => {
   new obsidian.Notice(`Done refreshing all.`)
 }
 
+idk.syncInbox = async ({obsidian}) => {
+  new obsidian.Notice(`Syncing inbox...`)
+
+  await fetch('http://localhost:5678/webhook/34027c90-9b75-4a50-b981-7d1f35ee5d1d')
+
+  new obsidian.Notice(`Done syncing`)
+}
+
 idk.climbedToday = async (one,two,three,four) =>{
   console.log({one,two,three,four})
   const d = moment().format('YYYY-MM-DD')
