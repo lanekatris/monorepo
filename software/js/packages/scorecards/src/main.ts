@@ -11,7 +11,7 @@ async function go() {
     csv: raw,
     playerName: 'Lane',
   });
-  const md = generateScorecardMarkdown(result.scorecards);
+  const md = generateScorecardMarkdown(result);
   writeFileSync(
     '/home/lane/Documents/lkat-vault/Public/Disc Golf Scorecards.md',
     md

@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:8080'
+const baseUrl = 'https://linux.loonison.com'
 
 const config = {
   disableMonitors: 'disable-monitors',
@@ -17,11 +17,15 @@ Object.keys(config).forEach(key => {
   const url = `${baseUrl}/${config[key]}`
   idk[key] = async ({ obsidian }) => {
     new obsidian.Notice(`Invoking ${key} with ${url}`)
-    const result = await fetch(url);
+    const result = await fetch(url, {
+      headers: {
+        'CF-Access-Client-Id':process.env.CF_CLIENT_ID,
+        'CF-Access-Client-Secret':process.env.CF_CLIENT_SECRET
+      }
+    });
     const text = await result.text()
     console.log(text)
-    new obsidian.Notice(`Done ${key}`)
-  }
+    new obsidian.Notice(`Done ${key}`)}
 })
 
 idk.refreshAll = async ({ obsidian }) => {
@@ -71,6 +75,10 @@ completed: null
 ---
 
 `)
+}
+
+idk.debugMe = async () => {
+  console.log(process.env)
 }
 
 module.exports = idk
