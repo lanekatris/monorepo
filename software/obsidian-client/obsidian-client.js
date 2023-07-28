@@ -35,4 +35,34 @@ idk.refreshAll = async ({ obsidian }) => {
   new obsidian.Notice(`Done refreshing all.`)
 }
 
+idk.climbedToday = async (one,two,three,four) =>{
+  console.log({one,two,three,four})
+  const d = moment().format('YYYY-MM-DD')
+  const path = `/Adventures/${d} Indoor Climbing.md`
+  one.app.vault.create(path, `
+---
+title: Indoor Climbing
+allDay: true
+date: ${d}
+completed: null
+---
+
+`)
+}
+
+idk.discGolfedToday = async (one,two,three,four) => {
+  console.log({one,two,three,four})
+  const d = moment().format('YYYY-MM-DD')
+  const path = `/Adventures/${d} Disc Golf.md`
+  one.app.vault.create(path, `
+---
+title: Disc Golf 
+allDay: true
+date: ${d}
+completed: null
+---
+
+`)
+}
+
 module.exports = idk
