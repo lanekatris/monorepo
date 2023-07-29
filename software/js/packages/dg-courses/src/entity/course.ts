@@ -8,6 +8,9 @@ export class Course {
   @Column({ type: 'text' })
   name: string;
 
+  @Column({ type: 'int' })
+  yearEstablished: number;
+
   @Column({ type: 'text' })
   city: string;
 
@@ -20,26 +23,29 @@ export class Course {
   @Column('int')
   holeCount: number;
 
-  @Column({ nullable: true, type: 'int' })
-  rating?: number;
+  @Column({ default: () => 'current_timestamp', type: 'datetime' })
+  createdOn!: string;
 
-  @Column({ type: 'text', nullable: true })
-  rawLocationData?: string;
+  // @Column({ nullable: true, type: 'int' })
+  // rating?: number;
+
+  // @Column({ type: 'text', nullable: true })
+  // rawLocationData?: string;
 
   // @Column({ default: 0 })
   // didFindLocations!: boolean;
-
-  @Column({ default: 0, type: 'int' })
-  foundLocationCount!: number;
-
-  @Column({ nullable: true, type: 'int' })
-  latitude?: number;
-
-  @Column({ nullable: true, type: 'int' })
-  longitude?: number;
-
-  @Column({ nullable: true, type: 'text' })
-  html?: string;
+  //
+  // @Column({ default: 0, type: 'int' })
+  // foundLocationCount!: number;
+  //
+  // @Column({ nullable: true, type: 'int' })
+  // latitude?: number;
+  //
+  // @Column({ nullable: true, type: 'int' })
+  // longitude?: number;
+  //
+  // @Column({ nullable: true, type: 'text' })
+  // html?: string;
 
   // eslint-disable-next-line max-len
   constructor(
@@ -49,7 +55,8 @@ export class Course {
     state: string,
     zip: string,
     holeCount: number,
-    rating: number
+    yearEstablished: number
+    // rating: number
   ) {
     this.id = id;
     this.name = name;
@@ -57,10 +64,11 @@ export class Course {
     this.state = state;
     this.zip = zip;
     this.holeCount = holeCount;
-    this.rating = rating;
+    this.yearEstablished = yearEstablished;
+    // this.rating = rating;
   }
 
-  serializeLocation(): string {
-    return `${this.name} ${this.city}, ${this.state} ${this.zip}`;
-  }
+  // serializeLocation(): string {
+  //   return `${this.name} ${this.city}, ${this.state} ${this.zip}`;
+  // }
 }

@@ -4,6 +4,7 @@ import { Course } from './entity/course';
 export interface ExtractCoursesResponse {
   courses: Course[];
   hasMore: boolean;
+  pageStatus: string;
 }
 
 function clean(input: string, type: string = 'string'): string | number {
@@ -46,7 +47,8 @@ export function extractCoursesFromHtml(html: string): ExtractCoursesResponse {
           el.find('.views-field-field-course-holes').text(),
           'num'
         ) as number,
-        0
+        Number(el.find('.date-display-single').text())
+        // 0
         // clean(
         //   el
         //     .find('.average-rating')
@@ -58,8 +60,13 @@ export function extractCoursesFromHtml(html: string): ExtractCoursesResponse {
     );
   });
 
+  const pageStatus = clean(
+    $('.view-footer').text().replace('Displaying', 'Loading')
+  ).toString();
+
   return {
     courses,
     hasMore: $('.pager-last.last').length > 0,
+    pageStatus,
   };
 }

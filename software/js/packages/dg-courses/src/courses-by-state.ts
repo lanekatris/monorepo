@@ -20,7 +20,7 @@ function getUrl(state: STATE, page: number): string {
 }
 
 export class CoursesByState {
-  private page: number = 0;
+  private page = 0;
 
   private readonly input: CoursesByStateInput;
 
@@ -37,11 +37,13 @@ export class CoursesByState {
 
     let response;
     if (htmlRecord) {
-      console.log(`Pulling from DB: ${htmlRecord.id}`);
+      console.log(
+        `Pulling course list from cache for ${state}, page ${this.page} (Cache id ${htmlRecord.id})`
+      );
       response = htmlRecord.html;
     } else {
       // Make get request
-      console.log(`Pulling from: ${url}`);
+      console.log(`Scraping pdga.com for ${state}, page ${this.page}`);
       const html = await getHtml(url);
       await htmlRepo.save({
         state,
@@ -63,6 +65,8 @@ export class CoursesByState {
     while (loadMore) {
       // eslint-disable-next-line no-await-in-loop
       const response = await this.downloadAndParseCourses();
+      console.log(response.pageStatus);
+
       courses = courses.concat(response.courses);
       loadMore = response.hasMore;
     }

@@ -1,15 +1,9 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Html {
+export class CacheItem {
   @PrimaryGeneratedColumn()
   id!: number;
-
-  @Column({ type: 'text' })
-  state!: string;
-
-  @Column({ type: 'int' })
-  page!: number;
 
   @Column({ type: 'text' })
   url!: string;
