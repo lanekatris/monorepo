@@ -7,3 +7,4 @@ hugo.exe
 /.$my-setup.drawio.bkp
 .obsidian
 .DS_Store
+data/dg-courses-generated.db

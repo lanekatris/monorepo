@@ -10,7 +10,7 @@ import { differenceInSeconds } from 'date-fns';
 
 const AppDataSource = new DataSource({
   type: 'sqlite',
-  database: 'dg.db',
+  database: '../../data/dg-courses-generated.db',
   entities: [Course, Html, CacheItem],
   synchronize: true,
   logging: false,
