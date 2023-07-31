@@ -6,7 +6,7 @@ import { STATE } from './state';
 import { CoursesByState } from './courses-by-state';
 import axios from 'axios';
 import { CacheItem } from './entity/cache-item';
-import { differenceInSeconds } from 'date-fns';
+import { differenceInSeconds, differenceInMilliseconds } from 'date-fns';
 
 const AppDataSource = new DataSource({
   type: 'sqlite',
@@ -70,18 +70,31 @@ async function loaIndividualCourseData() {
     const cacheRepo = AppDataSource.getRepository(CacheItem);
     const cacheItem = await cacheRepo.findOne({ where: { url } });
 
+    let html;
     if (cacheItem) {
       // good to go, parse data
       console.log(`Cache exists for ${course.id}`);
+      html = cacheItem.html;
     } else {
-      console.log(`Getting course detail ${course.id}`);
+      // console.log(`Getting course detail ${course.id}`);
 
+      const start = new Date();
       const { data } = await axios.get(url);
       const newCacheItem = new CacheItem();
       newCacheItem.url = url;
       newCacheItem.html = data;
       await AppDataSource.manager.save(newCacheItem);
+      const end = new Date();
+      console.log(
+        `Got course detail ${course.id} in ${differenceInMilliseconds(
+          end,
+          start
+        )} ms`
+      );
+      html = data;
     }
+
+    // todo: process the html and set the row in sql
 
     // Get the html
     i++;
