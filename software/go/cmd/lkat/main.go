@@ -133,13 +133,24 @@ func main() {
 
 	// update obsidian client
 	r.GET("/deploy-obsidian-client", func(c *gin.Context) {
-		cmd := exec.Command("cp", "/home/lane/git/monorepo/software/obsidian-client/obsidian-client.js", "/home/lane/Documents/lkat-vault/_admin/Scripts/")
-		//cmd.Dir = "/home/lane/git/monorepo/software/js"
-		out, err := cmd.Output()
+		//cmd := exec.Command("cp", "/home/lane/git/monorepo/software/obsidian-client/obsidian-client.js", "/home/lane/Documents/lkat-vault/_admin/Scripts/")
+		//out, err := cmd.Output()
+		//if err != nil {
+		//	c.JSON(500, err)
+		//}
+		//c.Data(http.StatusOK, "application/json", out)
+		cmd := exec.Command("nx", "build", "obsidian-client")
+		cmd.Dir = "/home/lane/git/monorepo/software/js"
+		_, err := cmd.Output()
 		if err != nil {
 			c.JSON(500, err)
 		}
-		c.Data(http.StatusOK, "application/json", out)
+		cmd = exec.Command("cp", "/home/lane/git/monorepo/software/js/dist/packages/obsidian-client/main.js", "/home/lane/Documents/lkat-vault/_admin/Scripts/obsidian-client.js")
+		_, err = cmd.Output()
+		if err != nil {
+			c.JSON(500, err)
+		}
+		c.JSON(200, "success")
 	})
 
 	r.GET("/disable-monitors", func(c *gin.Context) {
