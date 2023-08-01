@@ -11,7 +11,7 @@ type LkatApiCall =
   | 'deploy-obsidian-client'
   | 'udisc-scorecards';
 export function createGenericLkatApiCall(type: LkatApiCall) {
-  return async function ({ obsidian }: { obsidian: ObsidianApi }) {
+  return async function (obsidian: ObsidianApi) {
     const url = `${baseUrl}/${type}`;
     new obsidian.Notice(`Invoking ${type} with ${url}`);
     const result = await fetch(url, {

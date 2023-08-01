@@ -8,7 +8,7 @@ const ma: { [k in EventFileType]: string } = {
 };
 
 export function createEventFile(type: EventFileType) {
-  return async function ({ obsidian }: { obsidian: ObsidianApi }) {
+  return async function (obsidian: ObsidianApi) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const d = moment().format('YYYY-MM-DD');

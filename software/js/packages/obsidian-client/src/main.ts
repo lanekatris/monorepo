@@ -26,8 +26,8 @@ export const deployObsidianClient = createGenericLkatApiCall(
 );
 export const udiscScorecards = createGenericLkatApiCall('udisc-scorecards');
 
-export async function refreshAll(props: { obsidian: ObsidianApi }) {
-  new props.obsidian.Notice(`Refreshing all.`);
+export async function refreshAll(props: ObsidianApi) {
+  new props.Notice(`Refreshing all.`);
 
   await Promise.all([
     discList(props),
@@ -37,5 +37,5 @@ export async function refreshAll(props: { obsidian: ObsidianApi }) {
     deployObsidianClient(props),
   ]);
 
-  new props.obsidian.Notice(`Done refreshing all.`);
+  new props.Notice(`Done refreshing all.`);
 }
