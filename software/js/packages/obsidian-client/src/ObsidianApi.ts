@@ -4,5 +4,7 @@ export interface ObsidianApi {
       create: (path: string, content: string) => void;
     };
   };
-  Notice: (message: string) => void;
+  obsidian: {
+    Notice: (message: string) => void;
+  };
 }

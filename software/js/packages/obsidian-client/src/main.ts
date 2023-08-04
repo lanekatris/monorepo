@@ -15,6 +15,7 @@ export async function syncInbox({ obsidian }) {
 export const climbedToday = createEventFile('indoor-climbing');
 export const discGolfedToday = createEventFile('disc-golf');
 export const volleyballToday = createEventFile('volleyball');
+export const grilledToday = createEventFile('grilled');
 export const disableMonitors = createGenericLkatApiCall('disable-monitors');
 export const enableMonitors = createGenericLkatApiCall('enable-monitors');
 export const sleep = createGenericLkatApiCall('sleep');
@@ -27,7 +28,7 @@ export const deployObsidianClient = createGenericLkatApiCall(
 export const udiscScorecards = createGenericLkatApiCall('udisc-scorecards');
 
 export async function refreshAll(props: ObsidianApi) {
-  new props.Notice(`Refreshing all.`);
+  new props.obsidian.Notice(`Refreshing all.`);
 
   await Promise.all([
     discList(props),
@@ -37,5 +38,5 @@ export async function refreshAll(props: ObsidianApi) {
     deployObsidianClient(props),
   ]);
 
-  new props.Notice(`Done refreshing all.`);
+  new props.obsidian.Notice(`Done refreshing all.`);
 }

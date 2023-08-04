@@ -52,7 +52,7 @@ export const n8n = n8nAccessKey
 const n8nPolicy = aws.iam.getPolicyDocument({
   statements: [{
     effect: 'Allow',
-    actions: ['sns:Publish', 'sns:ListTopics'],
+    actions: ['sns:Publish', 'sns:ListTopics', 's3:*'],
     resources: ['*']
   }]
 })
