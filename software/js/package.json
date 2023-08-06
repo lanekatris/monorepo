@@ -57,6 +57,7 @@
     "markdown-table": "^3.0.3",
     "markdown-table-ts": "^1.0.3",
     "next": "13.4.1",
+    "pg": "^8.11.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sqlite3": "^5.1.6",
