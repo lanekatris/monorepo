@@ -1,0 +1,27 @@
+version: 1
+default_environment: dev
+project_id: 17825d8c-3edd-4906-8154-1cc7d9e0bf09
+environments:
+- name: dev
+- name: staging
+- name: prod
+plugins:
+  extractors:
+  - name: tap-csv
+    variant: meltano
+    pip_url: git+https://gitlab.com/meltano/tap-csv.git
+    config:
+      files:
+      - entity: values
+        file: extract/my_location_history.csv
+        keys:
+        - Id
+  loaders:
+  - name: target-postgres
+    variant: meltanolabs
+    pip_url: meltanolabs-target-postgres~=0.0.7
+    config:
+      host: ep-shiny-rice-179280.us-east-2.aws.neon.tech
+      port: 5432
+      user: lanekatris
+      database: neondb
