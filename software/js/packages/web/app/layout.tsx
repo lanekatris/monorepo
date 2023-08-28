@@ -1,4 +1,4 @@
-import './global.css';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 export const metadata = {
   title: 'Welcome to web',
@@ -19,7 +19,9 @@ https://dohliam.github.io/dropin-minimal-css/min/axist.min.css"
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <UserProvider>
+        <body>{children}</body>
+      </UserProvider>
     </html>
   );
 }
