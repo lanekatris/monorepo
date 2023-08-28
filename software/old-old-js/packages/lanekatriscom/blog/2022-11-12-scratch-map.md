@@ -1,3 +1,0 @@
-Learned from Reddit about "scratch map":  https://github.com/ad3m3r5/scratch-map
-
-As you'd expect you scratch off states or countries you've been to. Super simple but gives me inspiration for my own data and projects...
