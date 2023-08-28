@@ -1,0 +1,6 @@
+Lib/
+Include/
+Scripts/
+__pycache__
+data/
+.env
