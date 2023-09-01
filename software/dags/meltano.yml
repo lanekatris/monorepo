@@ -16,6 +16,13 @@ plugins:
         file: extract/my_location_history.csv
         keys:
         - Id
+  - name: tap-s3
+    variant: airbyte
+    pip_url: git+https://github.com/MeltanoLabs/tap-airbyte-wrapper.git
+    config:
+      airbyte_config:
+        dataset: locations
+        path_pattern: google-takeouts/takeout-20230703T122719Z-001.zip
   loaders:
   - name: target-postgres
     variant: meltanolabs
