@@ -1,11 +1,4 @@
-import styles from './page.module.css';
-
 export default async function Index() {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.css file.
-   */
   return (
     <div className="container mx-auto">
       <div className="bg-indigo-500-p-2 font-mono">Hello!</div>
