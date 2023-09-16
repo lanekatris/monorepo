@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { InferGetServerSidePropsType } from 'next';
 import { GiMountainClimbing } from 'react-icons/gi';
+import Navigation from 'packages/web/layout/navigation';
 const { Client } = require('pg');
 
 interface Result {
@@ -64,25 +65,7 @@ order by t."Date" desc
    */
   return (
     <main>
-      <ul>
-        <li>
-          <Link href="/apps">Apps</Link>
-        </li>
-        <li>
-          <Link href="/computer">Computer</Link>
-        </li>
-        <li>
-          <Link href="/feed">Feed</Link>
-        </li>
-        <li>
-          <Link href="/udisc-scorecard-upload">Udisc Scorecard Upload</Link>
-        </li>
-        <li>
-          <Link href="/location-history">Location History</Link>
-        </li>
-      </ul>
-
-      <hr />
+      <Navigation />
 
       <h3>
         Top 100 Disc Golf Course Completion: <mark>{dg}%</mark>
