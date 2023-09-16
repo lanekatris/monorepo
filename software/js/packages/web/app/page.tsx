@@ -31,10 +31,15 @@ export default async function Index() {
     rows: feed,
   }: { rows: { id: number; Date: Date; Route: string; Rating: string }[] } =
     await client.query(`
-  select
+select
+    case
+        when f.type = 'climb' then t."Date"
+        when f.type = 'disc-golf-scorecard' then u."date"
+    end as CommonDate,
     *
 from noco.feed f
     left join kestra.ticks t on f.remote_id_int = t.id and f.type = 'climb'
+    left join kestra.udisc_scorecard u on f.remote_id_int = u.id and f.type = 'disc-golf-scorecard'
 order by t."Date" desc
   `);
 
@@ -63,6 +68,7 @@ order by t."Date" desc
    *
    * Note: The corresponding styles are in the ./index.css file.
    */
+  console.log('feed', feed);
   return (
     <main>
       <Navigation />
@@ -78,8 +84,8 @@ order by t."Date" desc
         {feed.map((x) => (
           <li key={x.id}>
             <GiMountainClimbing />
-            {x.Date.toLocaleDateString()} - Climbed Route: {x.Route} ({x.Rating}
-            )
+            {x.commondate?.toLocaleDateString()} - Climbed Route: {x.Route} (
+            {x.Rating})
           </li>
         ))}
       </ul>
