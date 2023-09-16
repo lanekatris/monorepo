@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { InferGetServerSidePropsType } from 'next';
-import { GiMountainClimbing } from 'react-icons/gi';
+import { GiDiscGolfBasket, GiMountainClimbing } from 'react-icons/gi';
 import Navigation from 'packages/web/layout/navigation';
 const { Client } = require('pg');
 
@@ -29,18 +29,36 @@ export default async function Index() {
 
   const {
     rows: feed,
-  }: { rows: { id: number; Date: Date; Route: string; Rating: string }[] } =
-    await client.query(`
-select
-    case
-        when f.type = 'climb' then t."Date"
-        when f.type = 'disc-golf-scorecard' then u."date"
-    end as CommonDate,
-    *
-from noco.feed f
-    left join kestra.ticks t on f.remote_id_int = t.id and f.type = 'climb'
-    left join kestra.udisc_scorecard u on f.remote_id_int = u.id and f.type = 'disc-golf-scorecard'
-order by t."Date" desc
+  }: {
+    rows: {
+      id: string;
+      type: 'disc-golf-scorecard' | 'climb';
+      date: Date;
+      data: {
+        climb?: { Route: string; Rating: string };
+        scorecard?: { coursename: string; '+/-': number };
+      };
+    }[];
+  } = await client.query(`
+with x as (select
+ case
+                   when f.type = 'climb' then concat('climb-', t.id)
+                  when f.type = 'disc-golf-scorecard' then concat('scorecard-', u.id)
+                end as id,
+f.type,
+                  case
+                      when f.type = 'climb' then t."Date"::date
+                      when f.type = 'disc-golf-scorecard' then u."date"::date
+                      end as date,
+                  json_build_object(
+                          'climb', t.*,
+                          'scorecard', u.*
+                      )   as data
+           from noco.feed f
+                    left join kestra.ticks t on f.remote_id_int = t.id and f.type = 'climb'
+                    left join kestra.udisc_scorecard u on f.remote_id_int = u.id and f.type = 'disc-golf-scorecard'
+)
+select * from x order by date desc;
   `);
 
   await client.end();
@@ -55,20 +73,9 @@ order by t."Date" desc
     .filter((x) => x.visited)
     .reduce((acc, cur) => acc + Number(cur.count), 0);
 
-  // return {
-  //   props: {
-  //     dg: (completed / total) * 100,
-  //     wv: Math.floor((completed2 / total2) * 100),
-  //   },
-  // };
   const dg = (completed / total) * 100;
   const wv = Math.floor((completed2 / total2) * 100);
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.css file.
-   */
-  console.log('feed', feed);
+
   return (
     <main>
       <Navigation />
@@ -81,13 +88,27 @@ order by t."Date" desc
       </h3>
       <h3>Feed ({feed.length})</h3>
       <ul>
-        {feed.map((x) => (
-          <li key={x.id}>
-            <GiMountainClimbing />
-            {x.commondate?.toLocaleDateString()} - Climbed Route: {x.Route} (
-            {x.Rating})
-          </li>
-        ))}
+        {feed.map((x) => {
+          if (x.type === 'climb') {
+            return (
+              <li key={x.id}>
+                <GiMountainClimbing />
+                {x.date.toLocaleDateString()} - Climbed Route:{' '}
+                {x.data.climb?.Route} ({x.data.climb?.Rating})
+              </li>
+            );
+          }
+          if (x.type === 'disc-golf-scorecard') {
+            return (
+              <li key={x.id}>
+                <GiDiscGolfBasket />
+                {x.date.toLocaleDateString()} - Played disc golf @{' '}
+                {x.data.scorecard?.coursename} ({x.data.scorecard?.['+/-']})
+              </li>
+            );
+          }
+          return <span key={x.id}>Unknown</span>;
+        })}
       </ul>
     </main>
   );
