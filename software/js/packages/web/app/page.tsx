@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { InferGetServerSidePropsType } from 'next';
+import { GiMountainClimbing } from 'react-icons/gi';
 const { Client } = require('pg');
 
 interface Result {
@@ -24,6 +25,17 @@ export default async function Index() {
   const { rows: rows2 }: { rows: Result[] } = await client.query(
     `select visited, count(*) from noco.place where state_park = true and state = 'West Virginia' group by visited`
   );
+
+  const {
+    rows: feed,
+  }: { rows: { id: number; Date: Date; Route: string; Rating: string }[] } =
+    await client.query(`
+  select
+    *
+from noco.feed f
+    left join kestra.ticks t on f.remote_id_int = t.id and f.type = 'climb'
+order by t."Date" desc
+  `);
 
   await client.end();
 
@@ -78,6 +90,16 @@ export default async function Index() {
       <h3>
         WV State Parks Visited: <mark>{wv}%</mark>
       </h3>
+      <h3>Feed ({feed.length})</h3>
+      <ul>
+        {feed.map((x) => (
+          <li key={x.id}>
+            <GiMountainClimbing />
+            {x.Date.toLocaleDateString()} - Climbed Route: {x.Route} ({x.Rating}
+            )
+          </li>
+        ))}
+      </ul>
     </main>
   );
 }
