@@ -22,3 +22,15 @@ Running on the actual server:
 # Ansible
 
 ssh -i 'C:\Users\looni\Downloads\LightsailDefaultKey-us-east-2 (1).pem' ubuntu@lanekatris.com
+
+
+# Updated 2023-09-17
+
+Fire up Noco DB:
+`docker compose up -d`
+
+Fire up n8n:
+`docker compose -f docker-compose.n8n.yml up -d`
+
+Fire up Kestra:
+`sudo docker compose -f docker-compose.kestra.yml up -d`
