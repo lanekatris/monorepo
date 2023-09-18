@@ -1,7 +1,13 @@
 import { ObsidianApi } from './ObsidianApi';
 
-type EventFileType = 'indoor-climbing' | 'disc-golf' | 'volleyball' | 'grilled';
+type EventFileType =
+  | 'indoor-climbing'
+  | 'disc-golf'
+  | 'volleyball'
+  | 'grilled'
+  | 'basketball';
 const ma: { [k in EventFileType]: string } = {
+  basketball: 'Basketball',
   grilled: 'Grilled',
   volleyball: 'Volleyball',
   'disc-golf': 'Disc Golf',
