@@ -18,7 +18,6 @@ export const volleyballToday = createEventFile('volleyball');
 export const grilledToday = createEventFile('grilled');
 export const paintballToday = createEventFile('paintball');
 export const basketballToday = createEventFile('basketball');
-export const basketballToday = createEventFile('basketball');
 export const disableMonitors = createGenericLkatApiCall('disable-monitors');
 export const enableMonitors = createGenericLkatApiCall('enable-monitors');
 export const sleep = createGenericLkatApiCall('sleep');
