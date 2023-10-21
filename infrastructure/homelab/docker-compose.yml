@@ -1,7 +1,7 @@
 version: '3'
 services:
   nocodb:
-    image: nocodb/nocodb:0.109.6
+    image: nocodb/nocodb:0.202.5
     ports:
       - "8080:8080"
     restart: always
