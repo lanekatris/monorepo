@@ -8,7 +8,18 @@ import {
 import Navigation from 'packages/web/layout/navigation';
 import { CgDisc } from 'react-icons/cg';
 import { FeedTable, Idk } from './Idk';
-import { Card, Title } from '@tremor/react';
+import {
+  Card,
+  Text,
+  Flex,
+  Grid,
+  Metric,
+  ProgressBar,
+  Title,
+  List,
+  ListItem,
+  Button,
+} from '@tremor/react';
 const { Client } = require('pg');
 
 interface Result {
@@ -104,17 +115,60 @@ select * from x order by date desc;
   const wv = Math.floor((completed2 / total2) * 100);
 
   return (
-    <main className="mx-5">
-      <Navigation />
+    <main className="mx-5 mt-5">
+      <Title>Lane's Miscellaneous Data Dashboard</Title>
 
-      <h3 className="bg-indigo-500 p-2 font-mono">
-        Top 100 Disc Golf Course Completion: <mark>{dg}%</mark>
-      </h3>
-      {/*<Idk />*/}
-      <h3>
-        WV State Parks Visited: <mark>{wv}%</mark>
-      </h3>
-      <Card>
+      <Grid numItemsMd={3} className="mt-6 gap-6">
+        <Card className="max-w-xs mx-auto">
+          <Text>Top 100 Disc Golf Course Completion</Text>
+          <Metric>{dg}%</Metric>
+          <Flex className="mt-4">
+            <Text>
+              {completed} / {total} Courses
+            </Text>
+            <Text>
+              <a
+                href="https://udisc.com/blog/post/worlds-best-disc-golf-courses-2023"
+                target="_blank"
+                className="text-blue-600 visited:text-purple-600"
+              >
+                Link
+              </a>
+            </Text>
+          </Flex>
+          <ProgressBar value={dg} className="mt-2" color="rose" />
+        </Card>
+
+        <Card className="max-w-xs mx-auto">
+          <Text>WV State Parks Visited</Text>
+          <Metric>{wv}%</Metric>
+          <Flex className="mt-4">
+            <Text>
+              {completed2} / {total2} Parks
+            </Text>
+            {/*<Text>$ 225,000</Text>*/}
+          </Flex>
+          <ProgressBar value={wv} className="mt-2" />
+        </Card>
+
+        <Card className="max-w-xs mx-auto">
+          <Text>Other Apps</Text>
+          <List>
+            <ListItem>
+              <Button variant="light">
+                <Link href="/location-history">Location History</Link>
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button variant="light">
+                <Link href="/discs">Discs</Link>
+              </Button>
+            </ListItem>
+          </List>
+        </Card>
+      </Grid>
+
+      <Card className="mt-6">
         <Title>Feed ({feed.length})</Title>
         <FeedTable rows={feed} />
       </Card>
