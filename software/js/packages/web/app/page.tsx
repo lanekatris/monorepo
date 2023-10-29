@@ -7,6 +7,20 @@ import {
 } from 'react-icons/gi';
 import Navigation from 'packages/web/layout/navigation';
 import { CgDisc } from 'react-icons/cg';
+import { FeedTable, Idk } from './Idk';
+import {
+  Card,
+  Text,
+  Flex,
+  Grid,
+  Metric,
+  ProgressBar,
+  Title,
+  List,
+  ListItem,
+  Button,
+  Divider,
+} from '@tremor/react';
 const { Client } = require('pg');
 
 interface Result {
@@ -102,118 +116,73 @@ select * from x order by date desc;
   const wv = Math.floor((completed2 / total2) * 100);
 
   return (
-    <main>
-      <Navigation />
+    <main className="mx-5 mt-5">
+      <Title>Lane's Miscellaneous Data Dashboard</Title>
+      <Text>
+        View my{' '}
+        <Button variant="light">
+          <a href="https://lanekatris.com" target="_blank">
+            site
+          </a>
+        </Button>{' '}
+        for insight on why all this exists 😉
+      </Text>
 
-      <h3>
-        Top 100 Disc Golf Course Completion: <mark>{dg}%</mark>
-      </h3>
-      <h3>
-        WV State Parks Visited: <mark>{wv}%</mark>
-      </h3>
-      <h3>Feed ({feed.length})</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Type</th>
-            <th>Date</th>
-            <th>Event</th>
-          </tr>
-        </thead>
-        <tbody>
-          {feed.map((x) => {
-            if (x.type === 'climb') {
-              return (
-                <tr key={x.id}>
-                  <th>
-                    <GiMountainClimbing />
-                  </th>
-                  <th>{x.date.toLocaleDateString()}</th>
-                  <th>
-                    Climbed Route: {x.data.climb?.Route} ({x.data.climb?.Rating}
-                    )
-                  </th>
-                </tr>
-              );
-            }
-            if (x.type === 'disc-golf-scorecard') {
-              return (
-                <tr key={x.id}>
-                  <th>
-                    <GiDiscGolfBasket />
-                  </th>
-                  <th>{x.date.toLocaleDateString()}</th>
-                  <th>
-                    Played disc golf @ {x.data.scorecard?.coursename} (
-                    {x.data.scorecard?.['+/-']})
-                  </th>
-                </tr>
-              );
-            }
-            if (x.type === 'disc-golf-disc') {
-              return (
-                <tr key={x.id}>
-                  <th>
-                    <CgDisc />
-                  </th>
-                  <th> {x.date.toLocaleDateString()}</th>
-                  <th>
-                    New Disc: #{x.data.disc?.number} - {x.data.disc?.brand}{' '}
-                    {x.data.disc?.plastic} {x.data.disc?.model}{' '}
-                    {x.data.disc?.weight && `(${x.data.disc?.weight}g)`}
-                  </th>
-                </tr>
-              );
-            }
-            if (x.type === 'obsidian-adventure') {
-              return (
-                <tr key={x.id}>
-                  <th>
-                    <GiMountains />
-                  </th>
-                  <th>{x.date.toLocaleDateString()}</th>
-                  <th>Adventure: {x.data.adventure?.activity}</th>
-                </tr>
-              );
-            }
-            return <span key={x.id}>Unknown</span>;
-          })}
-        </tbody>
-      </table>
-      {/*<ul>*/}
-      {/*  {feed.map((x) => {*/}
-      {/*    if (x.type === 'climb') {*/}
-      {/*      return (*/}
-      {/*        <li key={x.id}>*/}
-      {/*          <GiMountainClimbing />*/}
-      {/*          {x.date.toLocaleDateString()} - Climbed Route:{' '}*/}
-      {/*          {x.data.climb?.Route} ({x.data.climb?.Rating})*/}
-      {/*        </li>*/}
-      {/*      );*/}
-      {/*    }*/}
-      {/*    if (x.type === 'disc-golf-scorecard') {*/}
-      {/*      return (*/}
-      {/*        <li key={x.id}>*/}
-      {/*          <GiDiscGolfBasket />*/}
-      {/*          {x.date.toLocaleDateString()} - Played disc golf @{' '}*/}
-      {/*          {x.data.scorecard?.coursename} ({x.data.scorecard?.['+/-']})*/}
-      {/*        </li>*/}
-      {/*      );*/}
-      {/*    }*/}
-      {/*    if (x.type === 'disc-golf-disc') {*/}
-      {/*      return (*/}
-      {/*        <li key={x.id}>*/}
-      {/*          <CgDisc />*/}
-      {/*          {x.date.toLocaleDateString()} - New Disc: #{x.data.disc?.number}{' '}*/}
-      {/*          - {x.data.disc?.brand} {x.data.disc?.plastic}{' '}*/}
-      {/*          {x.data.disc?.model}{' '}*/}
-      {/*          {x.data.disc?.weight && `(${x.data.disc?.weight}g)`}*/}
-      {/*        </li>*/}
-      {/*      );*/}
-      {/*    }*/}
-      {/*    return <span key={x.id}>Unknown</span>;*/}
-      {/*  })}*/}
-      {/*</ul>*/}
+      <Grid numItemsMd={3} className="mt-6 gap-6">
+        <Card className="max-w-xs mx-auto">
+          <Text>Top 100 Disc Golf Course Completion</Text>
+          <Metric>{dg}%</Metric>
+          <Flex className="mt-4">
+            <Text>
+              {completed} / {total} Courses
+            </Text>
+            <Text>
+              <a
+                href="https://udisc.com/blog/post/worlds-best-disc-golf-courses-2023"
+                target="_blank"
+                className="text-blue-600 visited:text-purple-600"
+              >
+                Link
+              </a>
+            </Text>
+          </Flex>
+          <ProgressBar value={dg} className="mt-2" color="rose" />
+        </Card>
+
+        <Card className="max-w-xs mx-auto">
+          <Text>WV State Parks Visited</Text>
+          <Metric>{wv}%</Metric>
+          <Flex className="mt-4">
+            <Text>
+              {completed2} / {total2} Parks
+            </Text>
+            {/*<Text>$ 225,000</Text>*/}
+          </Flex>
+          <ProgressBar value={wv} className="mt-2" />
+        </Card>
+
+        <Card className="max-w-xs mx-auto">
+          <Text>Other Apps</Text>
+          {/*<Divider />*/}
+          <List className="mt-3">
+            <ListItem>
+              <Button variant="light">
+                <Link href="/location-history">Location History</Link>
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button variant="light">
+                <Link href="/discs">Discs</Link>
+              </Button>
+            </ListItem>
+          </List>
+        </Card>
+      </Grid>
+
+      <Card className="mt-6">
+        <Title>Feed ({feed.length})</Title>
+        <FeedTable rows={feed} />
+      </Card>
     </main>
   );
 }

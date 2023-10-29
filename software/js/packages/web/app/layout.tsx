@@ -1,4 +1,5 @@
 import { UserProvider } from '@auth0/nextjs-auth0/client';
+import './global.css';
 
 export const metadata = {
   title: 'Welcome to web',
@@ -12,13 +13,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link
-          href="
-https://dohliam.github.io/dropin-minimal-css/min/axist.min.css"
-          rel="stylesheet"
-        />
-      </head>
+      {/*      <head>*/}
+      {/*        <link*/}
+      {/*          href="*/}
+      {/*https://dohliam.github.io/dropin-minimal-css/min/axist.min.css"*/}
+      {/*          rel="stylesheet"*/}
+      {/*        />*/}
+      {/*      </head>*/}
       <UserProvider>
         <body>{children}</body>
       </UserProvider>
