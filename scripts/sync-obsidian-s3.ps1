@@ -1,0 +1,1 @@
+aws s3 sync --delete C:\Users\looni\OneDrive\Documents\vault1 s3://lkat/obsidian-vault
