@@ -45,7 +45,8 @@ var jsonTestCmd = &cobra.Command{
 			if err != nil {
 				return err
 			}
-			fmt.Println(path, info.Size())
+			fmt.Println(info.Name(), info.Size())
+
 			return nil
 		})
 		if err != nil {
@@ -53,9 +54,48 @@ var jsonTestCmd = &cobra.Command{
 		}
 	},
 }
+var dirSizeCmd = &cobra.Command{
+	Use: "size",
+	Run: func(cmd *cobra.Command, args []string) {
+		s, err := DirSize(args[0])
+		if err != nil {
+			log.Println((err))
+		}
+		fmt.Println("Folder size: ", s)
+	},
+}
+
+func DirSize(path string) (string, error) {
+	var size int64
+	err := filepath.Walk(path, func(_ string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		if !info.IsDir() {
+			size += info.Size()
+		}
+		return err
+	})
+	return ByteCountSI(size), err
+}
+
+func ByteCountSI(b int64) string {
+	const unit = 1000
+	if b < unit {
+		return fmt.Sprintf("%d B", b)
+	}
+	div, exp := int64(unit), 0
+	for n := b / unit; n >= unit; n /= unit {
+		div *= unit
+		exp++
+	}
+	return fmt.Sprintf("%.1f %cB",
+		float64(b)/float64(div), "kMGTPE"[exp])
+}
 
 func init() {
 	rootCmd.AddCommand(jsonTestCmd)
+	rootCmd.AddCommand(dirSizeCmd)
 }
 
 func Execute() {

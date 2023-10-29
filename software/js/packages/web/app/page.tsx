@@ -53,6 +53,11 @@ export default async function Index() {
         </Button>{' '}
         for insight on why all this exists 😉
       </Text>
+      <img
+        className="mt-2"
+        src="https://api.netlify.com/api/v1/badges/6b9d6176-8a2c-44e4-9a44-27e96e5caa03/deploy-status"
+        alt="Netlify Build Status"
+      />
 
       <Grid numItemsMd={3} className="mt-6 gap-6">
         <Card className="max-w-xs mx-auto">
