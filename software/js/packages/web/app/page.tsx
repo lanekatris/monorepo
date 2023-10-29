@@ -7,6 +7,7 @@ import {
 } from 'react-icons/gi';
 import Navigation from 'packages/web/layout/navigation';
 import { CgDisc } from 'react-icons/cg';
+import { Idk } from './Idk';
 const { Client } = require('pg');
 
 interface Result {
@@ -105,9 +106,10 @@ select * from x order by date desc;
     <main>
       <Navigation />
 
-      <h3>
+      <h3 className="bg-indigo-500 p-2 font-mono">
         Top 100 Disc Golf Course Completion: <mark>{dg}%</mark>
       </h3>
+      <Idk />
       <h3>
         WV State Parks Visited: <mark>{wv}%</mark>
       </h3>
