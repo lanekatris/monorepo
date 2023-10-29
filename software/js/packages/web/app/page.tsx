@@ -19,6 +19,7 @@ import {
   List,
   ListItem,
   Button,
+  Divider,
 } from '@tremor/react';
 const { Client } = require('pg');
 
@@ -117,6 +118,15 @@ select * from x order by date desc;
   return (
     <main className="mx-5 mt-5">
       <Title>Lane's Miscellaneous Data Dashboard</Title>
+      <Text>
+        View my{' '}
+        <Button variant="light">
+          <a href="https://lanekatris.com" target="_blank">
+            site
+          </a>
+        </Button>{' '}
+        for insight on why all this exists 😉
+      </Text>
 
       <Grid numItemsMd={3} className="mt-6 gap-6">
         <Card className="max-w-xs mx-auto">
@@ -153,7 +163,8 @@ select * from x order by date desc;
 
         <Card className="max-w-xs mx-auto">
           <Text>Other Apps</Text>
-          <List>
+          {/*<Divider />*/}
+          <List className="mt-3">
             <ListItem>
               <Button variant="light">
                 <Link href="/location-history">Location History</Link>
