@@ -7,7 +7,8 @@ import {
 } from 'react-icons/gi';
 import Navigation from 'packages/web/layout/navigation';
 import { CgDisc } from 'react-icons/cg';
-import { Idk } from './Idk';
+import { FeedTable, Idk } from './Idk';
+import { Card, Title } from '@tremor/react';
 const { Client } = require('pg');
 
 interface Result {
@@ -103,119 +104,20 @@ select * from x order by date desc;
   const wv = Math.floor((completed2 / total2) * 100);
 
   return (
-    <main>
+    <main className="mx-5">
       <Navigation />
 
       <h3 className="bg-indigo-500 p-2 font-mono">
         Top 100 Disc Golf Course Completion: <mark>{dg}%</mark>
       </h3>
-      <Idk />
+      {/*<Idk />*/}
       <h3>
         WV State Parks Visited: <mark>{wv}%</mark>
       </h3>
-      <h3>Feed ({feed.length})</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Type</th>
-            <th>Date</th>
-            <th>Event</th>
-          </tr>
-        </thead>
-        <tbody>
-          {feed.map((x) => {
-            if (x.type === 'climb') {
-              return (
-                <tr key={x.id}>
-                  <th>
-                    <GiMountainClimbing />
-                  </th>
-                  <th>{x.date.toLocaleDateString()}</th>
-                  <th>
-                    Climbed Route: {x.data.climb?.Route} ({x.data.climb?.Rating}
-                    )
-                  </th>
-                </tr>
-              );
-            }
-            if (x.type === 'disc-golf-scorecard') {
-              return (
-                <tr key={x.id}>
-                  <th>
-                    <GiDiscGolfBasket />
-                  </th>
-                  <th>{x.date.toLocaleDateString()}</th>
-                  <th>
-                    Played disc golf @ {x.data.scorecard?.coursename} (
-                    {x.data.scorecard?.['+/-']})
-                  </th>
-                </tr>
-              );
-            }
-            if (x.type === 'disc-golf-disc') {
-              return (
-                <tr key={x.id}>
-                  <th>
-                    <CgDisc />
-                  </th>
-                  <th> {x.date.toLocaleDateString()}</th>
-                  <th>
-                    New Disc: #{x.data.disc?.number} - {x.data.disc?.brand}{' '}
-                    {x.data.disc?.plastic} {x.data.disc?.model}{' '}
-                    {x.data.disc?.weight && `(${x.data.disc?.weight}g)`}
-                  </th>
-                </tr>
-              );
-            }
-            if (x.type === 'obsidian-adventure') {
-              return (
-                <tr key={x.id}>
-                  <th>
-                    <GiMountains />
-                  </th>
-                  <th>{x.date.toLocaleDateString()}</th>
-                  <th>Adventure: {x.data.adventure?.activity}</th>
-                </tr>
-              );
-            }
-            return <span key={x.id}>Unknown</span>;
-          })}
-        </tbody>
-      </table>
-      {/*<ul>*/}
-      {/*  {feed.map((x) => {*/}
-      {/*    if (x.type === 'climb') {*/}
-      {/*      return (*/}
-      {/*        <li key={x.id}>*/}
-      {/*          <GiMountainClimbing />*/}
-      {/*          {x.date.toLocaleDateString()} - Climbed Route:{' '}*/}
-      {/*          {x.data.climb?.Route} ({x.data.climb?.Rating})*/}
-      {/*        </li>*/}
-      {/*      );*/}
-      {/*    }*/}
-      {/*    if (x.type === 'disc-golf-scorecard') {*/}
-      {/*      return (*/}
-      {/*        <li key={x.id}>*/}
-      {/*          <GiDiscGolfBasket />*/}
-      {/*          {x.date.toLocaleDateString()} - Played disc golf @{' '}*/}
-      {/*          {x.data.scorecard?.coursename} ({x.data.scorecard?.['+/-']})*/}
-      {/*        </li>*/}
-      {/*      );*/}
-      {/*    }*/}
-      {/*    if (x.type === 'disc-golf-disc') {*/}
-      {/*      return (*/}
-      {/*        <li key={x.id}>*/}
-      {/*          <CgDisc />*/}
-      {/*          {x.date.toLocaleDateString()} - New Disc: #{x.data.disc?.number}{' '}*/}
-      {/*          - {x.data.disc?.brand} {x.data.disc?.plastic}{' '}*/}
-      {/*          {x.data.disc?.model}{' '}*/}
-      {/*          {x.data.disc?.weight && `(${x.data.disc?.weight}g)`}*/}
-      {/*        </li>*/}
-      {/*      );*/}
-      {/*    }*/}
-      {/*    return <span key={x.id}>Unknown</span>;*/}
-      {/*  })}*/}
-      {/*</ul>*/}
+      <Card>
+        <Title>Feed ({feed.length})</Title>
+        <FeedTable rows={feed} />
+      </Card>
     </main>
   );
 }
