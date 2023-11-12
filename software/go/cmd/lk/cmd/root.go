@@ -39,6 +39,8 @@ func init() {
 	// will be global for your application.
 
 	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.lk.yaml)")
+	// // inboxCmd.PersistentFlags().String("foo", "", "A help for foo")
+	rootCmd.PersistentFlags().BoolP("json", "j", false, "Ouptut as JSON")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.

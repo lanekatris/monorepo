@@ -6,9 +6,9 @@ package cmd
 import (
 	"fmt"
 	"io/fs"
-	"log"
 	"path/filepath"
 
+	"github.com/charmbracelet/log"
 	"github.com/spf13/cobra"
 )
 
@@ -17,7 +17,7 @@ var jsonTestCmd = &cobra.Command{
 	Use:   "jsonTest",
 	Short: "Looks at markdown files and creates json as events",
 	Run: func(cmd *cobra.Command, args []string) {
-
+		log.Info("Loading ", "dir", args[0])
 		err := filepath.Walk(args[0], func(path string, info fs.FileInfo, err error) error {
 			if err != nil {
 				return err
@@ -27,7 +27,7 @@ var jsonTestCmd = &cobra.Command{
 			return nil
 		})
 		if err != nil {
-			log.Println(err)
+			log.Error(err)
 		}
 	},
 }
