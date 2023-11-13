@@ -27,6 +27,7 @@ func setupViper() {
 			// create it
 			log.Info("No config file found, creating...")
 			viper.Set(cmd.InboxApiKeyConfig, "")
+			viper.Set(cmd.PostgresApiKeyConfig, "")
 			err = viper.SafeWriteConfig()
 			if err != nil {
 				panic(err)
