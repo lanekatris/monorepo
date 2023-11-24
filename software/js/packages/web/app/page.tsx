@@ -105,6 +105,11 @@ export default async function Index() {
                 <Link href="/discs">Discs</Link>
               </Button>
             </ListItem>
+            <ListItem>
+              <Button variant="light">
+                <Link href="/climb/logger">Climb Logger</Link>
+              </Button>
+            </ListItem>
           </List>
         </Card>
       </Grid>
