@@ -35,3 +35,5 @@ cd scripts
 Kick off Kestra: http://server1.local:8090/ui/flows/edit/dev/feedGenerateFromObsidianAdventures
 
 Kick off netlify: https://app.netlify.com/sites/mellow-sunburst-a1d9d3/deploys
+
+docker run -e POSTGRES_CONN=XXXXXXXX lk me

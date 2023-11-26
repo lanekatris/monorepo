@@ -17,3 +17,6 @@ clean:
 
 deploy: generate
 	cp ./bin/* /home/lane/MyPrograms/computer-api
+
+docker-lk:
+	docker build -t lk .

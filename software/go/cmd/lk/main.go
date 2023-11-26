@@ -18,6 +18,7 @@ func setupViper() {
 	viper.SetConfigName(".lk")
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath("$HOME")
+	viper.AutomaticEnv()
 	//err := viper.ReadInConfig()
 	//if err != nil {
 	//	panic(err)
@@ -25,14 +26,14 @@ func setupViper() {
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			// create it
-			log.Info("No config file found, creating...")
-			viper.Set(cmd.InboxApiKeyConfig, "")
-			viper.Set(cmd.PostgresApiKeyConfig, "")
-			err = viper.SafeWriteConfig()
-			if err != nil {
-				panic(err)
-			}
-			log.Info("Config file created!")
+			log.Info("No config file found")
+			//viper.Set(cmd.InboxApiKeyConfig, "")
+			//viper.Set(cmd.PostgresApiKeyConfig, "")
+			//err = viper.SafeWriteConfig()
+			//if err != nil {
+			//	panic(err)
+			//}
+			//log.Info("Config file created!")
 		} else {
 			panic(err)
 		}

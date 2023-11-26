@@ -9,7 +9,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var PostgresApiKeyConfig = "postgres_conn"
+var PostgresApiKeyConfig = "POSTGRES_CONN"
 
 // dgCmd represents the dg command
 var dgCmd = &cobra.Command{
