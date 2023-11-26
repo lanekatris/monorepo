@@ -5,11 +5,12 @@ FROM golang:1.19 AS build-stage
 
 WORKDIR /app
 
-#COPY go.mod go.sum ./
-COPY . .
+COPY go.mod go.sum ./
+#COPY . .
 RUN go mod download
 
-#COPY . .
+COPY cmd/ cmd/
+COPY pkg/ pkg/
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o /lk ./cmd/lk/main.go
 
