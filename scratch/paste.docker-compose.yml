@@ -1,0 +1,50 @@
+services:
+#  paste:
+#    image: danielszabo99/microbin
+#    restart: always
+#    environment:
+#      - MICROBIN_PRIVATE=false
+#      - MICROBIN_PUBLIC_PATH=http://localhost:8065
+#      - MICROBIN_QR=true
+#      - MICROBIN_HIGHLIGHTSYNTAX=true
+#      - MICROBIN_ADMIN_USERNAME=Jeremy
+#      - MICROBIN_ADMIN_PASSWORD=V3ryS3cret
+#      - MICROBIN_ENCRYPTION_CLIENT_SIDE=false
+#      - MICROBIN_ENCRYPTION_SERVER_SIDE=true
+#      - MICROBIN_TITLE=Microbin
+#      - MICROBIN_QR=True
+#      - MICROBIN_HIDE_FOOTER=True
+#      - MICROBIN_WIDE=true
+#    ports:
+#      - "8065:8080"
+#    volumes:
+#      - /docker/microbin:/my/microbin
+#      - /docker/microbin/data:/app/pasta_data
+#  pingvin-share:
+#    image: stonith404/pingvin-share
+#    restart: unless-stopped
+#    ports:
+#      - 3000:3000
+#    volumes:
+#      - "/docker/pingvin:/opt/app/backend/data"
+#      - "/docker/pingvin/images:/opt/app/frontend/public/img"
+#  filegator:
+#    container_name: filegator
+#    ports:
+#      - '5517:8080'
+#    volumes:
+#      - C:\temp\filegator\images:/var/www/filegator/repository
+#      - C:\temp\filegator\conf\configuration.php:/var/www/filegator/configuration.php
+#    restart: always
+#    image: 'filegator/filegator:latest'
+
+#  miniflux:
+#    image: miniflux/miniflux:latest
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      - DATABASE_URL=
+#      - RUN_MIGRATIONS=1
+#      - CREATE_ADMIN=1
+#      - ADMIN_USERNAME=admin
+#      - ADMIN_PASSWORD=test123

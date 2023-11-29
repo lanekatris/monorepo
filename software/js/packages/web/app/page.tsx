@@ -1,30 +1,24 @@
 import Link from 'next/link';
-import { FeedTable, Idk } from './Idk';
+import { FeedTable } from './Idk';
 import {
+  Button,
   Card,
-  Text,
   Flex,
   Grid,
-  Metric,
-  ProgressBar,
-  Title,
   List,
   ListItem,
-  Button,
-  Divider,
+  Metric,
+  ProgressBar,
+  Text,
+  Title,
 } from '@tremor/react';
 import { getFeed } from '../feed/get-feed';
-import { getMetric, Result } from '../metrics/get-metric';
-const { Client } = require('pg');
+import { getMetric } from '../metrics/get-metric';
+import RssSearchTest from './RssSearchTest';
+import { sql } from '@vercel/postgres';
 
 export default async function Index() {
-  const client = new Client({
-    ssl: true,
-    connectionString: process.env.POSTGRES_CONN_URL,
-  });
-  await client.connect();
-
-  const { completed, total, percentage } = await getMetric(`
+  const { completed, total, percentage } = await getMetric(sql`
   select visited, count(*) as count
            from noco.place
            where source = 'https://udisc.com/blog/post/worlds-best-disc-golf-courses-2023'
@@ -36,7 +30,7 @@ export default async function Index() {
     total: total2,
     percentage: percentage2,
   } = await getMetric(
-    `select visited, count(*) from noco.place where state_park = true and state = 'West Virginia' group by visited`
+    sql`select visited, count(*) from noco.place where state_park = true and state = 'West Virginia' group by visited`
   );
 
   const feed = await getFeed();
@@ -58,6 +52,8 @@ export default async function Index() {
         src="https://api.netlify.com/api/v1/badges/6b9d6176-8a2c-44e4-9a44-27e96e5caa03/deploy-status"
         alt="Netlify Build Status"
       />
+
+      <RssSearchTest />
 
       <Grid numItemsMd={3} className="mt-6 gap-6">
         <Card className="max-w-xs mx-auto">

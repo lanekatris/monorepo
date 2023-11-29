@@ -1,15 +1,9 @@
 import { cache } from 'react';
-import { Client } from 'pg';
+import { sql } from '@vercel/postgres';
 
 export const revalidate = 3600; // revalidate teh data at most every hour
 
 export const getFeed = cache(async () => {
-  const client = new Client({
-    ssl: true,
-    connectionString: process.env.POSTGRES_CONN_URL,
-  });
-  await client.connect();
-
   const {
     rows: feed,
   }: {
@@ -34,7 +28,7 @@ export const getFeed = cache(async () => {
         adventure?: { activity: string };
       };
     }[];
-  } = await client.query(`
+  } = await sql`
 with x as (select
  case
                    when f.type = 'climb' then concat('climb-', t.id)
@@ -62,9 +56,7 @@ f.type,
                     left join kestra.obsidian_adventures oa on f.remote_id_int = oa.id and f.type = 'obsidian-adventure'
 )
 select * from x order by date desc;
-  `);
-
-  await client.end();
+  `;
 
   return feed;
 });

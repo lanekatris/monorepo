@@ -1,3 +1,5 @@
 config:
   lkat-infrastructure:didYouAdventureForm:
     secure: AAABAIyvs+g0bqDb2enuVowBG8aIchqB85NaNdI0ImX+qKaLBe8rC439ujxzSNMuTiNIIBRGZMvZFVDPp0+t0uBjlTQjoqdtAfaIu7fd2yfqZtDRwqgspOKGxLtDPQAeoxUX6KWPUaPoPMNlrXylWCdh
+  lkat-infrastructure:resend_api_key:
+    secure: AAABALYxbzMyq2x9R6Ji09g0owl2/EL2+EO80Ug1RfFivSarnEiGCotaK6+DJZoiV6dc6CfeKRPW0az4FkS6vPGHNzI=

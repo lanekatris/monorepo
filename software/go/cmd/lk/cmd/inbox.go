@@ -46,7 +46,7 @@ to quickly create a Cobra application.`,
 			log.Error(err)
 		}
 
-		log.Infof("Found %s of %s inbox items", len(t.Items), t.Count)
+		//log.Infof("Found %s of %s inbox items", len(t.Items), t.Count)
 
 		isJson, _ := cmd.Flags().GetBool("json")
 

@@ -1,5 +1,6 @@
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import './global.css';
+import ThemeRegistry from './ThemeRegistry';
 
 export const metadata = {
   title: 'Welcome to web',
@@ -21,7 +22,9 @@ export default function RootLayout({
       {/*        />*/}
       {/*      </head>*/}
       <UserProvider>
-        <body>{children}</body>
+        <body>
+          <ThemeRegistry options={{ key: 'joy' }}>{children}</ThemeRegistry>
+        </body>
       </UserProvider>
     </html>
   );

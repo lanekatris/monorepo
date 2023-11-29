@@ -52,13 +52,20 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.1.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/inter": "^5.0.16",
     "@heroicons/react": "^1.0.6",
+    "@mui/joy": "^5.0.0-beta.18",
     "@tremor/react": "3.11.1",
+    "@vercel/postgres": "^0.5.1",
     "axios": "^1.0.0",
     "cheerio": "^1.0.0-rc.12",
     "csvtojson": "^2.0.10",
     "date-fns": "^2.30.0",
     "got": "^13.0.0",
+    "instantsearch.css": "^8.1.0",
+    "instantsearch.js": "^4.62.0",
     "lodash": "^4.17.21",
     "lodash.groupby": "^4.6.0",
     "markdown-table": "^3.0.3",
@@ -68,8 +75,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
+    "react-instantsearch": "^7.4.1",
     "sqlite3": "^5.1.6",
     "tslib": "^2.3.0",
-    "typeorm": "^0.3.17"
+    "typeorm": "^0.3.17",
+    "typesense-instantsearch-adapter": "^2.7.1"
   }
 }
