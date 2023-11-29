@@ -61,6 +61,13 @@ to quickly create a Cobra application.`,
 			log.Info("You're stretching as expected ✅")
 		}
 
+		var newPlace = hasGoneSomewhereNew(db)
+		if newPlace == true {
+			log.Info("You've gone somewhere new recently ✅")
+		} else {
+			log.Error("You need to visit somewhere new")
+		}
+
 		rows, err = db.Query(`
 with x as (select a.date, a.activity, fp."Points", date_bin('7 days', a.date::date, timestamp '2023-1-1')
            from kestra.obsidian_feed a
@@ -90,6 +97,25 @@ order by x.date_bin
 		}
 		fmt.Println(t)
 	},
+}
+
+func hasGoneSomewhereNew(db *sql.DB) bool {
+	rows, err := db.Query(`select exists(select 1 from noco.place where visited_date > current_date - 7)`)
+	handleError(err)
+
+	var res bool
+	for rows.Next() {
+		err := rows.Scan(&res)
+		handleError(err)
+	}
+
+	return res
+}
+
+func handleError(err error) {
+	if err != nil {
+		panic(err)
+	}
 }
 
 func init() {
