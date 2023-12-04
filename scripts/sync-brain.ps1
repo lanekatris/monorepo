@@ -1,4 +1,4 @@
-Copy-Item -Recurse -Force -Path C:\Users\looni\OneDrive\Documents\vault1\Public\* C:\Code\brain\content
+Copy-Item -Recurse -Force -Path C:\Users\looni\vault1\Public\* C:\Code\brain\content
 
 Set-Location C:\Code\brain
 
