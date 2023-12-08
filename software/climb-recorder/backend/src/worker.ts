@@ -1,5 +1,6 @@
 import { NativeConnection, Worker } from '@temporalio/worker';
 import * as activities from './activities';
+import 'reflect-metadata';
 
 async function run() {
   // Step 1: Establish a connection with Temporal server.
