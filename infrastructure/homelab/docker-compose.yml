@@ -1,9 +1,26 @@
-version: '3'
+volumes:
+  homeassistant:
+
 services:
   nocodb:
     image: nocodb/nocodb:0.202.5
     ports:
       - "8080:8080"
-    restart: always
+    restart: unless-stopped
     volumes:
       - /home/lane/nocodb:/usr/app/data/  
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    environment:
+      - TZ=US/Eastern
+    ports:
+      - 8123:8123
+    volumes:
+      - homeassistant:/config
+#      - /etc/localtime:/etc/localtime:ro
+#      - /run/dbus:/run/dbus:ro
+    restart: unless-stopped
+#    privileged: true
+#    network_mode: host
+#    pull_policy: always
+
