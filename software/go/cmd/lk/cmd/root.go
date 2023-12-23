@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/lipgloss/table"
-	"github.com/charmbracelet/log"
 	"github.com/spf13/cobra"
 	"io/fs"
 	"io/ioutil"
@@ -44,7 +43,8 @@ to quickly create a Cobra application.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
-		log.Info("ahh")
+		startTime := time.Now()
+		//log.Info("ahh")
 		//err := beeep.Notify("Title", "Message body", "C:\\Users\\looni\\OneDrive\\Pictures\\Camera Roll\\393146857_2402553829927542_4045854401555263033_n.jpg")
 		//if err != nil {
 		//	panic(err)
@@ -105,40 +105,38 @@ to quickly create a Cobra application.`,
 			handleError(err)
 		}
 
-		//markdownContent := `
-		//- [ ] Stand at least for 29 minutes a day (to stretch back) (even at desk)
-		//- [ ] Do 50 crunches or 25 leg ups while hanging
-		//- [x] Do 25 push ups
-		//- [ ] 5 Chin Ups
-		//- [x] Stretch
-		//- [ ] Hang for 2 minutes
-		//- [x] Plank for 2 minutes
-		//- [ ] active pigeon folds
-		//- [ ] updog press
-		//`
+		adventures, err := ioutil.ReadDir("C:\\Users\\looni\\vault1\\Adventures")
+		handleError(err)
 
-		// Either load files or load from sql...
-		//fileContents, err := ioutil.ReadFile("C:\\Users\\looni\\vault1\\2023-12-11.md")
-		//handleError(err)
-		//markdownContent := string(fileContents)
-		//
-		//completedActivities := 0
-		//incompleteActivities := 0
-		//
-		//for i := 0; i < len(activities); i++ {
-		//	if strings.Contains(markdownContent, strings.TrimSpace(activities[i])) {
-		//		completedActivities++
-		//	} else {
-		//		incompleteActivities++
-		//	}
-		//}
+		validAdventures := []string{"disc golf", "basketball", "indoor climbing", "volleyball", "indoor bouldering"}
+		adventureDateFormat := "2006-01-02"
+		for _, file := range adventures {
+			if file.Mode().IsRegular() {
+				// check if file name contains
 
-		//log.Info("Fitness", "completed", completedActivities, "incomplete", incompleteActivities)
-		//
-		//		checkedCount := countChecked(markdownContent)
+				date, err := time.Parse(adventureDateFormat, file.Name()[:10])
+				handleError(err)
+				activityToCheck := strings.ToLower(strings.TrimSpace(file.Name()[10:]))
 
-		// Now we know the total completed for a iso week
-		//log.Info(fitnessStats)
+				for _, templateAdventureName := range validAdventures {
+					if strings.Contains(activityToCheck, templateAdventureName) {
+						// ok we like this append
+						sunday := FindSunday(date)
+						existingGroup, exists := fitnessStats[sunday.Format("2006-01-02")]
+						if exists {
+							existingGroup.CompletedActivityCount += 1
+							fitnessStats[sunday.Format("2006-01-02")] = existingGroup
+						} else {
+							fitnessStats[sunday.Format("2006-01-02")] = FitnessResult{
+								Week:                   sunday.Format("2006-01-02"),
+								CompletedActivityCount: 1,
+							}
+						}
+					}
+				}
+
+			}
+		}
 
 		// Convert to array to sort and display, but filter only wanted values
 		var fitnessArray []FitnessResult
@@ -153,6 +151,8 @@ to quickly create a Cobra application.`,
 			return fitnessArray[i].Week < fitnessArray[j].Week
 		})
 
+		endTime := time.Now()
+
 		t := table.New().Border(lipgloss.NormalBorder()).BorderStyle(lipgloss.NewStyle().Foreground(lipgloss.Color("99"))).
 			Headers("Week", "Completed Activities")
 
@@ -165,6 +165,10 @@ to quickly create a Cobra application.`,
 		}
 
 		fmt.Println(t)
+
+		duration := endTime.Sub(startTime)
+
+		fmt.Println("Time Taken: %v\n", duration)
 
 	},
 }
@@ -190,8 +194,6 @@ func ProcessFile(filePath string, fileName string) FitnessResult {
 		handleError(err)
 	}
 
-	// Print the file content
-	//fmt.Printf("Markdown File: %s\nContent:\n%s\n", file.Name(), content)
 	markdownContent := string(content)
 
 	completedActivities := 0
@@ -205,21 +207,10 @@ func ProcessFile(filePath string, fileName string) FitnessResult {
 		}
 	}
 
-	//if completedActivities > 0 {
-	//log.Info(filePath, "completed", completedActivities, "incomplete", incompleteActivities)
 	date, err := time.Parse("2006-01-02", strings.ReplaceAll(fileName, ".md", ""))
 	if err != nil {
 		handleError(err)
 	}
-
-	//year, week := date.ISOWeek()
-
-	//year, week := isoweek.FromDate(date.Year(), date.Month(), date.Day())
-	//loc, err := time.LoadLocation("EST")
-	//handleError(err)
-	//st := isoweek.StartTime(year, week, loc)
-
-	//year, week := date.ISOWeek()
 
 	sunday := FindSunday(date)
 
@@ -228,22 +219,7 @@ func ProcessFile(filePath string, fileName string) FitnessResult {
 	//	log.Info(filePath, "completed", completedActivities, "incomplete", incompleteActivities)
 	//}
 
-	//log.Info(sunday.Format("2006-01-02"))
-
-	//log.Info(strconv.Itoa(year) + " - " + strconv.Itoa(week) + " - " + strconv.Itoa(completedActivities) + " - " + filePath)
-
-	//log.Info("start of week", st)
-	//log.Info("year", year, "week", week)
-	//log.Info(FirstDayOfISOWeek(year, week, time.Local))
-
-	// now that we know the year-week, lets find sum up everything for the week
-
-	//}
-
-	//weekNumber := prependZeros(strconv.Itoa(week), 2)
-
 	hmm := FitnessResult{
-		//Week:                   strconv.Itoa(year) + "-W" + weekNumber,
 		Week:                   sunday.Format("2006-01-02"),
 		CompletedActivityCount: completedActivities,
 	}
@@ -264,44 +240,6 @@ func prependZeros(original string, totalLength int) string {
 	zeroCount := totalLength - len(original)
 	zeroString := strings.Repeat("0", zeroCount)
 	return zeroString + original
-}
-
-func startOfWeek(date time.Time) time.Time {
-	// Calculate the difference in days between the given date and Sunday
-	daysSinceSunday := int(date.Weekday() - time.Sunday)
-	if daysSinceSunday < 0 {
-		daysSinceSunday += 7
-	}
-
-	// Calculate the start of the week by subtracting the difference in days
-	startOfWeek := date.AddDate(0, 0, -daysSinceSunday)
-
-	return startOfWeek
-}
-
-func FirstDayOfISOWeek(year int, week int, timezone *time.Location) time.Time {
-	date := time.Date(year, 0, 0, 0, 0, 0, 0, timezone)
-	isoYear, isoWeek := date.ISOWeek()
-
-	// iterate back to Monday
-	for date.Weekday() != time.Monday {
-		date = date.AddDate(0, 0, -1)
-		isoYear, isoWeek = date.ISOWeek()
-	}
-
-	// iterate forward to the first day of the first week
-	for isoYear < year {
-		date = date.AddDate(0, 0, 7)
-		isoYear, isoWeek = date.ISOWeek()
-	}
-
-	// iterate forward to the first day of the given week
-	for isoWeek < week {
-		date = date.AddDate(0, 0, 7)
-		isoYear, isoWeek = date.ISOWeek()
-	}
-
-	return date
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
