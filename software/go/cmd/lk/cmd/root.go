@@ -7,7 +7,10 @@ import (
 	"fmt"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/lipgloss/table"
+	"github.com/charmbracelet/log"
+	"github.com/resendlabs/resend-go"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"io/fs"
 	"io/ioutil"
 	"os"
@@ -42,6 +45,8 @@ func getPath(linuxPath string, windowsPath string) string {
 	return windowsPath
 }
 
+var ResendApiKeyConfig = "resend_api_key"
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "lk",
@@ -55,7 +60,13 @@ to quickly create a Cobra application.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
+
 		startTime := time.Now()
+
+		var connStr = viper.GetString(ResendApiKeyConfig)
+		if connStr == "" {
+			panic("Config not found: " + ResendApiKeyConfig)
+		}
 		//log.Info("ahh")
 		//err := beeep.Notify("Title", "Message body", "C:\\Users\\looni\\OneDrive\\Pictures\\Camera Roll\\393146857_2402553829927542_4045854401555263033_n.jpg")
 		//if err != nil {
@@ -171,11 +182,28 @@ to quickly create a Cobra application.`,
 		//	t.Row(value.Week, strconv.Itoa(value.CompletedActivityCount))
 		//}
 
+		htmlLines := []string{"<ul>"}
 		for _, value := range fitnessArray {
 			t.Row(value.Week, strconv.Itoa(value.CompletedActivityCount))
+			htmlLines = append(htmlLines, "<li>", value.Week, " - ", strconv.Itoa(value.CompletedActivityCount), "</li>")
 		}
+		htmlLines = append(htmlLines, "</ul>")
+		htmlLines = append(htmlLines, "<b>Today</b>: ", time.Now().Format("2006-01-02"))
 
 		fmt.Println(t)
+
+		client := resend.NewClient(connStr)
+
+		params := &resend.SendEmailRequest{
+			From:    "onboarding@resend.dev",
+			To:      []string{"lanekatris@gmail.com"},
+			Subject: "Be active reminder",
+			Html:    strings.Join(htmlLines, ""),
+		}
+		send, err := client.Emails.Send(params)
+		handleError(err)
+
+		log.Infof("Sent email", "id", send.Id)
 
 		duration := endTime.Sub(startTime)
 

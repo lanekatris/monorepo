@@ -10,7 +10,7 @@ require (
 	github.com/gin-gonic/gin v1.9.0
 	github.com/goccy/go-json v0.10.0
 	github.com/lib/pq v1.10.9
-	github.com/snabb/isoweek v1.0.3
+	github.com/resendlabs/resend-go v1.7.0
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/viper v1.17.0
 	google.golang.org/grpc v1.58.2
