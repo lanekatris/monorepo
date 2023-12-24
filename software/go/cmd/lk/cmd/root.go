@@ -13,6 +13,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"runtime"
 	"sort"
 	"strconv"
 	"strings"
@@ -29,6 +30,17 @@ import (
 //	// Return the count of matches
 //	return len(matches)
 //}
+
+func isLinux() bool {
+	return runtime.GOOS == "linux"
+}
+
+func getPath(linuxPath string, windowsPath string) string {
+	if isLinux() {
+		return linuxPath
+	}
+	return windowsPath
+}
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -50,15 +62,13 @@ to quickly create a Cobra application.`,
 		//	panic(err)
 		//}
 
-		directoryPath := "C:\\Users\\looni\\vault1"
+		directoryPath := getPath("/home/lane/Documents/lkat-vault", "C:\\Users\\looni\\vault1")
 		files, err := ioutil.ReadDir(directoryPath)
 		if err != nil {
 			handleError(err)
 		}
 
 		fileNameRegex := regexp.MustCompile(`^\d{4}-\d{2}-\d{2}\.md$`)
-
-		//var results []FitnessResult
 
 		fitnessStats := make(map[string]FitnessResult)
 
@@ -82,7 +92,8 @@ to quickly create a Cobra application.`,
 			}
 		}
 
-		err = filepath.Walk("C:\\Users\\looni\\vault1\\Journal", func(path string, info fs.FileInfo, err error) error {
+		directoryPath2 := getPath("/home/lane/Documents/lkat-vault/Journal", "C:\\Users\\looni\\vault1\\Journal")
+		err = filepath.Walk(directoryPath2, func(path string, info fs.FileInfo, err error) error {
 			if err != nil {
 				handleError(err)
 			}
@@ -105,7 +116,7 @@ to quickly create a Cobra application.`,
 			handleError(err)
 		}
 
-		adventures, err := ioutil.ReadDir("C:\\Users\\looni\\vault1\\Adventures")
+		adventures, err := ioutil.ReadDir(getPath("/home/lane/Documents/lkat-vault/Adventures", "C:\\Users\\looni\\vault1\\Adventures"))
 		handleError(err)
 
 		validAdventures := []string{"disc golf", "basketball", "indoor climbing", "volleyball", "indoor bouldering"}
