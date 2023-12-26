@@ -103,7 +103,8 @@ export function FeedTable({ rows }: FeedTableProps) {
         {rows.map(({ id, date, data, type }) => (
           <TableRow key={id}>
             <TableCell>{feedIcon[type]}</TableCell>
-            <TableCell>{date.toLocaleDateString()}</TableCell>
+            {/*hack fix, investigate why undefined*/}
+            <TableCell>{date?.toLocaleDateString()}</TableCell>
             {type === 'obsidian-adventure' && (
               <TableCell>Adventure: {data.adventure?.activity}</TableCell>
             )}
