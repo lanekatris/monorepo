@@ -11,6 +11,7 @@ import (
 	"github.com/charmbracelet/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"lkat"
 	"strconv"
 	"time"
 )
@@ -101,21 +102,15 @@ order by x.date_bin
 
 func hasGoneSomewhereNew(db *sql.DB) bool {
 	rows, err := db.Query(`select exists(select 1 from noco.place where visited_date > current_date - 7)`)
-	handleError(err)
+	lkat.HandleError(err)
 
 	var res bool
 	for rows.Next() {
 		err := rows.Scan(&res)
-		handleError(err)
+		lkat.HandleError(err)
 	}
 
 	return res
-}
-
-func handleError(err error) {
-	if err != nil {
-		panic(err)
-	}
 }
 
 func init() {

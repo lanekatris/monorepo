@@ -202,6 +202,8 @@ func main() {
 	grpcServer := grpc.NewServer()
 	pb.RegisterLkatServiceServer(grpcServer, &ServerIdk{})
 	//grpcServer.RegisterService(s)
+	//err := go grpcServer.Serve(lis)
+
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("failed to listen %v", err)
 	}
