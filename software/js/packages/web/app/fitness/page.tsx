@@ -10,6 +10,8 @@ interface FitnessRecord {
   activity: string;
 }
 
+export const revalidate = 3600; // revalidate the data at most every hour
+
 export default async function FitnessPage() {
   const { rows }: { rows: FitnessRecord[] } =
     await sql`select * from noco."Test_Obsidian_Fitness" order by date desc`;
@@ -33,7 +35,7 @@ export default async function FitnessPage() {
   const keys = Object.keys(groupedData);
   keys.sort().reverse();
 
-  console.log(groupedData);
+  // console.log(groupedData);
 
   return (
     <main>

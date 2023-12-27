@@ -26,9 +26,9 @@ func SendFitnessEmailActivity(ctx context.Context) (string, error) {
 	GetFitnessIdk()
 	directoryPath2 := shared.GetPath("/home/lane/Documents/lkat-vault", "C:\\Users\\looni\\vault1")
 	idk := fitness.GetFitnessActivities(directoryPath2)
-	//log.Info(idk)
 
 	fitness.PersistFitnessActivities(idk)
+	log.Info("Done!")
 	return "i guess i ran well", nil
 }
 
