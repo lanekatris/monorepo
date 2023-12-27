@@ -36,9 +36,9 @@ to quickly create a Cobra application.`,
 		//	panic(err)
 		//}
 
-		var connStr = viper.GetString(PostgresApiKeyConfig)
+		var connStr = viper.GetString(lkat.PostgresApiKeyConfig)
 		if connStr == "" {
-			panic("Config not found: " + PostgresApiKeyConfig)
+			panic("Config not found: " + lkat.PostgresApiKeyConfig)
 		}
 
 		log.Info("Getting your health stats...")

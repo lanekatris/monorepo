@@ -6,6 +6,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"lkat"
+	"lkat/fitness"
 	"os"
 	"strings"
 )
@@ -40,7 +41,12 @@ to quickly create a Cobra application.`,
 		//	panic(err)
 		//}
 
-		lkat.GetFitnessIdk()
+		//lkat.GetFitnessIdk()
+		directoryPath2 := lkat.GetPath("/home/lane/Documents/lkat-vault", "C:\\Users\\looni\\vault1")
+		idk := fitness.GetFitnessActivities(directoryPath2)
+		//log.Info(idk)
+
+		fitness.PersistFitnessActivities(idk)
 
 	},
 }

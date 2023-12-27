@@ -28,6 +28,8 @@ func SendFitnessEmailActivity(ctx context.Context) (string, error) {
 
 const GreetingTaskQueue = "GREETING_TASK_QUEUE"
 
+const PostgresApiKeyConfig = "POSTGRES_CONN"
+
 func SendFitnessEmailWorkflow(ctx workflow.Context, name string) (string, error) {
 	options := workflow.ActivityOptions{
 		StartToCloseTimeout: time.Second * 5,
@@ -51,7 +53,7 @@ func GetFitnessIdk() {
 		panic("Config not found: " + ResendApiKeyConfig)
 	}
 
-	directoryPath := getPath("/home/lane/Documents/lkat-vault", "C:\\Users\\looni\\vault1")
+	directoryPath := GetPath("/home/lane/Documents/lkat-vault", "C:\\Users\\looni\\vault1")
 	files, err := ioutil.ReadDir(directoryPath)
 	if err != nil {
 		HandleError(err)
@@ -81,7 +83,7 @@ func GetFitnessIdk() {
 		}
 	}
 
-	directoryPath2 := getPath("/home/lane/Documents/lkat-vault/Journal", "C:\\Users\\looni\\vault1\\Journal")
+	directoryPath2 := GetPath("/home/lane/Documents/lkat-vault/Journal", "C:\\Users\\looni\\vault1\\Journal")
 	err = filepath.Walk(directoryPath2, func(path string, info fs.FileInfo, err error) error {
 		if err != nil {
 			HandleError(err)
@@ -105,7 +107,7 @@ func GetFitnessIdk() {
 		HandleError(err)
 	}
 
-	adventures, err := ioutil.ReadDir(getPath("/home/lane/Documents/lkat-vault/Adventures", "C:\\Users\\looni\\vault1\\Adventures"))
+	adventures, err := ioutil.ReadDir(GetPath("/home/lane/Documents/lkat-vault/Adventures", "C:\\Users\\looni\\vault1\\Adventures"))
 	HandleError(err)
 
 	validAdventures := []string{"disc golf", "basketball", "indoor climbing", "volleyball", "indoor bouldering"}
@@ -224,17 +226,11 @@ func ProcessFile(filePath string, fileName string) FitnessResult {
 
 	sunday := FindSunday(date)
 
-	// Nice for debugging
-	//if sunday.Format("2006-01-02") == "2023-12-10" {
-	//	log.Info(filePath, "completed", completedActivities, "incomplete", incompleteActivities)
-	//}
-
 	hmm := FitnessResult{
 		Week:                   sunday.Format("2006-01-02"),
 		CompletedActivityCount: completedActivities,
 	}
 	return hmm
-
 }
 
 type FitnessResult struct {
@@ -252,7 +248,7 @@ func isLinux() bool {
 	return runtime.GOOS == "linux"
 }
 
-func getPath(linuxPath string, windowsPath string) string {
+func GetPath(linuxPath string, windowsPath string) string {
 	if isLinux() {
 		return linuxPath
 	}
