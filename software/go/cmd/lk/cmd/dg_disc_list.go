@@ -12,8 +12,8 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"lkat"
 	"os"
+	"shared"
 	"strconv"
 
 	"github.com/charmbracelet/lipgloss/table"
@@ -30,9 +30,9 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		var connStr = viper.GetString(lkat.PostgresApiKeyConfig)
+		var connStr = viper.GetString(shared.PostgresApiKeyConfig)
 		if connStr == "" {
-			panic("Config not found: " + lkat.PostgresApiKeyConfig)
+			panic("Config not found: " + shared.PostgresApiKeyConfig)
 		}
 
 		log.Info("Getting discs from Postgres...")

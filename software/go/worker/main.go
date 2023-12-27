@@ -4,7 +4,8 @@ import (
 	"github.com/charmbracelet/log"
 	"go.temporal.io/sdk/client"
 	"go.temporal.io/sdk/worker"
-	"lkat"
+	"shared"
+	"shared/temporalstuff"
 )
 
 func main() {
@@ -17,11 +18,11 @@ func main() {
 	}
 	defer c.Close()
 
-	lkat.SetupViper()
+	shared.SetupViper()
 	// This worker hosts both Workflow and Activity functions
-	w := worker.New(c, lkat.GreetingTaskQueue, worker.Options{})
-	w.RegisterWorkflow(lkat.SendFitnessEmailWorkflow)
-	w.RegisterActivity(lkat.SendFitnessEmailActivity)
+	w := worker.New(c, shared.GreetingTaskQueue, worker.Options{})
+	w.RegisterWorkflow(temporalstuff.SendFitnessEmailWorkflow)
+	w.RegisterActivity(temporalstuff.SendFitnessEmailActivity)
 
 	// Start listening to the Task Queue
 	err = w.Run(worker.InterruptCh())

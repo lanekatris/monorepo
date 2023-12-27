@@ -3,8 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
+	"shared"
+	"shared/temporalstuff"
 
-	"lkat"
 	"log"
 
 	"go.temporal.io/sdk/client"
@@ -23,12 +24,12 @@ func main() {
 
 	options := client.StartWorkflowOptions{
 		ID:        "greeting-workflow",
-		TaskQueue: lkat.GreetingTaskQueue,
+		TaskQueue: shared.GreetingTaskQueue,
 	}
 
 	// Start the Workflow
 	name := "World"
-	we, err := c.ExecuteWorkflow(context.Background(), options, lkat.SendFitnessEmailWorkflow, name)
+	we, err := c.ExecuteWorkflow(context.Background(), options, temporalstuff.SendFitnessEmailWorkflow, name)
 	if err != nil {
 		log.Fatalln("unable to complete Workflow", err)
 	}

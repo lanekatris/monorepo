@@ -7,7 +7,7 @@ import (
 	"context"
 	"fmt"
 	"google.golang.org/grpc"
-	"lkat/pkg/pb"
+	pb "shared/pkg/pb"
 
 	"github.com/spf13/cobra"
 )

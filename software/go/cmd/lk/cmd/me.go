@@ -11,7 +11,7 @@ import (
 	"github.com/charmbracelet/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"lkat"
+	"shared"
 	"strconv"
 	"time"
 )
@@ -36,9 +36,9 @@ to quickly create a Cobra application.`,
 		//	panic(err)
 		//}
 
-		var connStr = viper.GetString(lkat.PostgresApiKeyConfig)
+		var connStr = viper.GetString(shared.PostgresApiKeyConfig)
 		if connStr == "" {
-			panic("Config not found: " + lkat.PostgresApiKeyConfig)
+			panic("Config not found: " + shared.PostgresApiKeyConfig)
 		}
 
 		log.Info("Getting your health stats...")
@@ -102,12 +102,12 @@ order by x.date_bin
 
 func hasGoneSomewhereNew(db *sql.DB) bool {
 	rows, err := db.Query(`select exists(select 1 from noco.place where visited_date > current_date - 7)`)
-	lkat.HandleError(err)
+	shared.HandleError(err)
 
 	var res bool
 	for rows.Next() {
 		err := rows.Scan(&res)
-		lkat.HandleError(err)
+		shared.HandleError(err)
 	}
 
 	return res

@@ -1,4 +1,4 @@
-package lkat
+package shared
 
 import "time"
 

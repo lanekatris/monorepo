@@ -3,12 +3,13 @@ package fitness
 import (
 	"database/sql"
 	"github.com/charmbracelet/log"
+	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
 	"io/fs"
 	"io/ioutil"
-	"lkat"
 	"path/filepath"
 	"regexp"
+	"shared"
 	"strings"
 	"time"
 )
@@ -22,36 +23,36 @@ type MarkdownFitnessRecording struct {
 
 func GetFitnessActivities(rootPath string) []MarkdownFitnessRecording {
 	journalActivities, err := getJournalActivities(filepath.Join(rootPath, "Journal"))
-	lkat.HandleError(err)
+	shared.HandleError(err)
 
 	rootJournalActivities, err := getJournalActivities(rootPath)
-	lkat.HandleError(err)
+	shared.HandleError(err)
 
 	adventureActivities, err := getAdventureActivities(filepath.Join(rootPath, "Adventures"))
-	lkat.HandleError(err)
+	shared.HandleError(err)
 
-	return lkat.ConcatMultipleSlices([][]MarkdownFitnessRecording{journalActivities, rootJournalActivities, adventureActivities})
+	return shared.ConcatMultipleSlices([][]MarkdownFitnessRecording{journalActivities, rootJournalActivities, adventureActivities})
 }
 
 func PersistFitnessActivities(activities []MarkdownFitnessRecording) {
-	var connStr = viper.GetString(lkat.PostgresApiKeyConfig)
+	var connStr = viper.GetString(shared.PostgresApiKeyConfig)
 	if connStr == "" {
-		panic("Config not found: " + lkat.PostgresApiKeyConfig)
+		panic("Config not found: " + shared.PostgresApiKeyConfig)
 	}
 
 	db, err := sql.Open("postgres", connStr)
-	lkat.HandleError(err)
+	shared.HandleError(err)
 
 	log.Info("Deleting...")
 	_, err = db.Exec("delete from noco.\"Test_Obsidian_Fitness\"")
-	lkat.HandleError(err)
+	shared.HandleError(err)
 
 	// TODO: Use bulk insert not individual
 	for _, activity := range activities {
 		log.Info("Inserting " + activity.Path)
 		query := "INSERT INTO noco.\"Test_Obsidian_Fitness\" (file_relative_path, date, week_start, activity) VALUES ($1, $2, $3, $4)"
 		_, err := db.Exec(query, activity.Path, activity.Date, activity.WeekStart, activity.Activity)
-		lkat.HandleError(err)
+		shared.HandleError(err)
 	}
 }
 
@@ -91,7 +92,7 @@ func getJournalActivities(path string) ([]MarkdownFitnessRecording, error) {
 					results = append(results, MarkdownFitnessRecording{
 						Path:      strings.Replace(path2, path, "", 1),
 						Date:      info.Name()[:10],
-						WeekStart: lkat.FindSunday(idk).Format(adventureDateFormat),
+						WeekStart: shared.FindSunday(idk).Format(adventureDateFormat),
 						Activity:  activities[i],
 					})
 				}
@@ -108,7 +109,7 @@ func getAdventureActivities(path string) ([]MarkdownFitnessRecording, error) {
 	adventureDateFormat := "2006-01-02"
 
 	adventures, err := ioutil.ReadDir(path)
-	lkat.HandleError(err)
+	shared.HandleError(err)
 
 	var results []MarkdownFitnessRecording
 	for _, file := range adventures {
@@ -125,7 +126,7 @@ func getAdventureActivities(path string) ([]MarkdownFitnessRecording, error) {
 			for _, templateAdventureName := range validAdventures {
 				if strings.Contains(activityToCheck, templateAdventureName) {
 					// ok we like this append
-					sunday := lkat.FindSunday(date)
+					sunday := shared.FindSunday(date)
 					//components := strings.Split(path + file.Name(), "/")
 					results = append(results, MarkdownFitnessRecording{
 						Path:      "Adventures/" + file.Name(),

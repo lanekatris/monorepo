@@ -1,4 +1,4 @@
-package lkat
+package shared
 
 // https://freshman.tech/snippets/go/concatenate-slices/
 func ConcatMultipleSlices[T any](slices [][]T) []T {
