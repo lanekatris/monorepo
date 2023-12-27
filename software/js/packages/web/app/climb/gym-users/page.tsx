@@ -2,6 +2,7 @@ import request from 'request';
 import { parse } from 'node-html-parser';
 import axios from 'axios';
 import { addDays } from 'date-fns';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 interface Member {
   id: string;
@@ -78,7 +79,7 @@ async function getMembers(): Promise<[Member]> {
 }
 
 export const revalidate = 3600; // revalidate the data at most every hour
-export default async function GymUsers() {
+export default withPageAuthRequired(async function GymUsers() {
   const members = await getMembers();
   // const members: Member[] = [];
   return (
@@ -93,4 +94,4 @@ export default async function GymUsers() {
       </ul>
     </>
   );
-}
+});
