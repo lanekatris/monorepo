@@ -11,6 +11,9 @@ RUN go mod download
 
 COPY cmd/ cmd/
 COPY pkg/ pkg/
+COPY temporalstuff temporalstuff/
+COPY fitness/ fitness/
+COPY *.go .
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o /lk ./cmd/lk/main.go
 
