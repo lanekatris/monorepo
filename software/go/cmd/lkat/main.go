@@ -7,13 +7,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
 	"io/ioutil"
-	"lkat/pkg/pb"
 	"net/http"
 	"os"
 	"os/exec"
-	"strconv"
-	"time"
-
+	"shared/pkg/pb"
 	//"lanekatris.com/lkat"
 	"log"
 	"net"
@@ -50,6 +47,9 @@ func isLinux() bool {
 func main() {
 	r := gin.Default()
 	r.Use(cors.Default())
+	r.GET("/", func(c *gin.Context) {
+		c.String(200, "Welcome to lkat API!")
+	})
 	r.GET("/ping", func(c *gin.Context) {
 		obsidianPath := "C:\\Users\\looni\\OneDrive\\Documents\\vault1"
 		if isLinux() {
@@ -153,6 +153,14 @@ func main() {
 		c.JSON(200, "success")
 	})
 
+	r.GET("/deploy-blog", func(c *gin.Context) {
+		cmd, err := exec.Command("/bin/sh", "/home/lane/git/monorepo/scripts/sync-brain.sh").Output()
+		if err != nil {
+			c.JSON(500, err)
+		}
+		c.Data(http.StatusOK, "application/json", cmd)
+	})
+
 	r.GET("/disable-monitors", func(c *gin.Context) {
 		cmd, err := exec.Command("disable-monitors.sh").Output()
 		if err != nil {
@@ -169,23 +177,7 @@ func main() {
 		}
 		c.Data(http.StatusOK, "application/json", cmd)
 	})
-	r.GET("/inbox/submit", func(c *gin.Context) {
-		url := c.Query("url")
 
-		folder := "/home/lane/Documents/lkat-vault/"
-		datePrefix := time.Now().Format("2006-01-02")
-		unixDate := strconv.FormatInt(time.Now().Unix(), 10)
-		fileName := datePrefix + " Read Later - " + unixDate + ".md"
-		fullPath := folder + fileName
-
-		noteBody := []byte(url)
-		err := os.WriteFile(fullPath, noteBody, 0644)
-		if err != nil {
-			c.JSON(500, err)
-		}
-
-		c.JSON(http.StatusOK, fullPath)
-	})
 	go r.Run() // listen and serve on 0.0.0.0:8080
 
 	lis, err := net.Listen("tcp", ":8081")

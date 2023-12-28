@@ -12,6 +12,14 @@ export async function syncInbox({ obsidian }) {
   new obsidian.Notice(`Done syncing`);
 }
 
+export async function deployBlog({ obsidian }) {
+  new obsidian.Notice(`Deploying...`);
+  const res = await fetch('http://localhost:8080/deploy-blog');
+  const data = await res.text();
+
+  new obsidian.Notice(`Done syncing: ${data}`);
+}
+
 export const climbedToday = createEventFile('indoor-climbing');
 export const discGolfedToday = createEventFile('disc-golf');
 export const volleyballToday = createEventFile('volleyball');
