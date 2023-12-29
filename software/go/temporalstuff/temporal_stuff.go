@@ -11,6 +11,7 @@ import (
 	"go.temporal.io/sdk/workflow"
 	"io/fs"
 	"io/ioutil"
+	"net/http"
 	"path/filepath"
 	"regexp"
 	"shared"
@@ -28,8 +29,22 @@ func SendFitnessEmailActivity(ctx context.Context) (string, error) {
 	idk := fitness.GetFitnessActivities(directoryPath2)
 
 	fitness.PersistFitnessActivities(idk)
+
+	KickBuild()
+
 	log.Info("Done!")
 	return "i guess i ran well", nil
+}
+
+func KickBuild() {
+	var connStr = viper.GetString("loonisoncom_build_hook")
+	if connStr == "" {
+		panic("Config not found: " + "loonisoncom_build_hook")
+	}
+
+	log.Info("Kicking netlify...")
+	_, err := http.Post("https://api.netlify.com/build_hooks/656bea07c564b13021346209", "application/json", strings.NewReader("{}"))
+	shared.HandleError(err)
 }
 
 func GetFitnessIdk() {
