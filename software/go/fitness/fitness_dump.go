@@ -71,6 +71,8 @@ func getJournalActivities(path string) ([]MarkdownFitnessRecording, error) {
 		"- [x] Plank for 2 minutes",
 		"- [x] active pigeon folds",
 		"- [x] updog press",
+		"- [x] Ice back",
+		"- [x] Leg Raises",
 	}
 	err := filepath.Walk(path, func(path2 string, info fs.FileInfo, err error) error {
 		if err != nil {

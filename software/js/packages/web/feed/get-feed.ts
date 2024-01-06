@@ -4,6 +4,7 @@ import { sql } from '@vercel/postgres';
 export const revalidate = 3600; // revalidate teh data at most every hour
 
 export const getFeed = cache(async () => {
+  console.log('Loading feed...');
   const {
     rows: feed,
   }: {

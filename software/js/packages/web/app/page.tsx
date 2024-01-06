@@ -53,7 +53,7 @@ export default async function Index() {
         alt="Netlify Build Status"
       />
 
-      <RssSearchTest />
+      {/*<RssSearchTest />*/}
 
       <Grid numItemsMd={3} className="mt-6 gap-6">
         <Card className="max-w-xs mx-auto">
@@ -104,6 +104,16 @@ export default async function Index() {
             <ListItem>
               <Button variant="light">
                 <Link href="/climb/logger">Climb Logger</Link>
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button variant="light">
+                <Link href="/climb/gym-users">Gym Users</Link>
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button variant="light">
+                <Link href="/fitness">Fitness</Link>
               </Button>
             </ListItem>
           </List>

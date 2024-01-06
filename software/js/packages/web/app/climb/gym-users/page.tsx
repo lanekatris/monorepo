@@ -3,6 +3,16 @@ import { parse } from 'node-html-parser';
 import axios from 'axios';
 import { addDays } from 'date-fns';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import Navigation from 'packages/web/layout/navigation';
+import {
+  Breadcrumbs,
+  Container,
+  List,
+  ListItem,
+  ListItemContent,
+  Typography,
+} from '@mui/joy';
+import Link from 'next/link';
 
 interface Member {
   id: string;
@@ -45,7 +55,12 @@ class AuthenticationService {
   }
 }
 
-async function getMembers(): Promise<[Member]> {
+// @ts-ignore
+function onlyUnique(value, index, array) {
+  return array.indexOf(value) === index;
+}
+
+async function getMembers(): Promise<[string]> {
   const authService = new AuthenticationService();
   console.log('Getting credentials...');
   const credentials = await authService.login({
@@ -68,13 +83,22 @@ async function getMembers(): Promise<[Member]> {
       // @ts-ignore
       .filter((x) => x.al_cal_type === 'DAC Entry')
       .reverse()
-      // @ts-ignore
-      .map((x) => ({
-        id: x.DT_RowId,
+      // .map((x) => ({
+      //   id: x.DT_RowId,
+      //   // @ts-ignore
+      //   name: parse(x.al_cal_userlink).firstChild.rawText,
+      //   date: x.al_cal_datetime.split(' ')[0],
+      // }))
+      .map(
         // @ts-ignore
-        name: parse(x.al_cal_userlink).firstChild.rawText,
-        date: x.al_cal_datetime.split(' ')[0],
-      }))
+        (x) =>
+          // @ts-ignore
+          `${x.al_cal_datetime.split(' ')[0]} - ${
+            // @ts-ignore
+            parse(x.al_cal_userlink).firstChild.rawText
+          }`
+      )
+      .filter(onlyUnique)
   );
 }
 
@@ -83,15 +107,30 @@ export default withPageAuthRequired(async function GymUsers() {
   const members = await getMembers();
   // const members: Member[] = [];
   return (
-    <>
-      <h1>hi there</h1>
-      <ul>
+    <Container maxWidth={'sm'}>
+      {/*<h1>hi there</h1>*/}
+      <Breadcrumbs>
+        <Link color="neutral" href="/">
+          Home
+        </Link>
+        <Typography>Gym Users</Typography>
+      </Breadcrumbs>
+
+      <Typography level={'h4'} gutterBottom>
+        Recent Gym Users
+      </Typography>
+      <List>
+        <ListItem>
+          <ListItemContent>
+            <b>Today</b>: {new Date().toISOString().split('T')[0]}
+          </ListItemContent>
+        </ListItem>
         {members.map((member) => (
-          <li key={member.id}>
-            {member.date} - {member.name}
-          </li>
+          <ListItem key={member}>
+            <ListItemContent>{member}</ListItemContent>
+          </ListItem>
         ))}
-      </ul>
-    </>
+      </List>
+    </Container>
   );
 });

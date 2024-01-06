@@ -14,10 +14,15 @@ export async function syncInbox({ obsidian }) {
 
 export async function deployBlog({ obsidian }) {
   new obsidian.Notice(`Deploying...`);
-  const res = await fetch('http://localhost:8080/deploy-blog');
-  const data = await res.text();
 
-  new obsidian.Notice(`Done syncing: ${data}`);
+  try {
+    const res = await fetch('http://localhost:8080/deploy-blog');
+    const data = await res.text();
+
+    new obsidian.Notice(`Done syncing: ${data}`);
+  } catch (err) {
+    new obsidian.Notice(`Failure: ${err}`);
+  }
 }
 
 export const climbedToday = createEventFile('indoor-climbing');
