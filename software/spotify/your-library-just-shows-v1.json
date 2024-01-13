@@ -1,0 +1,387 @@
+[
+  {
+    "name": "1865",
+    "publisher": "Airship / Wondery",
+    "uri": "spotify:show:2GFqbdH3xEtu0ZKUP6tr13"
+  },
+  {
+    "name": "99% Invisible",
+    "publisher": "Roman Mars",
+    "uri": "spotify:show:2VRS1IJCTn2Nlkg33ZVfkM"
+  },
+  {
+    "name": "AFK w/ Ninja",
+    "publisher": "Ninja",
+    "uri": "spotify:show:1iNqO4vhpiNrQxwVDRZ7yW"
+  },
+  {
+    "name": "AWS Podcast",
+    "publisher": "Amazon Web Services",
+    "uri": "spotify:show:363iMcjThX5KNpfSHPRAjj"
+  },
+  {
+    "name": "All-American: Venus & Serena",
+    "publisher": "Stitcher Studios",
+    "uri": "spotify:show:11odWZvEFUpLh3e6YaHhsF"
+  },
+  {
+    "name": "Alpinist",
+    "publisher": "Alpinist",
+    "uri": "spotify:show:0eFDVP0PnX0qk4qcRd6UgW"
+  },
+  {
+    "name": "Archewell Audio",
+    "publisher": "Spotify Studios",
+    "uri": "spotify:show:7kz7cRLYAcPiWxqiKw1nlG"
+  },
+  {
+    "name": "Backend Banter",
+    "publisher": "Lane Wagner",
+    "uri": "spotify:show:35trT95UkRVCkEb6tXndpF"
+  },
+  {
+    "name": "Backpacker Radio",
+    "publisher": "Backpacker Radio",
+    "uri": "spotify:show:5FO5edVqPbDcny0ja8kF4d"
+  },
+  {
+    "name": "Basecamp: A Climbing Magazine Podcast",
+    "publisher": "Climbing Magazine",
+    "uri": "spotify:show:7mrEe4JDVLv7YKxaWbQ3wS"
+  },
+  {
+    "name": "Beyond Bardstown: Unsolved",
+    "publisher": "VAULT Studios",
+    "uri": "spotify:show:0q0lDXqcT3U7FF4yHvHwwH"
+  },
+  {
+    "name": "Business of Tech",
+    "publisher": "MSP Radio",
+    "uri": "spotify:show:05G6fyFZdhQYWdwOwypre0"
+  },
+  {
+    "name": "Can You Survive This Podcast?",
+    "publisher": "Jeff Apple",
+    "uri": "spotify:show:2yzfw7zT0EAMjVen0VqqzA"
+  },
+  {
+    "name": "Changelog Master Feed",
+    "publisher": "Changelog Media",
+    "uri": "spotify:show:0S1h5K7jm2YvOcM7y1ZMXY"
+  },
+  {
+    "name": "Click Here",
+    "publisher": "Recorded Future News",
+    "uri": "spotify:show:2kxOETGvN32D6hZu0wPntG"
+  },
+  {
+    "name": "Code[ish]",
+    "publisher": "Salesforce Engineering",
+    "uri": "spotify:show:5VvkHRhd9E9SQf7i9HsPMd"
+  },
+  {
+    "name": "Darknet Diaries",
+    "publisher": "Jack Rhysider",
+    "uri": "spotify:show:4XPl3uEEL9hvqMkoZrzbx5"
+  },
+  {
+    "name": "DataFramed",
+    "publisher": "DataCamp",
+    "uri": "spotify:show:02yJXEJAJiQ0Vm2AO9Xj6X"
+  },
+  {
+    "name": "Dev Interrupted",
+    "publisher": "LinearB",
+    "uri": "spotify:show:7icMkauSvLflWCpQrfafIv"
+  },
+  {
+    "name": "Developer Tea",
+    "publisher": "Jonathan Cutrell",
+    "uri": "spotify:show:02fM1JHpt9HmHGp482K71b"
+  },
+  {
+    "name": "Eric Hörst's Training For Climbing podcast",
+    "publisher": "Eric J. Hörst",
+    "uri": "spotify:show:1VOce9zQpi2B6rcx5owqPf"
+  },
+  {
+    "name": "FKT Podcast",
+    "publisher": "Fastest Known",
+    "uri": "spotify:show:5zDMyj4akxxcb7an0C2VrO"
+  },
+  {
+    "name": "First Date with Lauren Compton",
+    "publisher": "YMH Studios",
+    "uri": "spotify:show:6ci7cws80RvbohCOlSSIPE"
+  },
+  {
+    "name": "Full Stack Radio",
+    "publisher": "Adam Wathan",
+    "uri": "spotify:show:0Ddvex5OtYOvhyyK6ckG3A"
+  },
+  {
+    "name": "Hacking the Org",
+    "publisher": "Container Solutions",
+    "uri": "spotify:show:12eOZXwUOJnPaogCqW92GZ"
+  },
+  {
+    "name": "Hanselminutes with Scott Hanselman",
+    "publisher": "Scott Hanselman",
+    "uri": "spotify:show:4SrTUZr1s5C4SJmUxDIUDc"
+  },
+  {
+    "name": "How I Write",
+    "publisher": "David Perell",
+    "uri": "spotify:show:2DjMSboniFAeGA8v9NpoPv"
+  },
+  {
+    "name": "Humans Outside",
+    "publisher": "Amy Bushatz",
+    "uri": "spotify:show:6aAQNAwfl7FrlfpgfJEmjK"
+  },
+  {
+    "name": "Inside Forbes Councils",
+    "publisher": "Forbes Councils",
+    "uri": "spotify:show:3niEMO1re2KW2OqagGDzj6"
+  },
+  {
+    "name": "Jammin' with the Best: A Disc Golf Podcast....Mostly",
+    "publisher": "Jammin' WIth The Best",
+    "uri": "spotify:show:3zFCBTbzylUvT09v4g2yl6"
+  },
+  {
+    "name": "Lex Fridman Podcast",
+    "publisher": "Lex Fridman",
+    "uri": "spotify:show:2MAi0BvDc6GTFvKFPXnkCL"
+  },
+  {
+    "name": "Live Wild or Die. Presented by wild gym.",
+    "publisher": "wild gym",
+    "uri": "spotify:show:4NKlOgT7N8GWLdzd5ai597"
+  },
+  {
+    "name": "Long Way Radio",
+    "publisher": "Jack Fisher",
+    "uri": "spotify:show:5GNFSs1zlaUuRqMdwV58OH"
+  },
+  {
+    "name": "Making Sense with Sam Harris",
+    "publisher": "Sam Harris",
+    "uri": "spotify:show:5rgumWEx4FsqIY8e1wJNAk"
+  },
+  {
+    "name": "Motherhacker",
+    "publisher": "Gimlet",
+    "uri": "spotify:show:7rAolxBjL2mq5Dq9osvLmE"
+  },
+  {
+    "name": "MtnMeister",
+    "publisher": "Ben Schenck",
+    "uri": "spotify:show:0zUIUxm1cFa82dwnhvwmhs"
+  },
+  {
+    "name": "On The Metal",
+    "publisher": "Oxide Computer Company",
+    "uri": "spotify:show:4GDUravTUbvTrdJ2oWnzJp"
+  },
+  {
+    "name": "Out and Back",
+    "publisher": "Gaia GPS",
+    "uri": "spotify:show:34wJM95LuWgfW0ZI7uInDj"
+  },
+  {
+    "name": "Outside Podcast",
+    "publisher": "Outside ",
+    "uri": "spotify:show:1jC5hCVbmvSCTGHwdXDAj1"
+  },
+  {
+    "name": "Oxide and Friends",
+    "publisher": "Oxide Computer Company",
+    "uri": "spotify:show:1OIFxTivR0D9clY3sZi4rA"
+  },
+  {
+    "name": "PodRocket - A web development podcast from LogRocket",
+    "publisher": "LogRocket ",
+    "uri": "spotify:show:6oFuKu89C9X1wQ7bT0QEM2"
+  },
+  {
+    "name": "REWORK",
+    "publisher": "37signals",
+    "uri": "spotify:show:5JxcIaIkN8zx3Zy7yD9snv"
+  },
+  {
+    "name": "Running It with Nate Sexton",
+    "publisher": "Nate Sexton and Jarett Orr",
+    "uri": "spotify:show:7scfhgewU0Kv8CvoqbvkKa"
+  },
+  {
+    "name": "SHOWMEZ",
+    "publisher": "JomezPro",
+    "uri": "spotify:show:6FHnIaTlz2abm5AS3OKxjl"
+  },
+  {
+    "name": "Software Engineering Daily",
+    "publisher": "softwareengineeringdaily.com",
+    "uri": "spotify:show:6UCtBYL29hwhw4YbTdX83N"
+  },
+  {
+    "name": "Software Engineering Radio - the podcast for professional software developers",
+    "publisher": "se-radio@computer.org",
+    "uri": "spotify:show:6UO3XQclSuNnGxB39QdAnL"
+  },
+  {
+    "name": "StarTalk Radio",
+    "publisher": "Neil deGrasse Tyson",
+    "uri": "spotify:show:1mNsuXfG95Lf76YQeVMuo1"
+  },
+  {
+    "name": "Streaming Audio: Apache Kafka® & Real-Time Data",
+    "publisher": "Confluent, founded by the original creators of Apache Kafka®",
+    "uri": "spotify:show:65WRDvSFQ2tkdk1GXlRPqR"
+  },
+  {
+    "name": "Stuff You Should Know",
+    "publisher": "iHeartPodcasts",
+    "uri": "spotify:show:0ofXAdFIQQRsCYj9754UFx"
+  },
+  {
+    "name": "System Design",
+    "publisher": "Wes and Kevin",
+    "uri": "spotify:show:2wnpdaxTbMaKQVVmUxb9QW"
+  },
+  {
+    "name": "Techmeme Ride Home",
+    "publisher": "Ride Home Media",
+    "uri": "spotify:show:1jBNbPVlGUen3sWdd25ho6"
+  },
+  {
+    "name": "The Art of Manliness",
+    "publisher": "The Art of Manliness",
+    "uri": "spotify:show:2vJHmWhhcMQRXtTruuFWTJ"
+  },
+  {
+    "name": "The Building a Second Brain Podcast",
+    "publisher": "Tiago Forte",
+    "uri": "spotify:show:40O0Lbp5ockSt0qSogo6q1"
+  },
+  {
+    "name": "The Changelog: Software Development, Open Source",
+    "publisher": "Changelog Media",
+    "uri": "spotify:show:5bBki72YeKSLUqyD94qsuJ"
+  },
+  {
+    "name": "The Engineering Leadership Podcast",
+    "publisher": "The Engineering Leadership Community (ELC)",
+    "uri": "spotify:show:1wIytRQ4Ub8McXSP1iDwVX"
+  },
+  {
+    "name": "The InfoQ Podcast",
+    "publisher": "InfoQ",
+    "uri": "spotify:show:4NhWaYYpPWgWRDAOqeRQbj"
+  },
+  {
+    "name": "The Joe Rogan Experience",
+    "publisher": "Joe Rogan",
+    "uri": "spotify:show:4rOoJ6Egrf8K2IrywzwOMk"
+  },
+  {
+    "name": "The Jordan B. Peterson Podcast",
+    "publisher": "Dr. Jordan B. Peterson",
+    "uri": "spotify:show:1Zw2DKjelPnuEYpydFlhgN"
+  },
+  {
+    "name": "The Louis Theroux Podcast",
+    "publisher": "Spotify Studios",
+    "uri": "spotify:show:7LuQv400JFzzlJrOuMukRj"
+  },
+  {
+    "name": "The Matt Walsh Show",
+    "publisher": "The Daily Wire",
+    "uri": "spotify:show:1LeIhhawEPWj4uVLQV8Lkd"
+  },
+  {
+    "name": "The Minimalists Podcast",
+    "publisher": "Joshua Fields Millburn, Ryan Nicodemus",
+    "uri": "spotify:show:5ECF0soZ1H5NxZHanAzUYd"
+  },
+  {
+    "name": "The Nugget Climbing Podcast",
+    "publisher": "Steven Dimmitt",
+    "uri": "spotify:show:0lvih5I7kELNS2NCs2Ab7r"
+  },
+  {
+    "name": "The Peter Attia Drive",
+    "publisher": "Peter Attia, MD",
+    "uri": "spotify:show:63AWQmsSnFNFHUqnRAOFtD"
+  },
+  {
+    "name": "The Pleasure Is Ours",
+    "publisher": "iHeartPodcasts",
+    "uri": "spotify:show:1XEE9AySPdILfogOjUqfAI"
+  },
+  {
+    "name": "The Ron Burgundy Podcast",
+    "publisher": "Big Money Players Network and iHeartPodcasts",
+    "uri": "spotify:show:09dBWzzyHt3JyWj4IplSYH"
+  },
+  {
+    "name": "The SaaS Podcast - SaaS, Startups, Growth Hacking & Entrepreneurship",
+    "publisher": "Omer Khan",
+    "uri": "spotify:show:0P2LhE0GAWvIsY4ChsgblC"
+  },
+  {
+    "name": "The Stack Overflow Podcast",
+    "publisher": "The Stack Overflow Podcast",
+    "uri": "spotify:show:0e5eoM6w7eW9Wu7wMA04Tr"
+  },
+  {
+    "name": "The Tee Off",
+    "publisher": "Patty Robinson",
+    "uri": "spotify:show:5NUmJlG4Baa6gix2Nnhm9M"
+  },
+  {
+    "name": "The TrainingBeta Podcast: A Climbing Training Podcast",
+    "publisher": "Neely Quinn",
+    "uri": "spotify:show:7tx1NJfgmoHsUhY2tTIjd9"
+  },
+  {
+    "name": "The Work Item - A Career Growth and Exploration Podcast",
+    "publisher": "Den Delimarsky",
+    "uri": "spotify:show:2vbh70X0WTzwUFQJGkHGXC"
+  },
+  {
+    "name": "This Past Weekend w/ Theo Von",
+    "publisher": "Theo Von",
+    "uri": "spotify:show:6PwE1CIZsgfrhX6Bw96PUN"
+  },
+  {
+    "name": "This Week in Startups",
+    "publisher": "Jason Calacanis",
+    "uri": "spotify:show:6ULQ0ewYf5zmsDgBchlkr9"
+  },
+  {
+    "name": "Thoughtworks Technology Podcast",
+    "publisher": "Thoughtworks",
+    "uri": "spotify:show:6RBb4pGRgOFTmtCDSfTWvu"
+  },
+  {
+    "name": "Web Rush",
+    "publisher": "Dan Wahlin, John Papa, Ward Bell, Craig Shoemaker",
+    "uri": "spotify:show:2fpykNR5dya5c4V8WTPldw"
+  },
+  {
+    "name": "Weekly Dev Tips",
+    "publisher": "Steve Smith (@ardalis)",
+    "uri": "spotify:show:3XS4QdHgmvYpPyIYDFLeIR"
+  },
+  {
+    "name": "balenaPodcast",
+    "publisher": "balena",
+    "uri": "spotify:show:2uWPWIyRbk0OrYSDLmdVMw"
+  },
+  {
+    "name": "eCrimeBytes.com",
+    "publisher": "Keith Jones",
+    "uri": "spotify:show:2wjCEX9yBbjDdNszRk2Ctw"
+  }
+]
