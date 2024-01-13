@@ -33,7 +33,7 @@ export default async function Index() {
     sql`select visited, count(*) from noco.place where state_park = true and state = 'West Virginia' group by visited`
   );
 
-  const feed = await getFeed();
+  // const feed = await getFeed();
 
   return (
     <main className="mx-5 mt-5">
@@ -116,14 +116,19 @@ export default async function Index() {
                 <Link href="/fitness">Fitness</Link>
               </Button>
             </ListItem>
+            <ListItem>
+              <Button variant="light">
+                <Link href="/spotify">Spotify</Link>
+              </Button>
+            </ListItem>
           </List>
         </Card>
       </Grid>
 
-      <Card className="mt-6">
-        <Title>Feed ({feed.length})</Title>
-        <FeedTable rows={feed} />
-      </Card>
+      {/*<Card className="mt-6">*/}
+      {/*  <Title>Feed ({feed.length})</Title>*/}
+      {/*  <FeedTable rows={feed} />*/}
+      {/*</Card>*/}
     </main>
   );
 }
