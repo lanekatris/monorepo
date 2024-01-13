@@ -108,7 +108,6 @@ export default withPageAuthRequired(async function GymUsers() {
   // const members: Member[] = [];
   return (
     <Container maxWidth={'sm'}>
-      {/*<h1>hi there</h1>*/}
       <Breadcrumbs>
         <Link color="neutral" href="/">
           Home
