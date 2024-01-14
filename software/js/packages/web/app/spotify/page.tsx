@@ -68,6 +68,20 @@ export default async function SpotifyPage() {
         Spotify Data
       </Typography>
 
+      <Link
+        target="_blank"
+        href="https://www.lanekatris.com/Consuming-Spotify-Data"
+      >
+        How this page was made
+      </Link>
+      <br />
+      <Link
+        target="_blank"
+        href="https://github.com/lanekatris/monorepo/blob/main/software/js/packages/web/app/spotify/page.tsx"
+      >
+        Source Code and SQL Queries
+      </Link>
+      <br />
       <br />
       <Typography level={'h4'}>Stats</Typography>
       <Grid container spacing={2}>
