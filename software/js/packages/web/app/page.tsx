@@ -118,7 +118,7 @@ export default async function Index() {
             </ListItem>
             <ListItem>
               <Button variant="light">
-                <Link href="/spotify">Spotify</Link>
+                <Link href="/spotify">Spotify & My Podcasts</Link>
               </Button>
             </ListItem>
           </List>
