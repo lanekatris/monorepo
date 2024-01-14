@@ -31,7 +31,7 @@ interface TopTrack {
   minutes: string;
 }
 
-interface Podcast {
+export interface Podcast {
   name: string;
   publisher: string;
 

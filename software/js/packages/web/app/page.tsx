@@ -123,6 +123,9 @@ export default async function Index() {
             <ListItem>
               <Link href="/spotify">Spotify & My Podcasts</Link>
             </ListItem>
+            <ListItem>
+              <Link href="/search">Search</Link>
+            </ListItem>
           </List>
         </Card>
       </Grid>
