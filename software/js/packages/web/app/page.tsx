@@ -1,21 +1,33 @@
 import Link from 'next/link';
 import { FeedTable } from './Idk';
-import {
-  Button,
-  Card,
-  Flex,
-  Grid,
-  List,
-  ListItem,
-  Metric,
-  ProgressBar,
-  Text,
-  Title,
-} from '@tremor/react';
+// import {
+//   Button,
+//   Card,
+//   Flex,
+//   Grid,
+//   List,
+//   ListItem,
+//   Metric,
+//   ProgressBar,
+//   Text,
+//   Title,
+// } from '@tremor/react';
 import { getFeed } from '../feed/get-feed';
 import { getMetric } from '../metrics/get-metric';
 import RssSearchTest from './RssSearchTest';
 import { sql } from '@vercel/postgres';
+import {
+  Button,
+  Card,
+  CardContent,
+  Container,
+  Grid,
+  LinearProgress,
+  List,
+  ListItem,
+  Stack,
+  Typography,
+} from '@mui/joy';
 
 export default async function Index() {
   const { completed, total, percentage } = await getMetric(sql`
@@ -36,17 +48,17 @@ export default async function Index() {
   // const feed = await getFeed();
 
   return (
-    <main className="mx-5 mt-5">
-      <Title>Lane&apos;s Miscellaneous Data Dashboard</Title>
-      <Text>
+    <Container>
+      <Typography level={'h3'}>
+        Lane&apos;s Miscellaneous Data Dashboard
+      </Typography>
+      <Typography>
         View my{' '}
-        <Button variant="light">
-          <a href="https://lanekatris.com" target="_blank">
-            site
-          </a>
-        </Button>{' '}
+        <a href="https://lanekatris.com" target="_blank">
+          site
+        </a>{' '}
         for insight on why all this exists 😉
-      </Text>
+      </Typography>
       <img
         className="mt-2"
         src="https://api.netlify.com/api/v1/badges/6b9d6176-8a2c-44e4-9a44-27e96e5caa03/deploy-status"
@@ -55,71 +67,61 @@ export default async function Index() {
 
       {/*<RssSearchTest />*/}
 
-      <Grid numItemsMd={3} className="mt-6 gap-6">
+      <Grid container>
         <Card className="max-w-xs mx-auto">
-          <Text>Top 100 Disc Golf Course Completion</Text>
-          <Metric>{percentage}%</Metric>
-          <Flex className="mt-4">
-            <Text>
-              {completed} / {total} Courses
-            </Text>
-            <Text>
-              <a
-                href="https://udisc.com/blog/post/worlds-best-disc-golf-courses-2023"
-                target="_blank"
-                className="text-blue-600 visited:text-purple-600"
-              >
-                Link
-              </a>
-            </Text>
-          </Flex>
-          <ProgressBar value={percentage} className="mt-2" color="rose" />
+          <CardContent>
+            <Typography>Top 100 Disc Golf Course Completion</Typography>
+            <Typography>{percentage}%</Typography>
+            <Stack className="mt-4">
+              <Typography>
+                {completed} / {total} Courses
+              </Typography>
+              <Typography>
+                <a
+                  href="https://udisc.com/blog/post/worlds-best-disc-golf-courses-2023"
+                  target="_blank"
+                  className="text-blue-600 visited:text-purple-600"
+                >
+                  Link
+                </a>
+              </Typography>
+            </Stack>
+            {/*<LinearProgress determinate value={percentage} size={'sm'} />*/}
+          </CardContent>
         </Card>
 
         <Card className="max-w-xs mx-auto">
-          <Text>WV State Parks Visited</Text>
-          <Metric>{percentage2}%</Metric>
-          <Flex className="mt-4">
-            <Text>
+          <Typography>WV State Parks Visited</Typography>
+          <Typography>{percentage2}%</Typography>
+          <Stack className="mt-4">
+            <Typography>
               {completed2} / {total2} Parks
-            </Text>
-          </Flex>
-          <ProgressBar value={percentage2} className="mt-2" />
+            </Typography>
+          </Stack>
+          {/*<LinearProgress value={percentage2} className="mt-2" />*/}
         </Card>
 
         <Card className="max-w-xs mx-auto">
-          <Text>Other Apps</Text>
+          <Typography>Other Apps</Typography>
           {/*<Divider />*/}
           <List className="mt-3">
             <ListItem>
-              <Button variant="light">
-                <Link href="/location-history">Location History</Link>
-              </Button>
+              <Link href="/location-history">Location History</Link>
             </ListItem>
             <ListItem>
-              <Button variant="light">
-                <Link href="/discs">Discs</Link>
-              </Button>
+              <Link href="/discs">Discs</Link>
             </ListItem>
             <ListItem>
-              <Button variant="light">
-                <Link href="/climb/logger">Climb Logger</Link>
-              </Button>
+              <Link href="/climb/logger">Climb Logger</Link>
             </ListItem>
             <ListItem>
-              <Button variant="light">
-                <Link href="/climb/gym-users">Gym Users</Link>
-              </Button>
+              <Link href="/climb/gym-users">Gym Users</Link>
             </ListItem>
             <ListItem>
-              <Button variant="light">
-                <Link href="/fitness">Fitness</Link>
-              </Button>
+              <Link href="/fitness">Fitness</Link>
             </ListItem>
             <ListItem>
-              <Button variant="light">
-                <Link href="/spotify">Spotify & My Podcasts</Link>
-              </Button>
+              <Link href="/spotify">Spotify & My Podcasts</Link>
             </ListItem>
           </List>
         </Card>
@@ -129,6 +131,6 @@ export default async function Index() {
       {/*  <Title>Feed ({feed.length})</Title>*/}
       {/*  <FeedTable rows={feed} />*/}
       {/*</Card>*/}
-    </main>
+    </Container>
   );
 }

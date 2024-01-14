@@ -1,4 +1,4 @@
-import { List, ListItem, Title, Text, Button } from '@tremor/react';
+// import { List, ListItem, Title, Text, Button } from '@tremor/react';
 import Link from 'next/link';
 import { Client } from 'pg';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
@@ -27,22 +27,22 @@ export default withPageAuthRequired(async function Page() {
   console.log(climbLogs);
   return (
     <main className="mx-5 mt-5">
-      <Button variant="light">
-        <Link href="/">Home</Link>
-      </Button>
-      <Title>Climb Logs ({climbLogs.length})</Title>
+      {/*<Button variant="light">*/}
+      {/*  <Link href="/">Home</Link>*/}
+      {/*</Button>*/}
+      {/*<Title>Climb Logs ({climbLogs.length})</Title>*/}
 
-      <List>
-        {climbLogs.map(({ Date }) => (
-          <ListItem key={Date.toString()}>
-            <Button variant={'light'}>
-              <Link href={`/climb/logger/${Date.toISOString()}`}>
-                {Date.toLocaleDateString()}
-              </Link>
-            </Button>
-          </ListItem>
-        ))}
-      </List>
+      {/*<List>*/}
+      {/*  {climbLogs.map(({ Date }) => (*/}
+      {/*    <ListItem key={Date.toString()}>*/}
+      {/*      <Button variant={'light'}>*/}
+      {/*        <Link href={`/climb/logger/${Date.toISOString()}`}>*/}
+      {/*          {Date.toLocaleDateString()}*/}
+      {/*        </Link>*/}
+      {/*      </Button>*/}
+      {/*    </ListItem>*/}
+      {/*  ))}*/}
+      {/*</List>*/}
     </main>
   );
 });

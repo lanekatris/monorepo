@@ -1,13 +1,13 @@
 import { Client } from 'pg';
-import {
-  Button,
-  List,
-  ListItem,
-  Title,
-  Text,
-  Card,
-  Subtitle,
-} from '@tremor/react';
+// import {
+//   Button,
+//   List,
+//   ListItem,
+//   Title,
+//   Text,
+//   Card,
+//   Subtitle,
+// } from '@tremor/react';
 import Link from 'next/link';
 import { revalidatePath } from 'next/cache';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
@@ -98,47 +98,47 @@ export default withPageAuthRequired(async function ClimbDetailPage({ params }) {
 
   return (
     <main className="mx-5 mt-5">
-      <Button variant="light">
-        <Link href="/climb/logger">Climb List</Link>
-      </Button>
+      {/*<Button variant="light">*/}
+      {/*  <Link href="/climb/logger">Climb List</Link>*/}
+      {/*</Button>*/}
 
-      <Card className="mt-5 mb-5">
-        <form action={createClimb} className="mx-5">
-          <Title>Add Climb</Title>
+      {/*<Card className="mt-5 mb-5">*/}
+      {/*  <form action={createClimb} className="mx-5">*/}
+      {/*    <Title>Add Climb</Title>*/}
 
-          <select name="climb">
-            {options.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-          {/*<FormButton />*/}
-          <Button type="submit" size="xs">
-            Save
-          </Button>
-          {/*<Button>tow</Button>*/}
-        </form>
-      </Card>
+      {/*    <select name="climb">*/}
+      {/*      {options.map((option) => (*/}
+      {/*        <option key={option} value={option}>*/}
+      {/*          {option}*/}
+      {/*        </option>*/}
+      {/*      ))}*/}
+      {/*    </select>*/}
+      {/*    /!*<FormButton />*!/*/}
+      {/*    <Button type="submit" size="xs">*/}
+      {/*      Save*/}
+      {/*    </Button>*/}
+      {/*    /!*<Button>tow</Button>*!/*/}
+      {/*  </form>*/}
+      {/*</Card>*/}
 
-      <Title>
-        {date.split('T')[0]} Climb History ({climbDetails.length})
-      </Title>
+      {/*<Title>*/}
+      {/*  {date.split('T')[0]} Climb History ({climbDetails.length})*/}
+      {/*</Title>*/}
 
-      <List>
-        {climbDetails.map(({ id, climb }, i) => (
-          <ListItem key={id}>
-            <Text>
-              {i + 1}) {climb}
-            </Text>
-          </ListItem>
-        ))}
-        {climbDetails.length === 0 && (
-          <ListItem>
-            <Subtitle>None so far...</Subtitle>
-          </ListItem>
-        )}
-      </List>
+      {/*<List>*/}
+      {/*  {climbDetails.map(({ id, climb }, i) => (*/}
+      {/*    <ListItem key={id}>*/}
+      {/*      <Text>*/}
+      {/*        {i + 1}) {climb}*/}
+      {/*      </Text>*/}
+      {/*    </ListItem>*/}
+      {/*  ))}*/}
+      {/*  {climbDetails.length === 0 && (*/}
+      {/*    <ListItem>*/}
+      {/*      <Subtitle>None so far...</Subtitle>*/}
+      {/*    </ListItem>*/}
+      {/*  )}*/}
+      {/*</List>*/}
     </main>
   );
 });
