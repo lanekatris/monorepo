@@ -21,11 +21,14 @@ export default function RootLayout({
       {/*          rel="stylesheet"*/}
       {/*        />*/}
       {/*      </head>*/}
-      <UserProvider>
-        <body>
-          <ThemeRegistry options={{ key: 'joy' }}>{children}</ThemeRegistry>
-        </body>
-      </UserProvider>
+      {/*<UserProvider>*/}
+      <body>
+        <ThemeRegistry options={{ key: 'joy' }}>
+          <UserProvider>{children}</UserProvider>
+          {children}
+        </ThemeRegistry>
+      </body>
+      {/*</UserProvider>*/}
     </html>
   );
 }
