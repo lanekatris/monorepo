@@ -25,7 +25,6 @@ export default function RootLayout({
       <body>
         <ThemeRegistry options={{ key: 'joy' }}>
           <UserProvider>{children}</UserProvider>
-          {children}
         </ThemeRegistry>
       </body>
       {/*</UserProvider>*/}
