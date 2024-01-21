@@ -20,6 +20,7 @@ import {
   Button,
   Card,
   CardContent,
+  Chip,
   Container,
   Grid,
   LinearProgress,
@@ -101,33 +102,39 @@ export default async function Index() {
           {/*<LinearProgress value={percentage2} className="mt-2" />*/}
         </Card>
 
-        <Card className="max-w-xs mx-auto">
-          <Typography>Other Apps</Typography>
-          {/*<Divider />*/}
-          <List className="mt-3">
-            <ListItem>
-              <Link href="/location-history">Location History</Link>
-            </ListItem>
-            <ListItem>
-              <Link href="/discs">Discs</Link>
-            </ListItem>
-            <ListItem>
-              <Link href="/climb/logger">Climb Logger</Link>
-            </ListItem>
-            <ListItem>
-              <Link href="/climb/gym-users">Gym Users</Link>
-            </ListItem>
-            <ListItem>
-              <Link href="/fitness">Fitness</Link>
-            </ListItem>
-            <ListItem>
-              <Link href="/spotify">Spotify & My Podcasts</Link>
-            </ListItem>
-            <ListItem>
-              <Link href="/search">Search</Link>
-            </ListItem>
-          </List>
-        </Card>
+        {/*<Card className="max-w-xs mx-auto">*/}
+        <Typography>Other Apps</Typography>
+        {/*<Divider />*/}
+        <List className="mt-3">
+          <ListItem>
+            <Link href="/location-history">Location History</Link>
+          </ListItem>
+          <ListItem>
+            <Link href="/discs">Discs</Link>
+          </ListItem>
+          <ListItem>
+            <Link href="/climb/logger">Climb Logger</Link>
+          </ListItem>
+          <ListItem>
+            <Link href="/climb/gym-users">Gym Users</Link>
+          </ListItem>
+          <ListItem>
+            <Link href="/fitness">Fitness</Link>
+          </ListItem>
+          <ListItem>
+            <Link href="/spotify">Spotify & My Podcasts</Link>
+          </ListItem>
+          <ListItem>
+            <Link href="/search">Search</Link>
+          </ListItem>
+          <ListItem>
+            <Link href="/blog">Blog </Link>
+            <Chip color="warning" variant="soft">
+              WIP
+            </Chip>
+          </ListItem>
+        </List>
+        {/*</Card>*/}
       </Grid>
 
       {/*<Card className="mt-6">*/}
