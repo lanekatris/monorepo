@@ -6,7 +6,8 @@ type EventFileType =
   | 'volleyball'
   | 'grilled'
   | 'paintball'
-  | 'basketball';
+  | 'basketball'
+  | 'family-time';
 const ma: { [k in EventFileType]: string } = {
   paintball: 'Paintball',
   grilled: 'Grilled',
@@ -14,6 +15,8 @@ const ma: { [k in EventFileType]: string } = {
   'disc-golf': 'Disc Golf',
   'indoor-climbing': 'Indoor Climbing',
   basketball: 'Basketball',
+
+  'family-time': 'Family Time',
 };
 
 export function createEventFile(type: EventFileType) {
