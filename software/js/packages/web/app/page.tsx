@@ -127,12 +127,12 @@ export default async function Index() {
           <ListItem>
             <Link href="/search">Search</Link>
           </ListItem>
-          <ListItem>
-            <Link href="/blog">Blog </Link>
-            <Chip color="warning" variant="soft">
-              WIP
-            </Chip>
-          </ListItem>
+          {/*<ListItem>*/}
+          {/*  <Link href="/blog">Blog </Link>*/}
+          {/*  <Chip color="warning" variant="soft">*/}
+          {/*    WIP*/}
+          {/*  </Chip>*/}
+          {/*</ListItem>*/}
         </List>
         {/*</Card>*/}
       </Grid>
