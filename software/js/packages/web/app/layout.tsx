@@ -1,6 +1,19 @@
-import { UserProvider } from '@auth0/nextjs-auth0/client';
-import './global.css';
+// import { UserProvider } from '@auth0/nextjs-auth0/client';
+// import './global.css';
 import ThemeRegistry from './ThemeRegistry';
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  getInitColorSchemeScript,
+  Stack,
+  Typography,
+} from '@mui/joy';
+// import ThemeToggler from 'packages/web/app/ThemeToggler';
+import React from 'react';
+import Link from 'next/link';
+import ThemeToggler from 'packages/web/app/ThemeToggler';
 
 export const metadata = {
   title: `Lane's Site`,
@@ -9,9 +22,11 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: // ...rest
+{
   children: React.ReactNode;
 }) {
+  // console.log('rest', rest);
   return (
     <html lang="en">
       {/*      <head>*/}
@@ -22,8 +37,36 @@ export default function RootLayout({
       {/*        />*/}
       {/*      </head>*/}
       {/*<UserProvider>*/}
-      <body>
+      <body style={{ paddingBottom: '5em' }}>
+        {/*{getInitColorSchemeScript({ defaultMode: 'system' })}*/}
         <ThemeRegistry options={{ key: 'joy' }}>
+          <Container maxWidth={'sm'} sx={{ marginTop: 2 }}>
+            {/*<br />*/}
+            <Typography level={'h3'}>Lane&apos;s Site</Typography>
+            <Box sx={{ textAlign: 'right' }}>
+              <ThemeToggler />
+              <img
+                style={{
+                  verticalAlign: 'sub',
+                }}
+                src="https://api.netlify.com/api/v1/badges/6b9d6176-8a2c-44e4-9a44-27e96e5caa03/deploy-status"
+                alt="Netlify Build Status"
+              />
+            </Box>
+            {/*<Button variant="plain" size={'sm'}>*/}
+            {/*  Location History*/}
+            {/*</Button>*/}
+            {/*<Stack direction={'row'} spacing={2}>*/}
+            {/*  <Link href="/location-history">Location History</Link>*/}
+            {/*  <Link href="/discs">Discs</Link>*/}
+            {/*  <Link href="/climb/logger">Climb Logger</Link>*/}
+            {/*  <Link href="/climb/gym-users">Gym Users</Link>*/}
+            {/*  <Link href="/fitness">Fitness</Link>*/}
+            {/*  <Link href="/spotify">Spotify & My Podcasts</Link>*/}
+            {/*  <Link href="/search">Search</Link>*/}
+            {/*</Stack>*/}
+            <Divider />
+          </Container>
           {/*<UserProvider>{children}</UserProvider>*/}
           {children}
         </ThemeRegistry>

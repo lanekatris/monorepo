@@ -60,7 +60,7 @@ export default function ThemeRegistry(props: ThemeRegistryProps) {
 
   return (
     <CacheProvider value={cache}>
-      <CssVarsProvider>
+      <CssVarsProvider defaultMode="system">
         {/* the custom theme is optional */}
         <CssBaseline />
         {children}
