@@ -11,6 +11,7 @@ import {
 } from '@mui/joy';
 import { sql } from '@vercel/postgres';
 import { useMemo } from 'react';
+import FitnessChart from 'packages/web/app/fitness/ChartIdk';
 
 interface FitnessRecord {
   id: number;
@@ -22,8 +23,8 @@ interface FitnessRecord {
 
 // export const revalidate = 3600; // revalidate the data at most every hour
 
-function getLastSunday(d) {
-  var t = new Date(d);
+function getLastSunday(d: Date) {
+  const t = new Date(d);
   t.setDate(t.getDate() - t.getDay());
   return t;
 }
@@ -33,7 +34,7 @@ export default async function FitnessPage() {
   const { rows }: { rows: FitnessRecord[] } =
     await sql`select * from noco."Test_Obsidian_Fitness" order by date desc limit 500`;
   // console.log(rows);
-  console.log(rows[0], rows[1]);
+  // console.log(rows[0], rows[1]);
 
   const groupedData: { [key: string]: FitnessRecord[] } = rows.reduce(
     (result, entry) => {
@@ -51,9 +52,16 @@ export default async function FitnessPage() {
   );
 
   const keys = Object.keys(groupedData);
+
   keys.sort().reverse();
 
-  console.log('keys', keys);
+  const chartKeys = Object.keys(groupedData).sort();
+  const chartData = chartKeys.map((key) => ({
+    date: key,
+    blah: groupedData[key].length,
+  }));
+
+  console.log('chartdata', chartData);
 
   return (
     <Container maxWidth={'sm'}>
@@ -64,6 +72,8 @@ export default async function FitnessPage() {
         <Typography>Fitness Dashboard</Typography>
       </Breadcrumbs>
       <Typography level={'h4'}>Fitness Dashboard</Typography>
+      <FitnessChart chartData={chartData} />
+      <br />
       Today: {new Date().toLocaleDateString('en-CA')}
       <br />
       Week Start: {getLastSunday(new Date()).toLocaleDateString('en-CA')}
