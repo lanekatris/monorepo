@@ -1,42 +1,20 @@
 import Link from 'next/link';
-import { FeedTable } from './Idk';
 import Image from 'next/image';
-// import {
-//   Button,
-//   Card,
-//   Flex,
-//   Grid,
-//   List,
-//   ListItem,
-//   Metric,
-//   ProgressBar,
-//   Text,
-//   Title,
-// } from '@tremor/react';
-import { getFeed } from '../feed/get-feed';
 import { getMetric } from '../metrics/get-metric';
-import RssSearchTest from './RssSearchTest';
 import { sql } from '@vercel/postgres';
 import {
   Alert,
   Box,
-  Button,
   Card,
   CardContent,
   Chip,
   CircularProgress,
   Container,
-  Grid,
-  LinearProgress,
   List,
   ListItem,
   Stack,
-  SvgIcon,
   Typography,
-  useColorScheme,
 } from '@mui/joy';
-// import ThemeToggler from 'packages/web/app/ThemeToggler';
-// import AnotherTheme from 'packages/web/app/ AnotherTheme';
 import homeImage from './2024_01_lane_troy_snow_crop.jpeg';
 
 export default async function Index() {
@@ -63,8 +41,6 @@ export default async function Index() {
       <Box sx={{ textAlign: 'center' }}>
         <Image
           src={homeImage}
-          // width={300}
-          // height={300}
           sizes={'100vw'}
           style={{
             width: '100%',
@@ -79,14 +55,6 @@ export default async function Index() {
         </Typography>
       </Box>
       <br />
-      {/*<ThemeToggler />*/}
-      {/*<Typography level={'h3'}>*/}
-      {/*  Lane&apos;s Miscellaneous Data Dashboard*/}
-      {/*</Typography>*/}
-
-      {/*<AnotherTheme />*/}
-      {/*<ThemeToggler />*/}
-      {/*<Typography gutterBottom></Typography>*/}
       <Alert color={'primary'}>
         View my
         <a href="https://lanekatris.com" target="_blank">
@@ -97,18 +65,29 @@ export default async function Index() {
 
       <br />
       <Typography level="h4">Links</Typography>
-      <List size={'sm'}>
+      <List size={'sm'} sx={{ backgroundColor: '#ffffce' }}>
         <ListItem>
           <Link href="/location-history">Location History</Link>
+
+          <Chip variant={'outlined'} color={'warning'}>
+            Requires Login
+          </Chip>
         </ListItem>
         <ListItem>
           <Link href="/discs">Discs</Link>
         </ListItem>
         <ListItem>
           <Link href="/climb/logger">Climb Logger</Link>
+
+          <Chip variant={'outlined'} color={'warning'}>
+            Requires Login
+          </Chip>
         </ListItem>
         <ListItem>
-          <Link href="/climb/gym-users">Gym Users</Link>
+          <Link href="/climb/gym-users">Gym Users</Link>{' '}
+          <Chip variant={'outlined'} color={'warning'}>
+            Requires Login
+          </Chip>
         </ListItem>
         <ListItem>
           <Link href="/fitness">Fitness</Link>

@@ -139,7 +139,7 @@ func main() {
 		//	c.JSON(500, err)
 		//}
 		//c.Data(http.StatusOK, "application/json", out)
-		cmd := exec.Command("nx", "build", "obsidian-client")
+		cmd := exec.Command("node_modules/.bin/nx", "build", "obsidian-client")
 		cmd.Dir = "/home/lane/git/monorepo/software/js"
 		_, err := cmd.Output()
 		if err != nil {

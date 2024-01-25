@@ -3,6 +3,7 @@
 import ThemeRegistry from './ThemeRegistry';
 import {
   Box,
+  Breadcrumbs,
   Button,
   Container,
   Divider,
@@ -42,8 +43,21 @@ export default function RootLayout({
         <ThemeRegistry options={{ key: 'joy' }}>
           <Container maxWidth={'sm'} sx={{ marginTop: 2 }}>
             {/*<br />*/}
-            <Typography level={'h3'}>Lane&apos;s Site</Typography>
+            <Typography level={'h3'}>
+              <Link
+                href="/"
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                Lane&apos;s Site
+              </Link>
+            </Typography>
             <Box sx={{ textAlign: 'right' }}>
+              {/*<Breadcrumbs>*/}
+              {/*  <Link color="neutral" href="/">*/}
+              {/*    Home*/}
+              {/*  </Link>*/}
+              {/*  <Typography>Spotify Data</Typography>*/}
+              {/*</Breadcrumbs>*/}
               <ThemeToggler />
               <img
                 style={{
