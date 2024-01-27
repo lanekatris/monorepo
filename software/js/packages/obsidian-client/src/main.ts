@@ -1,5 +1,5 @@
 import { ObsidianApi } from './ObsidianApi';
-import { createEventFile } from './createEventFile';
+import { createEventFile, createFeedFile } from './createEventFile';
 import { createGenericLkatApiCall } from './createGenericLkatApiCall';
 
 export async function syncInbox({ obsidian }) {
@@ -41,6 +41,9 @@ export const deployObsidianClient = createGenericLkatApiCall(
   'deploy-obsidian-client'
 );
 export const udiscScorecards = createGenericLkatApiCall('udisc-scorecards');
+
+export const high = createFeedFile('high');
+export const low = createFeedFile('low');
 
 export async function refreshAll(props: ObsidianApi) {
   new props.obsidian.Notice(`Refreshing all.`);

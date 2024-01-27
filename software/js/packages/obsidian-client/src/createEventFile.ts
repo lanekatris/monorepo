@@ -39,3 +39,25 @@ completed: null
     );
   };
 }
+
+type FeedType = 'high' | 'low';
+
+const feedMap: { [k in FeedType]: string } = {
+  high: 'HighLow - High - ',
+  low: 'HighLow - Low - ',
+};
+
+export function createFeedFile(type: FeedType) {
+  return async function (obsidian: ObsidianApi) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const d = moment().format('YYYY-MM-DD');
+    const path = `/Feed/${d} ${feedMap[type]}.md`;
+    obsidian.app.vault.create(
+      path,
+      `
+
+`
+    );
+  };
+}
