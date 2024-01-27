@@ -23,13 +23,13 @@ func main() {
 	defer c.Close()
 
 	options := client.StartWorkflowOptions{
-		ID:        "greeting-workflow",
+		ID:        "obsidian-theme-workflow",
 		TaskQueue: shared.GreetingTaskQueue,
 	}
 
 	// Start the Workflow
-	name := "World"
-	we, err := c.ExecuteWorkflow(context.Background(), options, temporalstuff.SendFitnessEmailWorkflow, name)
+	//name := "World"
+	we, err := c.ExecuteWorkflow(context.Background(), options, temporalstuff.ObsidianThemeWorkflow)
 	if err != nil {
 		log.Fatalln("unable to complete Workflow", err)
 	}

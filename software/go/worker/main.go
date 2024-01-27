@@ -22,7 +22,10 @@ func main() {
 	// This worker hosts both Workflow and Activity functions
 	w := worker.New(c, shared.GreetingTaskQueue, worker.Options{})
 	w.RegisterWorkflow(temporalstuff.SendFitnessEmailWorkflow)
+	w.RegisterWorkflow(temporalstuff.ObsidianThemeWorkflow)
+
 	w.RegisterActivity(temporalstuff.SendFitnessEmailActivity)
+	w.RegisterActivity(temporalstuff.LoadAndPersistObsidianThemeFile)
 
 	// Start listening to the Task Queue
 	err = w.Run(worker.InterruptCh())

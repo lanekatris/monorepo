@@ -2,16 +2,19 @@ package temporalstuff
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/lipgloss/table"
 	"github.com/charmbracelet/log"
+	"github.com/goccy/go-json"
 	"github.com/resendlabs/resend-go"
 	"github.com/spf13/viper"
 	"go.temporal.io/sdk/workflow"
 	"io/fs"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"path/filepath"
 	"regexp"
 	"shared"
@@ -34,6 +37,49 @@ func SendFitnessEmailActivity(ctx context.Context) (string, error) {
 
 	log.Info("Done!")
 	return "i guess i ran well", nil
+}
+
+type AppConfig struct {
+	Theme               string `json:"theme"`
+	BaseFontSize        int    `json:"baseFontSize"`
+	CssTheme            string `json:"cssTheme"`
+	Translucency        bool   `json:"translucency"`
+	AccentColor         string `json:"accentColor"`
+	InterfaceFontFamily string `json:"interfaceFontFamily"`
+	TextFontFamily      string `json:"textFontFamily"`
+}
+
+func LoadAndPersistObsidianThemeFile(ctx context.Context) error {
+	jsonData, err := os.ReadFile("/home/lane/Documents/lkat-vault/.obsidian/appearance.json")
+	shared.HandleError(err)
+
+	var data AppConfig
+
+	err = json.Unmarshal(jsonData, &data)
+	if err != nil {
+		return err
+	}
+	//shared.HandleError(err)
+
+	// persist to sql?
+	var connStr = viper.GetString(shared.PostgresApiKeyConfig)
+	if connStr == "" {
+		panic("Config not found: " + shared.PostgresApiKeyConfig)
+	}
+
+	db, err := sql.Open("postgres", connStr)
+	if err != nil {
+		return err
+	}
+
+	_, err = db.Exec("insert into metric (value, metric_type, datatype) VALUES ($1, $2, $3)", data.CssTheme, "obsidian_theme", "string")
+	if err != nil {
+		return err
+	}
+
+	log.Info("I should have worked")
+
+	return nil
 }
 
 func KickBuild() {
@@ -249,6 +295,19 @@ func SendFitnessEmailWorkflow(ctx workflow.Context, name string) (string, error)
 
 	var result string
 	err := workflow.ExecuteActivity(ctx, SendFitnessEmailActivity).Get(ctx, &result)
+
+	return result, err
+}
+
+func ObsidianThemeWorkflow(ctx workflow.Context) (string, error) {
+	options := workflow.ActivityOptions{
+		StartToCloseTimeout: time.Minute * 5,
+	}
+
+	ctx = workflow.WithActivityOptions(ctx, options)
+
+	var result string
+	err := workflow.ExecuteActivity(ctx, LoadAndPersistObsidianThemeFile).Get(ctx, &result)
 
 	return result, err
 }
