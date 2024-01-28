@@ -8,7 +8,7 @@ export default function ThemeToggler() {
     <Button
       variant="plain"
       // color="neutral"
-      sx={{ paddingLeft: 0 }}
+      // sx={{ paddingLeft: 0 }}
       size={'sm'}
       onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}
     >
