@@ -19,7 +19,7 @@ export default withPageAuthRequired(async function LocationHistoryPage({
   const searchTerm = `%${query}%`;
 
   const { rows }: { rows: LocationCustom[] } =
-    await sql`select "Address", "Name" from tap_csv.values where lower("Address") like ${searchTerm} or lower("Name") like ${searchTerm}  limit 100`;
+    await sql`select "Address", "Name" from kestra.location_history where lower("Address") like ${searchTerm} or lower("Name") like ${searchTerm}  limit 100`;
 
   return (
     <Container maxWidth="sm">
@@ -29,7 +29,7 @@ export default withPageAuthRequired(async function LocationHistoryPage({
         </Link>
         <Typography>Your Location History</Typography>
       </Breadcrumbs>
-      <Typography level={'h4'} gutterBottom>
+      <Typography level="h4" gutterBottom>
         Your Location History
       </Typography>
       <form style={{ marginBottom: '1.5em' }}>
