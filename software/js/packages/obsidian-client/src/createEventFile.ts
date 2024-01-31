@@ -7,8 +7,11 @@ type EventFileType =
   | 'grilled'
   | 'paintball'
   | 'basketball'
-  | 'family-time';
+  | 'family-time'
+  | 'escape-room';
+
 const ma: { [k in EventFileType]: string } = {
+  'escape-room': 'Escape Room',
   paintball: 'Paintball',
   grilled: 'Grilled',
   volleyball: 'Volleyball',
