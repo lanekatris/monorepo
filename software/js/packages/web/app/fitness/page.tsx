@@ -1,6 +1,9 @@
 import Navigation from 'packages/web/layout/navigation';
 import {
+  Alert,
   Breadcrumbs,
+  Card,
+  CardContent,
   Chip,
   Container,
   Link,
@@ -12,6 +15,7 @@ import {
 import { sql } from '@vercel/postgres';
 import { useMemo } from 'react';
 import FitnessChart from 'packages/web/app/fitness/ChartIdk';
+import { differenceInDays, formatRelative } from 'date-fns';
 
 interface FitnessRecord {
   id: number;
@@ -63,45 +67,68 @@ export default async function FitnessPage() {
 
   console.log('chartdata', chartData);
 
+  const idk = differenceInDays(new Date(2024, 3, 22, 0, 0, 0, 0), new Date()); //formatRelative(new Date(2024, 3, 22, 0, 0, 0, 0), new Date());
+  console.log('idk', idk);
+
   return (
-    <Container maxWidth={'sm'}>
+    <Container maxWidth="sm">
       <Breadcrumbs>
         <Link color="neutral" href="/">
           Home
         </Link>
         <Typography>Fitness Dashboard</Typography>
       </Breadcrumbs>
-      <Typography level={'h4'}>Fitness Dashboard</Typography>
-      <FitnessChart chartData={chartData} />
+      <Typography level="h4">Fitness Dashboard</Typography>
+      <Card>
+        <CardContent>
+          <FitnessChart chartData={chartData} />
+        </CardContent>
+      </Card>
       <br />
-      Today: {new Date().toLocaleDateString('en-CA')}
+      <Card>
+        <CardContent>
+          <Typography level="h4">Snowboarding Goal</Typography>
+          <Typography level="body-sm">
+            Complete 54 leg workouts to complete this goal
+          </Typography>
+          {idk} Days to Go
+          <Alert color="danger">0 Completed workouts for this goal</Alert>
+        </CardContent>
+      </Card>
       <br />
-      Week Start: {getLastSunday(new Date()).toLocaleDateString('en-CA')}
-      <List>
-        {keys.map((key) => (
-          <ListItem key={key}>
-            <List>
-              <Typography level={'title-md'}>
-                {key} ({groupedData[key].length})
-                {key ===
-                getLastSunday(new Date()).toLocaleDateString('en-CA') ? (
-                  <Chip color="primary">This Week</Chip>
-                ) : null}
-              </Typography>
-              {groupedData[key].map((row) => (
-                <ListItem key={row.id} sx={{ backgroundColor: '#ffffce' }}>
-                  <ListItemContent>
-                    <Typography level={'body-sm'}>
-                      {row.date.toLocaleDateString('en-CA')} -{' '}
-                      {row.file_relative_path} - {row.activity}
-                    </Typography>
-                  </ListItemContent>
-                </ListItem>
-              ))}
-            </List>
-          </ListItem>
-        ))}
-      </List>
+      <Card>
+        <CardContent>
+          <Typography level="h4">Log</Typography>
+          Today: {new Date().toLocaleDateString('en-CA')}
+          <br />
+          Week Start: {getLastSunday(new Date()).toLocaleDateString('en-CA')}
+          <List>
+            {keys.map((key) => (
+              <ListItem key={key}>
+                <List>
+                  <Typography level="title-md">
+                    {key} ({groupedData[key].length})
+                    {key ===
+                    getLastSunday(new Date()).toLocaleDateString('en-CA') ? (
+                      <Chip color="primary">This Week</Chip>
+                    ) : null}
+                  </Typography>
+                  {groupedData[key].map((row) => (
+                    <ListItem key={row.id} sx={{ backgroundColor: '#ffffce' }}>
+                      <ListItemContent>
+                        <Typography level="body-sm">
+                          {row.date.toLocaleDateString('en-CA')} -{' '}
+                          {row.file_relative_path} - {row.activity}
+                        </Typography>
+                      </ListItemContent>
+                    </ListItem>
+                  ))}
+                </List>
+              </ListItem>
+            ))}
+          </List>
+        </CardContent>
+      </Card>
     </Container>
   );
 }

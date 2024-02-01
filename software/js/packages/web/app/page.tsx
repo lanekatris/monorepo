@@ -14,8 +14,10 @@ import {
   ListItem,
   Stack,
   Typography,
+  useTheme,
 } from '@mui/joy';
 import homeImage from './2024_01_lane_troy_snow_crop.jpeg';
+import HomeLinks from 'packages/web/app/Links';
 
 export default async function Index() {
   const { completed, total, percentage } = await getMetric(sql`
@@ -36,12 +38,12 @@ export default async function Index() {
   // const feed = await getFeed();
 
   return (
-    <Container maxWidth={'sm'}>
+    <Container maxWidth="sm">
       <br />
       <Box sx={{ textAlign: 'center' }}>
         <Image
           src={homeImage}
-          sizes={'100vw'}
+          sizes="100vw"
           style={{
             width: '100%',
             height: 'auto',
@@ -55,7 +57,7 @@ export default async function Index() {
         </Typography>
       </Box>
       <br />
-      <Alert color={'primary'}>
+      <Alert color="primary">
         View my
         <a href="https://lanekatris.com" target="_blank">
           site
@@ -65,46 +67,7 @@ export default async function Index() {
 
       <br />
       <Typography level="h4">Links</Typography>
-      <List size={'sm'} sx={{ backgroundColor: '#ffffce' }}>
-        <ListItem>
-          <Link href="/location-history">Location History</Link>
-
-          <Chip variant={'outlined'} color={'warning'}>
-            Requires Login
-          </Chip>
-        </ListItem>
-        <ListItem>
-          <Link href="/discs">Discs</Link>
-        </ListItem>
-        <ListItem>
-          <Link href="/climb/logger">Climb Logger</Link>
-
-          <Chip variant={'outlined'} color={'warning'}>
-            Requires Login
-          </Chip>
-        </ListItem>
-        <ListItem>
-          <Link href="/climb/gym-users">Gym Users</Link>{' '}
-          <Chip variant={'outlined'} color={'warning'}>
-            Requires Login
-          </Chip>
-        </ListItem>
-        <ListItem>
-          <Link href="/fitness">Fitness</Link>
-        </ListItem>
-        <ListItem>
-          <Link href="/spotify">Spotify & My Podcasts</Link>
-        </ListItem>
-        <ListItem>
-          <Link href="/search">Search</Link>
-        </ListItem>
-        {/*<ListItem>*/}
-        {/*  <Link href="/blog">Blog </Link>*/}
-        {/*  <Chip color="warning" variant="soft">*/}
-        {/*    WIP*/}
-        {/*  </Chip>*/}
-        {/*</ListItem>*/}
-      </List>
+      <HomeLinks />
 
       {/*<RssSearchTest />*/}
 
@@ -116,7 +79,7 @@ export default async function Index() {
       </Typography>
       <Stack spacing={2}>
         <Card variant="outlined">
-          <CardContent orientation={'horizontal'}>
+          <CardContent orientation="horizontal">
             <CircularProgress
               size="lg"
               determinate
@@ -129,7 +92,7 @@ export default async function Index() {
               <Typography level="title-lg">
                 Top 100 Disc Golf Course Completion
               </Typography>
-              <Stack direction={'row'} spacing={2}>
+              <Stack direction="row" spacing={2}>
                 <Typography>
                   {completed} / {total} Courses
                 </Typography>
@@ -148,13 +111,13 @@ export default async function Index() {
         </Card>
 
         <Card variant="outlined">
-          <CardContent orientation={'horizontal'}>
+          <CardContent orientation="horizontal">
             <CircularProgress size="lg" determinate value={percentage2}>
               <Typography>{percentage2}%</Typography>
             </CircularProgress>
             <CardContent>
               <Typography level="title-lg">WV State Parks Visited</Typography>
-              <Stack direction={'row'} spacing={2}>
+              <Stack direction="row" spacing={2}>
                 <Typography>
                   {completed2} / {total2} Parks
                 </Typography>
