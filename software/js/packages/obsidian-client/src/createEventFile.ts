@@ -30,8 +30,8 @@ export function createEventFile(type: EventFileType) {
     const path = `/Adventures/${d} ${ma[type]}.md`;
     obsidian.app.vault.create(
       path,
-      `
----
+      // This must be on the same line as backtick since that is valid frontmatter
+      `---
 title: ${ma[type]}
 allDay: true
 date: ${d}
