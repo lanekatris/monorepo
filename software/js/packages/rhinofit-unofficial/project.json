@@ -1,0 +1,33 @@
+{
+  "name": "rhinofit-unofficial",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/rhinofit-unofficial/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/rhinofit-unofficial",
+        "main": "packages/rhinofit-unofficial/src/index.ts",
+        "tsConfig": "packages/rhinofit-unofficial/tsconfig.lib.json",
+        "assets": ["packages/rhinofit-unofficial/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs rhinofit-unofficial {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/rhinofit-unofficial/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
