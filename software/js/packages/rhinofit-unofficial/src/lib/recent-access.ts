@@ -7,10 +7,15 @@ function onlyUnique(value: string, index: number, array: string[]) {
   return array.indexOf(value) === index;
 }
 
-interface Member {
+export enum TrackingRecordType {
+  KIOSK = 'Kiosk',
+  DAC = 'DAC Entry',
+}
+
+export interface Member {
   DT_RowId: string;
   al_cal_datetime: string;
-  al_cal_type: string;
+  al_cal_type: TrackingRecordType;
   al_cal_loggedby: string;
   al_cal_userlink: string;
   al_cal_viewuser: string;
@@ -23,7 +28,7 @@ interface Member {
   al_cal_handledwhen: string;
 }
 
-interface MembersResponse {
+export interface MembersResponse {
   aaData: Member[];
 }
 
