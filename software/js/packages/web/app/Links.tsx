@@ -3,8 +3,6 @@ import { Chip, List, ListItem, useTheme } from '@mui/joy';
 import Link from 'next/link';
 
 export default function HomeLinks() {
-  const theme = useTheme();
-  console.log('theme', theme.palette.warning);
   return (
     <List
       size="sm"
