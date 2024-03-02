@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import { getMetric } from '../metrics/get-metric';
 import { sql } from '@vercel/postgres';
@@ -7,17 +6,13 @@ import {
   Box,
   Card,
   CardContent,
-  Chip,
   CircularProgress,
   Container,
-  List,
-  ListItem,
   Stack,
   Typography,
-  useTheme,
 } from '@mui/joy';
 import homeImage from './2024_01_lane_troy_snow_crop.jpeg';
-import HomeLinks from 'packages/web/app/Links';
+import HomeLinks from './Links';
 
 export default async function Index() {
   const { completed, total, percentage } = await getMetric(sql`
