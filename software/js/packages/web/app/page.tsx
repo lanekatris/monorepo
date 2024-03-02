@@ -35,6 +35,12 @@ export default async function Index() {
     sql`select visited, count(*) from noco.place where state_park = true and state = 'West Virginia' group by visited`
   );
 
+  const fourteenerStats = await getMetric(
+    sql`select visited, count(*) from noco.place where source = 'Hike all 14ers in Colorado' group by visited`
+  );
+
+  console.log(fourteenerStats);
+
   // const feed = await getFeed();
 
   return (
@@ -120,6 +126,27 @@ export default async function Index() {
               <Stack direction="row" spacing={2}>
                 <Typography>
                   {completed2} / {total2} Parks
+                </Typography>
+              </Stack>
+            </CardContent>
+          </CardContent>
+        </Card>
+
+        <Card variant="outlined">
+          <CardContent orientation="horizontal">
+            <CircularProgress
+              size="lg"
+              color="danger"
+              determinate
+              value={fourteenerStats.percentage}
+            >
+              <Typography>{fourteenerStats.percentage}%</Typography>
+            </CircularProgress>
+            <CardContent>
+              <Typography level="title-lg">Colorado 14ers Summited</Typography>
+              <Stack direction="row" spacing={2}>
+                <Typography>
+                  {fourteenerStats.completed} / {fourteenerStats.total} 14ers
                 </Typography>
               </Stack>
             </CardContent>
