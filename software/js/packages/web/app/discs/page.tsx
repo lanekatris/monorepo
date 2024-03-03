@@ -1,7 +1,23 @@
 import Navigation from 'packages/web/layout/navigation';
-import { Breadcrumbs, Container, Link, Table, Typography } from '@mui/joy';
+import {
+  Alert,
+  Breadcrumbs,
+  Chip,
+  Container,
+  Link,
+  List,
+  ListItem,
+  Stack,
+  Table,
+  Typography,
+} from '@mui/joy';
+// @ts-ignore
 import { sql } from '@vercel/postgres';
 import { Pie, ResponsiveContainer } from 'recharts';
+import { RawUdiscScorecardEntry } from 'packages/scorecards/src/raw-udisc-scorecard-entry';
+import { processScorecards } from 'packages/scorecards/src/process-scorecards';
+import { groupBy } from 'lodash';
+import { formatRelative } from 'date-fns';
 // import DiscsChart from 'packages/web/app/discs/DiscsCharts';
 
 export interface Disc {
@@ -22,43 +38,111 @@ export interface Disc {
   LostDate: Date;
 }
 
+async function GetRawScorecards() {
+  const { rows }: { rows: RawUdiscScorecardEntry[] } = await sql`select
+*
+
+     from kestra.udisc_scorecard order by startdate desc`;
+  return rows;
+}
+
 export default async function DiscsPage() {
   const { rows }: { rows: Disc[] } =
     await sql`select * from noco."disc" order by id desc`;
 
+  const rawScorecards = await GetRawScorecards();
+  // console.log('rawcorecardsx', rawScorecards[0]);
+  const scorecardResult = await processScorecards({
+    rawScorecards,
+    playerName: 'Lane',
+  });
+  // console.log('scoreme', rawScorecards[0], rawScorecards[1]);
+  // console.log('score', scorecardResult);
+
+  const latestRound = rawScorecards[0];
   const total = rows.length;
   const totalInBag = rows.filter((x) => x.status === 'In Bag').length;
+  const discStatuses = groupBy(rows, 'status');
+  // console.log('ii', discStatuses);
 
   // console.log(rows[0]);
   return (
-    <Container maxWidth="lg">
-      {/*<Breadcrumbs>*/}
-      {/*  <Link color="neutral" href="/">*/}
-      {/*    Home*/}
-      {/*  </Link>*/}
-      {/*  <Typography>Disc Golf Dashboard</Typography>*/}
-      {/*</Breadcrumbs>*/}
-      <Typography level="h4">Disc Golf Dashboard</Typography>
-
-      <Table>
-        <tbody>
-          <tr>
-            <td>Total Discs</td>
-            <td>{total}</td>
-          </tr>
-          <tr>
-            <td> Discs In Bag</td>
-            <td>{totalInBag}</td>
-          </tr>
-          {/*aces*/}
-        </tbody>
-      </Table>
-
+    <Container maxWidth="sm">
+      <Breadcrumbs>
+        <Link color="neutral" href="/">
+          Home
+        </Link>
+        <Typography>Disc Golf Dashboard</Typography>
+      </Breadcrumbs>
+      <Stack
+        direction="row"
+        justifyContent={'space-between'}
+        alignItems={'center'}
+      >
+        <Typography level="h4">Stats</Typography>
+        <Typography level={'body-sm'}>
+          Updated: {formatRelative(latestRound.startdate, new Date())}
+        </Typography>
+      </Stack>
+      {/*<List size="sm">*/}
+      <Alert color="primary">
+        I've been using Udisc for{' '}
+        {scorecardResult.stats.howLongHaveYouBeenPlaying}, I have{' '}
+        {scorecardResult.stats.aces} Aces, and have recorded{' '}
+        {scorecardResult.stats.rounds.total} rounds. I've recorded rounds at:{' '}
+        {scorecardResult.stats.courses.mostPlayed.name} the most -{' '}
+        {scorecardResult.stats.courses.mostPlayed.rounds} times.
+        <br />
+        {/*<br />*/}
+        Want to see your Udisc stats outside the app? (Coming Soon)
+      </Alert>
+      {/*<ListItem>*/}
+      {/*  Most Played Course:{' '}*/}
+      {/*  <b>*/}
+      {/*    {scorecardResult.stats.courses.mostPlayed.name} (*/}
+      {/*    {scorecardResult.stats.courses.mostPlayed.rounds} Times)*/}
+      {/*  </b>*/}
+      {/*</ListItem>*/}
+      {/*</List>*/}
+      {/*<Table>*/}
+      {/*  <tbody>*/}
+      {/*    <tr>*/}
+      {/*      <td>Total Discs</td>*/}
+      {/*      <td>{total}</td>*/}
+      {/*    </tr>*/}
+      {/*    <tr>*/}
+      {/*      <td> Discs In Bag</td>*/}
+      {/*      <td>{totalInBag}</td>*/}
+      {/*    </tr>*/}
+      {/*    /!*aces*!/*/}
+      {/*  </tbody>*/}
+      {/*</Table>*/}
       {/*<ResponsiveContainer>*/}
       {/*  <Pie data={rows} dataKey="status" nameKey="status" label />*/}
       {/*</ResponsiveContainer>*/}
       {/*<DiscsChart discs={rows} />*/}
-
+      <br />
+      <Typography level="h4" gutterBottom>
+        My Discs
+      </Typography>
+      <Stack direction={'row'} spacing={1} flexWrap={'wrap'} useFlexGap>
+        <Chip>Total: {total}</Chip>
+        {/*<Chip>In Bag: {totalInBag}</Chip>*/}
+        {/*hi*/}
+        {Object.keys(discStatuses).map((key) => (
+          <Chip key={key}>
+            {key}: {discStatuses[key].length}
+          </Chip>
+        ))}
+      </Stack>
+      {/*<List size={'sm'}>*/}
+      {/*  <ListItem>*/}
+      {/*    Total Discs: <b>{total}</b>*/}
+      {/*  </ListItem>*/}
+      {/*  <ListItem>*/}
+      {/*    Discs In Bag: <b>{totalInBag}</b>*/}
+      {/*  </ListItem>*/}
+      {/*</List>*/}
       <Table aria-label="basic table">
         {/*<thead>*/}
         {/*  <tr>*/}
@@ -69,6 +153,15 @@ export default async function DiscsPage() {
         {/*    <th>Protein&nbsp;(g)</th>*/}
         {/*  </tr>*/}
         {/*</thead>*/}
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Brand</th>
+            <th>Color</th>
+            <th>Model</th>
+            <th>Status</th>
+          </tr>
+        </thead>
         <tbody>
           {rows.map((disc) => (
             <tr key={disc.id}>
@@ -83,19 +176,19 @@ export default async function DiscsPage() {
       </Table>
     </Container>
   );
-  return (
-    <main>
-      <Navigation />
-      <h1>Disc Database</h1>
-      <iframe
-        className="nc-embed"
-        src="https://noco.lkat.io/dashboard/#/nc/view/19588d47-7626-443a-a182-2a9c10059421?embed"
-        frameBorder="0"
-        width="100%"
-        height="700"
-        // style="background: transparent; border: 1px solid #ddd"
-        style={{ background: 'transparent', border: '1px solid #ddd' }}
-      ></iframe>
-    </main>
-  );
+  // return (
+  //   <main>
+  //     <Navigation />
+  //     <h1>Disc Database</h1>
+  //     <iframe
+  //       className="nc-embed"
+  //       src="https://noco.lkat.io/dashboard/#/nc/view/19588d47-7626-443a-a182-2a9c10059421?embed"
+  //       frameBorder="0"
+  //       width="100%"
+  //       height="700"
+  //       // style="background: transparent; border: 1px solid #ddd"
+  //       style={{ background: 'transparent', border: '1px solid #ddd' }}
+  //     ></iframe>
+  //   </main>
+  // );
 }

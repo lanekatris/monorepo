@@ -7,14 +7,21 @@ import {
 import { ParseScorecardInput, ScorecardResponse } from './scorecard';
 import { getPlayerTimeInYears } from './get-player-time-in-years';
 
+export async function parseScorecardFromCsv(
+  csv: string
+): Promise<RawUdiscScorecardEntry[]> {
+  const parsed: RawUdiscScorecardEntry[] = await csvParser().fromString(csv);
+  return parsed;
+}
+
 // Careful, if you have player name collisions, not sure what that data looks like
-export async function parseScorecard({
-  csv,
+export async function processScorecards({
+  rawScorecards,
   playerName,
   excludes = [],
 }: ParseScorecardInput): Promise<ScorecardResponse> {
-  const parsed: RawUdiscScorecardEntry[] = await csvParser().fromString(csv);
-  const grouped: { string: RawUdiscScorecardEntry[] } = groupBy(parsed, 'Date');
+  // const parsed: RawUdiscScorecardEntry[] = await csvParser().fromString(csv);
+  const grouped = groupBy(rawScorecards, 'startdate');
 
   let aces = 0;
   let holes = 0;
@@ -27,7 +34,7 @@ export async function parseScorecard({
     .filter((x) => !excludes.includes(x))
     .map((date) => {
       const from: RawUdiscScorecardEntry[] = grouped[date];
-      const me = from.find((x) => x.PlayerName.includes(playerName));
+      const me = from.find((x) => x.playername.includes(playerName));
       if (!me) {
         skippedScorecards++;
         skippedScorecardNames.push(date);
@@ -44,35 +51,40 @@ export async function parseScorecard({
       let alreadySetRound = false;
       HOLE_PROPS.forEach((hole) => {
         if (alreadySetRound) return;
-        if (me[hole] === '0') {
+        // @ts-ignore
+        if (me[hole] === 0) {
           partialRounds++;
           alreadySetRound = true;
         }
       });
 
       HOLE_PROPS.forEach((hole) => {
-        if (me[hole] === '1') aces++;
+        // @ts-ignore
+        if (me[hole] === 1) aces++;
       });
 
       // move to iteration above
       HOLE_PROPS.forEach((hole) => {
         if (me.hasOwnProperty(hole) === false) return;
-        if (me[hole] === '0') return;
-        if (me[hole].length) holes++;
+        // @ts-ignore
+        if (me[hole] === 0) return;
+        // @ts-ignore
+        if (me[hole]) holes++;
       });
 
       HOLE_PROPS.forEach((hole) => {
         if (me.hasOwnProperty(hole) === false) return;
-        if (me[hole].length) throws += Number(me[hole]);
+        // @ts-ignore
+        if (me[hole]) throws += Number(me[hole]);
       });
 
       return {
-        courseName: from[0].CourseName,
-        layout: from[0].LayoutName,
-        date: from[0].Date,
+        courseName: from[0].coursename,
+        layout: from[0].layoutname,
+        date: from[0].startdate,
         players: from
-          .filter((x) => x.PlayerName !== 'Par')
-          .map((f) => f.PlayerName),
+          .filter((x) => x.playername !== 'Par')
+          .map((f) => f.playername),
         myScore: me['+/-'],
         // raw: from,
       };
@@ -81,7 +93,7 @@ export async function parseScorecard({
 
   // scorecards[0]
 
-  const idk = groupBy(scorecards, (x) => x.courseName);
+  const idk = groupBy(scorecards, (x) => x?.courseName!);
   const idk2 = Object.keys(idk).reduce((prev, current) => {
     const prevGrouping = idk[prev];
     const currentGrouping = idk[current];
@@ -95,16 +107,17 @@ export async function parseScorecard({
   let bestCourseName = '';
   let bestScore = 0;
   scorecards.forEach((x) => {
-    if (Number(x.myScore) < bestScore) {
-      bestCourseName = x.courseName;
-      bestScore = Number(x.myScore);
+    if (Number(x?.myScore!) < bestScore) {
+      bestCourseName = x?.courseName!;
+      bestScore = Number(x?.myScore!);
     }
   });
 
   const earliestDate = scorecards[scorecards.length - 1];
-  const howLongHaveYouBeenPlaying = getPlayerTimeInYears(earliestDate.date);
+  const howLongHaveYouBeenPlaying = getPlayerTimeInYears(earliestDate?.date!);
 
   return {
+    // @ts-ignore
     scorecards,
     stats: {
       rounds: {

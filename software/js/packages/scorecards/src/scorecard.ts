@@ -1,7 +1,9 @@
+import { RawUdiscScorecardEntry } from 'packages/scorecards/src/raw-udisc-scorecard-entry';
+
 export interface Scorecard {
   courseName: string;
   layout: string;
-  date: string;
+  date: Date;
   players: string[];
   myScore: string;
 }
@@ -36,7 +38,7 @@ export interface ScorecardResponse {
 }
 
 export interface ParseScorecardInput {
-  csv: string;
   playerName: string;
   excludes?: string[];
+  rawScorecards: RawUdiscScorecardEntry[];
 }

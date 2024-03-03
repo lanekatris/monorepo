@@ -16,7 +16,7 @@ export function generateScorecardMarkdown(response: ScorecardResponse): string {
         head: ['Date', 'Course', 'Score', 'Players'],
         body: response.scorecards.map(
           ({ courseName, date, myScore, players }) => [
-            date,
+            date.toLocaleDateString(),
             courseName,
             myScore,
             players.join(', '),

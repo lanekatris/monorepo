@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs';
-import { parseScorecard } from './parse-scorecard';
+import { processScorecards } from 'packages/scorecards/src/process-scorecards';
 import { getPlayerTimeInYears } from './get-player-time-in-years';
 
 const csv = readFileSync(
@@ -7,7 +7,7 @@ const csv = readFileSync(
 ).toString();
 
 test('Returns a list of scorecards', async () => {
-  const result = await parseScorecard({
+  const result = await processScorecards({
     csv,
     playerName: 'JJHACKN',
     // excludes: ['2022-10-15 14:50'],

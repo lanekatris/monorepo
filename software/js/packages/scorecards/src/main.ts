@@ -1,5 +1,8 @@
 import { readFileSync, writeFileSync } from 'fs';
-import { parseScorecard } from './parse-scorecard';
+import {
+  parseScorecardFromCsv,
+  processScorecards,
+} from 'packages/scorecards/src/process-scorecards';
 import { generateScorecardMarkdown } from './generate-scorecard-markdown';
 
 async function go() {
@@ -7,8 +10,9 @@ async function go() {
   const raw = readFileSync(
     '/home/lane/git/monorepo/data/scorecards-source.csv'
   ).toString();
-  const result = await parseScorecard({
-    csv: raw,
+  const rawScorecards = await parseScorecardFromCsv(raw);
+  const result = await processScorecards({
+    rawScorecards,
     playerName: 'Lane',
   });
   const md = generateScorecardMarkdown(result);
