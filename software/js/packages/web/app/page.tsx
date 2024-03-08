@@ -54,7 +54,7 @@ export default async function Index() {
           alt="Lane and his son Troy in the snow"
         />
         <Typography level="body-xs">
-          Land and Troy in the snow 2024-01
+          Lane and Troy in the snow 2024-01
         </Typography>
       </Box>
       <br />
