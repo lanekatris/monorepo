@@ -1,4 +1,3 @@
-import Navigation from 'packages/web/layout/navigation';
 import {
   Alert,
   Breadcrumbs,
@@ -66,6 +65,13 @@ export default async function DiscsPage() {
   // console.log('ii', discStatuses);
 
   // console.log(rows[0]);
+
+  const { rows: courses }: { rows: { coursename: string }[] } =
+    await sql`select distinct coursename from kestra.udisc_scorecard order by coursename`;
+
+  // console.log('courses', courses);
+
+  // const [idk, setidk] = useState('');
   return (
     <Container maxWidth="sm">
       <Breadcrumbs>
@@ -74,13 +80,22 @@ export default async function DiscsPage() {
         </Link>
         <Typography>Disc Golf Dashboard</Typography>
       </Breadcrumbs>
-      <Stack
-        direction="row"
-        justifyContent={'space-between'}
-        alignItems={'center'}
-      >
+      <Typography level="h4" id="toc">
+        TOC
+      </Typography>
+      <List size="sm">
+        <ListItem>
+          <Link href="#my-discs">My Discs</Link>
+        </ListItem>
+        <ListItem>
+          <Link href="#courses">Courses I've Played</Link>
+        </ListItem>
+      </List>
+      {/*<br />*/}
+      {/*<br />*/}
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Typography level="h4">Stats</Typography>
-        <Typography level={'body-sm'}>
+        <Typography level="body-sm">
           Updated: {formatRelative(latestRound.startdate, new Date())}
         </Typography>
       </Stack>
@@ -122,10 +137,14 @@ export default async function DiscsPage() {
       {/*</ResponsiveContainer>*/}
       {/*<DiscsChart discs={rows} />*/}
       <br />
-      <Typography level="h4" gutterBottom>
+      <Typography level="h4" gutterBottom id="my-discs">
         My Discs
       </Typography>
-      <Stack direction={'row'} spacing={1} flexWrap={'wrap'} useFlexGap>
+      <Alert color="primary">
+        I currently have {totalInBag} discs in my bag
+      </Alert>
+      <br />
+      <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
         <Chip>Total: {total}</Chip>
         {/*<Chip>In Bag: {totalInBag}</Chip>*/}
         {/*hi*/}
@@ -143,7 +162,7 @@ export default async function DiscsPage() {
       {/*    Discs In Bag: <b>{totalInBag}</b>*/}
       {/*  </ListItem>*/}
       {/*</List>*/}
-      <Table aria-label="basic table">
+      <Table>
         {/*<thead>*/}
         {/*  <tr>*/}
         {/*    <th style={{ width: '40%' }}>Dessert (100g serving)</th>*/}
@@ -174,6 +193,29 @@ export default async function DiscsPage() {
           ))}
         </tbody>
       </Table>
+      <br />
+      <Link href="#toc">Back to Top</Link>
+      <br />
+      <br />
+      <Typography level="h4" id="courses">
+        Unique Courses <Chip>Count: {courses.length}</Chip>
+      </Typography>
+      <Table>
+        <thead>
+          <tr>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {courses.map(({ coursename }) => (
+            <tr key={coursename}>
+              <td>{coursename}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+      <br />
+      <Link href="#toc">Back to Top</Link>
     </Container>
   );
   // return (

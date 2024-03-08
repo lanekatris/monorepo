@@ -141,7 +141,17 @@ export default async function Index() {
               <Typography level="title-lg">Colorado 14ers Summited</Typography>
               <Stack direction="row" spacing={2}>
                 <Typography>
-                  {fourteenerStats.completed} / {fourteenerStats.total} 14ers
+                  {fourteenerStats.completed} / {fourteenerStats.total}
+                </Typography>
+                {/* */}
+                <Typography>
+                  <a
+                    href="https://www.lanekatris.com/Colorado-14ers"
+                    target="_blank"
+                    className="text-blue-600 visited:text-purple-600"
+                  >
+                    More Info
+                  </a>
                 </Typography>
               </Stack>
             </CardContent>
