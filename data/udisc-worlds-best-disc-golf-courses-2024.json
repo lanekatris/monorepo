@@ -1,0 +1,702 @@
+[
+  {
+    "rank": 1,
+    "name": "Krokhol Disc Golf Course",
+    "url": "https://udisc.com/courses/krokhol-disc-golf-course-TKtF",
+    "udisc_id": "krokhol-disc-golf-course-TKtF",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 2,
+    "name": "Kippasuo Pro DiscGolfPark at Heinola DiscGolfPark World",
+    "url": "https://udisc.com/courses/kippasuo-pro-disc-golf-park-at-heinola-disc-golf-park-world-Q64q",
+    "udisc_id": "kippasuo-pro-disc-golf-park-at-heinola-disc-golf-park-world-Q64q",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 3,
+    "name": "Ale Disc Golf Center: White Course",
+    "url": "https://udisc.com/courses/ale-disc-golf-center-white-course-Bwwj",
+    "udisc_id": "ale-disc-golf-center-white-course-Bwwj",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 4,
+    "name": "Maple Hill",
+    "url": "https://udisc.com/courses/maple-hill-lCej",
+    "udisc_id": "maple-hill-lCej",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 5,
+    "name": "Brewster Ridge Disc Golf Course",
+    "url": "https://udisc.com/courses/brewster-ridge-disc-golf-course-DVua",
+    "udisc_id": "brewster-ridge-disc-golf-course-DVua",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 6,
+    "name": "Persimmon Ridge Disc Golf Course",
+    "url": "https://udisc.com/courses/persimmon-ridge-dgc-ErdF",
+    "udisc_id": "persimmon-ridge-dgc-ErdF",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 7,
+    "name": "Fox Run Meadows",
+    "url": "https://udisc.com/courses/fox-run-meadows-yi3h",
+    "udisc_id": "fox-run-meadows-yi3h",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 8,
+    "name": "Caliber Disc Golf Course",
+    "url": "https://udisc.com/courses/caliber-dgc-Rxbo",
+    "udisc_id": "caliber-dgc-Rxbo",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 9,
+    "name": "Championship Course at Eagles Crossing",
+    "url": "https://udisc.com/courses/eagles-crossing-JQQP",
+    "udisc_id": "eagles-crossing-JQQP",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 10,
+    "name": "Åkeslund DiscGolfCenter",
+    "url": "https://udisc.com/courses/akeslund-disc-golf-center-Slp3",
+    "udisc_id": "akeslund-disc-golf-center-Slp3",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 11,
+    "name": "Flip City Disc Golf Park",
+    "url": "https://udisc.com/courses/flip-city-disc-golf-park-Q6Sd",
+    "udisc_id": "flip-city-disc-golf-park-Q6Sd",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 12,
+    "name": "Ale Disc Golf Center: Yellow Course",
+    "url": "https://udisc.com/courses/ale-disc-golf-center-yellow-course-PSfu",
+    "udisc_id": "ale-disc-golf-center-yellow-course-PSfu",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 13,
+    "name": "Øverås Diskgolfpark",
+    "url": "https://udisc.com/courses/overas-diskgolfpark-JBfU",
+    "udisc_id": "overas-diskgolfpark-JBfU",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 14,
+    "name": "Blue Ribbon Pines",
+    "url": "https://udisc.com/courses/blue-ribbon-pines-aCxV",
+    "udisc_id": "blue-ribbon-pines-aCxV",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 15,
+    "name": "Harmony Bends",
+    "url": "https://udisc.com/courses/harmony-bends-iSZl",
+    "udisc_id": "harmony-bends-iSZl",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 16,
+    "name": "Neatman Creek",
+    "url": "https://udisc.com/courses/neatman-creek-LlEM",
+    "udisc_id": "neatman-creek-LlEM",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 17,
+    "name": "The Canyons at Dellwood Park",
+    "url": "https://udisc.com/courses/the-canyons-at-dellwood-park-EV25",
+    "udisc_id": "the-canyons-at-dellwood-park-EV25",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 18,
+    "name": "Sugaree",
+    "url": "https://udisc.com/courses/sugaree-IZdI",
+    "udisc_id": "sugaree-IZdI",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 19,
+    "name": "Wildcat Bluff",
+    "url": "https://udisc.com/courses/wildcat-bluff-I1rO",
+    "udisc_id": "wildcat-bluff-I1rO",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 20,
+    "name": "Beaver Ranch Disc Golf Course",
+    "url": "https://udisc.com/courses/beaver-ranch-disc-golf-course-dmjy",
+    "udisc_id": "beaver-ranch-disc-golf-course-dmjy",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 21,
+    "name": "THE Diavolo DGC @ New Hope Park",
+    "url": "https://udisc.com/courses/the-diavolo-dgc-new-hope-park-SxAA",
+    "udisc_id": "the-diavolo-dgc-new-hope-park-SxAA",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 22,
+    "name": "Idlewild",
+    "url": "https://udisc.com/courses/idlewild-FVl4",
+    "udisc_id": "idlewild-FVl4",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 23,
+    "name": "Momhøje Discgolf",
+    "url": "https://udisc.com/courses/momhoje-discgolf-SCMK",
+    "udisc_id": "momhoje-discgolf-SCMK",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 24,
+    "name": "Hillcrest Farm Disc Golf",
+    "url": "https://udisc.com/courses/hillcrest-farm-disc-golf-uWDj",
+    "udisc_id": "hillcrest-farm-disc-golf-uWDj",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 25,
+    "name": "Bear Mountain",
+    "url": "https://udisc.com/courses/bear-mountain-KTAl",
+    "udisc_id": "bear-mountain-KTAl",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 26,
+    "name": "Faylor Lake DiscGolfPark",
+    "url": "https://udisc.com/courses/faylor-lake-disc-golf-park-vVwU",
+    "udisc_id": "faylor-lake-disc-golf-park-vVwU",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 27,
+    "name": "North Cove Disc Golf: Boulders",
+    "url": "https://udisc.com/courses/north-cove-disc-golf-boulders-osby",
+    "udisc_id": "north-cove-disc-golf-boulders-osby",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 28,
+    "name": "Hobb's Farm Disc Golf",
+    "url": "https://udisc.com/courses/hobbs-farm-disc-golf-W9kF",
+    "udisc_id": "hobbs-farm-disc-golf-W9kF",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 29,
+    "name": "Skellefteå Discgolf Terminalen",
+    "url": "https://udisc.com/courses/discgolf-terminalen-skelleftea-Whtv",
+    "udisc_id": "discgolf-terminalen-skelleftea-Whtv",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 30,
+    "name": "Lundbyparken",
+    "url": "https://udisc.com/courses/lundbyparken-i88M",
+    "udisc_id": "lundbyparken-i88M",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 31,
+    "name": "Cannon Ridge",
+    "url": "https://udisc.com/courses/cannon-ridge-PTRU",
+    "udisc_id": "cannon-ridge-PTRU",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 32,
+    "name": "New London Tech Disc Golf Course",
+    "url": "https://udisc.com/courses/new-london-tech-dgc-B9rN",
+    "udisc_id": "new-london-tech-dgc-B9rN",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 33,
+    "name": "Raptors Knoll Disc Golf Park",
+    "url": "https://udisc.com/courses/raptors-knoll-disc-golf-park-mxVs",
+    "udisc_id": "raptors-knoll-disc-golf-park-mxVs",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 34,
+    "name": "Bryant Lake Park",
+    "url": "https://udisc.com/courses/bryant-lake-park-k5Dc",
+    "udisc_id": "bryant-lake-park-k5Dc",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 35,
+    "name": "Uspatorp",
+    "url": "https://udisc.com/courses/uspastorp-disc-golf-park-sKSb",
+    "udisc_id": "uspastorp-disc-golf-park-sKSb",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 36,
+    "name": "Puijo DiscGolf",
+    "url": "https://udisc.com/courses/puijo-disc-golf-NODE",
+    "udisc_id": "puijo-disc-golf-NODE",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 37,
+    "name": "Stafford Woods",
+    "url": "https://udisc.com/courses/stafford-woods-CXrd",
+    "udisc_id": "stafford-woods-CXrd",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 38,
+    "name": "The Hideaway DGR: Roadrunner",
+    "url": "https://udisc.com/courses/the-hideaway-dgr-roadrunner-K1Cr",
+    "udisc_id": "the-hideaway-dgr-roadrunner-K1Cr",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 39,
+    "name": "Harmon Hills",
+    "url": "https://udisc.com/courses/harmon-hills-fs94",
+    "udisc_id": "harmon-hills-fs94",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 40,
+    "name": "Northwood Park Disc Golf Course - Black",
+    "url": "https://udisc.com/courses/northwood-park-black-uqNc",
+    "udisc_id": "northwood-park-black-uqNc",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 41,
+    "name": "Järva Disc Golf Park",
+    "url": "https://udisc.com/courses/jaerva-discgolf-park-xgc5",
+    "udisc_id": "jaerva-discgolf-park-xgc5",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 42,
+    "name": "Vojens DiscGolfPark",
+    "url": "https://udisc.com/courses/vojens-disc-golf-park-Kvi1",
+    "udisc_id": "vojens-disc-golf-park-Kvi1",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 43,
+    "name": "Sandy Point Disc Golf Ranch",
+    "url": "https://udisc.com/courses/sandy-point-disc-golf-ranch-GYmV",
+    "udisc_id": "sandy-point-disc-golf-ranch-GYmV",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 44,
+    "name": "Lake Marshall - Lions",
+    "url": "https://udisc.com/courses/lake-marshall-lions-lZjw",
+    "udisc_id": "lake-marshall-lions-lZjw",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 45,
+    "name": "Lakeview Disc Golf Course at Moraine State Park",
+    "url": "https://udisc.com/courses/lakeview-dgc-at-moraine-state-park-DZlj",
+    "udisc_id": "lakeview-dgc-at-moraine-state-park-DZlj",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 46,
+    "name": "BC3 Disc Golf",
+    "url": "https://udisc.com/courses/b-c3-disc-golf-I57q",
+    "udisc_id": "b-c3-disc-golf-I57q",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 47,
+    "name": "Ymergårdens Discgolfcenter - Gold Course",
+    "url": "https://udisc.com/courses/ymergardens-discgolfcenter-gold-course-yQg4",
+    "udisc_id": "ymergardens-discgolfcenter-gold-course-yQg4",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 48,
+    "name": "Rollin Ridge",
+    "url": "https://udisc.com/courses/rollin-ridge-sU10",
+    "udisc_id": "rollin-ridge-sU10",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 49,
+    "name": "DeLaveaga Disc Golf Course",
+    "url": "https://udisc.com/courses/de-laveaga-dgc-EpV1",
+    "udisc_id": "de-laveaga-dgc-EpV1",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 50,
+    "name": "Echo Valley Disc Golf Course",
+    "url": "https://udisc.com/courses/echo-valley-dgc-q7H2",
+    "udisc_id": "echo-valley-dgc-q7H2",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 51,
+    "name": "The Regulator at Rock Creek",
+    "url": "https://udisc.com/courses/the-regulator-at-rock-creek-Vaol",
+    "udisc_id": "the-regulator-at-rock-creek-Vaol",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 52,
+    "name": "Kayak Point Disc Golf Resort - Red",
+    "url": "https://udisc.com/courses/kayak-point-dgr-red-odp9",
+    "udisc_id": "kayak-point-dgr-red-odp9",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 53,
+    "name": "Parc des Familles Disc Golf Course",
+    "url": "https://udisc.com/courses/parc-des-familles-dgc-stFh",
+    "udisc_id": "parc-des-familles-dgc-stFh",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 54,
+    "name": "Dino Hills Disc Golf Farm - Carnivore Valley",
+    "url": "https://udisc.com/courses/dino-hills-dg-farm-carnivore-valley-Yck6",
+    "udisc_id": "dino-hills-dg-farm-carnivore-valley-Yck6",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 55,
+    "name": "Deer Lakes Park",
+    "url": "https://udisc.com/courses/deer-lakes-park-vtXk",
+    "udisc_id": "deer-lakes-park-vtXk",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 56,
+    "name": "Ørland Discgolfpark",
+    "url": "https://udisc.com/courses/orland-discgolfpark-pXmH",
+    "udisc_id": "orland-discgolfpark-pXmH",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 57,
+    "name": "Renegade's Trail",
+    "url": "https://udisc.com/courses/renegade-s-trail-jWAL",
+    "udisc_id": "renegade-s-trail-jWAL",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 58,
+    "name": "Brooktrails",
+    "url": "https://udisc.com/courses/brooktrails-BiEV",
+    "udisc_id": "brooktrails-BiEV",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 59,
+    "name": "Sabattus Disc Golf - Hawk",
+    "url": "https://udisc.com/courses/sabattus-disc-golf-hawk-X4Iq",
+    "udisc_id": "sabattus-disc-golf-hawk-X4Iq",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 60,
+    "name": "Milo McIver",
+    "url": "https://udisc.com/courses/milo-mc-iver-east-CKuM",
+    "udisc_id": "milo-mc-iver-east-CKuM",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 61,
+    "name": "Spa Park",
+    "url": "https://udisc.com/courses/spa-park-x1cC",
+    "udisc_id": "spa-park-x1cC",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 62,
+    "name": "Caesar Ford Park - Championship",
+    "url": "https://udisc.com/courses/caesar-ford-park-championship-Rqp0",
+    "udisc_id": "caesar-ford-park-championship-Rqp0",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 63,
+    "name": "Meadowbrook Orchards",
+    "url": "https://udisc.com/courses/meadowbrook-orchards-Km6Z",
+    "udisc_id": "meadowbrook-orchards-Km6Z",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 64,
+    "name": "Karidalen FrisbeeGolfPark",
+    "url": "https://udisc.com/courses/karidalen-frisbee-golf-park-QqRf",
+    "udisc_id": "karidalen-frisbee-golf-park-QqRf",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 65,
+    "name": "Muddy Run Disc Golf Course",
+    "url": "https://udisc.com/courses/muddy-run-dgc-8uQz",
+    "udisc_id": "muddy-run-dgc-8uQz",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 66,
+    "name": "Sibbe Disc Golf",
+    "url": "https://udisc.com/courses/sibbe-disc-golf-0y4t",
+    "udisc_id": "sibbe-disc-golf-0y4t",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 67,
+    "name": "Bud Hill",
+    "url": "https://udisc.com/courses/bud-hill-A5Xf",
+    "udisc_id": "bud-hill-A5Xf",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 68,
+    "name": "Arrowhead Disc Golf Course",
+    "url": "https://udisc.com/courses/arrowhead-disc-golf-course-KVLv",
+    "udisc_id": "arrowhead-disc-golf-course-KVLv",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 69,
+    "name": "Wilcox Memorial Park",
+    "url": "https://udisc.com/courses/wilcox-memorial-park-h8kA",
+    "udisc_id": "wilcox-memorial-park-h8kA",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 70,
+    "name": "Aspen Meadows West",
+    "url": "https://udisc.com/courses/aspen-meadows-west-JOiP",
+    "udisc_id": "aspen-meadows-west-JOiP",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 71,
+    "name": "Kudzu Cove Cabins",
+    "url": "https://udisc.com/courses/kudzu-cove-cabins-XM3k",
+    "udisc_id": "kudzu-cove-cabins-XM3k",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 72,
+    "name": "Standing Rocks",
+    "url": "https://udisc.com/courses/standing-rocks-Q7j7",
+    "udisc_id": "standing-rocks-Q7j7",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 73,
+    "name": "Little Mulberry Park",
+    "url": "https://udisc.com/courses/little-mulberry-park-XhxF",
+    "udisc_id": "little-mulberry-park-XhxF",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 74,
+    "name": "Glåmos Diskgolfbane Main",
+    "url": "https://udisc.com/courses/glamos-diskgolfbane-main-taUo",
+    "udisc_id": "glamos-diskgolfbane-main-taUo",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 75,
+    "name": "Pickard Park",
+    "url": "https://udisc.com/courses/pickard-park-rnvJ",
+    "udisc_id": "pickard-park-rnvJ",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 76,
+    "name": "Tjader Acres",
+    "url": "https://udisc.com/courses/tjader-acres-oNYs",
+    "udisc_id": "tjader-acres-oNYs",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 77,
+    "name": "Camp Serene",
+    "url": "https://udisc.com/courses/camp-serene-jk32",
+    "udisc_id": "camp-serene-jk32",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 78,
+    "name": "Silver Creek Park",
+    "url": "https://udisc.com/courses/silver-creek-park-ItpA",
+    "udisc_id": "silver-creek-park-ItpA",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 79,
+    "name": "The Fort",
+    "url": "https://udisc.com/courses/the-fort-pAsd",
+    "udisc_id": "the-fort-pAsd",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 80,
+    "name": "Mayflower Hills",
+    "url": "https://udisc.com/courses/mayflower-hills-EVhu",
+    "udisc_id": "mayflower-hills-EVhu",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 81,
+    "name": "Westy Acres",
+    "url": "https://udisc.com/courses/westy-acres-0c3n",
+    "udisc_id": "westy-acres-0c3n",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 82,
+    "name": "North Bluff",
+    "url": "https://udisc.com/courses/north-bluff-Zo4W",
+    "udisc_id": "north-bluff-Zo4W",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 83,
+    "name": "Fålehagen DiscGolfPark",
+    "url": "https://udisc.com/courses/falehagen-disc-golf-park-jY3S",
+    "udisc_id": "falehagen-disc-golf-park-jY3S",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 84,
+    "name": "Hanna Hills Disc Golf Course",
+    "url": "https://udisc.com/courses/hanna-hills-disc-golf-course-R7zr",
+    "udisc_id": "hanna-hills-disc-golf-course-R7zr",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 85,
+    "name": "Häfla Bruks DiscGolfPark (Hävla)",
+    "url": "https://udisc.com/courses/haefla-bruks-disc-golf-park-haevla-t5x2",
+    "udisc_id": "haefla-bruks-disc-golf-park-haevla-t5x2",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 86,
+    "name": "Spoon Creek Disc Golf Course",
+    "url": "https://udisc.com/courses/spoon-creek-disc-golf-course-UXwL",
+    "udisc_id": "spoon-creek-disc-golf-course-UXwL",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 87,
+    "name": "Broken Chains",
+    "url": "https://udisc.com/courses/broken-chains-Xyol",
+    "udisc_id": "broken-chains-Xyol",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 88,
+    "name": "Beal Slough Disc Golf Course",
+    "url": "https://udisc.com/courses/beal-slough-disc-golf-course-hHt5",
+    "udisc_id": "beal-slough-disc-golf-course-hHt5",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 89,
+    "name": "The Admiral",
+    "url": "https://udisc.com/courses/the-admiral-HqzB",
+    "udisc_id": "the-admiral-HqzB",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 90,
+    "name": "Rolling Pines",
+    "url": "https://udisc.com/courses/rolling-pines-JQiT",
+    "udisc_id": "rolling-pines-JQiT",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 91,
+    "name": "Rocky Hills",
+    "url": "https://udisc.com/courses/rocky-hills-lBQt",
+    "udisc_id": "rocky-hills-lBQt",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 92,
+    "name": "Tom Brown Park Disc Golf Course",
+    "url": "https://udisc.com/courses/tom-brown-park-dgc-eMMo",
+    "udisc_id": "tom-brown-park-dgc-eMMo",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 93,
+    "name": "Kayak Point - Gold",
+    "url": "https://udisc.com/courses/kayak-point-dgr-gold-QMwm",
+    "udisc_id": "kayak-point-dgr-gold-QMwm",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 94,
+    "name": "North Cove Disc Golf: River Run",
+    "url": "https://udisc.com/courses/north-cove-disc-golf-river-run-TcAp",
+    "udisc_id": "north-cove-disc-golf-river-run-TcAp",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 95,
+    "name": "ReBoot Disc Golf at Bluebell Woods",
+    "url": "https://udisc.com/courses/re-boot-disc-golf-at-bluebell-woods-NrJC",
+    "udisc_id": "re-boot-disc-golf-at-bluebell-woods-NrJC",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 96,
+    "name": "Wilderness Ranch",
+    "url": "https://udisc.com/courses/wilderness-ranch-t6J6",
+    "udisc_id": "wilderness-ranch-t6J6",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 97,
+    "name": "Halsnæs Disc Golf",
+    "url": "https://udisc.com/courses/halsnaes-disc-golf-FiEw",
+    "udisc_id": "halsnaes-disc-golf-FiEw",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 98,
+    "name": "Oggwood Disc Golf Course",
+    "url": "https://udisc.com/courses/oggwood-c7Cf",
+    "udisc_id": "oggwood-c7Cf",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 99,
+    "name": "Lake Marshall - Lair",
+    "url": "https://udisc.com/courses/lake-marshall-lair-wynB",
+    "udisc_id": "lake-marshall-lair-wynB",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  },
+  {
+    "rank": 100,
+    "name": "Base Camp Adventure",
+    "url": "https://udisc.com/courses/base-camp-adventure-FRSb",
+    "udisc_id": "base-camp-adventure-FRSb",
+    "source": "https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+  }
+]
