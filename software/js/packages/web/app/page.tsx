@@ -22,6 +22,13 @@ export default async function Index() {
            group by visited
   `);
 
+  const coursesGoal2024 = await getMetric(sql`
+  select visited, count(*) as count
+           from noco.place
+           where source = 'https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024'
+           group by visited
+  `);
+
   const {
     completed: completed2,
     total: total2,
@@ -91,7 +98,7 @@ export default async function Index() {
             </CircularProgress>
             <CardContent>
               <Typography level="title-lg">
-                Top 100 Disc Golf Course Completion
+                Top 100 Disc Golf Course Completion 2023
               </Typography>
               <Stack direction="row" spacing={2}>
                 <Typography>
@@ -110,6 +117,14 @@ export default async function Index() {
             </CardContent>
           </CardContent>
         </Card>
+
+        <MetricCard
+          percentage={coursesGoal2024.percentage}
+          completed={coursesGoal2024.completed}
+          total={coursesGoal2024.total}
+          title="New Top 100 Disc Golf Course Completion 2024"
+          link="https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+        />
 
         <Card variant="outlined">
           <CardContent orientation="horizontal">
@@ -184,3 +199,42 @@ export default async function Index() {
   );
 }
 // Index.testies = <h1>hi there</h1>;
+
+interface Metric {
+  percentage: number;
+  completed: number;
+  total: number;
+  link?: string;
+  title: string;
+}
+function MetricCard({ percentage, completed, total, link, title }: Metric) {
+  return (
+    <Card variant="outlined">
+      <CardContent orientation="horizontal">
+        <CircularProgress
+          size="lg"
+          color="danger"
+          determinate
+          value={percentage}
+        >
+          <Typography>{percentage}%</Typography>
+        </CircularProgress>
+        <CardContent>
+          <Typography level="title-lg">{title}</Typography>
+          <Stack direction="row" spacing={2}>
+            <Typography>
+              {completed} / {total}
+            </Typography>
+            {link && (
+              <Typography>
+                <a href={link} target="_blank">
+                  More Info
+                </a>
+              </Typography>
+            )}
+          </Stack>
+        </CardContent>
+      </CardContent>
+    </Card>
+  );
+}

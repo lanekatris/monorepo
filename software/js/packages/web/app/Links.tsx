@@ -18,7 +18,7 @@ export default function HomeLinks() {
         </Chip>
       </ListItem>
       <ListItem>
-        <Link href="/discs">Discs</Link>
+        <Link href="/discs">Disc Golf</Link>
       </ListItem>
       <ListItem>
         <Link href="/climb/logger">Climb Logger</Link>
