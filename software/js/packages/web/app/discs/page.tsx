@@ -26,7 +26,7 @@ export interface Disc {
   plastic: string;
   number: bigint;
   status: string;
-  weight: bigint;
+  weight: number;
   created: Date;
   price: number;
   notes: string;
@@ -175,9 +175,11 @@ export default async function DiscsPage() {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Brand</th>
+            <th>Date</th>
             <th>Color</th>
-            <th>Model</th>
+            <th>Disc</th>
+            {/*<th>Model</th>*/}
+            <th>Weight</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -185,9 +187,15 @@ export default async function DiscsPage() {
           {rows.map((disc) => (
             <tr key={disc.id}>
               <td>{disc.id}</td>
-              <td>{disc.brand}</td>
+              <td>{disc.created?.toLocaleDateString()}</td>
               <td>{disc.color}</td>
-              <td>{disc.model}</td>
+              <td>
+                {disc.brand}
+                <br />
+                {disc.model}
+              </td>
+              {/*<td>{disc.model}</td>*/}
+              <td>{disc.weight ? `${disc.weight}g` : ''}</td>
               <td>{disc.status}</td>
             </tr>
           ))}
