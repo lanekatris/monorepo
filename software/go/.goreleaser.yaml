@@ -1,5 +1,17 @@
 builds:
   - id: lk
+    binary: lk
     main: './cmd/lk'
+    goos:
+      - linux
+      - windows
+    goarch:
+      - amd64
   - id: lkat
+    binary: lkat
     main: './cmd/lkat'
+    goos:
+      - linux
+      - windows
+    goarch:
+      - amd64
