@@ -154,11 +154,20 @@ func main() {
 	})
 
 	r.GET("/deploy-blog", func(c *gin.Context) {
-		cmd, err := exec.Command("/bin/sh", "/home/lane/git/monorepo/scripts/sync-brain.sh").Output()
-		if err != nil {
-			c.JSON(500, err)
+		if isLinux() {
+			cmd, err := exec.Command("/bin/sh", "/home/lane/git/monorepo/scripts/sync-brain.sh").Output()
+			if err != nil {
+				c.JSON(500, err)
+			}
+			c.Data(http.StatusOK, "application/json", cmd)
+		} else {
+			cmd, err := exec.Command("powershell", "C:\\Code\\monorepo\\scripts\\sync-brain.ps1").Output()
+			if err != nil {
+				c.JSON(500, err)
+			}
+			c.Data(http.StatusOK, "application/json", cmd)
 		}
-		c.Data(http.StatusOK, "application/json", cmd)
+
 	})
 
 	r.GET("/disable-monitors", func(c *gin.Context) {

@@ -1,2 +1,5 @@
 builds:
-  - main: './cmd/lk'
+  - id: lk
+    main: './cmd/lk'
+  - id: lkat
+    main: './cmd/lkat'
