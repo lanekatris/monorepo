@@ -15,3 +15,11 @@ builds:
       - windows
     goarch:
       - amd64
+  - id: worker
+    binary: worker
+    main: './worker'
+    goos:
+      - linux
+      - windows
+    goarch:
+      - amd64
