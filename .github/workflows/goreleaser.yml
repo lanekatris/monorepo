@@ -2,8 +2,8 @@ name: goreleaser
 
 on:
   push:
-    paths:
-      - 'software/go/**'
+    tags:
+      - '*'
 
 permissions:
   contents: write
