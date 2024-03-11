@@ -44,7 +44,7 @@ async function GetRawScorecards() {
      from kestra.udisc_scorecard order by startdate desc`;
   return rows;
 }
-
+export const dynamic = 'force-dynamic';
 export default async function DiscsPage() {
   const { rows }: { rows: Disc[] } =
     await sql`select * from noco."disc" order by id desc`;
