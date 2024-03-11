@@ -2,8 +2,17 @@ volumes:
   homeassistant:
 
 services:
+  web:
+    image: loonison101/web:main
+    restart: unless-stopped
+    pull_policy: always
+    ports:
+      - "3333:3000"
+    environment:
+      - POSTGRES_URL=${POSTGRES_URL}
+
   nocodb:
-    image: nocodb/nocodb:0.202.5
+    image: nocodb/nocodb:0.204.4
     ports:
       - "8080:8080"
     restart: unless-stopped
@@ -17,10 +26,33 @@ services:
       - 8123:8123
     volumes:
       - homeassistant:/config
-#      - /etc/localtime:/etc/localtime:ro
-#      - /run/dbus:/run/dbus:ro
     restart: unless-stopped
-#    privileged: true
-#    network_mode: host
-#    pull_policy: always
-
+  paste:
+    image: danielszabo99/microbin
+    restart: unless-stopped
+    environment:
+      - MICROBIN_PRIVATE=false
+      - MICROBIN_PUBLIC_PATH=https://paste.lkat.io
+      - MICROBIN_QR=true
+      - MICROBIN_HIGHLIGHTSYNTAX=true
+      - MICROBIN_ADMIN_USERNAME=${MICROBIN_USERNAME}
+      - MICROBIN_ADMIN_PASSWORD=${MICROBIN_SECRET}
+      - MICROBIN_ENCRYPTION_CLIENT_SIDE=false
+      - MICROBIN_ENCRYPTION_SERVER_SIDE=true
+      - MICROBIN_TITLE=Microbin
+      - MICROBIN_QR=True
+      - MICROBIN_HIDE_FOOTER=True
+      - MICROBIN_WIDE=true
+      - MICROBIN_ENABLE_READONLY=true
+    ports:
+      - "8065:8080"
+    volumes:
+      - /home/lane/microbin:/my/microbin
+      - /home/lane/microbin/data:/app/pasta_data
+  memos:
+    image: neosmemo/memos:stable
+    restart: unless-stopped
+    ports:
+      - "5230:5230"
+    volumes:
+      - /home/lane/memos:/var/opt/memos
