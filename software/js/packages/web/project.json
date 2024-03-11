@@ -50,9 +50,10 @@
       "executor": "@nx-tools/nx-container:build",
       "dependsOn": ["build"],
       "options": {
+        "push": true,
         "engine": "docker",
         "metadata": {
-          "images": ["web"],
+          "images": ["loonison101/web"],
           "load": true,
           "tags": [
             "type=schedule",
