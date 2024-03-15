@@ -40,7 +40,7 @@ with x as (select
 f.type,
                   case
                       when f.type = 'climb' then t."Date"::date
-                      when f.type = 'disc-golf-scorecard' then u."date"::date
+                      when f.type = 'disc-golf-scorecard' then u."startdate"::date
                       when f.type = 'disc-golf-disc' then coalesce(d.created, d.created_at)::date
                       when f.type = 'obsidian-adventure' then oa.date::date
                       end as date,
@@ -59,5 +59,6 @@ f.type,
 select * from x order by date desc;
   `;
 
+  // console.log('feed', feed);
   return feed;
 });

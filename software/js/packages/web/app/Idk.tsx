@@ -20,6 +20,16 @@ import {
   GiMountainClimbing,
   GiMountains,
 } from 'react-icons/gi';
+import {
+  Box,
+  List,
+  ListDivider,
+  ListItem,
+  Stack,
+  Table,
+  Typography,
+} from '@mui/joy';
+import React from 'react';
 
 // export function Idk() {
 //   return (
@@ -83,51 +93,96 @@ interface FeedTableProps {
 }
 
 const feedIcon: { [k in FeedType]: React.ReactElement } = {
-  'obsidian-adventure': <GiMountains size={30} />,
-  'disc-golf-disc': <CgDisc size={30} />,
-  'disc-golf-scorecard': <GiDiscGolfBasket size={30} />,
-  climb: <GiMountainClimbing size={30} />,
+  'obsidian-adventure': <GiMountains size={20} />,
+  'disc-golf-disc': <CgDisc size={20} />,
+  'disc-golf-scorecard': <GiDiscGolfBasket size={20} />,
+  climb: <GiMountainClimbing size={20} />,
 };
 
+const feedTitle: { [k in FeedType]: string } = {
+  climb: 'Climbed Route',
+  'disc-golf-disc': 'New Disc',
+  'disc-golf-scorecard': 'DG Round',
+  'obsidian-adventure': 'Adventure',
+};
+
+interface FeedLineItemProps {
+  // title: string;
+  type: FeedType;
+  date: Date;
+  // children: React.ReactElement | string | undefined;
+  children: React.ReactNode;
+}
+
+function FeedLineItem({ type, children, date }: FeedLineItemProps) {
+  return (
+    <Stack direction="row" gap={2} alignItems="center">
+      <Box textAlign="center">
+        {feedIcon[type]}
+        <Typography level="body-xs">{date?.toLocaleDateString()}</Typography>
+        <Typography level="body-xs">{feedTitle[type]}</Typography>
+      </Box>
+      <Typography level="body-sm">{children}</Typography>
+    </Stack>
+  );
+}
+
 export function FeedTable({ rows }: FeedTableProps) {
-  return null;
-  // <Table>
-  //   <TableHead>
-  //     <TableRow>
-  //       <TableHeaderCell>Type</TableHeaderCell>
-  //       <TableHeaderCell>Date</TableHeaderCell>
-  //       <TableHeaderCell>Event</TableHeaderCell>
-  //     </TableRow>
-  //   </TableHead>
-  //   <TableBody>
-  //     {rows.map(({ id, date, data, type }) => (
-  //       <TableRow key={id}>
-  //         <TableCell>{feedIcon[type]}</TableCell>
-  //         {/*hack fix, investigate why undefined*/}
-  //         <TableCell>{date?.toLocaleDateString()}</TableCell>
-  //         {type === 'obsidian-adventure' && (
-  //           <TableCell>Adventure: {data.adventure?.activity}</TableCell>
-  //         )}
-  //         {type === 'disc-golf-disc' && (
-  //           <TableCell>
-  //             New Disc: #{data.disc?.number} - {data.disc?.brand}{' '}
-  //             {data.disc?.plastic} {data.disc?.model}{' '}
-  //             {data.disc?.weight && `(${data.disc?.weight}g)`}
-  //           </TableCell>
-  //         )}
-  //         {type === 'disc-golf-scorecard' && (
-  //           <TableCell>
-  //             Played disc golf @ {data.scorecard?.coursename} (
-  //             {data.scorecard?.['+/-']})
-  //           </TableCell>
-  //         )}
-  //         {type === 'climb' && (
-  //           <TableCell>
-  //             Climbed Route: {data.climb?.Route} ({data.climb?.Rating})
-  //           </TableCell>
-  //         )}
-  //       </TableRow>
-  //     ))}
-  //   </TableBody>
-  // </Table>
+  return (
+    <List>
+      {rows.map(({ id, date, data, type }) => (
+        <>
+          <ListItem key={id}>
+            {/*<Stack direction="row" gap={1}>*/}
+            {/*<Typography level="body-xs">*/}
+            {/*  {feedIcon[type]}*/}
+            {/*  {date?.toLocaleDateString()}*/}
+            {/*</Typography>*/}
+            {type === 'obsidian-adventure' && (
+              <>
+                <FeedLineItem type={type} date={date}>
+                  {data.adventure?.activity}
+                </FeedLineItem>
+                {/*<b>Adventure</b>: */}
+              </>
+            )}
+            {type === 'disc-golf-disc' && (
+              <>
+                <FeedLineItem type={type} date={date}>
+                  #{data.disc?.number} - {data.disc?.brand} {data.disc?.plastic}{' '}
+                  {data.disc?.model}{' '}
+                  {data.disc?.weight && `(${data.disc?.weight}g)`}
+                </FeedLineItem>
+                {/*<Typography level="body-xs">New Disc</Typography>-{' '}*/}
+                {/*<Typography level="body-sm">*/}
+                {/*  #{data.disc?.number} - {data.disc?.brand} {data.disc?.plastic}{' '}*/}
+                {/*  {data.disc?.model}{' '}*/}
+                {/*  {data.disc?.weight && `(${data.disc?.weight}g)`}*/}
+                {/*</Typography>*/}
+              </>
+            )}
+            {type === 'disc-golf-scorecard' && (
+              <>
+                {/*<b>Played disc golf</b> @ {data.scorecard?.coursename} (*/}
+                {/*{data.scorecard?.['+/-']})*/}
+                <FeedLineItem type={type} date={date}>
+                  @ {data.scorecard?.coursename} ({data.scorecard?.['+/-']})
+                </FeedLineItem>
+              </>
+            )}
+            {type === 'climb' && (
+              <>
+                <FeedLineItem type={type} date={date}>
+                  {data.climb?.Route} ({data.climb?.Rating})
+                </FeedLineItem>
+                {/*<b>Climbed Route</b>: {data.climb?.Route} ({data.climb?.Rating})*/}
+              </>
+            )}
+            {/*</Stack>*/}
+          </ListItem>
+          <ListDivider />
+        </>
+      ))}
+    </List>
+  );
 }
