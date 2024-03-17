@@ -1,35 +1,51 @@
 import { cache } from 'react';
 import { sql } from '@vercel/postgres';
 
-export const revalidate = 3600; // revalidate teh data at most every hour
+import bookmarks from '../app/search/raindrop-export.json';
+
+export interface Bookmark {
+  id: string;
+  title: string;
+  note: string;
+  excerpt: string;
+  url: string;
+  folder: string;
+  tags: string;
+  created: string;
+  cover: string;
+  highlights: string;
+  favorite: string;
+}
+
+export type FeedItemType =
+  | 'disc-golf-scorecard'
+  | 'climb'
+  | 'disc-golf-disc'
+  | 'obsidian-adventure'
+  | 'bookmark';
+
+export interface FeedItem {
+  id: string;
+  type: FeedItemType;
+  date: Date;
+  data: {
+    climb?: { Route: string; Rating: string };
+    scorecard?: { coursename: string; '+/-': number };
+    disc?: {
+      brand: string;
+      model: string;
+      plastic: string;
+      number: number;
+      weight?: number;
+    };
+    adventure?: { activity: string };
+    bookmark?: Bookmark;
+  };
+}
 
 export const getFeed = cache(async () => {
   console.log('Loading feed...');
-  const {
-    rows: feed,
-  }: {
-    rows: {
-      id: string;
-      type:
-        | 'disc-golf-scorecard'
-        | 'climb'
-        | 'disc-golf-disc'
-        | 'obsidian-adventure';
-      date: Date;
-      data: {
-        climb?: { Route: string; Rating: string };
-        scorecard?: { coursename: string; '+/-': number };
-        disc?: {
-          brand: string;
-          model: string;
-          plastic: string;
-          number: number;
-          weight?: number;
-        };
-        adventure?: { activity: string };
-      };
-    }[];
-  } = await sql`
+  const { rows: feed }: { rows: FeedItem[] } = await sql`
 with x as (select
  case
                    when f.type = 'climb' then concat('climb-', t.id)
@@ -40,7 +56,7 @@ with x as (select
 f.type,
                   case
                       when f.type = 'climb' then t."Date"::date
-                      when f.type = 'disc-golf-scorecard' then u."date"::date
+                      when f.type = 'disc-golf-scorecard' then u."startdate"::date
                       when f.type = 'disc-golf-disc' then coalesce(d.created, d.created_at)::date
                       when f.type = 'obsidian-adventure' then oa.date::date
                       end as date,
@@ -59,5 +75,25 @@ f.type,
 select * from x order by date desc;
   `;
 
-  return feed;
+  const finalFeed: FeedItem[] = [
+    ...feed,
+    ...bookmarks.map((bookmark) => {
+      const a: FeedItem = {
+        id: bookmark.id,
+        type: 'bookmark',
+        date: new Date(bookmark.created),
+        data: {
+          bookmark: bookmark,
+        },
+      };
+      return a;
+    }),
+  ];
+  finalFeed.sort((a, b) => {
+    // return a.date - b.date;
+    return b.date.valueOf() - a.date.valueOf();
+  });
+
+  // console.log('feed', feed);
+  return finalFeed;
 });

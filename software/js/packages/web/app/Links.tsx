@@ -11,8 +11,10 @@ export default function HomeLinks() {
       // sx={{ backgroundColor: theme.palette.warning.solidBg }}
     >
       <ListItem>
+        <Link href="/feed">Feed</Link>
+      </ListItem>
+      <ListItem>
         <Link href="/location-history">Location History</Link>
-
         <Chip variant="outlined" color="warning">
           Requires Login
         </Chip>
