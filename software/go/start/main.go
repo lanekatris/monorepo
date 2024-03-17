@@ -3,10 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"shared"
-	"shared/temporalstuff"
-
 	"log"
+	"shared"
 
 	"go.temporal.io/sdk/client"
 )
@@ -23,13 +21,15 @@ func main() {
 	defer c.Close()
 
 	options := client.StartWorkflowOptions{
-		ID:        "obsidian-theme-workflow",
+		//ID:        "obsidian-theme-workflow",
+		ID:        "obsidian-adventures-sync-2",
 		TaskQueue: shared.GreetingTaskQueue,
 	}
 
 	// Start the Workflow
 	//name := "World"
-	we, err := c.ExecuteWorkflow(context.Background(), options, temporalstuff.ObsidianThemeWorkflow)
+	//we, err := c.ExecuteWorkflow(context.Background(), options, temporalstuff.ObsidianThemeWorkflow)
+	we, err := c.ExecuteWorkflow(context.Background(), options, shared.LoadObsidianAdventuresWorkflow)
 	if err != nil {
 		log.Fatalln("unable to complete Workflow", err)
 	}

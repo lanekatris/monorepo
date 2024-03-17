@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/charmbracelet/log"
+	_ "github.com/lib/pq"
 	"go.temporal.io/sdk/client"
 	"go.temporal.io/sdk/worker"
 	"shared"
@@ -26,6 +27,15 @@ func main() {
 
 	w.RegisterActivity(temporalstuff.SendFitnessEmailActivity)
 	w.RegisterActivity(temporalstuff.LoadAndPersistObsidianThemeFile)
+
+	db, err := shared.GetDb()
+	shared.HandleError(err)
+
+	var activities = &shared.ObsidianAdventuresActivityInput{Db: db}
+
+	w.RegisterWorkflow(shared.LoadObsidianAdventuresWorkflow)
+	//w.RegisterActivity(shared.DeleteAdventureData, db)
+	w.RegisterActivity(activities)
 
 	// Start listening to the Task Queue
 	err = w.Run(worker.InterruptCh())
