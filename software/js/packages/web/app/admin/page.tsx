@@ -6,7 +6,7 @@ export default async function AdminPage() {
     'use server';
     const url = `http://${process.env.SERVER1_URL}/obsidian-adventure-sync`;
     console.log('calling ' + url);
-    await fetch(url);
+    await fetch(url, { cache: 'no-store' });
     redirect(`/`);
   }
 
