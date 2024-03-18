@@ -5,13 +5,16 @@ import (
 	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"go.temporal.io/sdk/client"
 	"google.golang.org/grpc"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"os/exec"
+	"shared"
 	"shared/pkg/pb"
 	//"lanekatris.com/lkat"
+	"github.com/teris-io/shortid"
 	"log"
 	"net"
 	"runtime"
@@ -185,6 +188,30 @@ func main() {
 			c.JSON(500, err)
 		}
 		c.Data(http.StatusOK, "application/json", cmd)
+	})
+
+	r.GET("/obsidian-adventure-sync", func(cc *gin.Context) {
+		c, err := client.Dial(client.Options{
+			HostPort: "server1.local:7233",
+		})
+		if err != nil {
+			cc.JSON(500, err)
+		}
+		defer c.Close()
+
+		id, err := shortid.Generate()
+		shared.HandleError(err)
+
+		options := client.StartWorkflowOptions{
+			ID:        "obsidian-adventures-sync-" + id,
+			TaskQueue: shared.GreetingTaskQueue,
+		}
+
+		_, err = c.ExecuteWorkflow(context.Background(), options, shared.LoadObsidianAdventuresWorkflow)
+		if err != nil {
+			cc.JSON(500, err)
+		}
+		cc.JSON(200, "success")
 	})
 
 	go r.Run() // listen and serve on 0.0.0.0:8080

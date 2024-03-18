@@ -13,6 +13,7 @@ require (
 	github.com/resendlabs/resend-go v1.7.0
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/viper v1.17.0
+	github.com/teris-io/shortid v0.0.0-20220617161101-71ec9f2aa569
 	go.temporal.io/sdk v1.25.1
 	google.golang.org/grpc v1.58.2
 	google.golang.org/protobuf v1.31.0

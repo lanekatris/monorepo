@@ -1,0 +1,4 @@
+GET http://localhost:8080/obsidian-adventure-sync
+Accept: application/json
+
+###
