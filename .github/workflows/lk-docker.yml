@@ -3,7 +3,7 @@ name: lk docker build and push
 on:
   push:
     branches: [ main ]
-    paths: ['software/go/**']
+    paths: ['software/go/**', '.github/**']
 
 jobs:
   push_to_registry:

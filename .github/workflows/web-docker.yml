@@ -3,7 +3,7 @@ name:  web docker build and publish
 on:
   push:
     branches: [ main ]
-    paths: ['software/js/**']
+    paths: ['software/js/**', '.github/**']
 
 jobs:
   build-with-docker-engine:
