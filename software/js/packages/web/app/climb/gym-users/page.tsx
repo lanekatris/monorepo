@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { login, getMembers } from '@lkat/rhinofit-unofficial';
 import { isAdmin } from 'packages/web/isAdmin';
 
-export const revalidate = 3600; // revalidate the data at most every hour
+export const dynamic = 'force-dynamic';
 export default async function GymUsers() {
   if (!isAdmin()) return <Alert color="danger">Not Authorized</Alert>;
   const credentials = await login({
