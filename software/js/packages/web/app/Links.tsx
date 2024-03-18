@@ -2,7 +2,11 @@
 import { Chip, List, ListItem, useTheme } from '@mui/joy';
 import Link from 'next/link';
 
-export default function HomeLinks() {
+export default function HomeLinks({
+  showAdminLink,
+}: {
+  showAdminLink: boolean;
+}) {
   return (
     <List
       size="sm"
@@ -10,6 +14,11 @@ export default function HomeLinks() {
       // sx={(theme) => {}}
       // sx={{ backgroundColor: theme.palette.warning.solidBg }}
     >
+      {showAdminLink && (
+        <ListItem>
+          <Link href="/admin">Admin</Link>
+        </ListItem>
+      )}
       <ListItem>
         <Link href="/feed">Feed</Link>
       </ListItem>

@@ -192,15 +192,22 @@ func main() {
 
 	r.GET("/obsidian-adventure-sync", func(cc *gin.Context) {
 		c, err := client.Dial(client.Options{
-			HostPort: "server1.local:7233",
+			//HostPort: "server1.local:7233",
+			HostPort: "192.168.86.100:7233", // need to use ip address when within a docker image
 		})
 		if err != nil {
+			//fmt.Errorf(err)
+			log.Fatal(err)
 			cc.JSON(500, err)
+			return
 		}
 		defer c.Close()
 
 		id, err := shortid.Generate()
-		shared.HandleError(err)
+		if err != nil {
+			log.Fatal(err)
+			cc.JSON(500, err)
+		}
 
 		options := client.StartWorkflowOptions{
 			ID:        "obsidian-adventures-sync-" + id,
@@ -209,7 +216,9 @@ func main() {
 
 		_, err = c.ExecuteWorkflow(context.Background(), options, shared.LoadObsidianAdventuresWorkflow)
 		if err != nil {
+			log.Fatal(err)
 			cc.JSON(500, err)
+			return
 		}
 		cc.JSON(200, "success")
 	})

@@ -1,4 +1,4 @@
-name: lk docker build and push
+name: lkat docker build and push
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: loonison101/lk
+          images: loonison101/lkat
 
       - name: Build and push Docker image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
@@ -31,5 +31,5 @@ jobs:
           context: ./software/go
           file: ./software/go/Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }},loonison101/lk:latest
+          tags: ${{ steps.meta.outputs.tags }},loonison101/lkat:latest
           labels: ${{ steps.meta.outputs.labels }}

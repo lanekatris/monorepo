@@ -75,7 +75,7 @@ export default async function Index() {
 
       <br />
       <Typography level="h4">Links</Typography>
-      <HomeLinks />
+      <HomeLinks showAdminLink={!!process.env.SERVER1_URL} />
 
       {/*<RssSearchTest />*/}
 
