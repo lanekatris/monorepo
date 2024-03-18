@@ -43,13 +43,10 @@ jobs:
         env:
           POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
           POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
-          AUTH0_SECRET: ${{ secrets.AUTH0_SECRET }}
-          AUTH0_BASE_URL: ${{ secrets.AUTH0_BASE_URL }}
-          AUTH0_ISSUER_BASE_URL: ${{ secrets.AUTH0_ISSUER_BASE_URL }}
-          AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID }}
-          AUTH0_CLIENT_SECRET: ${{ secrets.AUTH0_CLIENT_SECRET }}
           INPUT_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NEXT_PUBLIC_SHOW_ADMIN: ${{ secrets.NEXT_PUBLIC_SHOW_ADMIN }}
+          RHINOFIT_EMAIL: ${{ secrets.RHINOFIT_EMAIL }}
+          RHINOFIT_PASSWORD: ${{ secrets.RHINOFIT_PASSWORD }}
+          NEXT_PUBLIC_SHOW_ADMIN: true
 
 #      - name: Retag
 #        run: docker image tag web:main loonison101/web:latest
