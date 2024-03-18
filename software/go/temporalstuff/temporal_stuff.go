@@ -8,7 +8,6 @@ import (
 	"github.com/charmbracelet/lipgloss/table"
 	"github.com/charmbracelet/log"
 	"github.com/goccy/go-json"
-	"github.com/resendlabs/resend-go"
 	"github.com/spf13/viper"
 	"go.temporal.io/sdk/workflow"
 	"io/fs"
@@ -216,18 +215,19 @@ func GetFitnessIdk() {
 
 	fmt.Println(t)
 
-	client := resend.NewClient(connStr)
+	//client := resend.NewClient(connStr)
+	//
+	//params := &resend.SendEmailRequest{
+	//	From:    "onboarding@resend.dev",
+	//	To:      []string{"lanekatris@gmail.com"},
+	//	Subject: "Be active reminder",
+	//	Html:    strings.Join(htmlLines, ""),
+	//}
+	//send, err := client.Emails.Send(params)
+	//shared.HandleError(err)
 
-	params := &resend.SendEmailRequest{
-		From:    "onboarding@resend.dev",
-		To:      []string{"lanekatris@gmail.com"},
-		Subject: "Be active reminder",
-		Html:    strings.Join(htmlLines, ""),
-	}
-	send, err := client.Emails.Send(params)
-	shared.HandleError(err)
-
-	log.Infof("Sent email", "id", send.Id)
+	//log.Infof("Sent email", "id", send.Id)
+	log.Info("Removed send email support for now")
 
 	duration := endTime.Sub(startTime)
 
