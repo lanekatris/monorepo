@@ -33,7 +33,6 @@ export interface MembersResponse {
 }
 
 export async function getMembers(credentials: Credentials): Promise<string[]> {
-  console.log('Getting user list...');
   const today = new Date().toISOString().split('T')[-1];
   const lastWeek = addDays(new Date(), -11).toISOString().split('T')[0];
   const { data } = await axios.get<MembersResponse>(

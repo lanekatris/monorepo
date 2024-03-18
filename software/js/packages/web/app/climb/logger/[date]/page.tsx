@@ -10,7 +10,8 @@ import { Client } from 'pg';
 // } from '@tremor/react';
 import Link from 'next/link';
 import { revalidatePath } from 'next/cache';
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { isAdmin } from 'packages/web/isAdmin';
+import { Alert } from '@mui/joy';
 
 // interface ClimbDetailPageProps {
 //   params: {
@@ -75,7 +76,12 @@ const options = [
   'V8 New Send',
 ];
 
-export default withPageAuthRequired(async function ClimbDetailPage({ params }) {
+export default async function ClimbDetailPage({
+  params,
+}: {
+  params: { date?: string };
+}) {
+  if (!isAdmin()) return <Alert color="danger">Not Authorized</Alert>;
   const date = params?.date;
   if (typeof date !== 'string') throw new Error('unknown date');
 
@@ -94,7 +100,7 @@ export default withPageAuthRequired(async function ClimbDetailPage({ params }) {
   }
 
   const climbDetails = await getClimbDetail(date);
-  console.log('climbdetails', climbDetails);
+  // console.log('climbdetails', climbDetails);
 
   return (
     <main className="mx-5 mt-5">
@@ -141,7 +147,7 @@ export default withPageAuthRequired(async function ClimbDetailPage({ params }) {
       {/*</List>*/}
     </main>
   );
-});
+}
 
 // function FormButton() {
 //   const { pending } = useFormStatus();

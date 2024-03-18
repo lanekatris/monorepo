@@ -34,7 +34,6 @@ function getLastSunday(d: Date) {
 }
 
 export default async function FitnessPage() {
-  console.log('getting fitness...');
   const { rows }: { rows: FitnessRecord[] } =
     await sql`select * from noco."Test_Obsidian_Fitness" order by date desc limit 500`;
   // console.log(rows);
@@ -65,10 +64,7 @@ export default async function FitnessPage() {
     blah: groupedData[key].length,
   }));
 
-  console.log('chartdata', chartData);
-
   const idk = differenceInDays(new Date(2024, 3, 22, 0, 0, 0, 0), new Date()); //formatRelative(new Date(2024, 3, 22, 0, 0, 0, 0), new Date());
-  console.log('idk', idk);
 
   return (
     <Container maxWidth="sm">

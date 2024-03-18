@@ -1,7 +1,6 @@
-// import { List, ListItem, Title, Text, Button } from '@tremor/react';
-import Link from 'next/link';
 import { Client } from 'pg';
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { isAdmin } from 'packages/web/isAdmin';
+import { Alert } from '@mui/joy';
 
 interface ClimbListLog {
   Date: Date;
@@ -22,9 +21,10 @@ async function getClimbLogs() {
   return rows;
 }
 
-export default withPageAuthRequired(async function Page() {
+export default async function Page() {
+  if (!isAdmin()) return <Alert color="danger">Not Authorized</Alert>;
   const climbLogs = await getClimbLogs();
-  console.log(climbLogs);
+  // console.log(climbLogs);
   return (
     <main className="mx-5 mt-5">
       {/*<Button variant="light">*/}
@@ -45,4 +45,4 @@ export default withPageAuthRequired(async function Page() {
       {/*</List>*/}
     </main>
   );
-});
+}

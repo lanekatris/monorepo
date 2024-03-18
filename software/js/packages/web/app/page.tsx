@@ -41,8 +41,6 @@ export default async function Index() {
     sql`select visited, count(*) from noco.place where source = 'Hike all 14ers in Colorado' group by visited`
   );
 
-  console.log(fourteenerStats);
-
   // const feed = await getFeed();
 
   return (
@@ -75,7 +73,7 @@ export default async function Index() {
 
       <br />
       <Typography level="h4">Links</Typography>
-      <HomeLinks showAdminLink={!!process.env.SERVER1_URL} />
+      <HomeLinks />
 
       {/*<RssSearchTest />*/}
 

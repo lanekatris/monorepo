@@ -1,17 +1,27 @@
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
-import { Breadcrumbs, Button, Container, Input, Typography } from '@mui/joy';
+import {
+  Alert,
+  Breadcrumbs,
+  Button,
+  Container,
+  Input,
+  Typography,
+} from '@mui/joy';
 import LocationsList from './LocationsList';
 import Link from 'next/link';
 import { sql } from '@vercel/postgres';
+import { isAdmin } from 'packages/web/isAdmin';
 
 export interface LocationCustom {
   Address: string;
   Name: string;
 }
 
-export default withPageAuthRequired(async function LocationHistoryPage({
+export default async function LocationHistoryPage({
   searchParams,
+}: {
+  searchParams: { query?: string };
 }) {
+  if (!isAdmin()) return <Alert color="danger">Not Authorized</Alert>;
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const query = (searchParams?.query || 'colorado').toLowerCase();
@@ -48,4 +58,4 @@ export default withPageAuthRequired(async function LocationHistoryPage({
       <LocationsList locations={rows} />
     </Container>
   );
-});
+}

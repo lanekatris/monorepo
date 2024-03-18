@@ -1,5 +1,5 @@
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import {
+  Alert,
   Breadcrumbs,
   Container,
   List,
@@ -9,9 +9,11 @@ import {
 } from '@mui/joy';
 import Link from 'next/link';
 import { login, getMembers } from '@lkat/rhinofit-unofficial';
+import { isAdmin } from 'packages/web/isAdmin';
 
 export const revalidate = 3600; // revalidate the data at most every hour
-export default withPageAuthRequired(async function GymUsers() {
+export default async function GymUsers() {
+  if (!isAdmin()) return <Alert color="danger">Not Authorized</Alert>;
   const credentials = await login({
     email: process.env.RHINOFIT_EMAIL!,
     password: process.env.RHINOFIT_PASSWORD!,
@@ -46,4 +48,4 @@ export default withPageAuthRequired(async function GymUsers() {
       </List>
     </Container>
   );
-});
+}

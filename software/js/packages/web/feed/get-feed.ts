@@ -44,7 +44,6 @@ export interface FeedItem {
 }
 
 export const getFeed = cache(async () => {
-  console.log('Loading feed...');
   const { rows: feed }: { rows: FeedItem[] } = await sql`
 with x as (select
  case

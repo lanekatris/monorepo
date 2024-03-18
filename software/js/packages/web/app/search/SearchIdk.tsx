@@ -113,8 +113,6 @@ export default function SearchIdk({ data, index }: SearchIdkProps) {
         placeholder="Search"
         type="search"
         onChange={(e) => {
-          console.log(e.target.value);
-
           // console.log(fuse.search(e.target.value));
           // setResults(
           //   fuse
@@ -128,9 +126,9 @@ export default function SearchIdk({ data, index }: SearchIdkProps) {
       {/*<Box textAlign={'right'} mt={1}>*/}
       <Stack
         mt={1}
-        direction={'row'}
+        direction="row"
         spacing={1}
-        justifyContent={'flex-end'}
+        justifyContent="flex-end"
         sx={{ position: 'absolute', right: 45 }}
       >
         <Checkbox
@@ -159,7 +157,7 @@ export default function SearchIdk({ data, index }: SearchIdkProps) {
       {/*<br />*/}
       <Stack direction="row" spacing={1} mt={1}>
         <Typography level="body-lg">Results</Typography>
-        <Chip size={'sm'}>
+        <Chip size="sm">
           {results.length}/{data.length} Total
         </Chip>
       </Stack>
@@ -171,16 +169,16 @@ export default function SearchIdk({ data, index }: SearchIdkProps) {
               <ListItemContent>
                 <Typography level="title-sm">{x.name}</Typography>
                 <Stack
-                  direction={'row'}
+                  direction="row"
                   spacing={1}
-                  justifyContent={'space-between'}
+                  justifyContent="space-between"
                 >
-                  <Chip size={'sm'} variant={'outlined'}>
+                  <Chip size="sm" variant="outlined">
                     {x.source}
                   </Chip>
                   {x.url ? (
-                    <Link href={x.url} target={'_blank'}>
-                      <Chip size={'sm'} variant={'plain'} color={'primary'}>
+                    <Link href={x.url} target="_blank">
+                      <Chip size="sm" variant="plain" color="primary">
                         Link
                       </Chip>
                     </Link>

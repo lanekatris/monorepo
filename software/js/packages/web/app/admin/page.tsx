@@ -1,5 +1,13 @@
-import { Breadcrumbs, Button, Container, Link, Typography } from '@mui/joy';
+import {
+  Alert,
+  Breadcrumbs,
+  Button,
+  Container,
+  Link,
+  Typography,
+} from '@mui/joy';
 import { redirect } from 'next/navigation';
+import { isAdmin } from 'packages/web/isAdmin';
 
 export default async function AdminPage() {
   async function kickObsidianAdventureSync() {
@@ -9,6 +17,8 @@ export default async function AdminPage() {
     await fetch(url, { cache: 'no-store' });
     redirect(`/`);
   }
+
+  if (!isAdmin()) return <Alert color="danger">Not Authorized</Alert>;
 
   return (
     <Container maxWidth="sm">
