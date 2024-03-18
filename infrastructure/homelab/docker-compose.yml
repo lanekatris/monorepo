@@ -19,6 +19,7 @@ services:
     environment:
       - POSTGRES_URL=${POSTGRES_URL}
       - SERVER1_URL=lkat:8080
+      - NEXT_PUBLIC_SHOW_ADMIN=true
 
   nocodb:
     image: nocodb/nocodb:0.204.4
