@@ -16,13 +16,29 @@ export interface Bookmark {
   highlights: string;
   favorite: string;
 }
+export interface Memo {
+  id: number;
+  name: string;
+  rowStatus: string;
+  creatorId: number;
+  createdTs: number;
+  updatedTs: number;
+  displayTs: number;
+  content: string;
+  visibility: string;
+  pinned: boolean;
+  creatorName: string;
+  creatorUsername: string;
+  _date: Date;
+}
 
 export type FeedItemType =
   | 'disc-golf-scorecard'
   | 'climb'
   | 'disc-golf-disc'
   | 'obsidian-adventure'
-  | 'bookmark';
+  | 'bookmark'
+  | 'memo';
 
 export interface FeedItem {
   id: string;
@@ -40,6 +56,7 @@ export interface FeedItem {
     };
     adventure?: { activity: string };
     bookmark?: Bookmark;
+    memo?: Memo;
   };
 }
 
@@ -74,8 +91,30 @@ f.type,
 select * from x order by date desc;
   `;
 
+  const memosResponse = await fetch('https://memo.lkat.io/api/v1/memo', {
+    headers: {
+      authorization: `Bearer ${process.env.MEMOS_API_KEY}`,
+    },
+  });
+  const rawMemos: Memo[] = await memosResponse.json();
+  const memos: Memo[] = rawMemos.map((x) => ({
+    ...x,
+    _date: new Date(x.displayTs * 1000),
+  }));
+
   const finalFeed: FeedItem[] = [
     ...feed,
+    ...memos.map((memo) => {
+      const b: FeedItem = {
+        id: `memo-${memo.id}`,
+        type: 'memo',
+        date: memo._date,
+        data: {
+          memo: memo,
+        },
+      };
+      return b;
+    }),
     ...bookmarks.map((bookmark) => {
       const a: FeedItem = {
         id: bookmark.id,
