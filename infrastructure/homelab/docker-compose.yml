@@ -22,6 +22,7 @@ services:
       - NEXT_PUBLIC_SHOW_ADMIN=true
       - RHINOFIT_EMAIL=${RHINOFIT_EMAIL}
       - RHINOFIT_PASSWORD=${RHINOFIT_PASSWORD}
+      - MEMOS_API_KEY=${MEMOS_API_KEY}
 
   nocodb:
     image: nocodb/nocodb:0.204.4

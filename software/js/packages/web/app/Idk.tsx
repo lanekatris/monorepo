@@ -20,6 +20,7 @@ import {
   GiMountainClimbing,
   GiMountains,
   GiBookmark,
+  GiNotebook,
 } from 'react-icons/gi';
 import {
   Box,
@@ -104,6 +105,7 @@ const feedIcon: { [k in FeedItemType]: React.ReactElement } = {
   climb: <GiMountainClimbing size={20} />,
 
   bookmark: <GiBookmark size={20} />,
+  memo: <GiNotebook size={20} />,
 };
 
 const feedTitle: { [k in FeedItemType]: string } = {
@@ -113,6 +115,7 @@ const feedTitle: { [k in FeedItemType]: string } = {
   'obsidian-adventure': 'Adventure',
 
   bookmark: 'Bookmark',
+  memo: 'Memo',
 };
 
 interface FeedLineItemProps {
@@ -198,6 +201,13 @@ export function FeedTable({ rows }: FeedTableProps) {
                   <Typography level="body-xs">
                     {data.bookmark?.excerpt}
                   </Typography>
+                </FeedLineItem>
+              </>
+            )}
+            {type === 'memo' && (
+              <>
+                <FeedLineItem type={type} date={date}>
+                  {data.memo?.content}
                 </FeedLineItem>
               </>
             )}
