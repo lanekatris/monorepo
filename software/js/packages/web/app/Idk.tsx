@@ -22,6 +22,7 @@ import {
   GiBookmark,
   GiNotebook,
 } from 'react-icons/gi';
+import Markdown from 'react-markdown';
 import {
   Box,
   Chip,
@@ -207,7 +208,7 @@ export function FeedTable({ rows }: FeedTableProps) {
             {type === 'memo' && (
               <>
                 <FeedLineItem type={type} date={date}>
-                  {data.memo?.content}
+                  <Markdown>{data.memo?.content}</Markdown>
                 </FeedLineItem>
               </>
             )}
