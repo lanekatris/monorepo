@@ -209,6 +209,14 @@ export function FeedTable({ rows }: FeedTableProps) {
               <>
                 <FeedLineItem type={type} date={date}>
                   <Markdown>{data.memo?.content}</Markdown>
+                  {data.memo?.resourceList.map((rl) => (
+                    <img
+                      height={100}
+                      // width={100}
+                      key={rl.name}
+                      src={`https://memo.lkat.io/o/r/${rl.name}`}
+                    />
+                  ))}
                 </FeedLineItem>
               </>
             )}

@@ -30,6 +30,10 @@ export interface Memo {
   creatorName: string;
   creatorUsername: string;
   _date: Date;
+  resourceList: {
+    name: string;
+    type: string;
+  }[];
 }
 
 export type FeedItemType =
