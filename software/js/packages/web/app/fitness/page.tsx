@@ -64,7 +64,7 @@ export default async function FitnessPage() {
     blah: groupedData[key].length,
   }));
 
-  const idk = differenceInDays(new Date(2024, 3, 22, 0, 0, 0, 0), new Date()); //formatRelative(new Date(2024, 3, 22, 0, 0, 0, 0), new Date());
+  // const idk = differenceInDays(new Date(2024, 3, 22, 0, 0, 0, 0), new Date()); //formatRelative(new Date(2024, 3, 22, 0, 0, 0, 0), new Date());
 
   return (
     <Container maxWidth="sm">
@@ -81,17 +81,17 @@ export default async function FitnessPage() {
         </CardContent>
       </Card>
       <br />
-      <Card>
-        <CardContent>
-          <Typography level="h4">Snowboarding Goal</Typography>
-          <Typography level="body-sm">
-            Complete 54 leg workouts to complete this goal
-          </Typography>
-          {idk} Days to Go
-          <Alert color="danger">0 Completed workouts for this goal</Alert>
-        </CardContent>
-      </Card>
-      <br />
+      {/*<Card>*/}
+      {/*  <CardContent>*/}
+      {/*    <Typography level="h4">Snowboarding Goal</Typography>*/}
+      {/*    <Typography level="body-sm">*/}
+      {/*      Complete 54 leg workouts to complete this goal*/}
+      {/*    </Typography>*/}
+      {/*    {idk} Days to Go*/}
+      {/*    <Alert color="danger">0 Completed workouts for this goal</Alert>*/}
+      {/*  </CardContent>*/}
+      {/*</Card>*/}
+      {/*<br />*/}
       <Card>
         <CardContent>
           <Typography level="h4">Log</Typography>

@@ -142,13 +142,13 @@ func main() {
 		//	c.JSON(500, err)
 		//}
 		//c.Data(http.StatusOK, "application/json", out)
-		cmd := exec.Command("node_modules/.bin/nx", "build", "obsidian-client")
-		cmd.Dir = "/home/lane/git/monorepo/software/js"
+		cmd := exec.Command("npx", "nx", "build", "obsidian-client")
+		cmd.Dir = shared.GetPath("/home/lane/git/monorepo/software/js", "C:\\Code\\monorepo\\software\\js")
 		_, err := cmd.Output()
 		if err != nil {
 			c.JSON(500, err)
 		}
-		cmd = exec.Command("cp", "/home/lane/git/monorepo/software/js/dist/packages/obsidian-client/main.js", "/home/lane/Documents/lkat-vault/_admin/Scripts/obsidian-client.js")
+		cmd = exec.Command("powershell", "cp", shared.GetPath("/home/lane/git/monorepo/software/js/dist/packages/obsidian-client/main.js", "C:\\Code\\monorepo\\software\\js\\dist\\packages\\obsidian-client\\main.js"), shared.GetPath("/home/lane/Documents/lkat-vault/_admin/Scripts/obsidian-client.js", "C:\\Users\\looni\\vault1\\_admin\\Scripts\\obsidian-client.js"))
 		_, err = cmd.Output()
 		if err != nil {
 			c.JSON(500, err)

@@ -85,7 +85,12 @@ func (input *ObsidianAdventuresActivityInput) DeleteAdventureDataActivity() erro
 }
 
 func (input *ObsidianAdventuresActivityInput) GetAdventureFiles() ([]AdventureFile, error) {
-	filesPath := GetPath("/home/lane/Documents/lkat-vault/Adventures", "C:\\Users\\looni\\vault1\\Adventures")
+	//filesPath := GetPath("/home/lane/Documents/lkat-vault/Adventures", "C:\\Users\\looni\\vault1\\Adventures")
+	var filesPath = viper.GetString("OBSIDIAN_VAULT_ROOT")
+	if filesPath == "" {
+		panic("Config not found: OBSIDIAN_VAULT_ROOT")
+	}
+	filesPath = filepath.Join(filesPath, "Adventures")
 
 	var adventures []AdventureFile
 	adventureDateFormat := "2006-01-02"

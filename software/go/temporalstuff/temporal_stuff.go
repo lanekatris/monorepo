@@ -88,7 +88,7 @@ func KickBuild() {
 	}
 
 	log.Info("Kicking netlify...")
-	_, err := http.Post("https://api.netlify.com/build_hooks/656bea07c564b13021346209", "application/json", strings.NewReader("{}"))
+	_, err := http.Post(connStr, "application/json", strings.NewReader("{}"))
 	shared.HandleError(err)
 }
 
