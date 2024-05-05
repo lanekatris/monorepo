@@ -155,6 +155,7 @@ export function FeedTable({ rows }: FeedTableProps) {
               <>
                 <FeedLineItem type={type} date={date}>
                   {data.adventure?.activity}
+                  <Markdown>{data.adventure?.contents}</Markdown>
                 </FeedLineItem>
                 {/*<b>Adventure</b>: */}
               </>
