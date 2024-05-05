@@ -3,6 +3,7 @@ module shared
 go 1.18
 
 require (
+	github.com/adrg/frontmatter v0.2.0
 	github.com/atsushinee/go-markdown-generator v0.0.0-20231027094725-92d26ffbe778
 	github.com/charmbracelet/lipgloss v0.9.1
 	github.com/charmbracelet/log v0.3.0
@@ -10,7 +11,6 @@ require (
 	github.com/gin-gonic/gin v1.9.0
 	github.com/goccy/go-json v0.10.0
 	github.com/lib/pq v1.10.9
-	github.com/resendlabs/resend-go v1.7.0
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/viper v1.17.0
 	github.com/teris-io/shortid v0.0.0-20220617161101-71ec9f2aa569
@@ -20,6 +20,7 @@ require (
 )
 
 require (
+	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/bytedance/sonic v1.8.0 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
@@ -83,5 +84,6 @@ require (
 	google.golang.org/genproto/googleapis/api v0.0.0-20230913181813-007df8e322eb // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20230920204549-e6e6cdab5c13 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
+	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
