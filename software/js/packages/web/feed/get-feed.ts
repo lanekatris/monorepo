@@ -49,7 +49,7 @@ export interface FeedItem {
   type: FeedItemType;
   date: Date;
   data: {
-    climb?: { Route: string; Rating: string };
+    climb?: { Route: string; Rating: string; Notes?: string };
     scorecard?: { coursename: string; '+/-': number };
     disc?: {
       brand: string;

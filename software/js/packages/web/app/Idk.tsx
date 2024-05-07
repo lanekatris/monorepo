@@ -188,6 +188,7 @@ export function FeedTable({ rows }: FeedTableProps) {
               <>
                 <FeedLineItem type={type} date={date}>
                   {data.climb?.Route} ({data.climb?.Rating})
+                  <blockquote>{data.climb?.Notes}</blockquote>
                 </FeedLineItem>
                 {/*<b>Climbed Route</b>: {data.climb?.Route} ({data.climb?.Rating})*/}
               </>
