@@ -65,6 +65,7 @@ export interface FeedItem {
 }
 
 export const getFeed = cache(async () => {
+  console.time('sql');
   const { rows: feed }: { rows: FeedItem[] } = await sql`
 with x as (select
  case
@@ -94,7 +95,9 @@ f.type,
 )
 select * from x order by date desc;
   `;
+  console.timeEnd('sql');
 
+  console.time('memos');
   const memosResponse = await fetch('https://memo.lkat.io/api/v1/memo', {
     headers: {
       authorization: `Bearer ${process.env.MEMOS_API_KEY}`,
@@ -105,7 +108,9 @@ select * from x order by date desc;
     ...x,
     _date: new Date(x.displayTs * 1000),
   }));
+  console.timeEnd('memos');
 
+  console.time('agg');
   const finalFeed: FeedItem[] = [
     ...feed,
     ...memos.map((memo) => {
@@ -135,7 +140,8 @@ select * from x order by date desc;
     // return a.date - b.date;
     return b.date.valueOf() - a.date.valueOf();
   });
+  console.timeEnd('agg');
 
   // console.log('feed', feed);
-  return finalFeed;
+  return finalFeed.slice(0, 100);
 });
