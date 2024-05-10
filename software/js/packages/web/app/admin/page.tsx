@@ -6,9 +6,10 @@ import {
   Link,
   Typography,
 } from '@mui/joy';
-import { isAdmin } from 'packages/web/isAdmin';
+import { isAdmin } from '../../isAdmin';
 import { sql } from '@vercel/postgres';
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 export const dynamic = 'force-dynamic';
 
@@ -29,14 +30,11 @@ export default async function AdminPage() {
     if (!id) throw new Error('id is required');
     if (!url || typeof url !== 'string') throw new Error('url is required');
 
-    const { rows }: { rows: Array<{ clicks: number }> } =
-      await sql`select clicks from noco.url where id = ${+id}`;
+    await sql`update noco.url set clicks = clicks + 1 where id = ${+id}`;
 
-    console.log('updating clicks', +id, rows);
+    // THIS IS F**KING CRITICAL FOR DATA TO UPDATE AS EXPECTED
+    revalidatePath('/admin');
 
-    await sql`update noco.url set clicks = ${
-      rows[0].clicks
-    } + 1 where id = ${+id}`;
     redirect(url);
   }
 
@@ -63,23 +61,15 @@ export default async function AdminPage() {
             <form action={click}>
               <input type="hidden" name="id" value={u.id} />
               <input type="hidden" name="url" value={u.url} />
-              <Button variant="plain" type="submit">
+
+              <Button variant="plain" type="submit" size="sm">
                 {u.name}
               </Button>
-              {/*<Link href={u.url} target="_blank">*/}
-              {/*  {u.name} ({u.tags})*/}
-              {/*</Link>*/}
-            </form>
 
-            {/*<Link*/}
-            {/*  href={url}*/}
-            {/*  target="_blank"*/}
-            {/*  // onClick={() => {*/}
-            {/*  //   console.log('hi there');*/}
-            {/*  // }}*/}
-            {/*>*/}
-            {/*  {name} ({tags})*/}
-            {/*</Link>*/}
+              <Typography display="inline" level="body-xs">
+                ({u.clicks} clicks)
+              </Typography>
+            </form>
           </li>
         ))}
       </ul>
