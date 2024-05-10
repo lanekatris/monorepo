@@ -7,22 +7,6 @@ builds:
       - windows
     goarch:
       - amd64
-  - id: lkat
-    binary: lkat
-    main: './cmd/lkat'
-    goos:
-      - linux
-      - windows
-    goarch:
-      - amd64
-  - id: worker
-    binary: worker
-    main: './worker'
-    goos:
-      - linux
-      - windows
-    goarch:
-      - amd64
 archives:
   - name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
     format: zip
