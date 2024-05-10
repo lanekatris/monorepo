@@ -23,3 +23,5 @@ builds:
       - windows
     goarch:
       - amd64
+release:
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
