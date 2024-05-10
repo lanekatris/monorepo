@@ -23,5 +23,7 @@ builds:
       - windows
     goarch:
       - amd64
-release:
-    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
+archives:
+  - name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
+    format: tar.gz
+#    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
