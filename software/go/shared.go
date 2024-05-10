@@ -33,6 +33,7 @@ func SetupViper() {
 	viper.SetConfigName(".lk")
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath("$HOME")
+	viper.AddConfigPath("/config")
 	viper.AutomaticEnv()
 	//err := viper.ReadInConfig()
 	//if err != nil {
