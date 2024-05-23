@@ -42,7 +42,8 @@ export type FeedItemType =
   | 'disc-golf-disc'
   | 'obsidian-adventure'
   | 'bookmark'
-  | 'memo';
+  | 'memo'
+  | 'maintenance';
 
 export interface FeedItem {
   id: string;
@@ -61,6 +62,12 @@ export interface FeedItem {
     adventure?: { activity: string; contents?: string };
     bookmark?: Bookmark;
     memo?: Memo;
+    maintenance?: {
+      title: string;
+      Date: string;
+      Property: string;
+      Notes: string;
+    };
   };
 }
 
@@ -73,6 +80,7 @@ with x as (select
                   when f.type = 'disc-golf-scorecard' then concat('scorecard-', u.id)
      when f.type = 'disc-golf-disc' then concat('disc-',d.id)
      when f.type = 'obsidian-adventure' then concat('obsidian-adventure-', oa.id)
+     when f.type = 'maintenance' then concat('maintenance-', m.id)
                 end as id,
 f.type,
                   case
@@ -80,18 +88,21 @@ f.type,
                       when f.type = 'disc-golf-scorecard' then u."startdate"::date
                       when f.type = 'disc-golf-disc' then coalesce(d.created, d.created_at)::date
                       when f.type = 'obsidian-adventure' then oa.date::date
+                      when f.type = 'maintenance' then m."Date"::date
                       end as date,
                   json_build_object(
                           'climb', t.*,
                           'scorecard', u.*,
                             'disc', d.*,
-                            'adventure', oa.*
+                            'adventure', oa.*,
+                            'maintenance',m.*
                       )   as data
            from noco.feed f
                     left join kestra.ticks t on f.remote_id_int = t.id and f.type = 'climb'
                     left join kestra.udisc_scorecard u on f.remote_id_int = u.id and f.type = 'disc-golf-scorecard'
                     left join noco.disc d on f.remote_id_int = d.id and f.type = 'disc-golf-disc'
                     left join kestra.obsidian_adventures oa on f.remote_id_int = oa.id and f.type = 'obsidian-adventure'
+                    left join noco.maintenance m on f.remote_id_int = m.id and f.type = 'maintenance'
 )
 select * from x order by date desc;
   `;
@@ -138,6 +149,11 @@ select * from x order by date desc;
   ];
   finalFeed.sort((a, b) => {
     // return a.date - b.date;
+    if (!b.date || !a.date) {
+      throw new Error(
+        'Date is null: ' + JSON.stringify(a) + ' --- ' + JSON.stringify(b)
+      );
+    }
     return b.date.valueOf() - a.date.valueOf();
   });
   console.timeEnd('agg');

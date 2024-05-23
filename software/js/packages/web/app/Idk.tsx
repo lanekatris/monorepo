@@ -21,6 +21,7 @@ import {
   GiMountains,
   GiBookmark,
   GiNotebook,
+  GiWrench,
 } from 'react-icons/gi';
 import Markdown from 'react-markdown';
 import {
@@ -107,6 +108,7 @@ const feedIcon: { [k in FeedItemType]: React.ReactElement } = {
 
   bookmark: <GiBookmark size={20} />,
   memo: <GiNotebook size={20} />,
+  maintenance: <GiWrench size={20} />,
 };
 
 const feedTitle: { [k in FeedItemType]: string } = {
@@ -117,6 +119,7 @@ const feedTitle: { [k in FeedItemType]: string } = {
 
   bookmark: 'Bookmark',
   memo: 'Memo',
+  maintenance: 'Maintenance',
 };
 
 interface FeedLineItemProps {
@@ -146,13 +149,9 @@ export function FeedTable({ rows }: FeedTableProps) {
       {rows.map(({ id, date, data, type }) => (
         <>
           <ListItem key={id}>
-            {/*<Stack direction="row" gap={1}>*/}
-            {/*<Typography level="body-xs">*/}
-            {/*  {feedIcon[type]}*/}
-            {/*  {date?.toLocaleDateString()}*/}
-            {/*</Typography>*/}
             {type === 'obsidian-adventure' && (
               <>
+                {/*<Markdown>{data.adventure?.contents}</Markdown>*/}
                 <FeedLineItem type={type} date={date}>
                   {data.adventure?.activity}
                   <Markdown>{data.adventure?.contents}</Markdown>
@@ -222,7 +221,16 @@ export function FeedTable({ rows }: FeedTableProps) {
                 </FeedLineItem>
               </>
             )}
-            {/*</Stack>*/}
+            {type === 'maintenance' && (
+              <>
+                <FeedLineItem type={type} date={date}>
+                  {data.maintenance?.title}
+                  {data.maintenance?.Notes}
+                  <br />
+                  <Chip>{data.maintenance?.Property}</Chip>
+                </FeedLineItem>
+              </>
+            )}
           </ListItem>
           <ListDivider />
         </>
