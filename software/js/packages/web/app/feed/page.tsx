@@ -14,9 +14,12 @@ export default async function FeedPage() {
           <Link color="neutral" href="/">
             Home
           </Link>
-          <Typography>Feed ({feed.length})</Typography>
+          <Typography>
+            Feed ({feed.length}) :: <Link href="/feed.json">API</Link> ::{' '}
+            <Link href="/admin">Refresh Feed...</Link>
+          </Typography>
         </Breadcrumbs>
-        <Link href="/admin">Refresh Feed...</Link>
+        {/*<Link href="/admin">Refresh Feed...</Link>*/}
       </Stack>
 
       <FeedTable rows={feed} />

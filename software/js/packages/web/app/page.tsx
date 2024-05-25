@@ -13,6 +13,7 @@ import {
 } from '@mui/joy';
 import homeImage from './2024_01_lane_troy_snow_crop.jpeg';
 import HomeLinks from './Links';
+import { ReactNode } from 'react';
 
 export default async function Index() {
   const { completed, total, percentage } = await getMetric(sql`
@@ -28,6 +29,12 @@ export default async function Index() {
            where source = 'https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024'
            group by visited
   `);
+
+  const truckProgress = await getMetric(sql`
+select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Truck' group by "Done"`);
+
+  const truckTasks =
+    await sql`select Title from noco.test_workflow2 where "Type" = 'Truck'`;
 
   const {
     completed: completed2,
@@ -81,7 +88,24 @@ export default async function Index() {
 
       <br />
       <Typography level="h4" gutterBottom>
-        Stats
+        Workflows
+      </Typography>
+      <Stack spacing={2}>
+        <MetricCard
+          percentage={truckProgress.percentage}
+          completed={truckProgress.completed}
+          total={truckProgress.total}
+          title="Truck (Toyota Tundra) Maintenance"
+          // link="https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+        >
+          <Typography level="body-sm">
+            {truckTasks.rows.map((x) => `${x.title}, `)}
+          </Typography>
+        </MetricCard>
+      </Stack>
+      <br />
+      <Typography level="h4" gutterBottom>
+        Goals
       </Typography>
       <Stack spacing={2}>
         <Card variant="outlined">
@@ -204,8 +228,16 @@ interface Metric {
   total: number;
   link?: string;
   title: string;
+  children?: ReactNode;
 }
-function MetricCard({ percentage, completed, total, link, title }: Metric) {
+function MetricCard({
+  percentage,
+  completed,
+  total,
+  link,
+  title,
+  children,
+}: Metric) {
   return (
     <Card variant="outlined">
       <CardContent orientation="horizontal">
@@ -220,7 +252,7 @@ function MetricCard({ percentage, completed, total, link, title }: Metric) {
         <CardContent>
           <Typography level="title-lg">{title}</Typography>
           <Stack direction="row" spacing={2}>
-            <Typography>
+            <Typography level="body-sm">
               {completed} / {total}
             </Typography>
             {link && (
@@ -231,6 +263,7 @@ function MetricCard({ percentage, completed, total, link, title }: Metric) {
               </Typography>
             )}
           </Stack>
+          {children}
         </CardContent>
       </CardContent>
     </Card>

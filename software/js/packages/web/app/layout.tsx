@@ -37,13 +37,14 @@ export default function RootLayout({
                   Lane&apos;s Site
                 </Link>
               </Typography>
-              <Box>
+              <Stack direction="row" spacing={1}>
+                <Link href="/feed">Feed</Link>
                 <Link href="/admin">Admin</Link>
 
                 <ThemeToggler />
-              </Box>
+              </Stack>
             </Stack>
-            <Divider />
+            {/*<Divider />*/}
           </Container>
           {children}
           <br />

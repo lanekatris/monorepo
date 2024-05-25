@@ -48,14 +48,14 @@ export default async function AdminPage() {
 
   return (
     <Container maxWidth="sm">
-      <Breadcrumbs>
-        <Link color="neutral" href="/">
-          Home
-        </Link>
-        <Typography>Admin Dashboard</Typography>
-      </Breadcrumbs>
+      {/*<Breadcrumbs>*/}
+      {/*  <Link color="neutral" href="/">*/}
+      {/*    Home*/}
+      {/*  </Link>*/}
+      {/*  <Typography>Admin Dashboard</Typography>*/}
+      {/*</Breadcrumbs>*/}
 
-      <ul>
+      <ul style={{ backgroundColor: '#ffffce' }}>
         {urls.map((u) => (
           <li key={u.name}>
             <form action={click}>
@@ -68,6 +68,9 @@ export default async function AdminPage() {
 
               <Typography display="inline" level="body-xs">
                 ({u.clicks} clicks)
+              </Typography>
+              <Typography display="inline" level="body-xs" ml="1em">
+                #{u.tags}
               </Typography>
             </form>
           </li>
