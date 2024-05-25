@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body style={{ paddingBottom: '5em' }}>
+      <body>
         <ThemeRegistry options={{ key: 'joy' }}>
           <Container maxWidth="sm" sx={{ marginTop: 2 }}>
             <Stack direction="row" justifyContent="space-between">
@@ -38,20 +38,26 @@ export default function RootLayout({
                 </Link>
               </Typography>
               <Box>
+                <Link href="/admin">Admin</Link>
+
                 <ThemeToggler />
-                <img
-                  style={{
-                    verticalAlign: 'sub',
-                    marginLeft: '.5em',
-                  }}
-                  src="https://api.netlify.com/api/v1/badges/6b9d6176-8a2c-44e4-9a44-27e96e5caa03/deploy-status"
-                  alt="Netlify Build Status"
-                />
               </Box>
             </Stack>
             <Divider />
           </Container>
           {children}
+          <br />
+          <footer>
+            <img
+              style={{
+                verticalAlign: 'sub',
+                marginLeft: '.5em',
+              }}
+              src="https://api.netlify.com/api/v1/badges/6b9d6176-8a2c-44e4-9a44-27e96e5caa03/deploy-status"
+              alt="Netlify Build Status"
+            />
+          </footer>
+          <br />
         </ThemeRegistry>
       </body>
     </html>

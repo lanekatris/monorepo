@@ -18,6 +18,7 @@ export default async function FeedPage() {
         </Breadcrumbs>
         <Link href="/admin">Refresh Feed...</Link>
       </Stack>
+
       <FeedTable rows={feed} />
     </Container>
   );
