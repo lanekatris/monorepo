@@ -1,7 +1,9 @@
 import { cache } from 'react';
 import { sql } from '@vercel/postgres';
 
-import bookmarks from '../app/search/raindrop-export.json';
+// import bookmarks from '../app/search/raindrop-export.json';
+import * as Minio from 'minio';
+import { Raindrop } from './raindrop';
 
 export interface Bookmark {
   id: string;
@@ -41,9 +43,10 @@ export type FeedItemType =
   | 'climb'
   | 'disc-golf-disc'
   | 'obsidian-adventure'
-  | 'bookmark'
+  // | 'bookmark'
   | 'memo'
-  | 'maintenance';
+  | 'maintenance'
+  | 'raindrop';
 
 export interface FeedItem {
   id: string;
@@ -68,7 +71,49 @@ export interface FeedItem {
       Property: string;
       Notes: string;
     };
+    raindrop?: Raindrop;
   };
+}
+
+const minioClient = new Minio.Client({
+  endPoint: '192.168.86.100', // e.g., 'play.min.io'
+  port: 9000, // e.g., 9000
+  useSSL: false, // Set to false if not using SSL
+  accessKey: process.env.MINIO_A!,
+  secretKey: process.env.MINIO_S!,
+});
+
+async function getJsonFromMinio<T>(
+  bucketName: string,
+  objectName: string
+): Promise<T> {
+  try {
+    const stream = await minioClient.getObject(bucketName, objectName);
+
+    let data = '';
+    stream.on('data', (chunk) => {
+      data += chunk;
+    });
+
+    return new Promise((resolve, reject) => {
+      stream.on('end', () => {
+        try {
+          const jsonData = JSON.parse(data);
+          resolve(jsonData);
+        } catch (error) {
+          reject(new Error('Error parsing JSON'));
+        }
+      });
+
+      stream.on('error', (error) => {
+        reject(error);
+      });
+    });
+  } catch (error) {
+    // @ts-ignore
+    console.error(`Error retrieving object: ${error.message}`);
+    throw error;
+  }
 }
 
 export const getFeed = cache(async () => {
@@ -121,6 +166,29 @@ select * from x order by date desc;
   }));
   console.timeEnd('memos');
 
+  console.time('raindrops');
+
+  // const stream = await minioClient.getObject('etl', 'raindrops.json');
+  // let data = '';
+  // let raindrops: Raindrop[] = [];
+  // stream.on('data', (chunk) => {
+  //   data += chunk;
+  // });
+  // stream.on('end', () => {
+  //   console.log('ddddd', JSON.parse(data));
+  //   raindrops = JSON.parse(data);
+  //   // raindrops.forEach(r => {
+  //   //   r.lastUpdate =
+  //   // })
+  // });
+  // stream.on('error', (err) => {
+  //   console.error(err);
+  // });
+  const raindrops: Raindrop[] = await getJsonFromMinio('etl', 'raindrops.json');
+
+  // console.log('found raindrops', raindrops[0]);
+  console.timeEnd('raindrops');
+
   console.time('agg');
   const finalFeed: FeedItem[] = [
     ...feed,
@@ -135,16 +203,27 @@ select * from x order by date desc;
       };
       return b;
     }),
-    ...bookmarks.map((bookmark) => {
-      const a: FeedItem = {
-        id: bookmark.id,
-        type: 'bookmark',
-        date: new Date(bookmark.created),
+    // ...bookmarks.map((bookmark) => {
+    //   const a: FeedItem = {
+    //     id: bookmark.id,
+    //     type: 'bookmark',
+    //     date: new Date(bookmark.created),
+    //     data: {
+    //       bookmark: bookmark,
+    //     },
+    //   };
+    //   return a;
+    // }),
+    ...raindrops.map((raindrop) => {
+      const r: FeedItem = {
+        id: raindrop._id.toString(),
+        type: 'raindrop',
+        date: new Date(raindrop.lastUpdate),
         data: {
-          bookmark: bookmark,
+          raindrop: raindrop,
         },
       };
-      return a;
+      return r;
     }),
   ];
   finalFeed.sort((a, b) => {

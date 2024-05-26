@@ -48,10 +48,10 @@ export default function RootLayout({
           </Container>
           {children}
           <br />
-          <footer>
+          <footer style={{ textAlign: 'center' }}>
+            <img src="https://github.com/lanekatris/monorepo/actions/workflows/web-docker.yml/badge.svg" />
             <img
               style={{
-                verticalAlign: 'sub',
                 marginLeft: '.5em',
               }}
               src="https://api.netlify.com/api/v1/badges/6b9d6176-8a2c-44e4-9a44-27e96e5caa03/deploy-status"

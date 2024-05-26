@@ -109,7 +109,7 @@ const feedIcon: { [k in FeedItemType]: React.ReactElement } = {
   'disc-golf-scorecard': <GiDiscGolfBasket size={20} />,
   climb: <GiMountainClimbing size={20} />,
 
-  bookmark: <GiBookmark size={20} />,
+  raindrop: <GiBookmark size={20} />,
   memo: <GiNotebook size={20} />,
   maintenance: <GiWrench size={20} />,
 };
@@ -120,7 +120,7 @@ const feedTitle: { [k in FeedItemType]: string } = {
   'disc-golf-scorecard': 'DG Round',
   'obsidian-adventure': 'Adventure',
 
-  bookmark: 'Bookmark',
+  raindrop: 'Bookmark',
   memo: 'Memo',
   maintenance: 'Maintenance',
 };
@@ -210,16 +210,30 @@ export function FeedTable({ rows }: FeedTableProps) {
                   {/*<b>Climbed Route</b>: {data.climb?.Route} ({data.climb?.Rating})*/}
                 </>
               )}
-              {type === 'bookmark' && (
+              {/*{type === 'bookmark' && (*/}
+              {/*  <>*/}
+              {/*    <FeedLineItem type={type} date={date}>*/}
+              {/*      <Chip sx={{ mr: '.5em' }}>{data.bookmark?.folder}</Chip>*/}
+              {/*      <Link href={data.bookmark?.url} target="_blank">*/}
+              {/*        {data.bookmark?.title}*/}
+              {/*      </Link>*/}
+              {/*      <br />*/}
+              {/*      <Typography level="body-xs">*/}
+              {/*        {data.bookmark?.excerpt}*/}
+              {/*      </Typography>*/}
+              {/*    </FeedLineItem>*/}
+              {/*  </>*/}
+              {/*)}*/}
+              {type === 'raindrop' && (
                 <>
                   <FeedLineItem type={type} date={date}>
-                    <Chip sx={{ mr: '.5em' }}>{data.bookmark?.folder}</Chip>
-                    <Link href={data.bookmark?.url} target="_blank">
-                      {data.bookmark?.title}
+                    {/*<Chip sx={{ mr: '.5em' }}>{data.raindrop?.folder}</Chip>*/}
+                    <Link href={data.raindrop?.link} target="_blank">
+                      {data.raindrop?.title}
                     </Link>
                     <br />
                     <Typography level="body-xs">
-                      {data.bookmark?.excerpt}
+                      {data.raindrop?.excerpt}
                     </Typography>
                   </FeedLineItem>
                 </>
