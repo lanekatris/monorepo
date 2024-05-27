@@ -3,12 +3,12 @@ volumes:
 
 services:
   lkat:
-    image: loonison101/lkat:main
+    image: loonison101/lk:main
     restart: unless-stopped
     pull_policy: always
     ports:
       - "4444:8080"
-
+    command: ['server']
 
   web:
     image: loonison101/web:main
@@ -23,6 +23,8 @@ services:
       - RHINOFIT_EMAIL=${RHINOFIT_EMAIL}
       - RHINOFIT_PASSWORD=${RHINOFIT_PASSWORD}
       - MEMOS_API_KEY=${MEMOS_API_KEY}
+      - MINIO_A=${MINIO_A}
+      - MINIO_S=${MINIO_S}
 
   nocodb:
     image: nocodb/nocodb:0.204.4
@@ -69,3 +71,15 @@ services:
       - "5230:5230"
     volumes:
       - /home/lane/memos:/var/opt/memos
+  minio:
+    image: quay.io/minio/minio
+    restart: unless-stopped
+    command: ["server", "/data", "--console-address", ":9001"]
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      - MINIO_ROOT_USER=${MINIO_ROOT_USER}
+      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
+    volumes:
+      - /bigboy/minio:/data
