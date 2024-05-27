@@ -10,7 +10,8 @@ export default async function BlogPage({
   console.log(articleData, 'asdfasdf');
   return (
     <>
-      <h1>blog goes here</h1>
+      <h1>{articleData.title}</h1>
+      <div dangerouslySetInnerHTML={{ __html: articleData.contentHtml }} />
     </>
   );
 }

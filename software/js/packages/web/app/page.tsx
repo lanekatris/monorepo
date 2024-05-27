@@ -11,7 +11,8 @@ import {
   Stack,
   Typography,
 } from '@mui/joy';
-import homeImage from './2024_01_lane_troy_snow_crop.jpeg';
+// import homeImage from './2024_01_lane_troy_snow_crop.jpeg';
+import homeImage from './PXL_20240512_144120828.jpg';
 import HomeLinks from './Links';
 import { ReactNode } from 'react';
 
@@ -65,9 +66,7 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
           placeholder="blur"
           alt="Lane and his son Troy in the snow"
         />
-        <Typography level="body-xs">
-          Lane and Troy in the snow 2024-01
-        </Typography>
+        <Typography level="body-xs">Mothers day 2024</Typography>
       </Box>
       <br />
       <Alert color="primary">
