@@ -46,10 +46,15 @@ async function GetRawScorecards() {
      from kestra.udisc_scorecard order by startdate desc`;
   return rows;
 }
+
 export const dynamic = 'force-dynamic';
+
 export default async function DiscsPage() {
   const { rows }: { rows: Disc[] } =
     await sql`select * from noco."disc" order by id desc`;
+
+  const { rows: oldestInBagDiscs }: { rows: Disc[] } =
+    await sql`select * from noco.disc where status = 'In Bag' order by created limit 3`;
 
   const rawScorecards = await GetRawScorecards();
   const scorecardResult = await processScorecards({
@@ -104,6 +109,15 @@ export default async function DiscsPage() {
       </Alert>
       <br />
       <Typography level="h4" gutterBottom id="my-discs">
+        Oldest Discs In My Bag
+      </Typography>
+      <Stack gap={1}>
+        {oldestInBagDiscs.map((disc) => (
+          <DiscCard key={disc.id} disc={disc} />
+        ))}
+      </Stack>
+      <br />
+      <Typography level="h4" gutterBottom id="my-discs">
         My Discs
       </Typography>
       <Alert color="primary">
@@ -119,28 +133,10 @@ export default async function DiscsPage() {
         ))}
       </Stack>
       <br />
+
       <Stack gap={1}>
         {rows.map((disc) => (
-          <Card key={disc.id} size="sm">
-            <CardContent>
-              <Typography level="body-xs">ID: {disc.id}</Typography>
-              <Typography level="title-lg">
-                {disc.color} - {disc.plastic} {disc.brand} {disc.model}
-              </Typography>
-              <Typography level="body-sm" gutterBottom>
-                {disc.notes || 'No notes'}
-              </Typography>
-              <Stack direction="row" justifyContent="space-between">
-                <Stack direction="row" justifyContent="space-between" gap={1}>
-                  <Chip variant="solid">{disc.status}</Chip>
-                  <Chip variant="solid">{disc.weight || 'n/a '}g</Chip>
-                </Stack>
-                <Typography level="body-xs">
-                  Added: {disc.created?.toLocaleDateString() || 'Unknown'}
-                </Typography>
-              </Stack>
-            </CardContent>
-          </Card>
+          <DiscCard key={disc.id} disc={disc} />
         ))}
       </Stack>
 
@@ -168,5 +164,30 @@ export default async function DiscsPage() {
       <br />
       <Link href="#toc">Back to Top</Link>
     </Container>
+  );
+}
+
+function DiscCard({ disc }: { disc: Disc }) {
+  return (
+    <Card size="sm">
+      <CardContent>
+        <Typography level="body-xs">ID: {disc.id}</Typography>
+        <Typography level="title-lg">
+          {disc.color} - {disc.plastic} {disc.brand} {disc.model}
+        </Typography>
+        <Typography level="body-sm" gutterBottom>
+          {disc.notes || 'No notes'}
+        </Typography>
+        <Stack direction="row" justifyContent="space-between">
+          <Stack direction="row" justifyContent="space-between" gap={1}>
+            <Chip variant="solid">{disc.status}</Chip>
+            <Chip variant="solid">{disc.weight || 'n/a '}g</Chip>
+          </Stack>
+          <Typography level="body-xs">
+            Added: {disc.created?.toLocaleDateString() || 'Unknown'}
+          </Typography>
+        </Stack>
+      </CardContent>
+    </Card>
   );
 }
