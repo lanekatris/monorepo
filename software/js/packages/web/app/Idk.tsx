@@ -257,7 +257,7 @@ export function FeedTable({ rows }: FeedTableProps) {
                 <>
                   <FeedLineItem type={type} date={date}>
                     {data.maintenance?.title}
-                    {data.maintenance?.Notes}
+                    <Markdown>{data.maintenance?.Notes}</Markdown>
                     <br />
                     <Chip>{data.maintenance?.Property}</Chip>
                   </FeedLineItem>

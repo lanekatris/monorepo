@@ -27,7 +27,7 @@ export interface Disc {
   color: string;
   model: string;
   plastic: string;
-  number: bigint;
+  number: number;
   status: string;
   weight: number;
   created: Date;
@@ -51,7 +51,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function DiscsPage() {
   const { rows }: { rows: Disc[] } =
-    await sql`select * from noco."disc" order by id desc`;
+    await sql`select * from noco."disc" order by number desc`;
 
   const { rows: oldestInBagDiscs }: { rows: Disc[] } =
     await sql`select * from noco.disc where status = 'In Bag' order by created limit 3`;
@@ -171,7 +171,7 @@ function DiscCard({ disc }: { disc: Disc }) {
   return (
     <Card size="sm">
       <CardContent>
-        <Typography level="body-xs">ID: {disc.id}</Typography>
+        <Typography level="body-xs">ID: {disc.number}</Typography>
         <Typography level="title-lg">
           {disc.color} - {disc.plastic} {disc.brand} {disc.model}
         </Typography>
