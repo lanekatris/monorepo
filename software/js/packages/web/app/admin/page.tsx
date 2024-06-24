@@ -10,6 +10,7 @@ import { isAdmin } from '../../isAdmin';
 import { sql } from '@vercel/postgres';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
+import { groupBy } from 'lodash';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,6 +20,14 @@ export interface Url {
   url: string;
   tags: string;
   clicks: number;
+}
+
+export interface Maintenance {
+  id: number;
+  title: string;
+  Date: Date;
+  Property: string;
+  Notes?: string;
 }
 
 export default async function AdminPage() {
@@ -44,6 +53,11 @@ export default async function AdminPage() {
     rows: Array<Url>;
   } = await sql`select * from noco.url order by clicks desc`;
 
+  const { rows: maintenances }: { rows: Array<Maintenance> } =
+    await sql`select * from noco.maintenance order by "Date" desc`;
+
+  const grouped = groupBy(maintenances, 'Property');
+
   if (!isAdmin()) return <Alert color="danger">Not Authorized</Alert>;
 
   return (
@@ -55,7 +69,13 @@ export default async function AdminPage() {
       {/*  <Typography>Admin Dashboard</Typography>*/}
       {/*</Breadcrumbs>*/}
 
-      <ul style={{ backgroundColor: '#ffffce' }}>
+      <ul
+        style={{
+          backgroundColor: '#ffffce',
+          paddingTop: '20px',
+          paddingBottom: '20px',
+        }}
+      >
         {urls.map((u) => (
           <li key={u.name}>
             <form action={click}>
@@ -73,6 +93,31 @@ export default async function AdminPage() {
                 #{u.tags}
               </Typography>
             </form>
+          </li>
+        ))}
+      </ul>
+
+      <Typography level="h4">Maintenance </Typography>
+      <ul
+        style={{
+          backgroundColor: '#ffffce',
+          paddingTop: '20px',
+          paddingBottom: '20px',
+        }}
+      >
+        {Object.keys(grouped).map((key) => (
+          <li key={key}>
+            <b>{key}</b>
+            <ul>
+              {grouped[key].map((m) => (
+                <li key={m.id}>
+                  <Typography display="inline" level="body-xs">
+                    {m.Date.toLocaleDateString()} ::
+                  </Typography>{' '}
+                  {m.title}
+                </li>
+              ))}
+            </ul>
           </li>
         ))}
       </ul>
