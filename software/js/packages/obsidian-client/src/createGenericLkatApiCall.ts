@@ -1,6 +1,6 @@
 import { ObsidianApi } from './ObsidianApi';
 
-const baseUrl = 'https://linux.lkat.io';
+const baseUrl = 'http://localhost:8080';
 type LkatApiCall =
   | 'disable-monitors'
   | 'enable-monitors'
