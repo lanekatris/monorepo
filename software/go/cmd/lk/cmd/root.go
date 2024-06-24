@@ -6,7 +6,6 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"os"
-	"shared/temporalstuff"
 	"strings"
 )
 
@@ -40,12 +39,21 @@ to quickly create a Cobra application.`,
 		//	panic(err)
 		//}
 
-		temporalstuff.GetFitnessIdk()
+		//temporalstuff.GetFitnessIdk()
 		//directoryPath2 := shared.GetPath("/home/lane/Documents/lkat-vault", "C:\\Users\\looni\\vault1")
 		//idk := fitness.GetFitnessActivities(directoryPath2)
 		//log.Info(idk)
 
 		//fitness.PersistFitnessActivities(idk)
+		//var connStr = viper.GetString("POSTGRES_CONN")
+		//if connStr == "" {
+		//	return nil, errors.New("config not found: " + "POSTGRES_CONN")
+		//}
+		//
+		//db, err := gorm.Open(postgres.Open(connStr), &gorm.Config{})
+		//shared.HandleError(err)
+		//
+		//db.Create(Obsidi)
 
 	},
 }

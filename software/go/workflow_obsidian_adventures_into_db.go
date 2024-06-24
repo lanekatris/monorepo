@@ -1,13 +1,15 @@
 package shared
 
 import (
+	"context"
 	"database/sql"
 	"errors"
-	"fmt"
 	"github.com/adrg/frontmatter"
 	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
 	"go.temporal.io/sdk/workflow"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 	"io/fs"
 	"io/ioutil"
 	"path/filepath"
@@ -19,6 +21,7 @@ type AdventureFile struct {
 	Date         time.Time
 	Activity     string
 	FileContents string
+	Tags         []string
 }
 
 func GetDb() (*sql.DB, error) {
@@ -36,6 +39,37 @@ func GetDb() (*sql.DB, error) {
 	return db, nil
 }
 
+func GetGormDb() (*gorm.DB, error) {
+	SetupViper()
+	var connStr = viper.GetString(PostgresApiKeyConfig)
+	if connStr == "" {
+		return nil, errors.New("config not found: " + PostgresApiKeyConfig)
+	}
+
+	db, err := gorm.Open(postgres.Open(connStr), &gorm.Config{})
+	if err != nil {
+		return nil, err
+	}
+
+	err = db.AutoMigrate(&ObsidianAdventuretwo{})
+	if err != nil {
+		return nil, err
+	}
+
+	return db, nil
+}
+
+type ObsidianAdventuretwo struct {
+	gorm.Model
+	Id uint
+	//Index    int64
+	Date     string
+	Activity string
+
+	Contents string
+	Tags     []string `gorm:"type:text[]"`
+}
+
 func LoadObsidianAdventuresWorkflow(ctx workflow.Context) error {
 	options := workflow.ActivityOptions{
 		StartToCloseTimeout: time.Minute * 1,
@@ -47,7 +81,14 @@ func LoadObsidianAdventuresWorkflow(ctx workflow.Context) error {
 		return err
 	}
 
-	var activities = ObsidianAdventuresActivityInput{Db: db}
+	gormDb, err := GetGormDb()
+	if err != nil {
+		return err
+	}
+
+	//gormDb.WithContext(ctx)
+
+	var activities = ObsidianAdventuresActivityInput{Db: db, GormDb: gormDb}
 
 	err = workflow.ExecuteActivity(ctx, activities.DeleteAdventureDataActivity).Get(ctx, nil)
 	if err != nil {
@@ -79,7 +120,9 @@ func LoadObsidianAdventuresWorkflow(ctx workflow.Context) error {
 }
 
 type ObsidianAdventuresActivityInput struct {
-	Db *sql.DB
+	Db     *sql.DB
+	GormDb *gorm.DB
+	//Ctx    context.Context
 }
 
 func (input *ObsidianAdventuresActivityInput) DeleteAdventureDataActivity() error {
@@ -106,10 +149,11 @@ func (input *ObsidianAdventuresActivityInput) GetAdventureFiles() ([]AdventureFi
 			contents, err := ioutil.ReadFile(path)
 			HandleError(err)
 			var matter struct {
+				Tags []string `yaml:"tags" toml:"tags" json:"tags"`
 			}
 			rest, err := frontmatter.Parse(strings.NewReader(string(contents)), &matter)
 			HandleError(err)
-			adventures = append(adventures, AdventureFile{Date: date, Activity: activityName, FileContents: string(rest)})
+			adventures = append(adventures, AdventureFile{Date: date, Activity: activityName, FileContents: string(rest), Tags: matter.Tags})
 		}
 		return nil
 	})
@@ -120,23 +164,37 @@ func (input *ObsidianAdventuresActivityInput) GetAdventureFiles() ([]AdventureFi
 	return adventures, nil
 }
 
-func (input *ObsidianAdventuresActivityInput) BulkInsert(unsavedRows []AdventureFile) error {
-	valueStrings := make([]string, 0, len(unsavedRows))
-	valueArgs := make([]interface{}, 0, len(unsavedRows)*3)
-	i := 0
-	for _, post := range unsavedRows {
-		valueStrings = append(valueStrings, fmt.Sprintf("($%d, $%d, $%d)", i*3+1, i*3+2, i*3+3))
-		valueArgs = append(valueArgs, post.Date.Format("2006-01-02"))
-		valueArgs = append(valueArgs, post.Activity)
-		valueArgs = append(valueArgs, post.FileContents)
-		//valueArgs = append(valueArgs, post.Column3)
-		i++
+func (input *ObsidianAdventuresActivityInput) BulkInsert(ctx context.Context, unsavedRows []AdventureFile) error {
+	//valueStrings := make([]string, 0, len(unsavedRows))
+	//valueArgs := make([]interface{}, 0, len(unsavedRows)*3)
+	//i := 0
+	//for _, post := range unsavedRows {
+	//	valueStrings = append(valueStrings, fmt.Sprintf("($%d, $%d, $%d)", i*3+1, i*3+2, i*3+3))
+	//	valueArgs = append(valueArgs, post.Date.Format("2006-01-02"))
+	//	valueArgs = append(valueArgs, post.Activity)
+	//	valueArgs = append(valueArgs, post.FileContents)
+	//	//valueArgs = append(valueArgs, pq.Array(post.Tags))
+	//	//valueArgs = append(valueArgs, post.Column3)
+	//	i++
+	//}
+	//stmt := fmt.Sprintf("INSERT INTO kestra.obsidian_adventures (date, activity, contents) VALUES %s", strings.Join(valueStrings, ","))
+	//
+	//_, err := input.Db.Exec(stmt, valueArgs...)
+
+	models := make([]ObsidianAdventuretwo, len(unsavedRows))
+	for _, file := range unsavedRows {
+		models = append(models, ObsidianAdventuretwo{
+			Date:     file.Date.Format("2006-01-02"),
+			Activity: file.Activity,
+			Contents: file.FileContents,
+			Tags:     file.Tags,
+		})
 	}
-	stmt := fmt.Sprintf("INSERT INTO kestra.obsidian_adventures (date, activity, contents) VALUES %s", strings.Join(valueStrings, ","))
 
-	_, err := input.Db.Exec(stmt, valueArgs...)
+	result := input.GormDb.WithContext(ctx).Create(&models)
+	return result.Error
 
-	return err
+	//return err
 }
 
 func (input *ObsidianAdventuresActivityInput) DeleteFromFeedByType(t string) error {

@@ -46,8 +46,10 @@ to quickly create a Cobra application.`,
 
 		db, err := shared.GetDb()
 		shared.HandleError(err)
+		gormDb, err := shared.GetGormDb()
+		shared.HandleError(err)
 
-		var activities = &shared.ObsidianAdventuresActivityInput{Db: db}
+		var activities = &shared.ObsidianAdventuresActivityInput{Db: db, GormDb: gormDb}
 
 		w.RegisterWorkflow(shared.LoadObsidianAdventuresWorkflow)
 		//w.RegisterActivity(shared.DeleteAdventureData, db)
