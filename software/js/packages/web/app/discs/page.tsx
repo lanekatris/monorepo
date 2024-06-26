@@ -88,6 +88,9 @@ export default async function DiscsPage() {
         <ListItem>
           <Link href="#courses">Courses I've Played</Link>
         </ListItem>
+        <ListItem>
+          <Link href="/dg/rounds">Rounds</Link>
+        </ListItem>
       </List>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Typography level="h4">Stats</Typography>

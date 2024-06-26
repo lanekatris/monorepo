@@ -5,7 +5,7 @@ export interface RawUdiscScorecardEntry {
   startdate: Date;
   enddate: Date;
   total: number;
-  '+/-': string;
+  '+/-': number;
   roundrating: number;
   hole1?: number;
   hole2?: number;
