@@ -8,6 +8,7 @@ import {
   CardContent,
   CircularProgress,
   Container,
+  Grid,
   Stack,
   Typography,
 } from '@mui/joy';
@@ -50,6 +51,167 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
   );
 
   // const feed = await getFeed();
+
+  return (
+    <Container>
+      <br />
+      <Grid container spacing={3}>
+        <Grid md={6}>
+          <Box sx={{ textAlign: 'center' }}>
+            <Image
+              src={homeImage}
+              sizes="100vw"
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+              priority={true}
+              placeholder="blur"
+              alt="Lane and his son Troy in the snow"
+            />
+            <Typography level="body-xs">Mothers day 2024</Typography>
+          </Box>
+          <br />
+          <Alert color="primary">
+            View my
+            <a href="https://lanekatris.com" target="_blank">
+              site
+            </a>
+            for insight on why all this exists 😉
+          </Alert>
+
+          <br />
+          <Typography level="h4">Links</Typography>
+          <HomeLinks />
+        </Grid>
+        <Grid md={6}>
+          <Typography level="h4" gutterBottom>
+            Workflows
+          </Typography>
+          <Stack spacing={2}>
+            <MetricCard
+              percentage={truckProgress.percentage}
+              completed={truckProgress.completed}
+              total={truckProgress.total}
+              title="Truck (Toyota Tundra) Maintenance"
+              // link="https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+            >
+              <Typography level="body-sm">
+                {truckTasks.rows.map((x) => `${x.title}, `)}
+              </Typography>
+            </MetricCard>
+          </Stack>
+          <br />
+          <Typography level="h4" gutterBottom>
+            Goals
+          </Typography>
+          <Stack spacing={2}>
+            <Card variant="outlined">
+              <CardContent orientation="horizontal">
+                <CircularProgress
+                  size="lg"
+                  determinate
+                  value={percentage}
+                  color="danger"
+                >
+                  <Typography>{percentage}%</Typography>
+                </CircularProgress>
+                <CardContent>
+                  <Typography level="title-lg">
+                    Top 100 Disc Golf Course Completion 2023
+                  </Typography>
+                  <Stack direction="row" spacing={2}>
+                    <Typography>
+                      {completed} / {total} Courses
+                    </Typography>
+                    <Typography>
+                      <a
+                        href="https://udisc.com/blog/post/worlds-best-disc-golf-courses-2023"
+                        target="_blank"
+                        className="text-blue-600 visited:text-purple-600"
+                      >
+                        Udisc Link
+                      </a>
+                    </Typography>
+                  </Stack>
+                </CardContent>
+              </CardContent>
+            </Card>
+
+            <MetricCard
+              percentage={coursesGoal2024.percentage}
+              completed={coursesGoal2024.completed}
+              total={coursesGoal2024.total}
+              title="New Top 100 Disc Golf Course Completion 2024"
+              link="https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+            />
+
+            <Card variant="outlined">
+              <CardContent orientation="horizontal">
+                <CircularProgress size="lg" determinate value={percentage2}>
+                  <Typography>{percentage2}%</Typography>
+                </CircularProgress>
+                <CardContent>
+                  <Typography level="title-lg">
+                    WV State Parks Visited
+                  </Typography>
+                  <Stack direction="row" spacing={2}>
+                    <Typography>
+                      {completed2} / {total2} Parks
+                    </Typography>
+                  </Stack>
+                </CardContent>
+              </CardContent>
+            </Card>
+
+            <Card variant="outlined">
+              <CardContent orientation="horizontal">
+                <CircularProgress
+                  size="lg"
+                  color="danger"
+                  determinate
+                  value={fourteenerStats.percentage}
+                >
+                  <Typography>{fourteenerStats.percentage}%</Typography>
+                </CircularProgress>
+                <CardContent>
+                  <Typography level="title-lg">
+                    Colorado 14ers Summited
+                  </Typography>
+                  <Stack direction="row" spacing={2}>
+                    <Typography>
+                      {fourteenerStats.completed} / {fourteenerStats.total}
+                    </Typography>
+                    {/* */}
+                    <Typography>
+                      <a
+                        href="https://www.lanekatris.com/Colorado-14ers"
+                        target="_blank"
+                        className="text-blue-600 visited:text-purple-600"
+                      >
+                        More Info
+                      </a>
+                    </Typography>
+                  </Stack>
+                </CardContent>
+              </CardContent>
+            </Card>
+
+            {/*<Card variant={'outlined'}>*/}
+            {/*  <Typography>WV State Parks Visited</Typography>*/}
+            {/*  <Typography>{percentage2}%</Typography>*/}
+            {/*  <Stack className="mt-4">*/}
+            {/*    <Typography>*/}
+            {/*      {completed2} / {total2} Parks*/}
+            {/*    </Typography>*/}
+            {/*  </Stack>*/}
+            {/*  /!*<LinearProgress value={percentage2} className="mt-2" />*!/*/}
+            {/*</Card>*/}
+          </Stack>
+        </Grid>
+      </Grid>
+    </Container>
+  );
 
   return (
     <Container maxWidth="sm">
