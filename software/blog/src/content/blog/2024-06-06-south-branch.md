@@ -70,6 +70,8 @@ To Buy
 
 
 # post trip
+
+- Using 90 second rice in a cast iron skillet didn't go too well. It popped out and didn't taste too good. I mixed jasmine and jumbalaya flavor. [This](https://www.southernpaddler.com/community/threads/90-seconds-rice.7863/#:~:text=For%20skillet%20cooking%20%2C%20mush%20the,meal%20or%20a%20side%20dish) article made  me think it was a good idea but I think I'll do something different next year.
 - forgot lotion
 - camp log was great
 - shirts... Submarine 

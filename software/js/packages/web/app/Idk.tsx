@@ -39,7 +39,7 @@ import {
   Typography,
 } from '@mui/joy';
 import React, { useState } from 'react';
-import { FeedItem, FeedItemType } from 'packages/web/feed/get-feed';
+import { FeedItem, FeedItemType } from '../feed/feed-types';
 
 // export function Idk() {
 //   return (
