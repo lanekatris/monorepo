@@ -3,7 +3,7 @@ $filename = "c:\temp\$(get-random).zip"
 $ProgressPreference = 'SilentlyContinue' # Speed up the download
 Invoke-WebRequest https://github.com/lanekatris/monorepo/releases/latest/download/monorepo_windows_amd64.zip -OutFile $filename
 
-Expand-Archive -Path $filename -DestinationPath ~/OneDrive/Desktop -Force
+Expand-Archive -Path $filename -DestinationPath C:\MyPrograms\lk -Force
 
 Write-Host -ForegroundColor Green "Success!"
 Write-Host "Don't forget to clear out: c:\temp"
