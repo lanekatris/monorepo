@@ -17,10 +17,10 @@ export function createGenericLkatApiCall(type: LkatApiCall) {
     const url = `${baseUrl}/${type}`;
     new obsidian.obsidian.Notice(`Invoking ${type} with ${url}`);
     const result = await fetch(url, {
-      headers: {
-        'CF-Access-Client-Id': process.env.CF_CLIENT_ID,
-        'CF-Access-Client-Secret': process.env.CF_CLIENT_SECRET,
-      },
+      // headers: {
+      //   'CF-Access-Client-Id': process.env.CF_CLIENT_ID,
+      //   'CF-Access-Client-Secret': process.env.CF_CLIENT_SECRET,
+      // },
     });
     const text = await result.text();
     console.log(text);

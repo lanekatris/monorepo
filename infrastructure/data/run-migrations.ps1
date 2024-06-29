@@ -1,0 +1,1 @@
+docker run --rm -v "C:\Code\monorepo\infrastructure\data\migrations:/flyway/sql" -v "C:\Code\monorepo\infrastructure\data:/flyway/conf" redgate/flyway migrate

@@ -30,6 +30,7 @@ export const kayakedToday = createEventFile('kayaking');
 export const campedToday = createEventFile('camping');
 export const rockClimbedToday = createEventFile('outdoor-rock-climbing');
 export const climbedToday = createEventFile('indoor-climbing');
+export const deepWaterSoloed = createEventFile('deep-water-solo');
 export const discGolfedToday = createEventFile('disc-golf');
 export const volleyballToday = createEventFile('volleyball');
 export const grilledToday = createEventFile('grilled');

@@ -12,9 +12,11 @@ type EventFileType =
   | 'outdoor-rock-climbing'
   | 'camping'
   | 'kayaking'
-  | 'ultimate-frisbee';
+  | 'ultimate-frisbee'
+  | 'deep-water-solo';
 
 const ma: { [k in EventFileType]: string } = {
+  'deep-water-solo': 'Deep Water Solo',
   'escape-room': 'Escape Room',
   paintball: 'Paintball',
   grilled: 'Grilled',
