@@ -22,8 +22,9 @@ import { RawUdiscScorecardEntry } from '../../scorecards/src/raw-udisc-scorecard
 import Link from 'next/link';
 import DatePicker from 'react-datepicker';
 import ThisMonthActivitiesCalendar from './ThisMonthActivitiesCalendar';
-import { parse } from 'date-fns';
+import { differenceInDays, parse } from 'date-fns';
 
+export const dynamic = 'force-dynamic';
 export default async function Index() {
   const { completed, total, percentage } = await getMetric(sql`
   select visited, count(*) as count
@@ -38,6 +39,13 @@ export default async function Index() {
            where source = 'https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024'
            group by visited
   `);
+
+  const nationalParks = await getMetric(sql`
+select pv.id is not null as visited, count(*) as count from temp.place  p
+         left join temp.place_visit pv on p.friendly_id = pv.place_friendly_id
+         where national_park=true
+group by pv.id is not null
+`);
 
   const truckProgress = await getMetric(sql`
 select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Truck' group by "Done"`);
@@ -130,7 +138,12 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
               <Link href="/dg/rounds">All Rounds</Link>
             </Typography>
           </Stack>
-          <List size="sm">
+          <Typography gutterBottom level="body-md">
+            (It has been{' '}
+            <b>{differenceInDays(new Date(), recentRounds[0].startdate)}</b>{' '}
+            day(s) since I've played disc golf or uploaded my scorecards)
+          </Typography>
+          <List size="sm" sx={{ backgroundColor: '#ffffce' }}>
             {recentRounds.map((round) => (
               <ListItem key={round.coursename + round.startdate.toString()}>
                 {round.startdate.toLocaleDateString()}: <b>{round['+/-']}</b> @{' '}
@@ -141,7 +154,7 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
 
           <Typography level="h4">Recent Climbs</Typography>
 
-          <List size="sm">
+          <List size="sm" sx={{ backgroundColor: '#ffffce' }}>
             {recentClimbs.map((climb) => (
               <ListItem key={climb.id}>
                 {climb.Date.toLocaleDateString()}:{' '}
@@ -151,28 +164,19 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
               </ListItem>
             ))}
           </List>
-          <br />
-          <Typography level="h4" gutterBottom>
-            Workflows
-          </Typography>
-          <Stack spacing={2}>
-            <MetricCard
-              percentage={truckProgress.percentage}
-              completed={truckProgress.completed}
-              total={truckProgress.total}
-              title="Truck (Toyota Tundra) Maintenance"
-              // link="https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
-            >
-              <Typography level="body-sm">
-                {truckTasks.rows.map((x) => `${x.title}, `)}
-              </Typography>
-            </MetricCard>
-          </Stack>
-          <br />
+
+          {/*<br />*/}
           <Typography level="h4" gutterBottom>
             Goals
           </Typography>
           <Stack spacing={2}>
+            <MetricCard
+              percentage={nationalParks.percentage}
+              completed={nationalParks.completed}
+              total={nationalParks.total}
+              title="National Parks Visited"
+            />
+
             <Card variant="outlined">
               <CardContent orientation="horizontal">
                 <CircularProgress
@@ -275,6 +279,23 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
             {/*  /!*<LinearProgress value={percentage2} className="mt-2" />*!/*/}
             {/*</Card>*/}
           </Stack>
+          <br />
+          <Typography level="h4" gutterBottom>
+            Workflows
+          </Typography>
+          <Stack spacing={2}>
+            <MetricCard
+              percentage={truckProgress.percentage}
+              completed={truckProgress.completed}
+              total={truckProgress.total}
+              title="Truck (Toyota Tundra) Maintenance"
+              // link="https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+            >
+              <Typography level="body-sm">
+                {truckTasks.rows.map((x) => `${x.title}, `)}
+              </Typography>
+            </MetricCard>
+          </Stack>
         </Grid>
       </Grid>
     </Container>
@@ -289,6 +310,7 @@ interface Metric {
   title: string;
   children?: ReactNode;
 }
+
 function MetricCard({
   percentage,
   completed,

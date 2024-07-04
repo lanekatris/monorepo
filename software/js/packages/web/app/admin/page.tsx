@@ -60,6 +60,18 @@ export default async function AdminPage() {
 
   if (!isAdmin()) return <Alert color="danger">Not Authorized</Alert>;
 
+  const {
+    rows: purchases,
+  }: {
+    rows: {
+      title: string;
+      Date: Date;
+      Cost: number;
+      Tags: string;
+      id: number;
+    }[];
+  } = await sql`select * from noco.purchases order by "Date" desc`;
+
   return (
     <Container maxWidth="sm">
       {/*<Breadcrumbs>*/}
@@ -118,6 +130,22 @@ export default async function AdminPage() {
                 </li>
               ))}
             </ul>
+          </li>
+        ))}
+      </ul>
+
+      <Typography level="h4">Purchases </Typography>
+      <ul
+        style={{
+          backgroundColor: '#ffffce',
+          paddingTop: '20px',
+          paddingBottom: '20px',
+        }}
+      >
+        {purchases.map(({ id, title, Date, Tags, Cost }) => (
+          <li key={id}>
+            {Date.toLocaleDateString()} ::
+            {title} :: {Cost} :: {Tags}
           </li>
         ))}
       </ul>

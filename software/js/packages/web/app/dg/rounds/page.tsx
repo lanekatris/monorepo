@@ -11,7 +11,7 @@ import { RawUdiscScorecardEntry } from 'packages/scorecards/src/raw-udisc-scorec
 import { DiscGolfRoundRow } from './discGolfRoundRow';
 
 // export interface DiscGolfRo
-
+export const dynamic = 'force-dynamic';
 export default async function DiscGolfRounds() {
   const { rows }: { rows: RawUdiscScorecardEntry[] } =
     await sql`select * from kestra.udisc_scorecard where playername = 'Lane' order by startdate desc`;

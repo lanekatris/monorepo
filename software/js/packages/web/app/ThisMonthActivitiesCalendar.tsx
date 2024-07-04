@@ -14,7 +14,12 @@ export default function ThisMonthActivitiesCalendar({
     <DatePicker
       selectedDates={dates}
       selectsMultiple
-      onChange={() => {}}
+      onMonthChange={(date) => {
+        console.log('month chnged', date);
+      }}
+      onChange={(newDate, e) => {
+        console.log('datepicker', newDate, e);
+      }}
       inline
     />
   );
