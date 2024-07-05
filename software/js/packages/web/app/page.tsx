@@ -16,6 +16,8 @@ import {
 } from '@mui/joy';
 // import homeImage from './2024_01_lane_troy_snow_crop.jpeg';
 import homeImage from './PXL_20240512_144120828.jpg';
+import fourthOfJuly from './received_2296397700699715.jpeg';
+import graysPeak from './grays-peak-resized-1_Jn1kTLuiK.jpeg';
 import HomeLinks from './Links';
 import React, { ReactNode } from 'react';
 import { RawUdiscScorecardEntry } from '../../scorecards/src/raw-udisc-scorecard-entry';
@@ -23,6 +25,8 @@ import Link from 'next/link';
 import DatePicker from 'react-datepicker';
 import ThisMonthActivitiesCalendar from './ThisMonthActivitiesCalendar';
 import { differenceInDays, parse } from 'date-fns';
+import { getMemos } from '../feed/get-feed';
+import Markdown from 'react-markdown';
 
 export const dynamic = 'force-dynamic';
 export default async function Index() {
@@ -92,12 +96,53 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
     }[];
   } = await sql`select * from kestra.ticks order by "Date" desc limit 3`;
 
+  const memos = await getMemos();
+
   return (
     <Container>
       <br />
+
       <Grid container spacing={3}>
         <Grid md={6}>
-          <Box sx={{ textAlign: 'center' }}>
+          {/*<br />*/}
+          <Image
+            src={graysPeak}
+            sizes="100vw"
+            style={{
+              width: '100%',
+              height: 'auto',
+            }}
+            priority={true}
+            placeholder="blur"
+            alt="Lane on top of Grays Peak, a 14er in Colorado"
+          />
+          <Typography gutterBottom level="body-xs">
+            Lane on top of Grays Peak, a 14er in Colorado
+          </Typography>
+          <Alert color="primary">
+            Hi! I'm Lane Katris, a senior full stack software engineer. This
+            site is a hodge podge of data and things I enjoy. The links below
+            are a few places to start with.
+          </Alert>
+
+          <br />
+          <Typography level="h4">Links</Typography>
+          <HomeLinks />
+          <br />
+          <Box sx={{ textAlign: 'center', maxWidth: 500 }}>
+            <Typography level="h4">Random Photos</Typography>
+            <Image
+              src={fourthOfJuly}
+              sizes="100vw"
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+              priority={true}
+              placeholder="blur"
+              alt="4th of July 2024"
+            />
+            <Typography level="body-xs">4th of July 2024</Typography>
             <Image
               src={homeImage}
               sizes="100vw"
@@ -107,65 +152,15 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
               }}
               priority={true}
               placeholder="blur"
-              alt="Lane and his son Troy in the snow"
+              alt="Troy and his mom"
             />
             <Typography level="body-xs">Mothers day 2024</Typography>
           </Box>
-          <br />
-          <Alert color="primary">
-            View my
-            <a href="https://lanekatris.com" target="_blank">
-              site
-            </a>
-            for insight on why all this exists 😉
-          </Alert>
-
-          <br />
-          <Typography level="h4">Links</Typography>
-          <HomeLinks />
         </Grid>
         <Grid md={6}>
           {/*<Box textAlign="center">*/}
           {/* */}
           {/*</Box>*/}
-          <Typography level="h4">Activities This Year</Typography>
-          <ThisMonthActivitiesCalendar dates={recentActivities} />
-          <br />
-
-          <Stack direction="row" justifyContent="space-between">
-            <Typography level="h4">Recent Disc Golf Rounds</Typography>
-            <Typography level="body-xs">
-              <Link href="/dg/rounds">All Rounds</Link>
-            </Typography>
-          </Stack>
-          <Typography gutterBottom level="body-md">
-            (It has been{' '}
-            <b>{differenceInDays(new Date(), recentRounds[0].startdate)}</b>{' '}
-            day(s) since I've played disc golf or uploaded my scorecards)
-          </Typography>
-          <List size="sm" sx={{ backgroundColor: '#ffffce' }}>
-            {recentRounds.map((round) => (
-              <ListItem key={round.coursename + round.startdate.toString()}>
-                {round.startdate.toLocaleDateString()}: <b>{round['+/-']}</b> @{' '}
-                {round.coursename}
-              </ListItem>
-            ))}
-          </List>
-
-          <Typography level="h4">Recent Climbs</Typography>
-
-          <List size="sm" sx={{ backgroundColor: '#ffffce' }}>
-            {recentClimbs.map((climb) => (
-              <ListItem key={climb.id}>
-                {climb.Date.toLocaleDateString()}:{' '}
-                <a target="_blank" href={climb.url}>
-                  {climb.Route} ({climb.Rating})
-                </a>{' '}
-              </ListItem>
-            ))}
-          </List>
-
-          {/*<br />*/}
           <Typography level="h4" gutterBottom>
             Goals
           </Typography>
@@ -177,37 +172,37 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
               title="National Parks Visited"
             />
 
-            <Card variant="outlined">
-              <CardContent orientation="horizontal">
-                <CircularProgress
-                  size="lg"
-                  determinate
-                  value={percentage}
-                  color="danger"
-                >
-                  <Typography>{percentage}%</Typography>
-                </CircularProgress>
-                <CardContent>
-                  <Typography level="title-lg">
-                    Top 100 Disc Golf Course Completion 2023
-                  </Typography>
-                  <Stack direction="row" spacing={2}>
-                    <Typography>
-                      {completed} / {total} Courses
-                    </Typography>
-                    <Typography>
-                      <a
-                        href="https://udisc.com/blog/post/worlds-best-disc-golf-courses-2023"
-                        target="_blank"
-                        className="text-blue-600 visited:text-purple-600"
-                      >
-                        Udisc Link
-                      </a>
-                    </Typography>
-                  </Stack>
-                </CardContent>
-              </CardContent>
-            </Card>
+            {/*<Card variant="outlined">*/}
+            {/*  <CardContent orientation="horizontal">*/}
+            {/*    <CircularProgress*/}
+            {/*      size="lg"*/}
+            {/*      determinate*/}
+            {/*      value={percentage}*/}
+            {/*      color="danger"*/}
+            {/*    >*/}
+            {/*      <Typography>{percentage}%</Typography>*/}
+            {/*    </CircularProgress>*/}
+            {/*    <CardContent>*/}
+            {/*      <Typography level="title-lg">*/}
+            {/*        Top 100 Disc Golf Course Completion 2023*/}
+            {/*      </Typography>*/}
+            {/*      <Stack direction="row" spacing={2}>*/}
+            {/*        <Typography>*/}
+            {/*          {completed} / {total} Courses*/}
+            {/*        </Typography>*/}
+            {/*        <Typography>*/}
+            {/*          <a*/}
+            {/*            href="https://udisc.com/blog/post/worlds-best-disc-golf-courses-2023"*/}
+            {/*            target="_blank"*/}
+            {/*            className="text-blue-600 visited:text-purple-600"*/}
+            {/*          >*/}
+            {/*            Udisc Link*/}
+            {/*          </a>*/}
+            {/*        </Typography>*/}
+            {/*      </Stack>*/}
+            {/*    </CardContent>*/}
+            {/*  </CardContent>*/}
+            {/*</Card>*/}
 
             <MetricCard
               percentage={coursesGoal2024.percentage}
@@ -279,23 +274,79 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
             {/*  /!*<LinearProgress value={percentage2} className="mt-2" />*!/*/}
             {/*</Card>*/}
           </Stack>
+          <Typography level="h4">Activities This Year</Typography>
+          <ThisMonthActivitiesCalendar dates={recentActivities} />
           <br />
-          <Typography level="h4" gutterBottom>
-            Workflows
-          </Typography>
-          <Stack spacing={2}>
-            <MetricCard
-              percentage={truckProgress.percentage}
-              completed={truckProgress.completed}
-              total={truckProgress.total}
-              title="Truck (Toyota Tundra) Maintenance"
-              // link="https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
-            >
-              <Typography level="body-sm">
-                {truckTasks.rows.map((x) => `${x.title}, `)}
-              </Typography>
-            </MetricCard>
+
+          <Stack direction="row" justifyContent="space-between">
+            <Typography level="h4">Recent Disc Golf Rounds</Typography>
+            <Typography level="body-xs">
+              <Link href="/dg/rounds">All Rounds</Link>
+            </Typography>
           </Stack>
+          <Typography gutterBottom level="body-md">
+            (It has been{' '}
+            <b>{differenceInDays(new Date(), recentRounds[0].startdate)}</b>{' '}
+            day(s) since I've played disc golf or uploaded my scorecards)
+          </Typography>
+          <List size="sm" sx={{ backgroundColor: '#ffffce' }}>
+            {recentRounds.map((round) => (
+              <ListItem key={round.coursename + round.startdate.toString()}>
+                {round.startdate.toLocaleDateString()}: <b>{round['+/-']}</b> @{' '}
+                {round.coursename}
+              </ListItem>
+            ))}
+          </List>
+
+          <Typography level="h4">Recent Climbs</Typography>
+
+          <List size="sm" sx={{ backgroundColor: '#ffffce' }}>
+            {recentClimbs.map((climb) => (
+              <ListItem key={climb.id}>
+                {climb.Date.toLocaleDateString()}:{' '}
+                <a target="_blank" href={climb.url}>
+                  {climb.Route} ({climb.Rating})
+                </a>{' '}
+              </ListItem>
+            ))}
+          </List>
+
+          <Stack direction="row" justifyContent="space-between">
+            <Typography level="h4">Recent Notes</Typography>
+            <Link href="https://memo.lkat.io/">All Notes</Link>
+          </Stack>
+
+          <List size="sm" sx={{ backgroundColor: '#ffffce' }}>
+            {memos.slice(0, 3).map((memo) => (
+              <ListItem key={memo.id}>
+                <b>{memo.date.toLocaleDateString()}</b>:
+                {/*<a target="_blank" href={climb.url}>*/}
+                {/*  {climb.Route} ({climb.Rating})*/}
+                {/*</a>{' '}*/}
+                <Markdown>{memo.data.memo?.content}</Markdown>
+              </ListItem>
+            ))}
+          </List>
+
+          {/*<br />*/}
+
+          <br />
+          {/*<Typography level="h4" gutterBottom>*/}
+          {/*  Workflows*/}
+          {/*</Typography>*/}
+          {/*<Stack spacing={2}>*/}
+          {/*  <MetricCard*/}
+          {/*    percentage={truckProgress.percentage}*/}
+          {/*    completed={truckProgress.completed}*/}
+          {/*    total={truckProgress.total}*/}
+          {/*    title="Truck (Toyota Tundra) Maintenance"*/}
+          {/*    // link="https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"*/}
+          {/*  >*/}
+          {/*    <Typography level="body-sm">*/}
+          {/*      {truckTasks.rows.map((x) => `${x.title}, `)}*/}
+          {/*    </Typography>*/}
+          {/*  </MetricCard>*/}
+          {/*</Stack>*/}
         </Grid>
       </Grid>
     </Container>

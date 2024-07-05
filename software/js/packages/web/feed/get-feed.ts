@@ -45,7 +45,7 @@ select * from x order by date desc;
   return feed;
 }
 
-async function getMemos() {
+export async function getMemos() {
   console.time('memos');
   const memosResponse = await fetch('https://memo.lkat.io/api/v1/memo', {
     headers: {
