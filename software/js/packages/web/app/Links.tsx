@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { isAdmin } from 'packages/web/isAdmin';
 
 const links = [
-  { href: '/admin', name: 'Admin', admin: true },
-  { href: '/feed', name: 'Feed' },
+  // { href: '/admin', name: 'Admin', admin: true },
+  // { href: '/feed', name: 'Feed' },
   { href: '/location-history', name: 'Location History', admin: true },
   { href: '/discs', name: 'Disc Golf' },
   { href: '/climb/logger', name: 'Climb Logger', admin: true },

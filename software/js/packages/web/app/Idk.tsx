@@ -131,15 +131,21 @@ interface FeedLineItemProps {
   date: Date;
   // children: React.ReactElement | string | undefined;
   children: React.ReactNode;
+  link?: string;
 }
 
-function FeedLineItem({ type, children, date }: FeedLineItemProps) {
+function FeedLineItem({ type, children, date, link }: FeedLineItemProps) {
   return (
     <Stack direction="row" gap={2} alignItems="center">
       <Box textAlign="center">
         {feedIcon[type]}
         <Typography level="body-xs">{date?.toLocaleDateString()}</Typography>
         <Typography level="body-xs">{feedTitle[type]}</Typography>
+        {link && (
+          <Typography level="body-xs">
+            <a href={link}>Open</a>
+          </Typography>
+        )}
       </Box>
       <Typography level="body-sm">{children}</Typography>
     </Stack>
@@ -149,6 +155,7 @@ function FeedLineItem({ type, children, date }: FeedLineItemProps) {
 export function FeedTable({ rows }: FeedTableProps) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
+  console.log('rows', rows);
   return (
     <>
       <Box textAlign="center">
@@ -164,109 +171,118 @@ export function FeedTable({ rows }: FeedTableProps) {
       </Box>
       <Divider sx={{ mt: '1em' }} />
       <List>
-        {rows.map(({ id, date, data, type }) => (
-          <>
-            <ListItem key={id}>
-              {type === 'obsidian-adventure' && (
-                <>
-                  {/*<Markdown>{data.adventure?.contents}</Markdown>*/}
-                  <FeedLineItem type={type} date={date}>
-                    {data.adventure?.activity}
-                    <Markdown>{data.adventure?.contents}</Markdown>
-                  </FeedLineItem>
-                  {/*<b>Adventure</b>: */}
-                </>
-              )}
-              {type === 'disc-golf-disc' && (
-                <>
-                  <FeedLineItem type={type} date={date}>
-                    #{data.disc?.number} - {data.disc?.brand}{' '}
-                    {data.disc?.plastic} {data.disc?.model}{' '}
-                    {data.disc?.weight && `(${data.disc?.weight}g)`}
-                  </FeedLineItem>
-                  {/*<Typography level="body-xs">New Disc</Typography>-{' '}*/}
-                  {/*<Typography level="body-sm">*/}
-                  {/*  #{data.disc?.number} - {data.disc?.brand} {data.disc?.plastic}{' '}*/}
-                  {/*  {data.disc?.model}{' '}*/}
-                  {/*  {data.disc?.weight && `(${data.disc?.weight}g)`}*/}
-                  {/*</Typography>*/}
-                </>
-              )}
-              {type === 'disc-golf-scorecard' && (
-                <>
-                  {/*<b>Played disc golf</b> @ {data.scorecard?.coursename} (*/}
-                  {/*{data.scorecard?.['+/-']})*/}
-                  <FeedLineItem type={type} date={date}>
-                    @ {data.scorecard?.coursename} ({data.scorecard?.['+/-']})
-                  </FeedLineItem>
-                </>
-              )}
-              {type === 'climb' && (
-                <>
-                  <FeedLineItem type={type} date={date}>
-                    {data.climb?.Route} ({data.climb?.Rating})
-                    <blockquote>{data.climb?.Notes}</blockquote>
-                  </FeedLineItem>
-                  {/*<b>Climbed Route</b>: {data.climb?.Route} ({data.climb?.Rating})*/}
-                </>
-              )}
-              {/*{type === 'bookmark' && (*/}
-              {/*  <>*/}
-              {/*    <FeedLineItem type={type} date={date}>*/}
-              {/*      <Chip sx={{ mr: '.5em' }}>{data.bookmark?.folder}</Chip>*/}
-              {/*      <Link href={data.bookmark?.url} target="_blank">*/}
-              {/*        {data.bookmark?.title}*/}
-              {/*      </Link>*/}
-              {/*      <br />*/}
-              {/*      <Typography level="body-xs">*/}
-              {/*        {data.bookmark?.excerpt}*/}
-              {/*      </Typography>*/}
-              {/*    </FeedLineItem>*/}
-              {/*  </>*/}
-              {/*)}*/}
-              {type === 'raindrop' && (
-                <>
-                  <FeedLineItem type={type} date={date}>
-                    {/*<Chip sx={{ mr: '.5em' }}>{data.raindrop?.folder}</Chip>*/}
-                    <Link href={data.raindrop?.link} target="_blank">
-                      {data.raindrop?.title}
-                    </Link>
-                    <br />
-                    <Typography level="body-xs">
-                      {data.raindrop?.excerpt}
-                    </Typography>
-                  </FeedLineItem>
-                </>
-              )}
-              {type === 'memo' && (
-                <>
-                  <FeedLineItem type={type} date={date}>
-                    <Markdown>{data.memo?.content}</Markdown>
-                    {data.memo?.resourceList.map((rl) => (
-                      <img
-                        height={100}
-                        // width={100}
-                        key={rl.name}
-                        src={`https://memo.lkat.io/o/r/${rl.name}`}
-                      />
-                    ))}
-                  </FeedLineItem>
-                </>
-              )}
-              {type === 'maintenance' && (
-                <>
-                  <FeedLineItem type={type} date={date}>
-                    {data.maintenance?.title}
-                    <Markdown>{data.maintenance?.Notes}</Markdown>
-                    <br />
-                    <Chip>{data.maintenance?.Property}</Chip>
-                  </FeedLineItem>
-                </>
-              )}
-            </ListItem>
-            <ListDivider />
-          </>
-        ))}
+        {rows.map(({ id, date, data, type }) => {
+          return (
+            <>
+              <ListItem key={id}>
+                {type === 'obsidian-adventure' && data.adventure && (
+                  <>
+                    <FeedLineItem
+                      type={type}
+                      date={date}
+                      link={`obsidian://open?vault=vault1&file=${encodeURIComponent(
+                        data.adventure.path.replace(
+                          `C:\\Users\\looni\\vault1\\`,
+                          ''
+                        )
+                      )}`}
+                    >
+                      {data.adventure.activity}
+                      <Markdown>{data.adventure.contents}</Markdown>
+                    </FeedLineItem>
+                  </>
+                )}
+                {type === 'disc-golf-disc' && (
+                  <>
+                    <FeedLineItem type={type} date={date}>
+                      #{data.disc?.number} - {data.disc?.brand}{' '}
+                      {data.disc?.plastic} {data.disc?.model}{' '}
+                      {data.disc?.weight && `(${data.disc?.weight}g)`}
+                    </FeedLineItem>
+                    {/*<Typography level="body-xs">New Disc</Typography>-{' '}*/}
+                    {/*<Typography level="body-sm">*/}
+                    {/*  #{data.disc?.number} - {data.disc?.brand} {data.disc?.plastic}{' '}*/}
+                    {/*  {data.disc?.model}{' '}*/}
+                    {/*  {data.disc?.weight && `(${data.disc?.weight}g)`}*/}
+                    {/*</Typography>*/}
+                  </>
+                )}
+                {type === 'disc-golf-scorecard' && (
+                  <>
+                    {/*<b>Played disc golf</b> @ {data.scorecard?.coursename} (*/}
+                    {/*{data.scorecard?.['+/-']})*/}
+                    <FeedLineItem type={type} date={date}>
+                      @ {data.scorecard?.coursename} ({data.scorecard?.['+/-']})
+                    </FeedLineItem>
+                  </>
+                )}
+                {type === 'climb' && (
+                  <>
+                    <FeedLineItem type={type} date={date}>
+                      {data.climb?.Route} ({data.climb?.Rating})
+                      <blockquote>{data.climb?.Notes}</blockquote>
+                    </FeedLineItem>
+                    {/*<b>Climbed Route</b>: {data.climb?.Route} ({data.climb?.Rating})*/}
+                  </>
+                )}
+                {/*{type === 'bookmark' && (*/}
+                {/*  <>*/}
+                {/*    <FeedLineItem type={type} date={date}>*/}
+                {/*      <Chip sx={{ mr: '.5em' }}>{data.bookmark?.folder}</Chip>*/}
+                {/*      <Link href={data.bookmark?.url} target="_blank">*/}
+                {/*        {data.bookmark?.title}*/}
+                {/*      </Link>*/}
+                {/*      <br />*/}
+                {/*      <Typography level="body-xs">*/}
+                {/*        {data.bookmark?.excerpt}*/}
+                {/*      </Typography>*/}
+                {/*    </FeedLineItem>*/}
+                {/*  </>*/}
+                {/*)}*/}
+                {type === 'raindrop' && (
+                  <>
+                    <FeedLineItem type={type} date={date}>
+                      {/*<Chip sx={{ mr: '.5em' }}>{data.raindrop?.folder}</Chip>*/}
+                      <Link href={data.raindrop?.link} target="_blank">
+                        {data.raindrop?.title}
+                      </Link>
+                      <br />
+                      <Typography level="body-xs">
+                        {data.raindrop?.excerpt}
+                      </Typography>
+                    </FeedLineItem>
+                  </>
+                )}
+                {type === 'memo' && (
+                  <>
+                    <FeedLineItem type={type} date={date}>
+                      <Markdown>{data.memo?.content}</Markdown>
+                      {data.memo?.resourceList.map((rl) => (
+                        <img
+                          height={100}
+                          // width={100}
+                          key={rl.name}
+                          src={`https://memo.lkat.io/o/r/${rl.name}`}
+                        />
+                      ))}
+                    </FeedLineItem>
+                  </>
+                )}
+                {type === 'maintenance' && (
+                  <>
+                    <FeedLineItem type={type} date={date}>
+                      {data.maintenance?.title}
+                      <Markdown>{data.maintenance?.Notes}</Markdown>
+                      <br />
+                      <Chip>{data.maintenance?.Property}</Chip>
+                    </FeedLineItem>
+                  </>
+                )}
+              </ListItem>
+              <ListDivider />
+            </>
+          );
+        })}
       </List>
     </>
   );

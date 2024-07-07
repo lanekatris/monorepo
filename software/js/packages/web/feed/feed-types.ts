@@ -58,7 +58,7 @@ export interface FeedItem {
       number: number;
       weight?: number;
     };
-    adventure?: { activity: string; contents?: string };
+    adventure?: { activity: string; contents?: string; path: string };
     bookmark?: Bookmark;
     memo?: Memo;
     maintenance?: {

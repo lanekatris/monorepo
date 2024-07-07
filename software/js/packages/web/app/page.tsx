@@ -22,7 +22,6 @@ import HomeLinks from './Links';
 import React, { ReactNode } from 'react';
 import { RawUdiscScorecardEntry } from '../../scorecards/src/raw-udisc-scorecard-entry';
 import Link from 'next/link';
-import DatePicker from 'react-datepicker';
 import ThisMonthActivitiesCalendar from './ThisMonthActivitiesCalendar';
 import { differenceInDays, parse } from 'date-fns';
 import { getMemos } from '../feed/get-feed';
@@ -98,6 +97,13 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
 
   const memos = await getMemos();
 
+  const {
+    rows: activityGrouping,
+  }: { rows: { name: string; value: number }[] } =
+    await sql`select activity as name,count(*) as value from kestra.obsidian_adventures group by activity order by count(*) desc`;
+
+  console.log('ugh', activityGrouping);
+
   return (
     <Container>
       <br />
@@ -120,9 +126,15 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
             Lane on top of Grays Peak, a 14er in Colorado
           </Typography>
           <Alert color="primary">
-            Hi! I'm Lane Katris, a senior full stack software engineer. This
-            site is a hodge podge of data and things I enjoy. The links below
-            are a few places to start with.
+            Hi! I'm{' '}
+            <Link href="about" style={{ display: 'contents' }}>
+              Lane Katris
+            </Link>{' '}
+            , a senior full stack software engineer. This site is a hodge podge
+            of data and things I enjoy. The links below are a few places to
+            start with. Also... this blog is a machete approach of getting
+            content out there, hacking and slashing to get it out. So don't
+            expect too much polish 😉
           </Alert>
 
           <br />
@@ -276,6 +288,12 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
           </Stack>
           <Typography level="h4">Activities This Year</Typography>
           <ThisMonthActivitiesCalendar dates={recentActivities} />
+          {/*<ActivityGrouping*/}
+          {/*  data={activityGrouping.map((x) => ({*/}
+          {/*    ...x,*/}
+          {/*    value: parseInt(x.value),*/}
+          {/*  }))}*/}
+          {/*/>*/}
           <br />
 
           <Stack direction="row" justifyContent="space-between">

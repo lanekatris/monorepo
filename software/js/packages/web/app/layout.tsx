@@ -40,10 +40,11 @@ export default function RootLayout({
               {/*<Link href="/feed">Feed</Link>*/}
 
               {/*<Stack direction="row" spacing={1}>*/}
-              <Link href="/feed">./Feed</Link>
-              <Link href="/admin">./Admin</Link>
-              <Link href="/blog">./Blog</Link>
+              <Link href="feed">./Feed</Link>
+              <Link href="admin">./Admin</Link>
+              <Link href="blog">./Blog</Link>
               <Link href="https://memo.lkat.io/">🔗Notes</Link>
+              <Link href="about">./About</Link>
 
               <ThemeToggler />
               {/*</Stack>*/}
@@ -53,7 +54,16 @@ export default function RootLayout({
           {children}
           <br />
           <footer style={{ textAlign: 'center' }}>
-            <img src="https://github.com/lanekatris/monorepo/actions/workflows/web-docker.yml/badge.svg" />
+            <a
+              href="https://github.com/lanekatris/monorepo/actions"
+              target="_blank"
+            >
+              <img
+                alt="docker image build status"
+                src="https://github.com/lanekatris/monorepo/actions/workflows/web-docker.yml/badge.svg"
+              />
+            </a>
+
             <img
               style={{
                 marginLeft: '.5em',
