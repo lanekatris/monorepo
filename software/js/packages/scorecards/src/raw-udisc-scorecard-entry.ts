@@ -1,4 +1,7 @@
 export interface RawUdiscScorecardEntry {
+  id: number;
+  new_course?: boolean;
+  streak?: boolean;
   playername: string;
   coursename: string;
   layoutname: string;
