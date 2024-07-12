@@ -65,7 +65,7 @@ services:
       - /home/lane/microbin:/my/microbin
       - /home/lane/microbin/data:/app/pasta_data
   memos:
-    image: neosmemo/memos:stable
+    image: neosmemo/memos:0.22.2
     restart: unless-stopped
     ports:
       - "5230:5230"
@@ -85,5 +85,6 @@ services:
       - /bigboy/minio:/data
 #  watchtower:
 #    image: containrrr/watchtower
+#    command: web --debug
 #    volumes:
 #      - /var/run/docker.sock:/var/run/docker.sock
