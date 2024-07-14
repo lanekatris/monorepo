@@ -26,6 +26,7 @@ import ThisMonthActivitiesCalendar from './ThisMonthActivitiesCalendar';
 import { differenceInDays, parse } from 'date-fns';
 import { getMemos } from '../feed/get-feed';
 import Markdown from 'react-markdown';
+import { MetricCard } from '../metrics/MetricCard';
 
 export const dynamic = 'force-dynamic';
 export default async function Index() {
@@ -238,38 +239,14 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
               </CardContent>
             </Card>
 
-            <Card variant="outlined">
-              <CardContent orientation="horizontal">
-                <CircularProgress
-                  size="lg"
-                  color="danger"
-                  determinate
-                  value={fourteenerStats.percentage}
-                >
-                  <Typography>{fourteenerStats.percentage}%</Typography>
-                </CircularProgress>
-                <CardContent>
-                  <Typography level="title-lg">
-                    Colorado 14ers Summited
-                  </Typography>
-                  <Stack direction="row" spacing={2}>
-                    <Typography>
-                      {fourteenerStats.completed} / {fourteenerStats.total}
-                    </Typography>
-                    {/* */}
-                    <Typography>
-                      <a
-                        href="https://www.lanekatris.com/Colorado-14ers"
-                        target="_blank"
-                        className="text-blue-600 visited:text-purple-600"
-                      >
-                        More Info
-                      </a>
-                    </Typography>
-                  </Stack>
-                </CardContent>
-              </CardContent>
-            </Card>
+            <MetricCard
+              percentage={fourteenerStats.percentage}
+              completed={fourteenerStats.completed}
+              total={fourteenerStats.total}
+              title="Colorado 14ers Summited"
+              // link="https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
+              link="/adventures/14ers"
+            />
 
             {/*<Card variant={'outlined'}>*/}
             {/*  <Typography>WV State Parks Visited</Typography>*/}
@@ -364,54 +341,5 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
         </Grid>
       </Grid>
     </Container>
-  );
-}
-
-interface Metric {
-  percentage: number;
-  completed: number;
-  total: number;
-  link?: string;
-  title: string;
-  children?: ReactNode;
-}
-
-function MetricCard({
-  percentage,
-  completed,
-  total,
-  link,
-  title,
-  children,
-}: Metric) {
-  return (
-    <Card variant="outlined">
-      <CardContent orientation="horizontal">
-        <CircularProgress
-          size="lg"
-          color="danger"
-          determinate
-          value={percentage}
-        >
-          <Typography>{percentage}%</Typography>
-        </CircularProgress>
-        <CardContent>
-          <Typography level="title-lg">{title}</Typography>
-          <Stack direction="row" spacing={2}>
-            <Typography level="body-sm">
-              {completed} / {total}
-            </Typography>
-            {link && (
-              <Typography>
-                <a href={link} target="_blank">
-                  More Info
-                </a>
-              </Typography>
-            )}
-          </Stack>
-          {children}
-        </CardContent>
-      </CardContent>
-    </Card>
   );
 }

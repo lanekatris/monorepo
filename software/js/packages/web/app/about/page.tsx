@@ -1,13 +1,20 @@
-import { Box, Container, Typography } from '@mui/joy';
+import { Box, Breadcrumbs, Container, Link, Typography } from '@mui/joy';
 import Image from 'next/image';
 
 import aboutImage from './434393123_7438281949593065_9174792310540916431_n.jpg';
 import fireTower from './448182925_8332689336765659_3010429954221537544_n.jpg';
+import React from 'react';
 
 export default function AboutPage() {
   return (
     <Container maxWidth="sm">
-      <br />
+      <Breadcrumbs>
+        <Link color="neutral" href="/">
+          Home
+        </Link>
+        <Typography fontWeight="bold">About Me</Typography>
+      </Breadcrumbs>
+
       <Box>
         <Image
           src={aboutImage}
