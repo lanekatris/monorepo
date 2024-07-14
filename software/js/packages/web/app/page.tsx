@@ -130,13 +130,11 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
             </Link>{' '}
             , a senior full stack software engineer. This site is a hodge podge
             of data and things I enjoy. The links below are a few places to
-            start with. Also... this blog is a machete approach of getting
-            content out there, hacking and slashing to get it out. So don't
-            expect too much polish 😉
+            start with.
           </Alert>
 
           <br />
-          <Typography level="h4">Links</Typography>
+          <Typography level="h4">Pages</Typography>
           <HomeLinks />
           <br />
           <Box sx={{ textAlign: 'center', maxWidth: 500 }}>

@@ -1,63 +1,56 @@
-// @ts-nocheck
-
-import { Container, Typography } from '@mui/joy';
-// import blogs from './blogroll.json';
-// import { opmlToJSON } from 'opml-to-json';
+import { Breadcrumbs, Container, Link, Typography } from '@mui/joy';
 import { getRssOpml } from './opml/getRssOpml';
+import React from 'react';
 const opml = require('opml');
 
-// function isParent(idk: Parent | Item){
-//
-// }
-// type Idk = opmlToJsonResult['children'];
-
-// function isParent(idk: Idk): idk is Idk['Parent'] {}
-
 export const dynamic = 'force-dynamic';
+interface OpmlResponse {
+  subs: {
+    text: string;
+    subs: {
+      title: string;
+      text: string;
+      xmlUrl: string;
+
+      htmlUrl: string;
+      type: 'rss';
+    }[];
+  }[];
+}
+
+async function parseOpml(): Promise<OpmlResponse> {
+  const xml = await getRssOpml();
+  return new Promise<OpmlResponse>((resolve, reject) => {
+    opml.parse(xml, function (err: Error, result: any) {
+      if (err) return reject(err);
+
+      return resolve(result.opml.body);
+    });
+  });
+}
 
 export default async function PodRollPage() {
-  //   const { rows } =
-  //     await sql`select f.id, c.title category_name, f.title, f.feed_url, f.site_url
-  // from feeds f
-  //          inner join categories c on c.id = f.category_id
-  // order by c.title`;
+  const data = await parseOpml();
 
-  // console.log('rows', rows[0]);
-
-  // const { data: xml } = await axios.get<string>(
-  //   'http://server1.local:8663/v1/export',
-  //   {
-  //     headers: {
-  //       'X-Auth-Token': process.env.MINIFLUX_API_KEY,
-  //     },
-  //   }
-  // );
-  const xml = await getRssOpml();
-  // const xml = await response.text();
-  // const opml = await opmlToJSON(xml);
-  // console.log('aaaaaaaa', json);
-  opml.parse(xml, function (err, result) {
-    console.log({ err, result }, result.opml.head, result.opml.body);
-  });
-  // console.log('bbb', opml.children[0].children);
-
-  // const grouped = groupBy(blogs, (x) => x.category_name);
-  // console.log('grouped', grouped);
-  // return <h1>hi there</h1>;
   return (
     <Container maxWidth="md">
-      {/*{blogs.map((blog) => (*/}
-      {/*  <div key={blog.id}>{blog.title}</div>*/}
-      {/*))}*/}
-      <br />
+      <Breadcrumbs>
+        <Link color="neutral" href="/">
+          Home
+        </Link>
+        <Typography fontWeight="bold">Blog Roll</Typography>
+      </Breadcrumbs>
+
       <Typography>
         I switched from Feedly to self-hosting Miniflux on TODO because Feedly
         requires a paid/Enterprise plan to use their api now.
       </Typography>
+      <br />
       <Typography>
         I've deleted quite a few that had broken links. It was a little
         surprising so many domains had expired.
       </Typography>
+      <br />
       {/*<Typography>*/}
       {/*  I want to organize more but I have <b>{Object.keys(grouped).length}</b>{' '}*/}
       {/*  categories and <b>{blogs.length}</b> RSS feeds.{' '}*/}
@@ -67,27 +60,20 @@ export default async function PodRollPage() {
       </Typography>
 
       <ul>
-        {opml.children.map((parent) => (
+        {data.subs.map((parent) => (
           <li key={parent.text}>
-            {parent.text} ({parent.children.length})
+            {parent.text} ({parent.subs.length})
             <ul>
-              {parent.children.map((blog) => (
+              {parent.subs.map((blog) => (
                 <li key={blog.title}>
-                  {blog.title} :: <a href={blog.htmlurl}>Site</a>
+                  {blog.title} :: <a href={blog.htmlUrl}>Site</a>
                   {' | '}
-                  <a href={blog.xmlurl}>Feed</a>
+                  <a href={blog.xmlUrl}>Feed</a>
                 </li>
               ))}
             </ul>
           </li>
         ))}
-        {/*{grouped.map((group) => (*/}
-        {/*  <li>*/}
-        {/*    {group.map((blg) => {*/}
-        {/*      return <li>{blg.title}</li>;*/}
-        {/*    })}*/}
-        {/*  </li>*/}
-        {/*))}*/}
       </ul>
     </Container>
   );

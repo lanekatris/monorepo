@@ -2,10 +2,14 @@
 import { Chip, List, ListItem, useTheme } from '@mui/joy';
 import Link from 'next/link';
 import { isAdmin } from 'packages/web/isAdmin';
+import React from 'react';
 
 const links = [
   // { href: '/admin', name: 'Admin', admin: true },
   // { href: '/feed', name: 'Feed' },
+  // <Link href="https://memo.lkat.io/">🔗Notes</Link>
+  { href: '/blogroll', name: 'Blog Roll' },
+  { href: 'https://memo.lkat.io/', name: 'Notes' },
   { href: '/location-history', name: 'Location History', admin: true },
   { href: '/discs', name: 'Disc Golf' },
   { href: '/climb/logger', name: 'Climb Logger', admin: true },
