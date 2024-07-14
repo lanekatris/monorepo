@@ -12,7 +12,7 @@ export default function BlogPage() {
       <ul>
         {content.map((c) => (
           <li key={c.path}>
-            <Link href={c.path}>{c.path}</Link>
+            <Link href={c.path}>{c.path.replace('/blog/', '')}</Link>
           </li>
         ))}
       </ul>

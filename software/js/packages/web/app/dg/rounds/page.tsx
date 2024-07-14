@@ -3,6 +3,8 @@ import {
   Chip,
   Container,
   Link,
+  List,
+  ListItem,
   Sheet,
   Table,
   Typography,
@@ -40,9 +42,27 @@ select previous_score < 0 and "+/-" < 0 streak, * from x
       <Typography level="h2" sx={{ textAlign: 'center' }}>
         Lane&apos;s Udisc Disc Golf Rounds ({rows.length})
       </Typography>
+      {/*<Typography fontWeight="bold">Information</Typography>*/}
+      {/*<List>*/}
+      {/*  <ListItem>*/}
+      {/*    Rating is out of 300. Udisc doesn&apos;t export a link to their*/}
+      {/*    courses in their CSV.*/}
+      {/*  </ListItem>*/}
+      {/*  <ListItem>*/}
+      {/*    <Chip size="sm" color="success">*/}
+      {/*      New*/}
+      {/*    </Chip>*/}
+      {/*    means this is the first time I've played this course. Keep in mind*/}
+      {/*    Udisc moderators can change the coursename willy nilly.*/}
+      {/*  </ListItem>*/}
+      {/*  <ListItem>*/}
+      {/*    <ImFire color="green" /> streak - determined if your previous round*/}
+      {/*    and current round were under par.*/}
+      {/*  </ListItem>*/}
+      {/*</List>*/}
       <Sheet sx={{ overflow: 'auto' }}>
         <Table stripe="odd">
-          <caption>
+          <caption style={{ textAlign: 'left' }}>
             Rating is out of 300. Udisc doesn&apos;t export a link to their
             courses in their CSV.
             {/*<br />*/}

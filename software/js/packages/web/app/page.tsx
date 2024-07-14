@@ -102,8 +102,6 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
   }: { rows: { name: string; value: number }[] } =
     await sql`select activity as name,count(*) as value from kestra.obsidian_adventures group by activity order by count(*) desc`;
 
-  console.log('ugh', activityGrouping);
-
   return (
     <Container>
       <br />
