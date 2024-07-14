@@ -179,6 +179,7 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
               completed={nationalParks.completed}
               total={nationalParks.total}
               title="National Parks Visited"
+              link="/adventures/national-parks"
             />
 
             {/*<Card variant="outlined">*/}

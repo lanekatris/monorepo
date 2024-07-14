@@ -5,6 +5,7 @@ import { sql } from '@vercel/postgres';
 import { Raindrop } from './raindrop';
 import { getJsonFromMinio } from './get-json-from-minio';
 import { FeedItem, Memo } from './feed-types';
+import axios from 'axios';
 
 async function getFeedItems() {
   console.time('sql');
@@ -47,13 +48,17 @@ select * from x order by date desc;
 
 export async function getMemos() {
   console.time('memos');
-  const memosResponse = await fetch('https://memo.lkat.io/api/v1/memo', {
-    headers: {
-      authorization: `Bearer ${process.env.MEMOS_API_KEY}`,
-    },
-  });
-  const rawMemos: Memo[] = await memosResponse.json();
-  const memos: Memo[] = rawMemos.map((x) => ({
+  const { data: rawMemos } = await axios.get<{ memos: Memo[] }>(
+    'https://memo.lkat.io/api/v1/memos',
+    {
+      headers: {
+        authorization: `Bearer ${process.env.MEMOS_API_KEY}`,
+      },
+    }
+  );
+  // console.log(rawMemos);
+  // const rawMemos: Memo[] = await memosResponse.data;
+  const memos: Memo[] = rawMemos.memos.map((x) => ({
     ...x,
     _date: new Date(x.displayTs * 1000),
   }));
@@ -90,30 +95,30 @@ async function getRaindrops() {
   });
 }
 
-export const getFeed = cache(
-  async ({
-    showBookmarks = true,
-  }: { showBookmarks?: boolean } | undefined = {}) => {
-    const allData = await Promise.all([
-      getFeedItems(),
-      getMemos(),
-      showBookmarks ? getRaindrops() : Promise.resolve([]),
-    ]);
+export const getFeed = async ({
+  showBookmarks = true,
+}: { showBookmarks?: boolean } | undefined = {}) => {
+  console.log('aaa', showBookmarks);
+  const allData = await Promise.all([
+    // getRaindrops(),
+    showBookmarks ? getRaindrops() : Promise.resolve([]),
+    getFeedItems(),
+    getMemos(),
+  ]);
 
-    console.time('agg');
+  console.time('agg');
 
-    const finalFeed = allData.flatMap((x) => x);
+  const finalFeed = allData.flatMap((x) => x);
 
-    finalFeed.sort((a, b) => {
-      if (!b.date || !a.date) {
-        throw new Error(
-          'Date is null: ' + JSON.stringify(a) + ' --- ' + JSON.stringify(b)
-        );
-      }
-      return b.date.valueOf() - a.date.valueOf();
-    });
-    console.timeEnd('agg');
+  finalFeed.sort((a, b) => {
+    if (!b.date || !a.date) {
+      throw new Error(
+        'Date is null: ' + JSON.stringify(a) + ' --- ' + JSON.stringify(b)
+      );
+    }
+    return b.date.valueOf() - a.date.valueOf();
+  });
+  console.timeEnd('agg');
 
-    return finalFeed.slice(0, 100);
-  }
-);
+  return finalFeed.slice(0, 100);
+};
