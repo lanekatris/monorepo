@@ -90,26 +90,28 @@ async function getRaindrops() {
   });
 }
 
-export const getFeed = cache(async () => {
-  const allData = await Promise.all([
-    getFeedItems(),
-    getMemos(),
-    getRaindrops(),
-  ]);
+export const getFeed = cache(
+  async ({ showBookmarks = true }: { showBookmarks?: boolean }) => {
+    const allData = await Promise.all([
+      getFeedItems(),
+      getMemos(),
+      showBookmarks ? getRaindrops() : Promise.resolve([]),
+    ]);
 
-  console.time('agg');
+    console.time('agg');
 
-  const finalFeed = allData.flatMap((x) => x);
+    const finalFeed = allData.flatMap((x) => x);
 
-  finalFeed.sort((a, b) => {
-    if (!b.date || !a.date) {
-      throw new Error(
-        'Date is null: ' + JSON.stringify(a) + ' --- ' + JSON.stringify(b)
-      );
-    }
-    return b.date.valueOf() - a.date.valueOf();
-  });
-  console.timeEnd('agg');
+    finalFeed.sort((a, b) => {
+      if (!b.date || !a.date) {
+        throw new Error(
+          'Date is null: ' + JSON.stringify(a) + ' --- ' + JSON.stringify(b)
+        );
+      }
+      return b.date.valueOf() - a.date.valueOf();
+    });
+    console.timeEnd('agg');
 
-  return finalFeed.slice(0, 100);
-});
+    return finalFeed.slice(0, 100);
+  }
+);

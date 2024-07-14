@@ -155,7 +155,7 @@ function FeedLineItem({ type, children, date, link }: FeedLineItemProps) {
 export function FeedTable({ rows }: FeedTableProps) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
-  console.log('rows', rows);
+
   return (
     <>
       <Box textAlign="center">
@@ -169,6 +169,7 @@ export function FeedTable({ rows }: FeedTableProps) {
           inline
         />
       </Box>
+
       <Divider sx={{ mt: '1em' }} />
       <List>
         {rows.map(({ id, date, data, type }) => {
