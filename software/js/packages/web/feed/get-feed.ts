@@ -91,7 +91,9 @@ async function getRaindrops() {
 }
 
 export const getFeed = cache(
-  async ({ showBookmarks = true }: { showBookmarks?: boolean }) => {
+  async ({
+    showBookmarks = true,
+  }: { showBookmarks?: boolean } | undefined = {}) => {
     const allData = await Promise.all([
       getFeedItems(),
       getMemos(),
