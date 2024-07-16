@@ -1,13 +1,6 @@
-import {
-  Breadcrumbs,
-  Container,
-  Link,
-  Stack,
-  Switch,
-  Typography,
-} from '@mui/joy';
+import { Breadcrumbs, Container, Link, Stack, Typography } from '@mui/joy';
 import { getFeed } from '../../feed/get-feed';
-import { FeedTable } from '../../app/Idk';
+import { FeedTable } from '../FeedTable';
 import React from 'react';
 import NextLink from 'next/link';
 import { unstable_noStore as noStore } from 'next/cache';
@@ -28,8 +21,6 @@ export default async function FeedPage({ searchParams }: FeedPageProps) {
 
   const feed = await getFeed(feedFilter);
 
-  console.log('searchparams', searchParams);
-
   return (
     <Container>
       <Stack direction="row" justifyContent="space-between">
@@ -42,7 +33,6 @@ export default async function FeedPage({ searchParams }: FeedPageProps) {
             <Link href="/admin">Refresh Feed...</Link>
           </Typography>
         </Breadcrumbs>
-        {/*<Link href="/admin">Refresh Feed...</Link>*/}
         <NextLink
           href={`/feed?showBookmarks=${
             feedFilter.showBookmarks ? 'false' : 'true'
@@ -51,16 +41,6 @@ export default async function FeedPage({ searchParams }: FeedPageProps) {
           {feedFilter.showBookmarks ? 'Hide Bookmarks' : 'Show Bookmarks'}
         </NextLink>
       </Stack>
-
-      {/*<Switch checked={feedFilter.showBookmarks} />*/}
-      {/*<Typography*/}
-      {/*  component="label"*/}
-      {/*  endDecorator={*/}
-      {/*    <Switch sx={{ ml: 1 }} checked={feedFilter.showBookmarks} onChange={e=> } />*/}
-      {/*  }*/}
-      {/*>*/}
-      {/*  Show Bookmarks*/}
-      {/*</Typography>*/}
 
       <FeedTable rows={feed} />
     </Container>
