@@ -10,6 +10,7 @@ import { getFeed } from '../../feed/get-feed';
 import { FeedTable } from '../../app/Idk';
 import React from 'react';
 import NextLink from 'next/link';
+import { unstable_noStore as noStore } from 'next/cache';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,6 +21,7 @@ interface FeedPageProps {
 }
 
 export default async function FeedPage({ searchParams }: FeedPageProps) {
+  noStore();
   const feedFilter = {
     showBookmarks: searchParams.showBookmarks !== 'false',
   };

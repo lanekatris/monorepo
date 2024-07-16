@@ -13,7 +13,8 @@ type EventFileType =
   | 'camping'
   | 'kayaking'
   | 'ultimate-frisbee'
-  | 'deep-water-solo';
+  | 'deep-water-solo'
+  | 'pool';
 
 const ma: { [k in EventFileType]: string } = {
   'deep-water-solo': 'Deep Water Solo',
@@ -30,6 +31,7 @@ const ma: { [k in EventFileType]: string } = {
   camping: 'Camping',
   kayaking: 'Kayaking',
   'ultimate-frisbee': 'Ultimate Frisbee',
+  pool: 'Pool',
 };
 
 export function createEventFile(type: EventFileType) {
