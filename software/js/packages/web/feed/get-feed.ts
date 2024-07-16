@@ -49,7 +49,7 @@ select * from x order by date desc;
 export async function getMemos() {
   console.time('memos');
   const { data: rawMemos } = await axios.get<{ memos: Memo[] }>(
-    'https://memo.lkat.io/api/v1/memos',
+    'http://192.168.86.100:5230/api/v1/memos',
     {
       headers: {
         authorization: `Bearer ${process.env.MEMOS_API_KEY}`,
