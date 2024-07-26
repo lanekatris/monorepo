@@ -1,5 +1,3 @@
-'use client';
-
 import { CgDisc } from 'react-icons/cg';
 import {
   GiDiscGolfBasket,
@@ -24,8 +22,9 @@ import {
   Table,
   Typography,
 } from '@mui/joy';
-import React, { useState } from 'react';
+import React from 'react';
 import { FeedItem, FeedItemType } from '../feed/feed-types';
+// import SimpleCalendar from './SimpleCalendar';
 
 interface FeedTableProps {
   rows: FeedItem[];
@@ -74,28 +73,15 @@ function FeedLineItem({ type, children, date, link }: FeedLineItemProps) {
           </Typography>
         )}
       </Box>
-      <Typography level="body-sm">{children}</Typography>
+      {children}
     </Stack>
   );
 }
 
 export function FeedTable({ rows }: FeedTableProps) {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
-
   return (
     <>
-      <Box textAlign="center">
-        <DatePicker
-          // inputStyle={{ textAlign: 'center' }}
-          selected={startDate}
-          onChange={() => {}}
-          startDate={startDate}
-          endDate={endDate}
-          selectsRange
-          inline
-        />
-      </Box>
+      {/*<SimpleCalendar />*/}
 
       <Divider sx={{ mt: '1em' }} />
       <List>
@@ -116,6 +102,7 @@ export function FeedTable({ rows }: FeedTableProps) {
                       )}`}
                     >
                       {data.adventure.activity}
+
                       <Markdown>{data.adventure.contents}</Markdown>
                     </FeedLineItem>
                   </>
@@ -148,7 +135,6 @@ export function FeedTable({ rows }: FeedTableProps) {
                 {type === 'raindrop' && (
                   <>
                     <FeedLineItem type={type} date={date}>
-                      {/*<Chip sx={{ mr: '.5em' }}>{data.raindrop?.folder}</Chip>*/}
                       <Link href={data.raindrop?.link} target="_blank">
                         {data.raindrop?.title}
                       </Link>
@@ -177,10 +163,13 @@ export function FeedTable({ rows }: FeedTableProps) {
                 {type === 'maintenance' && (
                   <>
                     <FeedLineItem type={type} date={date}>
-                      {data.maintenance?.title}
-                      <Markdown>{data.maintenance?.Notes}</Markdown>
-                      <br />
-                      <Chip>{data.maintenance?.Property}</Chip>
+                      <Box>
+                        {data.maintenance?.title}
+                        <Chip>{data.maintenance?.Property}</Chip>
+                        <Markdown>{data.maintenance?.Notes}</Markdown>
+                      </Box>
+
+                      {/*<br />*/}
                     </FeedLineItem>
                   </>
                 )}

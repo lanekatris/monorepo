@@ -27,15 +27,17 @@ import { differenceInDays, parse } from 'date-fns';
 import { getMemos } from '../feed/get-feed';
 import Markdown from 'react-markdown';
 import { MetricCard } from '../metrics/MetricCard';
+import { unstable_noStore as noStore } from 'next/cache';
 
 export const dynamic = 'force-dynamic';
 export default async function Index() {
-  const { completed, total, percentage } = await getMetric(sql`
-  select visited, count(*) as count
-           from noco.place
-           where source = 'https://udisc.com/blog/post/worlds-best-disc-golf-courses-2023'
-           group by visited
-  `);
+  noStore();
+  // const { completed, total, percentage } = await getMetric(sql`
+  // select visited, count(*) as count
+  //          from noco.place
+  //          where source = 'https://udisc.com/blog/post/worlds-best-disc-golf-courses-2023'
+  //          group by visited
+  // `);
 
   const coursesGoal2024 = await getMetric(sql`
   select visited, count(*) as count
@@ -51,11 +53,11 @@ select pv.id is not null as visited, count(*) as count from temp.place  p
 group by pv.id is not null
 `);
 
-  const truckProgress = await getMetric(sql`
-select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Truck' group by "Done"`);
-
-  const truckTasks =
-    await sql`select Title from noco.test_workflow2 where "Type" = 'Truck'`;
+  //   const truckProgress = await getMetric(sql`
+  // select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Truck' group by "Done"`);
+  //
+  //   const truckTasks =
+  //     await sql`select Title from noco.test_workflow2 where "Type" = 'Truck'`;
 
   const {
     completed: completed2,
@@ -98,10 +100,10 @@ select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Tr
 
   const memos = await getMemos();
 
-  const {
-    rows: activityGrouping,
-  }: { rows: { name: string; value: number }[] } =
-    await sql`select activity as name,count(*) as value from kestra.obsidian_adventures group by activity order by count(*) desc`;
+  // const {
+  //   rows: activityGrouping,
+  // }: { rows: { name: string; value: number }[] } =
+  //   await sql`select activity as name,count(*) as value from kestra.obsidian_adventures group by activity order by count(*) desc`;
 
   return (
     <Container>
