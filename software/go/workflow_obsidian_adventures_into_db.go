@@ -92,8 +92,6 @@ func LoadObsidianAdventuresWorkflow(ctx workflow.Context) error {
 		return err
 	}
 
-	//gormDb.WithContext(ctx)
-
 	var activities = ObsidianAdventuresActivityInput{Db: db, GormDb: gormDb}
 
 	err = workflow.ExecuteActivity(ctx, activities.DeleteAdventureDataActivity).Get(ctx, nil)

@@ -4,6 +4,7 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"context"
 	"fmt"
 	"github.com/charmbracelet/log"
 	"go.temporal.io/sdk/client"
@@ -54,6 +55,49 @@ to quickly create a Cobra application.`,
 		w.RegisterWorkflow(shared.LoadObsidianAdventuresWorkflow)
 		//w.RegisterActivity(shared.DeleteAdventureData, db)
 		w.RegisterActivity(activities)
+
+		minifluxDb, err := shared.GetMinifluxDb()
+		shared.HandleError(err)
+
+		var storageClient = shared.GetMinioClient()
+		var activitiesTwo = &shared.WorkflowInputMinifluxToS3{
+			Db:            minifluxDb,
+			StorageClient: storageClient,
+		}
+		w.RegisterWorkflow(shared.WorkflowMinifluxToS3)
+		w.RegisterActivity(activitiesTwo)
+
+		scheduleID := "schedule_id2"
+		workflowID := "schedule_workflow_id"
+
+		list, err := c.ScheduleClient().List(context.Background(), client.ScheduleListOptions{})
+		shared.HandleError(err)
+
+		var scheduleExists = false
+		for list.HasNext() {
+			n, err := list.Next()
+			shared.HandleError(err)
+			if n.ID == scheduleID {
+				scheduleExists = true
+			}
+			log.Info(n)
+		}
+
+		if scheduleExists == false {
+			scheduleHandle, err := c.ScheduleClient().Create(context.Background(), client.ScheduleOptions{
+				ID: scheduleID,
+				Spec: client.ScheduleSpec{
+					CronExpressions: []string{"0 */12 * * *"},
+				},
+				Action: &client.ScheduleWorkflowAction{
+					ID:        workflowID,
+					Workflow:  shared.WorkflowMinifluxToS3,
+					TaskQueue: shared.GreetingTaskQueue,
+				},
+			})
+			shared.HandleError(err)
+			log.Info(scheduleHandle)
+		}
 
 		// Start listening to the Task Queue
 		err = w.Run(worker.InterruptCh())
