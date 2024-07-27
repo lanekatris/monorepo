@@ -1,6 +1,8 @@
 module shared
 
-go 1.18
+go 1.21
+
+toolchain go1.22.5
 
 require (
 	github.com/adrg/frontmatter v0.2.0
