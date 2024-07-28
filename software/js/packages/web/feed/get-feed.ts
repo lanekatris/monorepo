@@ -60,7 +60,7 @@ export async function getMemos() {
   // const rawMemos: Memo[] = await memosResponse.data;
   const memos: Memo[] = rawMemos.memos.map((x) => ({
     ...x,
-    _date: new Date(x.displayTs * 1000),
+    _date: new Date(x.displayTime), //new Date(x.displayTs * 1000),
   }));
   console.timeEnd('memos');
   return memos.map((memo) => {

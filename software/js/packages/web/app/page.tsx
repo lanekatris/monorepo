@@ -28,6 +28,7 @@ import { getMemos } from '../feed/get-feed';
 import Markdown from 'react-markdown';
 import { MetricCard } from '../metrics/MetricCard';
 import { unstable_noStore as noStore } from 'next/cache';
+import { NEXT_ADVENTURE } from '../nextAdventure';
 
 export const dynamic = 'force-dynamic';
 export default async function Index() {
@@ -172,6 +173,18 @@ group by pv.id is not null
           {/*<Box textAlign="center">*/}
           {/* */}
           {/*</Box>*/}
+
+          <Alert
+            size="lg"
+            color="danger"
+            sx={{ alignItems: 'flex-start' }}
+            // variant="outlined"
+          >
+            <Typography>
+              <b>Next Adventure Not Planned, Ideas:</b> {NEXT_ADVENTURE}
+            </Typography>
+          </Alert>
+
           <Typography level="h4" gutterBottom>
             Goals
           </Typography>
@@ -313,11 +326,12 @@ group by pv.id is not null
           <List size="sm" sx={{ backgroundColor: '#ffffce' }}>
             {memos.slice(0, 3).map((memo) => (
               <ListItem key={memo.id}>
-                <b>{memo.date.toLocaleDateString()}</b>:
+                {/*{JSON.stringify(memo)}*/}
+                <b>{memo.data.memo?.displayTime?.split('T')[0]}</b>:
                 {/*<a target="_blank" href={climb.url}>*/}
                 {/*  {climb.Route} ({climb.Rating})*/}
                 {/*</a>{' '}*/}
-                <Markdown>{memo.data.memo?.content}</Markdown>
+                <Markdown>{memo.data.memo?.content.slice(0, 100)}</Markdown>...
               </ListItem>
             ))}
           </List>

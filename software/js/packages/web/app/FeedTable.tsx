@@ -148,7 +148,9 @@ export function FeedTable({ rows }: FeedTableProps) {
                 {type === 'memo' && (
                   <>
                     <FeedLineItem type={type} date={date}>
-                      <Markdown>{data.memo?.content}</Markdown>
+                      <Box>
+                        <Markdown>{data.memo?.content}</Markdown>
+                      </Box>
                       {data.memo?.resourceList?.map((rl) => (
                         <img
                           height={100}

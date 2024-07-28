@@ -21,13 +21,14 @@ export interface Memo {
   creatorId: number;
   createdTs: number;
   updatedTs: number;
-  displayTs: number;
+  displayTime: string;
   content: string;
   visibility: string;
   pinned: boolean;
   creatorName: string;
   creatorUsername: string;
   _date: Date;
+
   resourceList: {
     name: string;
     type: string;
