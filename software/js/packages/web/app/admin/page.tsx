@@ -11,6 +11,7 @@ import { sql } from '@vercel/postgres';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { groupBy } from 'lodash';
+import { unstable_noStore as noStore } from 'next/cache';
 
 export const dynamic = 'force-dynamic';
 
@@ -31,6 +32,7 @@ export interface Maintenance {
 }
 
 export default async function AdminPage() {
+  noStore();
   async function click(formData: FormData) {
     'use server';
 
