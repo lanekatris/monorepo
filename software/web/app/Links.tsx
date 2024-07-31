@@ -1,25 +1,25 @@
-'use client';
-import { Chip, List, ListItem, useTheme } from '@mui/joy';
-import Link from 'next/link';
-import { isAdmin } from 'packages/web/isAdmin';
-import React from 'react';
+"use client";
+import { Chip, List, ListItem, useTheme } from "@mui/joy";
+import Link from "next/link";
+import React from "react";
+import { isAdmin } from "./isAdmin";
 
 const links = [
-  { href: '/blogroll', name: 'Blog Roll' },
-  { href: 'https://memo.lkat.io/', name: 'Notes' },
-  { href: '/location-history', name: 'Location History', admin: true },
-  { href: '/discs', name: 'Disc Golf' },
-  { href: '/climb/gym-users', name: 'Gym Users', admin: true },
-  { href: '/fitness', name: 'Fitness' },
-  { href: '/spotify', name: 'Spotify' },
-  { href: '/search', name: 'Search' },
+  { href: "/blogroll", name: "Blog Roll" },
+  { href: "https://memo.lkat.io/", name: "Notes" },
+  { href: "/location-history", name: "Location History", admin: true },
+  { href: "/discs", name: "Disc Golf" },
+  { href: "/climb/gym-users", name: "Gym Users", admin: true },
+  { href: "/fitness", name: "Fitness" },
+  { href: "/spotify", name: "Spotify" },
+  { href: "/search", name: "Search" },
 ];
 
 export default function HomeLinks() {
   return (
     <List
       size="sm"
-      sx={{ backgroundColor: '#ffffce' }}
+      sx={{ backgroundColor: "#ffffce" }}
       // sx={(theme) => {}}
       // sx={{ backgroundColor: theme.palette.warning.solidBg }}
     >
