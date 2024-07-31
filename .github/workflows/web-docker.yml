@@ -2,7 +2,7 @@ name:  web docker build and publish
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, website-iteration-july-2024 ]
     paths: ['software/web/**', '.github/**', 'infrastructure/**']
 
 jobs:
