@@ -5,11 +5,11 @@ import {
   Container,
   Input,
   Typography,
-} from '@mui/joy';
-import LocationsList from './LocationsList';
-import Link from 'next/link';
-import { sql } from '@vercel/postgres';
-import { isAdmin } from 'packages/web/isAdmin';
+} from "@mui/joy";
+import LocationsList from "./LocationsList";
+import Link from "next/link";
+import { sql } from "@vercel/postgres";
+import { isAdmin } from "../isAdmin";
 
 export interface LocationCustom {
   Address: string;
@@ -22,9 +22,8 @@ export default async function LocationHistoryPage({
   searchParams: { query?: string };
 }) {
   if (!isAdmin()) return <Alert color="danger">Not Authorized</Alert>;
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  const query = (searchParams?.query || 'colorado').toLowerCase();
+  const query = (searchParams?.query || "colorado").toLowerCase();
 
   const searchTerm = `%${query}%`;
 
@@ -42,9 +41,9 @@ export default async function LocationHistoryPage({
       <Typography level="h4" gutterBottom>
         Your Location History
       </Typography>
-      <form style={{ marginBottom: '1.5em' }}>
+      <form style={{ marginBottom: "1.5em" }}>
         <Input
-          sx={{ '--Input-decoratorChildHeight': '45px' }}
+          sx={{ "--Input-decoratorChildHeight": "45px" }}
           autoFocus
           name="query"
           type="search"

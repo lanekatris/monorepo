@@ -1,8 +1,8 @@
-'use client';
-import { RawUdiscScorecardEntry } from 'packages/scorecards/src/raw-udisc-scorecard-entry';
-import { useState } from 'react';
-import { Chip, IconButton, Sheet, Typography } from '@mui/joy';
-import { ImFire } from 'react-icons/im';
+"use client";
+import { useState } from "react";
+import { Chip, IconButton, Sheet, Typography } from "@mui/joy";
+import { ImFire } from "react-icons/im";
+import { RawUdiscScorecardEntry } from "../../../scorecards/raw-udisc-scorecard-entry";
 // import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 // import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
@@ -25,7 +25,7 @@ export function DiscGolfRoundRow({ x }: { x: RawUdiscScorecardEntry }) {
         {/*</td>*/}
         <td>{x.startdate.toLocaleDateString()}</td>
         <td>
-          {x.coursename}{' '}
+          {x.coursename}{" "}
           {x.new_course && (
             <Chip size="sm" color="success">
               New
@@ -34,9 +34,9 @@ export function DiscGolfRoundRow({ x }: { x: RawUdiscScorecardEntry }) {
         </td>
 
         <td>{x.layoutname}</td>
-        <td style={{ display: 'flex', gap: 5, alignItems: 'baseline' }}>
-          <div style={{ color: x['+/-'] >= 0 ? 'red' : 'green' }}>
-            {x['+/-'] === 0 ? 'E' : x['+/-']} ({x.total})
+        <td style={{ display: "flex", gap: 5, alignItems: "baseline" }}>
+          <div style={{ color: x["+/-"] >= 0 ? "red" : "green" }}>
+            {x["+/-"] === 0 ? "E" : x["+/-"]} ({x.total})
           </div>
           {x.streak && <ImFire color="green" />}
         </td>

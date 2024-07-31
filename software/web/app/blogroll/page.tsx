@@ -1,9 +1,9 @@
-import { Breadcrumbs, Container, Link, Typography } from '@mui/joy';
-import { getRssOpml } from './opml/getRssOpml';
-import React from 'react';
-const opml = require('opml');
+import { Breadcrumbs, Container, Link, Typography } from "@mui/joy";
+import { getRssOpml } from "./opml/getRssOpml";
+import React from "react";
+const opml = require("opml");
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 interface OpmlResponse {
   subs: {
     text: string;
@@ -13,7 +13,7 @@ interface OpmlResponse {
       xmlUrl: string;
 
       htmlUrl: string;
-      type: 'rss';
+      type: "rss";
     }[];
   }[];
 }
@@ -47,7 +47,7 @@ export default async function PodRollPage() {
       </Typography>
       <br />
       <Typography>
-        I've deleted quite a few that had broken links. It was a little
+        I&apos;ve deleted quite a few that had broken links. It was a little
         surprising so many domains had expired.
       </Typography>
       <br />
@@ -67,7 +67,7 @@ export default async function PodRollPage() {
               {parent.subs.map((blog) => (
                 <li key={blog.title}>
                   {blog.title} :: <a href={blog.htmlUrl}>Site</a>
-                  {' | '}
+                  {" | "}
                   <a href={blog.xmlUrl}>Feed</a>
                 </li>
               ))}

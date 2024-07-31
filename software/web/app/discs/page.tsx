@@ -12,14 +12,14 @@ import {
   Stack,
   Table,
   Typography,
-} from '@mui/joy';
+} from "@mui/joy";
 // @ts-ignore
-import { sql } from '@vercel/postgres';
-import { Pie, ResponsiveContainer } from 'recharts';
-import { RawUdiscScorecardEntry } from 'packages/scorecards/src/raw-udisc-scorecard-entry';
-import { processScorecards } from 'packages/scorecards/src/process-scorecards';
-import { groupBy } from 'lodash';
-import { formatRelative } from 'date-fns';
+import { sql } from "@vercel/postgres";
+import { Pie, ResponsiveContainer } from "recharts";
+import { groupBy } from "lodash";
+import { formatRelative } from "date-fns";
+import { RawUdiscScorecardEntry } from "../../scorecards/raw-udisc-scorecard-entry";
+import { processScorecards } from "../../scorecards/process-scorecards";
 // import DiscsChart from 'packages/web/app/discs/DiscsCharts';
 
 export interface Disc {
@@ -47,7 +47,7 @@ async function GetRawScorecards() {
   return rows;
 }
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export default async function DiscsPage() {
   const { rows }: { rows: Disc[] } =
@@ -59,13 +59,13 @@ export default async function DiscsPage() {
   const rawScorecards = await GetRawScorecards();
   const scorecardResult = await processScorecards({
     rawScorecards,
-    playerName: 'Lane',
+    playerName: "Lane",
   });
 
   const latestRound = rawScorecards[0];
   const total = rows.length;
-  const totalInBag = rows.filter((x) => x.status === 'In Bag').length;
-  const discStatuses = groupBy(rows, 'status');
+  const totalInBag = rows.filter((x) => x.status === "In Bag").length;
+  const discStatuses = groupBy(rows, "status");
 
   const { rows: courses }: { rows: { coursename: string }[] } =
     await sql`select distinct coursename from kestra.udisc_scorecard order by coursename`;
@@ -86,7 +86,7 @@ export default async function DiscsPage() {
           <Link href="#my-discs">My Discs</Link>
         </ListItem>
         <ListItem>
-          <Link href="#courses">Courses I've Played</Link>
+          <Link href="#courses">Courses I&apos;ve Played</Link>
         </ListItem>
         <ListItem>
           <Link href="/dg/rounds">Rounds</Link>
@@ -100,11 +100,11 @@ export default async function DiscsPage() {
       </Stack>
       {/*<List size="sm">*/}
       <Alert color="primary">
-        I've been using Udisc for{' '}
-        {scorecardResult.stats.howLongHaveYouBeenPlaying}, I have{' '}
-        {scorecardResult.stats.aces} Aces, and have recorded{' '}
-        {scorecardResult.stats.rounds.total} rounds. I've recorded rounds at:{' '}
-        {scorecardResult.stats.courses.mostPlayed.name} the most -{' '}
+        I&apos;ve been using Udisc for{" "}
+        {scorecardResult.stats.howLongHaveYouBeenPlaying}, I have{" "}
+        {scorecardResult.stats.aces} Aces, and have recorded{" "}
+        {scorecardResult.stats.rounds.total} rounds. I&apos;ve recorded rounds
+        at: {scorecardResult.stats.courses.mostPlayed.name} the most -{" "}
         {scorecardResult.stats.courses.mostPlayed.rounds} times.
         <br />
         {/*<br />*/}
@@ -179,15 +179,15 @@ function DiscCard({ disc }: { disc: Disc }) {
           {disc.color} - {disc.plastic} {disc.brand} {disc.model}
         </Typography>
         <Typography level="body-sm" gutterBottom>
-          {disc.notes || 'No notes'}
+          {disc.notes || "No notes"}
         </Typography>
         <Stack direction="row" justifyContent="space-between">
           <Stack direction="row" justifyContent="space-between" gap={1}>
             <Chip variant="solid">{disc.status}</Chip>
-            <Chip variant="solid">{disc.weight || 'n/a '}g</Chip>
+            <Chip variant="solid">{disc.weight || "n/a "}g</Chip>
           </Stack>
           <Typography level="body-xs">
-            Added: {disc.created?.toLocaleDateString() || 'Unknown'}
+            Added: {disc.created?.toLocaleDateString() || "Unknown"}
           </Typography>
         </Stack>
       </CardContent>

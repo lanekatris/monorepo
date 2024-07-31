@@ -6,12 +6,13 @@ import {
   ListItem,
   ListItemContent,
   Typography,
-} from '@mui/joy';
-import Link from 'next/link';
-import { login, getMembers } from '@lkat/rhinofit-unofficial';
-import { isAdmin } from 'packages/web/isAdmin';
+} from "@mui/joy";
+import Link from "next/link";
+import { isAdmin } from "../../isAdmin";
+import { login } from "../../../rhinofit/auth";
+import { getMembers } from "../../../rhinofit/recent-access";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 export default async function GymUsers() {
   if (!isAdmin()) return <Alert color="danger">Not Authorized</Alert>;
   const credentials = await login({
@@ -36,8 +37,8 @@ export default async function GymUsers() {
         <ListItem>
           <ListItemContent>
             <b>Today</b>
-            {': '}
-            {new Date().toISOString().split('T')[0]}
+            {": "}
+            {new Date().toISOString().split("T")[0]}
           </ListItemContent>
         </ListItem>
         {members.map((member) => (

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Fuse, { Expression, FuseIndexRecords, FuseSearchOptions } from 'fuse.js';
+import Fuse, { Expression, FuseIndexRecords, FuseSearchOptions } from "fuse.js";
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from "react";
 import {
   Box,
   Checkbox,
@@ -15,8 +15,8 @@ import {
   ListItemContent,
   Stack,
   Typography,
-} from '@mui/joy';
-import { SearchResult } from 'packages/web/app/search/page';
+} from "@mui/joy";
+import { SearchResult } from "./page";
 
 interface SearchIdkProps {
   data: SearchResult[];
@@ -33,12 +33,12 @@ export default function SearchIdk({ data, index }: SearchIdkProps) {
   // const [entityFilters, setEntityFilters] = useState<string[]>([]);
 
   const [e, setE] = useState({
-    query: '',
+    query: "",
     includeBookmarks: true,
     includePodcasts: true,
     fuse: new Fuse(
       data,
-      { keys: ['name', 'source'], threshold: 0.4 },
+      { keys: ["name", "source"], threshold: 0.4 },
       Fuse.parseIndex(index)
     ),
   });
@@ -67,22 +67,22 @@ export default function SearchIdk({ data, index }: SearchIdkProps) {
 
     const entityFilters = [];
 
-    if (includePodcasts) entityFilters.push('podcast');
-    if (includeBookmarks) entityFilters.push('bookmark');
+    if (includePodcasts) entityFilters.push("podcast");
+    if (includeBookmarks) entityFilters.push("bookmark");
 
-    let entityFilter = '';
+    let entityFilter = "";
 
     // if (!includePodcasts || !includeBookmarks) {
     // }
     if (!includeBookmarks) {
-      entityFilter = 'podcast';
+      entityFilter = "podcast";
     }
 
     if (!includePodcasts) {
-      entityFilter = 'bookmark';
+      entityFilter = "bookmark";
     }
 
-    const filters: Expression[] = [{ name: query || ' ' }];
+    const filters: Expression[] = [{ name: query || " " }];
 
     if (entityFilter) filters.push({ source: entityFilter });
 
@@ -129,7 +129,7 @@ export default function SearchIdk({ data, index }: SearchIdkProps) {
         direction="row"
         spacing={1}
         justifyContent="flex-end"
-        sx={{ position: 'absolute', right: 45 }}
+        sx={{ position: "absolute", right: 45 }}
       >
         <Checkbox
           label="Podcasts"

@@ -8,13 +8,13 @@ import {
   Sheet,
   Table,
   Typography,
-} from '@mui/joy';
-import { sql } from '@vercel/postgres';
-import { RawUdiscScorecardEntry } from 'packages/scorecards/src/raw-udisc-scorecard-entry';
-import { DiscGolfRoundRow } from './discGolfRoundRow';
-import { ImFire } from 'react-icons/im';
+} from "@mui/joy";
+import { sql } from "@vercel/postgres";
+import { DiscGolfRoundRow } from "./discGolfRoundRow";
+import { ImFire } from "react-icons/im";
+import { RawUdiscScorecardEntry } from "../../../scorecards/raw-udisc-scorecard-entry";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export default async function DiscGolfRounds() {
   const { rows }: { rows: RawUdiscScorecardEntry[] } = await sql`
@@ -39,7 +39,7 @@ select previous_score < 0 and "+/-" < 0 streak, * from x
         <Link href="/discs">DG Discs</Link>
         <Typography>DG Rounds</Typography>
       </Breadcrumbs>
-      <Typography level="h2" sx={{ textAlign: 'center' }}>
+      <Typography level="h2" sx={{ textAlign: "center" }}>
         Lane&apos;s Udisc Disc Golf Rounds ({rows.length})
       </Typography>
       {/*<Typography fontWeight="bold">Information</Typography>*/}
@@ -60,9 +60,9 @@ select previous_score < 0 and "+/-" < 0 streak, * from x
       {/*    and current round were under par.*/}
       {/*  </ListItem>*/}
       {/*</List>*/}
-      <Sheet sx={{ overflow: 'auto' }}>
+      <Sheet sx={{ overflow: "auto" }}>
         <Table stripe="odd">
-          <caption style={{ textAlign: 'left' }}>
+          <caption style={{ textAlign: "left" }}>
             Rating is out of 300. Udisc doesn&apos;t export a link to their
             courses in their CSV.
             {/*<br />*/}
@@ -70,8 +70,8 @@ select previous_score < 0 and "+/-" < 0 streak, * from x
             <Chip size="sm" color="success">
               New
             </Chip>
-            means this is the first time I've played this course. Keep in mind
-            Udisc moderators can change the coursename willy nilly.
+            means this is the first time I&apos;ve played this course. Keep in
+            mind Udisc moderators can change the coursename willy nilly.
             <br />
             <ImFire color="green" /> streak - determined if your previous round
             and current round were under par.

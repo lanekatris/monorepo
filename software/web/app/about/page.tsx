@@ -1,9 +1,9 @@
-import { Box, Breadcrumbs, Container, Link, Typography } from '@mui/joy';
-import Image from 'next/image';
+import { Box, Breadcrumbs, Container, Link, Typography } from "@mui/joy";
+import Image from "next/image";
 
-import aboutImage from './434393123_7438281949593065_9174792310540916431_n.jpg';
-import fireTower from './448182925_8332689336765659_3010429954221537544_n.jpg';
-import React from 'react';
+import aboutImage from "./434393123_7438281949593065_9174792310540916431_n.jpg";
+import fireTower from "./448182925_8332689336765659_3010429954221537544_n.jpg";
+import React from "react";
 
 export default function AboutPage() {
   return (
@@ -37,10 +37,10 @@ export default function AboutPage() {
       <br />
       <Typography level="h3">Professional</Typography>
       <Typography>
-        I'm a software engineer. I care about delivering a product that gives
-        value. Taking requirements and architecting solutions from a full stack
-        perspective is my bread and butter. I'm always trying to learn and be
-        open minded.
+        I&apos;m a software engineer. I care about delivering a product that
+        gives value. Taking requirements and architecting solutions from a full
+        stack perspective is my bread and butter. I&apos;m always trying to
+        learn and be open minded.
       </Typography>
       <br />
       <a href="https://gitconnected.com/lanekatris" target="_blank">
@@ -69,9 +69,9 @@ export default function AboutPage() {
       </Box>
       <Typography>
         I live in West Virginia. Although it may be a poor state and folks
-        confuse it with "western virginia"... it is a beautiful place. Also, not
-        a bad place to raise your children. To be fair though: I dream of
-        Colorado a plenty.
+        confuse it with &quot;western virginia&quot;... it is a beautiful place.
+        Also, not a bad place to raise your children. To be fair though: I dream
+        of Colorado a plenty.
       </Typography>
     </Container>
   );

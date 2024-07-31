@@ -1,10 +1,11 @@
-import { Breadcrumbs, Container, Input, Link, Typography } from '@mui/joy';
-import Fuse from 'fuse.js';
-import SearchIdk from 'packages/web/app/search/SearchIdk';
-import { sql } from '@vercel/postgres';
-import { Podcast } from 'packages/web/app/spotify/page';
+import { Breadcrumbs, Container, Input, Link, Typography } from "@mui/joy";
+import Fuse from "fuse.js";
 
-import bookmarks from './raindrop-export.json';
+import { sql } from "@vercel/postgres";
+
+import bookmarks from "./raindrop-export.json";
+import { Podcast } from "../spotify/page";
+import SearchIdk from "./SearchIdk";
 // const data = [
 //   {
 //     name: 'Darknet Diaries',
@@ -28,20 +29,20 @@ async function getIndex() {
 
   let data: SearchResult[] = podcasts.map((x) => ({
     name: x.name,
-    source: 'podcast',
+    source: "podcast",
     url: x.url,
   }));
 
   data = [
     ...data,
     ...bookmarks.map((x) => ({
-      name: x.title + ' - ' + x.excerpt,
+      name: x.title + " - " + x.excerpt,
       url: x.url,
-      source: 'bookmark',
+      source: "bookmark",
     })),
   ];
 
-  const index = Fuse.createIndex(['name', 'source'], data);
+  const index = Fuse.createIndex(["name", "source"], data);
 
   return { index: index.toJSON(), data };
 }

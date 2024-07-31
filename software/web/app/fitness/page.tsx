@@ -1,4 +1,3 @@
-import Navigation from 'packages/web/layout/navigation';
 import {
   Alert,
   Breadcrumbs,
@@ -11,11 +10,11 @@ import {
   ListItem,
   ListItemContent,
   Typography,
-} from '@mui/joy';
-import { sql } from '@vercel/postgres';
-import { useMemo } from 'react';
-import FitnessChart from 'packages/web/app/fitness/ChartIdk';
-import { differenceInDays, formatRelative } from 'date-fns';
+} from "@mui/joy";
+import { sql } from "@vercel/postgres";
+import { useMemo } from "react";
+import { differenceInDays, formatRelative } from "date-fns";
+import FitnessChart from "./ChartIdk";
 
 interface FitnessRecord {
   id: number;
@@ -41,7 +40,7 @@ export default async function FitnessPage() {
 
   const groupedData: { [key: string]: FitnessRecord[] } = rows.reduce(
     (result, entry) => {
-      const weekStart = entry.week_start.toISOString().split('T')[0];
+      const weekStart = entry.week_start.toISOString().split("T")[0];
       // @ts-ignore
       if (!result[weekStart]) {
         // @ts-ignore
@@ -95,9 +94,9 @@ export default async function FitnessPage() {
       <Card>
         <CardContent>
           <Typography level="h4">Log</Typography>
-          Today: {new Date().toLocaleDateString('en-CA')}
+          Today: {new Date().toLocaleDateString("en-CA")}
           <br />
-          Week Start: {getLastSunday(new Date()).toLocaleDateString('en-CA')}
+          Week Start: {getLastSunday(new Date()).toLocaleDateString("en-CA")}
           <List>
             {keys.map((key) => (
               <ListItem key={key}>
@@ -105,15 +104,15 @@ export default async function FitnessPage() {
                   <Typography level="title-md">
                     {key} ({groupedData[key].length})
                     {key ===
-                    getLastSunday(new Date()).toLocaleDateString('en-CA') ? (
+                    getLastSunday(new Date()).toLocaleDateString("en-CA") ? (
                       <Chip color="primary">This Week</Chip>
                     ) : null}
                   </Typography>
                   {groupedData[key].map((row) => (
-                    <ListItem key={row.id} sx={{ backgroundColor: '#ffffce' }}>
+                    <ListItem key={row.id} sx={{ backgroundColor: "#ffffce" }}>
                       <ListItemContent>
                         <Typography level="body-sm">
-                          {row.date.toLocaleDateString('en-CA')} -{' '}
+                          {row.date.toLocaleDateString("en-CA")} -{" "}
                           {row.file_relative_path} - {row.activity}
                         </Typography>
                       </ListItemContent>
