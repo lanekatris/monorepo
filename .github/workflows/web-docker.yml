@@ -62,6 +62,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
+          context: software/web
           push: true
           tags: loonison101/web:latest
 
