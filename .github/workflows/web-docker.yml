@@ -3,7 +3,7 @@ name:  web docker build and publish
 on:
   push:
     branches: [ main ]
-    paths: ['software/js/**', '.github/**', 'infrastructure/**']
+    paths: ['software/web/**', '.github/**', 'infrastructure/**']
 
 jobs:
   build-with-docker-engine:
@@ -26,7 +26,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           cache: 'npm'
-          cache-dependency-path: software/js/package-lock.json
+          cache-dependency-path: software/web/package-lock.json
       - uses: actions/cache@v4
         with:
           # See here for caching with `yarn` https://github.com/actions/cache/blob/main/examples.md#node---yarn or you can leverage caching with actions/setup-node https://github.com/actions/setup-node
@@ -42,7 +42,7 @@ jobs:
 
       - name: 'Install Dependencies'
         run: npm install
-        working-directory: './software/js'
+        working-directory: './software/web'
 
 #      - name: Derive appropriate SHAs for base and head for `nx affected` commands
 #        uses: nrwl/nx-set-shas@v3
@@ -50,7 +50,7 @@ jobs:
       - name: 'Build images'
 #        run: INPUT_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} npx nx affected --base=$NX_BASE --head=$NX_HEAD --target=container --parallel=2
         run: npx nx container web
-        working-directory: './software/js'
+        working-directory: './software/web'
         env:
           POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
           POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
