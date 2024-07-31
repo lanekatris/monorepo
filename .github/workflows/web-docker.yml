@@ -61,6 +61,13 @@ jobs:
 #          NEXT_PUBLIC_SHOW_ADMIN: true
       - name: Build and push
         uses: docker/build-push-action@v6
+        env:
+          POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
+          POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
+          INPUT_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RHINOFIT_EMAIL: ${{ secrets.RHINOFIT_EMAIL }}
+          RHINOFIT_PASSWORD: ${{ secrets.RHINOFIT_PASSWORD }}
+          NEXT_PUBLIC_SHOW_ADMIN: true
         with:
           context: software/web
           push: true
