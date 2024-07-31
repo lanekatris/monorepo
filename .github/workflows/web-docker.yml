@@ -72,6 +72,14 @@ jobs:
           context: software/web
           push: true
           tags: loonison101/web:latest
+          build-args: |
+            POSTGRES_URL=${{ secrets.POSTGRES_URL }}
+            POSTGRES_URL_NON_POOLING=${{ secrets.POSTGRES_URL_NON_POOLING }}
+            INPUT_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+            RHINOFIT_EMAIL=${{ secrets.RHINOFIT_EMAIL }}
+            RHINOFIT_PASSWORD=${{ secrets.RHINOFIT_PASSWORD }}
+            NEXT_PUBLIC_SHOW_ADMIN=true
+
 
 #      - name: Retag
 #        run: docker image tag web:main loonison101/web:latest
