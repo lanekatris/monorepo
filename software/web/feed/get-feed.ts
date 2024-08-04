@@ -46,6 +46,19 @@ select * from x order by date desc;
   return feed;
 }
 
+export async function getPicMemos() {
+  const { data: rawMemos } = await axios.get<{ memos: Memo[] }>(
+    'http://192.168.86.100:5230/api/v1/memos?filter=tag_search == ["pic"]',
+    {
+      headers: {
+        authorization: `Bearer ${process.env.MEMOS_API_KEY}`
+      }
+    }
+  );
+
+  return rawMemos.memos;
+}
+
 export async function getMemos() {
   console.time('memos');
   const { data: rawMemos } = await axios.get<{ memos: Memo[] }>(

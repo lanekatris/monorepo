@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { getMetric } from "../metrics/get-metric";
-import { sql } from "@vercel/postgres";
+import Image from 'next/image';
+import { getMetric } from '../metrics/get-metric';
+import { sql } from '@vercel/postgres';
 import {
   Alert,
   Box,
@@ -12,25 +12,25 @@ import {
   List,
   ListItem,
   Stack,
-  Typography,
-} from "@mui/joy";
+  Typography
+} from '@mui/joy';
 // import homeImage from './2024_01_lane_troy_snow_crop.jpeg';
-import homeImage from "./PXL_20240512_144120828.jpg";
-import fourthOfJuly from "./received_2296397700699715.jpeg";
-import graysPeak from "./grays-peak-resized-1_Jn1kTLuiK.jpeg";
-import HomeLinks from "./Links";
-import React, { ReactNode } from "react";
-import Link from "next/link";
-import ThisMonthActivitiesCalendar from "./ThisMonthActivitiesCalendar";
-import { differenceInDays, parse } from "date-fns";
-import { getMemos } from "../feed/get-feed";
-import Markdown from "react-markdown";
-import { MetricCard } from "../metrics/MetricCard";
-import { unstable_noStore as noStore } from "next/cache";
-import { NEXT_ADVENTURE } from "../nextAdventure";
-import { RawUdiscScorecardEntry } from "../scorecards/raw-udisc-scorecard-entry";
+import homeImage from './PXL_20240512_144120828.jpg';
+import fourthOfJuly from './received_2296397700699715.jpeg';
+import graysPeak from './grays-peak-resized-1_Jn1kTLuiK.jpeg';
+import HomeLinks from './Links';
+import React, { ReactNode } from 'react';
+import Link from 'next/link';
+import ThisMonthActivitiesCalendar from './ThisMonthActivitiesCalendar';
+import { differenceInDays, parse } from 'date-fns';
+import { getMemos, getPicMemos } from '../feed/get-feed';
+import Markdown from 'react-markdown';
+import { MetricCard } from '../metrics/MetricCard';
+import { unstable_noStore as noStore } from 'next/cache';
+import { NEXT_ADVENTURE } from '../nextAdventure';
+import { RawUdiscScorecardEntry } from '../scorecards/raw-udisc-scorecard-entry';
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 export default async function Index() {
   noStore();
   // const { completed, total, percentage } = await getMetric(sql`
@@ -63,7 +63,7 @@ group by pv.id is not null
   const {
     completed: completed2,
     total: total2,
-    percentage: percentage2,
+    percentage: percentage2
   } = await getMetric(
     sql`select visited, count(*) from noco.place where state_park = true and state = 'West Virginia' group by visited`
   );
@@ -73,7 +73,7 @@ group by pv.id is not null
   );
 
   const {
-    rows: recentRounds,
+    rows: recentRounds
   }: {
     rows: RawUdiscScorecardEntry[];
   } =
@@ -83,11 +83,11 @@ group by pv.id is not null
     await sql`select date from kestra.obsidian_adventures where date::date >= date_trunc('year', CURRENT_DATE)`;
 
   const recentActivities = rawAdventureDates.map((x) =>
-    parse(x.date, "yyyy-MM-dd", new Date())
+    parse(x.date, 'yyyy-MM-dd', new Date())
   );
 
   const {
-    rows: recentClimbs,
+    rows: recentClimbs
   }: {
     rows: {
       Date: Date;
@@ -100,6 +100,7 @@ group by pv.id is not null
   } = await sql`select * from kestra.ticks order by "Date" desc limit 3`;
 
   const memos = await getMemos();
+  const picMemos = await getPicMemos();
 
   // const {
   //   rows: activityGrouping,
@@ -117,8 +118,8 @@ group by pv.id is not null
             src={graysPeak}
             sizes="100vw"
             style={{
-              width: "100%",
-              height: "auto",
+              width: '100%',
+              height: 'auto'
             }}
             priority={true}
             placeholder="blur"
@@ -128,10 +129,10 @@ group by pv.id is not null
             Lane on top of Grays Peak, a 14er in Colorado
           </Typography>
           <Alert color="primary">
-            Hi! I&apos;m{" "}
-            <Link href="about" style={{ display: "contents" }}>
+            Hi! I&apos;m{' '}
+            <Link href="about" style={{ display: 'contents' }}>
               Lane Katris
-            </Link>{" "}
+            </Link>{' '}
             , a senior full stack software engineer. This site is a hodge podge
             of data and things I enjoy. The links below are a few places to
             start with.
@@ -140,34 +141,6 @@ group by pv.id is not null
           <br />
           <Typography level="h4">Pages</Typography>
           <HomeLinks />
-          <br />
-          <Box sx={{ textAlign: "center", maxWidth: 500 }}>
-            <Typography level="h4">Random Photos</Typography>
-            <Image
-              src={fourthOfJuly}
-              sizes="100vw"
-              style={{
-                width: "100%",
-                height: "auto",
-              }}
-              priority={true}
-              placeholder="blur"
-              alt="4th of July 2024"
-            />
-            <Typography level="body-xs">4th of July 2024</Typography>
-            <Image
-              src={homeImage}
-              sizes="100vw"
-              style={{
-                width: "100%",
-                height: "auto",
-              }}
-              priority={true}
-              placeholder="blur"
-              alt="Troy and his mom"
-            />
-            <Typography level="body-xs">Mothers day 2024</Typography>
-          </Box>
         </Grid>
         <Grid md={6}>
           {/*<Box textAlign="center">*/}
@@ -177,7 +150,7 @@ group by pv.id is not null
           <Alert
             size="lg"
             color="danger"
-            sx={{ alignItems: "flex-start" }}
+            sx={{ alignItems: 'flex-start' }}
             // variant="outlined"
           >
             <Typography>
@@ -292,14 +265,14 @@ group by pv.id is not null
             </Typography>
           </Stack>
           <Typography gutterBottom level="body-md">
-            (It has been{" "}
-            <b>{differenceInDays(new Date(), recentRounds[0].startdate)}</b>{" "}
+            (It has been{' '}
+            <b>{differenceInDays(new Date(), recentRounds[0].startdate)}</b>{' '}
             day(s) since I&apos;ve played disc golf or uploaded my scorecards)
           </Typography>
-          <List size="sm" sx={{ backgroundColor: "#ffffce" }}>
+          <List size="sm" sx={{ backgroundColor: '#ffffce' }}>
             {recentRounds.map((round) => (
               <ListItem key={round.coursename + round.startdate.toString()}>
-                {round.startdate.toLocaleDateString()}: <b>{round["+/-"]}</b> @{" "}
+                {round.startdate.toLocaleDateString()}: <b>{round['+/-']}</b> @{' '}
                 {round.coursename}
               </ListItem>
             ))}
@@ -307,13 +280,13 @@ group by pv.id is not null
 
           <Typography level="h4">Recent Climbs</Typography>
 
-          <List size="sm" sx={{ backgroundColor: "#ffffce" }}>
+          <List size="sm" sx={{ backgroundColor: '#ffffce' }}>
             {recentClimbs.map((climb) => (
               <ListItem key={climb.id}>
-                {climb.Date.toLocaleDateString()}:{" "}
+                {climb.Date.toLocaleDateString()}:{' '}
                 <a target="_blank" href={climb.url}>
                   {climb.Route} ({climb.Rating})
-                </a>{" "}
+                </a>{' '}
               </ListItem>
             ))}
           </List>
@@ -323,11 +296,11 @@ group by pv.id is not null
             <Link href="https://memo.lkat.io/">All Notes</Link>
           </Stack>
 
-          <List size="sm" sx={{ backgroundColor: "#ffffce" }}>
+          <List size="sm" sx={{ backgroundColor: '#ffffce' }}>
             {memos.slice(0, 3).map((memo) => (
               <ListItem key={memo.id}>
                 {/*{JSON.stringify(memo)}*/}
-                <b>{memo.data.memo?.displayTime?.split("T")[0]}</b>:
+                <b>{memo.data.memo?.displayTime?.split('T')[0]}</b>:
                 {/*<a target="_blank" href={climb.url}>*/}
                 {/*  {climb.Route} ({climb.Rating})*/}
                 {/*</a>{' '}*/}
@@ -357,6 +330,51 @@ group by pv.id is not null
           {/*</Stack>*/}
         </Grid>
       </Grid>
+      <br />
+      <Box sx={{ textAlign: 'center', maxWidth: 500 }}>
+        <Typography level="h4">Photos</Typography>
+        <Image
+          src={fourthOfJuly}
+          sizes="100vw"
+          style={{
+            width: '100%',
+            height: 'auto'
+          }}
+          priority={true}
+          placeholder="blur"
+          alt="4th of July 2024"
+        />
+        <Typography level="body-xs">4th of July 2024</Typography>
+        <Image
+          src={homeImage}
+          sizes="100vw"
+          style={{
+            width: '100%',
+            height: 'auto'
+          }}
+          priority={true}
+          placeholder="blur"
+          alt="Troy and his mom"
+        />
+        <Typography level="body-xs">Mothers day 2024</Typography>
+        {picMemos.map((memo) => (
+          <Box key={memo.uid}>
+            {memo.resources.map((rl) => (
+              <img
+                loading={'lazy'}
+                // height={100}
+                // width={100}
+                key={rl.filename}
+                alt={rl.filename}
+                width={'100%'}
+                src={`https://memo.lkat.io/file/${rl.name}/${rl.filename}`}
+              />
+            ))}
+            {memo.displayTime.split('T')[0]}
+            <Markdown>{memo.content.replace('#pic', '')}</Markdown>
+          </Box>
+        ))}
+      </Box>
     </Container>
   );
 }
