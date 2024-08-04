@@ -97,8 +97,8 @@ export function FeedTable({ rows }: FeedTableProps) {
                       link={`obsidian://open?vault=vault1&file=${encodeURIComponent(
                         data.adventure.path.replace(
                           `C:\\Users\\looni\\vault1\\`,
-                          ''
-                        )
+                          '',
+                        ),
                       )}`}
                     >
                       {data.adventure.activity}
@@ -151,13 +151,19 @@ export function FeedTable({ rows }: FeedTableProps) {
                       <Box>
                         <Markdown>{data.memo?.content}</Markdown>
                       </Box>
-                      {data.memo?.resourceList?.map((rl) => (
-                        <img
-                          height={100}
-                          // width={100}
-                          key={rl.name}
-                          src={`https://memo.lkat.io/o/r/${rl.name}`}
-                        />
+                      {data.memo?.resources?.map((rl) => (
+                        <a
+                          href={`https://memo.lkat.io/m/${data.memo?.uid}`}
+                          target={'_blank'}
+                          key={rl.filename}
+                        >
+                          <img
+                            height={100}
+                            // width={100}
+                            alt={rl.filename}
+                            src={`https://memo.lkat.io/file/${rl.name}/${rl.filename}`}
+                          />
+                        </a>
                       ))}
                     </FeedLineItem>
                   </>

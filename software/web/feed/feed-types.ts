@@ -15,7 +15,7 @@ export interface Bookmark {
 }
 
 export interface Memo {
-  id: number;
+  uid: number;
   name: string;
   rowStatus: string;
   creatorId: number;
@@ -29,9 +29,10 @@ export interface Memo {
   creatorUsername: string;
   _date: Date;
 
-  resourceList: {
-    name: string;
+  resources: {
+    filename: string;
     type: string;
+    name: string;
   }[];
 }
 

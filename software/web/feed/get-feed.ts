@@ -52,25 +52,25 @@ export async function getMemos() {
     'http://192.168.86.100:5230/api/v1/memos',
     {
       headers: {
-        authorization: `Bearer ${process.env.MEMOS_API_KEY}`,
-      },
+        authorization: `Bearer ${process.env.MEMOS_API_KEY}`
+      }
     }
   );
   // console.log(rawMemos);
   // const rawMemos: Memo[] = await memosResponse.data;
   const memos: Memo[] = rawMemos.memos.map((x) => ({
     ...x,
-    _date: new Date(x.displayTime), //new Date(x.displayTs * 1000),
+    _date: new Date(x.displayTime) //new Date(x.displayTs * 1000),
   }));
   console.timeEnd('memos');
   return memos.map((memo) => {
     const b: FeedItem = {
-      id: `memo-${memo.id}`,
+      id: `memo-${memo.uid}`,
       type: 'memo',
       date: memo._date,
       data: {
-        memo: memo,
-      },
+        memo: memo
+      }
     };
     return b;
   });
@@ -88,22 +88,22 @@ async function getRaindrops() {
       type: 'raindrop',
       date: new Date(raindrop.lastUpdate),
       data: {
-        raindrop: raindrop,
-      },
+        raindrop: raindrop
+      }
     };
     return r;
   });
 }
 
 export const getFeed = async ({
-  showBookmarks = true,
+  showBookmarks = true
 }: { showBookmarks?: boolean } | undefined = {}) => {
   console.log('aaa', showBookmarks);
   const allData = await Promise.all([
     // getRaindrops(),
     showBookmarks ? getRaindrops() : Promise.resolve([]),
     getFeedItems(),
-    getMemos(),
+    getMemos()
   ]);
 
   console.time('agg');
