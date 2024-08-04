@@ -1,5 +1,5 @@
-volumes:
-  homeassistant:
+#volumes:
+#  homeassistant:
 
 services:
   lkat:
@@ -17,22 +17,20 @@ services:
     pull_policy: always
     ports:
       - "3333:3000"
-#    environment:
-#      - POSTGRES_URL=${POSTGRES_URL}
-#      - SERVER1_URL=lkat:8080
-#      - NEXT_PUBLIC_SHOW_ADMIN=true
-#      - RHINOFIT_EMAIL=${RHINOFIT_EMAIL}
-#      - RHINOFIT_PASSWORD=${RHINOFIT_PASSWORD}
-#      - MEMOS_API_KEY=${MEMOS_API_KEY}
-#      - MINIO_A=${MINIO_A}
-#      - MINIO_S=${MINIO_S}
     env_file:
       - .env
-  restarter:
-    image: docker:cli
-    volumes: ["/var/run/docker.sock:/var/run/docker.sock"]
-    command: ["/bin/sh", "-c", "while true; do sleep 5s; docker ps; done"]
-    restart: unless-stopped
+#  web-restarter:
+#    image: docker:cli
+#    volumes: ["/var/run/docker.sock:/var/run/docker.sock"]
+#    command: ["/bin/sh", "-c", "while true; do sleep 30m; docker restart web; done"]
+#    restart: unless-stopped
+  watchtower:
+    image: containrrr/watchtower
+    command: web --interval 1800 --debug
+#      command: --interval 10
+#    command: web --interval 30 --debug
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
   nocodb:
     image: nocodb/nocodb:0.204.4
@@ -41,15 +39,15 @@ services:
     restart: unless-stopped
     volumes:
       - /home/lane/nocodb:/usr/app/data/  
-  homeassistant:
-    image: ghcr.io/home-assistant/home-assistant:stable
-    environment:
-      - TZ=US/Eastern
-    ports:
-      - 8123:8123
-    volumes:
-      - homeassistant:/config
-    restart: unless-stopped
+#  homeassistant:
+#    image: ghcr.io/home-assistant/home-assistant:stable
+#    environment:
+#      - TZ=US/Eastern
+#    ports:
+#      - 8123:8123
+#    volumes:
+#      - homeassistant:/config
+#    restart: unless-stopped
   paste:
     image: danielszabo99/microbin
     restart: unless-stopped
@@ -91,9 +89,66 @@ services:
       - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
     volumes:
       - /bigboy/minio:/data
-#  watchtower:
-#    image: containrrr/watchtower
-##    command: web --interval 30 --debug
-#    command: --interval 10
-#    volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock
+
+
+  kestra-postgres:
+    image: postgres:15
+    restart: always
+    volumes:
+      - /home/lane/kestra-postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: kestra
+      POSTGRES_USER: kestra
+      POSTGRES_PASSWORD: ${KESTRA_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+
+  kestra:
+    image: kestra/kestra:latest-full
+    restart: always
+    pull_policy: always
+    entrypoint: /bin/bash
+    # Note that this is meant for development only. Refer to the documentation for production deployments of Kestra which runs without a root user.
+    user: "root"
+    command:
+      - -c
+      - /app/kestra server standalone --worker-thread=128
+    volumes:
+      - /home/lane/kestra-data:/app/storage
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp/kestra-wd:/tmp/kestra-wd
+    environment:
+      KESTRA_CONFIGURATION: |
+        datasources:
+          postgres:
+            url: jdbc:postgresql://kestra-postgres:5432/kestra
+            driverClassName: org.postgresql.Driver
+            username: kestra
+            password: ${KESTRA_PASSWORD}
+        kestra:
+          server:
+            basic-auth:
+              enabled: false
+              username: admin
+              password: kestra
+          repository:
+            type: postgres
+          storage:
+            type: local
+            local:
+              base-path: "/app/storage"
+          queue:
+            type: postgres
+          tasks:
+            tmp-dir:
+              path: /tmp/kestra-wd/tmp
+          url: http://localhost:8080/
+    ports:
+      - "8090:8080"
+      - "8091:8081"
+    depends_on:
+      kestra-postgres:
+        condition: service_started
