@@ -5,26 +5,34 @@ services:
   lkat:
     image: loonison101/lk:main
     restart: unless-stopped
-    pull_policy: always
+#    pull_policy: always
     ports:
       - "4444:8080"
     command: ['server']
 
   web:
     image: loonison101/web:main
+    container_name: web
     restart: unless-stopped
     pull_policy: always
     ports:
       - "3333:3000"
-    environment:
-      - POSTGRES_URL=${POSTGRES_URL}
-      - SERVER1_URL=lkat:8080
-      - NEXT_PUBLIC_SHOW_ADMIN=true
-      - RHINOFIT_EMAIL=${RHINOFIT_EMAIL}
-      - RHINOFIT_PASSWORD=${RHINOFIT_PASSWORD}
-      - MEMOS_API_KEY=${MEMOS_API_KEY}
-      - MINIO_A=${MINIO_A}
-      - MINIO_S=${MINIO_S}
+#    environment:
+#      - POSTGRES_URL=${POSTGRES_URL}
+#      - SERVER1_URL=lkat:8080
+#      - NEXT_PUBLIC_SHOW_ADMIN=true
+#      - RHINOFIT_EMAIL=${RHINOFIT_EMAIL}
+#      - RHINOFIT_PASSWORD=${RHINOFIT_PASSWORD}
+#      - MEMOS_API_KEY=${MEMOS_API_KEY}
+#      - MINIO_A=${MINIO_A}
+#      - MINIO_S=${MINIO_S}
+    env_file:
+      - .env
+  restarter:
+    image: docker:cli
+    volumes: ["/var/run/docker.sock:/var/run/docker.sock"]
+    command: ["/bin/sh", "-c", "while true; do sleep 5s; docker ps; done"]
+    restart: unless-stopped
 
   nocodb:
     image: nocodb/nocodb:0.204.4
@@ -65,7 +73,7 @@ services:
       - /home/lane/microbin:/my/microbin
       - /home/lane/microbin/data:/app/pasta_data
   memos:
-    image: neosmemo/memos:0.22.2
+    image: neosmemo/memos:0.22.4
     restart: unless-stopped
     ports:
       - "5230:5230"
@@ -85,6 +93,7 @@ services:
       - /bigboy/minio:/data
 #  watchtower:
 #    image: containrrr/watchtower
-#    command: web --debug
+##    command: web --interval 30 --debug
+#    command: --interval 10
 #    volumes:
 #      - /var/run/docker.sock:/var/run/docker.sock
