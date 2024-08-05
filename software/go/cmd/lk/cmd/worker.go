@@ -37,6 +37,22 @@ to quickly create a Cobra application.`,
 		defer c.Close()
 
 		shared.SetupViper()
+
+		isServerWorker, _ := cmd.Flags().GetBool("server")
+		if isServerWorker {
+			fmt.Println("worker is running in server mode")
+
+			w := worker.New(c, "server_queue", worker.Options{})
+			w.RegisterWorkflow(shared.WorkflowUpdateDockerApps)
+			w.RegisterActivity(shared.InvokeCliCommand)
+			err = w.Run(worker.InterruptCh())
+			if err != nil {
+				log.Fatalf("unable to start server Worker", err)
+			}
+			return
+
+		}
+
 		// This worker hosts both Workflow and Activity functions
 		w := worker.New(c, shared.GreetingTaskQueue, worker.Options{})
 		w.RegisterWorkflow(temporalstuff.SendFitnessEmailWorkflow)
@@ -109,6 +125,7 @@ to quickly create a Cobra application.`,
 
 func init() {
 	rootCmd.AddCommand(workerCmd)
+	rootCmd.PersistentFlags().Bool("server", false, "Run as a server worker")
 
 	// Here you will define your flags and configuration settings.
 
