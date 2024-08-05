@@ -1,6 +1,7 @@
 import { Container, Typography } from '@mui/joy';
 import { posts } from '../../../.velite';
 import { notFound } from 'next/navigation';
+import './blog-post-page.css';
 
 interface PostProps {
   params: {
@@ -25,7 +26,10 @@ export default function BlogPostPage({ params }: PostProps) {
   return (
     <Container maxWidth="sm">
       <Typography>{post.title}</Typography>
-      <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
+      <div
+        className="article"
+        dangerouslySetInnerHTML={{ __html: post.content }}
+      ></div>
     </Container>
   );
 }

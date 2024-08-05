@@ -8,7 +8,7 @@ import {
 } from '@mui/joy';
 import { posts } from '../../.velite';
 
-console.log('p', posts);
+// console.log('p', posts);
 
 export default function BlogPage() {
   return (
