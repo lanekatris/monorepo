@@ -11,7 +11,7 @@ services:
     command: ['server']
 
   web:
-    image: loonison101/web:main
+    image: loonison101/web
     container_name: web
     restart: unless-stopped
     pull_policy: always
