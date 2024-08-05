@@ -1,3 +1,9 @@
+---
+date: 2024-08-04
+slug: disc-golf-streak
+title: Determining Disc Golf Streaks
+---
+
 ### Determining a scoring streak and if it's the first time playing a course from your disc golf rounds
 
 I import my disc golf rounds from Udisc via CSV and display them [here](https://live.lkat.io/dg/rounds). I wanted to know when I was on a scoring streak; which I define as: 2 consecutive rounds where I shoot under par.

@@ -1,3 +1,9 @@
+---
+date: 2024-06-21
+slug: 2024-june-disc-golf
+title: Disc golf mayb eduplicate
+---
+
 import imageStamp from './PXL_20240628_194454979.jpg'
 import Image from 'next/image'
 

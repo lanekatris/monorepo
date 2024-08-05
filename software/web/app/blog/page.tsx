@@ -1,21 +1,28 @@
 import Link from 'next/link';
-import { Container } from '@mui/joy';
+import {
+  Container,
+  List,
+  ListItem,
+  ListItemContent,
+  Typography
+} from '@mui/joy';
+import { posts } from '../../.velite';
+
+console.log('p', posts);
 
 export default function BlogPage() {
-  const content = [
-    {
-      path: '/blog/2024-06-23-disc-golf',
-    },
-  ];
   return (
-    <Container maxWidth="sm">
-      <ul>
-        {content.map((c) => (
-          <li key={c.path}>
-            <Link href={c.path}>{c.path.replace('/blog/', '')}</Link>
-          </li>
+    <>
+      <List>
+        {posts.map((c) => (
+          <ListItem key={c.slug}>
+            <ListItemContent>
+              <Link href={c.permalink}>{c.title}</Link>
+              <Typography level={'body-xs'}>{c.date.split('T')[0]}</Typography>
+            </ListItemContent>
+          </ListItem>
         ))}
-      </ul>
-    </Container>
+      </List>
+    </>
   );
 }
