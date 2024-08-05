@@ -1,4 +1,5 @@
 import { defineConfig, s } from 'velite';
+import rehypeShiki from '@shikijs/rehype';
 
 // `s` is extended from Zod with some custom schemas,
 // you can also import re-exported `z` from `velite` if you don't need these extension schemas.
@@ -19,10 +20,15 @@ export default defineConfig({
           video: s.file().optional(), // input file relative path, output file public path.
           metadata: s.metadata(), // extract markdown reading-time, word-count, etc.
           excerpt: s.excerpt(), // excerpt of markdown content
-          content: s.markdown() // transform markdown to html
+          content: s.markdown(), // transform markdown to html
+          tags: s.string().array().optional(),
+          draft: s.boolean().optional()
         })
         // more additional fields (computed fields)
         .transform((data) => ({ ...data, permalink: `/blog/${data.slug}` }))
     }
+  },
+  markdown: {
+    rehypePlugins: [[rehypeShiki, { theme: 'nord' }]]
   }
 });

@@ -24,12 +24,16 @@ export default function BlogPostPage({ params }: PostProps) {
   if (post == null) notFound();
 
   return (
-    <Container maxWidth="sm">
-      <Typography>{post.title}</Typography>
+    <>
+      <Typography level={'h1'}>{post.title}</Typography>
+      <Typography level={'body-xs'}>
+        <b>Date</b>: {post.date.split('T')[0]} <b>Tags</b>:{' '}
+        {post.tags?.map((t) => `#${t}`).join(', ')}
+      </Typography>
       <div
         className="article"
         dangerouslySetInnerHTML={{ __html: post.content }}
       ></div>
-    </Container>
+    </>
   );
 }

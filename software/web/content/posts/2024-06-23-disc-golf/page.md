@@ -2,6 +2,7 @@
 date: 2024-06-21
 slug: 2024-june-disc-golf
 title: Disc golf mayb eduplicate
+draft: true
 ---
 
 import imageStamp from './PXL_20240628_194454979.jpg'
