@@ -27,7 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ThemeRegistry options={{ key: 'joy' }}>
-          <Container maxWidth="sm" sx={{ marginTop: 2 }}>
+          <Container sx={{ marginTop: 2 }}>
             <Stack direction="row" spacing={2} alignItems="center">
               <Typography level="h4">
                 <Link
@@ -37,19 +37,12 @@ export default function RootLayout({
                   Lane&apos;s Site
                 </Link>
               </Typography>
-              {/*<Link href="/feed">Feed</Link>*/}
-
-              {/*<Stack direction="row" spacing={1}>*/}
               <Link href="/feed">Feed</Link>
               <Link href="/admin">Admin</Link>
               <Link href="/blog">Blog</Link>
-
               <Link href="/about">About</Link>
-
               <ThemeToggler />
-              {/*</Stack>*/}
             </Stack>
-            {/*<Divider />*/}
           </Container>
           {children}
           <br />
