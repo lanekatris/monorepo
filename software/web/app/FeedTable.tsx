@@ -6,6 +6,7 @@ import {
   GiBookmark,
   GiNotebook,
   GiWrench,
+  GiMoneyStack
 } from 'react-icons/gi';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -20,7 +21,7 @@ import {
   ListItem,
   Stack,
   Table,
-  Typography,
+  Typography
 } from '@mui/joy';
 import React from 'react';
 import { FeedItem, FeedItemType } from '../feed/feed-types';
@@ -39,6 +40,7 @@ const feedIcon: { [k in FeedItemType]: React.ReactElement } = {
   raindrop: <GiBookmark size={20} />,
   memo: <GiNotebook size={20} />,
   maintenance: <GiWrench size={20} />,
+  purchase: <GiMoneyStack size={30} />
 };
 
 const feedTitle: { [k in FeedItemType]: string } = {
@@ -50,6 +52,7 @@ const feedTitle: { [k in FeedItemType]: string } = {
   raindrop: 'Bookmark',
   memo: 'Memo',
   maintenance: 'Maintenance',
+  purchase: 'Purchase'
 };
 
 interface FeedLineItemProps {
@@ -77,7 +80,10 @@ function FeedLineItem({ type, children, date, link }: FeedLineItemProps) {
     </Stack>
   );
 }
-
+const USDollar = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD'
+});
 export function FeedTable({ rows }: FeedTableProps) {
   return (
     <>
@@ -97,8 +103,8 @@ export function FeedTable({ rows }: FeedTableProps) {
                       link={`obsidian://open?vault=vault1&file=${encodeURIComponent(
                         data.adventure.path.replace(
                           `C:\\Users\\looni\\vault1\\`,
-                          '',
-                        ),
+                          ''
+                        )
                       )}`}
                     >
                       {data.adventure.activity}
@@ -176,8 +182,20 @@ export function FeedTable({ rows }: FeedTableProps) {
                         <Chip>{data.maintenance?.Property}</Chip>
                         <Markdown>{data.maintenance?.Notes}</Markdown>
                       </Box>
-
-                      {/*<br />*/}
+                    </FeedLineItem>
+                  </>
+                )}
+                {type === 'purchase' && (
+                  <>
+                    <FeedLineItem type={type} date={date}>
+                      <Box>
+                        <b>{data.purchase?.title}</b>{' '}
+                        <Chip sx={{ marginRight: 1 }}>
+                          {data.purchase?.Tags}
+                        </Chip>
+                        <Chip>{USDollar.format(data.purchase?.Cost ?? 0)}</Chip>
+                        <Markdown>{data.purchase?.Notes}</Markdown>
+                      </Box>
                     </FeedLineItem>
                   </>
                 )}
