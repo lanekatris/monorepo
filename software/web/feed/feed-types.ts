@@ -44,7 +44,8 @@ export type FeedItemType =
   // | 'bookmark'
   | 'memo'
   | 'maintenance'
-  | 'raindrop';
+  | 'raindrop'
+  | 'purchase';
 
 export interface FeedItem {
   id: string;
@@ -70,5 +71,11 @@ export interface FeedItem {
       Notes: string;
     };
     raindrop?: Raindrop;
+    purchase?: {
+      title: string;
+      Cost: number;
+      Tags: string;
+      Notes: string;
+    };
   };
 }
