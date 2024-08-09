@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Generate GraphQL" type="js.build_tools.npm">
-    <package-json value="$PROJECT_DIR$/software/js/package.json" />
+  <configuration default="false" name="climb recorder for real" type="js.build_tools.npm">
+    <package-json value="$PROJECT_DIR$/software/climb-recorder/package.json" />
     <command value="run" />
     <scripts>
-      <script value="gen" />
+      <script value="dev" />
     </scripts>
     <node-interpreter value="project" />
     <envs />
