@@ -34,9 +34,9 @@ function getStartDateFromFilename(filename:string){
 
 export async function GET() {
   const videoFolder= 'C:\\temp\\ffmpeg-test'
-  const files = await fs.readdir(videoFolder)
+  const rawFiles = await fs.readdir(videoFolder)
 
-  const idk = await Promise.all(files.filter(x => x.includes('mkv')).map(async filename => {
+  const files = await Promise.all(rawFiles.filter(x => x.includes('mkv')).map(async filename => {
 
     const stats = await p(`${videoFolder}\\${filename}`);
     let status = stats.err ? 'invalid':'valid';
@@ -48,7 +48,7 @@ export async function GET() {
       status = 'invalid'
     }
 
-
+  // todo: Can I do union types so I know for a fact properties are populated instead of these checks?
     const startDate =  status === 'valid' ? getStartDateFromFilename(filename):undefined;
     const endDate = startDate && videoLength ? addSeconds(startDate,videoLength) : undefined;
 
@@ -63,5 +63,5 @@ export async function GET() {
 
   }))
 
-  return NextResponse.json({idk}, { status: 200 });
+  return NextResponse.json({ files}, { status: 200 });
 }
