@@ -2,23 +2,7 @@ import { NextResponse } from 'next/server';
 import fs from 'fs/promises'
 import exec from 'child_process'
 import ffmpeg, { FfprobeData } from 'fluent-ffmpeg';
-
-/**
- * Function to execute exe
- * @param {string} fileName The name of the executable file to run.
- * @param {string[]} params List of string arguments.
- * @param {string} path Current working directory of the child process.
- */
-function execute(fileName, params, path) {
-  let promise = new Promise((resolve, reject) => {
-    exec.execFile(fileName, params, { cwd: path }, (err, data) => {
-      if (err) reject(err);
-      else resolve(data);
-    });
-
-  });
-  return promise;
-}
+import {parse,addSeconds} from 'date-fns'
 
 function p(path:string) : Promise<{data:FfprobeData,err:any}>{
 return new Promise((resolve, reject) => {
@@ -32,34 +16,52 @@ return new Promise((resolve, reject) => {
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
+// function getStatus():'valid'|'invalid'{
+//
+// }
+
+function getStartDateFromFilename(filename:string){
+  const noExt = filename.split('.')[0];
+  const parts = noExt.split('_');
+  const [year,month,day] = parts[0].split('-');
+  const dateTimeString = filename.substring(0, 19).replace('_', ' ')
+  const parsedDateTime = parse(dateTimeString, 'yyyy-MM-dd HH-mm-ss', new Date());
+  // "2024-06-29_10-03-40.mkv"
+  // const d= parse(filename, 'yyyy-MM-dd_HH-mm-ss', new Date())
+
+  return parsedDateTime;
+}
 
 export async function GET() {
   const videoFolder= 'C:\\temp\\ffmpeg-test'
   const files = await fs.readdir(videoFolder)
-  // const idk = files.filter(x => x.includes('mkv')).map(x => )
-
-
-    // const idk = await  execute('ffprobe.exe', ['-hide_banner', '', '-show_entries', 'format=duration', '-v', 'quiet', '-of', 'csv="p=0"', './2024-08-08_12-04-04.mkv'], 'C:\\temp\\ffmpeg-test')
-    // const idk = await execute('ffprobe.exe', ['-hide_banner -show_entries format=duration -v quiet -of csv="p=0" ./2024-08-08_14-32-35.mkv'], 'C:\\temp\\ffmpeg-test')
-    // ffmpeg.ffprobe('C:\\temp\\ffmpeg-test\\2024-08-08_14-32-35.mkv')
-    // const idk = await p('C:\\temp\\ffmpeg-test\\2024-08-08_14-32-35.mkv');
-
-    // return NextResponse.json({files,idk}, { status: 200 });
 
   const idk = await Promise.all(files.filter(x => x.includes('mkv')).map(async filename => {
 
-      // const videoLength = await execute('ffprobe.exe', ['-hide_banner', '-show_entries', 'format=duration', '-v', 'quiet', '-of', 'csv="p=0"', `./${filename}`], `C:\\temp\\ffmpeg-test`)
     const stats = await p(`${videoFolder}\\${filename}`);
-    const status = stats.err ? 'invalid':'valid';
+    let status = stats.err ? 'invalid':'valid';
     const videoLength=  status === 'valid'?stats.data.format.duration : undefined;
+
+    // Somehow we get in this state from ffprobe
+    // @ts-ignore
+    if (videoLength === 'N/A'){
+      status = 'invalid'
+    }
+
+
+    const startDate =  status === 'valid' ? getStartDateFromFilename(filename):undefined;
+    const endDate = startDate && videoLength ? addSeconds(startDate,videoLength) : undefined;
+
       return {
         filename,
+        startDate,
+        endDate,
         status,
-        s: stats.data,
+        // s: stats.data,
         videoLength // todo: I got n/a for oen of them?
       }
 
   }))
 
-  return NextResponse.json({files,idk}, { status: 200 });
+  return NextResponse.json({idk}, { status: 200 });
 }
