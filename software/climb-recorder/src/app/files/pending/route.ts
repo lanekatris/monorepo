@@ -4,6 +4,7 @@ import exec from 'child_process'
 import ffmpeg, { FfprobeData } from 'fluent-ffmpeg';
 import {parse,addSeconds} from 'date-fns'
 import { db, pendingFile } from '../../../schema';
+import { nanoid } from 'nanoid'
 
 function p(path:string) : Promise<{data:FfprobeData,err:any}>{
 return new Promise((resolve, reject) => {
@@ -33,7 +34,8 @@ function getStartDateFromFilename(filename:string){
   return parsedDateTime;
 }
 
-export async function GET() {
+export async function getPendingFilesFromDisk(){
+
   const videoFolder= 'C:\\temp\\ffmpeg-test'
   const rawFiles = await fs.readdir(videoFolder)
 
@@ -49,21 +51,26 @@ export async function GET() {
       status = 'invalid'
     }
 
-  // todo: Can I do union types so I know for a fact properties are populated instead of these checks?
+    // todo: Can I do union types so I know for a fact properties are populated instead of these checks?
     const startDate =  status === 'valid' ? getStartDateFromFilename(filename):undefined;
     const endDate = startDate && videoLength ? addSeconds(startDate,videoLength) : undefined;
 
-      return {
-        filename,
-        startDate,
-        endDate,
-        status,
-        // s: stats.data,
-        videoLength // todo: I got n/a for oen of them?
-      }
+    return {
+      filename,
+      fullPath: `${videoFolder}\\${filename}`,
+      startDate,
+      endDate,
+      status,
+      videoLength // todo: I got n/a for oen of them?
+    }
 
   }))
 
+  return files
+}
+
+export async function GET() {
+const files = await getPendingFilesFromDisk()
   const idk = await db.select().from(pendingFile);
 
   return NextResponse.json({ files,idk}, { status: 200 });
