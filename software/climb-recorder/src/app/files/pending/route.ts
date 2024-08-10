@@ -3,6 +3,7 @@ import fs from 'fs/promises'
 import exec from 'child_process'
 import ffmpeg, { FfprobeData } from 'fluent-ffmpeg';
 import {parse,addSeconds} from 'date-fns'
+import { db, pendingFile } from '../../../schema';
 
 function p(path:string) : Promise<{data:FfprobeData,err:any}>{
 return new Promise((resolve, reject) => {
@@ -63,5 +64,7 @@ export async function GET() {
 
   }))
 
-  return NextResponse.json({ files}, { status: 200 });
+  const idk = await db.select().from(pendingFile);
+
+  return NextResponse.json({ files,idk}, { status: 200 });
 }
