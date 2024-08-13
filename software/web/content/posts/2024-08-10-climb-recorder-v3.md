@@ -1,6 +1,8 @@
 ---
 ---
 
+[Obsidian Note](obsidian://open?vault=vault1&file=Climb%20Recorder%20V3)
+
 ### Why
 I want this but I want it to be extremely simple so it has the highest chance of not being deleted or rewritten.
 
@@ -18,4 +20,4 @@ Random Things
 - I forgot how to [structure async calls in a map](https://stackoverflow.com/questions/33438158/best-way-to-call-an-asynchronous-function-within-map)
 - I can't get `ffmpeg` to [format file names in Epoch time](https://stackoverflow.com/questions/61129758/ffmpeg-strftime-microseconds)
 - It's crazy you can't filter files when doing `fs.readdir`, you have to do it in memory after loading all files
-- 
+- Make sure you hit `q` to quit ffmpeg running in cli, don't ctrl+c or your video will corrupt potentially
