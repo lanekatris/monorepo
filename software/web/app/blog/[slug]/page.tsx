@@ -27,8 +27,12 @@ export default function BlogPostPage({ params }: PostProps) {
     <>
       <Typography level={'h1'}>{post.title}</Typography>
       <Typography level={'body-xs'}>
-        <b>Date</b>: {post.date.split('T')[0]} <b>Tags</b>:{' '}
-        {post.tags?.map((t) => `#${t}`).join(', ')}
+        <b>Date</b>: {post.date.split('T')[0]}{' '}
+        {post.tags && (
+          <>
+            <b>Tags</b>: {post.tags?.map((t) => `#${t}`).join(', ')}
+          </>
+        )}
       </Typography>
       <div
         className="article"
