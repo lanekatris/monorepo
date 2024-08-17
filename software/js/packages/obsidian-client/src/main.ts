@@ -25,6 +25,9 @@ export async function deployBlog({ obsidian }) {
   }
 }
 
+export const moveTheaterToday = createEventFile('movie-theater');
+export const fishedToday = createEventFile('fishing');
+export const zooToday = createEventFile('zoo');
 export const poolToday = createEventFile('pool');
 export const ultimateFrisbee = createEventFile('ultimate-frisbee');
 export const kayakedToday = createEventFile('kayaking');

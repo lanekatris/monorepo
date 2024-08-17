@@ -1,0 +1,6 @@
+
+
+
+#### Notes
+
+I want to use a monorepo so you have to delete the `.git` folder: https://stackoverflow.com/questions/10360342/git-clone-into-another-existing-git-repo
