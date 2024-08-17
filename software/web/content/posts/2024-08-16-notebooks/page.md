@@ -1,7 +1,7 @@
 ---
 date: 2024-08-16
 slug: notebooks
-title: My Field Notes Notebooks
+title: My Notebooks
 ---
 
 (more to come)
