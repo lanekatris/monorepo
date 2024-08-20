@@ -11,15 +11,15 @@ import {
   ListItem,
   Stack,
   Table,
-  Typography,
-} from "@mui/joy";
+  Typography
+} from '@mui/joy';
 // @ts-ignore
-import { sql } from "@vercel/postgres";
-import { Pie, ResponsiveContainer } from "recharts";
-import { groupBy } from "lodash";
-import { formatRelative } from "date-fns";
-import { RawUdiscScorecardEntry } from "../../scorecards/raw-udisc-scorecard-entry";
-import { processScorecards } from "../../scorecards/process-scorecards";
+import { sql } from '@vercel/postgres';
+import { Pie, ResponsiveContainer } from 'recharts';
+import { groupBy } from 'lodash';
+import { formatRelative } from 'date-fns';
+import { RawUdiscScorecardEntry } from '../../scorecards/raw-udisc-scorecard-entry';
+import { processScorecards } from '../../scorecards/process-scorecards';
 // import DiscsChart from 'packages/web/app/discs/DiscsCharts';
 
 export interface Disc {
@@ -47,7 +47,7 @@ async function GetRawScorecards() {
   return rows;
 }
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
 export default async function DiscsPage() {
   const { rows }: { rows: Disc[] } =
@@ -59,13 +59,13 @@ export default async function DiscsPage() {
   const rawScorecards = await GetRawScorecards();
   const scorecardResult = await processScorecards({
     rawScorecards,
-    playerName: "Lane",
+    playerName: 'Lane'
   });
 
   const latestRound = rawScorecards[0];
   const total = rows.length;
-  const totalInBag = rows.filter((x) => x.status === "In Bag").length;
-  const discStatuses = groupBy(rows, "status");
+  const totalInBag = rows.filter((x) => x.status === 'In Bag').length;
+  const discStatuses = groupBy(rows, 'status');
 
   const { rows: courses }: { rows: { coursename: string }[] } =
     await sql`select distinct coursename from kestra.udisc_scorecard order by coursename`;
@@ -100,11 +100,11 @@ export default async function DiscsPage() {
       </Stack>
       {/*<List size="sm">*/}
       <Alert color="primary">
-        I&apos;ve been using Udisc for{" "}
-        {scorecardResult.stats.howLongHaveYouBeenPlaying}, I have{" "}
-        {scorecardResult.stats.aces} Aces, and have recorded{" "}
+        I&apos;ve been using Udisc for{' '}
+        {scorecardResult.stats.howLongHaveYouBeenPlaying}, I have{' '}
+        {scorecardResult.stats.aces} Aces, and have recorded{' '}
         {scorecardResult.stats.rounds.total} rounds. I&apos;ve recorded rounds
-        at: {scorecardResult.stats.courses.mostPlayed.name} the most -{" "}
+        at: {scorecardResult.stats.courses.mostPlayed.name} the most -{' '}
         {scorecardResult.stats.courses.mostPlayed.rounds} times.
         <br />
         {/*<br />*/}
@@ -120,9 +120,22 @@ export default async function DiscsPage() {
         ))}
       </Stack>
       <br />
-      <Typography level="h4" gutterBottom id="my-discs">
-        My Discs
-      </Typography>
+      <Stack
+        direction="row"
+        justifyContent={'space-between'}
+        alignItems={'start'}
+      >
+        <Typography level="h4" gutterBottom id="my-discs">
+          My Discs
+        </Typography>
+        <Link
+          href={
+            'https://noco.lkat.io/dashboard/#/nc/p_egch5370h5zwqh/md_6b9re04oo9qvyv/vw3neyo0u3i83e8m'
+          }
+        >
+          Manage
+        </Link>
+      </Stack>
       <Alert color="primary">
         I currently have {totalInBag} discs in my bag
       </Alert>
@@ -179,15 +192,15 @@ function DiscCard({ disc }: { disc: Disc }) {
           {disc.color} - {disc.plastic} {disc.brand} {disc.model}
         </Typography>
         <Typography level="body-sm" gutterBottom>
-          {disc.notes || "No notes"}
+          {disc.notes || 'No notes'}
         </Typography>
         <Stack direction="row" justifyContent="space-between">
           <Stack direction="row" justifyContent="space-between" gap={1}>
             <Chip variant="solid">{disc.status}</Chip>
-            <Chip variant="solid">{disc.weight || "n/a "}g</Chip>
+            <Chip variant="solid">{disc.weight || 'n/a '}g</Chip>
           </Stack>
           <Typography level="body-xs">
-            Added: {disc.created?.toLocaleDateString() || "Unknown"}
+            Added: {disc.created?.toLocaleDateString() || 'Unknown'}
           </Typography>
         </Stack>
       </CardContent>
