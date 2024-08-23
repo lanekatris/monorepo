@@ -102,6 +102,9 @@ group by pv.id is not null
   const memos = await getMemos();
   const picMemos = await getPicMemos();
 
+  const { rows: dgLinks }: { rows: { url: string }[] } =
+    await sql`select url from noco.url where id = 1`;
+  console.log(dgLinks);
   // const {
   //   rows: activityGrouping,
   // }: { rows: { name: string; value: number }[] } =
@@ -261,7 +264,8 @@ group by pv.id is not null
           <Stack direction="row" justifyContent="space-between">
             <Typography level="h4">Recent Disc Golf Rounds</Typography>
             <Typography level="body-xs">
-              <Link href="/dg/rounds">All Rounds</Link>
+              <Link href="/dg/rounds">All Rounds</Link> |{' '}
+              <Link href={dgLinks[0].url}>Upload</Link>
             </Typography>
           </Stack>
           <Typography gutterBottom level="body-md">
