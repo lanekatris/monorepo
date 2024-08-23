@@ -102,9 +102,15 @@ group by pv.id is not null
   const memos = await getMemos();
   const picMemos = await getPicMemos();
 
-  const { rows: dgLinks }: { rows: { url: string }[] } =
+  interface L {
+    url: string;
+  }
+  const { rows: dgLinks }: { rows: L[] } =
     await sql`select url from noco.url where id = 1`;
-  console.log(dgLinks);
+
+  const { rows: kickObsidianAdventuresLinks }: { rows: L[] } =
+    await sql`select url from noco.url where id = 4`;
+
   // const {
   //   rows: activityGrouping,
   // }: { rows: { name: string; value: number }[] } =
@@ -239,26 +245,21 @@ group by pv.id is not null
               // link="https://udisc.com/blog/post/worlds-best-disc-golf-courses-2024"
               link="/adventures/14ers"
             />
-
-            {/*<Card variant={'outlined'}>*/}
-            {/*  <Typography>WV State Parks Visited</Typography>*/}
-            {/*  <Typography>{percentage2}%</Typography>*/}
-            {/*  <Stack className="mt-4">*/}
-            {/*    <Typography>*/}
-            {/*      {completed2} / {total2} Parks*/}
-            {/*    </Typography>*/}
-            {/*  </Stack>*/}
-            {/*  /!*<LinearProgress value={percentage2} className="mt-2" />*!/*/}
-            {/*</Card>*/}
           </Stack>
-          <Typography level="h4">Activities This Year</Typography>
+          <br />
+          <Stack direction="row" justifyContent="space-between">
+            <Typography level="h4">Activities This Year</Typography>
+            <Typography level="body-xs">
+              <Link
+                href="https://timeline.google.com/maps/timeline?hl=en&authuser=0&pli=1&rapt=AEjHL4OuTb6QVbcwylFSNprJeSNg3mIxuOaf4UriQxjFGOQJ7DpBVlJogCBrm8wEJfo6XyRrbZk30Wr0bTDKcwY6PE2znvkPptI_KfP6Lm3zYbu07fgfr78&pb=!1m2!1m1!1s2024-08-23"
+                target={'_blank'}
+              >
+                Google Timeline
+              </Link>{' '}
+              | <Link href={kickObsidianAdventuresLinks[0].url}>Refresh</Link>
+            </Typography>
+          </Stack>
           <ThisMonthActivitiesCalendar dates={recentActivities} />
-          {/*<ActivityGrouping*/}
-          {/*  data={activityGrouping.map((x) => ({*/}
-          {/*    ...x,*/}
-          {/*    value: parseInt(x.value),*/}
-          {/*  }))}*/}
-          {/*/>*/}
           <br />
 
           <Stack direction="row" justifyContent="space-between">
