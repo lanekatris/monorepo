@@ -1,10 +1,10 @@
-$filename = "c:\temp\$(get-random).zip"
+$filename = new-temporaryfile
+$destination = If ($IsWindows) {"C:\MyPrograms\"} else {"~/bin/"}
+$release = If ($IsWindows) {"monorepo_windows_amd64.zip"} else {"monorepo_linux_amd64"}
 
 $ProgressPreference = 'SilentlyContinue' # Speed up the download
-Invoke-WebRequest https://github.com/lanekatris/monorepo/releases/latest/download/monorepo_windows_amd64.zip -OutFile $filename
+Invoke-WebRequest "https://github.com/lanekatris/monorepo/releases/latest/download/$release.zip" -OutFile $filename
 
-Expand-Archive -Path $filename -DestinationPath C:\MyPrograms\lk -Force
+Expand-Archive -Path $filename -DestinationPath $destination -Force
 
 Write-Host -ForegroundColor Green "Success!"
-Write-Host "Don't forget to clear out: c:\temp"
-Get-ChildItem c:\temp\*.zip
