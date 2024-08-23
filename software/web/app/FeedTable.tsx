@@ -148,6 +148,13 @@ export function FeedTable({ rows }: FeedTableProps) {
                       <Typography level="body-xs">
                         {data.raindrop?.excerpt}
                       </Typography>
+                      {data.raindrop?.note && (
+                        <Box>
+                          <Typography level="body-xs">
+                            {data.raindrop?.note}
+                          </Typography>
+                        </Box>
+                      )}
                     </FeedLineItem>
                   </>
                 )}
