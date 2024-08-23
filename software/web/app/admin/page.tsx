@@ -4,9 +4,8 @@ import {
   Button,
   Container,
   Link,
-  Typography,
+  Typography
 } from '@mui/joy';
-import { isAdmin } from '../../isAdmin';
 import { sql } from '@vercel/postgres';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
@@ -50,7 +49,7 @@ export default async function AdminPage() {
   }
 
   const {
-    rows: urls,
+    rows: urls
   }: {
     rows: Array<Url>;
   } = await sql`select * from noco.url order by clicks desc`;
@@ -60,10 +59,8 @@ export default async function AdminPage() {
 
   const grouped = groupBy(maintenances, 'Property');
 
-  if (!isAdmin()) return <Alert color="danger">Not Authorized</Alert>;
-
   const {
-    rows: purchases,
+    rows: purchases
   }: {
     rows: {
       title: string;
@@ -87,7 +84,7 @@ export default async function AdminPage() {
         style={{
           backgroundColor: '#ffffce',
           paddingTop: '20px',
-          paddingBottom: '20px',
+          paddingBottom: '20px'
         }}
       >
         {urls.map((u) => (
@@ -116,7 +113,7 @@ export default async function AdminPage() {
         style={{
           backgroundColor: '#ffffce',
           paddingTop: '20px',
-          paddingBottom: '20px',
+          paddingBottom: '20px'
         }}
       >
         {Object.keys(grouped).map((key) => (
@@ -141,7 +138,7 @@ export default async function AdminPage() {
         style={{
           backgroundColor: '#ffffce',
           paddingTop: '20px',
-          paddingBottom: '20px',
+          paddingBottom: '20px'
         }}
       >
         {purchases.map(({ id, title, Date, Tags, Cost }) => (

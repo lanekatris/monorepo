@@ -9,7 +9,7 @@ function onlyUnique(value: string, index: number, array: string[]) {
 
 export enum TrackingRecordType {
   KIOSK = 'Kiosk',
-  DAC = 'DAC Entry',
+  DAC = 'DAC Entry'
 }
 
 export interface Member {
@@ -32,26 +32,43 @@ export interface MembersResponse {
   aaData: Member[];
 }
 
-export async function getMembers(credentials: Credentials): Promise<string[]> {
+interface RhinofitAccessRecord {
+  id: string;
+  date: string;
+  name: string;
+  time: string;
+}
+
+export async function getMembers(
+  credentials: Credentials
+): Promise<RhinofitAccessRecord[]> {
   const today = new Date().toISOString().split('T')[-1];
   const lastWeek = addDays(new Date(), -11).toISOString().split('T')[0];
   const { data } = await axios.get<MembersResponse>(
     `https://my.rhinofit.ca/datatables.php?method=getaccesstrackingobject&al_event=&start=${lastWeek}&end=${today}`,
     {
       headers: {
-        Cookie: credentials.cookies.join('; '),
-      },
+        Cookie: credentials.cookies.join('; ')
+      }
     }
   );
 
   return data.aaData
     .filter((x) => x.al_cal_type === 'DAC Entry')
     .reverse()
-    .map(
-      (x) =>
-        `${x.al_cal_datetime.split(' ')[0]} - ${
-          parse(x.al_cal_userlink)?.firstChild?.rawText
-        }`
-    )
-    .filter(onlyUnique);
+    .map((x) => ({
+      id: `${x.al_cal_datetime.split(' ')[0]} - ${
+        parse(x.al_cal_userlink)?.firstChild?.rawText
+      }`,
+      date: x.al_cal_datetime.split(' ')[0],
+      time: x.al_cal_datetime.split(' ')[1],
+      name: parse(x.al_cal_userlink)?.firstChild?.rawText ?? ''
+    }));
+  // .map(
+  //   (x) =>
+  //     `${x.al_cal_datetime.split(' ')[0]} - ${
+  //       parse(x.al_cal_userlink)?.firstChild?.rawText
+  //     }`
+  // )
+  // .filter(onlyUnique);
 }

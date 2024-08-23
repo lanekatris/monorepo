@@ -5,7 +5,7 @@ import {
   ListItem,
   ListItemContent,
   Skeleton,
-  Typography,
+  Typography
 } from '@mui/joy';
 import Link from 'next/link';
 
@@ -19,15 +19,7 @@ export default function GymUsersPageLoading() {
         <Typography>Gym Users</Typography>
       </Breadcrumbs>
 
-      <Typography level={'h4'} gutterBottom>
-        Recent Gym Users
-      </Typography>
       <List>
-        <ListItem>
-          <ListItemContent>
-            <b>Today</b>: {new Date().toISOString().split('T')[0]}
-          </ListItemContent>
-        </ListItem>
         <ListItem>
           <ListItemContent>
             <Typography>
