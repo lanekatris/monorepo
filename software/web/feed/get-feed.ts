@@ -130,7 +130,10 @@ export const getFeed = async ({
   finalFeed.sort((a, b) => {
     if (!b.date || !a.date) {
       throw new Error(
-        'Date is null: ' + JSON.stringify(a) + ' --- ' + JSON.stringify(b)
+        'Date is null: ' +
+          JSON.stringify(a) +
+          ' 🤺🤺🤺🤺🤺 ' +
+          JSON.stringify(b)
       );
     }
     return b.date.valueOf() - a.date.valueOf();
