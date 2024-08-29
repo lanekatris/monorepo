@@ -29,6 +29,7 @@ import { MetricCard } from '../metrics/MetricCard';
 import { unstable_noStore as noStore } from 'next/cache';
 import { NEXT_ADVENTURE } from '../nextAdventure';
 import { RawUdiscScorecardEntry } from '../scorecards/raw-udisc-scorecard-entry';
+import { getServerSession } from 'next-auth';
 
 export const dynamic = 'force-dynamic';
 export default async function Index() {
@@ -110,6 +111,9 @@ group by pv.id is not null
 
   const { rows: kickObsidianAdventuresLinks }: { rows: L[] } =
     await sql`select url from noco.url where id = 4`;
+
+  const session = await getServerSession();
+  console.log('session', session);
 
   // const {
   //   rows: activityGrouping,
