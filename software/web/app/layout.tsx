@@ -12,17 +12,19 @@ import {
 import React from 'react';
 import Link from 'next/link';
 import ThemeToggler from './ThemeToggler';
+import { getServerSession } from 'next-auth';
 
 export const metadata = {
   title: `Lane's Site`,
   description: 'to do'
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession();
   return (
     <html lang="en">
       <body>
@@ -37,11 +39,15 @@ export default function RootLayout({
                   Lane&apos;s Site
                 </Link>
               </Typography>
-              <Link href="/feed">Feed</Link>
-              <Link href="/admin">Admin</Link>
+              {session && <Link href="/feed">Feed</Link>}
+              {session && <Link href="/admin">Admin</Link>}
               <Link href="/blog">Blog</Link>
               <Link href="/about">About</Link>
-              <Link href="/inbox">Inbox</Link>
+              {session && <Link href="/inbox">Inbox</Link>}
+              <Link href={session ? '/api/auth/signout' : '/api/auth/signin'}>
+                {session ? 'Logout' : 'Login'}
+              </Link>
+
               <ThemeToggler />
             </Stack>
           </Container>

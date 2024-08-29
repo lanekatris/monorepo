@@ -12,6 +12,9 @@ import {
 import { NEXT_ADVENTURE } from '../../nextAdventure';
 import { sql } from '@vercel/postgres';
 import { getRaindrops } from '../../feed/get-feed';
+import { getServerSession } from 'next-auth';
+import { NotAuthorized } from '../feed/page';
+import React from 'react';
 // import ReportIcon from '@mui/icons-material/Report';
 
 const RAINDROP_INBOX_COLLECTION_ID = 36282268;
@@ -29,6 +32,8 @@ export default async function InboxPage() {
   const filteredBookmarks = allBookmarks.filter(
     (x) => x.data.raindrop?.collectionId === RAINDROP_INBOX_COLLECTION_ID
   );
+  const session = await getServerSession();
+  if (!session) return <NotAuthorized />;
   return (
     <Container maxWidth="sm">
       <Breadcrumbs>

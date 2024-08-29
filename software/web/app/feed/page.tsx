@@ -1,9 +1,20 @@
-import { Breadcrumbs, Container, Link, Stack, Typography } from '@mui/joy';
+import {
+  Alert,
+  Box,
+  Breadcrumbs,
+  Button,
+  Container,
+  Link,
+  Stack,
+  Typography
+} from '@mui/joy';
 import { getFeed } from '../../feed/get-feed';
 import { FeedTable } from '../FeedTable';
 import React from 'react';
 import NextLink from 'next/link';
 import { unstable_noStore as noStore } from 'next/cache';
+import { getServerSession } from 'next-auth';
+import { SiAdblock } from 'react-icons/si';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,13 +24,40 @@ interface FeedPageProps {
   };
 }
 
+export function NotAuthorized() {
+  return (
+    <Container maxWidth="sm">
+      <Box textAlign="center">
+        <SiAdblock fontSize={'6em'} color={'rgb(125, 18, 18)'} />
+      </Box>
+      <br />
+      <Alert
+        size={'lg'}
+        color={'danger'}
+        endDecorator={
+          <NextLink href="/api/auth/signin">
+            <Button size={'sm'} color={'danger'}>
+              Login
+            </Button>
+          </NextLink>
+        }
+      >
+        You must be logged in to access.
+      </Alert>
+    </Container>
+  );
+}
+
 export default async function FeedPage({ searchParams }: FeedPageProps) {
   noStore();
   const feedFilter = {
-    showBookmarks: searchParams.showBookmarks !== 'false',
+    showBookmarks: searchParams.showBookmarks !== 'false'
   };
 
   const feed = await getFeed(feedFilter);
+
+  const session = await getServerSession();
+  if (!session) return <NotAuthorized />;
 
   return (
     <Container>

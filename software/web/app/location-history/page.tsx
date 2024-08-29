@@ -9,6 +9,9 @@ import {
 import LocationsList from './LocationsList';
 import Link from 'next/link';
 import { sql } from '@vercel/postgres';
+import { getServerSession } from 'next-auth';
+import React from 'react';
+import { NotAuthorized } from '../feed/page';
 
 export interface LocationCustom {
   Address: string;
@@ -28,6 +31,8 @@ export default async function LocationHistoryPage({
   const { rows }: { rows: LocationCustom[] } =
     await sql`select "Address", "Name" from kestra.location_history where lower("Address") like ${searchTerm} or lower("Name") like ${searchTerm}  limit 100`;
 
+  const session = await getServerSession();
+  if (!session) return <NotAuthorized />;
   return (
     <Container maxWidth="sm">
       <Breadcrumbs>

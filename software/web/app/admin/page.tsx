@@ -11,6 +11,9 @@ import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { groupBy } from 'lodash';
 import { unstable_noStore as noStore } from 'next/cache';
+import { getServerSession } from 'next-auth';
+import React from 'react';
+import { NotAuthorized } from '../feed/page';
 
 export const dynamic = 'force-dynamic';
 
@@ -70,6 +73,9 @@ export default async function AdminPage() {
       id: number;
     }[];
   } = await sql`select * from noco.purchases order by "Date" desc`;
+
+  const session = await getServerSession();
+  if (!session) return <NotAuthorized />;
 
   return (
     <Container maxWidth="sm">

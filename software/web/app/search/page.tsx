@@ -1,11 +1,14 @@
-import { Breadcrumbs, Container, Input, Link, Typography } from "@mui/joy";
-import Fuse from "fuse.js";
+import { Breadcrumbs, Container, Input, Link, Typography } from '@mui/joy';
+import Fuse from 'fuse.js';
 
-import { sql } from "@vercel/postgres";
+import { sql } from '@vercel/postgres';
 
-import bookmarks from "./raindrop-export.json";
-import { Podcast } from "../spotify/page";
-import SearchIdk from "./SearchIdk";
+import bookmarks from './raindrop-export.json';
+import { Podcast } from '../spotify/page';
+import SearchIdk from './SearchIdk';
+import { getServerSession } from 'next-auth';
+import React from 'react';
+import { NotAuthorized } from '../feed/page';
 // const data = [
 //   {
 //     name: 'Darknet Diaries',
@@ -29,20 +32,20 @@ async function getIndex() {
 
   let data: SearchResult[] = podcasts.map((x) => ({
     name: x.name,
-    source: "podcast",
-    url: x.url,
+    source: 'podcast',
+    url: x.url
   }));
 
   data = [
     ...data,
     ...bookmarks.map((x) => ({
-      name: x.title + " - " + x.excerpt,
+      name: x.title + ' - ' + x.excerpt,
       url: x.url,
-      source: "bookmark",
-    })),
+      source: 'bookmark'
+    }))
   ];
 
-  const index = Fuse.createIndex(["name", "source"], data);
+  const index = Fuse.createIndex(['name', 'source'], data);
 
   return { index: index.toJSON(), data };
 }
@@ -52,6 +55,8 @@ export default async function SearchPage() {
   // console.log('indexJson', indexJson);
   // const index = Fuse.parseIndex(indexJson);
   // const fuse = new Fuse(data, {}, index);
+  const session = await getServerSession();
+  if (!session) return <NotAuthorized />;
   return (
     <Container maxWidth="sm">
       <Breadcrumbs>

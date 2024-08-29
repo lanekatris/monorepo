@@ -1,20 +1,22 @@
-'use client';
 import { Chip, List, ListItem, useTheme } from '@mui/joy';
 import Link from 'next/link';
 import React from 'react';
+import { getServerSession } from 'next-auth';
+import { NotAuthorized } from './feed/page';
 
 const links = [
   { href: '/blogroll', name: 'Blog Roll' },
   { href: 'https://memo.lkat.io/', name: 'Notes' },
-  { href: '/location-history', name: 'Location History' },
+  { href: '/location-history', name: 'Location History', requiresLogin: true },
   { href: '/discs', name: 'Disc Golf' },
-  { href: '/climb/gym-users', name: 'Gym Users' },
+  { href: '/climb/gym-users', name: 'Gym Users', requiresLogin: true },
   { href: '/fitness', name: 'Fitness' },
   { href: '/spotify', name: 'Spotify' },
-  { href: '/search', name: 'Search' }
+  { href: '/search', name: 'Search', requiresLogin: true }
 ];
 
-export default function HomeLinks() {
+export default async function HomeLinks() {
+  const session = await getServerSession();
   return (
     <List
       size="sm"
@@ -22,13 +24,18 @@ export default function HomeLinks() {
       // sx={(theme) => {}}
       // sx={{ backgroundColor: theme.palette.warning.solidBg }}
     >
-      {links.map(({ href, name }) => {
-        return (
-          <ListItem key={name}>
-            <Link href={href}>{name}</Link>
-          </ListItem>
-        );
-      })}
+      {links
+        .filter((link) => {
+          if (!link.requiresLogin) return true;
+          return session;
+        })
+        .map(({ href, name }) => {
+          return (
+            <ListItem key={name}>
+              <Link href={href}>{name}</Link>
+            </ListItem>
+          );
+        })}
       {/*{showAdminLink && (*/}
       {/*  <ListItem>*/}
       {/*    <Link href="/admin">Admin</Link>*/}
