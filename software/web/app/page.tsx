@@ -260,7 +260,12 @@ group by pv.id is not null
               >
                 Google Timeline
               </Link>{' '}
-              | <Link href={kickObsidianAdventuresLinks[0].url}>Refresh</Link>
+              {session && (
+                <>
+                  |{' '}
+                  <Link href={kickObsidianAdventuresLinks[0].url}>Refresh</Link>
+                </>
+              )}
             </Typography>
           </Stack>
           <ThisMonthActivitiesCalendar dates={recentActivities} />
@@ -269,8 +274,12 @@ group by pv.id is not null
           <Stack direction="row" justifyContent="space-between">
             <Typography level="h4">Recent Disc Golf Rounds</Typography>
             <Typography level="body-xs">
-              <Link href="/dg/rounds">All Rounds</Link> |{' '}
-              <Link href={dgLinks[0].url}>Upload</Link>
+              <Link href="/dg/rounds">All Rounds</Link>
+              {session && (
+                <>
+                  | <Link href={dgLinks[0].url}>Upload</Link>
+                </>
+              )}
             </Typography>
           </Stack>
           <Typography gutterBottom level="body-md">
