@@ -41,6 +41,7 @@ export default function RootLayout({
               <Link href="/admin">Admin</Link>
               <Link href="/blog">Blog</Link>
               <Link href="/about">About</Link>
+              <Link href="/inbox">Inbox</Link>
               <ThemeToggler />
             </Stack>
           </Container>

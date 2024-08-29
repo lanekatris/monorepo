@@ -93,7 +93,7 @@ export async function getMemos() {
   });
 }
 
-async function getRaindrops() {
+export async function getRaindrops() {
   console.time('raindrops');
 
   const raindrops: Raindrop[] = await getJsonFromMinio('etl', 'raindrops.json');
