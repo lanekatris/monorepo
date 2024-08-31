@@ -24,7 +24,15 @@ export default function BlogPage() {
       </nav>
       <main>
         <div className="flash attention">
-          I know this styling is very different - it is intentional 😉
+          I know this styling is very different - it is intentional 😉 (
+          <a
+            href="https://matcha.mizu.sh/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Matcha CSS
+          </a>
+          )
         </div>
         <div className="flash default">
           <dl>

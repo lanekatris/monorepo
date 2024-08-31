@@ -13,6 +13,8 @@ import React from 'react';
 import Link from 'next/link';
 import ThemeToggler from '../ThemeToggler';
 import { getServerSession } from 'next-auth';
+import ExampleCommandPalette from './CommandPalette';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata = {
   title: `Lane's Site`,
@@ -28,12 +30,13 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Toaster />
         <ThemeRegistry options={{ key: 'joy' }}>
           <Container sx={{ marginTop: 2 }}>
             <Stack direction="row" spacing={2} alignItems="center">
               <Typography level="h4">
                 <Link
-                  href="/software/web/public"
+                  href="/"
                   style={{ textDecoration: 'none', color: 'inherit' }}
                 >
                   Lane&apos;s Site
@@ -74,6 +77,7 @@ export default async function RootLayout({
           </footer>
           <br />
         </ThemeRegistry>
+        <ExampleCommandPalette />
       </body>
     </html>
   );
