@@ -2,7 +2,7 @@ import { Chip, List, ListItem, useTheme } from '@mui/joy';
 import Link from 'next/link';
 import React from 'react';
 import { getServerSession } from 'next-auth';
-import { NotAuthorized } from './feed/page';
+import { NotAuthorized } from './(mui-theme)/feed/page';
 
 const links = [
   { href: '/blogroll', name: 'Blog Roll' },
