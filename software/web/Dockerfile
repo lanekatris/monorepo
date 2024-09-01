@@ -39,6 +39,7 @@ FROM base AS runner
 WORKDIR /app
 
 RUN apk add --update-cache docker-cli
+RUN chmod 777 /var/run/docker.sock
 
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
