@@ -8,10 +8,17 @@ export async function GET(request: NextRequest) {
   if (token !== process.env.WEB_API_TOKEN)
     return NextResponse.json({ error: 'Bad token' }, { status: 401 });
 
-  try {
+  console.log('restarting web in 1 second');
+  setTimeout(async () => {
     const { stdout, stderr } = await exec(`docker restart web`);
-    return NextResponse.json({ stdout, stderr }, { status: 200 });
-  } catch (e) {
-    return NextResponse.json({ error: e }, { status: 500 });
-  }
+    console.log({ stdout, stderr });
+  }, 1000);
+
+  // try {
+  //   const { stdout, stderr } = await exec(`docker restart web`);
+  //   return NextResponse.json({ stdout, stderr }, { status: 200 });
+  // } catch (e) {
+  //   return NextResponse.json({ error: e }, { status: 500 });
+  // }
+  return NextResponse.json({ status: 200 });
 }
