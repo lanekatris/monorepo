@@ -39,7 +39,7 @@ FROM base AS runner
 WORKDIR /app
 
 RUN apk add --update-cache docker-cli
-RUN chmod 777 /var/run/docker.sock
+#RUN chmod 777 /var/run/docker.sock
 
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
@@ -53,6 +53,7 @@ COPY --from=builder /app/public ./public
 # Set the correct permission for prerender cache
 RUN mkdir .next
 RUN chown nextjs:nodejs .next
+RUN chown nextjs:nodejs /var/run/docker.sock
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
