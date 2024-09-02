@@ -15,6 +15,7 @@ import ThemeToggler from '../ThemeToggler';
 import { getServerSession } from 'next-auth';
 import ExampleCommandPalette from './CommandPalette';
 import { Toaster } from 'react-hot-toast';
+import { restartWebserverServerFunction } from '../../lib/restartWebserver';
 
 export const metadata = {
   title: `Lane's Site`,
@@ -27,6 +28,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession();
+
+  // async function restartWeb() {
+  //   'use server';
+  //   const session = await getServerSession();
+  //   console.log('server session', session);
+  // }
   return (
     <html lang="en">
       <body>
@@ -77,7 +84,10 @@ export default async function RootLayout({
           </footer>
           <br />
         </ThemeRegistry>
-        <ExampleCommandPalette />
+        <ExampleCommandPalette
+          session={session}
+          restartWeb={restartWebserverServerFunction}
+        />
       </body>
     </html>
   );

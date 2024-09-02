@@ -7,41 +7,49 @@ import CommandPalette, {
 } from 'react-cmdk';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { Session } from 'next-auth';
 
-const Example = () => {
+interface ExampleCommandPaletteProps {
+  session: Session | null;
+  restartWeb: () => Promise<void>;
+}
+
+const Example = ({ session, restartWeb }: ExampleCommandPaletteProps) => {
   const [page, setPage] = useState<'root' | 'projects'>('root');
   const [open, setOpen] = useState<boolean>(false);
   const [search, setSearch] = useState('');
+
+  // console.log('s', session);
 
   useHandleOpenCommandPalette(setOpen);
 
   const filteredItems = filterItems(
     [
       {
-        heading: 'Home',
+        heading: 'Actions',
         id: 'home',
         items: [
-          {
-            id: 'home',
-            children: 'Home',
-            icon: 'HomeIcon',
-            href: '#'
-          },
-          {
-            id: 'settings',
-            children: 'Settings',
-            icon: 'CogIcon',
-            href: '#'
-          },
-          {
-            id: 'projects',
-            children: 'Projects',
-            icon: 'RectangleStackIcon',
-            closeOnSelect: false,
-            onClick: () => {
-              setPage('projects');
-            }
-          },
+          // {
+          //   id: 'home',
+          //   children: 'Home',
+          //   icon: 'HomeIcon',
+          //   href: '#'
+          // },
+          // {
+          //   id: 'settings',
+          //   children: 'Settings',
+          //   icon: 'CogIcon',
+          //   href: '#'
+          // },
+          // {
+          //   id: 'projects',
+          //   children: 'Projects',
+          //   icon: 'RectangleStackIcon',
+          //   closeOnSelect: false,
+          //   onClick: () => {
+          //     setPage('projects');
+          //   }
+          // },
           {
             id: 'kick-obsidian-adventure-sync',
             children: 'Kick Obsidian Adventures',
@@ -56,35 +64,45 @@ const Example = () => {
                 }
               );
             }
-          }
-        ]
-      },
-      {
-        heading: 'Other',
-        id: 'advanced',
-        items: [
-          {
-            id: 'developer-settings',
-            children: 'Developer settings',
-            icon: 'CodeBracketIcon',
-            href: '#'
           },
           {
-            id: 'privacy-policy',
-            children: 'Privacy policy',
-            icon: 'LifebuoyIcon',
-            href: '#'
-          },
-          {
-            id: 'log-out',
-            children: 'Log out',
-            icon: 'ArrowRightOnRectangleIcon',
-            onClick: () => {
-              alert('Logging out...');
+            id: 'restart-web',
+            children: 'Restart Website',
+            icon: 'ArrowPathIcon',
+            onClick: async () => {
+              console.log('Restart Website');
+              const result = await restartWeb();
+              console.log('r', result);
             }
           }
         ]
       }
+      // {
+      //   heading: 'Other',
+      //   id: 'advanced',
+      //   items: [
+      //     {
+      //       id: 'developer-settings',
+      //       children: 'Developer settings',
+      //       icon: 'CodeBracketIcon',
+      //       href: '#'
+      //     },
+      //     {
+      //       id: 'privacy-policy',
+      //       children: 'Privacy policy',
+      //       icon: 'LifebuoyIcon',
+      //       href: '#'
+      //     },
+      //     {
+      //       id: 'log-out',
+      //       children: 'Log out',
+      //       icon: 'ArrowRightOnRectangleIcon',
+      //       onClick: () => {
+      //         alert('Logging out...');
+      //       }
+      //     }
+      //   ]
+      // }
     ],
     search
   );

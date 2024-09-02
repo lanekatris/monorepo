@@ -1,6 +1,5 @@
 import { type NextRequest, NextResponse } from 'next/server';
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
+import { restartWebserver } from '../../../../../lib/restartWebserver';
 
 export async function GET(request: NextRequest) {
   const token = request.nextUrl.searchParams.get('token');
@@ -11,9 +10,7 @@ export async function GET(request: NextRequest) {
   console.log('restarting web in 1 second...');
   setTimeout(async () => {
     console.log('invoking docker...');
-    const { stdout, stderr } = await exec(
-      `docker run --rm -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --run-once web`
-    );
+    const { stdout, stderr } = await restartWebserver();
     console.log({ stdout, stderr });
   }, 1000);
 
