@@ -8,11 +8,14 @@ export async function GET(request: NextRequest) {
   if (token !== process.env.WEB_API_TOKEN)
     return NextResponse.json({ error: 'Bad token' }, { status: 401 });
 
-  console.log('restarting web in 1 second');
-  setTimeout(async () => {
-    const { stdout, stderr } = await exec(`docker restart web`);
-    console.log({ stdout, stderr });
-  }, 1000);
+  // console.log('restarting web in 1 second');
+  // setTimeout(async () => {
+  const { stdout, stderr } = await exec(
+    // `docker pull loonison101/web && docker restart web`
+    `docker run --rm -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --run-once web`
+  );
+  console.log({ stdout, stderr });
+  // }, 1000);
 
   // try {
   //   const { stdout, stderr } = await exec(`docker restart web`);
