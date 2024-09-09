@@ -7,12 +7,10 @@ import (
 	"context"
 	"fmt"
 	"github.com/charmbracelet/log"
+	"github.com/spf13/cobra"
 	"go.temporal.io/sdk/client"
 	"go.temporal.io/sdk/worker"
 	"shared"
-	"shared/temporalstuff"
-
-	"github.com/spf13/cobra"
 )
 
 // workerCmd represents the worker command
@@ -38,28 +36,28 @@ to quickly create a Cobra application.`,
 
 		shared.SetupViper()
 
-		isServerWorker, _ := cmd.Flags().GetBool("server")
-		if isServerWorker {
-			fmt.Println("worker is running in server mode")
-
-			w := worker.New(c, "server_queue", worker.Options{})
-			w.RegisterWorkflow(shared.WorkflowUpdateDockerApps)
-			w.RegisterActivity(shared.InvokeCliCommand)
-			err = w.Run(worker.InterruptCh())
-			if err != nil {
-				log.Fatalf("unable to start server Worker", err)
-			}
-			return
-
-		}
+		//isServerWorker, _ := cmd.Flags().GetBool("server")
+		//if isServerWorker {
+		//	fmt.Println("worker is running in server mode")
+		//
+		//	w := worker.New(c, "server_queue", worker.Options{})
+		//	w.RegisterWorkflow(shared.WorkflowUpdateDockerApps)
+		//	w.RegisterActivity(shared.InvokeCliCommand)
+		//	err = w.Run(worker.InterruptCh())
+		//	if err != nil {
+		//		log.Fatalf("unable to start server Worker", err)
+		//	}
+		//	return
+		//
+		//}
 
 		// This worker hosts both Workflow and Activity functions
 		w := worker.New(c, shared.GreetingTaskQueue, worker.Options{})
-		w.RegisterWorkflow(temporalstuff.SendFitnessEmailWorkflow)
-		w.RegisterWorkflow(temporalstuff.ObsidianThemeWorkflow)
+		//w.RegisterWorkflow(temporalstuff.SendFitnessEmailWorkflow)
+		//w.RegisterWorkflow(temporalstuff.ObsidianThemeWorkflow)
 
-		w.RegisterActivity(temporalstuff.SendFitnessEmailActivity)
-		w.RegisterActivity(temporalstuff.LoadAndPersistObsidianThemeFile)
+		//w.RegisterActivity(temporalstuff.SendFitnessEmailActivity)
+		//w.RegisterActivity(temporalstuff.LoadAndPersistObsidianThemeFile)
 
 		db, err := shared.GetDb()
 		shared.HandleError(err)
@@ -72,16 +70,16 @@ to quickly create a Cobra application.`,
 		//w.RegisterActivity(shared.DeleteAdventureData, db)
 		w.RegisterActivity(activities)
 
-		minifluxDb, err := shared.GetMinifluxDb()
-		shared.HandleError(err)
-
-		var storageClient = shared.GetMinioClient()
-		var activitiesTwo = &shared.WorkflowInputMinifluxToS3{
-			Db:            minifluxDb,
-			StorageClient: storageClient,
-		}
-		w.RegisterWorkflow(shared.WorkflowMinifluxToS3)
-		w.RegisterActivity(activitiesTwo)
+		//minifluxDb, err := shared.GetMinifluxDb()
+		//shared.HandleError(err)
+		//
+		//var storageClient = shared.GetMinioClient()
+		//var activitiesTwo = &shared.WorkflowInputMinifluxToS3{
+		//	Db:            minifluxDb,
+		//	StorageClient: storageClient,
+		//}
+		//w.RegisterWorkflow(shared.WorkflowMinifluxToS3)
+		//w.RegisterActivity(activitiesTwo)
 
 		scheduleID := "schedule_id2"
 		workflowID := "schedule_workflow_id"

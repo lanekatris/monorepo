@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"errors"
 	"github.com/adrg/frontmatter"
+	"github.com/lib/pq"
 	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
 	"go.temporal.io/sdk/workflow"
@@ -68,7 +69,7 @@ type ObsidianAdventuretwo struct {
 	Activity string
 
 	Contents string
-	Tags     []string `gorm:"type:text[]"`
+	Tags     pq.StringArray `gorm:"type:text[]"`
 	Path     string
 }
 
@@ -82,19 +83,19 @@ func LoadObsidianAdventuresWorkflow(ctx workflow.Context) error {
 	}
 	ctx = workflow.WithActivityOptions(ctx, options)
 
-	db, err := GetDb()
-	if err != nil {
-		return err
-	}
+	//db, err := GetDb()
+	//if err != nil {
+	//	return err
+	//}
+	//
+	//gormDb, err := GetGormDb()
+	//if err != nil {
+	//	return err
+	//}
 
-	gormDb, err := GetGormDb()
-	if err != nil {
-		return err
-	}
+	var activities *ObsidianAdventuresActivityInput //ObsidianAdventuresActivityInput{}
 
-	var activities = ObsidianAdventuresActivityInput{Db: db, GormDb: gormDb}
-
-	err = workflow.ExecuteActivity(ctx, activities.DeleteAdventureDataActivity).Get(ctx, nil)
+	err := workflow.ExecuteActivity(ctx, activities.DeleteAdventureDataActivity).Get(ctx, nil)
 	if err != nil {
 		return err
 	}
@@ -129,7 +130,14 @@ type ObsidianAdventuresActivityInput struct {
 	//Ctx    context.Context
 }
 
-func (input *ObsidianAdventuresActivityInput) DeleteAdventureDataActivity() error {
+func (input *ObsidianAdventuresActivityInput) DeleteAdventureDataActivity(ctx context.Context) error {
+	//conn, err := input.Db.Conn(ctx)
+	//input.Db.exe
+	//_, err := input.Db.Exec("delete from kestra.obsidian_adventures")
+	//db, err := GetDb()
+	//if err != nil {
+	//	return err
+	//}
 	_, err := input.Db.Exec("delete from kestra.obsidian_adventures")
 	return err
 }
