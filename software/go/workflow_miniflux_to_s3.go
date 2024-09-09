@@ -6,12 +6,10 @@ import (
 	"database/sql"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
 	"github.com/spf13/viper"
 	"go.temporal.io/sdk/workflow"
-	"os/exec"
 	"time"
 )
 
@@ -91,31 +89,6 @@ func (input *WorkflowInputMinifluxToS3) UploadFile(feeds []RssFeed) error {
 	}
 
 	return nil
-}
-
-func GetRssFeedsv2() {
-
-}
-
-func InvokeCliCommand() error {
-	cmd := exec.Command("ping", "192.168.86.100")
-	//cmd.Dir = dir
-	out, err := cmd.Output()
-	if err != nil {
-		return err
-	}
-	fmt.Println(string(out))
-	return nil
-}
-
-func WorkflowUpdateDockerApps(ctx workflow.Context) error {
-	options := workflow.ActivityOptions{
-		StartToCloseTimeout: time.Second * 30,
-	}
-	ctx = workflow.WithActivityOptions(ctx, options)
-
-	err := workflow.ExecuteActivity(ctx, InvokeCliCommand).Get(ctx, nil)
-	return err
 }
 
 func WorkflowMinifluxToS3(ctx workflow.Context) error {
