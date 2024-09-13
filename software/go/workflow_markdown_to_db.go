@@ -84,8 +84,9 @@ func GenerateMarkdownModels(filePaths []string, rootPath string) (error, []Markd
 
 		//var emptyMatter struct{}
 		var EmptyMatter struct {
-			Situps  int `yaml:situps`
-			Pushups int `yaml:pushups`
+			Situps  int      `yaml:situps`
+			Pushups int      `yaml:pushups`
+			Tags    []string `yaml:tags`
 		}
 		_, err = frontmatter.Parse(strings.NewReader(string(contents)), &EmptyMatter)
 		if err != nil {

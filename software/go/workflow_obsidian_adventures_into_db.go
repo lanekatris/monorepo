@@ -11,8 +11,11 @@ import (
 	"go.temporal.io/sdk/workflow"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 	"io/fs"
 	"io/ioutil"
+	"log"
+	"os"
 	"path/filepath"
 	"strings"
 	"time"
@@ -48,7 +51,21 @@ func GetGormDb() (*gorm.DB, error) {
 		return nil, errors.New("config not found: " + PostgresApiKeyConfig)
 	}
 
-	db, err := gorm.Open(postgres.Open(connStr), &gorm.Config{})
+	// Cold start of serverless DB can take a bit, lets increase our slow threshold
+	newLogger := logger.New(
+		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
+		logger.Config{
+			SlowThreshold:             time.Second * 5, // Slow SQL threshold
+			LogLevel:                  logger.Silent,   // Log level
+			IgnoreRecordNotFoundError: true,            // Ignore ErrRecordNotFound error for logger
+			ParameterizedQueries:      true,            // Don't include params in the SQL log
+			Colorful:                  true,            // Disable color
+		},
+	)
+
+	db, err := gorm.Open(postgres.Open(connStr), &gorm.Config{
+		Logger: newLogger,
+	})
 	if err != nil {
 		return nil, err
 	}
