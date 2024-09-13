@@ -84,10 +84,9 @@ export default async function RootLayout({
           </footer>
           <br />
         </ThemeRegistry>
-        <ExampleCommandPalette
-          session={session}
-          restartWeb={restartWebserverServerFunction}
-        />
+        {session && (
+          <ExampleCommandPalette restartWeb={restartWebserverServerFunction} />
+        )}
       </body>
     </html>
   );

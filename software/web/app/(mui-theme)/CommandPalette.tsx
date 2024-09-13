@@ -10,16 +10,13 @@ import toast from 'react-hot-toast';
 import { Session } from 'next-auth';
 
 interface ExampleCommandPaletteProps {
-  session: Session | null;
   restartWeb: () => Promise<void>;
 }
 
-const Example = ({ session, restartWeb }: ExampleCommandPaletteProps) => {
+const Example = ({ restartWeb }: ExampleCommandPaletteProps) => {
   const [page, setPage] = useState<'root' | 'projects'>('root');
   const [open, setOpen] = useState<boolean>(false);
   const [search, setSearch] = useState('');
-
-  // console.log('s', session);
 
   useHandleOpenCommandPalette(setOpen);
 

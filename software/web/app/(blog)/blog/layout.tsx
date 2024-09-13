@@ -5,7 +5,8 @@ import '@lowlighter/matcha/dist/matcha.css';
 import './blog.css';
 import ThemeToggler from '../../ThemeToggler';
 
-import { ThemeProvider } from 'next-themes';
+import Image from 'next/image';
+import NotAi from './[slug]/Written-By-Human-Not-By-AI-Badge-white.svg';
 
 export default function MdxLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -27,7 +28,18 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
         {/*</nav>*/}
         {/*<Link href="/">Home</Link>*/}
         {children}
-        <footer style={{ textAlign: 'center' }}>
+        <footer
+          style={{ textAlign: 'center' }}
+          className="flex center align-center mb-1"
+        >
+          <a
+            href="https://notbyai.fyi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mr-2"
+          >
+            <Image src={NotAi} alt="Not written by AI" />
+          </a>
           <a
             href="https://github.com/lanekatris/monorepo/actions"
             target="_blank"
