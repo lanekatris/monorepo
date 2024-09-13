@@ -1,6 +1,0 @@
-﻿<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Web Logs" type="PowerShellRunType" factoryName="PowerShell" scriptUrl="$PROJECT_DIR$/Web/watch-logs.ps1" workingDirectory="$PROJECT_DIR$/Web" executablePath="$PROJECT_DIR$/../../../../Windows/System32/WindowsPowerShell/v1.0/powershell.exe">
-    <envs />
-    <method v="2" />
-  </configuration>
-</component>
