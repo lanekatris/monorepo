@@ -20,7 +20,7 @@ const response = await fetch(
 );
 
 const data: ClimbResponse = await response.json();
-const ll = formatRelative(new Date(data.sug.data_timestamp), new Date());
+const ll = formatRelative(new Date(data.sug.data_timestamp), new Date(), {});
 ---
 
 <Layout title="Summersville Water Height">
@@ -47,7 +47,8 @@ const ll = formatRelative(new Date(data.sug.data_timestamp), new Date());
   <!--<progress class="accent" max=""-->
   <h3>Can rope climb @ Whipporwill?</h3>
   <div class="flash attention">No, you'll get wet! 🌊</div>
-  <small class="muted">⏱️ Last Updated: <b>{ll}</b></small>
+  <!--<small class="muted">⏱️ Last Updated: <b>{ll}</b></small>-->
+  <small class="muted">Updates every ~12 hours</small>
   <!--<div class="flash default">-->
   <br />
   <br />
