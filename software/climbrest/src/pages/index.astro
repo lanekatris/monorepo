@@ -3,7 +3,16 @@ import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Climb.Rest">
+  <nav>
+    <menu
+      ><li class="selected"><a href="/">Climb.Rest</a></li>
+
+      <li>
+        <a href="/summersville-wv-climbing">Summersville</a>
+      </li></menu
+    >
+  </nav>
   <main>
     <h1>Welcome!</h1>
     <p>
@@ -11,44 +20,44 @@ import Card from "../components/Card.astro";
       🧗‍♀️community 🧗‍♂️ Right now all we have is one tool but swing by once in a
       while to see whats new 🤙
     </p>
-    <h3>Summersville Status</h3>
-    <p>
-      Let's you quickly know if you can hike out to Whipporwill for rope
-      climbing
-      <a href="/summersville-wv-climbing">View</a>
-    </p>
-    <h3>Route Finder</h3>
-    <p>
-      A more powerful route finder than what the popular climbing sites have
-    </p>
-    <div class="flex">
+    <!--<br />-->
+    <h1 class="mb-2">Tools</h1>
+    <!--<h3>Summersville Status</h3>-->
+    <!--<p>-->
+    <!--  Let's you quickly know if you can hike out to Whipporwill for rope-->
+    <!--  climbing-->
+    <!--  <a href="/summersville-wv-climbing">View</a>-->
+    <!--</p>-->
+    <!--<h3>Route Finder</h3>-->
+    <!--<p>-->
+    <!--  A more powerful route finder than what the popular climbing sites have-->
+    <!--</p>-->
+    <div>
+      <!--<br />-->
       <article>
         <header>
           <h1>
             <!--<img src="https://www.pokepedia.fr/images/c/c0/Miniature_0252_RS.gif" alt>-->
-            Treecko
+            Summersville Status
           </h1>
         </header>
         <p>
-          Treecko has small hooks on the bottom of its feet that enable it to
-          scale vertical walls. This Pokémon attacks by slamming foes with its
-          thick tail.
+          Let's you quickly know if you can hike out to Whipporwill for rope
+          climbing
         </p>
-        <footer class="muted">#0252</footer>
+        <footer class="muted">
+          <a href="/summersville-wv-climbing">View</a>
+        </footer>
       </article>
       <article>
         <header>
           <h1>
             <!--<img src="https://www.pokepedia.fr/images/5/55/Miniature_0255_RS.gif" alt>-->
-            Torchic
+            Route Finder
           </h1>
         </header>
-        <p>
-          Torchic sticks with its Trainer, following behind with unsteady steps.
-          This Pokémon breathes fire of over 1,800 degrees F, including
-          fireballs that leave the foe scorched black.
-        </p>
-        <footer class="muted">#0255</footer>
+        <p>A powerful route finder than what the popular climbing sites have</p>
+        <footer class="muted">Coming Soon!</footer>
       </article>
     </div>
   </main>

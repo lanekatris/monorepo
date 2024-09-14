@@ -19,11 +19,28 @@ const { title } = Astro.props;
   </head>
   <body>
     <slot />
-    <footer class="flex center">
+    <footer class="flex center mt-1">
       Copyright © Climb.Rest {new Date().getFullYear()} | Created with ❤️ by
       <span class="ml-.5">
-        <a href="mailto:lanekatris@gmail.com">Lane</a>
+        <a href="mailto:lanekatris@gmail.com">Lane Katris</a>
       </span>
     </footer>
   </body>
+  <style>
+    :root {
+      --ct-width: 700px;
+    }
+    //body {
+    //  margin-bottom:30px;
+    //}
+    //footer {
+    //  position: fixed;
+    //  bottom: 0;
+    //  left: 0;
+    //  width: 100%;
+    //}
+    //footer {
+    //
+    //}
+  </style>
 </html>

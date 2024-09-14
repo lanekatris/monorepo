@@ -6,7 +6,7 @@ const lastUpdated = new Date(data.sug.data_timestamp);
 const lastUpdatedFormatted = `${lastUpdated.toLocaleDateString()} ${lastUpdated.toLocaleTimeString()}`;
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Summersville Water Height">
   <!--<div class="container">-->
   <!--    <h2>adf</h2>-->
   <!--</div>-->
@@ -31,20 +31,56 @@ const lastUpdatedFormatted = `${lastUpdated.toLocaleDateString()} ${lastUpdated.
   <h3>Can rope climb @ Whipporwill?</h3>
   <div class="flash attention">No, you'll get wet! 🌊</div>
   <small class="muted">⏱️ Last Updated: {lastUpdatedFormatted}</small>
-  <div class="flash default">
-    <h3>Other Info</h3>
-    <div>Current Water Height: <code>{data.sug.pool_cur.elev} ft</code></div>
-    <div>You can climb at: <code>1620 ft</code></div>
-    <div>
-      Feet left to change: <code
-        >{(data.sug.pool_cur.elev - 1620).toFixed(2)} ft</code
-      >
-    </div>
-    <div>📅 Re-fills around April 1st</div>
-    <div>
-      📈 Data sourced from <a
-        href="https://www.lrh-wc.usace.army.mil/wm/?basin/kan/sug">here</a
-      > (US Army Corps of Engineers)
-    </div>
+  <!--<div class="flash default">-->
+  <br />
+  <br />
+  <h3>Other Info</h3>
+  <div>Current Water Height: <samp>{data.sug.pool_cur.elev}</samp> ft</div>
+  <div>You can climb at: <samp>1620</samp> ft</div>
+  <div>
+    Feet left to change: <samp
+      >{(data.sug.pool_cur.elev - 1620).toFixed(2)}</samp
+    > ft
   </div>
+  <div>📅 Re-fills around April 1st</div>
+  <div>
+    📈 Data sourced from <a
+      href="https://www.lrh-wc.usace.army.mil/wm/?basin/kan/sug">here</a
+    > (US Army Corps of Engineers)
+  </div>
+  <!--</div>-->
+  <!--<br />-->
+  <!--<article>-->
+  <!--  <header>-->
+  <!--    <h3>Other Info</h3>-->
+  <!--  </header>-->
+  <!--  <p>-->
+  <!--    <dl>-->
+  <!--      <dd>-->
+  <!--        <div>-->
+  <!--          Current Water Height: <samp>{data.sug.pool_cur.elev}</samp> ft-->
+  <!--        </div>-->
+  <!--      </dd>-->
+  <!--      <dd>-->
+  <!--        <div>You can climb at: <code>1620 ft</code></div>-->
+  <!--      </dd>-->
+  <!--    </dl>-->
+  <!--    <div>Current Water Height: <samp>{data.sug.pool_cur.elev}</samp> ft</div>-->
+  <!--    <div>You can climb at: <code>1620 ft</code></div>-->
+  <!--    <div>-->
+  <!--      Feet left to change: <code-->
+  <!--        >{(data.sug.pool_cur.elev - 1620).toFixed(2)} ft</code-->
+  <!--      >-->
+  <!--    </div>-->
+  <!--    <div>📅 Re-fills around April 1st</div>-->
+  <!--    <div>-->
+  <!--      📈 Data sourced from <a-->
+  <!--        href="https://www.lrh-wc.usace.army.mil/wm/?basin/kan/sug">here</a-->
+  <!--      > (US Army Corps of Engineers)-->
+  <!--    </div>-->
+  <!--  </p>-->
+  <!--</article>-->
+  <br />
+  <br />
+  <br />
 </Layout>
