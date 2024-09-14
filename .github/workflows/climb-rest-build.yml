@@ -1,0 +1,12 @@
+name: Cron to rebuild climb.rest
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+
+jobs:
+  kick-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Regenerate
+        run: curl ${{ secrets.CLIMB_REST_BUILD_URL }}
