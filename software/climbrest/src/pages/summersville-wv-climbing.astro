@@ -1,0 +1,48 @@
+---
+import Layout from "../layouts/Layout.astro";
+import data from "../data.json";
+
+const lastUpdated = new Date(data.sug.data_timestamp);
+const lastUpdatedFormatted = `${lastUpdated.toLocaleDateString()} ${lastUpdated.toLocaleTimeString()}`;
+---
+
+<Layout title="Welcome to Astro.">
+  <!--<div class="container">-->
+  <!--    <h2>adf</h2>-->
+  <!--</div>-->
+  <nav>
+    <menu
+      ><li><a href="/">Climb.Rest</a></li>
+
+      <li><a href="/summersville-wv-climbing">Summersville</a></li></menu
+    >
+  </nav>
+  <!--<nav>-->
+  <!--  <ol>-->
+  <!--    <li><a href="/">Home</a></li>-->
+  <!--    <li><a href="/summersville-wv-climbing">Summersville Status</a></li>-->
+  <!--  </ol>-->
+  <!--</nav>-->
+  <h1>Summersville Status</h1>
+  <!--<h1>This is where we show the details: {data.sug.pool_cur.elev}</h1>-->
+  <!--<progress class="accent" max=""-->
+  <h3>Can rope climb @ Whipporwill?</h3>
+  <div class="flash attention">No, you'll get wet! 🌊</div>
+  <small class="muted">⏱️ Last Updated: {lastUpdatedFormatted}</small>
+  <div class="flash default">
+    <h3>Other Info</h3>
+    <div>Current Water Height: <code>{data.sug.pool_cur.elev} ft</code></div>
+    <div>You can climb at: <code>1620 ft</code></div>
+    <div>
+      Feet left to change: <code
+        >{(data.sug.pool_cur.elev - 1620).toFixed(2)} ft</code
+      >
+    </div>
+    <div>📅 Re-fills around April 1st</div>
+    <div>
+      📈 Data sourced from <a
+        href="https://www.lrh-wc.usace.army.mil/wm/?basin/kan/sug">here</a
+      > (US Army Corps of Engineers)
+    </div>
+  </div>
+</Layout>
