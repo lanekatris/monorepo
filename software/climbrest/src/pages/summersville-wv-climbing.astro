@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { formatRelative } from "date-fns";
+import data from "../data.json";
 
 interface ClimbResponsePoolCur {
   elev: number;
@@ -15,12 +16,13 @@ interface ClimbResponse {
   sug: ClimbResponseSug;
 }
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
-const response = await fetch(
-  "https://www.lrh-wc.usace.army.mil/wm/data/json/projects/sug_15M.min.json.js",
-);
+// const response = await fetch(
+//   "https://www.lrh-wc.usace.army.mil/wm/data/json/projects/sug_15M.min.json.js",
+// );
 
-const data: ClimbResponse = await response.json();
+// const data: ClimbResponse = await response.json();
 const ll = formatRelative(new Date(data.sug.data_timestamp), new Date(), {});
+const difference = data.sug.pool_cur.elev - 1620;
 ---
 
 <Layout title="Summersville Water Height">
@@ -46,20 +48,48 @@ const ll = formatRelative(new Date(data.sug.data_timestamp), new Date(), {});
   <!--<h1>This is where we show the details: {data.sug.pool_cur.elev}</h1>-->
   <!--<progress class="accent" max=""-->
   <h3>Can rope climb @ Whipporwill?</h3>
-  <div class="flash attention">No, you'll get wet! 🌊</div>
+  {difference > 0 && <div class="flash attention">No, you'll get wet! 🌊</div>}
+  {difference <= 0 && <div class="flash success">Yes you can! 💪</div>}
   <!--<small class="muted">⏱️ Last Updated: <b>{ll}</b></small>-->
   <small class="muted">Updates every ~12 hours</small>
   <!--<div class="flash default">-->
   <br />
   <br />
-  <h3>Other Info</h3>
+  <h3>Details</h3>
   <div>Current Water Height: <samp>{data.sug.pool_cur.elev}</samp> ft</div>
   <div>You can climb at: <samp>1620</samp> ft</div>
   <div>
-    Feet left to change: <samp
-      >{(data.sug.pool_cur.elev - 1620).toFixed(2)}</samp
-    > ft
+    Feet left to change: <samp>{difference.toFixed(2)}</samp> ft
   </div>
+  <!--<div class="">-->
+  <!--  <table>-->
+  <!--    &lt;!&ndash;<thead&ndash;&gt;-->
+  <!--    &lt;!&ndash;  ><tr><th></th></tr>&ndash;&gt;-->
+  <!--    &lt;!&ndash;  <tr><th></th></tr>&ndash;&gt;-->
+  <!--    &lt;!&ndash;</thead>&ndash;&gt;-->
+  <!--    <tbody>-->
+  <!--      <tr>-->
+  <!--        <td>Current Water Height</td>-->
+  <!--        <td><samp>{data.sug.pool_cur.elev}</samp> ft</td>-->
+  <!--      </tr>-->
+  <!--      <tr>-->
+  <!--        <td> You can climb at </td>-->
+  <!--        <td>-->
+  <!--          <samp>1620</samp> ft-->
+  <!--        </td>-->
+  <!--      </tr>-->
+  <!--      <tr>-->
+  <!--        <td> Feet left to change </td>-->
+  <!--        <td>-->
+  <!--          <samp>{difference.toFixed(2)}</samp> ft-->
+  <!--        </td>-->
+  <!--      </tr>-->
+  <!--    </tbody>-->
+  <!--  </table>-->
+  <!--</div>-->
+  <!--<hr />-->
+  <br />
+  <h3>Other Info</h3>
   <div>📅 Re-fills around April 1st</div>
   <div>
     📈 Data sourced from <a

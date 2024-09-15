@@ -19,11 +19,16 @@ const { title } = Astro.props;
   </head>
   <body>
     <slot />
-    <footer class="flex center mt-1">
-      Copyright © Climb.Rest {new Date().getFullYear()} | Created with ❤️ by
-      <span class="ml-.5">
-        <a href="mailto:lanekatris@gmail.com">Lane Katris</a>
-      </span>
+    <footer>
+      <small
+        >© {new Date().getFullYear()}
+
+        <div>
+          Created with ❤️ by <a href="mailto:lanekatris@gmail.com"
+            >Lane Katris</a
+          >
+        </div>
+      </small>
     </footer>
   </body>
   <style>
