@@ -19,15 +19,22 @@ const { title } = Astro.props;
   </head>
   <body>
     <slot />
-    <footer>
-      <small
-        >© {new Date().getFullYear()}
-
-        <div>
-          Created with ❤️ by <a href="mailto:lanekatris@gmail.com"
-            >Lane Katris</a
-          >
-        </div>
+    <footer class="mb-1">
+      <small>© {new Date().getFullYear()} </small>
+      <br />
+      <small>
+        Created with ❤️ by <a href="mailto:lanekatris@gmail.com">Lane Katris</a>
+      </small>
+      <br />
+      <small>
+        <a href="/colophon">Colophon</a>
+      </small>
+      <br />
+      <small>
+        <a
+          href="https://github.com/lanekatris/monorepo/tree/climbrest-v2/software/climbrest"
+          >Github</a
+        >
       </small>
     </footer>
   </body>

@@ -1,0 +1,69 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Colophon">
+  <nav>
+    <menu
+      ><li><a href="/">Climb.Rest</a></li>
+      <li>
+        <a href="/summersville-wv-climbing">Summersville</a>
+      </li>
+      <li class="selected">
+        <a href="/colophon">Colophon</a>
+      </li>
+    </menu>
+  </nav>
+  <h1>About this site</h1>
+  <small class="muted">Updated: 2024-09-15</small>
+  <br />
+  <p>
+    This site used to be built with <a href="https://www.gatsbyjs.com/"
+      >Gatsby JS</a
+    > as a SPA that called a cloud function to get data on each page load.
+  </p>
+  I wanted to rebuild this site for a few reasons:
+  <ul>
+    <li>Gatsby JS is deprecated</li>
+    <li>Wanted to move the code to a monorepo</li>
+    <li>
+      Simplify: use a static site generator instead making a request per load -
+      no cloud function; also wanted FAST, no JS if possible
+    </li>
+    <li>Use a cron job to regenerate the site</li>
+  </ul>
+  <p>
+    This site before and now I think had decent UX. The whole reason I built
+    this site in the first place is that it was tribal knowledge buried in
+    Facebook posts on when it was possible to climb certain places. No fault to
+    the Army Corps of Engineers, but their website is hard to use.
+  </p>
+  <p>
+    So, the main purpose of this site is to capture what water height you can
+    climb somewhere and then pull in data to make it easily understandable if
+    you can climb or not.
+  </p>
+
+  <h1>Technology</h1>
+
+  <p>
+    I'm a big fan of Next.JS but I wanted to try something new; so I went with <a
+      href="https://astro.build/">Astro JS</a
+    >.
+  </p>
+  <p>
+    A Github Action that runs as a cron job will regenerate this site with the
+    latest data.
+  </p>
+  <p>
+    I thought about self hosting but I want uptime. I use Cloudflare tunnels for
+    self hosting a few things but recently learned about Cloudflare Pages. This
+    seemed like a winner: no egress cost - not that I expect much traffic.
+  </p>
+  <p>
+    Finally, for look and feel, I decided to go with <a
+      href="https://matcha.mizu.sh">Matcha CSS</a
+    >. I was getting burnt out on component libraries like MUI and Tailwind. I
+    wanted the CSS to do most of the work, no classes needed if possible.
+  </p></Layout
+>
