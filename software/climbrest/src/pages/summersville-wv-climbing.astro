@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { formatRelative } from "date-fns";
+// import { formatRelative } from "date-fns";
 // import data from "../data.json";
 
 interface ClimbResponsePoolCur {
@@ -21,7 +21,7 @@ const response = await fetch(
 );
 
 const data: ClimbResponse = await response.json();
-const ll = formatRelative(new Date(data.sug.data_timestamp), new Date(), {});
+// const ll = formatRelative(new Date(data.sug.data_timestamp), new Date(), {});
 const difference = data.sug.pool_cur.elev - 1620;
 ---
 
