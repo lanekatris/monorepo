@@ -1,0 +1,88 @@
+---
+import Layout from "../layouts/Layout.astro";
+// import { formatRelative } from "date-fns";
+// import data from "../data.json";
+
+interface ClimbResponsePoolCur {
+  elev: number;
+}
+
+interface ClimbResponseSug {
+  pool_cur: ClimbResponsePoolCur;
+  data_timestamp: string;
+}
+
+interface ClimbResponse {
+  sug: ClimbResponseSug;
+}
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
+const response = await fetch(
+  "https://www.lrh-wc.usace.army.mil/wm/data/json/projects/sug_15M.min.json.js",
+);
+
+const data: ClimbResponse = await response.json();
+// const ll = formatRelative(new Date(data.sug.data_timestamp), new Date(), {});
+const difference = data.sug.pool_cur.elev - 1620;
+---
+
+<Layout title="Summersville Water Height">
+  <nav>
+    <menu
+      ><li><a href="/">Climb.Rest</a></li>
+      <li class="selected">
+        <a href="/summersville-wv-climbing">Summersville</a>
+      </li></menu
+    >
+  </nav>
+  <h1>Summersville Status</h1>
+  <h3>Can rope climb @ Whipporwill?</h3>
+  {difference > 0 && <div class="flash attention">No, you'll get wet! 🌊</div>}
+  {difference <= 0 && <div class="flash success">Yes you can! 💪</div>}
+  <small class="muted">Updates every ~12 hours</small>
+  <br />
+  <br />
+  <h3>Details</h3>
+  <div>Current Water Height: <samp>{data.sug.pool_cur.elev}</samp> ft</div>
+  <div>You can climb at: <samp>1620</samp> ft</div>
+  <div>
+    Feet left to change: <samp>{difference.toFixed(2)}</samp> ft
+  </div>
+  <!--<div class="">-->
+  <!--  <table>-->
+  <!--    &lt;!&ndash;<thead&ndash;&gt;-->
+  <!--    &lt;!&ndash;  ><tr><th></th></tr>&ndash;&gt;-->
+  <!--    &lt;!&ndash;  <tr><th></th></tr>&ndash;&gt;-->
+  <!--    &lt;!&ndash;</thead>&ndash;&gt;-->
+  <!--    <tbody>-->
+  <!--      <tr>-->
+  <!--        <td>Current Water Height</td>-->
+  <!--        <td><samp>{data.sug.pool_cur.elev}</samp> ft</td>-->
+  <!--      </tr>-->
+  <!--      <tr>-->
+  <!--        <td> You can climb at </td>-->
+  <!--        <td>-->
+  <!--          <samp>1620</samp> ft-->
+  <!--        </td>-->
+  <!--      </tr>-->
+  <!--      <tr>-->
+  <!--        <td> Feet left to change </td>-->
+  <!--        <td>-->
+  <!--          <samp>{difference.toFixed(2)}</samp> ft-->
+  <!--        </td>-->
+  <!--      </tr>-->
+  <!--    </tbody>-->
+  <!--  </table>-->
+  <!--</div>-->
+  <!--<hr />-->
+  <br />
+  <h3>Other Info</h3>
+  <div>📅 Re-fills around April 1st</div>
+  <div>
+    📈 Data sourced from <a
+      href="https://www.lrh-wc.usace.army.mil/wm/?basin/kan/sug">here</a
+    > (US Army Corps of Engineers)
+  </div>
+  <br />
+  <br />
+  <br />
+</Layout>
