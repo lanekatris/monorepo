@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Regenerate
-        run: curl ${{ secrets.CLIMB_REST_BUILD_URL }}
+        run: curl -k POST ${{ secrets.CLIMB_REST_BUILD_URL }}
