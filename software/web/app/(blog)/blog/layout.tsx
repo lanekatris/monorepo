@@ -43,10 +43,20 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
           <a
             href="https://github.com/lanekatris/monorepo/actions"
             target="_blank"
+            className="mr-1"
           >
             <img
               alt="docker image build status"
               src="https://github.com/lanekatris/monorepo/actions/workflows/web-docker.yml/badge.svg"
+            />
+          </a>
+          <a
+            href="https://github.com/lanekatris/monorepo/actions/workflows/climb-rest-build.yml"
+            target="_blank"
+          >
+            <img
+              alt="Cron to rebuild climb.rest"
+              src="https://github.com/lanekatris/monorepo/actions/workflows/climb-rest-build.yml/badge.svg"
             />
           </a>
         </footer>
