@@ -7,3 +7,4 @@ restic backup /bigboy/immich/db_dumps
 
 restic backup /bigboy/minio
 restic backup /bigboy/miniflux
+restic backup /home/lane/memos
