@@ -15,6 +15,8 @@ services:
     container_name: web
     restart: unless-stopped
     pull_policy: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - "3333:3000"
     env_file:
@@ -24,13 +26,11 @@ services:
 #    volumes: ["/var/run/docker.sock:/var/run/docker.sock"]
 #    command: ["/bin/sh", "-c", "while true; do sleep 30m; docker restart web; done"]
 #    restart: unless-stopped
-  watchtower:
-    image: containrrr/watchtower
-    command: web --interval 1800 --debug
-#      command: --interval 10
-#    command: web --interval 30 --debug
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+#watchtower:
+#    image: containrrr/watchtower
+#    command: web --interval 1800 --debug
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
 
   nocodb:
     image: nocodb/nocodb:0.255.0
