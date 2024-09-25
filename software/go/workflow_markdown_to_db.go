@@ -12,6 +12,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 type WorkflowMarkdownToDbInput struct {
@@ -94,17 +95,19 @@ func GenerateMarkdownModels(filePaths []string, rootPath string) (error, []Markd
 		}
 
 		baseFilename := filepath.Base(filePath)
+
 		if len(baseFilename) < 11 {
 			baseFilename = ""
 		} else {
-			baseFilename = baseFilename[:10]
+			_, err = time.Parse("2006-01-02", baseFilename[:10])
+			if err == nil {
+				baseFilename = baseFilename[:10]
+			} else {
+				baseFilename = ""
+			}
+			//baseFilename = baseFilename[:10]
 		}
 
-		//stringContents = string(contents)
-
-		//noMeta := bytes.Equal(contents, rest)
-
-		//var meta sql.NullString
 		meta, err := json.Marshal(EmptyMatter)
 		if err != nil {
 			return err, nil

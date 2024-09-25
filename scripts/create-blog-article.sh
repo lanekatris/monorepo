@@ -28,6 +28,9 @@ slug: ${current_date}-xxxxxxxx
 # Your content starts here
 EOF
 
+echo "Waiting a second for compiling..."
+sleep 1
+
 xdg-open "http://localhost:3000/blog/${current_date}-xxxxxxxx" 2>/dev/null
 
 # Notify the user
