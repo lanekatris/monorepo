@@ -22,7 +22,7 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
             <h2>Lane's Site</h2>
           </Link>
           <div className={'links'}>
-            <Link href="/colophon">Colophon</Link>
+            <Link href="/homelab">Homelab</Link>
             <Link href={'/about'}>About</Link>
             <Link href="/blog" className={'selected'}>
               Blog
