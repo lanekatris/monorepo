@@ -2,6 +2,7 @@ import { defineConfig,defineSchema , s } from 'velite';
 import rehypeShiki from '@shikijs/rehype';
 import { exec } from 'child_process'
 import { promisify } from 'util'
+import { stat } from 'fs/promises'
 const execAsync = promisify(exec)
 
 interface GitInfo {
@@ -12,23 +13,36 @@ interface GitInfo {
 
 // `s` is extended from Zod with some custom schemas,
 // you can also import re-exported `z` from `velite` if you don't need these extension schemas.
-const timestamp = defineSchema(() =>
-    s
-      .custom<string | undefined>(i => i === undefined || typeof i === 'string')
-      .transform<GitInfo>(async (value, { meta, addIssue }) => {
-      if (value != null) {
-        addIssue({ fatal: false, code: 'custom', message: '`s.timestamp()` schema will resolve the value from `git log -1 --format=%cd`' })
-      }
-        const { stdout :date} = await execAsync(`git log -1 --format=%cd ${meta.path}`)
-        const { stdout :sha} = await execAsync(`git log -1 --format=%H ${meta.path}`)
-        const { stdout :short} = await execAsync(`git log -1 --format=%h ${meta.path}`)
+// const timestamp = defineSchema(() =>
+//     s
+//       .custom<string | undefined>(i => i === undefined || typeof i === 'string')
+//       .transform<GitInfo>(async (value, { meta, addIssue }) => {
+//       if (value != null) {
+//         addIssue({ fatal: false, code: 'custom', message: '`s.timestamp()` schema will resolve the value from `git log -1 --format=%cd`' })
+//       }
+//         const { stdout :date} = await execAsync(`git log -1 --format=%cd ${meta.path}`)
+//         const { stdout :sha} = await execAsync(`git log -1 --format=%H ${meta.path}`)
+//         const { stdout :short} = await execAsync(`git log -1 --format=%h ${meta.path}`)
+//
+//         // return new Date(date).toISOString()
+//         return {
+//         sha: sha.replace('\n', ''),
+//           short:short.replace('\n', ''),
+//           date: new Date(date).toISOString()
+//         }
+//     })
+// )
 
-        // return new Date(date).toISOString()
-        return {
-        sha: sha.replace('\n', ''),
-          short:short.replace('\n', ''),
-          date: new Date(date).toISOString()
-        }
+const timestamp = defineSchema(() =>
+  s
+    .custom<string | undefined>(i => i === undefined || typeof i === 'string')
+    .transform<string>(async (value, { meta, addIssue }) => {
+      if (value != null) {
+        addIssue({ fatal: false, code: 'custom', message: '`s.timestamp()` schema will resolve the file modified timestamp' })
+      }
+
+      const stats = await stat(meta.path)
+      return stats.mtime.toISOString()
     })
 )
 export default defineConfig({

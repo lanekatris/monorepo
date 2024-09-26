@@ -29,16 +29,7 @@ export default function BlogPostPage({ params }: PostProps) {
         <h1>{post.title}</h1>
         <small className="smaller">
           <span>Updated: </span>
-          <span className="bg-muted">
-            {post.lastModified.date.split('T')[0]}
-          </span>{' '}
-          in{' '}
-          <Link
-            href={`https://github.com/lanekatris/monorepo/commit/${post.lastModified.sha}`}
-            className="bg-accent"
-          >
-            {post.lastModified.short}
-          </Link>
+          <span className="bg-muted">{post.lastModified.split('T')[0]}</span>
         </small>
         <br />
         <br />
