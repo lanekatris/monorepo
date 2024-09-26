@@ -2,11 +2,11 @@ import React from 'react';
 import { Container } from '@mui/joy';
 import Link from 'next/link';
 import '@lowlighter/matcha/dist/matcha.css';
-import './blog.css';
-import ThemeToggler from '../../ThemeToggler';
+import './blog/blog.css';
+import ThemeToggler from '../ThemeToggler';
 
 import Image from 'next/image';
-import NotAi from './[slug]/Written-By-Human-Not-By-AI-Badge-white.svg';
+import NotAi from './blog/[slug]/Written-By-Human-Not-By-AI-Badge-white.svg';
 
 export default function MdxLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -17,16 +17,18 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
         {/*<link rel="stylesheet" href="https://matcha.mizu.sh/matcha.css" />*/}
       </head>
       <body>
-        <h2>Lane's Site</h2>
-
-        {/*  Lane's Blog*/}
-        {/*  <menu>*/}
-        {/*    <li>Lane's Blog</li>*/}
-        {/*    <li>Home</li>*/}
-        {/*  </menu>*/}
-        {/*  <ol></ol>*/}
-        {/*</nav>*/}
-        {/*<Link href="/">Home</Link>*/}
+        <nav>
+          <Link href="/" className={'default'}>
+            <h2>Lane's Site</h2>
+          </Link>
+          <div className={'links'}>
+            <Link href="/colophon">Colophon</Link>
+            <Link href={'/about'}>About</Link>
+            <Link href="/blog" className={'selected'}>
+              Blog
+            </Link>
+          </div>
+        </nav>
         {children}
         <footer
           style={{ textAlign: 'center' }}

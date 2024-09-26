@@ -25,32 +25,33 @@ export default function BlogPostPage({ params }: PostProps) {
 
   return (
     <>
-      <nav>
-        <ol>
-          <li>
-            <Link href="/">Home</Link>
-          </li>
-          <li>
-            <Link href="/blog">Blog</Link>
-          </li>
-          <li>
-            <Link href={post.permalink}>{post.title}</Link>
-          </li>
-        </ol>
-      </nav>
       <main>
+        <h1>{post.title}</h1>
+        <small className="smaller">
+          <span>Updated: </span>
+          <span className="bg-muted">
+            {post.lastModified.date.split('T')[0]}
+          </span>{' '}
+          in{' '}
+          <Link
+            href={`https://github.com/lanekatris/monorepo/commit/${post.lastModified.sha}`}
+            className="bg-accent"
+          >
+            {post.lastModified.short}
+          </Link>
+        </small>
+        <br />
+        <br />
+        <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
         <small>
-          <b>Date</b>: {post.date.split('T')[0]}{' '}
           {post.tags && (
             <>
+              <b>Date</b>: {post.date.split('T')[0]}
+              {' | '}
               <b>Tags</b>: {post.tags?.map((t) => `#${t}`).join(', ')}
             </>
           )}
         </small>
-        <div
-          className="article"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        ></div>
       </main>
     </>
   );

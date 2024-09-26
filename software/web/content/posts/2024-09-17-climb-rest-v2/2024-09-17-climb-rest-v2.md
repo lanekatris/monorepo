@@ -6,8 +6,6 @@ tags: ["project"]
 slug: climb-website-v2
 ---
 
-# Climbing Website V2
-
 I revamped my climbing website: https://climb.rest!
 
 It was using some old technologies and I wanted to change the hosting provider - more details are here: https://climb.rest/colophon.

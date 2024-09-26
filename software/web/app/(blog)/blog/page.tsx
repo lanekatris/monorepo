@@ -12,16 +12,6 @@ import React from 'react';
 export default function BlogPage() {
   return (
     <>
-      <nav>
-        <ol>
-          <li>
-            <Link href="/">Home</Link>
-          </li>
-          <li>
-            <Link href="/blog">Blog</Link>
-          </li>
-        </ol>
-      </nav>
       <main>
         <div className="flash attention">
           I know this styling is very different - it is intentional 😉 (
