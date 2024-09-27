@@ -13,7 +13,8 @@ import { groupBy } from 'lodash';
 import { unstable_noStore as noStore } from 'next/cache';
 import { getServerSession } from 'next-auth';
 import React from 'react';
-import { NotAuthorized } from '../feed/page';
+
+import { NotAuthorized } from '../../(blog)/feed/notAuthorized';
 
 export const dynamic = 'force-dynamic';
 

@@ -31,19 +31,19 @@ interface FeedTableProps {
   rows: FeedItem[];
 }
 
-const feedIcon: { [k in FeedItemType]: React.ReactElement } = {
-  'obsidian-adventure': <GiMountains size={20} />,
-  'disc-golf-disc': <CgDisc size={20} />,
-  'disc-golf-scorecard': <GiDiscGolfBasket size={20} />,
-  climb: <GiMountainClimbing size={20} />,
+export const feedIcon: { [k in FeedItemType]: React.ReactElement } = {
+  'obsidian-adventure': <GiMountains size={50} />,
+  'disc-golf-disc': <CgDisc size={50} />,
+  'disc-golf-scorecard': <GiDiscGolfBasket size={50} />,
+  climb: <GiMountainClimbing size={50} />,
 
-  raindrop: <GiBookmark size={20} />,
-  memo: <GiNotebook size={20} />,
-  maintenance: <GiWrench size={20} />,
-  purchase: <GiMoneyStack size={30} />
+  raindrop: <GiBookmark size={50} />,
+  memo: <GiNotebook size={50} />,
+  maintenance: <GiWrench size={50} />,
+  purchase: <GiMoneyStack size={60} />
 };
 
-const feedTitle: { [k in FeedItemType]: string } = {
+export const feedTitle: { [k in FeedItemType]: string } = {
   climb: 'Climbed Route',
   'disc-golf-disc': 'New Disc',
   'disc-golf-scorecard': 'DG Round',
@@ -55,13 +55,17 @@ const feedTitle: { [k in FeedItemType]: string } = {
   purchase: 'Purchase'
 };
 
-interface FeedLineItemProps {
+export interface FeedLineItemProps {
   type: FeedItemType;
   date: Date;
 
   children: React.ReactNode;
   link?: string;
 }
+
+// export function FeedLineItemV2({ type, children, date, link }: FeedLineItemProps){
+//
+// }
 
 function FeedLineItem({ type, children, date, link }: FeedLineItemProps) {
   return (
@@ -80,7 +84,7 @@ function FeedLineItem({ type, children, date, link }: FeedLineItemProps) {
     </Stack>
   );
 }
-const USDollar = new Intl.NumberFormat('en-US', {
+export const USDollar = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD'
 });
@@ -164,11 +168,11 @@ export function FeedTable({ rows }: FeedTableProps) {
                       <Box>
                         <Markdown>{data.memo?.content}</Markdown>
                       </Box>
-                      {data.memo?.resources?.map((rl) => (
+                      {data.memo?.resources?.map((rl, i) => (
                         <a
                           href={`https://memo.lkat.io/m/${data.memo?.uid}`}
                           target={'_blank'}
-                          key={rl.filename}
+                          key={`${data.memo?.uid}-${rl.filename}-${i}`}
                         >
                           <img
                             height={100}

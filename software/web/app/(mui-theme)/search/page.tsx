@@ -8,7 +8,8 @@ import { Podcast } from '../spotify/page';
 import SearchIdk from './SearchIdk';
 import { getServerSession } from 'next-auth';
 import React from 'react';
-import { NotAuthorized } from '../feed/page';
+
+import { NotAuthorized } from '../../(blog)/feed/notAuthorized';
 // const data = [
 //   {
 //     name: 'Darknet Diaries',

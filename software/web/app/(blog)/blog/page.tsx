@@ -24,6 +24,12 @@ export default function BlogPage() {
           </a>
           )
         </div>
+        <div className="flash accent">
+          I write Twitter/X type of content{' '}
+          <b>
+            <Link href={'https://memo.lkat.io'}>here</Link>
+          </b>
+        </div>
         <div className="flash default">
           <dl>
             {posts

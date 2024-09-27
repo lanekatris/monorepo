@@ -13,8 +13,8 @@ import { NEXT_ADVENTURE } from '../../../nextAdventure';
 import { sql } from '@vercel/postgres';
 import { getRaindrops } from '../../../feed/get-feed';
 import { getServerSession } from 'next-auth';
-import { NotAuthorized } from '../feed/page';
 import React from 'react';
+import { NotAuthorized } from '../../(blog)/feed/notAuthorized';
 // import ReportIcon from '@mui/icons-material/Report';
 
 const RAINDROP_INBOX_COLLECTION_ID = 36282268;

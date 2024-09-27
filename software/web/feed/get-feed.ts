@@ -140,5 +140,6 @@ export const getFeed = async ({
   });
   console.timeEnd('agg');
 
+  // return finalFeed;
   return finalFeed.slice(0, 100);
 };

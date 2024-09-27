@@ -55,12 +55,6 @@ select pv.id is not null as visited, count(*) as count from temp.place  p
 group by pv.id is not null
 `);
 
-  //   const truckProgress = await getMetric(sql`
-  // select "Done" visited,count(*) count from noco.test_workflow2 where "Type" = 'Truck' group by "Done"`);
-  //
-  //   const truckTasks =
-  //     await sql`select Title from noco.test_workflow2 where "Type" = 'Truck'`;
-
   const {
     completed: completed2,
     total: total2,

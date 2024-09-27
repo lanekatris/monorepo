@@ -11,7 +11,8 @@ import Link from 'next/link';
 import { sql } from '@vercel/postgres';
 import { getServerSession } from 'next-auth';
 import React from 'react';
-import { NotAuthorized } from '../feed/page';
+
+import { NotAuthorized } from '../../(blog)/feed/notAuthorized';
 
 export interface LocationCustom {
   Address: string;

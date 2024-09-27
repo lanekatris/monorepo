@@ -14,7 +14,8 @@ import { getMembers } from '../../../../rhinofit/recent-access';
 import { groupBy } from 'lodash';
 import { getServerSession } from 'next-auth';
 import React from 'react';
-import { NotAuthorized } from '../../feed/page';
+
+import { NotAuthorized } from '../../../(blog)/feed/notAuthorized';
 
 export const dynamic = 'force-dynamic';
 export default async function GymUsers() {
