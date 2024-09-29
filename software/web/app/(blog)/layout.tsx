@@ -24,7 +24,7 @@ export default async function MatchaLayout({
       </head>
       <body>
         <nav>
-          <Link href="/homev2" className={'default'}>
+          <Link href="/" className={'default'}>
             <h2>Lane's Site</h2>
           </Link>
           <div className={'links'}>

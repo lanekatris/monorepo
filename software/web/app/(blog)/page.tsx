@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { MetricCardV2 } from '../../../metrics/MetricCardV2';
-import { getMetric } from '../../../metrics/get-metric';
+import { MetricCardV2 } from '../../metrics/MetricCardV2';
+import { getMetric } from '../../metrics/get-metric';
 import { sql } from '@vercel/postgres';
-import { HomeLinksV2 } from '../../Links';
+import { HomeLinksV2 } from '../Links';
 
 const config = [
   {
