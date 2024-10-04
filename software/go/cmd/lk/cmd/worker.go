@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"github.com/charmbracelet/log"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"go.temporal.io/sdk/client"
 	"go.temporal.io/sdk/worker"
 	"shared"
@@ -27,7 +28,7 @@ to quickly create a Cobra application.`,
 		fmt.Println("worker called")
 
 		c, err := client.Dial(client.Options{
-			HostPort: "server1.local:7233",
+			HostPort: "192.168.86.100:7233",
 		})
 		if err != nil {
 			log.Fatalf("unable to create Temporal client", err)
@@ -37,7 +38,12 @@ to quickly create a Cobra application.`,
 		shared.SetupViper()
 
 		// This worker hosts both Workflow and Activity functions
-		w := worker.New(c, shared.GreetingTaskQueue, worker.Options{})
+		var queueName = viper.GetString("temporal_queue_name")
+		if queueName == "" {
+			queueName = shared.GreetingTaskQueue
+		}
+		fmt.Println("using queue name:", queueName)
+		w := worker.New(c, queueName, worker.Options{})
 		//w.RegisterWorkflow(temporalstuff.SendFitnessEmailWorkflow)
 		//w.RegisterWorkflow(temporalstuff.ObsidianThemeWorkflow)
 
@@ -65,6 +71,9 @@ to quickly create a Cobra application.`,
 		w.RegisterWorkflow(shared.WorkflowMinifluxToS3)
 		w.RegisterActivity(activitiesTwo)
 
+		w.RegisterWorkflow(shared.WorkflowBackupServer)
+		w.RegisterActivity(shared.BackupFolder)
+
 		scheduleID := "schedule_id2"
 		workflowID := "schedule_workflow_id"
 
@@ -78,11 +87,10 @@ to quickly create a Cobra application.`,
 			if n.ID == scheduleID {
 				scheduleExists = true
 			}
-			log.Info(n)
 		}
 
 		if scheduleExists == false {
-			scheduleHandle, err := c.ScheduleClient().Create(context.Background(), client.ScheduleOptions{
+			_, err := c.ScheduleClient().Create(context.Background(), client.ScheduleOptions{
 				ID: scheduleID,
 				Spec: client.ScheduleSpec{
 					CronExpressions: []string{"0 */12 * * *"},
@@ -94,7 +102,6 @@ to quickly create a Cobra application.`,
 				},
 			})
 			shared.HandleError(err)
-			log.Info(scheduleHandle)
 		}
 
 		// Start listening to the Task Queue
