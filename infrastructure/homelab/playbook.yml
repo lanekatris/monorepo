@@ -9,5 +9,31 @@
           - vim
           - curl
           - ranger
-          - ansible
-          - sshpass
+          - git
+          - gpg
+#          - ansible
+#          - sshpass
+    - name: Get monorepo
+      ansible.builtin.git:
+        repo: https://github.com/lanekatris/monorepo.git
+        dest: /home/lane/git/monorepo
+        single_branch: yes
+        version: main
+    - name: Add Docker GPG apt Key
+      become: true
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      become: true
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      become: true
+      apt:
+        name: docker-ce
+        state: latest
+        update_cache: true

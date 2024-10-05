@@ -107,6 +107,9 @@ export default async function MatchaLayout({
           <div>
             <dl>
               <dd>©️ {new Date().getFullYear()} Lane Katris</dd>
+              <dd>
+                <Link href="/colophon">Colophon</Link>
+              </dd>
               <dd>{session && <Link href="/feed">Feed</Link>}</dd>
               <dd>
                 <Link href={'/homelab'}>Homelab</Link>

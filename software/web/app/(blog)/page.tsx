@@ -61,10 +61,10 @@ export default async function Homev2Page() {
         I'm married, have a son, and am a big fan of{' '}
         <Link href={'/discs'}>Disc Golf</Link> and Rock Climbing.
       </p>
-      <h3 className={'bg-active bd-active'}>Pages</h3>
+      <h3 className={'bg-active '}>Pages</h3>
       <p>Here are a few links to start with:</p>
       <HomeLinksV2 />
-      <h3 className={'bg-active bd-active'}>Projects</h3>
+      <h3 className={'bg-active '}>Projects</h3>
       <p>I have a ton of unfinished projects...</p>
       <ul>
         <li>
@@ -74,7 +74,7 @@ export default async function Homev2Page() {
           <Link href={'/homelab'}>Homelab Setup</Link>
         </li>
       </ul>
-      <h3 className={'bg-active bd-active'}>Goals</h3>
+      <h3 className={'bg-active '}>Goals</h3>
       <p>Here area few goals that I'd love to accomplish more on:</p>
       <div style={{ maxWidth: 500 }}>
         {goals.map((goal) => (

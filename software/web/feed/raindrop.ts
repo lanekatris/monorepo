@@ -14,7 +14,7 @@ export interface Raindrop {
   removed: boolean;
   created: string;
   collection: Collection;
-  highlights: any[];
+  highlights: { _id: string; text: string }[];
   lastUpdate: string;
   domain: string;
   creatorRef: CreatorRef;
