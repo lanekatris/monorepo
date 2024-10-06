@@ -14,19 +14,45 @@ import (
 	"shared"
 )
 
+func deploySchedules(c client.Client) {
+	scheduleID := "schedule_id2"
+	workflowID := "schedule_workflow_id"
+
+	list, err := c.ScheduleClient().List(context.Background(), client.ScheduleListOptions{})
+	shared.HandleError(err)
+
+	var scheduleExists = false
+	for list.HasNext() {
+		n, err := list.Next()
+		shared.HandleError(err)
+		if n.ID == scheduleID {
+			scheduleExists = true
+		}
+	}
+
+	if scheduleExists == false {
+		_, err := c.ScheduleClient().Create(context.Background(), client.ScheduleOptions{
+			ID: scheduleID,
+			Spec: client.ScheduleSpec{
+				CronExpressions: []string{"0 */12 * * *"},
+			},
+			Action: &client.ScheduleWorkflowAction{
+				ID:        workflowID,
+				Workflow:  shared.WorkflowMinifluxToS3,
+				TaskQueue: shared.GreetingTaskQueue,
+			},
+		})
+		shared.HandleError(err)
+	}
+}
+
 // workerCmd represents the worker command
 var workerCmd = &cobra.Command{
 	Use:   "worker",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "The lkat worker listening to temporal",
+	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("worker called")
-
+		log.Info("Connecting to temporal...")
 		c, err := client.Dial(client.Options{
 			HostPort: "192.168.86.100:7233",
 		})
@@ -36,6 +62,15 @@ to quickly create a Cobra application.`,
 		defer c.Close()
 
 		shared.SetupViper()
+
+		shouldDeploySchedules := cmd.Flag("deploy-schedules").Changed
+
+		if shouldDeploySchedules {
+			log.Info("Deploying schedules...")
+			deploySchedules(c)
+			log.Info("Schedules deployed, exiting")
+			return
+		}
 
 		// This worker hosts both Workflow and Activity functions
 		var queueName = viper.GetString("temporal_queue_name")
@@ -74,36 +109,6 @@ to quickly create a Cobra application.`,
 		w.RegisterWorkflow(shared.WorkflowBackupServer)
 		w.RegisterActivity(shared.BackupFolder)
 
-		scheduleID := "schedule_id2"
-		workflowID := "schedule_workflow_id"
-
-		list, err := c.ScheduleClient().List(context.Background(), client.ScheduleListOptions{})
-		shared.HandleError(err)
-
-		var scheduleExists = false
-		for list.HasNext() {
-			n, err := list.Next()
-			shared.HandleError(err)
-			if n.ID == scheduleID {
-				scheduleExists = true
-			}
-		}
-
-		if scheduleExists == false {
-			_, err := c.ScheduleClient().Create(context.Background(), client.ScheduleOptions{
-				ID: scheduleID,
-				Spec: client.ScheduleSpec{
-					CronExpressions: []string{"0 */12 * * *"},
-				},
-				Action: &client.ScheduleWorkflowAction{
-					ID:        workflowID,
-					Workflow:  shared.WorkflowMinifluxToS3,
-					TaskQueue: shared.GreetingTaskQueue,
-				},
-			})
-			shared.HandleError(err)
-		}
-
 		// Start listening to the Task Queue
 		err = w.Run(worker.InterruptCh())
 		if err != nil {
@@ -114,13 +119,12 @@ to quickly create a Cobra application.`,
 
 func init() {
 	rootCmd.AddCommand(workerCmd)
-	rootCmd.PersistentFlags().Bool("server", false, "Run as a server worker")
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// workerCmd.PersistentFlags().String("foo", "", "A help for foo")
+	workerCmd.Flags().BoolP("deploy-schedules", "d", false, "Upsert temporal schedules")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
