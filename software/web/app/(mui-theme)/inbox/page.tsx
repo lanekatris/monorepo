@@ -25,6 +25,9 @@ interface MinifluxFavorite {
 }
 
 export default async function InboxPage() {
+  const session = await getServerSession();
+  if (!session) return <NotAuthorized />;
+
   const { rows }: { rows: MinifluxFavorite[] } =
     await sql`select * from miniflux_favorite`;
 
@@ -32,8 +35,15 @@ export default async function InboxPage() {
   const filteredBookmarks = allBookmarks.filter(
     (x) => x.data.raindrop?.collectionId === RAINDROP_INBOX_COLLECTION_ID
   );
-  const session = await getServerSession();
-  if (!session) return <NotAuthorized />;
+
+  const rootFolderCounts: { rows: { count: number }[] } =
+    await sql`with x as (select length(file_path) - length(replace(file_path, '/', '')) folder_depth, * from markdown_file_models)
+select count(*)::int
+from x
+where folder_depth = 0;`;
+
+  // console.log('idk', idk.rows);
+
   return (
     <Container maxWidth="sm">
       <Breadcrumbs>
@@ -47,6 +57,17 @@ export default async function InboxPage() {
 
         <Typography>Ideas: {NEXT_ADVENTURE}</Typography>
       </Alert>
+
+      {rootFolderCounts.rows[0]?.count > 50 && (
+        <>
+          <br />
+          <Alert color={'danger'}>
+            Your obsidian vault is a bit cluttered. There are{' '}
+            {rootFolderCounts.rows[0]?.count} files at / when you want at most
+            50
+          </Alert>
+        </>
+      )}
       <Typography level={'h1'}>Starred RSS Entries ({rows.length})</Typography>
       <List marker={'decimal'}>
         {rows.map(({ id, title }) => (

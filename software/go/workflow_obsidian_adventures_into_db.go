@@ -100,17 +100,7 @@ func LoadObsidianAdventuresWorkflow(ctx workflow.Context) error {
 	}
 	ctx = workflow.WithActivityOptions(ctx, options)
 
-	//db, err := GetDb()
-	//if err != nil {
-	//	return err
-	//}
-	//
-	//gormDb, err := GetGormDb()
-	//if err != nil {
-	//	return err
-	//}
-
-	var activities *ObsidianAdventuresActivityInput //ObsidianAdventuresActivityInput{}
+	var activities *ObsidianAdventuresActivityInput
 
 	err := workflow.ExecuteActivity(ctx, activities.DeleteAdventureDataActivity).Get(ctx, nil)
 	if err != nil {
@@ -144,17 +134,9 @@ func LoadObsidianAdventuresWorkflow(ctx workflow.Context) error {
 type ObsidianAdventuresActivityInput struct {
 	Db     *sql.DB
 	GormDb *gorm.DB
-	//Ctx    context.Context
 }
 
 func (input *ObsidianAdventuresActivityInput) DeleteAdventureDataActivity(ctx context.Context) error {
-	//conn, err := input.Db.Conn(ctx)
-	//input.Db.exe
-	//_, err := input.Db.Exec("delete from kestra.obsidian_adventures")
-	//db, err := GetDb()
-	//if err != nil {
-	//	return err
-	//}
 	_, err := input.Db.Exec("delete from kestra.obsidian_adventures")
 	return err
 }

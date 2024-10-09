@@ -1,11 +1,14 @@
 package shared
 
 import (
+	"bytes"
+	"context"
 	"database/sql"
-	"database/sql/driver"
 	"encoding/json"
-	"errors"
 	"github.com/adrg/frontmatter"
+	"github.com/charmbracelet/log"
+	"github.com/minio/minio-go/v7"
+	"go.temporal.io/sdk/workflow"
 	"gorm.io/gorm"
 	"io/fs"
 	"io/ioutil"
@@ -16,9 +19,7 @@ import (
 )
 
 type WorkflowMarkdownToDbInput struct {
-	//Db     *sql.DB
 	GormDb *gorm.DB
-	//Ctx    context.Context
 }
 
 type Matter struct {
@@ -26,7 +27,7 @@ type Matter struct {
 	Pushups int `yaml:pushups`
 }
 
-func GetFilePaths(rootDir string) (error, []string) {
+func GetFilePaths(rootDir string) ([]string, error) {
 	var paths []string
 	err := filepath.Walk(rootDir, func(path string, info fs.FileInfo, err error) error {
 		if err != nil {
@@ -37,24 +38,24 @@ func GetFilePaths(rootDir string) (error, []string) {
 		}
 		return nil
 	})
-	return err, paths
+	return paths, err
 }
 
 type JSONB map[string]interface{}
 
 // Value Marshal
-func (jsonField JSONB) Value() (driver.Value, error) {
-	return json.Marshal(jsonField)
-}
-
-// Scan Unmarshal
-func (jsonField *JSONB) Scan(value interface{}) error {
-	data, ok := value.([]byte)
-	if !ok {
-		return errors.New("type assertion to []byte failed")
-	}
-	return json.Unmarshal(data, &jsonField)
-}
+//func (jsonField JSONB) Value() (driver.Value, error) {
+//	return json.Marshal(jsonField)
+//}
+//
+//// Scan Unmarshal
+//func (jsonField *JSONB) Scan(value interface{}) error {
+//	data, ok := value.([]byte)
+//	if !ok {
+//		return errors.New("type assertion to []byte failed")
+//	}
+//	return json.Unmarshal(data, &jsonField)
+//}
 
 type MarkdownFileModel struct {
 	gorm.Model
@@ -66,7 +67,7 @@ type MarkdownFileModel struct {
 	FileSizeBytes int64
 }
 
-func GenerateMarkdownModels(filePaths []string, rootPath string) (error, []MarkdownFileModel) {
+func GenerateMarkdownModels(filePaths []string, rootPath string) ([]MarkdownFileModel, error) {
 
 	var models []MarkdownFileModel
 	for _, filePath := range filePaths {
@@ -75,12 +76,12 @@ func GenerateMarkdownModels(filePaths []string, rootPath string) (error, []Markd
 
 		stat, err := os.Stat(filePath)
 		if err != nil {
-			return err, nil
+			return nil, err
 		}
 
 		contents, err := ioutil.ReadFile(filePath)
 		if err != nil {
-			return err, nil
+			return nil, err
 		}
 
 		//var emptyMatter struct{}
@@ -91,7 +92,7 @@ func GenerateMarkdownModels(filePaths []string, rootPath string) (error, []Markd
 		}
 		_, err = frontmatter.Parse(strings.NewReader(string(contents)), &EmptyMatter)
 		if err != nil {
-			return err, nil
+			return nil, err
 		}
 
 		baseFilename := filepath.Base(filePath)
@@ -110,7 +111,7 @@ func GenerateMarkdownModels(filePaths []string, rootPath string) (error, []Markd
 
 		meta, err := json.Marshal(EmptyMatter)
 		if err != nil {
-			return err, nil
+			return nil, err
 		}
 
 		//if !noMeta {
@@ -131,7 +132,7 @@ func GenerateMarkdownModels(filePaths []string, rootPath string) (error, []Markd
 		})
 
 	}
-	return nil, models
+	return models, nil
 }
 
 //func GormBulkInsert(db *gorm.DB, models []gorm.Model){
@@ -162,4 +163,140 @@ func GenerateMarkdownModels(filePaths []string, rootPath string) (error, []Markd
 //	if err != nil {
 //		return err
 //	}
+//}
+
+func InsertMultipleIntoDb(value interface{}) (*gorm.DB, error) {
+	db, err := GetGormDb()
+	if err != nil {
+		return nil, err
+	}
+
+	result := db.Create(value)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return result, nil
+}
+
+func KvPut(key string, value interface{}) error {
+	jsonBytes, err := json.Marshal(value)
+	if err != nil {
+		return err
+	}
+
+	r := bytes.NewReader(jsonBytes)
+
+	mc := GetMinioClient()
+	_, err = mc.PutObject(context.Background(), "kv", key, r, r.Size(), minio.PutObjectOptions{
+		ContentType: "application/json",
+	})
+
+	return err
+}
+
+func GetAndPersistFilePaths(rootPath string) error {
+	paths, err := GetFilePaths("/home/lane/Documents/lkat-vault/")
+	if err != nil {
+		return err
+	}
+
+	err = KvPut("blah", paths)
+	return err
+}
+
+func TruncateTable(tableName string) error {
+	db, err := GetGormDb()
+	if err != nil {
+		return err
+	}
+
+	result := db.Exec("truncate table " + tableName)
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return nil
+}
+
+func SyncFolderMarkdownToDb(rootPath string) error {
+	paths, err := GetFilePaths(rootPath)
+	if err != nil {
+		return err
+	}
+
+	models, err := GenerateMarkdownModels(paths, rootPath)
+	if err != nil {
+		return err
+	}
+
+	db, err := GetGormDb()
+	if err != nil {
+		return err
+	}
+
+	result := db.Create(&models)
+	log.Info("Done pushing files to DB", "created", result.RowsAffected)
+
+	return result.Error
+
+}
+
+func WorkflowMarkdownToDb(ctx workflow.Context) error {
+	options := workflow.ActivityOptions{
+		StartToCloseTimeout: time.Minute * 1,
+	}
+	ctx = workflow.WithActivityOptions(ctx, options)
+
+	err := workflow.ExecuteActivity(ctx, TruncateTable, "public.markdown_file_models").Get(ctx, nil)
+
+	var rootPath = "/home/lane/Documents/lkat-vault/"
+	err = workflow.ExecuteActivity(ctx, SyncFolderMarkdownToDb, rootPath).Get(ctx, nil)
+	return err
+}
+
+//func WorkflowMarkdownToDb(ctx workflow.Context) (int64, error) {
+//	options := workflow.ActivityOptions{
+//		StartToCloseTimeout: time.Minute * 1,
+//	}
+//	ctx = workflow.WithActivityOptions(ctx, options)
+//
+//	var rootPath = "/home/lane/Documents/lkat-vault/"
+//
+//	//var paths []string
+//	err := workflow.ExecuteActivity(ctx, GetAndPersistFilePaths, rootPath).Get(ctx, nil)
+//	if err != nil {
+//		return 0, err
+//	}
+//
+//	//paths, err := GetFilePaths(rootPath)
+//	//if err != nil {
+//	//	return nil, err
+//	//}
+//
+//	//var models []MarkdownFileModel
+//	//err = workflow.ExecuteActivity(ctx, GenerateMarkdownModels, paths, rootPath).Get(ctx, &models)
+//	//if err != nil {
+//	//	return err
+//	//}
+//	models, err := GenerateMarkdownModels(paths, rootPath)
+//	if err != nil {
+//		return nil, err
+//	}
+//	//var db *gorm.DB
+//	//err = workflow.ExecuteActivity(ctx, GetGormDb).Get(ctx, &db)
+//	//if err != nil {
+//	//	return err
+//	//}
+//
+//	//var result *gorm.DB
+//	//err = workflow.ExecuteActivity(ctx, InsertMultipleIntoDb, models).Get(ctx, &result)
+//
+//	result, err := InsertMultipleIntoDb(&models)
+//	if err != nil {
+//		return nil, err
+//	}
+//
+//	return result, nil
+//
+//	//return err
 //}

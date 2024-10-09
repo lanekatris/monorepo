@@ -14,34 +14,49 @@ import (
 	"shared"
 )
 
-func deploySchedules(c client.Client) {
-	scheduleID := "schedule_id2"
-	workflowID := "schedule_workflow_id"
-
+func deploySchedulesV2(c client.Client) {
 	list, err := c.ScheduleClient().List(context.Background(), client.ScheduleListOptions{})
 	shared.HandleError(err)
 
-	var scheduleExists = false
+	// Delete all schedules
 	for list.HasNext() {
 		n, err := list.Next()
 		shared.HandleError(err)
-		if n.ID == scheduleID {
-			scheduleExists = true
-		}
+
+		log.Info("Deleting schedule " + n.ID)
+		handle := c.ScheduleClient().GetHandle(context.Background(), n.ID)
+		err = handle.Delete(context.Background())
+		shared.HandleError(err)
 	}
 
-	if scheduleExists == false {
-		_, err := c.ScheduleClient().Create(context.Background(), client.ScheduleOptions{
-			ID: scheduleID,
+	// Create schedules
+	var schedules = []client.ScheduleOptions{
+		client.ScheduleOptions{
+			ID: "schedule_miniflux_to_s3",
 			Spec: client.ScheduleSpec{
 				CronExpressions: []string{"0 */12 * * *"},
 			},
 			Action: &client.ScheduleWorkflowAction{
-				ID:        workflowID,
+				ID:        "action_miniflux_to_s3",
 				Workflow:  shared.WorkflowMinifluxToS3,
 				TaskQueue: shared.GreetingTaskQueue,
 			},
-		})
+		},
+		client.ScheduleOptions{
+			ID: "schedule_obsidian_files_to_db",
+			Spec: client.ScheduleSpec{
+				CronExpressions: []string{"0 */12 * * *"},
+			},
+			Action: &client.ScheduleWorkflowAction{
+				ID:        "action_obsidian_files_to_db",
+				Workflow:  shared.WorkflowMarkdownToDb,
+				TaskQueue: shared.GreetingTaskQueue,
+			},
+		},
+	}
+	for _, schedule := range schedules {
+		log.Info("Creating schedule " + schedule.ID)
+		_, err := c.ScheduleClient().Create(context.Background(), schedule)
 		shared.HandleError(err)
 	}
 }
@@ -67,7 +82,7 @@ var workerCmd = &cobra.Command{
 
 		if shouldDeploySchedules {
 			log.Info("Deploying schedules...")
-			deploySchedules(c)
+			deploySchedulesV2(c)
 			log.Info("Schedules deployed, exiting")
 			return
 		}
@@ -108,6 +123,14 @@ var workerCmd = &cobra.Command{
 
 		w.RegisterWorkflow(shared.WorkflowBackupServer)
 		w.RegisterActivity(shared.BackupFolder)
+
+		// Setup workflow_markdown_to_db
+		w.RegisterWorkflow(shared.WorkflowMarkdownToDb)
+		w.RegisterActivity(shared.TruncateTable)
+		w.RegisterActivity(shared.SyncFolderMarkdownToDb)
+		//w.RegisterActivity(shared.GetFilePaths)
+		//w.RegisterActivity(shared.GenerateMarkdownModels)
+		//w.RegisterActivity(shared.InsertMultipleIntoDb)
 
 		// Start listening to the Task Queue
 		err = w.Run(worker.InterruptCh())
