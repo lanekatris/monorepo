@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container } from '@mui/joy';
 import Link from 'next/link';
+import '@fontsource/silkscreen';
 import '@lowlighter/matcha/dist/matcha.css';
 import './blog/blog.css';
-import ThemeToggler from '../ThemeToggler';
 
 import Image from 'next/image';
 import NotAi from './blog/[slug]/Written-By-Human-Not-By-AI-Badge-white.svg';
@@ -35,6 +35,12 @@ export default async function MatchaLayout({
             </Link>
           </div>
         </nav>
+        {/*<nav>*/}
+        {/*  <Link href={'/about'}>About</Link>*/}
+        {/*  <Link href={'/about'}>About</Link>*/}
+        {/*  <Link href={'/about'}>About</Link>*/}
+        {/*  <Link href={'/about'}>About</Link>*/}
+        {/*</nav>*/}
         {children}
         <footer>
           {/*<div*/}

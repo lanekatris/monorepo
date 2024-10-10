@@ -4,7 +4,6 @@ import {
   Card,
   CardContent,
   Container,
-  Link,
   List,
   ListItem,
   Typography
@@ -14,7 +13,8 @@ import { sql } from '@vercel/postgres';
 import { getRaindrops } from '../../../feed/get-feed';
 import { getServerSession } from 'next-auth';
 import React from 'react';
-import { NotAuthorized } from '../../(blog)/feed/notAuthorized';
+import { NotAuthorized } from '../feed/notAuthorized';
+import Link from 'next/link';
 // import ReportIcon from '@mui/icons-material/Report';
 
 const RAINDROP_INBOX_COLLECTION_ID = 36282268;
@@ -45,59 +45,42 @@ where folder_depth = 0;`;
   // console.log('idk', idk.rows);
 
   return (
-    <Container maxWidth="sm">
-      <Breadcrumbs>
-        <Link color="neutral" href="/software/web/public">
-          Home
-        </Link>
-        <Typography>Your To Dos</Typography>
-      </Breadcrumbs>
-      <Alert color="danger">
+    <div>
+      <div className={'flash danger'}>
         <b>You Don&apos;t Have Something Planned!</b>
-
-        <Typography>Ideas: {NEXT_ADVENTURE}</Typography>
-      </Alert>
+        <div>Ideas: {NEXT_ADVENTURE}</div>
+      </div>
 
       {rootFolderCounts.rows[0]?.count > 50 && (
-        <>
-          <br />
-          <Alert color={'danger'}>
-            Your obsidian vault is a bit cluttered. There are{' '}
-            {rootFolderCounts.rows[0]?.count} files at / when you want at most
-            50
-          </Alert>
-        </>
+        <div className={'flash danger'}>
+          Your obsidian vault is a bit cluttered. There are{' '}
+          {rootFolderCounts.rows[0]?.count} files at <code>/</code> when you
+          want at most 50
+        </div>
       )}
-      <Typography level={'h1'}>Starred RSS Entries ({rows.length})</Typography>
-      <List marker={'decimal'}>
+      <h1>Starred RSS Entries ({rows.length})</h1>
+      <ol>
         {rows.map(({ id, title }) => (
-          <ListItem key={id}>
+          <li key={id}>
             <Link
               target={'_blank'}
               href={`https://miniflux.lkat.io/starred/entry/${id}`}
             >
               {title}
             </Link>
-          </ListItem>
+          </li>
         ))}
-      </List>
-      <Typography level={'h1'}>
-        Raindrop Inbox ({filteredBookmarks.length})
-      </Typography>
-      <List marker={'decimal'}>
+      </ol>
+      <h1>Raindrop Inbox ({filteredBookmarks.length})</h1>
+      <ol>
         {filteredBookmarks.map((bookmark) => (
-          <ListItem key={bookmark.id}>
-            <Link target={'_blank'} href={bookmark.data?.raindrop?.link}>
+          <li key={bookmark.id}>
+            <Link target={'_blank'} href={bookmark.data?.raindrop?.link!}>
               {bookmark.data?.raindrop?.title}
             </Link>
-          </ListItem>
+          </li>
         ))}
-      </List>
-      {/*{rows.map(({ id, title }) => (*/}
-      {/*  <Card key={id}>*/}
-      {/*    <CardContent>{title}</CardContent>*/}
-      {/*  </Card>*/}
-      {/*))}*/}
-    </Container>
+      </ol>
+    </div>
   );
 }

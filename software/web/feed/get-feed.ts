@@ -3,48 +3,44 @@ import { sql } from '@vercel/postgres';
 
 // import bookmarks from '../app/search/raindrop-export.json';
 import { Raindrop } from './raindrop';
-import { getJsonFromMinio } from './get-json-from-minio';
+import { getFromMinio } from './get-from-minio';
 import { FeedItem, Memo } from './feed-types';
 import axios from 'axios';
 
 async function getFeedItems() {
   console.time('sql');
   const { rows: feed }: { rows: FeedItem[] } = await sql`
-with x as (select case
-                      when f.type = 'climb' then concat('climb-', t.id)
-                      when f.type = 'disc-golf-scorecard' then concat('scorecard-', u.id)
-                      when f.type = 'disc-golf-disc' then concat('disc-', d.id)
-                      when f.type = 'obsidian-adventure' then concat('obsidian-adventure-', oa.id)
-                      when f.type = 'maintenance' then concat('maintenance-', m.id)
-                      when f.type = 'purchase' then concat('purchase-', p.id)
-                      end as id,
-                  f.type,
-                  case
-                      when f.type = 'climb' then t."Date"::date
-                      when f.type = 'disc-golf-scorecard' then u."startdate"::date
-                      when f.type = 'disc-golf-disc' then coalesce(d.created, d.created_at)::date
-                      when f.type = 'obsidian-adventure' then oa.date::date
-                      when f.type = 'maintenance' then m."Date"::date
-                      when f.type = 'purchase' then p."Date"
-                      end as date,
-                  json_build_object(
-                          'climb', t.*,
-                          'scorecard', u.*,
-                          'disc', d.*,
-                          'adventure', oa.*,
-                          'maintenance', m.*,
-                          'purchase', p.*
-                  )       as data
-           from noco.feed f
-                    left join kestra.ticks t on f.remote_id_int = t.id and f.type = 'climb'
-                    left join kestra.udisc_scorecard u on f.remote_id_int = u.id and f.type = 'disc-golf-scorecard'
-                    left join noco.disc d on f.remote_id_int = d.id and f.type = 'disc-golf-disc'
-                    left join kestra.obsidian_adventures oa on f.remote_id_int = oa.id and f.type = 'obsidian-adventure'
-                    left join noco.purchases p on f.remote_id_int = p.id and f.type = 'purchase'
-                    left join noco.maintenance m on f.remote_id_int = m.id and f.type = 'maintenance')
-select *
-from x
-order by date desc;
+with x as (select concat('climb-', id) id, 'climb' type, "Date"::date date, json_build_object('climb', t.*) data
+           from kestra.ticks t
+           union all
+           select concat('scorecard-', u.id) id,
+                  'scorecard'                type,
+                  "startdate"::date          date,
+                  json_build_object('scorecard', u.*) data
+           from kestra.udisc_scorecard u
+           union all
+           select concat('disc-', d.id)                   id,
+                  'disc'                                  type,
+                  coalesce(d.created, d.created_at)::date date,
+                  json_build_object('disc', d.*) data
+           from noco.disc d
+           union all
+           -- TODO: This needs to pull from the new thingy
+           select concat('adventure-', a.id) id,
+                  'obsidian-adventure'       type,
+                  a.date::date               date,
+                  json_build_object('adventure', a.*) data
+           from kestra.obsidian_adventures a
+           union all
+           select concat('purchase-', p.id) id, 'purchase' type, p."Date"::date date, json_build_object('purchase', p.*) data
+           from noco.purchases p
+           union all
+           select concat('maintenance-', m.id) id,
+                  'maintenance'                type,
+                  m."Date"::date               date,
+                  json_build_object('maintenance', m.*) data
+           from noco.maintenance m)
+select * from x order by date desc
   `;
   console.timeEnd('sql');
   return feed;
@@ -96,7 +92,7 @@ export async function getMemos() {
 export async function getRaindrops() {
   console.time('raindrops');
 
-  const raindrops: Raindrop[] = await getJsonFromMinio('etl', 'raindrops.json');
+  const raindrops: Raindrop[] = await getFromMinio('etl', 'raindrops.json');
 
   console.timeEnd('raindrops');
   return raindrops.map((raindrop) => {

@@ -11,3 +11,7 @@ nav .links {
     display: flex;
     gap: 1em;
 }
+
+.silk {
+    font-family: "silkscreen", serif;
+}

@@ -1,4 +1,5 @@
 import yaml from 'js-yaml';
+import { getFromMinio } from '../../../feed/get-from-minio';
 
 interface DockerComposeFile {
   services: { [k: string]: { ports?: string[] } };
@@ -26,6 +27,11 @@ export default async function HomelabPage() {
       };
     })
   );
+
+  const machines = await Promise.all([
+    getFromMinio<string>('etl', 'linux_desktop_screenfetch_result.txt', false),
+    getFromMinio<string>('scratch', 'server1_screenfetch_result.txt', false)
+  ]);
 
   return (
     <main>
@@ -80,6 +86,19 @@ export default async function HomelabPage() {
               </dd>
             ))}
         </div>
+      ))}
+
+      <h1>My Machines</h1>
+      <div className={'flash accent'}>
+        I have a Temporal schedule that runs <code>screenfetch -N</code> every
+        week that writes to Minio and this page requests the files from Minio
+        and renders the results here.
+      </div>
+      <div className="flash accent">
+        I didn't go with <code>neofetch</code> because of unicode characters.
+      </div>
+      {machines.map((serverInfo, i) => (
+        <pre key={i}>{serverInfo}</pre>
       ))}
     </main>
   );

@@ -3,6 +3,7 @@ import { MetricCardV2 } from '../../metrics/MetricCardV2';
 import { getMetric } from '../../metrics/get-metric';
 import { sql } from '@vercel/postgres';
 import { HomeLinksV2 } from '../Links';
+import { getFromMinio } from '../../feed/get-from-minio';
 
 const config = [
   {
@@ -61,7 +62,7 @@ export default async function Homev2Page() {
         I'm married, have a son, and am a big fan of{' '}
         <Link href={'/discs'}>Disc Golf</Link> and Rock Climbing.
       </p>
-      <h3 className={'bg-active '}>Pages</h3>
+      <h3 className={'bg-active'}>Pages</h3>
       <p>Here are a few links to start with:</p>
       <HomeLinksV2 />
       <h3 className={'bg-active '}>Projects</h3>

@@ -5,12 +5,13 @@ const minioClient = new Minio.Client({
   port: 9000, // e.g., 9000
   useSSL: false, // Set to false if not using SSL
   accessKey: process.env.MINIO_A!,
-  secretKey: process.env.MINIO_S!,
+  secretKey: process.env.MINIO_S!
 });
 
-export async function getJsonFromMinio<T>(
+export async function getFromMinio<T>(
   bucketName: string,
-  objectName: string
+  objectName: string,
+  isJson: boolean = true
 ): Promise<T> {
   try {
     const stream = await minioClient.getObject(bucketName, objectName);
@@ -23,8 +24,9 @@ export async function getJsonFromMinio<T>(
     return new Promise((resolve, reject) => {
       stream.on('end', () => {
         try {
-          const jsonData = JSON.parse(data);
-          resolve(jsonData);
+          // const jsonData = JSON.parse(data);
+          // resolve(jsonData);
+          resolve(isJson ? JSON.parse(data) : data);
         } catch (error) {
           reject(new Error('Error parsing JSON'));
         }

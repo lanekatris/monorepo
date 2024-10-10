@@ -14,7 +14,7 @@ export function MetricCardV2({
   title
 }: MetricCardV2Props) {
   return (
-    <div className={'flash default'}>
+    <div className={'flash default silk'}>
       <b>{title}</b>
       <br />
       <small>
