@@ -14,6 +14,17 @@ import (
 	"shared"
 )
 
+func createBackupArgs(prefix string) []interface{} {
+	strSlice := []string{prefix}
+	interfaceSlice := make([]interface{}, len(strSlice))
+
+	for i, v := range strSlice {
+		interfaceSlice[i] = v
+	}
+
+	return interfaceSlice
+}
+
 func deploySchedulesV2(c client.Client) {
 	list, err := c.ScheduleClient().List(context.Background(), client.ScheduleListOptions{})
 	shared.HandleError(err)
@@ -23,7 +34,7 @@ func deploySchedulesV2(c client.Client) {
 		n, err := list.Next()
 		shared.HandleError(err)
 
-		log.Info("Deleting schedule " + n.ID)
+		log.Warn("Deleting schedule", "id", n.ID)
 		handle := c.ScheduleClient().GetHandle(context.Background(), n.ID)
 		err = handle.Delete(context.Background())
 		shared.HandleError(err)
@@ -45,7 +56,8 @@ func deploySchedulesV2(c client.Client) {
 		client.ScheduleOptions{
 			ID: "schedule_obsidian_files_to_db",
 			Spec: client.ScheduleSpec{
-				CronExpressions: []string{"0 */12 * * *"},
+				// Every 12 hours
+				CronExpressions: []string{"0 */12 * * *"}, // https://crontab.guru/#0_*/12_*_*_*
 			},
 			Action: &client.ScheduleWorkflowAction{
 				ID:        "action_obsidian_files_to_db",
@@ -53,9 +65,44 @@ func deploySchedulesV2(c client.Client) {
 				TaskQueue: shared.GreetingTaskQueue,
 			},
 		},
+		client.ScheduleOptions{
+			ID: "schedule_backup_server1",
+			Spec: client.ScheduleSpec{
+				CronExpressions: []string{"0 3 * * 0"},
+			},
+			Action: &client.ScheduleWorkflowAction{
+				ID:        "action_backup_server1",
+				Workflow:  shared.WorkflowBackupServer,
+				TaskQueue: "server",
+			},
+		},
+		client.ScheduleOptions{
+			ID: "schedule_os_info_linux_desktop",
+			Spec: client.ScheduleSpec{
+				CronExpressions: []string{"0 3 * * 0"},
+			},
+			Action: &client.ScheduleWorkflowAction{
+				ID:        "action_os_info_linux_desktop",
+				Workflow:  shared.WorkflowGetOsInfo,
+				TaskQueue: shared.GreetingTaskQueue,
+				Args:      createBackupArgs("linux_desktop"),
+			},
+		},
+		client.ScheduleOptions{
+			ID: "schedule_os_info_server1",
+			Spec: client.ScheduleSpec{
+				CronExpressions: []string{"0 3 * * 0"},
+			},
+			Action: &client.ScheduleWorkflowAction{
+				ID:        "action_os_info_server1",
+				Workflow:  shared.WorkflowGetOsInfo,
+				TaskQueue: "server",
+				Args:      createBackupArgs("server1"),
+			},
+		},
 	}
 	for _, schedule := range schedules {
-		log.Info("Creating schedule " + schedule.ID)
+		log.Info("Creating schedule", "id", schedule.ID)
 		_, err := c.ScheduleClient().Create(context.Background(), schedule)
 		shared.HandleError(err)
 	}
@@ -131,6 +178,10 @@ var workerCmd = &cobra.Command{
 		//w.RegisterActivity(shared.GetFilePaths)
 		//w.RegisterActivity(shared.GenerateMarkdownModels)
 		//w.RegisterActivity(shared.InsertMultipleIntoDb)
+
+		w.RegisterWorkflow(shared.WorkflowGetOsInfo)
+		w.RegisterActivity(shared.ExecOnHost)
+		w.RegisterActivity(shared.KvPut)
 
 		// Start listening to the Task Queue
 		err = w.Run(worker.InterruptCh())
