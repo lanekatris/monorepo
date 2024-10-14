@@ -10,37 +10,54 @@ import axios from 'axios';
 async function getFeedItems() {
   console.time('sql');
   const { rows: feed }: { rows: FeedItem[] } = await sql`
-with x as (select concat('climb-', id) id, 'climb' type, "Date"::date date, json_build_object('climb', t.*) data
+  with x as (select concat('climb-', id) id, 'climb' type, "Date"::date date, json_build_object('climb', t.*) data
            from kestra.ticks t
            union all
-           select concat('scorecard-', u.id) id,
-                  'scorecard'                type,
-                  "startdate"::date          date,
+           select concat('scorecard-', u.id)          id,
+                  'scorecard'                         type,
+                  "startdate"::date                   date,
                   json_build_object('scorecard', u.*) data
            from kestra.udisc_scorecard u
            union all
            select concat('disc-', d.id)                   id,
                   'disc'                                  type,
                   coalesce(d.created, d.created_at)::date date,
-                  json_build_object('disc', d.*) data
+                  json_build_object('disc', d.*)          data
            from noco.disc d
            union all
-           -- TODO: This needs to pull from the new thingy
-           select concat('adventure-', a.id) id,
-                  'obsidian-adventure'       type,
-                  a.date::date               date,
-                  json_build_object('adventure', a.*) data
-           from kestra.obsidian_adventures a
+           select concat('adventure-', a.id)        id,
+                  'obsidian-adventure'              type,
+                  a.file_date::date                 date,
+                  json_build_object('adventure', json_build_object(
+                          'id', a.id,
+                          'created_at', a.created_at,
+                          'updated_at', a.updated_at,
+                          'deleted_at', a.deleted_at,
+                          'date', a.file_date,
+                          'activity',
+                          replace(replace(file_path, concat(split_part(file_path, ' ', 1), ' '), ''), '.md', ''),-- this is the reason we manually build out this object instead of a.*
+                          'contents', a.file_contents,
+                          'tags', a.meta -> 'Tags',
+                          'path', a.file_path
+                                                 )) data
+           from public.markdown_file_models a
+           where a.file_path like 'Adventures%'
            union all
-           select concat('purchase-', p.id) id, 'purchase' type, p."Date"::date date, json_build_object('purchase', p.*) data
+           select concat('purchase-', p.id)          id,
+                  'purchase'                         type,
+                  p."Date"::date                     date,
+                  json_build_object('purchase', p.*) data
            from noco.purchases p
            union all
-           select concat('maintenance-', m.id) id,
-                  'maintenance'                type,
-                  m."Date"::date               date,
+           select concat('maintenance-', m.id)          id,
+                  'maintenance'                         type,
+                  m."Date"::date                        date,
                   json_build_object('maintenance', m.*) data
            from noco.maintenance m)
-select * from x order by date desc
+select *
+from x
+order by date desc
+
   `;
   console.timeEnd('sql');
   return feed;
