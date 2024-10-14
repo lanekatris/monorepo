@@ -69,8 +69,9 @@ func GenerateMarkdownModels(filePaths []string, rootPath string) ([]MarkdownFile
 			Situps  int      `yaml:situps`
 			Pushups int      `yaml:pushups`
 			Tags    []string `yaml:tags`
+			Type    string   `yaml:type`
 		}
-		_, err = frontmatter.Parse(strings.NewReader(string(contents)), &EmptyMatter)
+		rest, err := frontmatter.Parse(strings.NewReader(string(contents)), &EmptyMatter)
 		if err != nil {
 			return nil, err
 		}
@@ -93,7 +94,7 @@ func GenerateMarkdownModels(filePaths []string, rootPath string) ([]MarkdownFile
 			return nil, err
 		}
 
-		fileContents := sql.NullString{String: string(contents), Valid: true}
+		fileContents := sql.NullString{String: string(rest), Valid: true}
 
 		models = append(models, MarkdownFileModel{
 			FileDate:      baseFilename,

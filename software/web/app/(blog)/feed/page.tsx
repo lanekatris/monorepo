@@ -183,7 +183,8 @@ export default async function FeedPage({ searchParams }: FeedPageProps) {
               <FeedLineItemV2 type={type} date={date}>
                 <div className={'small'}>
                   <b>{data.maintenance?.title}</b>
-                  <div className={'bg-variant'}>
+                  <br />
+                  <div className={'bg-variant'} style={{ display: 'inline' }}>
                     {data.maintenance?.Property}
                   </div>
                   {data.maintenance?.Notes && (
