@@ -1,5 +1,8 @@
 ---
+slug: august-2024-website-updates
+date: 2024-10-14
 draft: true
+title: Website Updates
 ---
 
 As I've been changing up my website deployment pipeline, I still have the same issue of how to update my container when there is a new version. I'm running via docker compose. Watchtowerr hasn't been working for me

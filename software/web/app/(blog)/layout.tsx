@@ -8,6 +8,7 @@ import './blog/blog.css';
 import Image from 'next/image';
 import NotAi from './blog/[slug]/Written-By-Human-Not-By-AI-Badge-white.svg';
 import { getServerSession } from 'next-auth';
+import { GoToTop } from '../../lib/GoToTop/GoToTop';
 
 export default async function MatchaLayout({
   children
@@ -28,6 +29,7 @@ export default async function MatchaLayout({
             <h2>Lane's Site</h2>
           </Link>
           <div className={'links'}>
+            {session && <Link href="/feed">Feed</Link>}{' '}
             {/*<Link href="/homelab">Homelab</Link>*/}
             <Link href={'/about'}>About</Link>
             <Link href="/blog" className={'selected'}>
@@ -35,6 +37,21 @@ export default async function MatchaLayout({
             </Link>
           </div>
         </nav>
+        {/*<div>*/}
+        {/*  <Link href={'/about'}>About</Link>*/}
+        {/*  <Link href="/blog" className={'selected'}>*/}
+        {/*    Blog*/}
+        {/*  </Link>*/}
+
+        {/*  <Link href={'/about'}>About</Link>*/}
+        {/*  <Link href="/blog" className={'selected'}>*/}
+        {/*    Blog*/}
+        {/*  </Link>*/}
+        {/*  <Link href={'/about'}>About</Link>*/}
+        {/*  <Link href="/blog" className={'selected'}>*/}
+        {/*    Blog*/}
+        {/*  </Link>*/}
+        {/*</div>*/}
         {/*<nav>*/}
         {/*  <Link href={'/about'}>About</Link>*/}
         {/*  <Link href={'/about'}>About</Link>*/}
@@ -42,6 +59,7 @@ export default async function MatchaLayout({
         {/*  <Link href={'/about'}>About</Link>*/}
         {/*</nav>*/}
         {children}
+        <GoToTop />
         <footer>
           {/*<div*/}
           {/*  style={{ textAlign: 'center' }}*/}
@@ -129,6 +147,9 @@ export default async function MatchaLayout({
               )}
             </dd>
             <dd>{session && <Link href="/climb/gym-users">Gym Users</Link>}</dd>
+            <dd>
+              <Link href={'/food'}>Food</Link>
+            </dd>
             <dd>
               <Link href={session ? '/api/auth/signout' : '/api/auth/signin'}>
                 {session ? 'Logout' : 'Login'}

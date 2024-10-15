@@ -158,14 +158,20 @@ to quickly create a Cobra application.`,
 			//c.Data(http.StatusOK, "application/json", out)
 			cmd := exec.Command("npx", "nx", "build", "obsidian-client")
 			cmd.Dir = shared.GetPath("/home/lane/git/monorepo/software/js", "C:\\Code\\monorepo\\software\\js")
-			_, err := cmd.Output()
+			output, err := cmd.Output()
 			if err != nil {
+				log.Error(string(output))
+				log.Error(err)
 				c.JSON(500, err)
+				return
 			}
-			cmd = exec.Command("powershell", "cp", shared.GetPath("/home/lane/git/monorepo/software/js/dist/packages/obsidian-client/main.js", "C:\\Code\\monorepo\\software\\js\\dist\\packages\\obsidian-client\\main.js"), shared.GetPath("/home/lane/Documents/lkat-vault/_admin/Scripts/obsidian-client.js", "C:\\Users\\looni\\vault1\\_admin\\Scripts\\obsidian-client.js"))
-			_, err = cmd.Output()
+			cmd = exec.Command("cp", shared.GetPath("/home/lane/git/monorepo/software/js/dist/packages/obsidian-client/main.js", "C:\\Code\\monorepo\\software\\js\\dist\\packages\\obsidian-client\\main.js"), shared.GetPath("/home/lane/Documents/lkat-vault/_admin/Scripts/obsidian-client.js", "C:\\Users\\looni\\vault1\\_admin\\Scripts\\obsidian-client.js"))
+			output, err = cmd.Output()
 			if err != nil {
+				log.Error(string(output))
+				log.Error(err)
 				c.JSON(500, err)
+				return
 			}
 			c.JSON(200, "success")
 		})

@@ -12,6 +12,7 @@ import { getServerSession } from 'next-auth';
 import Markdown from 'react-markdown';
 import { NotAuthorized } from './notAuthorized';
 import Link from 'next/link';
+import { FeedItem } from '../../../feed/feed-types';
 
 export const dynamic = 'force-dynamic';
 
@@ -117,7 +118,8 @@ export default async function FeedPage({ searchParams }: FeedPageProps) {
           </NextLink>
         </div>
       </div>
-      {feed.map(({ id, type, date, data }) => {
+      {feed.map((input) => {
+        const { id, type, date, data } = input;
         if (type === 'obsidian-adventure' && data.adventure)
           return (
             <>
@@ -264,43 +266,43 @@ export default async function FeedPage({ searchParams }: FeedPageProps) {
           );
 
         if (type === 'raindrop' && data.raindrop)
-          return (
-            <FeedLineItemV2 key={id} type={type} date={date}>
-              <Link
-                href={data.raindrop.link}
-                target="_blank"
-                className={'small'}
-              >
-                {/*{data.raindrop?.title?.split(' ').slice(0, 10).join(' ')}...*/}
-                {formatTitle(data.raindrop?.title)}...
-              </Link>
-              <br />
-              {data.raindrop?.excerpt && (
-                <details className={'small'}>
-                  <summary>{formatTitle(data.raindrop?.title)}...</summary>
-                  {data.raindrop?.excerpt}
-                </details>
-              )}
-              {data.raindrop?.note && (
-                <blockquote className={'small'}>
-                  {data.raindrop?.note}
-                </blockquote>
-              )}
-              {data.raindrop?.highlights?.length > 0 && (
-                <>
-                  <b className={'small'}>Highlights:</b>
-                  {data.raindrop?.highlights.map((x) => (
-                    <blockquote key={x._id} className={'small'}>
-                      {x.text}
-                    </blockquote>
-                  ))}
-                </>
-              )}
-            </FeedLineItemV2>
-          );
+          return <RaindropFeedItem input={input} />;
 
         return <div key={id}>{type} - not implemented</div>;
       })}
     </main>
+  );
+}
+
+export function RaindropFeedItem({ input }: { input: FeedItem }) {
+  const { id, type, date, data } = input;
+  if (!data.raindrop) return null;
+  return (
+    <FeedLineItemV2 key={id} type={type} date={date}>
+      <Link href={data.raindrop.link} target="_blank" className={'small'}>
+        {/*{data.raindrop?.title?.split(' ').slice(0, 10).join(' ')}...*/}
+        {formatTitle(data.raindrop?.title)}...
+      </Link>
+      <br />
+      {data.raindrop?.excerpt && (
+        <details className={'small'}>
+          <summary>{formatTitle(data.raindrop?.title)}...</summary>
+          {data.raindrop?.excerpt}
+        </details>
+      )}
+      {data.raindrop?.note && (
+        <blockquote className={'small'}>{data.raindrop?.note}</blockquote>
+      )}
+      {data.raindrop?.highlights?.length > 0 && (
+        <>
+          <b className={'small'}>Highlights:</b>
+          {data.raindrop?.highlights.map((x) => (
+            <blockquote key={x._id} className={'small'}>
+              {x.text}
+            </blockquote>
+          ))}
+        </>
+      )}
+    </FeedLineItemV2>
   );
 }

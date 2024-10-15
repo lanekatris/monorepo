@@ -13,17 +13,17 @@ export default function BlogPage() {
   return (
     <>
       <main>
-        <div className="flash attention">
-          I know this styling is very different - it is intentional 😉 (
-          <a
-            href="https://matcha.mizu.sh/"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Matcha CSS
-          </a>
-          )
-        </div>
+        {/*<div className="flash attention">*/}
+        {/*  I know this styling is very different - it is intentional 😉 (*/}
+        {/*  <a*/}
+        {/*    href="https://matcha.mizu.sh/"*/}
+        {/*    rel="noopener noreferrer"*/}
+        {/*    target="_blank"*/}
+        {/*  >*/}
+        {/*    Matcha CSS*/}
+        {/*  </a>*/}
+        {/*  )*/}
+        {/*</div>*/}
         <div className="flash accent">
           I write Twitter/X type of content{' '}
           <b>
