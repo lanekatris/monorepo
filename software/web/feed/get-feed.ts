@@ -107,6 +107,12 @@ export async function getMemos() {
 }
 
 export const RAINDROP_COLLECTION_RECIPES = 25930218;
+export const RAINDROP_COLLECTION_INBOX = 36282268;
+
+const excludedCollectionIds = new Set([
+  RAINDROP_COLLECTION_INBOX,
+  RAINDROP_COLLECTION_RECIPES
+]);
 
 export async function getRaindrops() {
   console.time('raindrops');
@@ -136,7 +142,7 @@ export const getFeed = async ({
     showBookmarks
       ? getRaindrops().then((x) =>
           x.filter(
-            (y) => y.data.raindrop?.collectionId !== RAINDROP_COLLECTION_RECIPES
+            (y) => !excludedCollectionIds.has(y.data.raindrop?.collectionId!)
           )
         )
       : Promise.resolve([]),

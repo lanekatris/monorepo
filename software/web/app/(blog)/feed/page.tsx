@@ -105,14 +105,19 @@ export default async function FeedPage({ searchParams }: FeedPageProps) {
       >
         <h1 style={{ marginTop: 0 }}>Feed ({feed.length})</h1>
         <div style={{ display: 'flex', gap: '.5rem', flexWrap: 'wrap' }}>
-          <Link href="/feed.json">API</Link>
+          <Link href={'/inbox'} className={'muted'}>
+            Inbox
+          </Link>
           <span>|</span>
-          <NextLink href="/admin">Refresh Feed...</NextLink>
+          <Link href="/feed.json" className={'active'}>
+            API
+          </Link>
           <span>|</span>
           <NextLink
             href={`/feed?showBookmarks=${
               feedFilter.showBookmarks ? 'false' : 'true'
             }`}
+            className={'variant'}
           >
             {feedFilter.showBookmarks ? 'Hide Bookmarks' : 'Show Bookmarks'}
           </NextLink>
@@ -266,7 +271,7 @@ export default async function FeedPage({ searchParams }: FeedPageProps) {
           );
 
         if (type === 'raindrop' && data.raindrop)
-          return <RaindropFeedItem input={input} />;
+          return <RaindropFeedItem key={id} input={input} />;
 
         return <div key={id}>{type} - not implemented</div>;
       })}
