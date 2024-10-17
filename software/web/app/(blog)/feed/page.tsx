@@ -12,7 +12,8 @@ import { getServerSession } from 'next-auth';
 import Markdown from 'react-markdown';
 import { NotAuthorized } from './notAuthorized';
 import Link from 'next/link';
-import { FeedItem } from '../../../feed/feed-types';
+import { FeedItem, FeedItemType } from '../../../feed/feed-types';
+import { notFound } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
 
@@ -184,12 +185,22 @@ export default async function FeedPage({ searchParams }: FeedPageProps) {
             </>
           );
 
-        if (type === 'maintenance')
+        if (type === 'maintenance' && data.maintenance)
           return (
             <>
               <FeedLineItemV2 type={type} date={date}>
                 <div className={'small'}>
-                  <b>{data.maintenance?.title}</b>
+                  <b>{data.maintenance?.title}</b>{' '}
+                  {editLinks[type] ? (
+                    <Link
+                      href={`${editLinks[type]}${data.maintenance.id}`}
+                      target={'_blank'}
+                    >
+                      Edit
+                    </Link>
+                  ) : (
+                    ''
+                  )}
                   <br />
                   <div className={'bg-variant'} style={{ display: 'inline' }}>
                     {data.maintenance?.Property}
@@ -278,6 +289,18 @@ export default async function FeedPage({ searchParams }: FeedPageProps) {
     </main>
   );
 }
+
+const editLinks: { [k in FeedItemType]: string | undefined } = {
+  'disc-golf-scorecard': undefined,
+  climb: undefined,
+  'disc-golf-disc': undefined,
+  'obsidian-adventure': undefined,
+  memo: undefined,
+  maintenance:
+    'https://noco.lkat.io/dashboard/#/nc/p_egch5370h5zwqh/myqm1xxv25h0zia?rowId=',
+  raindrop: undefined,
+  purchase: undefined
+};
 
 export function RaindropFeedItem({ input }: { input: FeedItem }) {
   const { id, type, date, data } = input;

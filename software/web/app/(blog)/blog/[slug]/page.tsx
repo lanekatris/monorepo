@@ -34,7 +34,8 @@ export default function BlogPostPage({ params }: PostProps) {
         <br />
         <br />
         <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
-        <small>
+        <hr />
+        <small className="flash muted">
           {post.tags && (
             <>
               <b>Date</b>: {post.date.split('T')[0]}
@@ -43,6 +44,7 @@ export default function BlogPostPage({ params }: PostProps) {
             </>
           )}
         </small>
+        <hr />
       </main>
     </>
   );

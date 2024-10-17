@@ -65,6 +65,7 @@ export interface FeedItem {
     bookmark?: Bookmark;
     memo?: Memo;
     maintenance?: {
+      id: number;
       title: string;
       Date: string;
       Property: string;
