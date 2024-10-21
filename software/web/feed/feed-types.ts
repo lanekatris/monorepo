@@ -45,7 +45,8 @@ export type FeedItemType =
   | 'memo'
   | 'maintenance'
   | 'raindrop'
-  | 'purchase';
+  | 'purchase'
+  | 'github-event';
 
 export interface FeedItem {
   id: string;
@@ -77,6 +78,21 @@ export interface FeedItem {
       Cost: number;
       Tags: string;
       Notes: string;
+    };
+    githubEvent?: {
+      // Jobs
+      action?: 'completed' | 'in_progress';
+      workflow_run?: {
+        display_title: string;
+      };
+      commits?: [
+        {
+          id: string;
+          message: string;
+          url: string;
+          modified: string[];
+        }
+      ];
     };
   };
 }

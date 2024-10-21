@@ -53,7 +53,14 @@ async function getFeedItems() {
                   'maintenance'                         type,
                   m."Date"::date                        date,
                   json_build_object('maintenance', m.*) data
-           from noco.maintenance m)
+           from noco.maintenance m
+           union all
+           select concat('github-', e.id) id, 
+                'github-event' type, 
+                e.created_at date,
+                json_build_object('githubEvent', e.data::json) data 
+           from events e where event_name = 'github_event_v1' and e.id not in (7,9)
+)
 select *
 from x
 order by date desc

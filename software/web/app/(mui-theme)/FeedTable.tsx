@@ -9,6 +9,7 @@ import {
   GiMoneyStack
 } from 'react-icons/gi';
 import { MdOutlineAttachMoney } from 'react-icons/md';
+import { FaGithub } from 'react-icons/fa';
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -41,7 +42,8 @@ export const feedIcon: { [k in FeedItemType]: React.ReactElement } = {
   raindrop: <GiBookmark size={20} />,
   memo: <GiNotebook size={20} />,
   maintenance: <GiWrench size={20} />,
-  purchase: <MdOutlineAttachMoney size={20} />
+  purchase: <MdOutlineAttachMoney size={20} />,
+  'github-event': <FaGithub size={20} />
 };
 
 export const feedTitle: { [k in FeedItemType]: string } = {
@@ -53,7 +55,8 @@ export const feedTitle: { [k in FeedItemType]: string } = {
   raindrop: 'Bookmark',
   memo: 'Memo',
   maintenance: 'Maintenance',
-  purchase: 'Purchase'
+  purchase: 'Purchase',
+  'github-event': 'Github Event'
 };
 
 export interface FeedLineItemProps {
