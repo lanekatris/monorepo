@@ -132,6 +132,9 @@ export default async function MatchaLayout({
             <dl>
               <dd>©️ {new Date().getFullYear()} Lane Katris</dd>
               <dd>
+                <Link href="/goals">Goals</Link>
+              </dd>
+              <dd>
                 <Link href="/colophon">Colophon</Link>
               </dd>
               <dd>{session && <Link href="/feed">Feed</Link>}</dd>

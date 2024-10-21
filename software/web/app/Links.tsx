@@ -6,6 +6,7 @@ import { getServerSession } from 'next-auth';
 import { NotAuthorized } from './(blog)/feed/notAuthorized';
 
 const links = [
+  { href: '/goals', name: 'Goals' },
   { href: '/blogroll', name: 'Blog Roll' },
   // { href: 'https://memo.lkat.io/', name: 'Notes' },
   // { href: '/location-history', name: 'Location History', requiresLogin: true },
