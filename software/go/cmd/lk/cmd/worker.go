@@ -100,6 +100,17 @@ func deploySchedulesV2(c client.Client) {
 				Args:      createBackupArgs("server1"),
 			},
 		},
+		client.ScheduleOptions{
+			ID: "schedule_build_climb_rest",
+			Spec: client.ScheduleSpec{
+				CronExpressions: []string{"0 */12 * * *"},
+			},
+			Action: &client.ScheduleWorkflowAction{
+				ID:        "action_build_climb_rest",
+				Workflow:  shared.WorkflowClimbRest,
+				TaskQueue: "server",
+			},
+		},
 	}
 	for _, schedule := range schedules {
 		log.Info("Creating schedule", "id", schedule.ID)
@@ -186,6 +197,11 @@ var workerCmd = &cobra.Command{
 		// Event dumper
 		w.RegisterWorkflow(shared.WorkflowDumper)
 		w.RegisterActivity(shared.DumpEvent)
+
+		// Climb.rest
+		w.RegisterWorkflow(shared.WorkflowClimbRest)
+		w.RegisterActivity(shared.BuildClimbRest)
+		w.RegisterActivity(shared.GetClimbRestData)
 
 		// Start listening to the Task Queue
 		err = w.Run(worker.InterruptCh())

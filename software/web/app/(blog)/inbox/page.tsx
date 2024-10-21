@@ -40,10 +40,13 @@ export default async function InboxPage() {
     await sql`with x as (select length(file_path) - length(replace(file_path, '/', '')) folder_depth, * from markdown_file_models)
 select count(*)::int
 from x
-where folder_depth = 0;`;
+where folder_depth = 1;`;
 
-  // console.log('idk', idk.rows);
+  const summersvilleWaterHight: { rows: { count: number }[] } =
+    await sql`select data::jsonb->'sug'->'pool_cur'->'elev' count from events where event_name = 'climbrest_build_kicked' order by created_at desc limit 1`;
 
+  const waterHeight = summersvilleWaterHight.rows[0]?.count;
+  const canClimb = waterHeight <= 1620;
   return (
     <div>
       <div className={'flash danger'}>
@@ -58,6 +61,14 @@ where folder_depth = 0;`;
           want at most 50
         </div>
       )}
+      {rootFolderCounts.rows[0]?.count <= 50 && (
+        <div className={'flash success'}>
+          Your obsidian root looks tidy ({rootFolderCounts.rows[0]?.count})
+        </div>
+      )}
+      <div className={`flash ${canClimb ? 'success' : 'error'}`}>
+        Can climb at Summersville {waterHeight} / 1620
+      </div>
       <h1>Starred RSS Entries ({rows.length})</h1>
       <ol>
         {rows.map(({ id, title }) => (
