@@ -117,7 +117,10 @@ const excludedCollectionIds = new Set([
 export async function getRaindrops() {
   console.time('raindrops');
 
-  const raindrops: Raindrop[] = await getFromMinio('etl', 'raindrops.json');
+  const { data: raindrops } = await getFromMinio<Raindrop[]>(
+    'etl',
+    'raindrops.json'
+  );
 
   console.timeEnd('raindrops');
   return raindrops.map((raindrop) => {
