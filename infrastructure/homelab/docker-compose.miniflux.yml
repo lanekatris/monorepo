@@ -1,5 +1,6 @@
 services:
   miniflux:
+    restart: unless-stopped
     image: miniflux/miniflux:latest
     ports:
       - "8663:8080"
@@ -14,6 +15,7 @@ services:
       - ADMIN_PASSWORD=test123
   db:
     image: postgres:15
+    restart: unless-stopped
     environment:
       - POSTGRES_USER=miniflux
       - POSTGRES_PASSWORD=secret
