@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
   });
 
   const result = await client.workflow.start('WorkflowDumper', {
-    workflowId: 'nextjs-event-dumper',
+    workflowId: `nextjs-event-dumper-${type}`,
     taskQueue: 'server',
     args: [type, data]
   });
