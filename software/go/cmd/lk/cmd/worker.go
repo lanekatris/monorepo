@@ -57,12 +57,12 @@ func deploySchedulesV2(c client.Client) {
 			ID: "schedule_obsidian_files_to_db",
 			Spec: client.ScheduleSpec{
 				// Every 12 hours
-				CronExpressions: []string{"0 */12 * * *"}, // https://crontab.guru/#0_*/12_*_*_*
+				CronExpressions: []string{"0 */2 * * *"}, // https://crontab.guru/#0_*/12_*_*_*
 			},
 			Action: &client.ScheduleWorkflowAction{
 				ID:        "action_obsidian_files_to_db",
 				Workflow:  shared.WorkflowMarkdownToDb,
-				TaskQueue: shared.GreetingTaskQueue,
+				TaskQueue: "server",
 			},
 		},
 		client.ScheduleOptions{
@@ -182,6 +182,10 @@ var workerCmd = &cobra.Command{
 		w.RegisterWorkflow(shared.WorkflowGetOsInfo)
 		w.RegisterActivity(shared.ExecOnHost)
 		w.RegisterActivity(shared.KvPut)
+
+		// Event dumper
+		w.RegisterWorkflow(shared.WorkflowDumper)
+		w.RegisterActivity(shared.DumpEvent)
 
 		// Start listening to the Task Queue
 		err = w.Run(worker.InterruptCh())

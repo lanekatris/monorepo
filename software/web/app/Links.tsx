@@ -2,13 +2,19 @@ import { Chip, List, ListItem, useTheme } from '@mui/joy';
 import Link from 'next/link';
 import React from 'react';
 import { getServerSession } from 'next-auth';
+import { FiExternalLink } from 'react-icons/fi';
 
 import { NotAuthorized } from './(blog)/feed/notAuthorized';
 
 const links = [
+  {
+    href: 'https://memo.lkat.io/',
+    name: 'Notes',
+    icon: <FiExternalLink />,
+    target: '_blank'
+  },
   { href: '/goals', name: 'Goals' },
   { href: '/blogroll', name: 'Blog Roll' },
-  // { href: 'https://memo.lkat.io/', name: 'Notes' },
   // { href: '/location-history', name: 'Location History', requiresLogin: true },
   // { href: '/discs', name: 'Disc Golf' },
   // { href: '/climb/gym-users', name: 'Gym Users', requiresLogin: true },
@@ -46,10 +52,12 @@ export async function HomeLinksV2() {
         //   // if (!link.requiresLogin) return true;
         //   return session;
         // })
-        .map(({ href, name }) => {
+        .map(({ href, name, icon, target }) => {
           return (
             <li key={name}>
-              <Link href={href}>{name}</Link>
+              <Link href={href} target={target}>
+                {name} {icon}
+              </Link>
             </li>
           );
         })}
