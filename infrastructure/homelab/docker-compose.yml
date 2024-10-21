@@ -2,6 +2,23 @@
 #  homeassistant:
 
 services:
+  obsidian:
+    image: lscr.io/linuxserver/obsidian:1.7.4
+    container_name: obsidian
+    security_opt:
+      - seccomp:unconfined #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /bigboy/obsidian/config:/config
+    ports:
+      - "4445:3000"
+    devices:
+      - /dev/dri:/dev/dri
+    shm_size: "1gb"
+    restart: unless-stopped
   lkat:
     image: loonison101/lk:main
     restart: unless-stopped
