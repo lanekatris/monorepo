@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Connection, Client } from '@temporalio/client';
+import { nanoid } from 'nanoid';
 
 export async function POST(request: NextRequest) {
   const token = request.nextUrl.searchParams.get('token');
@@ -19,7 +20,7 @@ export async function POST(request: NextRequest) {
   });
 
   const result = await client.workflow.start('WorkflowDumper', {
-    workflowId: `nextjs-event-dumper-${type}`,
+    workflowId: `nextjs-event-dumper-${type}-${nanoid()}`,
     taskQueue: 'server',
     args: [type, data]
   });
