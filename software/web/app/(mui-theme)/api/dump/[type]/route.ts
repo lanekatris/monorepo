@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Connection, Client } from '@temporalio/client';
 import { nanoid } from 'nanoid';
+import { createEvent } from '../../../../../lib/createEvent';
 
 export async function POST(request: NextRequest) {
   const token = request.nextUrl.searchParams.get('token');
@@ -10,20 +11,9 @@ export async function POST(request: NextRequest) {
 
   const data = await request.text();
   const type = request.nextUrl.pathname.split('/').pop();
+  if (!type) throw new Error('Type is required');
 
-  const connection = await Connection.connect({
-    address: '192.168.86.100:7233'
-  });
-
-  const client = new Client({
-    connection
-  });
-
-  const result = await client.workflow.start('WorkflowDumper', {
-    workflowId: `nextjs-event-dumper-${type}-${nanoid()}`,
-    taskQueue: 'server',
-    args: [type, data]
-  });
+  const result = createEvent(type, data);
 
   return NextResponse.json({
     data,

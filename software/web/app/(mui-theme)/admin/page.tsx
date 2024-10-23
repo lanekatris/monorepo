@@ -6,6 +6,7 @@ import {
   Link,
   Typography
 } from '@mui/joy';
+import NextLink from 'next/link';
 import { sql } from '@vercel/postgres';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
@@ -15,6 +16,7 @@ import { getServerSession } from 'next-auth';
 import React from 'react';
 
 import { NotAuthorized } from '../../(blog)/feed/notAuthorized';
+import { createEvent } from '../../../lib/createEvent';
 
 export const dynamic = 'force-dynamic';
 
@@ -34,8 +36,16 @@ export interface Maintenance {
   Notes?: string;
 }
 
-export default async function AdminPage() {
+export default async function AdminPage({
+  searchParams
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   noStore();
+
+  const session = await getServerSession();
+  if (!session) return <NotAuthorized />;
+
   async function click(formData: FormData) {
     'use server';
 
@@ -50,6 +60,15 @@ export default async function AdminPage() {
     revalidatePath('/admin');
 
     redirect(url);
+  }
+
+  async function createSimpleEvent(formData: FormData) {
+    'use server';
+    const eventName = formData.get('eventName');
+    if (!eventName) throw new Error('eventName is required');
+    await createEvent(eventName.toString());
+    revalidatePath('/admin');
+    redirect('/admin?success=true');
   }
 
   const {
@@ -75,8 +94,8 @@ export default async function AdminPage() {
     }[];
   } = await sql`select * from noco.purchases order by "Date" desc`;
 
-  const session = await getServerSession();
-  if (!session) return <NotAuthorized />;
+  const success = (await searchParams).success;
+  console.log('success', success);
 
   return (
     <Container maxWidth="sm">
@@ -86,6 +105,14 @@ export default async function AdminPage() {
       {/*  </Link>*/}
       {/*  <Typography>Admin Dashboard</Typography>*/}
       {/*</Breadcrumbs>*/}
+      {success && (
+        <Alert
+          color={'success'}
+          endDecorator={<NextLink href={'/admin'}>X</NextLink>}
+        >
+          Success!
+        </Alert>
+      )}
 
       <ul
         style={{
@@ -115,6 +142,25 @@ export default async function AdminPage() {
         ))}
       </ul>
 
+      <Typography level="h4">Events</Typography>
+      <div
+        style={{
+          backgroundColor: '#ffffce',
+          paddingTop: '20px',
+          paddingBottom: '20px'
+        }}
+      >
+        <form action={createSimpleEvent}>
+          <input
+            type={'hidden'}
+            name={'eventName'}
+            value={'aquarium_water_filled_v1'}
+          />
+          <Button variant="plain" type="submit" size="sm">
+            Filled Fish Tank
+          </Button>
+        </form>
+      </div>
       <Typography level="h4">Maintenance </Typography>
       <ul
         style={{

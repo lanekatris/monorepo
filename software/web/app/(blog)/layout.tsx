@@ -7,6 +7,7 @@ import './blog/blog.css';
 
 import Image from 'next/image';
 import NotAi from './blog/[slug]/Written-By-Human-Not-By-AI-Badge-white.svg';
+import NotAiDark from './blog/[slug]/Written-By-Human-Not-By-AI-Badge-black.svg';
 import { getServerSession } from 'next-auth';
 import { GoToTop } from '../../lib/GoToTop/GoToTop';
 
@@ -101,7 +102,17 @@ export default async function MatchaLayout({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Image priority={false} src={NotAi} alt="Not written by AI" />
+                  <picture>
+                    <source
+                      srcSet={NotAiDark.src}
+                      media="(prefers-color-scheme: dark)"
+                    />
+                    <Image
+                      priority={false}
+                      src={NotAi}
+                      alt="Not written by AI"
+                    />
+                  </picture>
                 </a>
               </dd>
               <dd>
@@ -112,17 +123,6 @@ export default async function MatchaLayout({
                   <img
                     alt="docker image build status"
                     src="https://github.com/lanekatris/monorepo/actions/workflows/web-docker.yml/badge.svg"
-                  />
-                </a>
-              </dd>
-              <dd>
-                <a
-                  href="https://github.com/lanekatris/monorepo/actions/workflows/climb-rest-build.yml"
-                  target="_blank"
-                >
-                  <img
-                    alt="Cron to rebuild climb.rest"
-                    src="https://github.com/lanekatris/monorepo/actions/workflows/climb-rest-build.yml/badge.svg"
                   />
                 </a>
               </dd>

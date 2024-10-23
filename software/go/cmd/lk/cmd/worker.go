@@ -50,7 +50,7 @@ func deploySchedulesV2(c client.Client) {
 			Action: &client.ScheduleWorkflowAction{
 				ID:        "action_miniflux_to_s3",
 				Workflow:  shared.WorkflowMinifluxToS3,
-				TaskQueue: shared.GreetingTaskQueue,
+				TaskQueue: "server",
 			},
 		},
 		client.ScheduleOptions{
