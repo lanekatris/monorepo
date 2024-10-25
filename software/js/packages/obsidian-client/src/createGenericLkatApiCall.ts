@@ -9,7 +9,8 @@ type LkatApiCall =
   | 'recent-gym-users'
   | 'raindrop-io'
   | 'deploy-obsidian-client'
-  | 'udisc-scorecards';
+  | 'udisc-scorecards'
+  | 'deploy-markdown';
 export function createGenericLkatApiCall(type: LkatApiCall) {
   return async function (obsidian: ObsidianApi) {
     // eslint-disable-next-line prefer-rest-params
