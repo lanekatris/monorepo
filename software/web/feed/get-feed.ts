@@ -60,6 +60,13 @@ async function getFeedItems() {
                 e.created_at date,
                 json_build_object('githubEvent', e.data::json) data 
            from events e where event_name = 'github_event_v1' and e.id not in (7,9)
+           union all
+           select
+    concat('place-visit-', p.id) id,
+    'place-visit' type,
+    p.visited_date date,
+    json_build_object('placeVisit', p.*) data
+    from noco.place p where visited_date is not null
 )
 select *
 from x
@@ -157,6 +164,7 @@ export const getFeed = async ({
         )
       : Promise.resolve([]),
     getFeedItems(),
+
     getMemos()
   ]);
 

@@ -46,7 +46,8 @@ export type FeedItemType =
   | 'maintenance'
   | 'raindrop'
   | 'purchase'
-  | 'github-event';
+  | 'github-event'
+  | 'place-visit';
 
 export interface FeedItem {
   id: string;
@@ -94,5 +95,6 @@ export interface FeedItem {
         }
       ];
     };
+    placeVisit?: { name: string };
   };
 }

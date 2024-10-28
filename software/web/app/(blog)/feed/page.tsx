@@ -322,6 +322,12 @@ export default async function FeedPage({ searchParams }: FeedPageProps) {
             </FeedLineItemV2>
           );
 
+        if (type === 'place-visit' && data.placeVisit)
+          return (
+            <FeedLineItemV2 key={id} type={type} date={date}>
+              Place: {data.placeVisit.name}
+            </FeedLineItemV2>
+          );
         return <div key={id}>{type} - not implemented</div>;
       })}
     </main>
@@ -338,7 +344,8 @@ const editLinks: { [k in FeedItemType]: string | undefined } = {
     'https://noco.lkat.io/dashboard/#/nc/p_egch5370h5zwqh/myqm1xxv25h0zia?rowId=',
   raindrop: undefined,
   purchase: undefined,
-  'github-event': undefined
+  'github-event': undefined,
+  'place-visit': undefined
 };
 
 export function RaindropFeedItem({ input }: { input: FeedItem }) {
