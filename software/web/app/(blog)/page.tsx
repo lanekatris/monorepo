@@ -13,7 +13,7 @@ export default async function Homev2Page() {
         .
       </p>
       <p>
-        I'm married, have a son, and am a big fan of{' '}
+        I&apos;m married, have a son, and am a big fan of{' '}
         <Link href={'/discs'}>Disc Golf</Link> and Rock Climbing.
       </p>
       <h2 className={''}>Pages</h2>

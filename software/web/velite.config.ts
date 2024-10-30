@@ -71,6 +71,7 @@ export default defineConfig({
     }
   },
   markdown: {
+// @ts-ignore
     rehypePlugins: [[rehypeShiki, { theme: 'nord' }]]
   }
 });

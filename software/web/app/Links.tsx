@@ -44,7 +44,7 @@ export default async function HomeLinks() {
 }
 
 export async function HomeLinksV2() {
-  const session = await getServerSession();
+  // const session = await getServerSession();
   return (
     <ul>
       {links

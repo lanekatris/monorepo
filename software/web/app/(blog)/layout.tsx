@@ -19,12 +19,12 @@ export default async function MatchaLayout({
   return (
     <html lang="en">
       <head>
-        <title>Lane's Blog</title>
+        <title>Lane&apos;s Blog</title>
       </head>
       <body>
         <nav>
           <Link href="/" className={'default'}>
-            <h2>Lane's Site</h2>
+            <h2>Lane&apos;s Site</h2>
           </Link>
           <div className={'links'}>
             {session && <Link href="/feed">Feed</Link>}{' '}

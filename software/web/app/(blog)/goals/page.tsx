@@ -47,7 +47,7 @@ export default async function GoalsPage() {
   return (
     <>
       <h1 className={' '}>Goals</h1>
-      <p>Here are a few goals that I'd love to accomplish more on:</p>
+      <p>Here are a few goals that I&apos;d love to accomplish more on:</p>
       <div style={{ maxWidth: 500 }}>
         {goals.map((goal) => (
           <MetricCardV2 key={goal.title} {...goal} />

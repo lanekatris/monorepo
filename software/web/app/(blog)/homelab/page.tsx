@@ -95,7 +95,8 @@ export default async function HomelabPage() {
         and renders the results here.
       </div>
       <div className="flash accent">
-        I didn't go with <code>neofetch</code> because of unicode characters.
+        I didn&apos;t go with <code>neofetch</code> because of unicode
+        characters.
       </div>
       {machines.map((serverInfo, i) => (
         <div key={i}>
