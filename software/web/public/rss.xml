@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Blog posts | RSS Feed</title>
+        <link>localhost:3000</link>
+        <description>Welcome to this blog posts!</description>
+        <lastBuildDate>Fri, 01 Nov 2024 00:54:42 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>Feed for Node.js</generator>
+        <image>
+            <title>Blog posts | RSS Feed</title>
+            <url>localhost:3000/logo.png</url>
+            <link>localhost:3000</link>
+        </image>
+        <copyright>All rights reserved 2024, Ibas</copyright>
+        <item>
+            <title><![CDATA[Determining Disc Golf Streaks]]></title>
+            <link>localhost:3000/blog/disc-golf-streak</link>
+            <guid>localhost:3000/blog/disc-golf-streak</guid>
+            <pubDate>Sun, 04 Aug 2024 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[My Notebooks]]></title>
+            <link>localhost:3000/blog/notebooks</link>
+            <guid>localhost:3000/blog/notebooks</guid>
+            <pubDate>Fri, 16 Aug 2024 00:00:00 GMT</pubDate>
+        </item>
+    </channel>
+</rss>

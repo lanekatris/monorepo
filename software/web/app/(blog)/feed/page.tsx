@@ -23,12 +23,18 @@ interface FeedPageProps {
   };
 }
 
-function FeedLineItemV2({ type, date, children, link }: FeedLineItemProps) {
+function FeedLineItemV2({
+  type,
+  date,
+  children,
+  link,
+  className
+}: FeedLineItemProps) {
   return (
     <div
       // className={'flash default'}
       // className={'flash attention'}
-      className={'flash default'}
+      className={className ?? 'flash default'}
       // className={''}
       style={{
         // display: 'flex',
@@ -324,7 +330,12 @@ export default async function FeedPage({ searchParams }: FeedPageProps) {
 
         if (type === 'place-visit' && data.placeVisit)
           return (
-            <FeedLineItemV2 key={id} type={type} date={date}>
+            <FeedLineItemV2
+              key={id}
+              type={type}
+              date={date}
+              className={'flash success'}
+            >
               Place: {data.placeVisit.name}
             </FeedLineItemV2>
           );

@@ -23,22 +23,24 @@ export default function BlogPostPage({ params }: PostProps) {
 
   if (post == null) notFound();
 
+  // console.log('post', post);
+
   return (
     <>
       <main>
-        <h1>{post.title}</h1>
-        <small className="smaller">
-          <span>Updated: </span>
-          <span className="bg-muted">{post.lastModified.split('T')[0]}</span>
-        </small>
-        <br />
-        <br />
+        {/*<h1>{post.title}</h1>*/}
+        {/*<small className="smaller">*/}
+        {/*  <span>Updated: </span>*/}
+        {/*  <span className="bg-muted">{post.lastModified.split('T')[0]}</span>*/}
+        {/*</small>*/}
+        {/*<br />*/}
+        {/*<br />*/}
         <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
         <hr />
         <small className="flash muted">
+          <b>Date</b>: {post.date.split('T')[0]}
           {post.tags && (
             <>
-              <b>Date</b>: {post.date.split('T')[0]}
               {' | '}
               <b>Tags</b>: {post.tags?.map((t) => `#${t}`).join(', ')}
             </>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>localhost:3000</id>
+    <title>Blog posts | RSS Feed</title>
+    <updated>2024-11-01T00:54:42.788Z</updated>
+    <generator>Feed for Node.js</generator>
+    <link rel="alternate" href="localhost:3000"/>
+    <link rel="self" href="localhost:3000/atom.xml"/>
+    <subtitle>Welcome to this blog posts!</subtitle>
+    <logo>localhost:3000/logo.png</logo>
+    <icon>localhost:3000/favicon.png</icon>
+    <rights>All rights reserved 2024, Ibas</rights>
+    <entry>
+        <title type="html"><![CDATA[Determining Disc Golf Streaks]]></title>
+        <id>localhost:3000/blog/disc-golf-streak</id>
+        <link href="localhost:3000/blog/disc-golf-streak"/>
+        <updated>2024-08-04T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[My Notebooks]]></title>
+        <id>localhost:3000/blog/notebooks</id>
+        <link href="localhost:3000/blog/notebooks"/>
+        <updated>2024-08-16T00:00:00.000Z</updated>
+    </entry>
+</feed>

@@ -1,0 +1,22 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Blog posts | RSS Feed",
+    "home_page_url": "localhost:3000",
+    "feed_url": "localhost:3000/rss.json",
+    "description": "Welcome to this blog posts!",
+    "icon": "localhost:3000/logo.png",
+    "items": [
+        {
+            "id": "localhost:3000/blog/disc-golf-streak",
+            "url": "localhost:3000/blog/disc-golf-streak",
+            "title": "Determining Disc Golf Streaks",
+            "date_modified": "2024-08-04T00:00:00.000Z"
+        },
+        {
+            "id": "localhost:3000/blog/notebooks",
+            "url": "localhost:3000/blog/notebooks",
+            "title": "My Notebooks",
+            "date_modified": "2024-08-16T00:00:00.000Z"
+        }
+    ]
+}

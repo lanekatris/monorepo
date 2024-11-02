@@ -8,8 +8,10 @@ import {
 } from '@mui/joy';
 import { posts } from '../../../.velite';
 import React from 'react';
+import generateRssFeed from '../../../generateRssFeed';
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  // await generateRssFeed();
   return (
     <>
       <main>
@@ -39,9 +41,16 @@ export default function BlogPage() {
               })
               .map((c) => (
                 <dd key={c.slug}>
+                  {/*<Link href={c.permalink}>{c.title}</Link>*/}
+                  {/*<br />*/}
+                  {/*<small>{c.date.split('T')[0]}</small>*/}
+                  <span className={'mr-.75'}>{c.date.split('T')[0]}</span>
                   <Link href={c.permalink}>{c.title}</Link>
-                  <br />
-                  <small>{c.date.split('T')[0]}</small>
+                  {/*<br />*/}
+                  {/*<Link href={c.permalink}>*/}
+                  {/*  <span className={'mr-.75'}>{c.date.split('T')[0]}</span>*/}
+                  {/*  {c.title}*/}
+                  {/*</Link>*/}
                 </dd>
               ))}
           </dl>

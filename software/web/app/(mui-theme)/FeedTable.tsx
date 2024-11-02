@@ -68,6 +68,7 @@ export interface FeedLineItemProps {
 
   children: React.ReactNode;
   link?: string;
+  className?: string;
 }
 
 export const USDollar = new Intl.NumberFormat('en-US', {

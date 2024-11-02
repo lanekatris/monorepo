@@ -105,14 +105,6 @@ export default async function AdminPage({
       {/*  </Link>*/}
       {/*  <Typography>Admin Dashboard</Typography>*/}
       {/*</Breadcrumbs>*/}
-      {success && (
-        <Alert
-          color={'success'}
-          endDecorator={<NextLink href={'/admin'}>X</NextLink>}
-        >
-          Success!
-        </Alert>
-      )}
 
       <ul
         style={{
@@ -160,6 +152,18 @@ export default async function AdminPage({
             Filled Fish Tank
           </Button>
         </form>
+        {success && (
+          <Alert
+            color={'success'}
+            endDecorator={
+              <NextLink href={'/admin'} scroll={false}>
+                X
+              </NextLink>
+            }
+          >
+            Success!
+          </Alert>
+        )}
       </div>
       <Typography level="h4">Maintenance </Typography>
       <ul
