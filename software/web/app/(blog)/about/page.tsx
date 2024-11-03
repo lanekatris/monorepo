@@ -1,4 +1,3 @@
-import { Box, Breadcrumbs, Container, Link, Typography } from '@mui/joy';
 import Image from 'next/image';
 
 import aboutImage from './434393123_7438281949593065_9174792310540916431_n.jpg';
@@ -7,42 +6,26 @@ import React from 'react';
 
 export default function AboutPage() {
   return (
-    <Container maxWidth="sm">
-      <Breadcrumbs>
-        <Link color="neutral" href="/software/web/public">
-          Home
-        </Link>
-        <Typography fontWeight="bold">About Me</Typography>
-      </Breadcrumbs>
-
-      <Box>
+    <main>
+      <h2>About Me</h2>
+      <p>
         <Image
           src={aboutImage}
           alt="Lane and his son playing disc golf"
-          // sizes="100vw"
-          // style={{
-          //   width: '100%',
-          //   height: 'auto',
-          // }}
-          // style={{ textAlign: 'center' }}
           height={400}
           width={400}
           placeholder="blur"
         />
-        <Typography level="body-xs">
-          Lane and his son playing disc golf
-        </Typography>
-      </Box>
+        <div className={'muted small'}>Lane and his son playing disc golf</div>
+      </p>
 
-      <br />
-      <Typography level="h3">Professional</Typography>
-      <Typography>
+      <h3>Professional</h3>
+      <p>
         I&apos;m a software engineer. I care about delivering a product that
         gives value. Taking requirements and architecting solutions from a full
         stack perspective is my bread and butter. I&apos;m always trying to
         learn and be open minded.
-      </Typography>
-      <br />
+      </p>
       <a href="https://gitconnected.com/lanekatris" target="_blank">
         Live Resume
       </a>
@@ -50,29 +33,26 @@ export default function AboutPage() {
       <a href="/resume.pdf">PDF Resume</a>
       <br />
       <br />
-      <Typography level="h3">Fun</Typography>
-      <Typography>
+      <h3>Fun</h3>
+      <p>
         I also enjoy disc golf, ultimate frisbee, rock climbing, paintball,
         basketball, etc. The vast majority of my activities are disc golf
         related.
-      </Typography>
-      <br />
+      </p>
 
-      <Typography level="h3" gutterBottom>
-        West Virginia
-      </Typography>
-      <Box>
+      <h3>West Virginia</h3>
+      <p>
         <Image src={fireTower} height={500} alt="Atop a fire tower" />
-        <Typography level="body-xs">
+        <div className={'muted small'}>
           Atop a fire tower in Monongahela National Forest - June 2024
-        </Typography>
-      </Box>
-      <Typography>
+        </div>
+      </p>
+      <p>
         I live in West Virginia. Although it may be a poor state and folks
         confuse it with &quot;western virginia&quot;... it is a beautiful place.
         Also, not a bad place to raise your children. To be fair though: I dream
         of Colorado a plenty.
-      </Typography>
-    </Container>
+      </p>
+    </main>
   );
 }
