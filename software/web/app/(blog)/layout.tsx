@@ -2,11 +2,11 @@ import React from 'react';
 import Link from 'next/link';
 import '@fontsource/silkscreen';
 import '@lowlighter/matcha/dist/matcha.css';
-import './blog/blog.css';
+import './blog.css';
 
 import Image from 'next/image';
-import NotAi from './blog/[slug]/Written-By-Human-Not-By-AI-Badge-white.svg';
-import NotAiDark from './blog/[slug]/Written-By-Human-Not-By-AI-Badge-black.svg';
+import NotAi from './Written-By-Human-Not-By-AI-Badge-white.svg';
+import NotAiDark from './Written-By-Human-Not-By-AI-Badge-black.svg';
 import { getServerSession } from 'next-auth';
 import { GoToTop } from '../../lib/GoToTop/GoToTop';
 
@@ -29,9 +29,6 @@ export default async function MatchaLayout({
           <div className={'links'}>
             {session && <Link href="/feed">Feed</Link>}{' '}
             <Link href={'/about'}>About</Link>
-            <Link href="/blog" className={'selected'}>
-              Blog
-            </Link>
           </div>
         </nav>
         {children}
