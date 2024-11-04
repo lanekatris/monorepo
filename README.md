@@ -14,8 +14,9 @@ TODO link
 
 ## Blog
 
-- Copy files: `scripts/sync-brain.ps1`
-- Run brain: `cd c:\code\brain && npx quartz build --serve`
+- `ln -s /home/lane/git/monorepo/content/images /home/lane/git/monorepo/software/blog/public/images`
+- `ln -s /home/lane/git/monorepo/content/assets /home/lane/git/monorepo/software/web/content/assets`
+- `ln -s /home/lane/git/monorepo/content/blog /home/lane/git/monorepo/software/web/content/posts`
 
 ## Loonison.com
 

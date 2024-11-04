@@ -29,6 +29,8 @@ const posts = (await getCollection('blog')).sort(
 
 								</a>
 								<FormattedDate date={post.data.pubDate} />
+								<!--<br>-->
+								{post.data.tags?.map((tag) => <span>#{tag}</span>)}
 							</li>
 						))
 					}

@@ -16,6 +16,7 @@
     "@astrojs/sitemap": "^3.2.1",
     "@braindb/astro": "^0.0.3",
     "@braindb/remark-wiki-link": "^2.1.0",
+    "@neondatabase/serverless": "^0.10.1",
     "@portaljs/remark-wiki-link": "^1.2.0",
     "astro": "^4.16.7",
     "js-yaml": "^4.1.0",
