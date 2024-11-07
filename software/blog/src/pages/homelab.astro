@@ -45,7 +45,7 @@ const machines = await Promise.all([
     links to navigate to them if they expose any ports.
   </p>
   {files.map((file) => (
-    <div key={file.url}>
+    <div >
       <a target={'_blank'} href={file.url}>
         <h3>{file.fileName}</h3>
       </a>
@@ -53,7 +53,7 @@ const machines = await Promise.all([
       {Object.keys(file.fileContents.services)
         .filter((name) => file.fileContents.services[name].ports)
         .map((name) => (
-          <dd key={name}>
+          <dd >
             <b>{name}</b>
             <ul>
               {/*{!file.fileContents.services[name].ports && (*/}
@@ -61,10 +61,9 @@ const machines = await Promise.all([
               {/*)}*/}
               {file.fileContents.services[name].ports?.map((port) => (
                 <li
-                  key={`${name}-${port}`}
                   style={{ display: 'flex', gap: '.5em' }}
                 >
-                  <div className={'bg-accent'}>{port}</div>
+                  <div >{port}</div>
                   <b>|</b>
                   <a
                     target={'_blank'}
@@ -102,9 +101,9 @@ const machines = await Promise.all([
     I didn&apos;t go with <code>neofetch</code> because of unicode
     characters.
   </p>
-  {machines.map((serverInfo, i) => (
-    <div key={i}>
-      <small className={'muted'}>
+  {machines.map((serverInfo) => (
+    <div >
+      <small >
         Last Updated: {serverInfo.stats.lastModified.toLocaleDateString()}:
       </small>
       <pre>{serverInfo.data}</pre>
