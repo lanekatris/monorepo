@@ -1,7 +1,16 @@
 ---
-const today = new Date();
+import { Image } from 'astro:assets'
+const today = new Date()
+import byHuman from '../assets/Written-By-Human-Not-By-AI-Badge-white.svg'
 ---
 
 <footer>
-	&copy; {today.getFullYear()} Lane Katris. All rights reserved.
+	<p>
+		&copy; {today.getFullYear()} Lane Katris. All rights reserved.
+	</p>
+	<div>
+		<a href="https://notbyai.fyi" target="_blank" rel="noopener noreferrer">
+			<Image src={byHuman} alt="Written by a human" />
+		</a>
+	</div>
 </footer>
