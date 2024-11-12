@@ -20,23 +20,33 @@ const posts = (await getCollection('blog')).sort(
 		<Header />
 		<main>
 			<section>
-				<ul>
+				<dl>
 					{
 						posts.map((post) => (
-							<li>
+							<dt>
 								<a href={`/blog/${post.slug}/`}>
 									{post.data.title}
 
 								</a>
+								<small>
+
 								<FormattedDate date={post.data.pubDate} />
 								<!--<br>-->
 								{post.data.tags?.map((tag) => <span>#{tag}</span>)}
-							</li>
+								</small>
+							</dt>
 						))
 					}
-				</ul>
+				</dl>
 			</section>
 		</main>
 		<Footer />
 	</body>
 </html>
+<style>
+	dt{
+			display:flex;
+			align-items:center;
+			justify-content: space-between;
+	}
+</style>
