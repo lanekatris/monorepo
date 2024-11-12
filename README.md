@@ -19,6 +19,10 @@ TODO: make this a script to add or remove sym links
 - `ln -s /home/lkat/Documents/monorepo/content/assets /home/lkat/Documents/monorepo/software/blog/src/assets`
 - `ln -s /home/lkat/Documents/monorepo/content/blog /home/lkat/Documents/monorepo/software/blog/src/content/posts`
 
+For windows run as admin:
+- `mklink /D "C:\Code\monorepo\software\web\content\posts" "C:\Code\monorepo\content\blog"`
+- `mklink /D "C:\Code\monorepo\software\web\content\assets" "C:\Code\monorepo\content\assets"`
+
 ## Loonison.com
 
 ```powershell
