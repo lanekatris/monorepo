@@ -1,0 +1,71 @@
+---
+import Layout from '../../layouts/BlogPost.astro'
+---
+
+<Layout title="Preview your Udisc Stats" pubDate={new Date('August 08 2021')}>
+	<p>Note: Nothing is uploaded to a server. This happens all client side in your browser.</p>
+	<p>Version: 20241113</p>
+
+	TODO: put a screenshot or directions how to get CSV
+	<br />
+	TODO: show rounds TODO: sql playground
+	<br />
+	TODO: Uze zod to verify data and parse it brother...
+	<fieldset>
+		<form>
+			<input required id="file" type="file" accept="text/csv" />
+			<p>
+				<button type="submit">Process</button>
+			</p>
+		</form>
+	</fieldset>
+	<p id="output"></p>
+</Layout>
+
+<!--<script src="../../scorecards/process-scorecards.ts"></script>-->
+<script>
+	// import {}
+	import { parseScorecardFromCsv, processScorecards } from '../../scorecards/process-scorecards'
+
+	const formEl = document.querySelector('form')
+	const inputEl = document.querySelector('input')
+	const outputEl = document.getElementById('output')
+
+	if (!formEl || !inputEl || !outputEl) {
+		throw new Error('elements not found')
+	}
+
+	formEl.onsubmit = function (e) {
+		e.preventDefault()
+
+		const files = inputEl.files
+		if (!files || !files.length) {
+			throw new Error('files not found')
+		}
+
+		const file = files[0]
+		const reader = new FileReader()
+
+		reader.onload = async function (e) {
+			console.log('progress', e)
+			if (typeof e.target?.result !== 'string') return
+
+			const scorecards = await parseScorecardFromCsv(e.target.result)
+			const result = await processScorecards({
+				rawScorecards: scorecards,
+				// TODO: You need you rname parameterized
+				playerName: 'Lane'
+			})
+
+			outputEl.innerHTML = `I've been using Udisc for ${result.stats.howLongHaveYouBeenPlaying}`
+
+			// return function (e) {
+			// 	console.log('aaaa', e.target.result)
+			// }
+		}
+
+		reader.readAsText(file)
+
+		console.log('submitted')
+	}
+</script>
