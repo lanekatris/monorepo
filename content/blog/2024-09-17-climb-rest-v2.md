@@ -1,9 +1,7 @@
 ---
-title: "Climbing Website V2"
-description: ''
-date: "2024-09-17"
+title: "Climb.rest Website V2"
+pubDate: "2024-09-17"
 tags: ["project"]
-slug: climb-website-v2
 ---
 
 I revamped my climbing website: https://climb.rest!
@@ -14,8 +12,8 @@ It was using some old technologies and I wanted to change the hosting provider -
 
 Old Homepage:
 
-[![old-1_small.webp](old-1_small.webp)](./old-1.png)
+[![old-1_small.webp](../assets/climb_rest_v1_small.webp)](/images/climb_rest_v1.png)
 
 Old Summersville page:
 
-[![old-2_small.webp](old-2_small.webp)](./old-2.png)
+[![old-2_small.webp](../assets/climb_rest_v1_small_2.webp)](/images/climb_rest_v1_2.png)
