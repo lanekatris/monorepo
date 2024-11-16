@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets'
 const today = new Date()
 import byHuman from '../assets/Written-By-Human-Not-By-AI-Badge-white.svg'
+import byHumanDark from '../assets/Written-By-Human-Not-By-AI-Badge-black.svg'
 ---
 
 <footer>
@@ -10,8 +11,12 @@ import byHuman from '../assets/Written-By-Human-Not-By-AI-Badge-white.svg'
 		&copy; {today.getFullYear()} Lane Katris. All rights reserved.
 	</p>
 	<div>
+		<!--https://stackoverflow.com/questions/55787167/how-to-change-image-source-based-on-css-prefers-color-scheme-->
 		<a href="https://notbyai.fyi" target="_blank" rel="noopener noreferrer">
-			<Image src={byHuman} alt="Written by a human" />
+			<picture>
+				<source srcset={byHumanDark.src} media="(prefers-color-scheme: dark)" />
+				<Image src={byHuman} alt="Written by a human" />
+			</picture>
 		</a>
 	</div>
 </footer>
