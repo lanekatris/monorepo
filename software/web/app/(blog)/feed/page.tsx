@@ -8,7 +8,6 @@ import {
 import React from 'react';
 import NextLink from 'next/link';
 import { unstable_noStore as noStore } from 'next/cache';
-import { getServerSession } from 'next-auth';
 import Markdown from 'react-markdown';
 import { NotAuthorized } from './notAuthorized';
 import Link from 'next/link';
@@ -86,9 +85,6 @@ export default async function FeedPage({ searchParams }: FeedPageProps) {
   };
 
   const feed = await getFeed(feedFilter);
-
-  const session = await getServerSession();
-  if (!session) return <NotAuthorized />;
 
   return (
     <main>

@@ -5,7 +5,6 @@ import '@lowlighter/matcha/dist/matcha.css';
 import './blog.css';
 
 import Image from 'next/image';
-import { getServerSession } from 'next-auth';
 import { GoToTop } from '../../lib/GoToTop/GoToTop';
 
 export default async function MatchaLayout({
@@ -13,7 +12,6 @@ export default async function MatchaLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession();
   return (
     <html lang="en">
       <head>
@@ -25,7 +23,7 @@ export default async function MatchaLayout({
             <h2>Lane&apos;s Site</h2>
           </Link>
           <div className={'links'}>
-            {session && <Link href="/feed">Feed</Link>}{' '}
+            <Link href="/feed">Feed</Link>
             <Link href={'/about'}>About</Link>
           </div>
         </nav>
@@ -57,7 +55,9 @@ export default async function MatchaLayout({
                 {' | '}
                 <Link href={'/food'}>Food</Link>
               </dd>
-              <dd>{session && <Link href="/feed">Feed</Link>}</dd>
+              <dd>
+                <Link href="/feed">Feed</Link>
+              </dd>
               <dd>
                 <Link href="/colophon">Colophon</Link>
                 {' | '}
@@ -65,20 +65,16 @@ export default async function MatchaLayout({
               </dd>
             </dl>
             <dd>
-              {session && <Link href="/admin">Admin</Link>}
+              <Link href="/admin">Admin</Link>
               {' | '}
-              {session && <Link href="/inbox">Inbox</Link>}
+              <Link href="/inbox">Inbox</Link>
             </dd>
             <dd>
-              {session && (
-                <Link href="/location-history">Location History</Link>
-              )}
+              <Link href="/location-history">Location History</Link>
             </dd>
-            <dd>{session && <Link href="/climb/gym-users">Gym Users</Link>}</dd>
             <dd>
-              <Link href={session ? '/api/auth/signout' : '/api/auth/signin'}>
-                {session ? 'Logout' : 'Login'}
-              </Link>
+              {' '}
+              <Link href="/climb/gym-users">Gym Users</Link>
             </dd>
           </div>
         </footer>

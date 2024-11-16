@@ -12,7 +12,6 @@ import Link from 'next/link';
 import { login } from '../../../../rhinofit/auth';
 import { getMembers } from '../../../../rhinofit/recent-access';
 import { groupBy } from 'lodash';
-import { getServerSession } from 'next-auth';
 import React from 'react';
 
 import { NotAuthorized } from '../../../(blog)/feed/notAuthorized';
@@ -27,8 +26,6 @@ export default async function GymUsers() {
 
   const grouped = groupBy(members, (x) => x.date);
 
-  const session = await getServerSession();
-  if (!session) return <NotAuthorized />;
   return (
     <Container maxWidth="sm">
       <Breadcrumbs>

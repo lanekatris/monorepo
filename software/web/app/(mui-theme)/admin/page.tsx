@@ -12,7 +12,6 @@ import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { groupBy } from 'lodash';
 import { unstable_noStore as noStore } from 'next/cache';
-import { getServerSession } from 'next-auth';
 import React from 'react';
 
 import { NotAuthorized } from '../../(blog)/feed/notAuthorized';
@@ -42,9 +41,6 @@ export default async function AdminPage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   noStore();
-
-  const session = await getServerSession();
-  if (!session) return <NotAuthorized />;
 
   async function click(formData: FormData) {
     'use server';

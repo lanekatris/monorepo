@@ -1,5 +1,3 @@
-import { getServerSession } from 'next-auth';
-
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
@@ -11,10 +9,5 @@ export async function restartWebserver() {
 
 export async function restartWebserverServerFunction() {
   'use server';
-  const session = await getServerSession();
-  if (!session) {
-    console.log('not logged in, not doing anything');
-    return;
-  }
   return restartWebserver();
 }

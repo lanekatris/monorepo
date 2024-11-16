@@ -12,7 +12,6 @@ import {
 import React from 'react';
 import Link from 'next/link';
 import ThemeToggler from '../ThemeToggler';
-import { getServerSession } from 'next-auth';
 import ExampleCommandPalette from './CommandPalette';
 import { Toaster } from 'react-hot-toast';
 import { restartWebserverServerFunction } from '../../lib/restartWebserver';
@@ -27,8 +26,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession();
-
   // async function restartWeb() {
   //   'use server';
   //   const session = await getServerSession();
@@ -49,14 +46,11 @@ export default async function RootLayout({
                   Lane&apos;s Site
                 </Link>
               </Typography>
-              {session && <Link href="/feed">Feed</Link>}
-              {session && <Link href="/admin">Admin</Link>}
+              <Link href="/feed">Feed</Link>
+              <Link href="/admin">Admin</Link>
               <Link href="/blog">Blog</Link>
               <Link href="/about">About</Link>
-              {session && <Link href="/inbox">Inbox</Link>}
-              <Link href={session ? '/api/auth/signout' : '/api/auth/signin'}>
-                {session ? 'Logout' : 'Login'}
-              </Link>
+              <Link href="/inbox">Inbox</Link>
 
               <ThemeToggler />
             </Stack>
@@ -76,9 +70,7 @@ export default async function RootLayout({
           </footer>
           <br />
         </ThemeRegistry>
-        {session && (
-          <ExampleCommandPalette restartWeb={restartWebserverServerFunction} />
-        )}
+        <ExampleCommandPalette restartWeb={restartWebserverServerFunction} />
       </body>
     </html>
   );
