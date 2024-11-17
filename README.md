@@ -22,6 +22,7 @@ TODO: make this a script to add or remove sym links
 For windows run as admin:
 - `mklink /D "C:\Code\monorepo\software\web\content\posts" "C:\Code\monorepo\content\blog"`
 - `mklink /D "C:\Code\monorepo\software\web\content\assets" "C:\Code\monorepo\content\assets"`
+- `mklink /D "C:\Code\monorepo\software\web\content\images" "C:\Code\monorepo\content\images"`
 
 ## Loonison.com
 
