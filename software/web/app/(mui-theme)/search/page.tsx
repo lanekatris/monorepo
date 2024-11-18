@@ -6,6 +6,7 @@ import { sql } from '@vercel/postgres';
 import bookmarks from './raindrop-export.json';
 import { Podcast } from '../spotify/page';
 import SearchIdk from './SearchIdk';
+import { getServerSession } from 'next-auth';
 import React from 'react';
 
 import { NotAuthorized } from '../../(blog)/feed/notAuthorized';
@@ -55,6 +56,8 @@ export default async function SearchPage() {
   // console.log('indexJson', indexJson);
   // const index = Fuse.parseIndex(indexJson);
   // const fuse = new Fuse(data, {}, index);
+  const session = await getServerSession();
+  if (!session) return <NotAuthorized />;
   return (
     <Container maxWidth="sm">
       <Breadcrumbs>

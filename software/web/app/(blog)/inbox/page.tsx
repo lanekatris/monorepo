@@ -11,6 +11,7 @@ import {
 import { NEXT_ADVENTURE } from '../../../nextAdventure';
 import { sql } from '@vercel/postgres';
 import { getRaindrops } from '../../../feed/get-feed';
+import { getServerSession } from 'next-auth';
 import React from 'react';
 import { NotAuthorized } from '../feed/notAuthorized';
 import Link from 'next/link';
@@ -24,6 +25,9 @@ interface MinifluxFavorite {
 }
 
 export default async function InboxPage() {
+  const session = await getServerSession();
+  if (!session) return <NotAuthorized />;
+
   const { rows }: { rows: MinifluxFavorite[] } =
     await sql`select * from miniflux_favorite`;
 
