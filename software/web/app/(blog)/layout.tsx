@@ -36,6 +36,16 @@ export default async function MatchaLayout({
             <dl>
               <dd>
                 <a
+                  href="https://hub.docker.com/repository/docker/loonison101/web/tags"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    alt="docker image size"
+                    src="https://img.shields.io/docker/image-size/loonison101/web"
+                  />
+                </a>
+                <a
                   href="https://github.com/lanekatris/monorepo/actions"
                   target="_blank"
                 >
