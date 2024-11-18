@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import { HomeLinksV2 } from '../Links';
+import { getRecentTemporalWorkflows } from '../../lib/getRecentTemporalWorkflows';
 
 export default async function Homev2Page() {
+  const workflows = await getRecentTemporalWorkflows();
+
   return (
     <main>
       <p>
@@ -29,6 +32,28 @@ export default async function Homev2Page() {
           <Link href={'/homelab'}>Homelab Setup</Link>
         </li>
       </ul>
+      <h2>
+        Temporal History{' - '}
+        <a href="http://server1.local:8055/namespaces/default/workflows">UI</a>
+      </h2>
+      <table>
+        <thead>
+          <tr>
+            <td>Status</td>
+            <td>Workflow ID</td>
+          </tr>
+        </thead>
+        <tbody>
+          {workflows.map((workflow) => (
+            <tr key={workflow.runId}>
+              <td>
+                <var>{workflow.status.name}</var>
+              </td>
+              <td>{workflow.workflowId}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </main>
   );
 }
