@@ -1,37 +1,31 @@
 import Link from 'next/link';
-import { HomeLinksV2 } from '../Links';
 import { getRecentTemporalWorkflows } from '../../lib/getRecentTemporalWorkflows';
+import { GiAquarium } from 'react-icons/gi';
+import { getAquariumTemp } from '../../lib/getAquariumTemp';
 
 export default async function Homev2Page() {
   const workflows = await getRecentTemporalWorkflows();
+  const { temperatureF, lastUpdated } = await getAquariumTemp();
 
   return (
     <main>
       <p>
-        Hi! I&apos;m <Link href={'/about'}>Lane Katris</Link>, a senior full
-        stack software engineer at{' '}
-        <Link href={'https://www.linkedin.com/company/hd-supply'}>
-          HD Supply
-        </Link>
-        .
+        Hi! I&apos;m <Link href={'/about'}>Lane Katris</Link>. This is my
+        dynamic NextJS site.
+        <br />
+        It doesn&apos;t have a whole lot publicly. You may want to head over to
+        my blog which will have more public content:{' '}
+        <Link href={'https://lanekatris.com'}>lanekatris.com</Link>.
       </p>
-      <p>
-        I&apos;m married, have a son, and am a big fan of{' '}
-        <Link href={'/discs'}>Disc Golf</Link> and Rock Climbing.
+      <p className={'flash default'}>
+        <GiAquarium size={'2em'} style={{ verticalAlign: 'bottom' }} /> Aquarium
+        Temperature:{'  '}
+        <var>{Math.round(temperatureF)}°F</var> <br />
+        <small className={'smaller'}>
+          Updated: {lastUpdated.toLocaleDateString()}{' '}
+          {lastUpdated.toLocaleTimeString()}
+        </small>
       </p>
-      <h2 className={''}>Pages</h2>
-      <p>Here are a few links to start with:</p>
-      <HomeLinksV2 />
-      <h2 className={''}>Projects</h2>
-      <p>I have a ton of unfinished projects...</p>
-      <ul>
-        <li>
-          <Link href={'https://climb.rest'}>Climb.rest</Link>
-        </li>
-        <li>
-          <Link href={'/homelab'}>Homelab Setup</Link>
-        </li>
-      </ul>
       <h2>
         Temporal History{' - '}
         <a href="http://server1.local:8055/namespaces/default/workflows">UI</a>
