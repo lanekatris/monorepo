@@ -8,7 +8,6 @@ export async function getRecentTemporalWorkflows() {
   let i = 0;
   const workflows = [];
   for await (const workflow of workflowIterator) {
-    console.log('getting workflow', i);
     if (i === 4) break;
     workflows.push(workflow);
     i++;
