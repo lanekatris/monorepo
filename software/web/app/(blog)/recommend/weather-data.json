@@ -1,0 +1,102 @@
+[
+  {
+    "latitude": 38.820297,
+    "longitude": -81.70882,
+    "generationtime_ms": 0.034928321838378906,
+    "utc_offset_seconds": -18000,
+    "timezone": "America/New_York",
+    "timezone_abbreviation": "EST",
+    "elevation": 189.0,
+    "daily_units": {
+      "time": "iso8601",
+      "temperature_2m_max": "°F"
+    },
+    "daily": {
+      "time": [
+        "2024-11-19",
+        "2024-11-20",
+        "2024-11-21",
+        "2024-11-22",
+        "2024-11-23",
+        "2024-11-24",
+        "2024-11-25"
+      ],
+      "temperature_2m_max": [
+        61.0,
+        61.7,
+        38.6,
+        40.4,
+        45.7,
+        52.1,
+        54.4
+      ]
+    }
+  },
+  {
+    "latitude": 35.216976,
+    "longitude": -80.83189,
+    "generationtime_ms": 0.028014183044433594,
+    "utc_offset_seconds": -18000,
+    "timezone": "America/New_York",
+    "timezone_abbreviation": "EST",
+    "elevation": 254.0,
+    "location_id": 1,
+    "daily_units": {
+      "time": "iso8601",
+      "temperature_2m_max": "°F"
+    },
+    "daily": {
+      "time": [
+        "2024-11-19",
+        "2024-11-20",
+        "2024-11-21",
+        "2024-11-22",
+        "2024-11-23",
+        "2024-11-24",
+        "2024-11-25"
+      ],
+      "temperature_2m_max": [
+        65.7,
+        67.1,
+        53.3,
+        49.9,
+        55.6,
+        59.2,
+        67.9
+      ]
+    }
+  },
+  {
+    "latitude": 39.968395,
+    "longitude": -82.98353,
+    "generationtime_ms": 0.027060508728027344,
+    "utc_offset_seconds": -18000,
+    "timezone": "America/New_York",
+    "timezone_abbreviation": "EST",
+    "elevation": 227,
+    "daily_units": {
+      "time": "iso8601",
+      "temperature_2m_max": "°F"
+    },
+    "daily": {
+      "time": [
+        "2024-11-19",
+        "2024-11-20",
+        "2024-11-21",
+        "2024-11-22",
+        "2024-11-23",
+        "2024-11-24",
+        "2024-11-25"
+      ],
+      "temperature_2m_max": [
+        61.4,
+        51.6,
+        38.2,
+        43.7,
+        47.9,
+        53.6,
+        56.6
+      ]
+    }
+  }
+]

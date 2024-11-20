@@ -13,10 +13,12 @@ export default async function Homev2Page() {
         Hi! I&apos;m <Link href={'/about'}>Lane Katris</Link>. This is my
         dynamic NextJS site.
         <br />
+        <br />
         It doesn&apos;t have a whole lot publicly. You may want to head over to
         my blog which will have more public content:{' '}
         <Link href={'https://lanekatris.com'}>lanekatris.com</Link>.
       </p>
+      <h2>Stats</h2>
       <p className={'flash default'}>
         <GiAquarium size={'2em'} style={{ verticalAlign: 'bottom' }} /> Aquarium
         Temperature:{'  '}
