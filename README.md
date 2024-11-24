@@ -13,10 +13,11 @@ TODO link
 
 
 ## Blog
+TODO: make this a script to add or remove sym links
 
-- `ln -s /home/lane/git/monorepo/content/images /home/lane/git/monorepo/software/blog/public/images`
-- `ln -s /home/lane/git/monorepo/content/assets /home/lane/git/monorepo/software/web/content/assets`
-- `ln -s /home/lane/git/monorepo/content/blog /home/lane/git/monorepo/software/web/content/posts`
+- `ln -s /home/lkat/Documents/monorepo/content/images /home/lkat/Documents/monorepo/software/blog/public/images`
+- `ln -s /home/lkat/Documents/monorepo/content/assets /home/lkat/Documents/monorepo/software/blog/src/assets`
+- `ln -s /home/lkat/Documents/monorepo/content/blog /home/lkat/Documents/monorepo/software/blog/src/content/posts`
 
 ## Loonison.com
 

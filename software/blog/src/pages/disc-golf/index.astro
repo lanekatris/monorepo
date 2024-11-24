@@ -1,5 +1,14 @@
 ---
 import Layout from '../../layouts/BlogPost.astro'
+import courses from './courses.json'
+
+const initial: { [key: number]: number } = {}
+
+const stats: { [key: number]: number } = courses.reduce((prev, curr) => {
+	prev[curr.yearEstablished] = (prev[curr.yearEstablished] || 0) + 1
+	return prev
+}, initial)
+console.log('stats', stats)
 ---
 
 <Layout title="Disc Golf" pubDate={new Date('August 08 2021')}>
@@ -11,4 +20,24 @@ import Layout from '../../layouts/BlogPost.astro'
 	<p>
 		<a href="/disc-golf/udisc-stat-previewer">View Udisc Stats</a>
 	</p>
+	<h1>US Disc Golf Courses Stats</h1>
+	{courses.length.toLocaleString()} courses according to <a
+		href="
+
+  https://www.pdga.com/course-directory/advanced?order=field_course_year_established&sort=desc&page=1
+    "
+		>pdga.com</a
+	>
+
+	<h2>New Coureses Per Year</h2>
+	<p>
+		I need to figure out <b>0</b> and filter out duplicates
+	</p>
+	{
+		Object.keys(stats).map((year) => (
+			<div>
+				{year}: {stats[Number(year)]}
+			</div>
+		))
+	}
 </Layout>
