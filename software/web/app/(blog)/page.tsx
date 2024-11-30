@@ -10,12 +10,12 @@ export default async function Homev2Page() {
   return (
     <main>
       <p>
-        Hi! I&apos;m <Link href={'/about'}>Lane Katris</Link>. This is my
-        dynamic NextJS site.
-        <br />
-        <br />
-        It doesn&apos;t have a whole lot publicly. You may want to head over to
-        my blog which will have more public content:{' '}
+        Hi! I&apos;m <a href="https://lanekatris.com/about">Lane Katris</a>.
+        This is my dynamic NextJS site.
+      </p>
+      <p>
+        It doesn&apos;t have a whole lot publicly available. You may want to
+        head over to my blog which will have more public content:{' '}
         <Link href={'https://lanekatris.com'}>lanekatris.com</Link>.
       </p>
       <h2>Stats</h2>

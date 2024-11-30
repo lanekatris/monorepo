@@ -17,17 +17,21 @@ export default async function MatchaLayout({
   return (
     <html lang="en">
       <head>
-        <title>Lane&apos;s Blog</title>
+        <title>Lane&apos;s Admin Site</title>
       </head>
       <body>
         <nav>
           <Link href="/" className={'default'}>
-            <h2>Lane&apos;s Site</h2>
+            <h2>Lane&apos;s Admin Site</h2>
           </Link>
-          <div className={'links'}>
-            {session && <Link href="/feed">Feed</Link>}{' '}
-            <Link href={'/about'}>About</Link>
-          </div>
+        </nav>
+        <nav style={{ flexWrap: 'wrap', gap: '5px' }}>
+          <Link href="/feed">Feed</Link>
+          <Link href="/admin">Admin</Link>
+          <Link href={'/about'}>About</Link>
+          <Link href="/recommend">Recommend</Link>
+          <Link href={'/food'}>Food</Link>
+          <Link href="/inbox">Inbox</Link>
         </nav>
         {children}
         <GoToTop />
