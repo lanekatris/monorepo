@@ -2,3 +2,7 @@
 img {
     width: unset;
 }
+
+:root {
+    --primary-color: #ff5733; /* Replace with your desired color */
+}

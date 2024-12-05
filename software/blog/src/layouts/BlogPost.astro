@@ -31,9 +31,9 @@ const formattedObsidianLink = formatObsidianLink(obsidianType, obsidianLink)
 		<Header />
 		<main>
 			<article>
-				<div class="prose">
-					<div class="title">
-						<h1>{title}</h1>
+				<div class="">
+					<div class="">
+						<h1 style="padding-bottom:0">{title}</h1>
 						<div>
 							<FormattedDate date={pubDate} />
 							{
@@ -45,8 +45,9 @@ const formattedObsidianLink = formatObsidianLink(obsidianType, obsidianLink)
 							}
 							{formattedObsidianLink && <a href={formattedObsidianLink}>Obsidian Link</a>}
 						</div>
-						<!--<hr />-->
 					</div>
+					<hr style="margin-top:05px;margin-bottom:5px;" />
+					<!--<br />-->
 					<slot />
 				</div>
 			</article>

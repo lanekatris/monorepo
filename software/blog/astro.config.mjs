@@ -7,5 +7,11 @@ import sitemap from '@astrojs/sitemap'
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://lanekatris.com',
-	integrations: [mdx(), sitemap()]
+	integrations: [mdx(), sitemap()],
+	markdown: {
+		// shikiConfig: {
+		// 	theme: 'dracula'
+		// }
+		syntaxHighlight: false
+	}
 })
