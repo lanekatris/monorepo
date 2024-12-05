@@ -8,8 +8,7 @@ import { formatObsidianLink } from '../formatObsidianLink'
 
 type Props = CollectionEntry<'blog'>['data']
 
-const { title, description, pubDate, updatedDate, heroImage, obsidianLink, obsidianType } =
-	Astro.props
+const { title, description, pubDate, updatedDate, obsidianLink, obsidianType } = Astro.props
 
 // obsidianLink: obsidian://open?vault=lkat-vault&file=Adventures/2024-11-09 Outdoor Rock Climbing
 
@@ -39,14 +38,15 @@ const formattedObsidianLink = formatObsidianLink(obsidianType, obsidianLink)
 							{
 								updatedDate && (
 									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
+										Last updated on
+										<FormattedDate date={updatedDate} />
 									</div>
 								)
 							}
 							{formattedObsidianLink && <a href={formattedObsidianLink}>Obsidian Link</a>}
 						</div>
 					</div>
-					<hr style="margin-top:05px;margin-bottom:5px;" />
+					<hr style="margin-top:05px;margin-bottom:10px;" />
 					<!--<br />-->
 					<slot />
 				</div>

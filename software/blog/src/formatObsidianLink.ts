@@ -1,6 +1,6 @@
 // import z from 'zod'
 import { z } from 'astro:content'
-import type { obsidianType } from './content/config.ts'
+import type { obsidianType } from './content.config.ts'
 
 type ObsidianType = z.infer<typeof obsidianType>
 

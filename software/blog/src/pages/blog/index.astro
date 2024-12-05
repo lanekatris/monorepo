@@ -20,6 +20,7 @@ const posts = (await getCollection('blog')).sort(
 <Header />
 <main>
 	<section>
+		<h1>Blog Index</h1>
 		<dl>
 			{
 				posts.map((post) => (
@@ -28,7 +29,7 @@ const posts = (await getCollection('blog')).sort(
 
 							<FormattedDate date={post.data.pubDate} />
 						</small>
-						<a href={`/blog/${post.slug}/`}>
+						<a href={`/blog/${post.id}/`}>
 							{post.data.title}
 						</a>
 						<!--<br />-->
@@ -45,10 +46,3 @@ const posts = (await getCollection('blog')).sort(
 <Footer />
 </body>
 </html>
-<style>
-    //dt{
-    //		display:flex;
-    //		align-items:center;
-    //		justify-content: space-between;
-    //}
-</style>

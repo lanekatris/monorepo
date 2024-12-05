@@ -11,14 +11,12 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/mdx": "^3.1.8",
-    "@astrojs/rss": "^4.0.9",
+    "@astrojs/mdx": "^4.0.1",
+    "@astrojs/rss": "^4.0.10",
     "@astrojs/sitemap": "^3.2.1",
-    "@braindb/astro": "^0.0.3",
-    "@braindb/remark-wiki-link": "^2.1.0",
     "@neondatabase/serverless": "^0.10.1",
-    "@portaljs/remark-wiki-link": "^1.2.0",
-    "astro": "^4.16.7",
+    "astro": "^5.0.3",
+    "chartjs-node-canvas": "^4.1.6",
     "csvtojson": "^2.0.10",
     "date-fns": "^4.1.0",
     "js-yaml": "^4.1.0",
@@ -33,6 +31,7 @@
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
-    "@types/lodash": "^4.17.13"
+    "@types/lodash": "^4.17.13",
+    "wrangler": "^3.93.0"
   }
 }
