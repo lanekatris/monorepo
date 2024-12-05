@@ -97,6 +97,8 @@ export default async function AdminPage({
   const success = (await searchParams).success;
   console.log('success', success);
 
+  const { rows: events }: { rows: { name: string; value: string }[] } =
+    await sql`select * from noco.config`;
   return (
     <Container maxWidth="sm">
       {/*<Breadcrumbs>*/}
@@ -135,6 +137,12 @@ export default async function AdminPage({
       </ul>
 
       <Typography level="h4">Events</Typography>
+      <a
+        href="https://noco.lkat.io/dashboard/#/nc/form/c68b0a6e-cd33-4c89-ba34-3e7c78fd013c"
+        target="_blank"
+      >
+        Add Event
+      </a>
       <div
         style={{
           backgroundColor: '#ffffce',
@@ -142,16 +150,14 @@ export default async function AdminPage({
           paddingBottom: '20px'
         }}
       >
-        <form action={createSimpleEvent}>
-          <input
-            type={'hidden'}
-            name={'eventName'}
-            value={'aquarium_water_filled_v1'}
-          />
-          <Button variant="plain" type="submit" size="sm">
-            Filled Fish Tank
-          </Button>
-        </form>
+        {events.map(({ name, value }) => (
+          <form action={createSimpleEvent} key={name}>
+            <input type={'hidden'} name={'eventName'} value={value} />
+            <Button variant="plain" type="submit" size="sm">
+              {name}
+            </Button>
+          </form>
+        ))}
         {success && (
           <Alert
             color={'success'}
