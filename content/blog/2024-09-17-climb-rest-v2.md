@@ -4,7 +4,7 @@ pubDate: "2024-09-17"
 tags: ["project"]
 ---
 
-I revamped my climbing website: https://climb.rest!
+I revamped my climbing website: [https://climb.rest](https://climb.rest)!
 
 It was using some old technologies and I wanted to change the hosting provider - more details are here: https://climb.rest/colophon.
 

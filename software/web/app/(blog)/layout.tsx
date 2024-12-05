@@ -18,6 +18,8 @@ export default async function MatchaLayout({
     <html lang="en">
       <head>
         <title>Lane&apos;s Admin Site</title>
+        {/* <link rel="stylesheet" href="https://unpkg.com/terminal.css@0.7.4/dist/terminal.min.css" /> */}
+
       </head>
       <body>
         <nav>

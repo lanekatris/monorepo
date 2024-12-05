@@ -70,6 +70,8 @@ where event_name = 'barcode_scanned_v1' and data::jsonb->>'barcode' != 'abc123'
 and e.id > ${eventId}
             order by created_at desc`;
 
+
+
   return (
     <main>
       <h1>Shopping List ({cartItems.length})</h1>
@@ -84,7 +86,7 @@ and e.id > ${eventId}
       {cartItems.length === 0 && (
         <div className="bg-success">No groceries to buy!</div>
       )}
-      <ul>
+      <ol>
         {cartItems.map(({ id, created_at, barcode, name }) => (
           <li key={created_at.toISOString()}>
             <small className={'muted'}>{barcode}</small>
@@ -112,7 +114,7 @@ and e.id > ${eventId}
             </form>
           </li>
         ))}
-      </ul>
+      </ol>
 
       <h1>Food Bookmarks ({recipes.length})</h1>
       {recipes.map((recipe) => (

@@ -49,6 +49,8 @@ export default async function RecommendPage() {
     <main>
       <h1>Adventure Recommender</h1>
       <h3>Forecasts</h3>
+      <a href="https://www.windy.com/-Temperature-temp">Windy.com</a> (Visual
+      Forecasts)
       <table>
         <caption>
           Weekend is highlighted yellow since weekends are the best.

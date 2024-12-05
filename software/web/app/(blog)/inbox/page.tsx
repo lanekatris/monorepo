@@ -47,12 +47,31 @@ where folder_depth = 1;`;
 
   const waterHeight = summersvilleWaterHight.rows[0]?.count;
   const canClimb = waterHeight <= 1620;
+
+  // lets get the barcode query
+  //
+  const { rows: barcodes }: { rows: { has_unknown_barcodes: boolean }[] } =
+    await sql`select EXISTS(select 1 from events e
+    left join noco.grocery ng on ng.barcode = data::jsonb ->> 'barcode'
+    where event_name = 'barcode_scanned_v1' and data::jsonb ->> 'barcode' != 'abc123'
+        and ng.name is null) has_unknown_barcodes`;
+  const hasUnknownBarcodes = barcodes[0]?.has_unknown_barcodes;
+
   return (
     <div>
-      <div className={'flash danger'}>
-        <b>You Don&apos;t Have Something Planned!</b>
-        <div>Ideas: {NEXT_ADVENTURE}</div>
-      </div>
+      {/* <div className={'flash danger'}> */}
+      {/*   <b>You Don&apos;t Have Something Planned!</b> */}
+      {/*   <div>Ideas: {NEXT_ADVENTURE}</div> */}
+      {/* </div> */}
+
+      {hasUnknownBarcodes && (
+        <div className="flash danger">
+          You have unknown barcodes. <Link href="/food">Fix</Link>
+        </div>
+      )}
+      {!hasUnknownBarcodes && (
+        <div className="flash success">All barcodes are processed.</div>
+      )}
 
       {rootFolderCounts.rows[0]?.count > 50 && (
         <div className={'flash danger'}>
@@ -69,6 +88,7 @@ where folder_depth = 1;`;
       <div className={`flash ${canClimb ? 'success' : 'error'}`}>
         Can climb at Summersville {waterHeight} / 1620
       </div>
+      <a href="https://miniflux.lkat.io/feeds">Miniflux</a>
       <h1>Starred RSS Entries ({rows.length})</h1>
       <ol>
         {rows.map(({ id, title }) => (
