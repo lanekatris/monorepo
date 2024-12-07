@@ -5,7 +5,7 @@ current_date=$(date +"%Y-%m-%d")
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Set the file name with the date prefix
-filename="${SCRIPT_DIR}/../content/blog/${current_date}-xxxxxxxx.md"
+filename="${SCRIPT_DIR}/../software/blog/src/content/blog/${current_date}-xxxxxxxx.md"
 
 
 # Check if the file already exists

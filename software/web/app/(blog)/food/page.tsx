@@ -13,6 +13,7 @@ import { redirect } from 'next/navigation';
 import { unstable_noStore as noStore } from 'next/cache';
 import { SubmitButton } from './SubmitButton';
 import NextLink from 'next/link';
+import CopyToClipboard from './CopyToClipboard';
 
 export default async function FoodPage({
   searchParams
@@ -70,8 +71,6 @@ where event_name = 'barcode_scanned_v1' and data::jsonb->>'barcode' != 'abc123'
 and e.id > ${eventId}
             order by created_at desc`;
 
-
-
   return (
     <main>
       <h1>Shopping List ({cartItems.length})</h1>
@@ -105,6 +104,13 @@ and e.id > ${eventId}
                 </a>
               </>
             )}
+            <div style={{ marginLeft: 10, display: 'inline' }}>
+              <CopyToClipboard
+                textToCopy={name}
+                buttonText="Copy"
+                copiedText="Copied!"
+              />
+            </div>
             <form
               style={{ background: 'none', display: 'inline' }}
               action={clear}

@@ -1,0 +1,35 @@
+---
+// textDecoration: 'underline', //; /* Mimic hyperlink style */
+import Layout from '../layouts/BlogPost.astro'
+import { sql } from '../content.config'
+
+const outlets = await sql`select * from noco.home_electric order by outlet`
+console.log(outlets[0])
+---
+
+<Layout title="WIP Home Wiring" pubDate={outlets[0].updated_at}>
+	<table>
+		<thead>
+			<tr>
+				<td>ID</td>
+				<td>Breaker</td>
+				<td>Notes</td>
+			</tr>
+		</thead>
+
+		<tbody>
+			{
+				outlets.map((outlet) => (
+					<tr>
+						<td>
+							{outlet['floor']}
+							{outlet['outlet']}
+						</td>
+						<td>{outlet['breaker']}</td>
+						<td>{outlet['Notes']}</td>
+					</tr>
+				))
+			}
+		</tbody>
+	</table>
+</Layout>
