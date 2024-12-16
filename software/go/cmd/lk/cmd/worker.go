@@ -195,8 +195,12 @@ var workerCmd = &cobra.Command{
 		w.RegisterActivity(shared.KvPut)
 
 		// Event dumper
+		var dumperActivities = &shared.WorkflowInputDumper{
+			Db: gormDb,
+		}
 		w.RegisterWorkflow(shared.WorkflowDumper)
-		w.RegisterActivity(shared.DumpEvent)
+		//w.RegisterActivity(shared.DumpEvent)
+		w.RegisterActivity(dumperActivities)
 
 		// Climb.rest
 		w.RegisterWorkflow(shared.WorkflowClimbRest)

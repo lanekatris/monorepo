@@ -62,8 +62,12 @@ func WorkflowClimbRest(ctx workflow.Context) error {
 
 	var data string
 	err = workflow.ExecuteActivity(ctx, GetClimbRestData).Get(ctx, &data)
+	if err != nil {
+		return err
+	}
 
-	err = workflow.ExecuteActivity(ctx, DumpEvent, "climbrest_build_kicked", data).Get(ctx, nil)
+	var activities *WorkflowInputDumper
+	err = workflow.ExecuteActivity(ctx, activities.DumpEvent, "climbrest_build_kicked", data).Get(ctx, nil)
 
 	return err
 
