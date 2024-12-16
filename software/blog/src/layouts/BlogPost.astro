@@ -8,7 +8,15 @@ import { formatObsidianLink } from '../formatObsidianLink'
 
 type Props = CollectionEntry<'blog'>['data']
 
-const { title, description, pubDate, updatedDate, obsidianLink, obsidianType } = Astro.props
+const {
+	tags = [],
+	title,
+	description,
+	pubDate,
+	updatedDate,
+	obsidianLink,
+	obsidianType
+} = Astro.props
 
 // obsidianLink: obsidian://open?vault=lkat-vault&file=Adventures/2024-11-09 Outdoor Rock Climbing
 
@@ -45,6 +53,15 @@ const formattedObsidianLink = formatObsidianLink(obsidianType, obsidianLink)
 							}
 							{formattedObsidianLink && <a href={formattedObsidianLink}>Obsidian Link</a>}
 						</div>
+						{
+							tags.length > 0 && (
+								<div>
+									{tags.map((tag) => (
+										<span style="margin-right:5px">#{tag}</span>
+									))}
+								</div>
+							)
+						}
 					</div>
 					<hr style="margin-top:05px;margin-bottom:10px;" />
 					<!--<br />-->

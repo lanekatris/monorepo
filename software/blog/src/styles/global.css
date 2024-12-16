@@ -1,6 +1,7 @@
 /*Terminal.css overrides*/
 img {
     width: unset;
+    max-width: 100%;
 }
 
 :root {

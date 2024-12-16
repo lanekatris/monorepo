@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/BlogPost.astro'
+import { sql } from '../content.config'
+
+const results =
+	await sql`with x as (select length(file_path) - length(replace(file_path, '/', '')) folder_depth, * from markdown_file_models)
+select count(*)::int
+from x
+where folder_depth = 1;`
+
+const rootFolderCount: number = results[0].count
+---
+
+<Layout pubDate={new Date('December 12 2024')} title="Obsidian Vault Stats">
+	<p>
+		<a
+			href="http://server1.local:8055/namespaces/default/schedules/schedule_obsidian_files_to_db"
+			target="_blank">Refresh Stats (Private Link)</a
+		>
+	</p>
+	<p>Root File Count: <code>{rootFolderCount}</code></p>
+</Layout>
