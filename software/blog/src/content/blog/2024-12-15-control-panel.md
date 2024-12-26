@@ -22,7 +22,7 @@ tags: [ iot,project,hardware ]
 
 # Final Product
 
-[![final_control_panel_small.webp](../../assets/control_panel/final_control_panel_small.webp)](/images/final_control_panel.jpg)
+[![final_control_panel_small.webp](../../assets/control_panel/final_control_panel_small.webp)](/images/control_panel/final_control_panel.jpg)
 
 # Overview
 

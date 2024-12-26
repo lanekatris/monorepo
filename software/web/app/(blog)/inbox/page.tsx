@@ -57,12 +57,25 @@ where folder_depth = 1;`;
         and ng.name is null) has_unknown_barcodes`;
   const hasUnknownBarcodes = barcodes[0]?.has_unknown_barcodes;
 
+  const gmail: {
+    unreadCount: number;
+  } = await fetch(process.env.GOOGLE_APPS_URL!).then((x) => x.json());
+
   return (
     <div>
       {/* <div className={'flash danger'}> */}
       {/*   <b>You Don&apos;t Have Something Planned!</b> */}
       {/*   <div>Ideas: {NEXT_ADVENTURE}</div> */}
       {/* </div> */}
+      {gmail.unreadCount > 0 && (
+        <div className="flash danger">
+          Gmail unread count: {gmail.unreadCount}.{' '}
+          <a href="https://mail.google.com/mail/u/0/#inbox">Fix</a>
+        </div>
+      )}
+      {gmail.unreadCount === 0 && (
+        <div className="flash success">Inbox Zero.</div>
+      )}
 
       {hasUnknownBarcodes && (
         <div className="flash danger">
@@ -72,7 +85,6 @@ where folder_depth = 1;`;
       {!hasUnknownBarcodes && (
         <div className="flash success">All barcodes are processed.</div>
       )}
-
       {rootFolderCounts.rows[0]?.count > 50 && (
         <div className={'flash danger'}>
           Your obsidian vault is a bit cluttered. There are{' '}
