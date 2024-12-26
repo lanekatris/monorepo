@@ -50,7 +50,7 @@ services:
 #      - /var/run/docker.sock:/var/run/docker.sock
 
   nocodb:
-    image: nocodb/nocodb:0.255.0
+    image: nocodb/nocodb:0.258.3
     ports:
       - "8080:8080"
     restart: unless-stopped
