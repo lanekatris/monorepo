@@ -70,7 +70,7 @@ func GetGormDb() (*gorm.DB, error) {
 		return nil, err
 	}
 
-	err = db.AutoMigrate(&ObsidianAdventuretwo{}, &MarkdownFileModel{})
+	err = db.AutoMigrate(&ObsidianAdventuretwo{}, &MarkdownFileModel{}, &Event{})
 	if err != nil {
 		return nil, err
 	}

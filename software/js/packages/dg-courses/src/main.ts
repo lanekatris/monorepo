@@ -104,8 +104,8 @@ async function loaIndividualCourseData() {
 AppDataSource.initialize().then(async () => {
   const start = new Date();
   // todo: bring this back
-  // await loadCoursesIntoDb();
-  await loaIndividualCourseData();
+  await loadCoursesIntoDb();
+  // await loaIndividualCourseData();
 
   const end = new Date();
   console.log(`Completed in ${differenceInSeconds(end, start)} seconds`);

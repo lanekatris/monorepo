@@ -53,7 +53,21 @@ async function getFeedItems() {
                   'maintenance'                         type,
                   m."Date"::date                        date,
                   json_build_object('maintenance', m.*) data
-           from noco.maintenance m)
+           from noco.maintenance m
+           union all
+           select concat('github-', e.id) id, 
+                'github-event' type, 
+                e.created_at date,
+                json_build_object('githubEvent', e.data::json) data 
+           from events e where event_name = 'github_event_v1' and e.id not in (7,9)
+           union all
+           select
+    concat('place-visit-', p.id) id,
+    'place-visit' type,
+    p.visited_date date,
+    json_build_object('placeVisit', p.*) data
+    from noco.place p where visited_date is not null
+)
 select *
 from x
 order by date desc
@@ -117,7 +131,10 @@ const excludedCollectionIds = new Set([
 export async function getRaindrops() {
   console.time('raindrops');
 
-  const raindrops: Raindrop[] = await getFromMinio('etl', 'raindrops.json');
+  const { data: raindrops } = await getFromMinio<Raindrop[]>(
+    'etl',
+    'raindrops.json'
+  );
 
   console.timeEnd('raindrops');
   return raindrops.map((raindrop) => {
@@ -147,6 +164,7 @@ export const getFeed = async ({
         )
       : Promise.resolve([]),
     getFeedItems(),
+
     getMemos()
   ]);
 

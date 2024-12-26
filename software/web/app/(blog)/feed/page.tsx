@@ -23,12 +23,18 @@ interface FeedPageProps {
   };
 }
 
-function FeedLineItemV2({ type, date, children, link }: FeedLineItemProps) {
+function FeedLineItemV2({
+  type,
+  date,
+  children,
+  link,
+  className
+}: FeedLineItemProps) {
   return (
     <div
       // className={'flash default'}
       // className={'flash attention'}
-      className={'flash default'}
+      className={className ?? 'flash default'}
       // className={''}
       style={{
         // display: 'flex',
@@ -283,7 +289,56 @@ export default async function FeedPage({ searchParams }: FeedPageProps) {
 
         if (type === 'raindrop' && data.raindrop)
           return <RaindropFeedItem key={id} input={input} />;
+        if (type === 'github-event' && data.githubEvent)
+          return (
+            <FeedLineItemV2 key={id} type={type} date={date}>
+              {(data.githubEvent.action === 'completed' ||
+                data.githubEvent.action === 'in_progress') && (
+                <>
+                  GitHub Workflow: <code>{data.githubEvent.action}</code>
+                  <blockquote className={'small'}>
+                    {data.githubEvent.workflow_run?.display_title}
+                  </blockquote>
+                </>
+              )}
+              {data.githubEvent.commits && (
+                <>
+                  <div>Pushed</div>
+                  <div>
+                    {data.githubEvent.commits.map((commit) => (
+                      <div key={commit.id}>
+                        <small>{commit.message}</small>{' '}
+                        <small>
+                          <Link href={commit.url} target={'_blank'}>
+                            Link
+                          </Link>{' '}
+                        </small>
+                        <ul>
+                          {commit.modified.map((file) => (
+                            <li key={commit.id + file}>
+                              <code>{file}</code>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </FeedLineItemV2>
+          );
 
+        if (type === 'place-visit' && data.placeVisit)
+          return (
+            <FeedLineItemV2
+              key={id}
+              type={type}
+              date={date}
+              className={'flash success'}
+            >
+              Place: {data.placeVisit.name}
+            </FeedLineItemV2>
+          );
         return <div key={id}>{type} - not implemented</div>;
       })}
     </main>
@@ -299,7 +354,9 @@ const editLinks: { [k in FeedItemType]: string | undefined } = {
   maintenance:
     'https://noco.lkat.io/dashboard/#/nc/p_egch5370h5zwqh/myqm1xxv25h0zia?rowId=',
   raindrop: undefined,
-  purchase: undefined
+  purchase: undefined,
+  'github-event': undefined,
+  'place-visit': undefined
 };
 
 export function RaindropFeedItem({ input }: { input: FeedItem }) {

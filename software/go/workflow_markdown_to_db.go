@@ -5,9 +5,11 @@ import (
 	"context"
 	"database/sql"
 	"encoding/json"
+	"errors"
 	"github.com/adrg/frontmatter"
 	"github.com/charmbracelet/log"
 	"github.com/minio/minio-go/v7"
+	"github.com/spf13/viper"
 	"go.temporal.io/sdk/workflow"
 	"gorm.io/gorm"
 	"io/fs"
@@ -49,6 +51,13 @@ type MarkdownFileModel struct {
 	FileContents  sql.NullString // string
 	Meta          string         `gorm:"type:jsonb"`
 	FileSizeBytes int64
+}
+
+type Event struct {
+	gorm.Model
+	Id        int `json:"id" gorm:"unique;primaryKey;autoIncrement"`
+	EventName string
+	Data      sql.NullString
 }
 
 func GenerateMarkdownModels(filePaths []string, rootPath string) ([]MarkdownFileModel, error) {
@@ -169,6 +178,11 @@ func WorkflowMarkdownToDb(ctx workflow.Context) error {
 
 	err := workflow.ExecuteActivity(ctx, TruncateTable, "public.markdown_file_models").Get(ctx, nil)
 
-	err = workflow.ExecuteActivity(ctx, SyncFolderMarkdownToDb, "/home/lane/Documents/lkat-vault/").Get(ctx, nil)
+	// TODO: Make an argument or something better maybe...
+	var filesPath = viper.GetString("OBSIDIAN_VAULT_ROOT")
+	if filesPath == "" {
+		return errors.New("Config not found: OBSIDIAN_VAULT_ROOT")
+	}
+	err = workflow.ExecuteActivity(ctx, SyncFolderMarkdownToDb, filesPath).Get(ctx, nil)
 	return err
 }

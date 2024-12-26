@@ -176,6 +176,37 @@ to quickly create a Cobra application.`,
 			c.JSON(200, "success")
 		})
 
+		r.GET("/deploy-markdown", func(c *gin.Context) {
+			cc, err := client.Dial(client.Options{
+				HostPort: "192.168.86.100:7233",
+			})
+			if err != nil {
+				log.Error("unable to create Temporal client", err)
+				return
+
+			}
+			defer cc.Close()
+
+			options := client.StartWorkflowOptions{
+				//ID:        "obsidian-theme-workflow",
+				ID:        "api-kick-deploy-markdown",
+				TaskQueue: "server",
+			}
+
+			we, err := cc.ExecuteWorkflow(context.Background(), options, shared.WorkflowMarkdownToDb)
+			if err != nil {
+				log.Error("unable to complete Workflow", err)
+				return
+			}
+
+			err = we.Get(context.Background(), nil)
+			if err != nil {
+				log.Error("unable to complete Workflow2222", err)
+				return
+			}
+			c.JSON(200, "success")
+		})
+
 		r.GET("/deploy-blog", func(c *gin.Context) {
 			if isLinux() {
 				cmd, err := exec.Command("/bin/sh", "/home/lane/git/monorepo/scripts/sync-brain.sh").Output()

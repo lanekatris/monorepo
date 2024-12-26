@@ -1,0 +1,18 @@
+---
+interface Props {
+	date: Date;
+}
+
+const { date } = Astro.props;
+---
+
+<time >
+	{
+		// date.toLocaleDateString('en-us', {
+		// 	year: 'numeric',
+		// 	month: 'short',
+		// 	day: 'numeric',
+		// })
+   date.toISOString().split('T')[0]
+	}
+</time>

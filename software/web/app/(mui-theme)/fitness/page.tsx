@@ -16,6 +16,8 @@ import { useMemo } from 'react';
 import { differenceInDays, formatRelative } from 'date-fns';
 import FitnessChart from './ChartIdk';
 
+import SimpleCalendar from '../../SimpleCalendar';
+
 interface FitnessRecord {
   id: number;
   file_relative_path: string;
@@ -35,6 +37,46 @@ function getLastSunday(d: Date) {
 export default async function FitnessPage() {
   const { rows }: { rows: FitnessRecord[] } =
     await sql`select * from noco."Test_Obsidian_Fitness" order by date desc limit 500`;
+
+  const { rows: eyeDates }: { rows: { dd: Date }[] } = await sql`
+      select dd::date
+from generate_series('2024-09-19', current_date - 1, '1 day'::interval) dd
+         left join vw_markdown_files m on m.file_date::date = dd.dd::date
+where m.is_journal = true and meta -> 'Tags' @> '"glaucoma-eye-drops"' order by dd
+  `;
+
+  const { rows: eyeDropData }: { rows: { count: number }[] } = await sql`
+      WITH date_series AS (
+    SELECT dd::date
+    FROM generate_series('2024-09-19', current_date - 1, '1 day'::interval) dd
+),
+eye_drops_data AS (
+    SELECT
+        ds.dd,
+        m.meta -> 'Tags' @> '"glaucoma-eye-drops"' AS took_eye_drops
+    FROM date_series ds
+    LEFT JOIN vw_markdown_files m
+        ON m.file_date::date = ds.dd
+    WHERE m.is_journal = TRUE
+),
+ranked_data AS (
+    SELECT
+        dd,
+        took_eye_drops,
+        ROW_NUMBER() OVER (ORDER BY dd) AS overall_row,
+        ROW_NUMBER() OVER (PARTITION BY took_eye_drops ORDER BY dd) AS partitioned_row,
+        ROW_NUMBER() OVER (ORDER BY dd) - ROW_NUMBER() OVER (PARTITION BY took_eye_drops ORDER BY dd) AS nn
+    FROM eye_drops_data
+),
+final_data AS (
+    SELECT *,
+           DENSE_RANK() OVER (ORDER BY nn) AS rank_group
+    FROM ranked_data
+)
+SELECT COUNT(*)
+FROM final_data
+WHERE rank_group = (SELECT rank_group FROM final_data ORDER BY dd DESC LIMIT 1);
+  `;
   // console.log(rows);
   // console.log(rows[0], rows[1]);
 
@@ -91,6 +133,11 @@ export default async function FitnessPage() {
       {/*  </CardContent>*/}
       {/*</Card>*/}
       {/*<br />*/}
+      <Typography level={'body-lg'}>
+        Glaucoma Eye Drop Streak: <b>{eyeDropData[0]?.count}</b>
+      </Typography>
+      <SimpleCalendar dates={eyeDates.map((x) => x.dd)} />
+      <br />
       <Card>
         <CardContent>
           <Typography level="h4">Log</Typography>

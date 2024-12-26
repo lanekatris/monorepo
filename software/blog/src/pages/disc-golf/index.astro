@@ -1,0 +1,165 @@
+---
+import Layout from '../../layouts/BlogPost.astro'
+import { getCollection } from 'astro:content'
+import { renderGraph } from '../../renderGraph'
+import { PRIMARY_COLOR } from '../../consts'
+import { type ChartConfiguration } from 'chart.js'
+
+const initial: { [key: number]: number } = {}
+
+const courses = await getCollection('discGolfCourses')
+const stats: { [key: number]: number } = courses.reduce((prev, curr) => {
+	prev[curr.data.yearEstablished] = (prev[curr.data.yearEstablished] || 0) + 1
+	return prev
+}, initial)
+
+const discs = await getCollection('discs', (x) => x.data.status === 'In Bag')
+
+const coursesPerYearConfig: ChartConfiguration = {
+	type: 'line', // Chart type
+	data: {
+		labels: Object.keys(stats),
+		datasets: [
+			{
+				label: 'New Courses',
+				// backgroundColor: ['#ff6384', '#36a2eb', '#ffce56'],
+				backgroundColor: [PRIMARY_COLOR], // todo: use the theme of my blog here
+				data: Object.values(stats)
+			}
+		]
+	},
+	options: {
+		responsive: false,
+		plugins: {
+			legend: { display: true }
+		}
+	}
+}
+
+const coursesPerYearImageSmall = await renderGraph(400, 400, coursesPerYearConfig)
+const coursesPerYearImageLarge = await renderGraph(600, 1000, coursesPerYearConfig)
+---
+
+<Layout title="Disc Golf" pubDate={new Date('August 08 2021')}>
+	<p>
+		My favorite sport is disc golf! Since I'm a software engineer I have to show and analyze my disc
+		golf data 😉
+	</p>
+
+	<p>
+		<a href="/disc-golf/udisc-stat-previewer">View Your Udisc Stats</a>
+	</p>
+
+	<h1>Discs in my bag ({discs.length})</h1>
+	<p>
+		<i>The number in quotes is my unique </i>
+
+		<code>ID</code>
+		I give to every disc
+	</p>
+	{
+		discs.map((disc) => (
+			<div>
+				({disc.id}) {disc.data.color} {disc.data.brand} {disc.data.model}
+			</div>
+		))
+	}
+
+	<h1>US Disc Golf Courses Stats</h1>
+	<p>
+		{courses.length.toLocaleString()} courses according to <a
+			href="https://www.pdga.com/course-directory/advanced?order=field_course_year_established&sort=desc&page=1"
+			>pdga.com</a
+		>
+	</p>
+
+	<h3>New Courses Per Year</h3>
+
+	<img src={coursesPerYearImageSmall} />
+
+	<details>
+		<summary>Bigger Graph</summary>
+
+		<img src={coursesPerYearImageLarge} />
+	</details>
+
+	<details>
+		<summary>New courses per year</summary>
+
+		<table>
+			<thead>
+				<tr>
+					<td>Year</td>
+					<td>Course Count</td>
+				</tr>
+			</thead>
+			<tbody>
+				{
+					Object.keys(stats).map((year) => (
+						<tr>
+							<td>{year}</td>
+							<td>{stats[Number(year)]}</td>
+						</tr>
+					))
+				}
+			</tbody>
+		</table>
+	</details>
+	<!--<div>-->
+	<!--	<canvas id="chart-new-courses"></canvas>-->
+	<!--</div>-->
+</Layout>
+
+<!--<script>-->
+<!--	// console.log('sssss', stats)-->
+<!--	import Chart from 'chart.js/auto'-->
+
+<!--	const MONTHS = [-->
+<!--		'January',-->
+<!--		'February',-->
+<!--		'March',-->
+<!--		'April',-->
+<!--		'May',-->
+<!--		'June',-->
+<!--		'July',-->
+<!--		'August',-->
+<!--		'September',-->
+<!--		'October',-->
+<!--		'November',-->
+<!--		'December'-->
+<!--	]-->
+
+<!--	export function months(config) {-->
+<!--		var cfg = config || {}-->
+<!--		var count = cfg.count || 12-->
+<!--		var section = cfg.section-->
+<!--		var values = []-->
+<!--		var i, value-->
+
+<!--		for (i = 0; i < count; ++i) {-->
+<!--			value = MONTHS[Math.ceil(i) % 12]-->
+<!--			values.push(value.substring(0, section))-->
+<!--		}-->
+
+<!--		return values-->
+<!--	}-->
+
+<!--	const labels = months({ count: 7 })-->
+<!--	const data = {-->
+<!--		labels: labels,-->
+<!--		datasets: [-->
+<!--			{-->
+<!--				label: 'My First Dataset',-->
+<!--				data: [65, 59, 80, 81, 56, 55, 40],-->
+<!--				fill: false,-->
+<!--				borderColor: 'rgb(75, 192, 192)',-->
+<!--				tension: 0.1-->
+<!--			}-->
+<!--		]-->
+<!--	}-->
+<!--	const config = {-->
+<!--		type: 'line',-->
+<!--		data: data-->
+<!--	}-->
+<!--	new Chart(document.getElementById('chart-new-courses'), config)-->
+<!--</script>-->

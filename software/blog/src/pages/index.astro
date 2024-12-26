@@ -1,0 +1,53 @@
+---
+import BaseHead from '../components/BaseHead.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body class="container">
+		<Header />
+		<main>
+			<p>
+				Hi! I&apos;m Lane Katris, a senior full stack software engineer at{' '}
+				<a href={'https://www.linkedin.com/company/hd-supply'}> HD Supply </a>.
+			</p>
+			<p>
+				I&apos;m married, have a son, and am a big fan of{' '}
+				<a href="/disc-golf">Disc Golf</a> and <a href="/ticks">Rock Climbing</a>.
+			</p>
+			<b>Pages</b>
+			<p>Here are a few links to start with:</p>
+			<ul>
+				<li><a href="/blog">Blog</a></li>
+				<li><a href="/about">About Me</a></li>
+				<li>
+					<a href={'/homelab'}>Homelab Setup</a>
+				</li>
+				<li><a href="/blogroll">Blog Roll</a></li>
+				<li>
+					<a href="https://memo.lkat.io">Notes</a>
+				</li>
+				<li><a href="/ticks">My Climb Ticks</a></li>
+				<!--<li><a href="/goals">Goals</a></li>-->
+				<!--<li><a href="/spotify">Spotify</a></li>-->
+			</ul>
+			<b>Projects</b>
+			<p>I have a ton of unfinished/semi-done projects...</p>
+			<ul>
+				<li>
+					<a href="https://loonison.com">loonison.com</a>
+				</li>
+				<li>
+					<a href={'https://climb.rest'}>Climb.rest</a>
+				</li>
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>

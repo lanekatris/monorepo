@@ -40,17 +40,51 @@ export default async function InboxPage() {
     await sql`with x as (select length(file_path) - length(replace(file_path, '/', '')) folder_depth, * from markdown_file_models)
 select count(*)::int
 from x
-where folder_depth = 0;`;
+where folder_depth = 1;`;
 
-  // console.log('idk', idk.rows);
+  const summersvilleWaterHight: { rows: { count: number }[] } =
+    await sql`select data::jsonb->'sug'->'pool_cur'->'elev' count from events where event_name = 'climbrest_build_kicked' order by created_at desc limit 1`;
+
+  const waterHeight = summersvilleWaterHight.rows[0]?.count;
+  const canClimb = waterHeight <= 1620;
+
+  // lets get the barcode query
+  //
+  const { rows: barcodes }: { rows: { has_unknown_barcodes: boolean }[] } =
+    await sql`select EXISTS(select 1 from events e
+    left join noco.grocery ng on ng.barcode = data::jsonb ->> 'barcode'
+    where event_name = 'barcode_scanned_v1' and data::jsonb ->> 'barcode' != 'abc123'
+        and ng.name is null) has_unknown_barcodes`;
+  const hasUnknownBarcodes = barcodes[0]?.has_unknown_barcodes;
+
+  const gmail: {
+    unreadCount: number;
+  } = await fetch(process.env.GOOGLE_APPS_URL!).then((x) => x.json());
 
   return (
     <div>
-      <div className={'flash danger'}>
-        <b>You Don&apos;t Have Something Planned!</b>
-        <div>Ideas: {NEXT_ADVENTURE}</div>
-      </div>
+      {/* <div className={'flash danger'}> */}
+      {/*   <b>You Don&apos;t Have Something Planned!</b> */}
+      {/*   <div>Ideas: {NEXT_ADVENTURE}</div> */}
+      {/* </div> */}
+      {gmail.unreadCount > 0 && (
+        <div className="flash danger">
+          Gmail unread count: {gmail.unreadCount}.{' '}
+          <a href="https://mail.google.com/mail/u/0/#inbox">Fix</a>
+        </div>
+      )}
+      {gmail.unreadCount === 0 && (
+        <div className="flash success">Inbox Zero.</div>
+      )}
 
+      {hasUnknownBarcodes && (
+        <div className="flash danger">
+          You have unknown barcodes. <Link href="/food">Fix</Link>
+        </div>
+      )}
+      {!hasUnknownBarcodes && (
+        <div className="flash success">All barcodes are processed.</div>
+      )}
       {rootFolderCounts.rows[0]?.count > 50 && (
         <div className={'flash danger'}>
           Your obsidian vault is a bit cluttered. There are{' '}
@@ -58,6 +92,15 @@ where folder_depth = 0;`;
           want at most 50
         </div>
       )}
+      {rootFolderCounts.rows[0]?.count <= 50 && (
+        <div className={'flash success'}>
+          Your obsidian root looks tidy ({rootFolderCounts.rows[0]?.count})
+        </div>
+      )}
+      <div className={`flash ${canClimb ? 'success' : 'error'}`}>
+        Can climb at Summersville {waterHeight} / 1620
+      </div>
+      <a href="https://miniflux.lkat.io/feeds">Miniflux</a>
       <h1>Starred RSS Entries ({rows.length})</h1>
       <ol>
         {rows.map(({ id, title }) => (

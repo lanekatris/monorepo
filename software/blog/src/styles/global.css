@@ -1,0 +1,16 @@
+/*Terminal.css overrides*/
+img {
+    width: unset;
+    max-width: 100%;
+}
+
+:root {
+    --primary-color: #ff4f29; /* Replace with your desired color */
+}
+
+@media (prefers-color-scheme: dark) {
+
+    :root {
+        --primary-color: #1a95e0; /* Replace with your desired color */
+    }
+}

@@ -50,19 +50,19 @@ func deploySchedulesV2(c client.Client) {
 			Action: &client.ScheduleWorkflowAction{
 				ID:        "action_miniflux_to_s3",
 				Workflow:  shared.WorkflowMinifluxToS3,
-				TaskQueue: shared.GreetingTaskQueue,
+				TaskQueue: "server",
 			},
 		},
 		client.ScheduleOptions{
 			ID: "schedule_obsidian_files_to_db",
 			Spec: client.ScheduleSpec{
 				// Every 12 hours
-				CronExpressions: []string{"0 */12 * * *"}, // https://crontab.guru/#0_*/12_*_*_*
+				CronExpressions: []string{"0 */2 * * *"}, // https://crontab.guru/#0_*/12_*_*_*
 			},
 			Action: &client.ScheduleWorkflowAction{
 				ID:        "action_obsidian_files_to_db",
 				Workflow:  shared.WorkflowMarkdownToDb,
-				TaskQueue: shared.GreetingTaskQueue,
+				TaskQueue: "server",
 			},
 		},
 		client.ScheduleOptions{
@@ -98,6 +98,17 @@ func deploySchedulesV2(c client.Client) {
 				Workflow:  shared.WorkflowGetOsInfo,
 				TaskQueue: "server",
 				Args:      createBackupArgs("server1"),
+			},
+		},
+		client.ScheduleOptions{
+			ID: "schedule_build_climb_rest",
+			Spec: client.ScheduleSpec{
+				CronExpressions: []string{"0 */12 * * *"},
+			},
+			Action: &client.ScheduleWorkflowAction{
+				ID:        "action_build_climb_rest",
+				Workflow:  shared.WorkflowClimbRest,
+				TaskQueue: "server",
 			},
 		},
 	}
@@ -182,6 +193,19 @@ var workerCmd = &cobra.Command{
 		w.RegisterWorkflow(shared.WorkflowGetOsInfo)
 		w.RegisterActivity(shared.ExecOnHost)
 		w.RegisterActivity(shared.KvPut)
+
+		// Event dumper
+		var dumperActivities = &shared.WorkflowInputDumper{
+			Db: gormDb,
+		}
+		w.RegisterWorkflow(shared.WorkflowDumper)
+		//w.RegisterActivity(shared.DumpEvent)
+		w.RegisterActivity(dumperActivities)
+
+		// Climb.rest
+		w.RegisterWorkflow(shared.WorkflowClimbRest)
+		w.RegisterActivity(shared.BuildClimbRest)
+		w.RegisterActivity(shared.GetClimbRestData)
 
 		// Start listening to the Task Queue
 		err = w.Run(worker.InterruptCh())

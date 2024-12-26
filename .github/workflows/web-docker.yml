@@ -73,4 +73,4 @@ jobs:
           push: true
           tags: loonison101/web:latest
       - name: Restart app
-        run: curl https://live.lkat.io/api/hook/github_action_completed?token=${{ secrets.WEB_API_TOKEN }}
+        run: curl https://loonison.com/api/hook/github_action_completed?token=${{ secrets.WEB_API_TOKEN }}

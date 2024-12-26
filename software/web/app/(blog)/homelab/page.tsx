@@ -95,10 +95,16 @@ export default async function HomelabPage() {
         and renders the results here.
       </div>
       <div className="flash accent">
-        I didn't go with <code>neofetch</code> because of unicode characters.
+        I didn&apos;t go with <code>neofetch</code> because of unicode
+        characters.
       </div>
       {machines.map((serverInfo, i) => (
-        <pre key={i}>{serverInfo}</pre>
+        <div key={i}>
+          <small className={'muted'}>
+            Last Updated: {serverInfo.stats.lastModified.toLocaleDateString()}:
+          </small>
+          <pre>{serverInfo.data}</pre>
+        </div>
       ))}
     </main>
   );

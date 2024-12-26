@@ -1,0 +1,38 @@
+{
+  "name": "blog",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "deploy": "npm run build && npx wrangler pages deploy dist"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/mdx": "^4.0.1",
+    "@astrojs/rss": "^4.0.10",
+    "@astrojs/sitemap": "^3.2.1",
+    "@neondatabase/serverless": "^0.10.1",
+    "astro": "^5.0.3",
+    "chartjs-node-canvas": "^4.1.6",
+    "csvtojson": "^2.0.10",
+    "date-fns": "^4.1.0",
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21",
+    "markdown-it": "^14.1.0",
+    "minio": "^8.0.2",
+    "opml": "^0.5.6",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "sanitize-html": "^2.13.1",
+    "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/lodash": "^4.17.13",
+    "wrangler": "^3.93.0"
+  }
+}

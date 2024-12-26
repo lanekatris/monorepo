@@ -1,4 +1,5 @@
 import * as Minio from 'minio';
+import { BucketItemStat } from 'minio';
 
 const minioClient = new Minio.Client({
   endPoint: '192.168.86.100', // e.g., 'play.min.io'
@@ -12,9 +13,13 @@ export async function getFromMinio<T>(
   bucketName: string,
   objectName: string,
   isJson: boolean = true
-): Promise<T> {
+): Promise<{
+  data: T;
+  stats: BucketItemStat;
+}> {
   try {
     const stream = await minioClient.getObject(bucketName, objectName);
+    const stats = await minioClient.statObject(bucketName, objectName);
 
     let data = '';
     stream.on('data', (chunk) => {
@@ -24,9 +29,7 @@ export async function getFromMinio<T>(
     return new Promise((resolve, reject) => {
       stream.on('end', () => {
         try {
-          // const jsonData = JSON.parse(data);
-          // resolve(jsonData);
-          resolve(isJson ? JSON.parse(data) : data);
+          resolve(isJson ? { data: JSON.parse(data), stats } : { data, stats });
         } catch (error) {
           reject(new Error('Error parsing JSON'));
         }

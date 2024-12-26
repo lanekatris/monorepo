@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/BlogPost.astro'
+import { getCollection } from 'astro:content'
+
+const URL = 'https://www.mountainproject.com/user/7079884/lane-katris/tick-export'
+
+const ticks = await getCollection('ticks')
+---
+
+<Layout title="My Climb Ticks" pubDate={new Date('November 11 2024')}>
+	<p>This data is sourced from Mountain Project <a href={URL} target="_blank">here</a>.</p>
+	<table>
+		<thead>
+			<tr>
+				<td>Date</td>
+				<td>Name</td>
+				<td>Grade</td>
+			</tr>
+		</thead>
+		<tbody>
+			{
+				ticks.map(({ data: row }) => (
+					<>
+						<tr>
+							<td>{row.Date.toLocaleDateString()}</td>
+							<td>
+								<a href={row.url} target="_blank">
+									{' '}
+									{row.Route}
+								</a>
+							</td>
+							<td>{row.Rating}</td>
+						</tr>
+						{row.Notes && (
+							<tr>
+								<td colspan="4">
+									<b>Notes</b>: ({row.Style}
+									{row['Lead Style'] && <> - {row['Lead Style']}</>}) {row.Notes}
+								</td>
+							</tr>
+						)}
+					</>
+				))
+			}
+		</tbody>
+	</table>
+</Layout>
+<style>
+	table {
+		width: 100%;
+	}
+
+	thead {
+		font-weight: bold;
+	}
+
+	tr:nth-child(even) {
+		background-color: lightgray;
+	}
+</style>

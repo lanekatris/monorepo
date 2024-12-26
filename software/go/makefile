@@ -1,22 +1,12 @@
-proto:
-	protoc proto/* --go_out=./ --go-grpc_out=./
 
-lkat:
-	go build -o bin/lkat ./cmd/lkat/main.go
 
-lk:
-	go build -o bin/lk ./cmd/lk/main.go
+deploy-server:
+	export CGO_ENABLED=0; go build cmd/lk/main.go
+	# TODO: Figure out how to do sudo
+	#ssh -S lane@server1.local "sudo systemctl stop lk.service"
+	scp ./main server1.local:/home/lane/lk
+	#ssh -S lane@server1.local "sudo systemctl start lk.service"
 
-generate: clean proto lkat lk
-
-clean:
-	rm -f ./lk
-	rm -f ./main
-	rm -f ./lkat
-	rm -rf bin/*.*
-
-deploy: generate
-	cp ./bin/* /home/lane/MyPrograms/computer-api
-
-docker-lk:
-	docker build -t lk .
+deploy-local:
+	go build cmd/lk/main.go
+	cp ./main ~/bin/lk

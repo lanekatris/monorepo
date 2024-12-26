@@ -1,0 +1,61 @@
+---
+import { getRssOpml } from '../getRssOpml'
+// @ts-ignore
+import opml from 'opml'
+
+import Layout from '../layouts/BlogPost.astro'
+
+interface OpmlResponse {
+	subs: {
+		text: string
+		subs: {
+			title: string
+			text: string
+			xmlUrl: string
+
+			htmlUrl: string
+			type: 'rss'
+		}[]
+	}[]
+}
+
+async function parseOpml(): Promise<OpmlResponse> {
+	const xml = await getRssOpml()
+	return new Promise<OpmlResponse>((resolve, reject) => {
+		opml.parse(xml, function (err: Error, result: any) {
+			if (err) return reject(err)
+
+			return resolve(result.opml.body)
+		})
+	})
+}
+
+const data = await parseOpml()
+---
+
+<Layout title="Blogroll" pubDate={new Date('November 11 2024')}>
+	<p>
+		Download my latest RSS feed OPML from <a href="https://miniflux.app/" target="_blank"
+			>Miniflux</a
+		>
+		<a href="/blogroll.xml">here</a>
+	</p>
+	<ul>
+		{
+			data.subs.map((parent) => (
+				<li>
+					{parent.text} ({parent.subs.length})
+					<ul>
+						{parent.subs.map((blog) => (
+							<li>
+								{blog.title} :: <a href={blog.htmlUrl}>Site</a>
+								{' | '}
+								<a href={blog.xmlUrl}>Feed</a>
+							</li>
+						))}
+					</ul>
+				</li>
+			))
+		}
+	</ul>
+</Layout>

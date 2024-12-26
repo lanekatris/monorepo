@@ -25,7 +25,7 @@ export async function deployBlog({ obsidian }) {
   }
 }
 
-export const moveTheaterToday = createEventFile('movie-theater');
+export const movieTheaterToday = createEventFile('movie-theater');
 export const fishedToday = createEventFile('fishing');
 export const zooToday = createEventFile('zoo');
 export const poolToday = createEventFile('pool');
@@ -51,6 +51,7 @@ export const deployObsidianClient = createGenericLkatApiCall(
   'deploy-obsidian-client'
 );
 export const udiscScorecards = createGenericLkatApiCall('udisc-scorecards');
+export const deployMarkdownToDb = createGenericLkatApiCall('deploy-markdown');
 
 export const high = createFeedFile('high');
 export const low = createFeedFile('low');

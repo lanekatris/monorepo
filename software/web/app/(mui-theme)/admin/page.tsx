@@ -6,6 +6,7 @@ import {
   Link,
   Typography
 } from '@mui/joy';
+import NextLink from 'next/link';
 import { sql } from '@vercel/postgres';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
@@ -15,6 +16,7 @@ import { getServerSession } from 'next-auth';
 import React from 'react';
 
 import { NotAuthorized } from '../../(blog)/feed/notAuthorized';
+import { createEvent } from '../../../lib/createEvent';
 
 export const dynamic = 'force-dynamic';
 
@@ -34,8 +36,16 @@ export interface Maintenance {
   Notes?: string;
 }
 
-export default async function AdminPage() {
+export default async function AdminPage({
+  searchParams
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   noStore();
+
+  const session = await getServerSession();
+  if (!session) return <NotAuthorized />;
+
   async function click(formData: FormData) {
     'use server';
 
@@ -50,6 +60,15 @@ export default async function AdminPage() {
     revalidatePath('/admin');
 
     redirect(url);
+  }
+
+  async function createSimpleEvent(formData: FormData) {
+    'use server';
+    const eventName = formData.get('eventName');
+    if (!eventName) throw new Error('eventName is required');
+    await createEvent(eventName.toString());
+    revalidatePath('/admin');
+    redirect('/admin?success=true');
   }
 
   const {
@@ -75,9 +94,11 @@ export default async function AdminPage() {
     }[];
   } = await sql`select * from noco.purchases order by "Date" desc`;
 
-  const session = await getServerSession();
-  if (!session) return <NotAuthorized />;
+  const success = (await searchParams).success;
+  console.log('success', success);
 
+  const { rows: events }: { rows: { name: string; value: string }[] } =
+    await sql`select * from noco.config`;
   return (
     <Container maxWidth="sm">
       {/*<Breadcrumbs>*/}
@@ -115,6 +136,41 @@ export default async function AdminPage() {
         ))}
       </ul>
 
+      <Typography level="h4">Events</Typography>
+      <a
+        href="https://noco.lkat.io/dashboard/#/nc/form/c68b0a6e-cd33-4c89-ba34-3e7c78fd013c"
+        target="_blank"
+      >
+        Add Event
+      </a>
+      <div
+        style={{
+          backgroundColor: '#ffffce',
+          paddingTop: '20px',
+          paddingBottom: '20px'
+        }}
+      >
+        {events.map(({ name, value }) => (
+          <form action={createSimpleEvent} key={name}>
+            <input type={'hidden'} name={'eventName'} value={value} />
+            <Button variant="plain" type="submit" size="sm">
+              {name}
+            </Button>
+          </form>
+        ))}
+        {success && (
+          <Alert
+            color={'success'}
+            endDecorator={
+              <NextLink href={'/admin'} scroll={false}>
+                X
+              </NextLink>
+            }
+          >
+            Success!
+          </Alert>
+        )}
+      </div>
       <Typography level="h4">Maintenance </Typography>
       <ul
         style={{

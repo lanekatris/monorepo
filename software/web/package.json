@@ -16,15 +16,18 @@
     "@lowlighter/matcha": "^3.0.0",
     "@mui/joy": "^5.0.0-beta.48",
     "@shikijs/rehype": "^1.12.1",
+    "@temporalio/client": "^1.11.3",
     "@vercel/postgres": "^0.9.0",
     "axios": "^1.7.2",
     "bright": "^0.8.5",
     "csvtojson": "^2.0.10",
     "date-fns": "^3.6.0",
+    "feed": "^4.2.2",
     "fuse.js": "^7.0.0",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "minio": "^8.0.1",
+    "nanoid": "^5.0.7",
     "next": "^14.2.7",
     "next-auth": "^4.24.7",
     "node-html-parser": "^6.1.13",
@@ -51,7 +54,6 @@
     "eslint-config-next": "14.2.5",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "3.3.3",
-    "typescript": "^5",
-    "velite": "^0.1.1"
+    "typescript": "^5"
   }
 }

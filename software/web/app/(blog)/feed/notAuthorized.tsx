@@ -14,7 +14,7 @@ export function NotAuthorized() {
         size={'lg'}
         color={'danger'}
         endDecorator={
-          <NextLink href="/software/web/app/(mui-theme)/api/auth/signin">
+          <NextLink href="/api/auth/signin">
             <Button size={'sm'} color={'danger'}>
               Login
             </Button>

@@ -13,9 +13,11 @@ TODO link
 
 
 ## Blog
+TODO: make this a script to add or remove sym links
 
-- Copy files: `scripts/sync-brain.ps1`
-- Run brain: `cd c:\code\brain && npx quartz build --serve`
+- `ln -s /home/lkat/Documents/monorepo/content/images /home/lkat/Documents/monorepo/software/blog/public/images`
+- `ln -s /home/lkat/Documents/monorepo/content/assets /home/lkat/Documents/monorepo/software/blog/src/assets`
+- `ln -s /home/lkat/Documents/monorepo/content/blog /home/lkat/Documents/monorepo/software/blog/src/content/posts`
 
 ## Loonison.com
 
