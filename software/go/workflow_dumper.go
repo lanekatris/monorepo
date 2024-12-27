@@ -53,7 +53,7 @@ func (input *WorkflowInputDumper) ProcessEvent(eventName string, data string) er
 
 		var ipAddress string = ""
 		if switchData.SwitchId == "troy_control_panel_1" { // small light
-			ipAddress = "192.168.86.48"
+			ipAddress = "192.168.86.37"
 		}
 		if switchData.SwitchId == "troy_control_panel_2" { // blue fan
 			ipAddress = "192.168.86.47"
