@@ -1,112 +1,99 @@
 ---
-import yaml from 'js-yaml';
-import Layout from '../layouts/BlogPost.astro';
-import { getFromMinio } from '../get-from-minio';
+import yaml from 'js-yaml'
+import Layout from '../layouts/BlogPost.astro'
+import { getFromMinio } from '../get-from-minio'
 
 interface DockerComposeFile {
-  services: { [k: string]: { ports?: string[] } };
+	services: { [k: string]: { ports?: string[] } }
 }
 
 const urls = [
-  'https://raw.githubusercontent.com/lanekatris/monorepo/refs/heads/main/infrastructure/homelab/docker-compose.yml',
-  'https://raw.githubusercontent.com/lanekatris/monorepo/refs/heads/main/infrastructure/homelab/docker-compose.miniflux.yml',
-  'https://raw.githubusercontent.com/lanekatris/monorepo/refs/heads/main/infrastructure/homelab/docker-compose.n8n.yml',
-  'https://raw.githubusercontent.com/lanekatris/monorepo/refs/heads/main/infrastructure/homelab/immich/docker-compose.yml',
-  'https://raw.githubusercontent.com/lanekatris/monorepo/refs/heads/main/infrastructure/homelab/windmill/docker-compose.yml'
-];
+	'https://raw.githubusercontent.com/lanekatris/monorepo/refs/heads/main/infrastructure/homelab/docker-compose.yml',
+	'https://raw.githubusercontent.com/lanekatris/monorepo/refs/heads/main/infrastructure/homelab/docker-compose.miniflux.yml',
+	'https://raw.githubusercontent.com/lanekatris/monorepo/refs/heads/main/infrastructure/homelab/docker-compose.n8n.yml',
+	'https://raw.githubusercontent.com/lanekatris/monorepo/refs/heads/main/infrastructure/homelab/immich/docker-compose.yml',
+	'https://raw.githubusercontent.com/lanekatris/monorepo/refs/heads/main/infrastructure/homelab/windmill/docker-compose.yml'
+]
 
 const files = await Promise.all(
-  urls.map(async (url) => {
-    const response = await fetch(url);
-    const contents = await response.text();
-    const json = (await yaml.load(contents)) as DockerComposeFile;
+	urls.map(async (url) => {
+		const response = await fetch(url)
+		const contents = await response.text()
+		const json = (await yaml.load(contents)) as DockerComposeFile
 
-    return {
-      url,
-      fileName: url.split('/').slice(-2).join('/'),
-      fileContents: json
-    };
-  })
-);
+		return {
+			url,
+			fileName: url.split('/').slice(-2).join('/'),
+			fileContents: json
+		}
+	})
+)
 
 const machines = await Promise.all([
-  getFromMinio<string>('etl', 'linux_desktop_screenfetch_result.txt', false),
-  getFromMinio<string>('scratch', 'server1_screenfetch_result.txt', false)
-]);
-
+	getFromMinio<string>('etl', 'linux_desktop_screenfetch_result.txt', false),
+	getFromMinio<string>('scratch', 'server1_screenfetch_result.txt', false)
+])
 ---
 
-<Layout
-  title="My Homelab"
-  pubDate={new Date('August 08 2021')}
->
-  <p>
-    This page sucks in my homelab docker-compose files and creates easy
-    links to navigate to them if they expose any ports.
-  </p>
-  {files.map((file) => (
-    <div >
-      <a target={'_blank'} href={file.url}>
-        <h3>{file.fileName}</h3>
-      </a>
+<Layout title="My Homelab" pubDate={new Date('August 08 2021')}>
+	<p>
+		This page sucks in my homelab docker-compose files and creates easy links to navigate to them if
+		they expose any ports.
+	</p>
+	{
+		files.map((file) => (
+			<div>
+				<h3>
+					<a target={'_blank'} href={file.url}>
+						{file.fileName}
+					</a>
+				</h3>
 
-      {Object.keys(file.fileContents.services)
-        .filter((name) => file.fileContents.services[name].ports)
-        .map((name) => (
-          <dd >
-            <b>{name}</b>
-            <ul>
-              {/*{!file.fileContents.services[name].ports && (*/}
-              {/*  <div className={'bg-attention'}>No Exposed Ports</div>*/}
-              {/*)}*/}
-              {file.fileContents.services[name].ports?.map((port) => (
-                <li
-                  style={{ display: 'flex', gap: '.5em' }}
-                >
-                  <div >{port}</div>
-                  <b>|</b>
-                  <a
-                    target={'_blank'}
-                    href={`http://server1.local:${port.split(':')[0]}`}
-                  >
-                    DNS
-                  </a>
-                  <a
-                    target={'_blank'}
-                    href={`http://192.168.86.100:${port.split(':')[0]}`}
-                  >
-                    IP
-                  </a>
-                  <a
-                    target={'_blank'}
-                    href={`http://100.99.14.109:${port.split(':')[0]}`}
-                  >
-                    Tailscale
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </dd>
-        ))}
-    </div>
-  ))}
+				{Object.keys(file.fileContents.services)
+					.filter((name) => file.fileContents.services[name].ports)
+					.map((name) => (
+						<dd>
+							<b>{name}</b>
+							<ul>
+								{/*{!file.fileContents.services[name].ports && (*/}
+								{/*  <div className={'bg-attention'}>No Exposed Ports</div>*/}
+								{/*)}*/}
+								{file.fileContents.services[name].ports?.map((port) => (
+									<li style={{ display: 'flex', gap: '.5em' }}>
+										<div>{port}</div>
+										<b>|</b>
+										<a target={'_blank'} href={`http://server1.local:${port.split(':')[0]}`}>
+											DNS
+										</a>
+										<a target={'_blank'} href={`http://192.168.86.100:${port.split(':')[0]}`}>
+											IP
+										</a>
+										<a target={'_blank'} href={`http://100.99.14.109:${port.split(':')[0]}`}>
+											Tailscale
+										</a>
+									</li>
+								))}
+							</ul>
+						</dd>
+					))}
+			</div>
+		))
+	}
 
-  <h1>My Machines</h1>
-  <p>
-    I have a Temporal schedule that runs <code>screenfetch -N</code> every
-    week that writes to Minio and this page requests the files from Minio
-    and renders the results here.
-  </p>
-  <p >
-    I didn&apos;t go with <code>neofetch</code> because of unicode
-    characters.
-  </p>
-  {machines.map((serverInfo) => (
-    <div >
-      <small >
-        Last Updated: {serverInfo.stats.lastModified.toLocaleDateString()}:
-      </small>
-      <pre>{serverInfo.data}</pre>
-    </div>
-  ))}
+	<h1>My Machines</h1>
+	<p>
+		I have a Temporal schedule that runs <code>screenfetch -N</code> every week that writes to Minio
+		and this page requests the files from Minio and renders the results here.
+	</p>
+	<p>
+		I didn&apos;t go with <code>neofetch</code> because of unicode characters.
+	</p>
+	{
+		machines.map((serverInfo) => (
+			<div>
+				<small>Last Updated: {serverInfo.stats.lastModified.toLocaleDateString()}:</small>
+				<pre>{serverInfo.data}</pre>
+			</div>
+		))
+	}
 </Layout>

@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content'
 import { renderGraph } from '../../renderGraph'
 import { PRIMARY_COLOR } from '../../consts'
 import { type ChartConfiguration } from 'chart.js'
+import { sql } from '../../content.config'
 
 const initial: { [key: number]: number } = {}
 
@@ -38,6 +39,9 @@ const coursesPerYearConfig: ChartConfiguration = {
 
 const coursesPerYearImageSmall = await renderGraph(400, 400, coursesPerYearConfig)
 const coursesPerYearImageLarge = await renderGraph(600, 1000, coursesPerYearConfig)
+
+const lastUpdatedResults = await sql`select max(updated_at) last_updated from noco.disc`
+console.log(lastUpdatedResults)
 ---
 
 <Layout title="Disc Golf" pubDate={new Date('August 08 2021')}>
@@ -51,11 +55,12 @@ const coursesPerYearImageLarge = await renderGraph(600, 1000, coursesPerYearConf
 	</p>
 
 	<h1>Discs in my bag ({discs.length})</h1>
+	<small>Last Updated: {lastUpdatedResults[0]['last_updated'].toLocaleDateString()}</small>
 	<p>
-		<i>The number in quotes is my unique </i>
+		The number in quotes is my unique
 
 		<code>ID</code>
-		I give to every disc
+		I give to every disc.
 	</p>
 	{
 		discs.map((disc) => (

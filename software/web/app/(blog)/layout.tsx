@@ -19,7 +19,6 @@ export default async function MatchaLayout({
       <head>
         <title>Lane&apos;s Admin Site</title>
         {/* <link rel="stylesheet" href="https://unpkg.com/terminal.css@0.7.4/dist/terminal.min.css" /> */}
-
       </head>
       <body>
         <nav>
@@ -30,7 +29,6 @@ export default async function MatchaLayout({
         <nav style={{ flexWrap: 'wrap', gap: '5px' }}>
           <Link href="/feed">Feed</Link>
           <Link href="/admin">Admin</Link>
-          <Link href={'/about'}>About</Link>
           <Link href="/recommend">Recommend</Link>
           <Link href={'/food'}>Food</Link>
           <Link href="/inbox">Inbox</Link>
@@ -79,8 +77,6 @@ export default async function MatchaLayout({
               <dd>{session && <Link href="/feed">Feed</Link>}</dd>
               <dd>
                 <Link href="/colophon">Colophon</Link>
-                {' | '}
-                <Link href={'/homelab'}>Homelab</Link>
               </dd>
             </dl>
             <dd>

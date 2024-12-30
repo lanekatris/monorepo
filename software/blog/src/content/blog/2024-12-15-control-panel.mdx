@@ -3,26 +3,15 @@ title: "Son's Control Panel"
 pubDate: "2024-12-15"
 tags: [ iot,project,hardware ]
 ---
-
-[//]: # (todo: show the link to the box website)
-
-[//]: # (todo: list out colors)
-
-[//]: # (todo: list out parts list)
-
-[//]: # (todo: 2021 she got laser)
-
-[//]: # (todo: fritzing)
-
-[//]: # (code reference)
-
-[//]: # (pic of wires in box)
-
-[//]: # (power)
+import SimpleLineGraph from '../../components/SimpleLineGraph.astro';
 
 # Final Product
 
 [![final_control_panel_small.webp](../../assets/control_panel/final_control_panel_small.webp)](/images/control_panel/final_control_panel.jpg)
+
+How many times switched:
+<SimpleLineGraph
+	sql="select created_at::date date, count(*) count from events where event_name = 'toggle_switched_v1' group by created_at::date order by created_at::date" />
 
 # Overview
 
@@ -34,7 +23,7 @@ A control panel has always interested me but I never had a project that it made 
 > I thought it would be cool to have a control panel my son could use to turn off his lights and turn on his fan
 
 He can reach all but one light, so this wasn't exactly needed... but it is fun to flip toggle switches, especially if
-they light up. Anything to make bedtime easier.
+they light up.Anything to make bedtime easier.
 
 # How it works
 
@@ -66,7 +55,8 @@ that without sacrificing any microcontrollers or making my computer's USB port m
 
 I also wasn't clear how to wire it up, so this helped.
 
-<p class="terminal-alert terminal-alert-primary">Had to remove switch covers as my 3-year-old had a hard time flipping them.</p>
+	<p class="terminal-alert terminal-alert-primary">Had to remove switch covers as my 3-year-old had a hard time flipping
+		them.</p>
 
 [![prototype_cardboard_small.webp](../../assets/control_panel/prototype_cardboard_small.webp)](/images/control_panel/prototype_cardboard.jpg)
 [![prototype_done_small.webp](../../assets/control_panel/prototype_done_small.webp)](/images/control_panel/prototype_done.jpg)

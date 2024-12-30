@@ -1,0 +1,33 @@
+---
+import { renderGraph } from '../renderGraph'
+import { sql } from '../content.config'
+import { type ChartConfiguration } from 'chart.js'
+type Props = {
+	sql: string
+}
+const { sql: sqlString } = Astro.props
+
+const results = await sql(sqlString)
+
+const config: ChartConfiguration = {
+	type: 'line',
+	data: {
+		labels: results.map((x) => x['date'].toLocaleDateString()),
+		datasets: [
+			{
+				label: 'Toggled',
+				data: results.map((x) => x['count']),
+
+				borderColor: 'rgba(75, 192, 192, 1)',
+				backgroundColor: 'rgba(75, 192, 192, 0.2)'
+				// tension: 0.4
+			}
+		]
+	}
+}
+
+const coursesPerYearImageSmall = await renderGraph(500, 600, config)
+console.log(results[0])
+---
+
+<img src={coursesPerYearImageSmall} />
