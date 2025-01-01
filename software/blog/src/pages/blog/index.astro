@@ -20,13 +20,12 @@ const posts = (await getCollection('blog')).sort(
 <Header />
 <main>
 	<section>
-		<h1>Blog Index</h1>
+		<h1>Blog Index ({posts.filter(x => !x.data.draft).length})</h1>
 		<dl>
 			{
-				posts.map((post) => (
+				posts.filter(x => !x.data.draft).map((post) => (
 					<dt>
 						<small>
-
 							<FormattedDate date={post.data.pubDate} />
 						</small>
 						<a href={`/blog/${post.id}/`}>
@@ -41,6 +40,10 @@ const posts = (await getCollection('blog')).sort(
 				))
 			}
 		</dl>
+	</section>
+	<section>
+		<div class="terminal-alert">I have <code>{posts.filter(x => x.data.draft).length}</code> <b>draft</b> blog post(s).
+		</div>
 	</section>
 </main>
 <Footer />

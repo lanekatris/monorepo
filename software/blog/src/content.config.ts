@@ -17,7 +17,8 @@ const blog = defineCollection({
 		heroImage: z.string().optional(),
 		tags: z.string().array().optional(),
 		obsidianLink: z.string().optional(),
-		obsidianType: obsidianType.optional()
+		obsidianType: obsidianType.optional(),
+		draft: z.boolean().optional()
 	})
 })
 
