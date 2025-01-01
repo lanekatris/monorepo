@@ -61,6 +61,7 @@ where folder_depth = 1;`;
     unreadCount: number;
   } = await fetch(process.env.GOOGLE_APPS_URL!).then((x) => x.json());
 
+  // @ts-ignore
   const { rows: lastGymData }: { rows: { count: number } } = await sql`
  select now()::date - file_date::date count from markdown_file_models where file_path like '%/Adventures/%' and file_path like '%Indoor Climbing.md' order by file_date desc limit 1
   `;
