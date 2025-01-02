@@ -11,15 +11,25 @@ const shortHash = childProcess.execSync('git rev-parse --short HEAD').toString()
 
 <footer>
 	<hr />
-	<p>
+	<div>
 		&copy; {today.getFullYear()} Lane Katris
-	</p>
-	<p>
+	</div>
+	<div>
 		Version: <a href={`https://github.com/lanekatris/monorepo/commit/${hash}`}>{shortHash}</a>
-	</p>
-	<p>
+	</div>
+	<div>
 		<a href="https://terminalcss.xyz/" target="_blank">TerminalXYZ Theme</a>
-	</p>
+	</div>
+	<div>
+		<a href="https://astro.build"
+			><img
+				src="https://astro.badg.es/v2/built-with-astro/tiny.svg"
+				alt="Built with Astro"
+				width="120"
+				height="20"
+			/></a
+		>
+	</div>
 	<div>
 		<!--https://stackoverflow.com/questions/55787167/how-to-change-image-source-based-on-css-prefers-color-scheme-->
 		<a href="https://notbyai.fyi" target="_blank" rel="noopener noreferrer">
@@ -33,6 +43,6 @@ const shortHash = childProcess.execSync('git rev-parse --short HEAD').toString()
 
 <style>
 	footer {
-		//margin-top: 3em;
+		padding-bottom: 12em;
 	}
 </style>

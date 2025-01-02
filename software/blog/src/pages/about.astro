@@ -1,6 +1,7 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
-import { Image } from 'astro:assets';
+import Layout from '../layouts/BlogPost.astro'
+import { Image } from 'astro:assets'
+import BestImage from '../components/BestImage.astro'
 import aboutImage from '../assets/me-dg-cart-troy-sunglasses.jpg'
 import fireTower from '../assets/fire-tower.jpg'
 ---
@@ -10,45 +11,34 @@ import fireTower from '../assets/fire-tower.jpg'
 	description="Lorem ipsum dolor sit amet"
 	pubDate={new Date('August 08 2021')}
 >
+	<div class="terminal-alert">You may gather that I like disc golf:</div>
+	<BestImage image={aboutImage} width={400} alt="Lane and his son playing disc golf" />
+
+	<h1>Professional</h1>
 	<p>
-		<Image
-			src={aboutImage}
-			alt="Lane and his son playing disc golf"
-			height={400}
-			width={400}
-		/>
-	<div class='muted small'>Lane and his son playing <a href="/disc-golf">disc golf</a></div>
+		I&apos;m a software engineer. I care about delivering a product that gives value. Taking
+		requirements and architecting solutions from a full stack perspective is my bread and butter.
+		I&apos;m always trying to learn and be open minded.
+		<br />
+		<br />
+		<a href="https://gitconnected.com/lanekatris/resume" target="_blank"> Resume </a>
+	</p>
+	<h1>Fun</h1>
+	<p>
+		I also enjoy <a href="/disc-golf">disc golf</a>, ultimate frisbee, rock climbing, paintball,
+		basketball, etc. The vast majority of my activities are disc golf related.
 	</p>
 
-	<h3>Professional</h3>
-	<p>
-		I&apos;m a software engineer. I care about delivering a product that
-		gives value. Taking requirements and architecting solutions from a full
-		stack perspective is my bread and butter. I&apos;m always trying to
-		learn and be open minded.
-	</p>
-	<a href="https://gitconnected.com/lanekatris/resume" target="_blank">
-		Resume
-	</a>
+	<h1>West Virginia</h1>
+	<BestImage
+		image={fireTower}
+		width={400}
+		alt="Atop a fire tower in Monongahela National Forest - June 2024"
+	/>
 	<br />
-	<h3>Fun</h3>
 	<p>
-		I also enjoy disc golf, ultimate frisbee, rock climbing, paintball,
-		basketball, etc. The vast majority of my activities are disc golf
-		related.
-	</p>
-
-	<h3>West Virginia</h3>
-	<p>
-		<Image src={fireTower} height={500} alt="Atop a fire tower" />
-	<div class='muted small'>
-		Atop a fire tower in Monongahela National Forest - June 2024
-	</div>
-	</p>
-	<p>
-		I live in West Virginia. Although it may be a poor state and folks
-		confuse it with &quot;western virginia&quot;... it is a beautiful place.
-		Also, not a bad place to raise your children. To be fair though: I dream
-		of Colorado a plenty.
+		I live in West Virginia. Although it may be a poor state and folks confuse it with &quot;western
+		virginia&quot;... it is a beautiful place. Also, not a bad place to raise your children. To be
+		fair though: I dream of Colorado a plenty.
 	</p>
 </Layout>
