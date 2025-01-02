@@ -1,0 +1,19 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+type Props = HTMLAttributes<'h1'>
+---
+
+<div>
+	<h1 {...Astro.props}>
+		<slot />
+	</h1>
+	<a href="#">Top</a>
+</div>
+
+<style>
+	div {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+</style>

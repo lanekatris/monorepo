@@ -2,6 +2,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content'
 import BlogPost from '../../layouts/BlogPost.astro'
 import { render } from 'astro:content'
+import Heading from '../../components/Heading.astro'
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog')
@@ -26,7 +27,7 @@ const { Content, headings } = await render(post)
 			))
 		}
 	</ol>
-	<Content />
+	<Content components={{ h1: Heading }} />
 	<hr />
 	<a href="#">Back to Top</a>
 </BlogPost>
