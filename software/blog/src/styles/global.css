@@ -12,6 +12,11 @@ img {
     --primary-color: #074caa; /* Replace with your desired color */
 }
 
+figure > svg {
+    width: 100%;
+    height: unset;
+}
+
 @media (prefers-color-scheme: dark) {
 
     /*:root {*/

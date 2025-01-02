@@ -26,8 +26,8 @@ const config: ChartConfiguration = {
 	}
 }
 
-const coursesPerYearImageSmall = await renderGraph(500, 800, config)
+const coursesPerYearImageSmall = renderGraph(500, 800, config)
 console.log(results[0])
 ---
 
-<img src={coursesPerYearImageSmall} />
+{coursesPerYearImageSmall}
