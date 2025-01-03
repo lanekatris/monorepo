@@ -40,7 +40,8 @@ const coursesPerYearConfig: ChartConfiguration = {
 const coursesPerYearImageSmall = await renderGraph(400, 400, coursesPerYearConfig)
 const coursesPerYearImageLarge = await renderGraph(600, 1000, coursesPerYearConfig)
 
-const lastUpdatedResults = await sql`select max(updated_at) last_updated from noco.disc`
+const lastUpdatedResults = await sql`select max(updated_at) last_updated
+                                     from noco.disc`
 console.log(lastUpdatedResults)
 ---
 
@@ -80,12 +81,12 @@ console.log(lastUpdatedResults)
 
 	<h3>New Courses Per Year</h3>
 
-	<img src={coursesPerYearImageSmall} />
+	{coursesPerYearImageSmall}
 
 	<details>
 		<summary>Bigger Graph</summary>
 
-		<img src={coursesPerYearImageLarge} />
+		{coursesPerYearImageLarge}
 	</details>
 
 	<details>
