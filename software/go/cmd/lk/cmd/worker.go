@@ -111,6 +111,17 @@ func deploySchedulesV2(c client.Client) {
 				TaskQueue: "server",
 			},
 		},
+		client.ScheduleOptions{
+			ID: "schedule_get_washer_power",
+			Spec: client.ScheduleSpec{
+				CronExpressions: []string{"*/10 * * * *"},
+			},
+			Action: &client.ScheduleWorkflowAction{
+				ID:        "action_get_washer_power",
+				Workflow:  shared.WorkflowPowerOutlet,
+				TaskQueue: shared.ServerQueue,
+			},
+		},
 	}
 	for _, schedule := range schedules {
 		log.Info("Creating schedule", "id", schedule.ID)
@@ -206,6 +217,10 @@ var workerCmd = &cobra.Command{
 		w.RegisterWorkflow(shared.WorkflowClimbRest)
 		w.RegisterActivity(shared.BuildClimbRest)
 		w.RegisterActivity(shared.GetClimbRestData)
+
+		// Power monitor
+		w.RegisterWorkflow(shared.WorkflowPowerOutlet)
+		w.RegisterActivity(shared.GetPowerMonitoringOutletData)
 
 		// Start listening to the Task Queue
 		err = w.Run(worker.InterruptCh())

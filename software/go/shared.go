@@ -7,6 +7,7 @@ import (
 )
 
 const GreetingTaskQueue = "GREETING_TASK_QUEUE"
+const ServerQueue = "server"
 
 const PostgresApiKeyConfig = "POSTGRES_CONN"
 
