@@ -118,11 +118,6 @@ func GenerateMarkdownModels(filePaths []string, rootPath string) ([]MarkdownFile
 }
 
 func KvPut(key string, value string) error {
-	//jsonBytes, err := json.Marshal(value)
-	//if err != nil {
-	//	return err
-	//}
-
 	r := bytes.NewReader([]byte(value))
 
 	mc := GetMinioClient()

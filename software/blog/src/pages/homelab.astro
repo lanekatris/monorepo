@@ -2,6 +2,7 @@
 import yaml from 'js-yaml'
 import Layout from '../layouts/BlogPost.astro'
 import { getFromMinio } from '../get-from-minio'
+import { sql } from '../content.config'
 
 interface DockerComposeFile {
 	services: { [k: string]: { ports?: string[] } }
@@ -31,13 +32,25 @@ const files = await Promise.all(
 
 const machines = await Promise.all([
 	getFromMinio<string>('etl', 'linux_desktop_screenfetch_result.txt', false),
-	getFromMinio<string>('scratch', 'server1_screenfetch_result.txt', false)
+	getFromMinio<string>('etl', 'server1_screenfetch_result.txt', false)
 ])
+
+const eventCounts = await sql`select event_name,min(created_at)::date earliest_date, count(*) count from events group by event_name order by event_name`
 ---
 
 <Layout title="My Homelab" pubDate={new Date('August 08 2021')}>
+	<ol class="terminal-toc">
+		{
+				<li>
+					<a href={`#dc`}>Docker Compose Files</a>
+				</li>
+			<li><a href="#mm">My Machines</a></li>
+			<li><a href="#e">My Events</a></li>
+		}
+	</ol>
+	<h1 id="dc">Docker Compose Files</h1>
 	<p>
-		This page sucks in my homelab docker-compose files and creates easy links to navigate to them if
+I suck		 in my homelab docker-compose files and creates easy links to navigate to them if
 		they expose any ports.
 	</p>
 	{
@@ -49,38 +62,52 @@ const machines = await Promise.all([
 					</a>
 				</h3>
 
-				{Object.keys(file.fileContents.services)
-					.filter((name) => file.fileContents.services[name].ports)
-					.map((name) => (
-						<dd>
-							<b>{name}</b>
-							<ul>
-								{/*{!file.fileContents.services[name].ports && (*/}
-								{/*  <div className={'bg-attention'}>No Exposed Ports</div>*/}
-								{/*)}*/}
-								{file.fileContents.services[name].ports?.map((port) => (
-									<li style={{ display: 'flex', gap: '.5em' }}>
+				<table>
+					<thead>
+					<tr>
+						<td>App</td>
+						<td>Ports</td>
+						<td>Links</td>
+					</tr>
+					</thead>
+					<tbody>
+					{Object.keys(file.fileContents.services)
+						.filter((name) => file.fileContents.services[name].ports)
+						.map((name) => (
+							<tr>
+								<td>{name}</td>
+								<td>
+									<!--<ul>-->
+									{file.fileContents.services[name].ports?.map((port) => (
 										<div>{port}</div>
-										<b>|</b>
-										<a target={'_blank'} href={`http://server1.local:${port.split(':')[0]}`}>
-											DNS
-										</a>
-										<a target={'_blank'} href={`http://192.168.86.100:${port.split(':')[0]}`}>
-											IP
-										</a>
-										<a target={'_blank'} href={`http://100.99.14.109:${port.split(':')[0]}`}>
-											Tailscale
-										</a>
-									</li>
-								))}
-							</ul>
-						</dd>
-					))}
+									))}
+									<!--</ul>-->
+								</td>
+								<td>
+
+									{file.fileContents.services[name].ports?.map((port) => (
+										<div>
+											<a target={'_blank'} href={`http://server1.local:${port.split(':')[0]}`}>
+												DNS
+											</a>
+											<a target={'_blank'} href={`http://192.168.86.100:${port.split(':')[0]}`}>
+												IP
+											</a>
+											<a target={'_blank'} href={`http://100.99.14.109:${port.split(':')[0]}`}>
+												Tailscale
+											</a>
+										</div>
+									))}
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
 			</div>
 		))
 	}
 
-	<h1>My Machines</h1>
+	<h1 id="mm">My Machines</h1>
 	<p>
 		I have a Temporal schedule that runs <code>screenfetch -N</code> every week that writes to Minio
 		and this page requests the files from Minio and renders the results here.
@@ -96,4 +123,17 @@ const machines = await Promise.all([
 			</div>
 		))
 	}
+					<h1 id="e">My Events</h1>
+					<table><thead><tr><td>Name</td>
+					<td>First Logged</td><td>Event Count</td></tr></thead>
+
+					<tbody>
+					{eventCounts.map((eventCount) => <tr>
+						<td>
+							{eventCount.event_name || 'Bad Data...'}
+						</td>
+						<td>{eventCount.earliest_date.toLocaleDateString()}</td>
+						<td>{eventCount.count}</td>
+					</tr>)}
+					</tbody></table>
 </Layout>

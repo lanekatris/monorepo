@@ -4,6 +4,7 @@ import childProcess from 'child_process'
 const today = new Date()
 import byHuman from '../assets/Written-By-Human-Not-By-AI-Badge-white.svg'
 import byHumanDark from '../assets/Written-By-Human-Not-By-AI-Badge-black.svg'
+import badgeGmail from '../assets/badge-gmail.png'
 
 const hash = childProcess.execSync('git rev-parse  HEAD').toString().trim()
 const shortHash = childProcess.execSync('git rev-parse --short HEAD').toString().trim()
@@ -16,9 +17,16 @@ const shortHash = childProcess.execSync('git rev-parse --short HEAD').toString()
 	</div>
 	<div>
 		&copy; {today.getFullYear()} Lane Katris
+		<a href="mailto:lanekatris@gmail.com">
+			<Image src={badgeGmail} alt="Gmail" />
+		</a>
 	</div>
 	<div>
-		Version: <a href={`https://github.com/lanekatris/monorepo/commit/${hash}`}>{shortHash}</a>
+		Version: <a href={`https://github.com/lanekatris/monorepo/commit/${hash}`}>{shortHash}</a> Last Published:
+		<code
+			>{today.toLocaleDateString()}
+			{today.toLocaleTimeString()}</code
+		>
 	</div>
 	<div>
 		<a href="https://terminalcss.xyz/" target="_blank">TerminalXYZ Theme</a>
