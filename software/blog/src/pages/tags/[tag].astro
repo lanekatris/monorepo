@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/BlogPost.astro'
+import { getCollection } from 'astro:content'
+import FormattedDate from '../../components/FormattedDate.astro'
+
+export async function getStaticPaths({}) {
+	const allPosts = await getCollection('blog')
+	const sortedPosts = allPosts.sort(
+		(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+	)
+	const allTags = new Set<string>()
+	sortedPosts.map((post) => {
+		post.data.tags && post.data.tags.map((tag) => allTags.add(tag))
+	})
+
+	return Array.from(allTags).map((tag) => {
+		const filteredPosts = sortedPosts.filter((post) => post.data.tags?.includes(tag))
+		return {
+			params: { tag },
+			props: {
+				posts: filteredPosts
+			}
+		}
+	})
+}
+
+const { posts } = Astro.props
+const { tag } = Astro.params
+
+let title = tag
+let description = 'Posts with tag #' + tag
+---
+
+<Layout title={description} pubDate={new Date('January 05 2025')}>
+	<a href="/tags">All Tags</a>
+	<dl>
+		{
+			posts.filter(x => !x.data.draft).map((post) => (
+				<dt>
+					<small>
+						<FormattedDate date={post.data.pubDate} />
+					</small>
+					<a href={`/blog/${post.id}/`}>
+						{post.data.title}
+					</a>
+					<!--<br />-->
+					<!--{post.data.tags && <small class="muted">-->
+
+					<!--	{post.data.tags?.map((tag) => <span>#{tag}</span>)}-->
+					<!--</small>}-->
+				</dt>
+			))
+		}
+	</dl>
+</Layout>

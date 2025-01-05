@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '../../layouts/BlogPost.astro'
+const allPosts = await getCollection('blog')
+const allTags = allPosts.map((tag) => tag.data.tags).flat()
+
+type TagsCount = Record<string, number>
+
+const processedTags: TagsCount = allTags.reduce((acc: TagsCount, tag: string | undefined) => {
+	if (!tag) return acc
+	const value = acc[tag] || 0
+
+	const pTags = {
+		...acc,
+		[tag]: value + 1
+	}
+
+	const sortedTags = Object.fromEntries(Object.entries(pTags).sort(([, a], [, b]) => b - a))
+
+	return sortedTags
+}, {})
+---
+
+<Layout title="Tags" pubDate={new Date('January 05 2025')}>
+	<table>
+		<thead>
+			<tr>
+				<td>Name</td>
+				<td>Count</td>
+			</tr>
+		</thead>
+		<tbody
+			>{
+				Object.keys(processedTags).map((tag) => (
+					<tr>
+						<td>
+							<a href={`/tags/${tag}`}>#{tag}</a>
+						</td>
+						<td>{processedTags[tag]}</td>
+					</tr>
+				))
+			}</tbody
+		>
+	</table>
+</Layout>

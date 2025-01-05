@@ -18,8 +18,6 @@ const {
 	obsidianType
 } = Astro.props
 
-// obsidianLink: obsidian://open?vault=lkat-vault&file=Adventures/2024-11-09 Outdoor Rock Climbing
-
 const formattedObsidianLink = formatObsidianLink(obsidianType, obsidianLink)
 ---
 
@@ -57,7 +55,9 @@ const formattedObsidianLink = formatObsidianLink(obsidianType, obsidianLink)
 							tags.length > 0 && (
 								<div>
 									{tags.map((tag) => (
-										<span style="margin-right:5px">#{tag}</span>
+										<a href={`/tags/${tag}`} style="margin-right:5px">
+											#{tag}
+										</a>
 									))}
 								</div>
 							)

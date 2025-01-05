@@ -21,6 +21,7 @@ const posts = (await getCollection('blog')).sort(
 <main>
 	<section>
 		<h1>Blog Index ({posts.filter(x => !x.data.draft).length})</h1>
+		<a href="/tags">All Tags</a>
 		<dl>
 			{
 				posts.filter(x => !x.data.draft).map((post) => (
