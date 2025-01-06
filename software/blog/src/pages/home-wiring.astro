@@ -3,8 +3,9 @@
 import Layout from '../layouts/BlogPost.astro'
 import { sql } from '../content.config'
 
-const outlets = await sql`select * from noco.home_electric order by outlet`
-console.log(outlets[0])
+const outlets = await sql`select *
+                          from noco.home_electric
+                          order by outlet`
 ---
 
 <Layout title="WIP Home Wiring" pubDate={outlets[0].updated_at}>

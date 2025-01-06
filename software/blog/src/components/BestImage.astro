@@ -8,24 +8,40 @@ type Props = {
 	width: number
 	height?: number
 	widths?: number[]
+	isFigure?: boolean
 }
 
-const { image, alt, width, height, widths, ...props } = Astro.props
+const { image, alt, isFigure, width, height, widths, ...props } = Astro.props
 ---
 
-<figure>
-	<a href={image.src}>
-		<Image
-			src={image}
-			alt={alt}
-			widths={widths}
-			width={width}
-			height={height}
-			sizes={`(max-width: 720px) 400px, (max-width: 1600px) 800px`}
-		/>
-	</a>
-	<figcaption>{alt}</figcaption>
-</figure>
+{
+	isFigure === undefined || isFigure === true ? (
+		<figure>
+			<a href={image.src}>
+				<Image
+					src={image}
+					alt={alt}
+					widths={widths}
+					width={width}
+					height={height}
+					sizes={`(max-width: 720px) 400px, (max-width: 1600px) 800px`}
+				/>
+			</a>
+			<figcaption>{alt}</figcaption>
+		</figure>
+	) : (
+		<a href={image.src}>
+			<Image
+				src={image}
+				alt={alt}
+				widths={widths}
+				width={width}
+				height={height}
+				sizes={`(max-width: 720px) 400px, (max-width: 1600px) 800px`}
+			/>
+		</a>
+	)
+}
 
 <style>
 	figure {

@@ -42,7 +42,6 @@ const coursesPerYearImageLarge = await renderGraph(600, 1000, coursesPerYearConf
 
 const lastUpdatedResults = await sql`select max(updated_at) last_updated
                                      from noco.disc`
-console.log(lastUpdatedResults)
 ---
 
 <Layout title="Disc Golf" pubDate={new Date('August 08 2021')}>
