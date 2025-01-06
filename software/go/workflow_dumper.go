@@ -100,7 +100,7 @@ func (input *WorkflowInputDumper) ProcessEvent(eventName string, data string) er
 			return nil
 		}
 
-		createdRecently := input.EventQueries.WasEventCreatedRecently("email_dog_water_sent_v1")
+		createdRecently := input.EventService.WasEventCreatedRecently("email_dog_water_sent_v1")
 		if createdRecently {
 			log.Info("Water needs refilled, but notification already sent")
 			return nil
@@ -111,7 +111,7 @@ func (input *WorkflowInputDumper) ProcessEvent(eventName string, data string) er
 		if err != nil {
 			return err
 		}
-		err = input.DumpEvent("email_dog_water_sent_v1", "")
+		err = input.EventService.CreateEvent(EmailDogWaterSent, "")
 		if err != nil {
 			return err
 		}
@@ -134,13 +134,13 @@ func WorkflowDumper(ctx workflow.Context, eventName string, data string) error {
 	if err != nil {
 		return err
 	}
-	err = workflow.ExecuteActivity(ctx, activities.DumpEvent, eventName, data).Get(ctx, nil)
 
+	err = workflow.ExecuteActivity(ctx, activities.DumpEvent, eventName, data).Get(ctx, nil)
 	return err
 }
 
 type WorkflowInputDumper struct {
 	Db           *gorm.DB
 	EmailClient  EmailClient
-	EventQueries EventQueries
+	EventService EventService
 }

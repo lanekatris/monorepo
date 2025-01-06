@@ -213,7 +213,7 @@ var workerCmd = &cobra.Command{
 		var dumperActivities = &shared.WorkflowInputDumper{
 			Db:          gormDb,
 			EmailClient: shared.NewResendClient(connStr),
-			EventQueries: &shared.PostgresEventQueries{
+			EventService: &shared.DbEventService{
 				Db: gormDb,
 			},
 		}

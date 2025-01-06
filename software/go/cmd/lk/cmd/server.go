@@ -5,12 +5,10 @@ package cmd
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"github.com/charmbracelet/log"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
 	"github.com/teris-io/shortid"
 	"go.temporal.io/sdk/client"
 	"google.golang.org/grpc"
@@ -64,10 +62,10 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		db, err := shared.GetGormDb()
-		if err != nil {
-			panic(err)
-		}
+		//db, err := shared.GetGormDb()
+		//if err != nil {
+		//	panic(err)
+		//}
 
 		r := gin.Default()
 		r.Use(cors.Default())
@@ -249,38 +247,39 @@ to quickly create a Cobra application.`,
 		})
 
 		r.GET("/testies", func(c *gin.Context) {
-			var connStr = viper.GetString(shared.ResendApiKeyConfig)
-			if connStr == "" {
-				panic("Config not found: " + shared.ResendApiKeyConfig)
-			}
-			dumper := shared.WorkflowInputDumper{
-				Db:          db,
-				EmailClient: shared.NewResendClient(connStr),
-				EventQueries: &shared.PostgresEventQueries{
-					Db: db,
-				},
-			}
-			var data = shared.WaterLevelData{
-				Data: 3,
-			}
-			stringified, err := json.Marshal(data)
-			if err != nil {
-				log.Error(err)
-				return
-			}
-			err = dumper.ProcessEvent("water_level_v1", string(stringified))
-			if err != nil {
-				log.Error(err)
-				return
-			}
-			err = dumper.DumpEvent("water_level_v1", string(stringified))
-			if err != nil {
-				log.Error(err)
-				return
-			}
+			//var connStr = viper.GetString(shared.ResendApiKeyConfig)
+			//if connStr == "" {
+			//	panic("Config not found: " + shared.ResendApiKeyConfig)
+			//}
+			//dumper := shared.WorkflowInputDumper{
+			//	Db:          db,
+			//	EmailClient: shared.NewResendClient(connStr),
+			//	EventService: &shared.DbEventService{
+			//		Db: db,
+			//	},
+			//}
+			//var data = shared.WaterLevelData{
+			//	Data: 3,
+			//}
+			//stringified, err := json.Marshal(data)
+			//if err != nil {
+			//	log.Error(err)
+			//	return
+			//}
+			//err = dumper.ProcessEvent("water_level_v1", string(stringified))
+			//if err != nil {
+			//	log.Error(err)
+			//	return
+			//}
+			//err = dumper.DumpEvent("water_level_v1", string(stringified))
+			//if err != nil {
+			//	log.Error(err)
+			//	return
+			//}
 
 			c.JSON(200, gin.H{
 				"hello": "world",
+				"ugh":   shared.WaterLevel.String(),
 				//"e":     event,
 				//"two":   event.Id,
 				//"three": shared.IsWithin24Hours(event.CreatedAt),
