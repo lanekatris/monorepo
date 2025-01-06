@@ -12,13 +12,7 @@ import (
 	"time"
 )
 
-// func (input *WorkflowInputMinifluxToS3) GetRssFeeds() ([]RssFeed, error) {
-// func DumpEvent(eventName string, data string) error {
 func (input *WorkflowInputDumper) DumpEvent(eventName string, data string) error {
-	//db, err := GetGormDb()
-	//if err != nil {
-	//	return err
-	//}
 	var e = Event{
 		EventName: eventName,
 		Data:      sql.NullString{String: data, Valid: true},
@@ -35,6 +29,10 @@ func (input *WorkflowInputDumper) DumpEvent(eventName string, data string) error
 type ToggleSwitchedData struct {
 	Value    int    `json:"value"`
 	SwitchId string `json:"switch_id"`
+}
+
+type WaterLevelData struct {
+	Data int `json:"data"`
 }
 
 func (input *WorkflowInputDumper) ProcessEvent(eventName string, data string) error {
@@ -87,11 +85,42 @@ func (input *WorkflowInputDumper) ProcessEvent(eventName string, data string) er
 		}
 
 		return nil
+	}
 
+	// send notification if zekes water bowl is empty
+	if eventName == "water_level_v1" {
+		var waterLevelData WaterLevelData
+
+		var err = json.Unmarshal([]byte(data), &waterLevelData)
+		if err != nil {
+			return err
+		}
+
+		if waterLevelData.Data >= 100 {
+			return nil
+		}
+
+		createdRecently := input.EventQueries.WasEventCreatedRecently("email_dog_water_sent_v1")
+		if createdRecently {
+			log.Info("Water needs refilled, but notification already sent")
+			return nil
+		}
+
+		log.Info("Sending email...")
+		err = input.EmailClient.SendEmail("lanekatris@gmail.com", "Zeke's bowl needs filled", "Zeke's bowl needs filled")
+		if err != nil {
+			return err
+		}
+		err = input.DumpEvent("email_dog_water_sent_v1", "")
+		if err != nil {
+			return err
+		}
+		return nil
 	}
 
 	return nil
 }
+
 func WorkflowDumper(ctx workflow.Context, eventName string, data string) error {
 	options := workflow.ActivityOptions{
 		StartToCloseTimeout: time.Minute * 1,
@@ -111,5 +140,7 @@ func WorkflowDumper(ctx workflow.Context, eventName string, data string) error {
 }
 
 type WorkflowInputDumper struct {
-	Db *gorm.DB
+	Db           *gorm.DB
+	EmailClient  EmailClient
+	EventQueries EventQueries
 }

@@ -205,12 +205,19 @@ var workerCmd = &cobra.Command{
 		w.RegisterActivity(shared.ExecOnHost)
 		w.RegisterActivity(shared.KvPut)
 
-		// Event dumper
+		var connStr = viper.GetString(shared.ResendApiKeyConfig)
+		if connStr == "" {
+			panic("Config not found: " + shared.ResendApiKeyConfig)
+		}
+
 		var dumperActivities = &shared.WorkflowInputDumper{
-			Db: gormDb,
+			Db:          gormDb,
+			EmailClient: shared.NewResendClient(connStr),
+			EventQueries: &shared.PostgresEventQueries{
+				Db: gormDb,
+			},
 		}
 		w.RegisterWorkflow(shared.WorkflowDumper)
-		//w.RegisterActivity(shared.DumpEvent)
 		w.RegisterActivity(dumperActivities)
 
 		// Climb.rest
