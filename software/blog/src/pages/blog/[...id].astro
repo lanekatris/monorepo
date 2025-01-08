@@ -18,7 +18,8 @@ const { Content, headings, remarkPluginFrontmatter } = await render(post)
 // console.log(remarkPluginFrontmatter)
 ---
 
-<BlogPost {...post.data} lastModified={remarkPluginFrontmatter.lastModified} shortSha={remarkPluginFrontmatter.shortHash} longSha={remarkPluginFrontmatter.longHash} />
+<BlogPost {...post.data} lastModified={remarkPluginFrontmatter.lastModified}
+					shortSha={remarkPluginFrontmatter.shortHash} longSha={remarkPluginFrontmatter.longHash}>
 	{
 		headings.length > 0 && (
 			<h1>Table of Contents</h1>
