@@ -8,23 +8,34 @@ export async function getStaticPaths({}) {
 	const sortedPosts = allPosts.sort(
 		(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
 	)
+
+	const allNotes = await getCollection('notes')
+
 	const allTags = new Set<string>()
 	sortedPosts.map((post) => {
 		post.data.tags && post.data.tags.map((tag) => allTags.add(tag))
 	})
+	allNotes.map((note) => {
+		note.data.tags &&
+			note.data.tags.map((tag) => {
+				allTags.add(tag)
+			})
+	})
 
 	return Array.from(allTags).map((tag) => {
 		const filteredPosts = sortedPosts.filter((post) => post.data.tags?.includes(tag))
+		const filteredNotes = allNotes.filter((note) => note.data.tags?.includes(tag))
 		return {
 			params: { tag },
 			props: {
-				posts: filteredPosts
+				posts: filteredPosts,
+				notes: filteredNotes
 			}
 		}
 	})
 }
 
-const { posts } = Astro.props
+const { posts, notes } = Astro.props
 const { tag } = Astro.params
 
 let title = tag
@@ -33,21 +44,28 @@ let description = 'Posts with tag #' + tag
 
 <Layout title={description} pubDate={new Date('January 05 2025')}>
 	<a href="/tags">All Tags</a>
+	<h3>Blog Posts</h3>
 	<dl>
 		{
-			posts.filter(x => !x.data.draft).map((post) => (
+			posts
+				.filter((x) => !x.data.draft)
+				.map((post) => (
+					<dt>
+						<small>
+							<FormattedDate date={post.data.pubDate} />
+						</small>
+						<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+					</dt>
+				))
+		}
+	</dl>
+	<h3>Notes</h3>
+	<dl>
+		{
+			notes.map((post) => (
 				<dt>
-					<small>
-						<FormattedDate date={post.data.pubDate} />
-					</small>
-					<a href={`/blog/${post.id}/`}>
-						{post.data.title}
-					</a>
-					<!--<br />-->
-					<!--{post.data.tags && <small class="muted">-->
-
-					<!--	{post.data.tags?.map((tag) => <span>#{tag}</span>)}-->
-					<!--</small>}-->
+					<small>{post.id}</small>
+					<a href={`/notes/${post.id}/`}>{post.data.title}</a>
 				</dt>
 			))
 		}

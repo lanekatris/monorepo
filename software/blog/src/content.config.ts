@@ -22,6 +22,17 @@ const blog = defineCollection({
 	})
 })
 
+const notes = defineCollection({
+	loader: glob({
+		pattern: '**/*.{md,mdx}',
+		base: 'src/content/notes'
+	}),
+	schema: z.object({
+		title: z.string(),
+		tags: z.string().array().optional()
+	})
+})
+
 const discGolfCourses = defineCollection({
 	loader: file('src/data/courses.json'),
 	schema: z.object({
@@ -33,7 +44,9 @@ const discGolfCourses = defineCollection({
 export const sql = neon(import.meta.env.DATABASE_URL)
 const discs = defineCollection({
 	loader: async () => {
-		const response = await sql`select * from noco.disc order by number desc`
+		const response = await sql`select *
+                               from noco.disc
+                               order by number desc`
 		const idk = response as { number: string }[]
 		const f = idk.map((x) => ({
 			...x,
@@ -54,7 +67,9 @@ const discs = defineCollection({
 
 const ticks = defineCollection({
 	loader: async () => {
-		const response = await sql`select * from kestra.ticks order by "Date" desc`
+		const response = await sql`select *
+                               from kestra.ticks
+                               order by "Date" desc`
 		return response.map((x) => ({
 			...x,
 			id: x['id'].toString()
@@ -80,4 +95,4 @@ const ticks = defineCollection({
 	})
 })
 
-export const collections = { blog, discGolfCourses, discs, ticks }
+export const collections = { blog, discGolfCourses, discs, ticks, notes }
