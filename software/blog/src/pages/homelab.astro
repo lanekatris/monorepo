@@ -45,6 +45,7 @@ const eventCounts = await sql`select event_name,min(created_at)::date earliest_d
 					<a href={`#dc`}>Docker Compose Files</a>
 				</li>
 			<li><a href="#mm">My Machines</a></li>
+			<li><a href="#iot">My IoT Devices</a></li>
 			<li><a href="#e">My Events</a></li>
 		}
 	</ol>
@@ -77,11 +78,9 @@ I suck		 in my homelab docker-compose files and creates easy links to navigate t
 							<tr>
 								<td>{name}</td>
 								<td>
-									<!--<ul>-->
 									{file.fileContents.services[name].ports?.map((port) => (
 										<div>{port}</div>
 									))}
-									<!--</ul>-->
 								</td>
 								<td>
 
@@ -123,7 +122,27 @@ I suck		 in my homelab docker-compose files and creates easy links to navigate t
 			</div>
 		))
 	}
+					<h1 id="iot">My IoT Devices</h1>
+					These are devices I've created. I'll think of how to show 3rd party in the future.
+					<table>
+					<thead><tr><td>Purpose</td><td>Device</td><td>Random</td></tr></thead>
+
+					<tbody>
+					<tr><td>Aquarium</td><td>Pi Pico W</td></tr>
+					<tr><td>
+						Kitchen Barcode Scanner
+					</td><td>Pi Zero W 1.1</td></tr>
+					<tr><td><a href="/blog/2024-12-15-control-panel">Control Panel</a></td><td>Pi Pico W</td></tr>
+					<tr><td>Dog water level</td><td>ESP32 DevkitC 1.1</td><td>Battery powered</td></tr>
+					</tbody>
+
+					</table>
+					<!--<ul>-->
+					<!--	<li>Aquarium Pi Pico W</li>-->
+					<!--	<li>Kitchen Barcode Scanner </li>-->
+					<!--</ul>-->
 					<h1 id="e">My Events</h1>
+					I'll add more details about what is going on here in the future.
 					<table><thead><tr><td>Name</td>
 					<td>First Logged</td><td>Event Count</td></tr></thead>
 
