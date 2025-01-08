@@ -44,7 +44,7 @@ let description = 'Posts with tag #' + tag
 
 <Layout title={description} pubDate={new Date('January 05 2025')}>
 	<a href="/tags">All Tags</a>
-	<h3>Blog Posts</h3>
+	<h1>Blog Posts</h1>
 	<dl>
 		{
 			posts
@@ -58,8 +58,9 @@ let description = 'Posts with tag #' + tag
 					</dt>
 				))
 		}
+		{posts.length === 0 ? <dt>No posts with tag {tag}</dt> : null}
 	</dl>
-	<h3>Notes</h3>
+	<h1>Notes</h1>
 	<dl>
 		{
 			notes.map((post) => (
@@ -69,5 +70,6 @@ let description = 'Posts with tag #' + tag
 				</dt>
 			))
 		}
+		{notes.length === 0 ? <dt>No notes with tag {tag}</dt> : null}
 	</dl>
 </Layout>

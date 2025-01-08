@@ -6,7 +6,11 @@ import Footer from '../components/Footer.astro'
 import FormattedDate from '../components/FormattedDate.astro'
 import { formatObsidianLink } from '../formatObsidianLink'
 
-type Props = CollectionEntry<'blog'>['data'] & { lastModified?: string }
+type Props = CollectionEntry<'blog'>['data'] & {
+	lastModified?: string
+	shortSha?: string
+	longSha?: string
+}
 
 const {
 	tags = [],
@@ -16,7 +20,9 @@ const {
 	updatedDate,
 	obsidianLink,
 	obsidianType,
-	lastModified
+	lastModified,
+	shortSha,
+	longSha
 } = Astro.props
 
 const formattedObsidianLink = formatObsidianLink(obsidianType, obsidianLink)
@@ -42,6 +48,13 @@ const formattedObsidianLink = formatObsidianLink(obsidianType, obsidianLink)
 						<h1 style="padding-bottom:0">{title}</h1>
 						<div>
 							<FormattedDate date={pubDate} />
+							{
+								longSha && (
+									<a href={`https://github.com/lanekatris/monorepo/commit/${longSha}`}>
+										{shortSha}
+									</a>
+								)
+							}
 							{
 								lastModified && (
 									<div class="last-updated-on">

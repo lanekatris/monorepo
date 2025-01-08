@@ -11,6 +11,12 @@ export function remarkModifiedTime() {
 		const filepath = file.history[0]
 		// console.log(filepath)
 		const result = execSync(`git log -1 --pretty="format:%cI" "${filepath}"`)
+		const shortHash = execSync(`git log -1 --pretty="format:%h" "${filepath}"`).toString().trim()
+		const longHash = execSync(`git log -1 --pretty="format:%H" "${filepath}"`).toString().trim()
+
+		// Assign them to your frontmatter
+		file.data.astro.frontmatter.shortHash = shortHash
+		file.data.astro.frontmatter.longHash = longHash
 		file.data.astro.frontmatter.lastModified = result.toString()
 	}
 }

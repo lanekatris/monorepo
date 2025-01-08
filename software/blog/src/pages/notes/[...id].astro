@@ -22,7 +22,8 @@ const day = rawDate.slice(6, 8)
 const pubDate = new Date(+year, +month, +day)
 ---
 
-<BlogPost {...post.data} pubDate={pubDate}>
+<BlogPost {...post.data} pubDate={pubDate} shortSha={remarkPluginFrontmatter.shortHash}
+					longSha={remarkPluginFrontmatter.longHash}>
 	{
 		headings.length > 0 && (
 			<h1>Table of Contents</h1>
