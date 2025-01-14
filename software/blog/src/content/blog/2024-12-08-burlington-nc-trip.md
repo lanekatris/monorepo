@@ -1,7 +1,7 @@
 ---
 title: "Burlington, NC Trip"
 pubDate: "2024-12-08"
-tags: [ trip,disc-golf ]
+tags: [ adventure,disc-golf ]
 ---
 
 Took a quick trip at the tail end of my PTO chasing some warmish weather.
