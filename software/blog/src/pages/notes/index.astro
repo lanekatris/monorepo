@@ -6,7 +6,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts'
 import { getCollection } from 'astro:content'
 import FormattedDate from '../../components/FormattedDate.astro'
 
-const notes = await getCollection('notes')
+const notes = (await getCollection('notes')).sort((a, b) => a.data.title.localeCompare(b.data.title))
 ---
 
 <!doctype html>

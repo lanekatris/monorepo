@@ -3,7 +3,7 @@ Description=Barcode Scanner Input Service
 After=multi-user.target
 
 [Service]
-ExecStart=/usr/bin/python3 /home/kitchenpi/scanme.py
+ExecStart=/usr/bin/python3 /home/pi/scanme.py
 Restart=always
 User=root
 StandardOutput=journal
