@@ -1,0 +1,4904 @@
+[
+  {
+    "endTime" : "2024-01-09 02:58",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Eddie Jaoude on GitHub Stars and MDX documentation",
+    "msPlayed" : 2044325
+  },
+  {
+    "endTime" : "2024-01-09 23:07",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "AWS re:Invent Special: Sagemaker with Ankur Mehrotra",
+    "msPlayed" : 325340
+  },
+  {
+    "endTime" : "2024-01-09 23:31",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "AWS re:Invent Special: Sagemaker with Ankur Mehrotra",
+    "msPlayed" : 159620
+  },
+  {
+    "endTime" : "2024-01-10 02:42",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "AWS re:Invent Special: Sagemaker with Ankur Mehrotra",
+    "msPlayed" : 531820
+  },
+  {
+    "endTime" : "2024-01-11 21:45",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "AWS re:Invent Special: Sagemaker with Ankur Mehrotra",
+    "msPlayed" : 654292
+  },
+  {
+    "endTime" : "2024-01-11 21:47",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "Solo Ep | Return of the Floss, Ninja New Years Recap & Detroit Lions Playoffs Hype",
+    "msPlayed" : 140284
+  },
+  {
+    "endTime" : "2024-01-11 22:31",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "Amazon's silent sacking (Interview)",
+    "msPlayed" : 2049439
+  },
+  {
+    "endTime" : "2024-01-12 01:21",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "Amazon's silent sacking (Interview)",
+    "msPlayed" : 10680
+  },
+  {
+    "endTime" : "2024-01-12 03:42",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "Amazon's silent sacking (Interview)",
+    "msPlayed" : 2581095
+  },
+  {
+    "endTime" : "2024-01-14 17:23",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "Solo Ep | Return of the Floss, Ninja New Years Recap & Detroit Lions Playoffs Hype",
+    "msPlayed" : 9293
+  },
+  {
+    "endTime" : "2024-01-14 17:24",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "Solo Ep | Return of the Floss, Ninja New Years Recap & Detroit Lions Playoffs Hype",
+    "msPlayed" : 38463
+  },
+  {
+    "endTime" : "2024-01-14 17:49",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "Kaizen! Should we build a CDN? (Friends)",
+    "msPlayed" : 1507358
+  },
+  {
+    "endTime" : "2024-01-14 18:05",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "Kaizen! Should we build a CDN? (Friends)",
+    "msPlayed" : 358204
+  },
+  {
+    "endTime" : "2024-01-17 23:24",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "Kaizen! Should we build a CDN? (Friends)",
+    "msPlayed" : 1854245
+  },
+  {
+    "endTime" : "2024-01-18 01:53",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "Kaizen! Should we build a CDN? (Friends)",
+    "msPlayed" : 575277
+  },
+  {
+    "endTime" : "2024-01-18 02:37",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "Let's talk FreeBSD (finally) (Interview)",
+    "msPlayed" : 2006869
+  },
+  {
+    "endTime" : "2024-01-18 12:03",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "Let's talk FreeBSD (finally) (Interview)",
+    "msPlayed" : 2070734
+  },
+  {
+    "endTime" : "2024-01-18 13:52",
+    "podcastName" : "Self-Hosted",
+    "episodeName" : "102: NixOS is a bit Flakey",
+    "msPlayed" : 3872185
+  },
+  {
+    "endTime" : "2024-01-18 13:55",
+    "podcastName" : "Self-Hosted",
+    "episodeName" : "101: Joining the Federation",
+    "msPlayed" : 1404
+  },
+  {
+    "endTime" : "2024-01-19 03:23",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Turborepo and Turbopack with Anthony Shew",
+    "msPlayed" : 154880
+  },
+  {
+    "endTime" : "2024-01-19 04:30",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Turborepo and Turbopack with Anthony Shew",
+    "msPlayed" : 669840
+  },
+  {
+    "endTime" : "2024-01-21 16:37",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Turborepo and Turbopack with Anthony Shew",
+    "msPlayed" : 4503
+  },
+  {
+    "endTime" : "2024-01-21 16:37",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Turborepo and Turbopack with Anthony Shew",
+    "msPlayed" : 978
+  },
+  {
+    "endTime" : "2024-01-21 16:49",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Turborepo and Turbopack with Anthony Shew",
+    "msPlayed" : 698576
+  },
+  {
+    "endTime" : "2024-01-21 16:54",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "Solo Ep | Return of the Floss, Ninja New Years Recap & Detroit Lions Playoffs Hype",
+    "msPlayed" : 327065
+  },
+  {
+    "endTime" : "2024-01-21 17:00",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "A pre-party to a feud  (Changelog++ 🔐) (JS Party)",
+    "msPlayed" : 365862
+  },
+  {
+    "endTime" : "2024-01-21 21:44",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2089 - Joey Diaz",
+    "msPlayed" : 3886627
+  },
+  {
+    "endTime" : "2024-01-21 22:58",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2089 - Joey Diaz",
+    "msPlayed" : 1641125
+  },
+  {
+    "endTime" : "2024-01-25 22:03",
+    "podcastName" : "Software Engineering Radio - the podcast for professional software developers",
+    "episodeName" : "SE Radio 600: William Morgan on Kubernetes Sidecars and Service Mesh",
+    "msPlayed" : 1792080
+  },
+  {
+    "endTime" : "2024-01-25 22:07",
+    "podcastName" : "Techmeme Ride Home",
+    "episodeName" : "Thu. 01/25 – Will Nintendo Try To Shut Down Palworld?",
+    "msPlayed" : 256625
+  },
+  {
+    "endTime" : "2024-01-26 03:42",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Web development according to The Primeagen",
+    "msPlayed" : 1761406
+  },
+  {
+    "endTime" : "2024-01-26 04:01",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "From sales to engineering (JS Party #309)",
+    "msPlayed" : 1020857
+  },
+  {
+    "endTime" : "2024-02-01 21:35",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "From sales to engineering (JS Party #309)",
+    "msPlayed" : 8761
+  },
+  {
+    "endTime" : "2024-02-01 22:18",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2089 - Joey Diaz",
+    "msPlayed" : 2537300
+  },
+  {
+    "endTime" : "2024-02-01 22:20",
+    "podcastName" : "Hanselminutes with Scott Hanselman",
+    "episodeName" : "The Power of Open Telemetry with Dr. Sally Wahba",
+    "msPlayed" : 152280
+  },
+  {
+    "endTime" : "2024-02-02 03:16",
+    "podcastName" : "Hanselminutes with Scott Hanselman",
+    "episodeName" : "The Power of Open Telemetry with Dr. Sally Wahba",
+    "msPlayed" : 1419232
+  },
+  {
+    "endTime" : "2024-02-02 03:17",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "From sales to engineering (JS Party #309)",
+    "msPlayed" : 41184
+  },
+  {
+    "endTime" : "2024-02-02 03:23",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Building Chess.com with Jay Severson",
+    "msPlayed" : 371249
+  },
+  {
+    "endTime" : "2024-02-02 04:04",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Building Chess.com with Jay Severson",
+    "msPlayed" : 890371
+  },
+  {
+    "endTime" : "2024-02-03 10:18",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Building Chess.com with Jay Severson",
+    "msPlayed" : 1578684
+  },
+  {
+    "endTime" : "2024-02-03 10:52",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "From sales to engineering (JS Party #309)",
+    "msPlayed" : 1930423
+  },
+  {
+    "endTime" : "2024-02-03 10:52",
+    "podcastName" : "Techmeme Ride Home",
+    "episodeName" : "Thu. 01/25 – Will Nintendo Try To Shut Down Palworld?",
+    "msPlayed" : 34552
+  },
+  {
+    "endTime" : "2024-02-03 12:04",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Angular Signals (JS Party #310)",
+    "msPlayed" : 3221791
+  },
+  {
+    "endTime" : "2024-02-03 13:57",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Helios",
+    "msPlayed" : 6469511
+  },
+  {
+    "endTime" : "2024-02-03 14:06",
+    "podcastName" : "Humans Outside",
+    "episodeName" : "364 ‘Ranger of the Lost Art:’ Chasing Down Art from the U.S. National Parks (Ranger Doug Leen, National park poster expert)",
+    "msPlayed" : 5928
+  },
+  {
+    "endTime" : "2024-02-03 14:53",
+    "podcastName" : "Developer Tea",
+    "episodeName" : "Apply Little's Law To What You Can Control",
+    "msPlayed" : 23360
+  },
+  {
+    "endTime" : "2024-02-03 17:36",
+    "podcastName" : "Developer Tea",
+    "episodeName" : "Apply Little's Law To What You Can Control",
+    "msPlayed" : 746318
+  },
+  {
+    "endTime" : "2024-02-03 18:02",
+    "podcastName" : "This Week in Startups",
+    "episodeName" : "Late-stage VC market update + Terra Kaffe's Sahand Dilmaghani | E1891",
+    "msPlayed" : 310548
+  },
+  {
+    "endTime" : "2024-02-03 20:48",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "In the beginning (of generative AI) (Interview)",
+    "msPlayed" : 503756
+  },
+  {
+    "endTime" : "2024-02-04 23:35",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "In the beginning (of generative AI) (Interview)",
+    "msPlayed" : 4505561
+  },
+  {
+    "endTime" : "2024-02-05 01:12",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "You have how many open tabs?! (Friends)",
+    "msPlayed" : 5535770
+  },
+  {
+    "endTime" : "2024-02-05 01:13",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "You have how many open tabs?! (Changelog & Friends #29)",
+    "msPlayed" : 23491
+  },
+  {
+    "endTime" : "2024-02-05 01:32",
+    "podcastName" : "Techmeme Ride Home",
+    "episodeName" : "Fri. 02/02 – Facebook’s Golden Age Is Now",
+    "msPlayed" : 1136914
+  },
+  {
+    "endTime" : "2024-02-05 01:54",
+    "podcastName" : "The Stack Overflow Podcast",
+    "episodeName" : "How to beat Doom in just 600 years",
+    "msPlayed" : 739370
+  },
+  {
+    "endTime" : "2024-02-05 02:28",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Dan Abramov on React, RSCs, and the future",
+    "msPlayed" : 1853789
+  },
+  {
+    "endTime" : "2024-02-05 03:29",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Go Capture the Flag! 🚩 (Go Time #301)",
+    "msPlayed" : 2683943
+  },
+  {
+    "endTime" : "2024-02-06 12:05",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Go Capture the Flag! 🚩 (Go Time #301)",
+    "msPlayed" : 693050
+  },
+  {
+    "endTime" : "2024-02-06 12:30",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "AFK w/ Justin Kenna | The Future of Gaming, FaZe Clan Acquisition & An Epic Football Surprise",
+    "msPlayed" : 802764
+  },
+  {
+    "endTime" : "2024-02-06 14:09",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "AFK w/ Justin Kenna | The Future of Gaming, FaZe Clan Acquisition & An Epic Football Surprise",
+    "msPlayed" : 1582680
+  },
+  {
+    "endTime" : "2024-02-08 22:20",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Architectural cloud design patterns with Keith \"Danger\" Casey",
+    "msPlayed" : 1349262
+  },
+  {
+    "endTime" : "2024-02-09 04:01",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Architectural cloud design patterns with Keith \"Danger\" Casey",
+    "msPlayed" : 1058170
+  },
+  {
+    "endTime" : "2024-02-09 04:11",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "AFK w/ Justin Kenna | The Future of Gaming, FaZe Clan Acquisition & An Epic Football Surprise",
+    "msPlayed" : 596380
+  },
+  {
+    "endTime" : "2024-02-09 04:42",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "React Server Components 🧐 (JS Party #311)",
+    "msPlayed" : 974574
+  },
+  {
+    "endTime" : "2024-02-10 14:12",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "React Server Components 🧐 (JS Party #311)",
+    "msPlayed" : 279224
+  },
+  {
+    "endTime" : "2024-02-10 15:31",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "React Server Components 🧐 (JS Party #311)",
+    "msPlayed" : 2084380
+  },
+  {
+    "endTime" : "2024-02-11 21:31",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "React Server Components 🧐 (JS Party #311)",
+    "msPlayed" : 1070520
+  },
+  {
+    "endTime" : "2024-02-12 23:59",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "React Server Components 🧐 (JS Party #311)",
+    "msPlayed" : 1178160
+  },
+  {
+    "endTime" : "2024-02-13 23:48",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "React Server Components 🧐 (JS Party #311)",
+    "msPlayed" : 539440
+  },
+  {
+    "endTime" : "2024-02-14 03:49",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "React Server Components 🧐 (JS Party #311)",
+    "msPlayed" : 1285120
+  },
+  {
+    "endTime" : "2024-02-19 23:30",
+    "podcastName" : "Backend Banter",
+    "episodeName" : "#041 - From Roblox to software founder feat. Lewis Menelaws",
+    "msPlayed" : 1338040
+  },
+  {
+    "endTime" : "2024-02-20 22:41",
+    "podcastName" : "Backend Banter",
+    "episodeName" : "#041 - From Roblox to software founder feat. Lewis Menelaws",
+    "msPlayed" : 1034635
+  },
+  {
+    "endTime" : "2024-02-20 22:50",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "Yeeting stuff into public (Friends)",
+    "msPlayed" : 509777
+  },
+  {
+    "endTime" : "2024-02-21 03:08",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "Yeeting stuff into public (Friends)",
+    "msPlayed" : 2410873
+  },
+  {
+    "endTime" : "2024-02-21 14:05",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "Yeeting stuff into public (Friends)",
+    "msPlayed" : 769820
+  },
+  {
+    "endTime" : "2024-02-22 22:07",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "Yeeting stuff into public (Friends)",
+    "msPlayed" : 1611300
+  },
+  {
+    "endTime" : "2024-02-22 22:22",
+    "podcastName" : "Hanselminutes with Scott Hanselman",
+    "episodeName" : "Reinventing the API Gateway with Zuplo's Josh Twist",
+    "msPlayed" : 916220
+  },
+  {
+    "endTime" : "2024-02-23 03:46",
+    "podcastName" : "Hanselminutes with Scott Hanselman",
+    "episodeName" : "Reinventing the API Gateway with Zuplo's Josh Twist",
+    "msPlayed" : 933560
+  },
+  {
+    "endTime" : "2024-02-23 04:00",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Who's that girl? It's Jess! (JS Party #313)",
+    "msPlayed" : 701684
+  },
+  {
+    "endTime" : "2024-02-23 04:28",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Who's that girl? It's Jess! (JS Party #313)",
+    "msPlayed" : 1079255
+  },
+  {
+    "endTime" : "2024-02-25 01:40",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Who's that girl? It's Jess! (JS Party #313)",
+    "msPlayed" : 455060
+  },
+  {
+    "endTime" : "2024-02-26 02:19",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Who's that girl? It's Jess! (JS Party #313)",
+    "msPlayed" : 495100
+  },
+  {
+    "endTime" : "2024-02-26 23:10",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Who's that girl? It's Jess! (JS Party #313)",
+    "msPlayed" : 9397
+  },
+  {
+    "endTime" : "2024-02-26 23:32",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Who's that girl? It's Jess! (JS Party #313)",
+    "msPlayed" : 873779
+  },
+  {
+    "endTime" : "2024-02-27 00:04",
+    "podcastName" : "Backend Banter",
+    "episodeName" : "#042 - Rust is the WORST language to learn first feat. Teej DeVries",
+    "msPlayed" : 1337855
+  },
+  {
+    "endTime" : "2024-02-29 22:09",
+    "podcastName" : "Hanselminutes with Scott Hanselman",
+    "episodeName" : "Postgres Replication at speed with PeerDB's Sai Srirampur",
+    "msPlayed" : 1340340
+  },
+  {
+    "endTime" : "2024-02-29 22:19",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Stately with Laura Kalbag",
+    "msPlayed" : 317333
+  },
+  {
+    "endTime" : "2024-02-29 22:31",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "Solo Ep | AFK Exclusive: Ninja's Fan Interaction Hour",
+    "msPlayed" : 692110
+  },
+  {
+    "endTime" : "2024-03-01 03:29",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "Solo Ep | AFK Exclusive: Ninja's Fan Interaction Hour",
+    "msPlayed" : 672462
+  },
+  {
+    "endTime" : "2024-03-01 03:35",
+    "podcastName" : "The Matt Walsh Show",
+    "episodeName" : "POV: Matt Walsh Reacts To Women's Favorite IG Reels",
+    "msPlayed" : 288338
+  },
+  {
+    "endTime" : "2024-03-01 03:40",
+    "podcastName" : "Software Engineering Radio - the podcast for professional software developers",
+    "episodeName" : "SE Radio 605: Yingjun Wu on Streaming Databases",
+    "msPlayed" : 283837
+  },
+  {
+    "endTime" : "2024-03-01 04:26",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Qwik and JavaScript streaming with Tony Alicea",
+    "msPlayed" : 1714060
+  },
+  {
+    "endTime" : "2024-03-03 16:49",
+    "podcastName" : "The Jordan B. Peterson Podcast",
+    "episodeName" : "427. Bad Therapy, Weak Parenting, Broken Children | Abigail Shrier",
+    "msPlayed" : 1169723
+  },
+  {
+    "endTime" : "2024-03-07 00:26",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "HTMX v2 with Carson Gross",
+    "msPlayed" : 2096157
+  },
+  {
+    "endTime" : "2024-03-07 00:27",
+    "podcastName" : "Outside Podcast",
+    "episodeName" : "The Trouble with the Internet’s Most Famous Moose",
+    "msPlayed" : 45701
+  },
+  {
+    "endTime" : "2024-03-07 00:43",
+    "podcastName" : "Techmeme Ride Home",
+    "episodeName" : "Tue. 03/05 – The Linux Phoenix?",
+    "msPlayed" : 942972
+  },
+  {
+    "endTime" : "2024-03-07 01:40",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "AFK w/ ARTY | Dance Music Phenom, Life on Tour & The Best Games Today",
+    "msPlayed" : 2261520
+  },
+  {
+    "endTime" : "2024-03-07 22:07",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Rethinking frontend architectures with data layers with Max Stoiber",
+    "msPlayed" : 1444000
+  },
+  {
+    "endTime" : "2024-03-07 22:16",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Rethinking frontend architectures with data layers with Max Stoiber",
+    "msPlayed" : 498402
+  },
+  {
+    "endTime" : "2024-03-07 22:19",
+    "podcastName" : "Hanselminutes with Scott Hanselman",
+    "episodeName" : "eSports for the next generation with Davin Jackson",
+    "msPlayed" : 192115
+  },
+  {
+    "endTime" : "2024-03-07 22:21",
+    "podcastName" : "Web Rush",
+    "episodeName" : "Episode 271: Should You Learn Container Apps?",
+    "msPlayed" : 105407
+  },
+  {
+    "endTime" : "2024-03-07 22:21",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Iceberg at Netflix and Beyond with Ryan Blue",
+    "msPlayed" : 21358
+  },
+  {
+    "endTime" : "2024-03-08 03:35",
+    "podcastName" : "Stuff You Should Know",
+    "episodeName" : "The Smiley, Stubborn Llama",
+    "msPlayed" : 26603
+  },
+  {
+    "endTime" : "2024-03-08 03:35",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Iceberg at Netflix and Beyond with Ryan Blue",
+    "msPlayed" : 2328615
+  },
+  {
+    "endTime" : "2024-03-08 04:04",
+    "podcastName" : "Thoughtworks Technology Podcast",
+    "episodeName" : "Diving head first into software architecture",
+    "msPlayed" : 603660
+  },
+  {
+    "endTime" : "2024-03-10 20:37",
+    "podcastName" : "Thoughtworks Technology Podcast",
+    "episodeName" : "Diving head first into software architecture",
+    "msPlayed" : 1243380
+  },
+  {
+    "endTime" : "2024-03-12 21:50",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Biotech Special: Life Sciences at Snowflake with Harini Gopalakrishnan",
+    "msPlayed" : 301564
+  },
+  {
+    "endTime" : "2024-03-12 21:57",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "Puter is the internet OS (News)",
+    "msPlayed" : 451199
+  },
+  {
+    "endTime" : "2024-03-12 21:57",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Puter is the internet OS (Changelog News #85)",
+    "msPlayed" : 8181
+  },
+  {
+    "endTime" : "2024-03-12 23:03",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Biotech Special: Life Sciences at Snowflake with Harini Gopalakrishnan",
+    "msPlayed" : 652069
+  },
+  {
+    "endTime" : "2024-03-13 01:19",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Jumping into an existing codebase (Go Time #307)",
+    "msPlayed" : 4355760
+  },
+  {
+    "endTime" : "2024-03-14 21:19",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "Solo Ep | The OG Days: Ninja Gets Nostalgic in AFK Solo Episode",
+    "msPlayed" : 1139117
+  },
+  {
+    "endTime" : "2024-03-15 02:18",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "Solo Ep | The OG Days: Ninja Gets Nostalgic in AFK Solo Episode",
+    "msPlayed" : 470704
+  },
+  {
+    "endTime" : "2024-03-15 02:19",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Biotech Special: Life Sciences at Snowflake with Harini Gopalakrishnan",
+    "msPlayed" : 14255
+  },
+  {
+    "endTime" : "2024-03-15 02:55",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Advocating for the future of the open web (JS Party #316)",
+    "msPlayed" : 45240
+  },
+  {
+    "endTime" : "2024-03-15 03:28",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Advocating for the future of the open web (JS Party #316)",
+    "msPlayed" : 367701
+  },
+  {
+    "endTime" : "2024-03-15 21:14",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Advocating for the future of the open web (JS Party #316)",
+    "msPlayed" : 852700
+  },
+  {
+    "endTime" : "2024-03-15 21:49",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Advocating for the future of the open web (JS Party #316)",
+    "msPlayed" : 119660
+  },
+  {
+    "endTime" : "2024-03-17 15:40",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Advocating for the future of the open web (JS Party #316)",
+    "msPlayed" : 8897
+  },
+  {
+    "endTime" : "2024-03-27 14:20",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Advocating for the future of the open web (JS Party #316)",
+    "msPlayed" : 2620
+  },
+  {
+    "endTime" : "2024-03-28 02:07",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Advocating for the future of the open web (JS Party #316)",
+    "msPlayed" : 135328
+  },
+  {
+    "endTime" : "2024-03-28 03:10",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "We're flipping the script (Interview)",
+    "msPlayed" : 1327867
+  },
+  {
+    "endTime" : "2024-04-02 00:59",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "We're flipping the script (Interview)",
+    "msPlayed" : 420520
+  },
+  {
+    "endTime" : "2024-04-02 01:31",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "We're flipping the script (Interview)",
+    "msPlayed" : 349304
+  },
+  {
+    "endTime" : "2024-04-04 00:44",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "E-Girl Exploits Simp Army For Millions",
+    "msPlayed" : 2480504
+  },
+  {
+    "endTime" : "2024-04-06 14:22",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "E-Girl Exploits Simp Army For Millions",
+    "msPlayed" : 2009462
+  },
+  {
+    "endTime" : "2024-04-06 14:24",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Cultural Idiosyncrasies",
+    "msPlayed" : 10630
+  },
+  {
+    "endTime" : "2024-04-07 13:15",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Astro DB with Ben Holmes",
+    "msPlayed" : 1319940
+  },
+  {
+    "endTime" : "2024-04-07 13:48",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Astro DB with Ben Holmes",
+    "msPlayed" : 653114
+  },
+  {
+    "endTime" : "2024-04-08 22:33",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Kaizen! There goes my PgHero (Changelog & Friends #38)",
+    "msPlayed" : 532120
+  },
+  {
+    "endTime" : "2024-04-09 00:54",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Kaizen! There goes my PgHero (Changelog & Friends #38)",
+    "msPlayed" : 644900
+  },
+  {
+    "endTime" : "2024-04-09 01:52",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Kaizen! There goes my PgHero (Changelog & Friends #38)",
+    "msPlayed" : 284234
+  },
+  {
+    "endTime" : "2024-04-09 20:42",
+    "podcastName" : "Self-Hosted",
+    "episodeName" : "120: Can a VPS Replace a Homelab?",
+    "msPlayed" : 2713945
+  },
+  {
+    "endTime" : "2024-04-09 21:33",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Kaizen! There goes my PgHero (Changelog & Friends #38)",
+    "msPlayed" : 1754315
+  },
+  {
+    "endTime" : "2024-04-09 21:37",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Ship software, not code (Go Time #311)",
+    "msPlayed" : 225797
+  },
+  {
+    "endTime" : "2024-04-10 00:10",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Ship software, not code (Go Time #311)",
+    "msPlayed" : 718610
+  },
+  {
+    "endTime" : "2024-04-10 01:20",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Dating Expert w/ Blaine Anderson | First Date with Lauren Compton",
+    "msPlayed" : 1651596
+  },
+  {
+    "endTime" : "2024-04-10 16:30",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Dating Expert w/ Blaine Anderson | First Date with Lauren Compton",
+    "msPlayed" : 33610
+  },
+  {
+    "endTime" : "2024-04-11 20:50",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Off to see the Wiz (JS Party #318)",
+    "msPlayed" : 867787
+  },
+  {
+    "endTime" : "2024-04-11 21:02",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "Solo Ep | I’m Back & Answering Your Questions",
+    "msPlayed" : 752986
+  },
+  {
+    "endTime" : "2024-04-11 21:04",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Netflix Engineering with Jay Phelps",
+    "msPlayed" : 87520
+  },
+  {
+    "endTime" : "2024-04-11 21:21",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Netflix Engineering with Jay Phelps",
+    "msPlayed" : 979502
+  },
+  {
+    "endTime" : "2024-04-12 00:59",
+    "podcastName" : "Developer Voices",
+    "episodeName" : "Bringing Pure Python to Apache Kafka (with Tomáš Neubauer)",
+    "msPlayed" : 0
+  },
+  {
+    "endTime" : "2024-04-12 00:59",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Deploying projects vs products (Ship It! #98)",
+    "msPlayed" : 213
+  },
+  {
+    "endTime" : "2024-04-12 00:59",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "RAG continues to rise (Practical AI #264)",
+    "msPlayed" : 305
+  },
+  {
+    "endTime" : "2024-04-12 00:59",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "The Angular and Wiz merger with Minko Gechev",
+    "msPlayed" : 553
+  },
+  {
+    "endTime" : "2024-04-12 00:59",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "The Angular and Wiz merger with Minko Gechev",
+    "msPlayed" : 0
+  },
+  {
+    "endTime" : "2024-04-12 00:59",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "Kaizen! There goes my PgHero (Friends)",
+    "msPlayed" : 303
+  },
+  {
+    "endTime" : "2024-04-12 02:37",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Netflix Engineering with Jay Phelps",
+    "msPlayed" : 2544278
+  },
+  {
+    "endTime" : "2024-04-12 08:25",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "Solo Ep | I’m Back & Answering Your Questions",
+    "msPlayed" : 422294
+  },
+  {
+    "endTime" : "2024-04-13 18:08",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Off to see the Wiz (JS Party #318)",
+    "msPlayed" : 17107
+  },
+  {
+    "endTime" : "2024-04-13 18:35",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Off to see the Wiz (JS Party #318)",
+    "msPlayed" : 1277696
+  },
+  {
+    "endTime" : "2024-04-13 18:56",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Off to see the Wiz (JS Party #318)",
+    "msPlayed" : 595340
+  },
+  {
+    "endTime" : "2024-04-13 21:10",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Off to see the Wiz (JS Party #318)",
+    "msPlayed" : 292456
+  },
+  {
+    "endTime" : "2024-04-13 21:21",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Dating Expert w/ Blaine Anderson | First Date with Lauren Compton",
+    "msPlayed" : 1762331
+  },
+  {
+    "endTime" : "2024-04-13 21:34",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Ship software, not code (Go Time #311)",
+    "msPlayed" : 1680018
+  },
+  {
+    "endTime" : "2024-04-14 17:08",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Ship software, not code (Go Time #311)",
+    "msPlayed" : 81057
+  },
+  {
+    "endTime" : "2024-04-14 17:40",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "More BMC goodness (Changelog & Friends #39)",
+    "msPlayed" : 505116
+  },
+  {
+    "endTime" : "2024-04-15 12:31",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "More BMC goodness (Changelog & Friends #39)",
+    "msPlayed" : 364700
+  },
+  {
+    "endTime" : "2024-04-15 13:39",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "More BMC goodness (Changelog & Friends #39)",
+    "msPlayed" : 407928
+  },
+  {
+    "endTime" : "2024-04-15 14:44",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "More BMC goodness (Changelog & Friends #39)",
+    "msPlayed" : 1510148
+  },
+  {
+    "endTime" : "2024-04-16 01:54",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Disgusted By Sleazy Car Salesman",
+    "msPlayed" : 237588
+  },
+  {
+    "endTime" : "2024-04-16 02:10",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Disgusted By Sleazy Car Salesman",
+    "msPlayed" : 287632
+  },
+  {
+    "endTime" : "2024-04-16 13:07",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Disgusted By Sleazy Car Salesman",
+    "msPlayed" : 0
+  },
+  {
+    "endTime" : "2024-04-16 22:09",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Disgusted By Sleazy Car Salesman",
+    "msPlayed" : 2109212
+  },
+  {
+    "endTime" : "2024-04-17 00:40",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "More BMC goodness (Friends)",
+    "msPlayed" : 306
+  },
+  {
+    "endTime" : "2024-04-17 00:49",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Disgusted By Sleazy Car Salesman",
+    "msPlayed" : 523368
+  },
+  {
+    "endTime" : "2024-04-17 00:49",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "More BMC goodness (Changelog & Friends #39)",
+    "msPlayed" : 27980
+  },
+  {
+    "endTime" : "2024-04-17 02:55",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Hookdeck and Building an Event Gateway with Alex Bouchard",
+    "msPlayed" : 702640
+  },
+  {
+    "endTime" : "2024-04-18 20:57",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Hookdeck and Building an Event Gateway with Alex Bouchard",
+    "msPlayed" : 1178836
+  },
+  {
+    "endTime" : "2024-04-18 21:00",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "More BMC goodness (Changelog & Friends #39)",
+    "msPlayed" : 137870
+  },
+  {
+    "endTime" : "2024-04-18 21:13",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The boring JavaScript stack (JS Party #319)",
+    "msPlayed" : 746500
+  },
+  {
+    "endTime" : "2024-04-18 21:16",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The boring JavaScript stack (JS Party #319)",
+    "msPlayed" : 206950
+  },
+  {
+    "endTime" : "2024-04-19 01:48",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The boring JavaScript stack (JS Party #319)",
+    "msPlayed" : 1369726
+  },
+  {
+    "endTime" : "2024-04-19 02:37",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "TypeScript-powered backends for frontend devs with Aleksandra Sikora",
+    "msPlayed" : 1603120
+  },
+  {
+    "endTime" : "2024-04-19 10:30",
+    "podcastName" : "Self-Hosted",
+    "episodeName" : "121: Forbidden Fruit",
+    "msPlayed" : 5000
+  },
+  {
+    "endTime" : "2024-04-19 11:53",
+    "podcastName" : "Self-Hosted",
+    "episodeName" : "121: Forbidden Fruit",
+    "msPlayed" : 3041087
+  },
+  {
+    "endTime" : "2024-04-19 11:55",
+    "podcastName" : "Click Here",
+    "episodeName" : "123. Mic Drop: China seeks a Great Leap Forward in cyber",
+    "msPlayed" : 105292
+  },
+  {
+    "endTime" : "2024-04-19 12:28",
+    "podcastName" : "Accidental Tech Podcast",
+    "episodeName" : "583: I've Spent a Lot of Time in the Address Bar",
+    "msPlayed" : 1651110
+  },
+  {
+    "endTime" : "2024-04-19 16:46",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "She's Dominating Me",
+    "msPlayed" : 727683
+  },
+  {
+    "endTime" : "2024-04-20 22:13",
+    "podcastName" : "Accidental Tech Podcast",
+    "episodeName" : "583: I've Spent a Lot of Time in the Address Bar",
+    "msPlayed" : 468678
+  },
+  {
+    "endTime" : "2024-04-21 19:11",
+    "podcastName" : "Accidental Tech Podcast",
+    "episodeName" : "583: I've Spent a Lot of Time in the Address Bar",
+    "msPlayed" : 220320
+  },
+  {
+    "endTime" : "2024-04-21 20:15",
+    "podcastName" : "Accidental Tech Podcast",
+    "episodeName" : "583: I've Spent a Lot of Time in the Address Bar",
+    "msPlayed" : 188720
+  },
+  {
+    "endTime" : "2024-04-22 16:36",
+    "podcastName" : "Accidental Tech Podcast",
+    "episodeName" : "583: I've Spent a Lot of Time in the Address Bar",
+    "msPlayed" : 45077
+  },
+  {
+    "endTime" : "2024-04-22 17:07",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2138 - Tucker Carlson",
+    "msPlayed" : 987146
+  },
+  {
+    "endTime" : "2024-04-22 22:06",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2138 - Tucker Carlson",
+    "msPlayed" : 550812
+  },
+  {
+    "endTime" : "2024-04-23 00:24",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2138 - Tucker Carlson",
+    "msPlayed" : 141604
+  },
+  {
+    "endTime" : "2024-04-23 05:16",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2138 - Tucker Carlson",
+    "msPlayed" : 472588
+  },
+  {
+    "endTime" : "2024-04-24 00:33",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2138 - Tucker Carlson",
+    "msPlayed" : 274159
+  },
+  {
+    "endTime" : "2024-04-25 00:40",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2138 - Tucker Carlson",
+    "msPlayed" : 3906144
+  },
+  {
+    "endTime" : "2024-04-25 01:07",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "She's Dominating Me",
+    "msPlayed" : 765415
+  },
+  {
+    "endTime" : "2024-04-25 21:01",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "She's Dominating Me",
+    "msPlayed" : 1315828
+  },
+  {
+    "endTime" : "2024-04-25 21:19",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2138 - Tucker Carlson",
+    "msPlayed" : 1083985
+  },
+  {
+    "endTime" : "2024-04-26 07:29",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2138 - Tucker Carlson",
+    "msPlayed" : 1952032
+  },
+  {
+    "endTime" : "2024-04-30 00:11",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2138 - Tucker Carlson",
+    "msPlayed" : 295549
+  },
+  {
+    "endTime" : "2024-04-30 21:42",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "AFK w/ DrLupo | Is It 2018?! Our Incredible Wives & How Gaming Changed Our Life",
+    "msPlayed" : 420122
+  },
+  {
+    "endTime" : "2024-05-01 01:30",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "AFK w/ DrLupo | Is It 2018?! Our Incredible Wives & How Gaming Changed Our Life",
+    "msPlayed" : 2247397
+  },
+  {
+    "endTime" : "2024-05-01 01:31",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2138 - Tucker Carlson",
+    "msPlayed" : 66689
+  },
+  {
+    "endTime" : "2024-05-01 01:51",
+    "podcastName" : "This Past Weekend w/ Theo Von",
+    "episodeName" : "E498 Dave Ramsey",
+    "msPlayed" : 296008
+  },
+  {
+    "endTime" : "2024-05-02 20:47",
+    "podcastName" : "This Past Weekend w/ Theo Von",
+    "episodeName" : "E498 Dave Ramsey",
+    "msPlayed" : 540650
+  },
+  {
+    "endTime" : "2024-05-02 23:48",
+    "podcastName" : "This Past Weekend w/ Theo Von",
+    "episodeName" : "E498 Dave Ramsey",
+    "msPlayed" : 169680
+  },
+  {
+    "endTime" : "2024-05-03 00:56",
+    "podcastName" : "This Past Weekend w/ Theo Von",
+    "episodeName" : "E498 Dave Ramsey",
+    "msPlayed" : 228500
+  },
+  {
+    "endTime" : "2024-05-03 01:41",
+    "podcastName" : "This Past Weekend w/ Theo Von",
+    "episodeName" : "E498 Dave Ramsey",
+    "msPlayed" : 1705395
+  },
+  {
+    "endTime" : "2024-05-03 11:51",
+    "podcastName" : "This Past Weekend w/ Theo Von",
+    "episodeName" : "E498 Dave Ramsey",
+    "msPlayed" : 3516716
+  },
+  {
+    "endTime" : "2024-05-03 12:19",
+    "podcastName" : "The Stack Overflow Podcast",
+    "episodeName" : "The reverse mullett model of software engineering",
+    "msPlayed" : 1326980
+  },
+  {
+    "endTime" : "2024-05-03 13:30",
+    "podcastName" : "The TrainingBeta Podcast: A Climbing Training Podcast",
+    "episodeName" : "TBP 258: Training and Climbing for People with Full-Time Jobs",
+    "msPlayed" : 2737913
+  },
+  {
+    "endTime" : "2024-05-03 21:35",
+    "podcastName" : "The TrainingBeta Podcast: A Climbing Training Podcast",
+    "episodeName" : "TBP 258: Training and Climbing for People with Full-Time Jobs",
+    "msPlayed" : 547857
+  },
+  {
+    "endTime" : "2024-05-03 21:52",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2138 - Tucker Carlson",
+    "msPlayed" : 1035488
+  },
+  {
+    "endTime" : "2024-05-03 21:57",
+    "podcastName" : "The Nugget Climbing Podcast",
+    "episodeName" : "EXTRA: Maddy Cope — A Masterclass in Endurance Training",
+    "msPlayed" : 129210
+  },
+  {
+    "endTime" : "2024-05-03 22:18",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The Wu-Tang way (Changelog & Friends #42)",
+    "msPlayed" : 436800
+  },
+  {
+    "endTime" : "2024-05-04 20:39",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Managing Meta's millions of machines (Ship It! #102)",
+    "msPlayed" : 500340
+  },
+  {
+    "endTime" : "2024-05-04 23:53",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The Wu-Tang way (Changelog & Friends #42)",
+    "msPlayed" : 555015
+  },
+  {
+    "endTime" : "2024-05-05 12:58",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Managing Meta's millions of machines (Ship It! #102)",
+    "msPlayed" : 2930140
+  },
+  {
+    "endTime" : "2024-05-06 21:51",
+    "podcastName" : "The Robert Greene Podcast",
+    "episodeName" : "The Chaos We’re Going Through",
+    "msPlayed" : 562
+  },
+  {
+    "endTime" : "2024-05-07 21:30",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Managing Meta's millions of machines (Ship It! #102)",
+    "msPlayed" : 166680
+  },
+  {
+    "endTime" : "2024-05-07 21:55",
+    "podcastName" : "The Engineering Leadership Podcast",
+    "episodeName" : "Balancing technical depth & high-level business strategy w/ Oded Kedem #178",
+    "msPlayed" : 428280
+  },
+  {
+    "endTime" : "2024-05-08 01:37",
+    "podcastName" : "The Engineering Leadership Podcast",
+    "episodeName" : "Balancing technical depth & high-level business strategy w/ Oded Kedem #178",
+    "msPlayed" : 333983
+  },
+  {
+    "endTime" : "2024-05-08 02:02",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "A Bit Awkward w/ Rick Glassman | First Date with Lauren Compton",
+    "msPlayed" : 1452291
+  },
+  {
+    "endTime" : "2024-05-08 02:24",
+    "podcastName" : "This Past Weekend w/ Theo Von",
+    "episodeName" : "E500 Zac Brown",
+    "msPlayed" : 508301
+  },
+  {
+    "endTime" : "2024-05-08 22:23",
+    "podcastName" : "Freestyle Fire with Chris Turner 🔥🎤",
+    "episodeName" : "The 'Highly Offensive to Women' Rap",
+    "msPlayed" : 2103
+  },
+  {
+    "endTime" : "2024-05-09 00:04",
+    "podcastName" : "This Past Weekend w/ Theo Von",
+    "episodeName" : "E500 Zac Brown",
+    "msPlayed" : 4936916
+  },
+  {
+    "endTime" : "2024-05-09 00:28",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The Wu-Tang way (Changelog & Friends #42)",
+    "msPlayed" : 452720
+  },
+  {
+    "endTime" : "2024-05-09 20:32",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The Wu-Tang way (Changelog & Friends #42)",
+    "msPlayed" : 55006
+  },
+  {
+    "endTime" : "2024-05-09 21:15",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Dumbest Guy I've Ever Met",
+    "msPlayed" : 2608552
+  },
+  {
+    "endTime" : "2024-05-09 21:20",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "What if Google lays off the Go team? (Go Time #315)",
+    "msPlayed" : 303755
+  },
+  {
+    "endTime" : "2024-05-10 01:42",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "What if Google lays off the Go team? (Go Time #315)",
+    "msPlayed" : 577161
+  },
+  {
+    "endTime" : "2024-05-10 02:27",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "From Shoelace to Web Awesome (JS Party #322)",
+    "msPlayed" : 2675021
+  },
+  {
+    "endTime" : "2024-05-11 12:23",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "What if Google lays off the Go team? (Go Time #315)",
+    "msPlayed" : 1034
+  },
+  {
+    "endTime" : "2024-05-14 00:39",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Avoiding the soft delete anti-pattern (Changelog News #94)",
+    "msPlayed" : 3530
+  },
+  {
+    "endTime" : "2024-05-14 01:54",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Avoiding the soft delete anti-pattern (Changelog News #94)",
+    "msPlayed" : 155589
+  },
+  {
+    "endTime" : "2024-05-14 01:55",
+    "podcastName" : "Making Sense with Sam Harris",
+    "episodeName" : "#367 — Campus Protests, Antisemitism, and Western Values",
+    "msPlayed" : 17542
+  },
+  {
+    "endTime" : "2024-05-14 02:15",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Deceitful Husband Nearly Has Aneurysm",
+    "msPlayed" : 374441
+  },
+  {
+    "endTime" : "2024-05-14 22:04",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Deceitful Husband Nearly Has Aneurysm",
+    "msPlayed" : 1764194
+  },
+  {
+    "endTime" : "2024-05-15 00:53",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Getting Juicy w/ Pauly Shore | First Date with Lauren Compton",
+    "msPlayed" : 1401857
+  },
+  {
+    "endTime" : "2024-05-15 01:32",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "LLMs for Data Queries with Sarah Nagy",
+    "msPlayed" : 1039680
+  },
+  {
+    "endTime" : "2024-05-16 13:04",
+    "podcastName" : "COMPRESSEDfm",
+    "episodeName" : "174 | FOMO and Leveraging AI for Better Dev Productivity",
+    "msPlayed" : 3257200
+  },
+  {
+    "endTime" : "2024-05-16 21:22",
+    "podcastName" : "COMPRESSEDfm",
+    "episodeName" : "174 | FOMO and Leveraging AI for Better Dev Productivity",
+    "msPlayed" : 15777
+  },
+  {
+    "endTime" : "2024-05-16 21:22",
+    "podcastName" : "COMPRESSEDfm",
+    "episodeName" : "173 | From Blog Post to VC Funding: The Story of Unkey",
+    "msPlayed" : 19523
+  },
+  {
+    "endTime" : "2024-05-16 21:47",
+    "podcastName" : "Web Rush",
+    "episodeName" : "Episode 281: What You Need to Know About the Proposal for Signals in JavaScript",
+    "msPlayed" : 1499709
+  },
+  {
+    "endTime" : "2024-05-16 22:16",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Pinata and the Interplanetary File System with Matt Ober",
+    "msPlayed" : 1058971
+  },
+  {
+    "endTime" : "2024-05-17 00:51",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Pinata and the Interplanetary File System with Matt Ober",
+    "msPlayed" : 948070
+  },
+  {
+    "endTime" : "2024-05-17 01:51",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Deceitful Husband Nearly Has Aneurysm",
+    "msPlayed" : 272397
+  },
+  {
+    "endTime" : "2024-05-18 12:46",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Deceitful Husband Nearly Has Aneurysm",
+    "msPlayed" : 23181
+  },
+  {
+    "endTime" : "2024-05-18 13:33",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "FROM guests SELECT Andrew (Ship It! #104)",
+    "msPlayed" : 917080
+  },
+  {
+    "endTime" : "2024-05-18 21:18",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "FROM guests SELECT Andrew (Ship It! #104)",
+    "msPlayed" : 218960
+  },
+  {
+    "endTime" : "2024-05-19 15:06",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "FROM guests SELECT Andrew (Ship It! #104)",
+    "msPlayed" : 1220
+  },
+  {
+    "endTime" : "2024-05-21 21:52",
+    "podcastName" : "The Dave Chang Show",
+    "episodeName" : "Overrated French Foods, Where to Eat in Copenhagen, and Delete Yelper: Benu SF",
+    "msPlayed" : 6017
+  },
+  {
+    "endTime" : "2024-05-21 22:08",
+    "podcastName" : "Dev Interrupted",
+    "episodeName" : "How to Increase Adoption of Internal Developer Tooling | Bloomberg’s Luis Vega",
+    "msPlayed" : 921318
+  },
+  {
+    "endTime" : "2024-05-22 01:24",
+    "podcastName" : "Dev Interrupted",
+    "episodeName" : "How to Increase Adoption of Internal Developer Tooling | Bloomberg’s Luis Vega",
+    "msPlayed" : 1383209
+  },
+  {
+    "endTime" : "2024-05-22 02:28",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "FROM guests SELECT Andrew (Ship It! #104)",
+    "msPlayed" : 1036830
+  },
+  {
+    "endTime" : "2024-05-24 23:13",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "FROM guests SELECT Andrew (Ship It! #104)",
+    "msPlayed" : 635200
+  },
+  {
+    "endTime" : "2024-05-24 23:56",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "It's a long & windy road (Changelog & Friends #45)",
+    "msPlayed" : 1061940
+  },
+  {
+    "endTime" : "2024-05-25 19:42",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "It's a long & windy road (Changelog & Friends #45)",
+    "msPlayed" : 231104
+  },
+  {
+    "endTime" : "2024-05-26 18:33",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "It's a long & windy road (Changelog & Friends #45)",
+    "msPlayed" : 556340
+  },
+  {
+    "endTime" : "2024-05-27 22:26",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "It's a long & windy road (Changelog & Friends #45)",
+    "msPlayed" : 498480
+  },
+  {
+    "endTime" : "2024-05-28 01:00",
+    "podcastName" : "Backend Banter",
+    "episodeName" : "#055 - Talking Go with the Go God feat. AnthonyGG",
+    "msPlayed" : 544585
+  },
+  {
+    "endTime" : "2024-05-28 02:05",
+    "podcastName" : "Backend Banter",
+    "episodeName" : "#055 - Talking Go with the Go God feat. AnthonyGG",
+    "msPlayed" : 256904
+  },
+  {
+    "endTime" : "2024-05-28 21:53",
+    "podcastName" : "Backend Banter",
+    "episodeName" : "#055 - Talking Go with the Go God feat. AnthonyGG",
+    "msPlayed" : 911950
+  },
+  {
+    "endTime" : "2024-05-28 22:13",
+    "podcastName" : "AWS Podcast",
+    "episodeName" : "#669: How Figma scaled their databases to 100x growth with Amazon RDS",
+    "msPlayed" : 1180945
+  },
+  {
+    "endTime" : "2024-05-29 01:33",
+    "podcastName" : "AWS Podcast",
+    "episodeName" : "#669: How Figma scaled their databases to 100x growth with Amazon RDS",
+    "msPlayed" : 414560
+  },
+  {
+    "endTime" : "2024-05-29 01:38",
+    "podcastName" : "Backend Banter",
+    "episodeName" : "#055 - Talking Go with the Go God feat. AnthonyGG",
+    "msPlayed" : 280404
+  },
+  {
+    "endTime" : "2024-05-29 01:38",
+    "podcastName" : "AWS Podcast",
+    "episodeName" : "#669: How Figma scaled their databases to 100x growth with Amazon RDS",
+    "msPlayed" : 3300
+  },
+  {
+    "endTime" : "2024-05-29 01:40",
+    "podcastName" : "Backend Banter",
+    "episodeName" : "#055 - Talking Go with the Go God feat. AnthonyGG",
+    "msPlayed" : 101537
+  },
+  {
+    "endTime" : "2024-05-29 02:37",
+    "podcastName" : "StarTalk Radio",
+    "episodeName" : "Making Stuff, with Adam Savage",
+    "msPlayed" : 1584160
+  },
+  {
+    "endTime" : "2024-05-29 16:14",
+    "podcastName" : "DOPE AS USUAL Podcast",
+    "episodeName" : "Trippin out w/ Therapy Gecko",
+    "msPlayed" : 2460
+  },
+  {
+    "endTime" : "2024-05-29 16:22",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Rethinking frontend architectures with data layers with Max Stoiber [Repeat]",
+    "msPlayed" : 347371
+  },
+  {
+    "endTime" : "2024-05-29 16:48",
+    "podcastName" : "REWORK",
+    "episodeName" : "The Subtle Art of Staying Out of It",
+    "msPlayed" : 450260
+  },
+  {
+    "endTime" : "2024-05-30 21:31",
+    "podcastName" : "DOPE AS USUAL Podcast",
+    "episodeName" : "Trippin out w/ Therapy Gecko",
+    "msPlayed" : 2512
+  },
+  {
+    "endTime" : "2024-05-30 21:40",
+    "podcastName" : "DOPE AS USUAL Podcast",
+    "episodeName" : "Trippin out w/ Therapy Gecko",
+    "msPlayed" : 2274
+  },
+  {
+    "endTime" : "2024-05-30 21:46",
+    "podcastName" : "REWORK",
+    "episodeName" : "The Subtle Art of Staying Out of It",
+    "msPlayed" : 914128
+  },
+  {
+    "endTime" : "2024-05-30 22:21",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Second Hand Romance w/ Ian Fidance | First Date with Lauren Compton",
+    "msPlayed" : 1398820
+  },
+  {
+    "endTime" : "2024-05-31 01:29",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Second Hand Romance w/ Ian Fidance | First Date with Lauren Compton",
+    "msPlayed" : 956820
+  },
+  {
+    "endTime" : "2024-05-31 02:28",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "11ty goes fully independent (JS Party #325)",
+    "msPlayed" : 1414698
+  },
+  {
+    "endTime" : "2024-05-31 20:22",
+    "podcastName" : "REWORK",
+    "episodeName" : "The Subtle Art of Staying Out of It",
+    "msPlayed" : 300650
+  },
+  {
+    "endTime" : "2024-05-31 20:46",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "11ty goes fully independent (JS Party #325)",
+    "msPlayed" : 8758
+  },
+  {
+    "endTime" : "2024-05-31 21:13",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "11ty goes fully independent (JS Party #325)",
+    "msPlayed" : 1070262
+  },
+  {
+    "endTime" : "2024-06-01 12:26",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "11ty goes fully independent (JS Party #325)",
+    "msPlayed" : 5342
+  },
+  {
+    "endTime" : "2024-06-01 12:57",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "11ty goes fully independent (JS Party #325)",
+    "msPlayed" : 1475220
+  },
+  {
+    "endTime" : "2024-06-03 02:20",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Is Wasm the new Java? (Ship It! #106)",
+    "msPlayed" : 1114630
+  },
+  {
+    "endTime" : "2024-06-04 01:48",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Is Wasm the new Java? (Ship It! #106)",
+    "msPlayed" : 931140
+  },
+  {
+    "endTime" : "2024-06-04 21:30",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Is Wasm the new Java? (Ship It! #106)",
+    "msPlayed" : 455220
+  },
+  {
+    "endTime" : "2024-06-04 22:16",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "More Cushion For The Pushin’ w/ Harland Williams | First Date with Lauren Compton",
+    "msPlayed" : 1929190
+  },
+  {
+    "endTime" : "2024-06-05 00:48",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Is Wasm the new Java? (Ship It! #106)",
+    "msPlayed" : 488520
+  },
+  {
+    "endTime" : "2024-06-05 01:06",
+    "podcastName" : "StarTalk Radio",
+    "episodeName" : "Making Stuff, with Adam Savage",
+    "msPlayed" : 341398
+  },
+  {
+    "endTime" : "2024-06-05 01:10",
+    "podcastName" : "This Past Weekend w/ Theo Von",
+    "episodeName" : "E508 Joey Diaz",
+    "msPlayed" : 243767
+  },
+  {
+    "endTime" : "2024-06-05 01:49",
+    "podcastName" : "The Harland Highway",
+    "episodeName" : "JASON ELLIS- Skateboarder, Comedian, and strawberry Carebear!",
+    "msPlayed" : 1240140
+  },
+  {
+    "endTime" : "2024-06-06 15:07",
+    "podcastName" : "This Past Weekend w/ Theo Von",
+    "episodeName" : "E508 Joey Diaz",
+    "msPlayed" : 7217918
+  },
+  {
+    "endTime" : "2024-06-07 00:02",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Traditional Marriage w/ Jim and Nikki Norton | First Date with Lauren Compton",
+    "msPlayed" : 35380
+  },
+  {
+    "endTime" : "2024-06-11 11:06",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Engineering Fast-Paced Multiplayer Games with Gabriel Gambetta",
+    "msPlayed" : 1342992
+  },
+  {
+    "endTime" : "2024-06-12 01:00",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Engineering Fast-Paced Multiplayer Games with Gabriel Gambetta",
+    "msPlayed" : 2191620
+  },
+  {
+    "endTime" : "2024-06-12 22:00",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Engineering Fast-Paced Multiplayer Games with Gabriel Gambetta",
+    "msPlayed" : 624740
+  },
+  {
+    "endTime" : "2024-06-13 01:47",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Traditional Marriage w/ Jim and Nikki Norton | First Date with Lauren Compton",
+    "msPlayed" : 1971798
+  },
+  {
+    "endTime" : "2024-06-13 02:17",
+    "podcastName" : "Good For You",
+    "episodeName" : "Jim & Nikki Norton Open Up About Transgender Love | Ep 218",
+    "msPlayed" : 797295
+  },
+  {
+    "endTime" : "2024-06-16 13:17",
+    "podcastName" : "Good For You",
+    "episodeName" : "Jim & Nikki Norton Open Up About Transgender Love | Ep 218",
+    "msPlayed" : 274253
+  },
+  {
+    "endTime" : "2024-06-16 13:57",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The infrastructure behind a PaaS (Ship It! #108)",
+    "msPlayed" : 1525916
+  },
+  {
+    "endTime" : "2024-06-16 14:36",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The infrastructure behind a PaaS (Ship It! #108)",
+    "msPlayed" : 30540
+  },
+  {
+    "endTime" : "2024-06-16 23:52",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The infrastructure behind a PaaS (Ship It! #108)",
+    "msPlayed" : 1388300
+  },
+  {
+    "endTime" : "2024-06-17 00:11",
+    "podcastName" : "COMPRESSEDfm",
+    "episodeName" : "178 | Inside Postman’s Journey to Build a VS Code Extension",
+    "msPlayed" : 278360
+  },
+  {
+    "endTime" : "2024-06-17 22:14",
+    "podcastName" : "COMPRESSEDfm",
+    "episodeName" : "178 | Inside Postman’s Journey to Build a VS Code Extension",
+    "msPlayed" : 468040
+  },
+  {
+    "endTime" : "2024-06-18 01:35",
+    "podcastName" : "COMPRESSEDfm",
+    "episodeName" : "178 | Inside Postman’s Journey to Build a VS Code Extension",
+    "msPlayed" : 653888
+  },
+  {
+    "endTime" : "2024-06-18 01:49",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The infrastructure behind a PaaS (Ship It! #108)",
+    "msPlayed" : 211771
+  },
+  {
+    "endTime" : "2024-06-19 21:53",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The infrastructure behind a PaaS (Ship It! #108)",
+    "msPlayed" : 320691
+  },
+  {
+    "endTime" : "2024-06-19 22:32",
+    "podcastName" : "Good For You",
+    "episodeName" : "Jim & Nikki Norton Open Up About Transgender Love | Ep 218",
+    "msPlayed" : 1673419
+  },
+  {
+    "endTime" : "2024-06-20 01:32",
+    "podcastName" : "Good For You",
+    "episodeName" : "Jim & Nikki Norton Open Up About Transgender Love | Ep 218",
+    "msPlayed" : 619093
+  },
+  {
+    "endTime" : "2024-06-20 02:17",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Securing GitHub (Changelog Interviews #596)",
+    "msPlayed" : 1451460
+  },
+  {
+    "endTime" : "2024-06-20 21:38",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Securing GitHub (Changelog Interviews #596)",
+    "msPlayed" : 1498281
+  },
+  {
+    "endTime" : "2024-06-21 01:04",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Securing GitHub (Changelog Interviews #596)",
+    "msPlayed" : 588671
+  },
+  {
+    "endTime" : "2024-06-21 01:13",
+    "podcastName" : "Web Rush",
+    "episodeName" : "Episode 285: The Best of Build for Developers",
+    "msPlayed" : 373960
+  },
+  {
+    "endTime" : "2024-06-21 01:45",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "It’s APIs All the Way Down with Marco Palladino",
+    "msPlayed" : 1317661
+  },
+  {
+    "endTime" : "2024-06-25 21:50",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "It’s APIs All the Way Down with Marco Palladino",
+    "msPlayed" : 339591
+  },
+  {
+    "endTime" : "2024-06-25 21:51",
+    "podcastName" : "Web Rush",
+    "episodeName" : "Episode 285: The Best of Build for Developers",
+    "msPlayed" : 48133
+  },
+  {
+    "endTime" : "2024-06-25 21:52",
+    "podcastName" : "The Engineering Leadership Podcast",
+    "episodeName" : "The Top 10 Challenges Engineering Leaders Face: A Sneak Peak",
+    "msPlayed" : 80056
+  },
+  {
+    "endTime" : "2024-06-25 22:17",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Dating Is For Suckers w/ Preacher Lawson | First Date with Lauren Compton",
+    "msPlayed" : 401083
+  },
+  {
+    "endTime" : "2024-06-26 01:00",
+    "podcastName" : "Business of Tech: Daily 10-Minute IT Services Insights",
+    "episodeName" : "EU Regulatory Pressure on Tech Giants, SaaS Security, AI Incident Response, and MFA Adoption",
+    "msPlayed" : 11215
+  },
+  {
+    "endTime" : "2024-06-26 01:00",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Dating Is For Suckers w/ Preacher Lawson | First Date with Lauren Compton",
+    "msPlayed" : 1455485
+  },
+  {
+    "endTime" : "2024-06-26 01:20",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "DataStax with Ed Anuff",
+    "msPlayed" : 550686
+  },
+  {
+    "endTime" : "2024-06-27 21:34",
+    "podcastName" : "Self-Hosted",
+    "episodeName" : "125: Tiny Mini Micro Systems FTW",
+    "msPlayed" : 452550
+  },
+  {
+    "endTime" : "2024-06-27 21:46",
+    "podcastName" : "Self-Hosted",
+    "episodeName" : "125: Tiny Mini Micro Systems FTW",
+    "msPlayed" : 81525
+  },
+  {
+    "endTime" : "2024-06-27 21:58",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "React Native the Expo way (JS Party #328)",
+    "msPlayed" : 724631
+  },
+  {
+    "endTime" : "2024-06-27 22:01",
+    "podcastName" : "Web Rush",
+    "episodeName" : "Episode 286: Fast Development with Visual Studio",
+    "msPlayed" : 159763
+  },
+  {
+    "endTime" : "2024-06-27 22:17",
+    "podcastName" : "DataFramed",
+    "episodeName" : "#219 Building a Data Platform that Drives Value with Shuang Li, Group Product Manager at Box",
+    "msPlayed" : 936676
+  },
+  {
+    "endTime" : "2024-06-30 15:04",
+    "podcastName" : "The Nikki Glaser Podcast",
+    "episodeName" : "#449 Bag of Fun, Regretful Career Stories, Taylor Swift & Travis Kelce in Europe, Scams",
+    "msPlayed" : 324691
+  },
+  {
+    "endTime" : "2024-06-30 16:33",
+    "podcastName" : "This Past Weekend w/ Theo Von",
+    "episodeName" : "E513 Louis Theroux",
+    "msPlayed" : 1922087
+  },
+  {
+    "endTime" : "2024-06-30 21:01",
+    "podcastName" : "This Past Weekend w/ Theo Von",
+    "episodeName" : "E513 Louis Theroux",
+    "msPlayed" : 3120
+  },
+  {
+    "endTime" : "2024-07-01 01:48",
+    "podcastName" : "DataFramed",
+    "episodeName" : "#219 Building a Data Platform that Drives Value with Shuang Li, Group Product Manager at Box",
+    "msPlayed" : 228345
+  },
+  {
+    "endTime" : "2024-07-01 03:20",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The Kubernetes of Lambda (Ship It! #110)",
+    "msPlayed" : 3875989
+  },
+  {
+    "endTime" : "2024-07-01 23:56",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The Kubernetes of Lambda (Ship It! #110)",
+    "msPlayed" : 238260
+  },
+  {
+    "endTime" : "2024-07-02 00:58",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The scariest chart in all of software (Changelog News #101)",
+    "msPlayed" : 189320
+  },
+  {
+    "endTime" : "2024-07-03 21:45",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The scariest chart in all of software (Changelog News #101)",
+    "msPlayed" : 222038
+  },
+  {
+    "endTime" : "2024-07-03 21:51",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Dependencies are dangerous (Go Time #321)",
+    "msPlayed" : 314920
+  },
+  {
+    "endTime" : "2024-07-03 21:56",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Code review anxiety (Changelog Interviews #598)",
+    "msPlayed" : 333078
+  },
+  {
+    "endTime" : "2024-07-09 01:42",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Programming advice for my younger self (Changelog News #102)",
+    "msPlayed" : 150880
+  },
+  {
+    "endTime" : "2024-07-09 01:53",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Programming advice for my younger self (Changelog News #102)",
+    "msPlayed" : 255403
+  },
+  {
+    "endTime" : "2024-07-09 11:47",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Programming advice for my younger self (Changelog News #102)",
+    "msPlayed" : 118733
+  },
+  {
+    "endTime" : "2024-07-09 11:48",
+    "podcastName" : "The Changelog: Software Development, Open Source",
+    "episodeName" : "Programming advice for my younger self (News)",
+    "msPlayed" : 3810
+  },
+  {
+    "endTime" : "2024-07-09 12:10",
+    "podcastName" : "Backend Banter",
+    "episodeName" : "#061 - Forget SQL, use Typescript feat. Thomas Ballinger",
+    "msPlayed" : 412423
+  },
+  {
+    "endTime" : "2024-07-09 13:01",
+    "podcastName" : "Backend Banter",
+    "episodeName" : "#061 - Forget SQL, use Typescript feat. Thomas Ballinger",
+    "msPlayed" : 405055
+  },
+  {
+    "endTime" : "2024-07-09 21:47",
+    "podcastName" : "Backend Banter",
+    "episodeName" : "#061 - Forget SQL, use Typescript feat. Thomas Ballinger",
+    "msPlayed" : 968767
+  },
+  {
+    "endTime" : "2024-07-09 22:17",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Finding Love On Grindr w/ Chris Distefano | First Date with Lauren Compton",
+    "msPlayed" : 1760723
+  },
+  {
+    "endTime" : "2024-07-10 00:00",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "How Mat writes HTTP services in Go (Go Time #322)",
+    "msPlayed" : 523200
+  },
+  {
+    "endTime" : "2024-07-10 01:16",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "How Mat writes HTTP services in Go (Go Time #322)",
+    "msPlayed" : 1713560
+  },
+  {
+    "endTime" : "2024-07-10 13:36",
+    "podcastName" : "Backend Banter",
+    "episodeName" : "#061 - Forget SQL, use Typescript feat. Thomas Ballinger",
+    "msPlayed" : 977819
+  },
+  {
+    "endTime" : "2024-07-10 13:53",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "How Mat writes HTTP services in Go (Go Time #322)",
+    "msPlayed" : 393340
+  },
+  {
+    "endTime" : "2024-07-10 15:06",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "How Mat writes HTTP services in Go (Go Time #322)",
+    "msPlayed" : 211099
+  },
+  {
+    "endTime" : "2024-07-10 15:21",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Impractical Romance w/ Joe Gatto | First Date with Lauren Compton",
+    "msPlayed" : 209480
+  },
+  {
+    "endTime" : "2024-07-10 21:47",
+    "podcastName" : "Accidental Tech Podcast",
+    "episodeName" : "595: The Best Secret Store",
+    "msPlayed" : 246400
+  },
+  {
+    "endTime" : "2024-07-10 22:35",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Fast Frontend Development with David Hsu",
+    "msPlayed" : 445710
+  },
+  {
+    "endTime" : "2024-07-11 02:11",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Fast Frontend Development with David Hsu",
+    "msPlayed" : 2816240
+  },
+  {
+    "endTime" : "2024-07-11 22:51",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "It all starts with Postgres (Changelog Interviews #599)",
+    "msPlayed" : 309392
+  },
+  {
+    "endTime" : "2024-07-12 00:12",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "It all starts with Postgres (Changelog Interviews #599)",
+    "msPlayed" : 433296
+  },
+  {
+    "endTime" : "2024-07-12 22:32",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "It all starts with Postgres (Changelog Interviews #599)",
+    "msPlayed" : 767875
+  },
+  {
+    "endTime" : "2024-07-13 15:57",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "It all starts with Postgres (Changelog Interviews #599)",
+    "msPlayed" : 938704
+  },
+  {
+    "endTime" : "2024-07-14 15:50",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "It all starts with Postgres (Changelog Interviews #599)",
+    "msPlayed" : 1470080
+  },
+  {
+    "endTime" : "2024-07-14 16:27",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Failed OF “Model” Is A Literal Clown | Financial Audit",
+    "msPlayed" : 1944582
+  },
+  {
+    "endTime" : "2024-07-14 16:56",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Failed OF “Model” Is A Literal Clown | Financial Audit",
+    "msPlayed" : 1374324
+  },
+  {
+    "endTime" : "2024-07-14 17:22",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Impractical Romance w/ Joe Gatto | First Date with Lauren Compton",
+    "msPlayed" : 1494622
+  },
+  {
+    "endTime" : "2024-07-14 18:23",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Last DevRel standing (Changelog & Friends #52)",
+    "msPlayed" : 3039291
+  },
+  {
+    "endTime" : "2024-07-14 18:48",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Spilling the git tea (Ship It! #112)",
+    "msPlayed" : 302118
+  },
+  {
+    "endTime" : "2024-07-16 20:18",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Spilling the git tea (Ship It! #112)",
+    "msPlayed" : 336940
+  },
+  {
+    "endTime" : "2024-07-16 21:24",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Spilling the git tea (Ship It! #112)",
+    "msPlayed" : 424245
+  },
+  {
+    "endTime" : "2024-07-16 21:33",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The six dumbest ideas in computer security (Changelog News #103)",
+    "msPlayed" : 311923
+  },
+  {
+    "endTime" : "2024-07-16 21:52",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "24k Magic w/ 24kGoldn | First Date with Lauren Compton",
+    "msPlayed" : 1116557
+  },
+  {
+    "endTime" : "2024-07-17 00:28",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "24k Magic w/ 24kGoldn | First Date with Lauren Compton",
+    "msPlayed" : 312100
+  },
+  {
+    "endTime" : "2024-07-17 00:35",
+    "podcastName" : "Software Engineering Radio - the podcast for professional software developers",
+    "episodeName" : "SE Radio 625: Jonathan Schneider on Automated Refactoring with OpenRewrite",
+    "msPlayed" : 396281
+  },
+  {
+    "endTime" : "2024-07-17 00:40",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "AFK w/ Gav | UK's Voiceover Legend Christopher York on Final Fantasy & Baldur's Gate 3",
+    "msPlayed" : 281003
+  },
+  {
+    "endTime" : "2024-07-17 00:41",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "AI at Redis with Brian Sam-Bodden",
+    "msPlayed" : 98060
+  },
+  {
+    "endTime" : "2024-07-17 01:53",
+    "podcastName" : "Backend Banter",
+    "episodeName" : "#062 - Declaring War Against the Frontend feat. Sam Selikoff",
+    "msPlayed" : 1263842
+  },
+  {
+    "endTime" : "2024-07-17 21:16",
+    "podcastName" : "Backend Banter",
+    "episodeName" : "#062 - Declaring War Against the Frontend feat. Sam Selikoff",
+    "msPlayed" : 583463
+  },
+  {
+    "endTime" : "2024-07-17 21:19",
+    "podcastName" : "Backend Banter",
+    "episodeName" : "#062 - Declaring War Against the Frontend feat. Sam Selikoff",
+    "msPlayed" : 1194
+  },
+  {
+    "endTime" : "2024-07-17 21:19",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "AI at Redis with Brian Sam-Bodden",
+    "msPlayed" : 135734
+  },
+  {
+    "endTime" : "2024-07-17 21:51",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "What even is the modern data stack (Changelog Interviews #600)",
+    "msPlayed" : 375112
+  },
+  {
+    "endTime" : "2024-07-17 23:00",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "What even is the modern data stack (Changelog Interviews #600)",
+    "msPlayed" : 348870
+  },
+  {
+    "endTime" : "2024-07-18 02:22",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "What even is the modern data stack (Changelog Interviews #600)",
+    "msPlayed" : 1265025
+  },
+  {
+    "endTime" : "2024-07-18 14:52",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "What even is the modern data stack (Changelog Interviews #600)",
+    "msPlayed" : 646263
+  },
+  {
+    "endTime" : "2024-07-22 17:15",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "It all starts with Postgres (Changelog Interviews #599)",
+    "msPlayed" : 159380
+  },
+  {
+    "endTime" : "2024-07-25 21:51",
+    "podcastName" : "Frontend First",
+    "episodeName" : "Crossover: Declaring War Against the Frontend",
+    "msPlayed" : 6161
+  },
+  {
+    "endTime" : "2024-07-25 22:20",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "The future of serverless is WASM with David Flanagan",
+    "msPlayed" : 1398895
+  },
+  {
+    "endTime" : "2024-07-26 02:32",
+    "podcastName" : "Thoughtworks Technology Podcast",
+    "episodeName" : "Sensible defaults: A way to think about our technology practices",
+    "msPlayed" : 1144924
+  },
+  {
+    "endTime" : "2024-07-26 21:44",
+    "podcastName" : "Thoughtworks Technology Podcast",
+    "episodeName" : "Sensible defaults: A way to think about our technology practices",
+    "msPlayed" : 42416
+  },
+  {
+    "endTime" : "2024-07-26 22:04",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2180 - Jordan Peterson",
+    "msPlayed" : 1107092
+  },
+  {
+    "endTime" : "2024-07-27 03:45",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2180 - Jordan Peterson",
+    "msPlayed" : 688005
+  },
+  {
+    "endTime" : "2024-07-27 20:03",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2180 - Jordan Peterson",
+    "msPlayed" : 6487081
+  },
+  {
+    "endTime" : "2024-07-27 20:12",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2180 - Jordan Peterson",
+    "msPlayed" : 8346
+  },
+  {
+    "endTime" : "2024-07-27 20:24",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2180 - Jordan Peterson",
+    "msPlayed" : 188568
+  },
+  {
+    "endTime" : "2024-07-27 21:55",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Nasty Karen Hates Me | Financial Audit",
+    "msPlayed" : 2240834
+  },
+  {
+    "endTime" : "2024-07-28 19:38",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2180 - Jordan Peterson",
+    "msPlayed" : 772076
+  },
+  {
+    "endTime" : "2024-07-28 19:39",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Impractical Romance w/ Joe Gatto | First Date with Lauren Compton",
+    "msPlayed" : 17258
+  },
+  {
+    "endTime" : "2024-07-28 19:39",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Dating Is For Suckers w/ Preacher Lawson | First Date with Lauren Compton",
+    "msPlayed" : 18413
+  },
+  {
+    "endTime" : "2024-07-28 19:41",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Finding Love On Grindr w/ Chris Distefano | First Date with Lauren Compton",
+    "msPlayed" : 41580
+  },
+  {
+    "endTime" : "2024-07-28 23:53",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "More Cushion For The Pushin’ w/ Harland Williams | First Date with Lauren Compton",
+    "msPlayed" : 303139
+  },
+  {
+    "endTime" : "2024-07-29 20:00",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Deploying on a Friday (Ship It! #114)",
+    "msPlayed" : 0
+  },
+  {
+    "endTime" : "2024-07-29 20:00",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Deploying on a Friday (Ship It! #114)",
+    "msPlayed" : 246
+  },
+  {
+    "endTime" : "2024-07-29 20:00",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Deploying on a Friday (Ship It! #114)",
+    "msPlayed" : 1945
+  },
+  {
+    "endTime" : "2024-07-29 20:19",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Deploying on a Friday (Ship It! #114)",
+    "msPlayed" : 256488
+  },
+  {
+    "endTime" : "2024-07-30 12:17",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Deploying on a Friday (Ship It! #114)",
+    "msPlayed" : 2175715
+  },
+  {
+    "endTime" : "2024-07-30 12:18",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Getting In Bed w/ Mia Malkova & Gabby Epstein | First Date with Lauren Compton",
+    "msPlayed" : 2160
+  },
+  {
+    "endTime" : "2024-07-31 01:47",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Uber’s LedgerStore and its Trillions of Indexes with Kaushik Devarajaiah",
+    "msPlayed" : 1859202
+  },
+  {
+    "endTime" : "2024-08-02 02:48",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Uber’s LedgerStore and its Trillions of Indexes with Kaushik Devarajaiah",
+    "msPlayed" : 124900
+  },
+  {
+    "endTime" : "2024-08-02 02:59",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Nasty Karen Hates Me | Financial Audit",
+    "msPlayed" : 680302
+  },
+  {
+    "endTime" : "2024-08-02 03:00",
+    "podcastName" : "The Nikki Glaser Podcast",
+    "episodeName" : "#459 Nikki's Weird Gift, Roasting Phish Fans & How To Have Fun At Concerts",
+    "msPlayed" : 0
+  },
+  {
+    "endTime" : "2024-08-02 03:33",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "A Nick-level emergency (JS Party #333)",
+    "msPlayed" : 1997075
+  },
+  {
+    "endTime" : "2024-08-02 03:34",
+    "podcastName" : "DataFramed",
+    "episodeName" : "#231 Manage Your Data Better with Shinji Kim, CEO at Select Star",
+    "msPlayed" : 43289
+  },
+  {
+    "endTime" : "2024-08-03 00:17",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "5000 Walmart stores in 2 months (Ship It! #115)",
+    "msPlayed" : 3025325
+  },
+  {
+    "endTime" : "2024-08-03 01:24",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Vile Cheater Has Secret Pregnancy And Loses Everything | Financial Audit",
+    "msPlayed" : 1739011
+  },
+  {
+    "endTime" : "2024-08-05 01:15",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "From Chef to System Initiative (Changelog & Friends #55)",
+    "msPlayed" : 1072480
+  },
+  {
+    "endTime" : "2024-08-05 23:00",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "From Chef to System Initiative (Changelog & Friends #55)",
+    "msPlayed" : 1960
+  },
+  {
+    "endTime" : "2024-08-06 01:15",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "From Chef to System Initiative (Changelog & Friends #55)",
+    "msPlayed" : 515820
+  },
+  {
+    "endTime" : "2024-08-06 07:20",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "From Chef to System Initiative (Changelog & Friends #55)",
+    "msPlayed" : 258846
+  },
+  {
+    "endTime" : "2024-08-07 00:05",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "From Chef to System Initiative (Changelog & Friends #55)",
+    "msPlayed" : 3415236
+  },
+  {
+    "endTime" : "2024-08-07 00:34",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "From Chef to System Initiative (Changelog & Friends #55)",
+    "msPlayed" : 31120
+  },
+  {
+    "endTime" : "2024-08-07 00:35",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Impractical Connection w/ Sal Vulcano | First Date with Lauren Compton",
+    "msPlayed" : 700
+  },
+  {
+    "endTime" : "2024-08-07 01:07",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Impractical Connection w/ Sal Vulcano | First Date with Lauren Compton",
+    "msPlayed" : 1779772
+  },
+  {
+    "endTime" : "2024-08-07 02:16",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "AFK w/ Kevin Hart | Streaming with Kai, Borderlands & The Best Advice You’ll Ever Hear",
+    "msPlayed" : 566509
+  },
+  {
+    "endTime" : "2024-08-07 12:02",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "AFK w/ Kevin Hart | Streaming with Kai, Borderlands & The Best Advice You’ll Ever Hear",
+    "msPlayed" : 1095985
+  },
+  {
+    "endTime" : "2024-08-07 12:03",
+    "podcastName" : "AFK w/ Ninja",
+    "episodeName" : "AFK w/ Kevin Hart | Streaming with Kai, Borderlands & The Best Advice You’ll Ever Hear",
+    "msPlayed" : 7420
+  },
+  {
+    "endTime" : "2024-08-07 12:33",
+    "podcastName" : "The Engineering Leadership Podcast",
+    "episodeName" : "Connecting bugs & quality to the business bottom line w/ Dave Rhodes #190",
+    "msPlayed" : 1695812
+  },
+  {
+    "endTime" : "2024-08-07 12:34",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "80% of professional programmers are unhappy (Changelog News #106)",
+    "msPlayed" : 36992
+  },
+  {
+    "endTime" : "2024-08-07 12:55",
+    "podcastName" : "Backend Banter",
+    "episodeName" : "#065 - I Quit Voice Coaching for Typescript feat. Matt Pocock",
+    "msPlayed" : 239871
+  },
+  {
+    "endTime" : "2024-08-07 14:09",
+    "podcastName" : "Backend Banter",
+    "episodeName" : "#065 - I Quit Voice Coaching for Typescript feat. Matt Pocock",
+    "msPlayed" : 1479427
+  },
+  {
+    "endTime" : "2024-08-07 21:22",
+    "podcastName" : "Backend Banter",
+    "episodeName" : "#065 - I Quit Voice Coaching for Typescript feat. Matt Pocock",
+    "msPlayed" : 512005
+  },
+  {
+    "endTime" : "2024-08-07 21:28",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Lemon Chicken Saved My Marriage w/ Rachel Feinstein | First Date with Lauren Compton",
+    "msPlayed" : 395283
+  },
+  {
+    "endTime" : "2024-08-07 21:29",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "AI for React developers and beyond with Alexandra Spalato",
+    "msPlayed" : 75049
+  },
+  {
+    "endTime" : "2024-08-07 22:37",
+    "podcastName" : "The Art of Manliness",
+    "episodeName" : "The Science of Motivating Your Kids (And Any Young Adult)",
+    "msPlayed" : 1998620
+  },
+  {
+    "endTime" : "2024-08-07 23:20",
+    "podcastName" : "The Art of Manliness",
+    "episodeName" : "The Science of Motivating Your Kids (And Any Young Adult)",
+    "msPlayed" : 157347
+  },
+  {
+    "endTime" : "2024-08-07 23:55",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Into the Bobiverse (Changelog Interviews #603)",
+    "msPlayed" : 1534669
+  },
+  {
+    "endTime" : "2024-08-08 00:32",
+    "podcastName" : "Self-Taught Devs",
+    "episodeName" : "#82 - Jack Herrington",
+    "msPlayed" : 793287
+  },
+  {
+    "endTime" : "2024-08-08 12:37",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "From Chef to System Initiative (Changelog & Friends #55)",
+    "msPlayed" : 235074
+  },
+  {
+    "endTime" : "2024-08-11 15:03",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Picking a database should be simple (Changelog & Friends #56)",
+    "msPlayed" : 2481967
+  },
+  {
+    "endTime" : "2024-08-11 16:11",
+    "podcastName" : "Self-Taught Devs",
+    "episodeName" : "#82 - Jack Herrington",
+    "msPlayed" : 1200680
+  },
+  {
+    "endTime" : "2024-08-11 16:24",
+    "podcastName" : "Self-Taught Devs",
+    "episodeName" : "#82 - Jack Herrington",
+    "msPlayed" : 12300
+  },
+  {
+    "endTime" : "2024-08-11 17:10",
+    "podcastName" : "Self-Taught Devs",
+    "episodeName" : "#82 - Jack Herrington",
+    "msPlayed" : 2165
+  },
+  {
+    "endTime" : "2024-08-11 17:10",
+    "podcastName" : "Self-Taught Devs",
+    "episodeName" : "#82 - Jack Herrington",
+    "msPlayed" : 183720
+  },
+  {
+    "endTime" : "2024-08-11 17:36",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "OpenAPI & API design (Go Time #328)",
+    "msPlayed" : 612573
+  },
+  {
+    "endTime" : "2024-08-11 18:46",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "OpenAPI & API design (Go Time #328)",
+    "msPlayed" : 2331732
+  },
+  {
+    "endTime" : "2024-08-11 18:46",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "OpenAPI & API design (Go Time #328)",
+    "msPlayed" : 2780
+  },
+  {
+    "endTime" : "2024-08-11 19:05",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "DuckDB with Hannes Mühleisen",
+    "msPlayed" : 662840
+  },
+  {
+    "endTime" : "2024-08-11 19:31",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "DuckDB with Hannes Mühleisen",
+    "msPlayed" : 1191510
+  },
+  {
+    "endTime" : "2024-08-11 19:56",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Lemon Chicken Saved My Marriage w/ Rachel Feinstein | First Date with Lauren Compton",
+    "msPlayed" : 1100235
+  },
+  {
+    "endTime" : "2024-08-11 20:31",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The Zookeeper of jujutsu (Ship It! #116)",
+    "msPlayed" : 644059
+  },
+  {
+    "endTime" : "2024-08-12 23:20",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The Zookeeper of jujutsu (Ship It! #116)",
+    "msPlayed" : 660360
+  },
+  {
+    "endTime" : "2024-08-13 01:18",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The Zookeeper of jujutsu (Ship It! #116)",
+    "msPlayed" : 561580
+  },
+  {
+    "endTime" : "2024-08-13 02:26",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The Zookeeper of jujutsu (Ship It! #116)",
+    "msPlayed" : 253180
+  },
+  {
+    "endTime" : "2024-08-13 10:37",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2186 - Ari Matti",
+    "msPlayed" : 447
+  },
+  {
+    "endTime" : "2024-08-13 10:37",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The Zookeeper of jujutsu (Ship It! #116)",
+    "msPlayed" : 449817
+  },
+  {
+    "endTime" : "2024-08-13 11:33",
+    "podcastName" : "The Stack Overflow Podcast",
+    "episodeName" : "Scaling systems to manage the data about the data",
+    "msPlayed" : 888120
+  },
+  {
+    "endTime" : "2024-08-13 12:22",
+    "podcastName" : "The Stack Overflow Podcast",
+    "episodeName" : "Scaling systems to manage the data about the data",
+    "msPlayed" : 4480
+  },
+  {
+    "endTime" : "2024-08-13 12:22",
+    "podcastName" : "The Stack Overflow Podcast",
+    "episodeName" : "Scaling systems to manage the data about the data",
+    "msPlayed" : 4580
+  },
+  {
+    "endTime" : "2024-08-13 13:32",
+    "podcastName" : "COMPRESSEDfm",
+    "episodeName" : "180 | Building a Custom Email Service: Why Sometimes DIY is Best",
+    "msPlayed" : 572900
+  },
+  {
+    "endTime" : "2024-08-13 23:12",
+    "podcastName" : "COMPRESSEDfm",
+    "episodeName" : "180 | Building a Custom Email Service: Why Sometimes DIY is Best",
+    "msPlayed" : 666000
+  },
+  {
+    "endTime" : "2024-08-14 02:15",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2187 - Adam Sandler",
+    "msPlayed" : 3372818
+  },
+  {
+    "endTime" : "2024-08-14 23:16",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2187 - Adam Sandler",
+    "msPlayed" : 2075663
+  },
+  {
+    "endTime" : "2024-08-15 00:19",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2187 - Adam Sandler",
+    "msPlayed" : 3153
+  },
+  {
+    "endTime" : "2024-08-15 00:20",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2187 - Adam Sandler",
+    "msPlayed" : 1868
+  },
+  {
+    "endTime" : "2024-08-15 02:00",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "The Saga of Sagas",
+    "msPlayed" : 1921200
+  },
+  {
+    "endTime" : "2024-08-19 14:34",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "The Saga of Sagas",
+    "msPlayed" : 376144
+  },
+  {
+    "endTime" : "2024-08-19 19:24",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "The Saga of Sagas",
+    "msPlayed" : 720
+  },
+  {
+    "endTime" : "2024-08-19 19:45",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "The Saga of Sagas",
+    "msPlayed" : 698863
+  },
+  {
+    "endTime" : "2024-08-19 23:50",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "The Saga of Sagas",
+    "msPlayed" : 555740
+  },
+  {
+    "endTime" : "2024-08-20 01:05",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "The Saga of Sagas",
+    "msPlayed" : 608100
+  },
+  {
+    "endTime" : "2024-08-20 02:09",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "The Saga of Sagas",
+    "msPlayed" : 515240
+  },
+  {
+    "endTime" : "2024-08-21 21:42",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "The Saga of Sagas",
+    "msPlayed" : 855920
+  },
+  {
+    "endTime" : "2024-08-21 21:45",
+    "podcastName" : "COMPRESSEDfm",
+    "episodeName" : "180 | Building a Custom Email Service: Why Sometimes DIY is Best",
+    "msPlayed" : 120953
+  },
+  {
+    "endTime" : "2024-08-22 00:55",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Mastering durable, event-driven workflows with Joel Hooks",
+    "msPlayed" : 1237842
+  },
+  {
+    "endTime" : "2024-08-22 01:19",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Mastering durable, event-driven workflows with Joel Hooks",
+    "msPlayed" : 3608
+  },
+  {
+    "endTime" : "2024-08-22 01:44",
+    "podcastName" : "Outside Podcast",
+    "episodeName" : "The Mystery of the Mis-Labeled Mollusk",
+    "msPlayed" : 1276132
+  },
+  {
+    "endTime" : "2024-08-22 02:36",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Whither CockroachDB?",
+    "msPlayed" : 1430520
+  },
+  {
+    "endTime" : "2024-08-22 11:08",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Pathetic Simp Drowning In Debt For Mail-Order Wife | Financial Audit",
+    "msPlayed" : 69
+  },
+  {
+    "endTime" : "2024-08-22 11:18",
+    "podcastName" : "Techmeme Ride Home",
+    "episodeName" : "Wed. 08/21 – AI Grabs The Spotlight Back",
+    "msPlayed" : 40
+  },
+  {
+    "endTime" : "2024-08-22 22:51",
+    "podcastName" : "Techmeme Ride Home",
+    "episodeName" : "Wed. 08/21 – AI Grabs The Spotlight Back",
+    "msPlayed" : 716298
+  },
+  {
+    "endTime" : "2024-08-22 23:12",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "No Cure For Love w/ Tim Minchin | First Date with Lauren Compton",
+    "msPlayed" : 806075
+  },
+  {
+    "endTime" : "2024-08-23 01:50",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "No Cure For Love w/ Tim Minchin | First Date with Lauren Compton",
+    "msPlayed" : 896722
+  },
+  {
+    "endTime" : "2024-08-23 06:45",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "There be a11y dragons (JS Party #335)",
+    "msPlayed" : 1521515
+  },
+  {
+    "endTime" : "2024-08-23 20:13",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "There be a11y dragons (JS Party #335)",
+    "msPlayed" : 241
+  },
+  {
+    "endTime" : "2024-08-23 20:24",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "There be a11y dragons (JS Party #335)",
+    "msPlayed" : 242132
+  },
+  {
+    "endTime" : "2024-08-23 20:26",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "There be a11y dragons (JS Party #335)",
+    "msPlayed" : 3440
+  },
+  {
+    "endTime" : "2024-08-23 20:35",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "There be a11y dragons (JS Party #335)",
+    "msPlayed" : 438715
+  },
+  {
+    "endTime" : "2024-08-23 20:59",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "2 Nice 2 Love w/ Marcus King | First Date with Lauren Compton",
+    "msPlayed" : 1098539
+  },
+  {
+    "endTime" : "2024-08-24 00:21",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "2 Nice 2 Love w/ Marcus King | First Date with Lauren Compton",
+    "msPlayed" : 208075
+  },
+  {
+    "endTime" : "2024-08-24 01:19",
+    "podcastName" : "This Past Weekend w/ Theo Von",
+    "episodeName" : "E526 Donald Trump",
+    "msPlayed" : 2031661
+  },
+  {
+    "endTime" : "2024-08-25 13:17",
+    "podcastName" : "This Past Weekend w/ Theo Von",
+    "episodeName" : "E526 Donald Trump",
+    "msPlayed" : 145200
+  },
+  {
+    "endTime" : "2024-08-26 22:16",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Whither CockroachDB?",
+    "msPlayed" : 545647
+  },
+  {
+    "endTime" : "2024-08-27 00:59",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Whither CockroachDB?",
+    "msPlayed" : 714359
+  },
+  {
+    "endTime" : "2024-08-27 05:37",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Whither CockroachDB?",
+    "msPlayed" : 292525
+  },
+  {
+    "endTime" : "2024-08-27 22:39",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Whither CockroachDB?",
+    "msPlayed" : 1013100
+  },
+  {
+    "endTime" : "2024-08-28 22:31",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Whither CockroachDB?",
+    "msPlayed" : 283681
+  },
+  {
+    "endTime" : "2024-08-29 21:29",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Metrics Driven Development (Practical AI #284)",
+    "msPlayed" : 453
+  },
+  {
+    "endTime" : "2024-08-29 21:29",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Whither CockroachDB?",
+    "msPlayed" : 5060
+  },
+  {
+    "endTime" : "2024-08-29 23:05",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Reinventing Kafka on object storage (Changelog Interviews #606)",
+    "msPlayed" : 4111042
+  },
+  {
+    "endTime" : "2024-08-30 00:56",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Reinventing Kafka on object storage (Changelog Interviews #606)",
+    "msPlayed" : 439619
+  },
+  {
+    "endTime" : "2024-08-30 01:18",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Exploring Node.js with David Neal",
+    "msPlayed" : 804759
+  },
+  {
+    "endTime" : "2024-08-30 01:19",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Exploring Node.js with David Neal",
+    "msPlayed" : 4562
+  },
+  {
+    "endTime" : "2024-08-30 02:04",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "When 3rd party JavaScript attacks (JS Party #336)",
+    "msPlayed" : 602490
+  },
+  {
+    "endTime" : "2024-08-30 20:05",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "When 3rd party JavaScript attacks (JS Party #336)",
+    "msPlayed" : 5080
+  },
+  {
+    "endTime" : "2024-09-01 16:29",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Threat modeling LLM apps (Practical AI #283)",
+    "msPlayed" : 529
+  },
+  {
+    "endTime" : "2024-09-01 16:29",
+    "podcastName" : "Hacked",
+    "episodeName" : "Hacking Bicycles + DIY Laser Exploits + the National Public Data Breach",
+    "msPlayed" : 0
+  },
+  {
+    "endTime" : "2024-09-01 16:29",
+    "podcastName" : "This Past Weekend w/ Theo Von",
+    "episodeName" : "E528 Dermot Kennedy",
+    "msPlayed" : 11
+  },
+  {
+    "endTime" : "2024-09-01 16:41",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "When 3rd party JavaScript attacks (JS Party #336)",
+    "msPlayed" : 5760
+  },
+  {
+    "endTime" : "2024-09-03 23:50",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "When 3rd party JavaScript attacks (JS Party #336)",
+    "msPlayed" : 1445280
+  },
+  {
+    "endTime" : "2024-09-04 00:40",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "When 3rd party JavaScript attacks (JS Party #336)",
+    "msPlayed" : 133380
+  },
+  {
+    "endTime" : "2024-09-04 21:21",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Reinventing Kafka on object storage (Changelog Interviews #606)",
+    "msPlayed" : 81400
+  },
+  {
+    "endTime" : "2024-09-04 21:22",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "The invisible hand of React performance with Ivan Akulov",
+    "msPlayed" : 88469
+  },
+  {
+    "endTime" : "2024-09-04 21:41",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "The invisible hand of React performance with Ivan Akulov",
+    "msPlayed" : 1010998
+  },
+  {
+    "endTime" : "2024-09-04 22:23",
+    "podcastName" : "Lex Fridman Podcast",
+    "episodeName" : "#442 – Donald Trump Interview",
+    "msPlayed" : 2523836
+  },
+  {
+    "endTime" : "2024-09-05 00:01",
+    "podcastName" : "99% Invisible",
+    "episodeName" : "Not Built For This #5: The Little Levee That Could",
+    "msPlayed" : 939400
+  },
+  {
+    "endTime" : "2024-09-05 01:55",
+    "podcastName" : "99% Invisible",
+    "episodeName" : "Not Built For This #5: The Little Levee That Could",
+    "msPlayed" : 995292
+  },
+  {
+    "endTime" : "2024-09-05 03:10",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Wannabe Hipster Knocks Up Literal Clown | Financial Audit",
+    "msPlayed" : 1555157
+  },
+  {
+    "endTime" : "2024-09-05 12:09",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Wannabe Hipster Knocks Up Literal Clown | Financial Audit",
+    "msPlayed" : 204083
+  },
+  {
+    "endTime" : "2024-09-05 12:16",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Cursor wants to write all the world's code (Changelog News #110)",
+    "msPlayed" : 379238
+  },
+  {
+    "endTime" : "2024-09-05 13:11",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Lekko and Dynamic Software Configuration with Konrad Niemiec",
+    "msPlayed" : 1536821
+  },
+  {
+    "endTime" : "2024-09-05 14:32",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Lekko and Dynamic Software Configuration with Konrad Niemiec",
+    "msPlayed" : 109435
+  },
+  {
+    "endTime" : "2024-09-05 15:00",
+    "podcastName" : "The Stack Overflow Podcast",
+    "episodeName" : "At scale, anything that could fail definitely will",
+    "msPlayed" : 1211559
+  },
+  {
+    "endTime" : "2024-09-05 15:32",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "First Date LIVE! w/ Tom Segura & Ian Fidance | First Date with Lauren Compton",
+    "msPlayed" : 1070340
+  },
+  {
+    "endTime" : "2024-09-05 21:00",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "First Date LIVE! w/ Tom Segura & Ian Fidance | First Date with Lauren Compton",
+    "msPlayed" : 1747597
+  },
+  {
+    "endTime" : "2024-09-05 21:13",
+    "podcastName" : "Techmeme Ride Home",
+    "episodeName" : "Tue. 09/03 – The X Ban In Brazil",
+    "msPlayed" : 769991
+  },
+  {
+    "endTime" : "2024-09-05 21:38",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Don’t ever use these TypeScript features (JS Party #337)",
+    "msPlayed" : 861650
+  },
+  {
+    "endTime" : "2024-09-06 00:37",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Don’t ever use these TypeScript features (JS Party #337)",
+    "msPlayed" : 387700
+  },
+  {
+    "endTime" : "2024-09-06 02:32",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Don’t ever use these TypeScript features (JS Party #337)",
+    "msPlayed" : 617618
+  },
+  {
+    "endTime" : "2024-09-06 03:06",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Open source threaded team chat?! (Changelog Interviews #607)",
+    "msPlayed" : 1292859
+  },
+  {
+    "endTime" : "2024-09-06 14:42",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Open source threaded team chat?! (Changelog Interviews #607)",
+    "msPlayed" : 2021748
+  },
+  {
+    "endTime" : "2024-09-06 16:01",
+    "podcastName" : "The Stack Overflow Podcast",
+    "episodeName" : "The creator of Jenkins discusses CI/CD and balancing business with open source",
+    "msPlayed" : 615542
+  },
+  {
+    "endTime" : "2024-09-06 16:02",
+    "podcastName" : "The Stack Overflow Podcast",
+    "episodeName" : "The creator of Jenkins discusses CI/CD and balancing business with open source",
+    "msPlayed" : 61767
+  },
+  {
+    "endTime" : "2024-09-06 16:40",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "React 19 with Shruti Kapoor",
+    "msPlayed" : 1216038
+  },
+  {
+    "endTime" : "2024-09-06 17:23",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Building a Collaborative DevOps Platform with Adam Jacob",
+    "msPlayed" : 881435
+  },
+  {
+    "endTime" : "2024-09-07 14:26",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Building a Collaborative DevOps Platform with Adam Jacob",
+    "msPlayed" : 584163
+  },
+  {
+    "endTime" : "2024-09-07 22:46",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Building a Collaborative DevOps Platform with Adam Jacob",
+    "msPlayed" : 269100
+  },
+  {
+    "endTime" : "2024-09-08 12:41",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Building a Collaborative DevOps Platform with Adam Jacob",
+    "msPlayed" : 377540
+  },
+  {
+    "endTime" : "2024-09-09 00:32",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Building a Collaborative DevOps Platform with Adam Jacob",
+    "msPlayed" : 13305
+  },
+  {
+    "endTime" : "2024-09-09 00:57",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Wannabe Hipster Knocks Up Literal Clown | Financial Audit",
+    "msPlayed" : 277886
+  },
+  {
+    "endTime" : "2024-09-11 16:50",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Wannabe Hipster Knocks Up Literal Clown | Financial Audit",
+    "msPlayed" : 210482
+  },
+  {
+    "endTime" : "2024-09-11 19:01",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Deno 2 with Ryan Dahl",
+    "msPlayed" : 363090
+  },
+  {
+    "endTime" : "2024-09-11 22:09",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Deno 2 with Ryan Dahl",
+    "msPlayed" : 785299
+  },
+  {
+    "endTime" : "2024-09-11 22:18",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Wannabe Hipster Knocks Up Literal Clown | Financial Audit",
+    "msPlayed" : 502488
+  },
+  {
+    "endTime" : "2024-09-11 22:32",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Firefox Software Architecture with Brian Grinstead",
+    "msPlayed" : 680415
+  },
+  {
+    "endTime" : "2024-09-11 23:29",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Firefox Software Architecture with Brian Grinstead",
+    "msPlayed" : 493589
+  },
+  {
+    "endTime" : "2024-09-12 01:14",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Firefox Software Architecture with Brian Grinstead",
+    "msPlayed" : 599471
+  },
+  {
+    "endTime" : "2024-09-12 20:38",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Firefox Software Architecture with Brian Grinstead",
+    "msPlayed" : 217980
+  },
+  {
+    "endTime" : "2024-09-12 20:39",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Wannabe Hipster Knocks Up Literal Clown | Financial Audit",
+    "msPlayed" : 12318
+  },
+  {
+    "endTime" : "2024-09-12 20:58",
+    "podcastName" : "FLOPS & Threads",
+    "episodeName" : "CentOS 7 is EOL - Time to Plan Your Next Move!",
+    "msPlayed" : 1140600
+  },
+  {
+    "endTime" : "2024-09-12 21:30",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Undirected hyper arrows (JS Party #338)",
+    "msPlayed" : 1886160
+  },
+  {
+    "endTime" : "2024-09-13 00:37",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Undirected hyper arrows (JS Party #338)",
+    "msPlayed" : 414040
+  },
+  {
+    "endTime" : "2024-09-13 02:02",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Undirected hyper arrows (JS Party #338)",
+    "msPlayed" : 16305
+  },
+  {
+    "endTime" : "2024-09-13 08:46",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Building customizable ergonomic keyboards (Changelog Interviews #608)",
+    "msPlayed" : 2893470
+  },
+  {
+    "endTime" : "2024-09-15 12:39",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Building customizable ergonomic keyboards (Changelog Interviews #608)",
+    "msPlayed" : 187800
+  },
+  {
+    "endTime" : "2024-09-15 20:18",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Building customizable ergonomic keyboards (Changelog Interviews #608)",
+    "msPlayed" : 280660
+  },
+  {
+    "endTime" : "2024-09-16 11:45",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Building customizable ergonomic keyboards (Changelog Interviews #608)",
+    "msPlayed" : 290542
+  },
+  {
+    "endTime" : "2024-09-16 12:30",
+    "podcastName" : "AWS Podcast",
+    "episodeName" : "#685: [Beyond the API] Colm MacCárthaigh",
+    "msPlayed" : 1536320
+  },
+  {
+    "endTime" : "2024-09-16 16:09",
+    "podcastName" : "AWS Podcast",
+    "episodeName" : "#685: [Beyond the API] Colm MacCárthaigh",
+    "msPlayed" : 1004873
+  },
+  {
+    "endTime" : "2024-09-16 16:54",
+    "podcastName" : "The Art of Manliness",
+    "episodeName" : "Is Self-Control Overrated?",
+    "msPlayed" : 1212807
+  },
+  {
+    "endTime" : "2024-09-16 22:00",
+    "podcastName" : "The Art of Manliness",
+    "episodeName" : "Is Self-Control Overrated?",
+    "msPlayed" : 718000
+  },
+  {
+    "endTime" : "2024-09-17 00:10",
+    "podcastName" : "The Art of Manliness",
+    "episodeName" : "Is Self-Control Overrated?",
+    "msPlayed" : 534120
+  },
+  {
+    "endTime" : "2024-09-17 01:40",
+    "podcastName" : "The Art of Manliness",
+    "episodeName" : "Is Self-Control Overrated?",
+    "msPlayed" : 227640
+  },
+  {
+    "endTime" : "2024-09-17 19:49",
+    "podcastName" : "The Art of Manliness",
+    "episodeName" : "Is Self-Control Overrated?",
+    "msPlayed" : 4940
+  },
+  {
+    "endTime" : "2024-09-17 20:33",
+    "podcastName" : "Click Here",
+    "episodeName" : "166. The curious case of Esma Memtimin’s disappearing TikTok videos",
+    "msPlayed" : 1782193
+  },
+  {
+    "endTime" : "2024-09-17 21:03",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Building Rawkode Academy (Ship It! #121)",
+    "msPlayed" : 879880
+  },
+  {
+    "endTime" : "2024-09-18 06:06",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Building Rawkode Academy (Ship It! #121)",
+    "msPlayed" : 2370402
+  },
+  {
+    "endTime" : "2024-09-18 20:57",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Building Rawkode Academy (Ship It! #121)",
+    "msPlayed" : 2200
+  },
+  {
+    "endTime" : "2024-09-19 20:54",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "TanStack and TanRouter with Tanner Linsley",
+    "msPlayed" : 1221985
+  },
+  {
+    "endTime" : "2024-09-19 21:04",
+    "podcastName" : "Techmeme Ride Home",
+    "episodeName" : "Thu. 09/19 – Pokémon: No!",
+    "msPlayed" : 587611
+  },
+  {
+    "endTime" : "2024-09-19 21:25",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Data Management at Capital One with Jim Lebonitte",
+    "msPlayed" : 1156907
+  },
+  {
+    "endTime" : "2024-09-20 01:01",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "It's all about the squiggles (JS Party #339)",
+    "msPlayed" : 1114330
+  },
+  {
+    "endTime" : "2024-09-20 01:24",
+    "podcastName" : "Hanselminutes with Scott Hanselman",
+    "episodeName" : "Life as an Indie Developer with Joseph Finney",
+    "msPlayed" : 1301357
+  },
+  {
+    "endTime" : "2024-09-20 01:29",
+    "podcastName" : "Developer Tea",
+    "episodeName" : "Career Growth Comes From Finding Low Hanging Fruit in the Gaps",
+    "msPlayed" : 347742
+  },
+  {
+    "endTime" : "2024-09-20 02:46",
+    "podcastName" : "Thoughtworks Technology Podcast",
+    "episodeName" : "Exploring DuckDB: A relational database built for online analytical processing",
+    "msPlayed" : 735100
+  },
+  {
+    "endTime" : "2024-09-21 16:09",
+    "podcastName" : "Thoughtworks Technology Podcast",
+    "episodeName" : "Exploring DuckDB: A relational database built for online analytical processing",
+    "msPlayed" : 683280
+  },
+  {
+    "endTime" : "2024-09-21 16:44",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "It's all about the squiggles (JS Party #339)",
+    "msPlayed" : 1689481
+  },
+  {
+    "endTime" : "2024-09-21 19:15",
+    "podcastName" : "Business of Tech: Daily 10-Minute IT Services Insights",
+    "episodeName" : "Exploring AI's Impact on Data, Device Sales, and Business Strategies: Insights from Jay McBain",
+    "msPlayed" : 656598
+  },
+  {
+    "endTime" : "2024-09-23 21:54",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Imagine Fly.io on your own VPS (Changelog News #113)",
+    "msPlayed" : 324908
+  },
+  {
+    "endTime" : "2024-09-23 22:04",
+    "podcastName" : "Making Sense with Sam Harris",
+    "episodeName" : "#384 — Stress Testing Our Democracy",
+    "msPlayed" : 465611
+  },
+  {
+    "endTime" : "2024-09-24 01:25",
+    "podcastName" : "The Louis Theroux Podcast",
+    "episodeName" : "S3 EP1: Mia Khalifa on living with autism, receiving death threats and her experience of the adult film industry",
+    "msPlayed" : 187747
+  },
+  {
+    "endTime" : "2024-09-24 12:36",
+    "podcastName" : "The Louis Theroux Podcast",
+    "episodeName" : "S3 EP1: Mia Khalifa on living with autism, receiving death threats and her experience of the adult film industry",
+    "msPlayed" : 2495116
+  },
+  {
+    "endTime" : "2024-09-24 13:05",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Funeral Date w/ Mike Cannon | First Date with Lauren Compton",
+    "msPlayed" : 243077
+  },
+  {
+    "endTime" : "2024-09-24 13:40",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Funeral Date w/ Mike Cannon | First Date with Lauren Compton",
+    "msPlayed" : 1393123
+  },
+  {
+    "endTime" : "2024-09-24 14:08",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "AI Pipelines with Maxime Armstrong and Yuhan Luo",
+    "msPlayed" : 345460
+  },
+  {
+    "endTime" : "2024-09-25 12:23",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "AI Pipelines with Maxime Armstrong and Yuhan Luo",
+    "msPlayed" : 789979
+  },
+  {
+    "endTime" : "2024-09-30 23:23",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "AI Pipelines with Maxime Armstrong and Yuhan Luo",
+    "msPlayed" : 544388
+  },
+  {
+    "endTime" : "2024-09-30 23:40",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "AI Pipelines with Maxime Armstrong and Yuhan Luo",
+    "msPlayed" : 43851
+  },
+  {
+    "endTime" : "2024-09-30 23:42",
+    "podcastName" : "Making Sense with Sam Harris",
+    "episodeName" : "#384 — Stress Testing Our Democracy",
+    "msPlayed" : 75638
+  },
+  {
+    "endTime" : "2024-10-01 01:16",
+    "podcastName" : "AWS Podcast",
+    "episodeName" : "#687: Graph Analytics Breakdown",
+    "msPlayed" : 687400
+  },
+  {
+    "endTime" : "2024-10-01 21:02",
+    "podcastName" : "The Peter Attia Drive",
+    "episodeName" : "#319 ‒ Peter's key takeaways on liver health, heart rate variability, AI in medicine, klotho, and lactate metabolism | Quarterly Podcast Summary #2",
+    "msPlayed" : 3557
+  },
+  {
+    "endTime" : "2024-10-01 21:02",
+    "podcastName" : "AWS Podcast",
+    "episodeName" : "#687: Graph Analytics Breakdown",
+    "msPlayed" : 262369
+  },
+  {
+    "endTime" : "2024-10-01 21:08",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "The 2024 Stack Overflow Developer Survey with Erin Yepis and Ryan Polk",
+    "msPlayed" : 253759
+  },
+  {
+    "endTime" : "2024-10-01 23:56",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "The 2024 Stack Overflow Developer Survey with Erin Yepis and Ryan Polk",
+    "msPlayed" : 726540
+  },
+  {
+    "endTime" : "2024-10-02 01:34",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "The 2024 Stack Overflow Developer Survey with Erin Yepis and Ryan Polk",
+    "msPlayed" : 608415
+  },
+  {
+    "endTime" : "2024-10-02 02:24",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Dusty Slay's Silky Secret | First Date with Lauren Compton",
+    "msPlayed" : 1242536
+  },
+  {
+    "endTime" : "2024-10-03 21:09",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Create interactive tutorials the easy way (JS Party #341)",
+    "msPlayed" : 1843486
+  },
+  {
+    "endTime" : "2024-10-03 21:28",
+    "podcastName" : "DataFramed",
+    "episodeName" : "#249 Towards Self-Service Data Engineering with Taylor Brown, Co-Founder and COO at Fivetran",
+    "msPlayed" : 22134
+  },
+  {
+    "endTime" : "2024-10-04 04:04",
+    "podcastName" : "DataFramed",
+    "episodeName" : "#249 Towards Self-Service Data Engineering with Taylor Brown, Co-Founder and COO at Fivetran",
+    "msPlayed" : 316230
+  },
+  {
+    "endTime" : "2024-10-04 21:41",
+    "podcastName" : "DataFramed",
+    "episodeName" : "#249 Towards Self-Service Data Engineering with Taylor Brown, Co-Founder and COO at Fivetran",
+    "msPlayed" : 911862
+  },
+  {
+    "endTime" : "2024-10-04 21:49",
+    "podcastName" : "AWS Podcast",
+    "episodeName" : "#687: Graph Analytics Breakdown",
+    "msPlayed" : 437111
+  },
+  {
+    "endTime" : "2024-10-04 21:50",
+    "podcastName" : "Making Sense with Sam Harris",
+    "episodeName" : "#384 — Stress Testing Our Democracy",
+    "msPlayed" : 70417
+  },
+  {
+    "endTime" : "2024-10-04 22:32",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Developer (un)happiness (Changelog & Friends #64)",
+    "msPlayed" : 1848584
+  },
+  {
+    "endTime" : "2024-10-05 16:27",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Developer (un)happiness (Changelog & Friends #64)",
+    "msPlayed" : 845126
+  },
+  {
+    "endTime" : "2024-10-05 20:08",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Developer (un)happiness (Changelog & Friends #64)",
+    "msPlayed" : 46680
+  },
+  {
+    "endTime" : "2024-10-05 21:43",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Developer (un)happiness (Changelog & Friends #64)",
+    "msPlayed" : 625000
+  },
+  {
+    "endTime" : "2024-10-06 00:14",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Developer (un)happiness (Changelog & Friends #64)",
+    "msPlayed" : 15353
+  },
+  {
+    "endTime" : "2024-10-06 00:14",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Developer (un)happiness (Changelog & Friends #64)",
+    "msPlayed" : 90001
+  },
+  {
+    "endTime" : "2024-10-06 00:54",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "You suck at programming (Ship It! #124)",
+    "msPlayed" : 874533
+  },
+  {
+    "endTime" : "2024-10-07 01:55",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "You suck at programming (Ship It! #124)",
+    "msPlayed" : 917314
+  },
+  {
+    "endTime" : "2024-10-07 01:56",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "JRE MMA Show #164 with Israel Adesanya",
+    "msPlayed" : 48423
+  },
+  {
+    "endTime" : "2024-10-07 02:09",
+    "podcastName" : "FLOPS & Threads",
+    "episodeName" : "Fuzzball-Ansible Deployment with Ascender",
+    "msPlayed" : 732243
+  },
+  {
+    "endTime" : "2024-10-07 12:59",
+    "podcastName" : "FLOPS & Threads",
+    "episodeName" : "Fuzzball-Ansible Deployment with Ascender",
+    "msPlayed" : 344020
+  },
+  {
+    "endTime" : "2024-10-07 16:29",
+    "podcastName" : "FLOPS & Threads",
+    "episodeName" : "Fuzzball-Ansible Deployment with Ascender",
+    "msPlayed" : 2540
+  },
+  {
+    "endTime" : "2024-10-07 16:55",
+    "podcastName" : "Self-Hosted",
+    "episodeName" : "133: No Google October",
+    "msPlayed" : 888411
+  },
+  {
+    "endTime" : "2024-10-07 17:10",
+    "podcastName" : "Self-Hosted",
+    "episodeName" : "133: No Google October",
+    "msPlayed" : 766237
+  },
+  {
+    "endTime" : "2024-10-07 17:35",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Good Impressions w/ Adam Ray | First Date with Lauren Compton",
+    "msPlayed" : 448873
+  },
+  {
+    "endTime" : "2024-10-07 21:44",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Good Impressions w/ Adam Ray | First Date with Lauren Compton",
+    "msPlayed" : 955492
+  },
+  {
+    "endTime" : "2024-10-08 00:14",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Good Impressions w/ Adam Ray | First Date with Lauren Compton",
+    "msPlayed" : 360900
+  },
+  {
+    "endTime" : "2024-10-08 00:59",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Good Impressions w/ Adam Ray | First Date with Lauren Compton",
+    "msPlayed" : 19240
+  },
+  {
+    "endTime" : "2024-10-08 01:05",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The slow death of the hyperlink (Changelog News #115)",
+    "msPlayed" : 260480
+  },
+  {
+    "endTime" : "2024-10-08 17:10",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The slow death of the hyperlink (Changelog News #115)",
+    "msPlayed" : 102863
+  },
+  {
+    "endTime" : "2024-10-08 18:35",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Building Secure Payments Infrastructure with Jack Gibson",
+    "msPlayed" : 916919
+  },
+  {
+    "endTime" : "2024-10-08 19:14",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Building Secure Payments Infrastructure with Jack Gibson",
+    "msPlayed" : 12740
+  },
+  {
+    "endTime" : "2024-10-10 20:55",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Building Secure Payments Infrastructure with Jack Gibson",
+    "msPlayed" : 740287
+  },
+  {
+    "endTime" : "2024-10-10 20:55",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "JRE MMA Show #164 with Israel Adesanya",
+    "msPlayed" : 40979
+  },
+  {
+    "endTime" : "2024-10-10 21:14",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "A great horse to bet on (JS Party #342)",
+    "msPlayed" : 1110382
+  },
+  {
+    "endTime" : "2024-10-11 02:02",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "A great horse to bet on (JS Party #342)",
+    "msPlayed" : 733220
+  },
+  {
+    "endTime" : "2024-10-11 02:52",
+    "podcastName" : "Frontend First",
+    "episodeName" : "Can you self-host Next.js?",
+    "msPlayed" : 2300106
+  },
+  {
+    "endTime" : "2024-10-11 02:52",
+    "podcastName" : "Frontend First",
+    "episodeName" : "Can you self-host Next.js?",
+    "msPlayed" : 0
+  },
+  {
+    "endTime" : "2024-10-11 03:16",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Breastfeeding Burns Calories w/ Kat Timpf | First Date with Lauren Compton",
+    "msPlayed" : 176086
+  },
+  {
+    "endTime" : "2024-10-11 16:47",
+    "podcastName" : "Frontend First",
+    "episodeName" : "Can you self-host Next.js?",
+    "msPlayed" : 8980
+  },
+  {
+    "endTime" : "2024-10-11 17:25",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Breastfeeding Burns Calories w/ Kat Timpf | First Date with Lauren Compton",
+    "msPlayed" : 1358151
+  },
+  {
+    "endTime" : "2024-10-11 17:26",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Breastfeeding Burns Calories w/ Kat Timpf | First Date with Lauren Compton",
+    "msPlayed" : 2960
+  },
+  {
+    "endTime" : "2024-10-11 18:14",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2212 - Jelly Roll",
+    "msPlayed" : 226942
+  },
+  {
+    "endTime" : "2024-10-16 14:18",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "The End of GraphQL with Matt Bessey",
+    "msPlayed" : 2309889
+  },
+  {
+    "endTime" : "2024-10-16 14:56",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2212 - Jelly Roll",
+    "msPlayed" : 7783
+  },
+  {
+    "endTime" : "2024-10-16 14:56",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "The End of GraphQL with Matt Bessey",
+    "msPlayed" : 164078
+  },
+  {
+    "endTime" : "2024-10-16 14:59",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "The End of GraphQL with Matt Bessey",
+    "msPlayed" : 171833
+  },
+  {
+    "endTime" : "2024-10-16 16:12",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Unshrouding Turin (or Benvenuto a Torino)",
+    "msPlayed" : 4426
+  },
+  {
+    "endTime" : "2024-10-17 17:38",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Breaking free from SPA dominance with Anthony Alaribe",
+    "msPlayed" : 280392
+  },
+  {
+    "endTime" : "2024-10-17 20:47",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Breaking free from SPA dominance with Anthony Alaribe",
+    "msPlayed" : 644500
+  },
+  {
+    "endTime" : "2024-10-17 21:13",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "SoundCloud’s Platform Architecture with Matthew Drooker",
+    "msPlayed" : 1505936
+  },
+  {
+    "endTime" : "2024-10-17 21:21",
+    "podcastName" : "Thoughtworks Technology Podcast",
+    "episodeName" : "Themes from Technology Radar Vol.31",
+    "msPlayed" : 466331
+  },
+  {
+    "endTime" : "2024-10-18 02:31",
+    "podcastName" : "Thoughtworks Technology Podcast",
+    "episodeName" : "Themes from Technology Radar Vol.31",
+    "msPlayed" : 1120112
+  },
+  {
+    "endTime" : "2024-10-18 02:37",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Breaking free from SPA dominance with Anthony Alaribe",
+    "msPlayed" : 299097
+  },
+  {
+    "endTime" : "2024-10-18 03:13",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Practical workflow orchestration (Practical AI #291)",
+    "msPlayed" : 1062083
+  },
+  {
+    "endTime" : "2024-10-19 18:23",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Practical workflow orchestration (Practical AI #291)",
+    "msPlayed" : 1200980
+  },
+  {
+    "endTime" : "2024-10-19 20:31",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2212 - Jelly Roll",
+    "msPlayed" : 260423
+  },
+  {
+    "endTime" : "2024-10-20 02:35",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2212 - Jelly Roll",
+    "msPlayed" : 2595
+  },
+  {
+    "endTime" : "2024-10-20 02:42",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2212 - Jelly Roll",
+    "msPlayed" : 449592
+  },
+  {
+    "endTime" : "2024-10-20 03:29",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2212 - Jelly Roll",
+    "msPlayed" : 1210077
+  },
+  {
+    "endTime" : "2024-10-21 21:22",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2212 - Jelly Roll",
+    "msPlayed" : 31161
+  },
+  {
+    "endTime" : "2024-10-21 21:40",
+    "podcastName" : "DataFramed",
+    "episodeName" : "#254 Career Skills for Data Professionals with Wes Kao, Co-Founder of Maven",
+    "msPlayed" : 603160
+  },
+  {
+    "endTime" : "2024-10-22 01:53",
+    "podcastName" : "DataFramed",
+    "episodeName" : "#254 Career Skills for Data Professionals with Wes Kao, Co-Founder of Maven",
+    "msPlayed" : 800800
+  },
+  {
+    "endTime" : "2024-10-22 21:29",
+    "podcastName" : "DataFramed",
+    "episodeName" : "#254 Career Skills for Data Professionals with Wes Kao, Co-Founder of Maven",
+    "msPlayed" : 426272
+  },
+  {
+    "endTime" : "2024-10-22 21:30",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2212 - Jelly Roll",
+    "msPlayed" : 18969
+  },
+  {
+    "endTime" : "2024-10-22 21:30",
+    "podcastName" : "DataFramed",
+    "episodeName" : "#254 Career Skills for Data Professionals with Wes Kao, Co-Founder of Maven",
+    "msPlayed" : 4600
+  },
+  {
+    "endTime" : "2024-10-22 21:45",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Engineering an Open Source CRISPR with Aadyot Bhatnagar",
+    "msPlayed" : 904588
+  },
+  {
+    "endTime" : "2024-10-22 22:49",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "First Date LIVE! w/ Chris Distefano and Joe DeRosa | First Date with Lauren Compton",
+    "msPlayed" : 1224150
+  },
+  {
+    "endTime" : "2024-10-23 00:53",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "First Date LIVE! w/ Chris Distefano and Joe DeRosa | First Date with Lauren Compton",
+    "msPlayed" : 1880660
+  },
+  {
+    "endTime" : "2024-10-23 01:31",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2212 - Jelly Roll",
+    "msPlayed" : 473756
+  },
+  {
+    "endTime" : "2024-10-24 00:46",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Rust vs. C++ with Steve Klabnik and Herb Sutter",
+    "msPlayed" : 1314900
+  },
+  {
+    "endTime" : "2024-10-24 20:55",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Rust vs. C++ with Steve Klabnik and Herb Sutter",
+    "msPlayed" : 1156337
+  },
+  {
+    "endTime" : "2024-10-24 20:56",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Love Trumps All w/ Austin Nasso | First Date with Lauren Compton",
+    "msPlayed" : 702
+  },
+  {
+    "endTime" : "2024-10-24 21:15",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Component composition with Dominik Dorfmiester",
+    "msPlayed" : 749905
+  },
+  {
+    "endTime" : "2024-10-24 21:18",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Argo and Kubernetes with Michael Crenshaw and Zach Aller",
+    "msPlayed" : 166479
+  },
+  {
+    "endTime" : "2024-10-25 02:01",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Argo and Kubernetes with Michael Crenshaw and Zach Aller",
+    "msPlayed" : 1579401
+  },
+  {
+    "endTime" : "2024-10-25 02:40",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Elasticsearch is open source, again (Changelog Interviews #614)",
+    "msPlayed" : 722382
+  },
+  {
+    "endTime" : "2024-10-29 01:35",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Elasticsearch is open source, again (Changelog Interviews #614)",
+    "msPlayed" : 329149
+  },
+  {
+    "endTime" : "2024-10-29 18:52",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Elasticsearch is open source, again (Changelog Interviews #614)",
+    "msPlayed" : 452400
+  },
+  {
+    "endTime" : "2024-10-30 21:56",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Elasticsearch is open source, again (Changelog Interviews #614)",
+    "msPlayed" : 161500
+  },
+  {
+    "endTime" : "2024-10-31 00:46",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Elasticsearch is open source, again (Changelog Interviews #614)",
+    "msPlayed" : 1466828
+  },
+  {
+    "endTime" : "2024-10-31 15:00",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Elasticsearch is open source, again (Changelog Interviews #614)",
+    "msPlayed" : 2580
+  },
+  {
+    "endTime" : "2024-11-03 18:19",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Wine Web and a whole lot of Whatnot (Changelog & Friends #68)",
+    "msPlayed" : 851028
+  },
+  {
+    "endTime" : "2024-11-05 07:14",
+    "podcastName" : "Data Engineering Podcast",
+    "episodeName" : "Feldera: Bridging Batch and Streaming with Incremental Computation",
+    "msPlayed" : 1300620
+  },
+  {
+    "endTime" : "2024-11-05 23:14",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Love in Recovery w/ Brandon Novak | First Date with Lauren Compton",
+    "msPlayed" : 1942265
+  },
+  {
+    "endTime" : "2024-11-05 23:49",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2223 - Elon Musk",
+    "msPlayed" : 501149
+  },
+  {
+    "endTime" : "2024-11-06 00:28",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2223 - Elon Musk",
+    "msPlayed" : 158400
+  },
+  {
+    "endTime" : "2024-11-06 01:09",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2223 - Elon Musk",
+    "msPlayed" : 1537394
+  },
+  {
+    "endTime" : "2024-11-06 02:45",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2223 - Elon Musk",
+    "msPlayed" : 2435279
+  },
+  {
+    "endTime" : "2024-11-07 18:04",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2223 - Elon Musk",
+    "msPlayed" : 1698831
+  },
+  {
+    "endTime" : "2024-11-07 18:45",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2219 - Donald Trump",
+    "msPlayed" : 1148556
+  },
+  {
+    "endTime" : "2024-11-08 00:22",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2219 - Donald Trump",
+    "msPlayed" : 3190490
+  },
+  {
+    "endTime" : "2024-11-08 01:47",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2219 - Donald Trump",
+    "msPlayed" : 30986
+  },
+  {
+    "endTime" : "2024-11-08 04:30",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2219 - Donald Trump",
+    "msPlayed" : 2798361
+  },
+  {
+    "endTime" : "2024-11-09 12:09",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "ANTHOLOGY – Self-hosted, self-confident & self-employed (Changelog & Friends #69)",
+    "msPlayed" : 711380
+  },
+  {
+    "endTime" : "2024-11-09 14:35",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "ANTHOLOGY – Self-hosted, self-confident & self-employed (Changelog & Friends #69)",
+    "msPlayed" : 1373638
+  },
+  {
+    "endTime" : "2024-11-10 00:41",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "ANTHOLOGY – Self-hosted, self-confident & self-employed (Changelog & Friends #69)",
+    "msPlayed" : 1031100
+  },
+  {
+    "endTime" : "2024-11-10 01:43",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2226 - Theo Von",
+    "msPlayed" : 2590919
+  },
+  {
+    "endTime" : "2024-11-11 22:44",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2226 - Theo Von",
+    "msPlayed" : 633289
+  },
+  {
+    "endTime" : "2024-11-12 01:39",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2226 - Theo Von",
+    "msPlayed" : 865067
+  },
+  {
+    "endTime" : "2024-11-13 01:53",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2226 - Theo Von",
+    "msPlayed" : 667817
+  },
+  {
+    "endTime" : "2024-11-13 23:18",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2226 - Theo Von",
+    "msPlayed" : 3276797
+  },
+  {
+    "endTime" : "2024-11-13 23:20",
+    "podcastName" : "Data Engineering Podcast",
+    "episodeName" : "Feldera: Bridging Batch and Streaming with Incremental Computation",
+    "msPlayed" : 111885
+  },
+  {
+    "endTime" : "2024-11-14 01:57",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Crawl, walk & run your way to usable CLIs in Go (Go Time #337)",
+    "msPlayed" : 2125837
+  },
+  {
+    "endTime" : "2024-11-14 05:33",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "The Streets Love Donnell Rawlings | First Date with Lauren Compton",
+    "msPlayed" : 277567
+  },
+  {
+    "endTime" : "2024-11-14 15:53",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "void(0) with Evan You",
+    "msPlayed" : 9984
+  },
+  {
+    "endTime" : "2024-11-14 16:14",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "void(0) with Evan You",
+    "msPlayed" : 60480
+  },
+  {
+    "endTime" : "2024-11-14 22:02",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "void(0) with Evan You",
+    "msPlayed" : 1802047
+  },
+  {
+    "endTime" : "2024-11-14 22:15",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Controlling Karen Exploits Cuck Husband | Financial Audit",
+    "msPlayed" : 822334
+  },
+  {
+    "endTime" : "2024-11-15 00:44",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "The Streets Love Donnell Rawlings | First Date with Lauren Compton",
+    "msPlayed" : 730219
+  },
+  {
+    "endTime" : "2024-11-15 01:27",
+    "podcastName" : "Data Engineering Podcast",
+    "episodeName" : "Feldera: Bridging Batch and Streaming with Incremental Computation",
+    "msPlayed" : 281740
+  },
+  {
+    "endTime" : "2024-11-15 03:16",
+    "podcastName" : "Data Engineering Podcast",
+    "episodeName" : "Feldera: Bridging Batch and Streaming with Incremental Computation",
+    "msPlayed" : 16302
+  },
+  {
+    "endTime" : "2024-11-15 03:32",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "The Streets Love Donnell Rawlings | First Date with Lauren Compton",
+    "msPlayed" : 801039
+  },
+  {
+    "endTime" : "2024-11-15 04:24",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "It's all about documentation (JS Party #346)",
+    "msPlayed" : 2081421
+  },
+  {
+    "endTime" : "2024-11-15 22:33",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "It's all about documentation (JS Party #346)",
+    "msPlayed" : 119140
+  },
+  {
+    "endTime" : "2024-11-15 22:52",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "It's all about documentation (JS Party #346)",
+    "msPlayed" : 585760
+  },
+  {
+    "endTime" : "2024-11-15 23:52",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Controlling Karen Exploits Cuck Husband | Financial Audit",
+    "msPlayed" : 247906
+  },
+  {
+    "endTime" : "2024-11-16 21:18",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Bus factors & conspiracy theories (Changelog & Friends #70)",
+    "msPlayed" : 10477
+  },
+  {
+    "endTime" : "2024-11-16 22:01",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Bus factors & conspiracy theories (Changelog & Friends #70)",
+    "msPlayed" : 1993568
+  },
+  {
+    "endTime" : "2024-11-18 13:20",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Bus factors & conspiracy theories (Changelog & Friends #70)",
+    "msPlayed" : 915255
+  },
+  {
+    "endTime" : "2024-11-18 15:36",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Bus factors & conspiracy theories (Changelog & Friends #70)",
+    "msPlayed" : 2435633
+  },
+  {
+    "endTime" : "2024-11-18 22:34",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Hosting Hachyderm (Ship It! #130)",
+    "msPlayed" : 606767
+  },
+  {
+    "endTime" : "2024-11-19 02:22",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Hosting Hachyderm (Ship It! #130)",
+    "msPlayed" : 484475
+  },
+  {
+    "endTime" : "2024-11-19 03:28",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Hosting Hachyderm (Ship It! #130)",
+    "msPlayed" : 259880
+  },
+  {
+    "endTime" : "2024-11-21 22:08",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Hosting Hachyderm (Ship It! #130)",
+    "msPlayed" : 1284054
+  },
+  {
+    "endTime" : "2024-11-21 22:30",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Nine pillars of great Node apps (JS Party #347)",
+    "msPlayed" : 174977
+  },
+  {
+    "endTime" : "2024-11-21 22:40",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Unpop roundup! 2023 (Go Time #338)",
+    "msPlayed" : 560230
+  },
+  {
+    "endTime" : "2024-11-22 03:42",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Unpop roundup! 2023 (Go Time #338)",
+    "msPlayed" : 703260
+  },
+  {
+    "endTime" : "2024-11-22 03:48",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Technical Blogging",
+    "msPlayed" : 308180
+  },
+  {
+    "endTime" : "2024-11-22 04:33",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Two tickets for Departure, please (Changelog Interviews #618)",
+    "msPlayed" : 1651200
+  },
+  {
+    "endTime" : "2024-11-25 22:44",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Two tickets for Departure, please (Changelog Interviews #618)",
+    "msPlayed" : 676089
+  },
+  {
+    "endTime" : "2024-11-26 01:49",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Entitled Gen-Z Girl Uses Payday Loans To Party | Financial Audit",
+    "msPlayed" : 765583
+  },
+  {
+    "endTime" : "2024-11-26 02:41",
+    "podcastName" : "Financial Audit",
+    "episodeName" : "Entitled Gen-Z Girl Uses Payday Loans To Party | Financial Audit",
+    "msPlayed" : 221274
+  },
+  {
+    "endTime" : "2024-11-26 03:26",
+    "podcastName" : "AWS Podcast",
+    "episodeName" : "#696: [The Frugal Architect w/Werner Vogels] WeTransfer's journey to cut costs, not corners",
+    "msPlayed" : 272300
+  },
+  {
+    "endTime" : "2024-11-27 23:08",
+    "podcastName" : "AWS Podcast",
+    "episodeName" : "#696: [The Frugal Architect w/Werner Vogels] WeTransfer's journey to cut costs, not corners",
+    "msPlayed" : 1677548
+  },
+  {
+    "endTime" : "2024-11-27 23:09",
+    "podcastName" : "The Peter Attia Drive",
+    "episodeName" : "Optimizing life for maximum fulfillment | Bill Perkins (#237 rebroadcast)",
+    "msPlayed" : 3407
+  },
+  {
+    "endTime" : "2024-11-27 23:11",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Technical Blogging",
+    "msPlayed" : 97954
+  },
+  {
+    "endTime" : "2024-11-27 23:24",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Let's archive the web (Changelog Interviews #619)",
+    "msPlayed" : 626558
+  },
+  {
+    "endTime" : "2024-11-28 00:20",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Let's archive the web (Changelog Interviews #619)",
+    "msPlayed" : 2870689
+  },
+  {
+    "endTime" : "2024-11-28 01:05",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2235 - Mike Rowe",
+    "msPlayed" : 2595410
+  },
+  {
+    "endTime" : "2024-11-28 01:06",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2235 - Mike Rowe",
+    "msPlayed" : 20298
+  },
+  {
+    "endTime" : "2024-11-28 01:35",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2235 - Mike Rowe",
+    "msPlayed" : 1684356
+  },
+  {
+    "endTime" : "2024-11-28 12:32",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2235 - Mike Rowe",
+    "msPlayed" : 2415789
+  },
+  {
+    "endTime" : "2024-11-29 14:00",
+    "podcastName" : "Super Great Kids' Stories",
+    "episodeName" : "Robin Hood and the Silver Arrow",
+    "msPlayed" : 3008
+  },
+  {
+    "endTime" : "2024-11-29 14:02",
+    "podcastName" : "Super Great Kids' Stories",
+    "episodeName" : "Robin Hood and the Silver Arrow",
+    "msPlayed" : 110457
+  },
+  {
+    "endTime" : "2024-11-29 17:14",
+    "podcastName" : "The Joe Rogan Experience",
+    "episodeName" : "#2235 - Mike Rowe",
+    "msPlayed" : 706757
+  },
+  {
+    "endTime" : "2024-11-29 19:34",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Public safety Kubernetes (Ship It! #132)",
+    "msPlayed" : 255749
+  },
+  {
+    "endTime" : "2024-11-29 21:51",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Public safety Kubernetes (Ship It! #132)",
+    "msPlayed" : 931480
+  },
+  {
+    "endTime" : "2024-11-29 23:33",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Public safety Kubernetes (Ship It! #132)",
+    "msPlayed" : 3440
+  },
+  {
+    "endTime" : "2024-11-30 00:22",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Public safety Kubernetes (Ship It! #132)",
+    "msPlayed" : 5160
+  },
+  {
+    "endTime" : "2024-12-01 21:34",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Public safety Kubernetes (Ship It! #132)",
+    "msPlayed" : 1445020
+  },
+  {
+    "endTime" : "2024-12-01 22:16",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "WYSIWYG (JS Party #348)",
+    "msPlayed" : 859620
+  },
+  {
+    "endTime" : "2024-12-03 19:02",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "WYSIWYG (JS Party #348)",
+    "msPlayed" : 2091319
+  },
+  {
+    "endTime" : "2024-12-03 20:07",
+    "podcastName" : "The ADULT TIME Podcast",
+    "episodeName" : "JANE WILDE: Dick Ratings, Anal, & Co-Directing STARS",
+    "msPlayed" : 2112780
+  },
+  {
+    "endTime" : "2024-12-04 00:36",
+    "podcastName" : "The ADULT TIME Podcast",
+    "episodeName" : "JANE WILDE: Dick Ratings, Anal, & Co-Directing STARS",
+    "msPlayed" : 872815
+  },
+  {
+    "endTime" : "2024-12-04 12:32",
+    "podcastName" : "The ADULT TIME Podcast",
+    "episodeName" : "JANE WILDE: Dick Ratings, Anal, & Co-Directing STARS",
+    "msPlayed" : 76976
+  },
+  {
+    "endTime" : "2024-12-04 12:43",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "TanStack and TanRouter with Tanner Linsley [Repeat]",
+    "msPlayed" : 386647
+  },
+  {
+    "endTime" : "2024-12-04 14:09",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "CodeSandbox with Ives van Hoorne",
+    "msPlayed" : 100140
+  },
+  {
+    "endTime" : "2024-12-04 23:45",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "CodeSandbox with Ives van Hoorne",
+    "msPlayed" : 55080
+  },
+  {
+    "endTime" : "2024-12-06 03:59",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "CodeSandbox with Ives van Hoorne",
+    "msPlayed" : 2412647
+  },
+  {
+    "endTime" : "2024-12-06 04:15",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Mastering Dependency Management with Carmen Huidobro",
+    "msPlayed" : 200956
+  },
+  {
+    "endTime" : "2024-12-07 01:03",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Mastering Dependency Management with Carmen Huidobro",
+    "msPlayed" : 589620
+  },
+  {
+    "endTime" : "2024-12-07 20:18",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Mastering Dependency Management with Carmen Huidobro",
+    "msPlayed" : 54780
+  },
+  {
+    "endTime" : "2024-12-10 16:30",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "AI makes tech debt more expensive (Changelog News #121)",
+    "msPlayed" : 7755
+  },
+  {
+    "endTime" : "2024-12-12 01:06",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Pitching Go in 2025 (Go Time #339)",
+    "msPlayed" : 786700
+  },
+  {
+    "endTime" : "2024-12-12 03:16",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Pitching Go in 2025 (Go Time #339)",
+    "msPlayed" : 256630
+  },
+  {
+    "endTime" : "2024-12-12 21:37",
+    "podcastName" : "Frontend First",
+    "episodeName" : "Creating a background gradient from an image",
+    "msPlayed" : 41240
+  },
+  {
+    "endTime" : "2024-12-12 21:37",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Pitching Go in 2025 (Go Time #339)",
+    "msPlayed" : 1343661
+  },
+  {
+    "endTime" : "2024-12-12 23:09",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Building the developer cloud (Changelog Interviews #621)",
+    "msPlayed" : 2251889
+  },
+  {
+    "endTime" : "2024-12-13 04:03",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Building the developer cloud (Changelog Interviews #621)",
+    "msPlayed" : 1278216
+  },
+  {
+    "endTime" : "2024-12-13 04:05",
+    "podcastName" : "Business of Tech: Daily 10-Minute IT Services Insights",
+    "episodeName" : "Google Gemini 2.0, Cybersecurity Breaches, and the Future of Managed Services",
+    "msPlayed" : 124708
+  },
+  {
+    "endTime" : "2024-12-13 04:06",
+    "podcastName" : "PodRocket - A web development podcast from LogRocket",
+    "episodeName" : "Mastering Dependency Management with Carmen Huidobro",
+    "msPlayed" : 4400
+  },
+  {
+    "endTime" : "2024-12-13 05:13",
+    "podcastName" : "Hanselminutes with Scott Hanselman",
+    "episodeName" : "The Boring Edition with Shopify's Glen Coates",
+    "msPlayed" : 1327525
+  },
+  {
+    "endTime" : "2024-12-14 18:18",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Kaizen! Three wise men? (Changelog & Friends #73)",
+    "msPlayed" : 715571
+  },
+  {
+    "endTime" : "2024-12-14 20:23",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Kaizen! Three wise men? (Changelog & Friends #73)",
+    "msPlayed" : 1025207
+  },
+  {
+    "endTime" : "2024-12-14 21:16",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Kaizen! Three wise men? (Changelog & Friends #73)",
+    "msPlayed" : 2160040
+  },
+  {
+    "endTime" : "2024-12-14 21:19",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "Kaizen! Three wise men? (Changelog & Friends #73)",
+    "msPlayed" : 160101
+  },
+  {
+    "endTime" : "2024-12-15 00:58",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Conferences in Tech",
+    "msPlayed" : 1037995
+  },
+  {
+    "endTime" : "2024-12-15 02:50",
+    "podcastName" : "Self-Hosted",
+    "episodeName" : "138: ODROID and Chill",
+    "msPlayed" : 1155367
+  },
+  {
+    "endTime" : "2024-12-16 02:05",
+    "podcastName" : "Self-Hosted",
+    "episodeName" : "138: ODROID and Chill",
+    "msPlayed" : 1500170
+  },
+  {
+    "endTime" : "2024-12-16 12:57",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Conferences in Tech",
+    "msPlayed" : 250369
+  },
+  {
+    "endTime" : "2024-12-16 22:20",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Conferences in Tech",
+    "msPlayed" : 13719
+  },
+  {
+    "endTime" : "2024-12-16 22:21",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The code, prose & pods that shaped 2024 (Changelog News #125)",
+    "msPlayed" : 23591
+  },
+  {
+    "endTime" : "2024-12-16 22:39",
+    "podcastName" : "Data Engineering Podcast",
+    "episodeName" : "How Orchestration Impacts Data Platform Architecture",
+    "msPlayed" : 1077320
+  },
+  {
+    "endTime" : "2024-12-17 02:22",
+    "podcastName" : "Data Engineering Podcast",
+    "episodeName" : "How Orchestration Impacts Data Platform Architecture",
+    "msPlayed" : 330451
+  },
+  {
+    "endTime" : "2024-12-17 21:30",
+    "podcastName" : "Data Engineering Podcast",
+    "episodeName" : "How Orchestration Impacts Data Platform Architecture",
+    "msPlayed" : 980520
+  },
+  {
+    "endTime" : "2024-12-17 21:43",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "The code, prose & pods that shaped 2024 (Changelog News #125)",
+    "msPlayed" : 750885
+  },
+  {
+    "endTime" : "2024-12-17 21:43",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Conferences in Tech",
+    "msPlayed" : 8573
+  },
+  {
+    "endTime" : "2024-12-17 22:34",
+    "podcastName" : "The Engineering Leadership Podcast",
+    "episodeName" : "Unleashing potential in your employees & strategies to grow leadership skills in your org w/ Natalie Glance #201",
+    "msPlayed" : 1359002
+  },
+  {
+    "endTime" : "2024-12-19 21:44",
+    "podcastName" : "Hanselminutes with Scott Hanselman",
+    "episodeName" : "Next steps for Open Sauced with Brian Douglas",
+    "msPlayed" : 1292365
+  },
+  {
+    "endTime" : "2024-12-20 01:31",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Scaling Bluesky with Paul Frazee",
+    "msPlayed" : 2333372
+  },
+  {
+    "endTime" : "2024-12-20 03:49",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Scaling Bluesky with Paul Frazee",
+    "msPlayed" : 451080
+  },
+  {
+    "endTime" : "2024-12-21 16:42",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Scaling Bluesky with Paul Frazee",
+    "msPlayed" : 955220
+  },
+  {
+    "endTime" : "2024-12-22 17:45",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Scaling Bluesky with Paul Frazee",
+    "msPlayed" : 299399
+  },
+  {
+    "endTime" : "2024-12-22 17:47",
+    "podcastName" : "FLOPS & Threads",
+    "episodeName" : "2024 in Review: Highlights, Innovations, and What's Next for 2025",
+    "msPlayed" : 3361
+  },
+  {
+    "endTime" : "2024-12-22 21:33",
+    "podcastName" : "Triple Point Training",
+    "episodeName" : "Joe Stock: The Avalanche Factor",
+    "msPlayed" : 604780
+  },
+  {
+    "endTime" : "2024-12-22 21:33",
+    "podcastName" : "Triple Point Training",
+    "episodeName" : "Joe Stock: The Avalanche Factor",
+    "msPlayed" : 67456
+  },
+  {
+    "endTime" : "2024-12-22 22:25",
+    "podcastName" : "Triple Point Training",
+    "episodeName" : "Joe Stock: The Avalanche Factor",
+    "msPlayed" : 617723
+  },
+  {
+    "endTime" : "2024-12-22 22:28",
+    "podcastName" : "Triple Point Training",
+    "episodeName" : "Joe Stock: The Avalanche Factor",
+    "msPlayed" : 100842
+  },
+  {
+    "endTime" : "2024-12-22 22:34",
+    "podcastName" : "Triple Point Training",
+    "episodeName" : "Joe Stock: The Avalanche Factor",
+    "msPlayed" : 322037
+  },
+  {
+    "endTime" : "2024-12-24 18:05",
+    "podcastName" : "Triple Point Training",
+    "episodeName" : "Joe Stock: The Avalanche Factor",
+    "msPlayed" : 467347
+  },
+  {
+    "endTime" : "2024-12-24 18:49",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "The Rocket Of Romance w/ Casey Rocket | First Date with Lauren Compton",
+    "msPlayed" : 153875
+  },
+  {
+    "endTime" : "2024-12-24 21:49",
+    "podcastName" : "Data Engineering Podcast",
+    "episodeName" : "Building a Data Vision Board: A Guide to Strategic Planning",
+    "msPlayed" : 2181003
+  },
+  {
+    "endTime" : "2024-12-24 22:21",
+    "podcastName" : "Data Engineering Podcast",
+    "episodeName" : "Building a Data Vision Board: A Guide to Strategic Planning",
+    "msPlayed" : 693582
+  },
+  {
+    "endTime" : "2024-12-24 22:23",
+    "podcastName" : "Lex Fridman Podcast",
+    "episodeName" : "#455 – Adam Frank: Alien Civilizations and the Search for Extraterrestrial Life",
+    "msPlayed" : 89549
+  },
+  {
+    "endTime" : "2024-12-24 22:58",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "State of the \"log\" 2024 (Changelog & Friends #74)",
+    "msPlayed" : 2116287
+  },
+  {
+    "endTime" : "2024-12-24 23:47",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "State of the \"log\" 2024 (Changelog & Friends #74)",
+    "msPlayed" : 747457
+  },
+  {
+    "endTime" : "2024-12-25 02:40",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "State of the \"log\" 2024 (Changelog & Friends #74)",
+    "msPlayed" : 1989580
+  },
+  {
+    "endTime" : "2024-12-25 18:27",
+    "podcastName" : "Changelog Master Feed",
+    "episodeName" : "State of the \"log\" 2024 (Changelog & Friends #74)",
+    "msPlayed" : 94840
+  },
+  {
+    "endTime" : "2024-12-25 18:57",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "Conferences in Tech",
+    "msPlayed" : 409060
+  },
+  {
+    "endTime" : "2024-12-27 17:45",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "The Rocket Of Romance w/ Casey Rocket | First Date with Lauren Compton",
+    "msPlayed" : 1509094
+  },
+  {
+    "endTime" : "2024-12-27 18:30",
+    "podcastName" : "Thoughtworks Technology Podcast",
+    "episodeName" : "Who should make software architecture decisions?",
+    "msPlayed" : 1399328
+  },
+  {
+    "endTime" : "2024-12-27 18:30",
+    "podcastName" : "The Nikki Glaser Podcast",
+    "episodeName" : "#497 A Cancelled Christmas, Andrew's Wrong Pizza & Behind The Scenes Tea",
+    "msPlayed" : 18503
+  },
+  {
+    "endTime" : "2024-12-27 20:49",
+    "podcastName" : "Lex Fridman Podcast",
+    "episodeName" : "#455 – Adam Frank: Alien Civilizations and the Search for Extraterrestrial Life",
+    "msPlayed" : 5662793
+  },
+  {
+    "endTime" : "2024-12-27 22:09",
+    "podcastName" : "Lex Fridman Podcast",
+    "episodeName" : "#455 – Adam Frank: Alien Civilizations and the Search for Extraterrestrial Life",
+    "msPlayed" : 414094
+  },
+  {
+    "endTime" : "2024-12-27 22:37",
+    "podcastName" : "Lex Fridman Podcast",
+    "episodeName" : "#455 – Adam Frank: Alien Civilizations and the Search for Extraterrestrial Life",
+    "msPlayed" : 5268
+  },
+  {
+    "endTime" : "2024-12-27 23:00",
+    "podcastName" : "Lex Fridman Podcast",
+    "episodeName" : "#455 – Adam Frank: Alien Civilizations and the Search for Extraterrestrial Life",
+    "msPlayed" : 88754
+  },
+  {
+    "endTime" : "2024-12-28 02:42",
+    "podcastName" : "Self-Hosted",
+    "episodeName" : "139: Okay Nabu!",
+    "msPlayed" : 1517868
+  },
+  {
+    "endTime" : "2024-12-28 21:16",
+    "podcastName" : "Self-Hosted",
+    "episodeName" : "139: Okay Nabu!",
+    "msPlayed" : 513962
+  },
+  {
+    "endTime" : "2024-12-28 22:30",
+    "podcastName" : "Business of Tech: Daily 10-Minute IT Services Insights",
+    "episodeName" : "Exploring Human-Centric Support, AI Integration, Trust Building, & Training with David Sohn",
+    "msPlayed" : 857
+  },
+  {
+    "endTime" : "2024-12-29 19:30",
+    "podcastName" : "Ship It! Cloud, SRE, Platform Engineering",
+    "episodeName" : "Linux distros",
+    "msPlayed" : 2712852
+  },
+  {
+    "endTime" : "2024-12-30 00:15",
+    "podcastName" : "Lex Fridman Podcast",
+    "episodeName" : "#455 – Adam Frank: Alien Civilizations and the Search for Extraterrestrial Life",
+    "msPlayed" : 1385114
+  },
+  {
+    "endTime" : "2024-12-30 21:15",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "OxF 2024 Wrap-Up",
+    "msPlayed" : 79713
+  },
+  {
+    "endTime" : "2025-01-01 22:47",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "OxF 2024 Wrap-Up",
+    "msPlayed" : 224365
+  },
+  {
+    "endTime" : "2025-01-01 23:09",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Streamlined React Native Development with Charlie Cheever and James Ide",
+    "msPlayed" : 980858
+  },
+  {
+    "endTime" : "2025-01-02 01:09",
+    "podcastName" : "FLOPS & Threads",
+    "episodeName" : "Maximizing Hybrid Cloud Efficiency with Amazon EKS and Rocky Linux 9",
+    "msPlayed" : 1064940
+  },
+  {
+    "endTime" : "2025-01-02 02:01",
+    "podcastName" : "FLOPS & Threads",
+    "episodeName" : "Maximizing Hybrid Cloud Efficiency with Amazon EKS and Rocky Linux 9",
+    "msPlayed" : 1054832
+  },
+  {
+    "endTime" : "2025-01-02 02:18",
+    "podcastName" : "Software Engineering Daily",
+    "episodeName" : "Streamlined React Native Development with Charlie Cheever and James Ide",
+    "msPlayed" : 982704
+  },
+  {
+    "endTime" : "2025-01-02 05:38",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Fat \"Kitties\", Trashy Tattoos, and Romance w/ Ari Matti | First Date with Lauren Compton",
+    "msPlayed" : 344647
+  },
+  {
+    "endTime" : "2025-01-02 21:35",
+    "podcastName" : "Business of Tech: Daily 10-Minute IT Services Insights",
+    "episodeName" : "AI in Food Safety: Enhancing Compliance, Consumer Insights, and Product Innovation withMark Haas",
+    "msPlayed" : 10493
+  },
+  {
+    "endTime" : "2025-01-02 21:35",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Fat \"Kitties\", Trashy Tattoos, and Romance w/ Ari Matti | First Date with Lauren Compton",
+    "msPlayed" : 100547
+  },
+  {
+    "endTime" : "2025-01-02 22:03",
+    "podcastName" : "First Date with Lauren Compton",
+    "episodeName" : "Fat \"Kitties\", Trashy Tattoos, and Romance w/ Ari Matti | First Date with Lauren Compton",
+    "msPlayed" : 1622645
+  },
+  {
+    "endTime" : "2025-01-02 22:20",
+    "podcastName" : "Oxide and Friends",
+    "episodeName" : "OxF 2024 Wrap-Up",
+    "msPlayed" : 2220
+  },
+  {
+    "endTime" : "2025-01-02 23:50",
+    "podcastName" : "The ADULT TIME Podcast",
+    "episodeName" : "LEXI LUNA: The Gentleman’s Pornstar",
+    "msPlayed" : 452783
+  },
+  {
+    "endTime" : "2025-01-03 04:14",
+    "podcastName" : "The ADULT TIME Podcast",
+    "episodeName" : "LEXI LUNA: The Gentleman’s Pornstar",
+    "msPlayed" : 1805945
+  },
+  {
+    "endTime" : "2025-01-03 04:15",
+    "podcastName" : "Click Here",
+    "episodeName" : "196. 2024: A year of living more dangerously in cyberspace.",
+    "msPlayed" : 64603
+  },
+  {
+    "endTime" : "2025-01-03 04:42",
+    "podcastName" : "This Past Weekend w/ Theo Von",
+    "episodeName" : "BEST OF: This Past Weekend w/ Theo Von 2024",
+    "msPlayed" : 407884
+  },
+  {
+    "endTime" : "2025-01-04 20:32",
+    "podcastName" : "Business of Tech: Daily 10-Minute IT Services Insights",
+    "episodeName" : "Custom Software Development, AI Integration, & Client Engagement Strategies with Andrew Duncan",
+    "msPlayed" : 298051
+  }
+]

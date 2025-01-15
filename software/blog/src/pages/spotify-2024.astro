@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/BlogPost.astro'
+import { parseStreamingHistory } from '../spotifyParsers'
+
+const data = parseStreamingHistory()
+
+const model = [
+	{
+		name: 'Top 5 Podcasts',
+		columnNames: ['Podcast Name', 'Hours Listened'],
+		links: [{ href: '/podroll', name: 'Full Podcast List' }],
+		data: data.uniquePodcasts.slice(0, 5)
+	},
+	{
+		name: 'Top 5 Artists',
+		columnNames: ['Artist Name', 'Hours Listened'],
+		alert: 'This may include children music',
+		data: data.uniqueArtists.slice(0, 5)
+	},
+	{
+		name: 'Top 10 Songs',
+		columnNames: ['Artist - Song', 'Minutes Listened'],
+		data: data.uniqueTracks.slice(0, 10).map((track) => ({
+			name: `${track.more?.artistName} - ${track.name}`,
+			totalMsPlayed: track.totalMsPlayed
+		})),
+		conversion: 60000
+	}
+]
+---
+
+<Layout title="2024 Spotify Breakdown" pubDate={new Date('January 14, 2025')}>
+	{
+		model.map((pod) => (
+			<>
+				<h1>{pod.name}</h1>
+				{pod.links?.map((link) => (
+					<a href={link.href}>{link.name}</a>
+				))}
+				{pod.alert && <div class="terminal-alert terminal-alert-primary">{pod.alert}</div>}
+				<table>
+					<thead>
+						<tr>
+							<td>{pod.columnNames[0]}</td>
+							<td>{pod.columnNames[1]}</td>
+						</tr>
+					</thead>
+					<tbody>
+						{pod.data.map((x) => (
+							<tr>
+								<td>{x.name}</td>
+								<td>{Math.trunc(x.totalMsPlayed / (pod?.conversion ? pod.conversion : 3.6e6))}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</>
+		))
+	}
+</Layout>
