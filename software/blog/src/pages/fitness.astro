@@ -124,7 +124,10 @@ const coursesPerYearImageSmall = renderGraph(500, 800, config)
 
 <Layout title="Fitness" pubDate={new Date('January 18 2025')}>
 	<h1>Activities Per Month</h1>
-	{coursesPerYearImageSmall}
+	<figure>
+		{coursesPerYearImageSmall}
+		<figcaption>Activities Per Month</figcaption>
+	</figure>
 	<h1>Activities Per Year</h1>
 	<table>
 		<thead><tr><td>Year</td><td>Activity</td><td>Count</td></tr></thead>
