@@ -118,6 +118,24 @@ func (input *WorkflowInputDumper) ProcessEvent(eventName string, data string) er
 		return nil
 	}
 
+	// send notification when the washer finishes
+	if eventName == "power_monitoring_outlet_v1" {
+		var d PowerMonitoringData
+
+		var err = json.Unmarshal([]byte(data), &d)
+		if err != nil {
+			return err
+		}
+
+		if d.Emeter.GetRealtime.PowerMw > 10000 {
+			// find last event
+			//input.EventService.
+			// if over 10k don't do anything
+			// if under 10k the washer is done, send notification
+		}
+
+	}
+
 	return nil
 }
 

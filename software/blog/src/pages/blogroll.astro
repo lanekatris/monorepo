@@ -33,7 +33,10 @@ async function parseOpml(): Promise<OpmlResponse> {
 const data = await parseOpml()
 ---
 
-<Layout title="Blogroll" pubDate={new Date('November 11 2024')}>
+<Layout
+	title={`Blogroll (${data.subs.flatMap((x) => x.subs).length})`}
+	pubDate={new Date('November 11 2024')}
+>
 	<p>
 		Download my latest RSS feed OPML from <a href="https://miniflux.app/" target="_blank"
 			>Miniflux</a

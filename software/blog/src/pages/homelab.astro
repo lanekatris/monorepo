@@ -35,7 +35,7 @@ const machines = await Promise.all([
 	getFromMinio<string>('etl', 'server1_screenfetch_result.txt', false)
 ])
 
-const eventCounts = await sql`select event_name,min(created_at)::date earliest_date, count(*) count from events group by event_name order by event_name`
+const eventCounts = await sql`select event_name,min(created_at)::date earliest_date, max(created_at)::date latest_date, count(*) count from events group by event_name order by max(created_at) desc`
 ---
 
 <Layout title="My Homelab" pubDate={new Date('August 08 2021')}>
@@ -144,7 +144,7 @@ I suck		 in my homelab docker-compose files and creates easy links to navigate t
 					<h1 id="e">My Events</h1>
 					I'll add more details about what is going on here in the future.
 					<table><thead><tr><td>Name</td>
-					<td>First Logged</td><td>Event Count</td></tr></thead>
+					<td>First Logged</td><td>Last Logged</td><td>Event Count</td></tr></thead>
 
 					<tbody>
 					{eventCounts.map((eventCount) => <tr>
@@ -152,6 +152,7 @@ I suck		 in my homelab docker-compose files and creates easy links to navigate t
 							{eventCount.event_name || 'Bad Data...'}
 						</td>
 						<td>{eventCount.earliest_date.toLocaleDateString()}</td>
+						<td>{eventCount.latest_date.toLocaleDateString()}</td>
 						<td>{eventCount.count}</td>
 					</tr>)}
 					</tbody></table>
