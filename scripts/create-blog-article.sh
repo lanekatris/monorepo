@@ -21,6 +21,8 @@ title: "xxxxxxxx"
 pubDate: "${current_date}"
 tags: []
 ---
+import sevenpage26 from '../../assets/notebooks/FN07-page26-27.jpg'
+import BestImage from '../../components/BestImage.astro'
 
 # Your content starts here
 EOF
