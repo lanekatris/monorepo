@@ -4,7 +4,9 @@ import pen from '../assets/f701-pen.png'
 import BestImage from '../components/BestImage.astro'
 import { getCollection } from 'astro:content'
 
-const posts = (await getCollection('blog')).filter((post) => post.data.tags?.includes('edc'))
+const posts = (await getCollection('blog'))
+	.filter((post) => post.data.tags?.includes('edc'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 // todo: sort
 // link to the article
 console.log(posts)
