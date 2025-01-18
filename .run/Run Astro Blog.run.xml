@@ -5,6 +5,7 @@
     <scripts>
       <script value="dev" />
     </scripts>
+    <arguments value="--verbose" />
     <node-interpreter value="project" />
     <envs />
     <method v="2" />
