@@ -28,8 +28,8 @@ export default async function InboxPage() {
   const session = await getServerSession();
   if (!session) return <NotAuthorized />;
 
-  const { rows }: { rows: MinifluxFavorite[] } =
-    await sql`select * from miniflux_favorite`;
+  const { rows }: { rows: MinifluxFavorite[] } = await sql`select *
+                                                           from miniflux_favorite`;
 
   const allBookmarks = await getRaindrops();
   const filteredBookmarks = allBookmarks.filter(
@@ -37,13 +37,17 @@ export default async function InboxPage() {
   );
 
   const rootFolderCounts: { rows: { count: number }[] } =
-    await sql`with x as (select length(file_path) - length(replace(file_path, '/', '')) folder_depth, * from markdown_file_models)
-select count(*)::int
-from x
-where folder_depth = 1;`;
+    await sql`with x as (select length(file_path) - length(replace(file_path, '/', '')) folder_depth, *
+                         from markdown_file_models)
+              select count(*) ::int
+              from x
+              where folder_depth = 1;`;
 
   const summersvilleWaterHight: { rows: { count: number }[] } =
-    await sql`select data::jsonb->'sug'->'pool_cur'->'elev' count from events where event_name = 'climbrest_build_kicked' order by created_at desc limit 1`;
+    await sql`select data::jsonb->'sug'->'pool_cur'->'elev' count
+              from events
+              where event_name = 'climbrest_build_kicked'
+              order by created_at desc limit 1`;
 
   const waterHeight = summersvilleWaterHight.rows[0]?.count;
   const canClimb = waterHeight <= 1620;
@@ -51,8 +55,9 @@ where folder_depth = 1;`;
   // lets get the barcode query
   //
   const { rows: barcodes }: { rows: { has_unknown_barcodes: boolean }[] } =
-    await sql`select EXISTS(select 1 from events e
-    left join noco.grocery ng on ng.barcode = data::jsonb ->> 'barcode'
+    await sql`select EXISTS(select 1
+                            from events e
+                                     left join noco.grocery ng on ng.barcode = data::jsonb ->> 'barcode'
     where event_name = 'barcode_scanned_v1' and data::jsonb ->> 'barcode' != 'abc123'
         and ng.name is null) has_unknown_barcodes`;
   const hasUnknownBarcodes = barcodes[0]?.has_unknown_barcodes;
@@ -63,9 +68,19 @@ where folder_depth = 1;`;
 
   // @ts-ignore
   const { rows: lastGymData }: { rows: { count: number } } = await sql`
- select now()::date - file_date::date count from markdown_file_models where file_path like '%/Adventures/%' and file_path like '%Indoor Climbing.md' order by file_date desc limit 1
-  `;
+      select now() ::date - file_date::date count
+      from markdown_file_models
+      where file_path like '%/Adventures/%' and file_path like '%Indoor Climbing.md'
+      order by file_date desc limit 1
+	`;
   const daysSinceGoingToGym = lastGymData[0].count;
+
+  const { rows: invoices } = await sql`select count(*) count
+                                       from markdown_file_models
+                                       where file_path ilike '%invoices/%.md'
+                                         and file_path not ilike '%source%'
+                                         and file_path not ilike '%paid%'`;
+  const invoiceCount = invoices[0].count;
 
   return (
     <div>
@@ -115,10 +130,20 @@ where folder_depth = 1;`;
         </div>
       )}
 
+      <div className={`flash ${invoiceCount === '0' ? 'success' : 'danger'}`}>
+        You have {invoiceCount} pending invoice(s){' '}
+        <Link
+          target="_blank"
+          href="http://server1.local:8055/namespaces/default/schedules/schedule_obsidian_files_to_db"
+        >
+          Temporal
+        </Link>
+      </div>
+
       <details>
         <summary>Other...</summary>
         <div className={`flash ${canClimb ? 'success' : 'error'}`}>
-          Can climb at Summersville {waterHeight} / 1620
+          Can climb at Summersville {waterHeight} / 1620{' '}
         </div>
       </details>
       <a href="https://miniflux.lkat.io/feeds">Miniflux</a>
