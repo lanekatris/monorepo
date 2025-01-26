@@ -1,0 +1,26 @@
+---
+title: "xxxxxxxx"
+pubDate: "2025-01-25"
+tags: []
+draft: true
+---
+import sevenpage26 from '../../assets/notebooks/FN07-page26-27.jpg'
+import BestImage from '../../components/BestImage.astro'
+
+# failure creating oauth client via pulumi
+
+
+https://console.cloud.google.com/apis/credentials?inv=1&invt=Abny_A&project=lkat-448914&supportedpurview=project
+
+https://www.pulumi.com/registry/packages/gcp/api-docs/iap/client/
+> Note: Only internal org clients can be created via declarative tools. External clients must be manually created via the GCP console. This restriction is due to the existing APIs and not lack of support in this tool.
+
+find your team id : https://one.dash.cloudflare.com/3ebca05f3bc1ae6ba8b889f550921295/settings/custom_pages
+
+https://community.cloudflare.com/t/how-to-find-team-name-on-cloudflare/640059/3
+
+
+add localhost:3000 to redirect uris... didn't work
+https://lkat.cloudflareaccess.com/cdn-cgi/access/callback
+http://localhost:3000/api/auth/callback/google
+https://loonison.com/api/auth/callback/google

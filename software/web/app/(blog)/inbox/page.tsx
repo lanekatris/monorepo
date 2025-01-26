@@ -55,11 +55,15 @@ export default async function InboxPage() {
   // lets get the barcode query
   //
   const { rows: barcodes }: { rows: { has_unknown_barcodes: boolean }[] } =
-    await sql`select EXISTS(select 1
-                            from events e
-                                     left join noco.grocery ng on ng.barcode = data::jsonb ->> 'barcode'
-    where event_name = 'barcode_scanned_v1' and data::jsonb ->> 'barcode' != 'abc123'
-        and ng.name is null) has_unknown_barcodes`;
+    await sql`
+        with x as (select max(created_at) from events where event_name = 'groceries_cleared_v1')
+        select EXISTS(select 1
+                      from events e
+                               left join noco.grocery ng on ng.barcode = data::jsonb ->> 'barcode'
+                            cross join x xx
+    where event_name = 'barcode_scanned_v1' and data::jsonb ->> 'barcode' != 'abc123' and e.created_at > xx.max
+        and ng.name is null) has_unknown_barcodes
+		`;
   const hasUnknownBarcodes = barcodes[0]?.has_unknown_barcodes;
 
   const gmail: {
