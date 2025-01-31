@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/BlogPost.astro'
+import { sql } from '../content.config'
+import fs from 'fs'
+import path from 'path'
+
+const d =
+	await sql`select date,opponent,sets_won::int,sets_lost::int,dinner_location,count(*) over (partition by date)::int games_per_day from noco.volleyball order by date`
+
+console.log(d[0])
+const winCount = d.reduce((acc, x) => acc + x.sets_won, 0)
+const lossCount = d.reduce((acc, x) => acc + x.sets_lost, 0)
+const total = d.reduce((acc, x) => acc + (x.sets_won ?? 3) + x.sets_lost, 0)
+const completion = Math.floor(((winCount + lossCount) / total) * 100)
+console.log(completion)
+
+// @ts-ignore
+function convertToCSV(jsonData) {
+	if (!jsonData.length) return ''
+
+	const headers = Object.keys(jsonData[0]).join(',') + '\n'
+	// @ts-ignore
+	const rows = jsonData.map((row) => Object.values(row).join(',')).join('\n')
+
+	return headers + rows
+}
+
+const csvData = convertToCSV(d)
+const filePath = path.join('public', '2025-volleyball-data.csv')
+fs.writeFileSync(filePath, csvData)
+---
+
+<Layout title="Volleyball League - 2025" pubDate={new Date('January 31 2025')}>
+	<h1>Stats</h1>
+	<h4>Sets Won: <code>{winCount}</code></h4>
+	<div>
+		<h4>Sets Lost: <code>{lossCount}</code></h4>
+	</div>
+	<h4>Total Sets: <code>{total}</code></h4>
+	<div class="progress-bar progress-bar-show-percent">
+		<div
+			class="progress-bar-filled"
+			style={`width: ${completion}%`}
+			data-filled={`Season Completion ${completion}%`}
+		>
+		</div>
+	</div>
+
+	<hr />
+	<!--<br />-->
+	<h1>Game History</h1>
+	<table>
+		<thead>
+			<tr>
+				<td>Date</td>
+				<td>Opponent</td>
+				<td>Sets Won</td>
+				<td>Sets Lost</td>
+				<td>Dinner</td>
+			</tr>
+		</thead>
+		<tbody>
+			{
+				d.map((x) => (
+					<tr>
+						<td>
+							{x.games_per_day > 1 && <mark>{x.date.toLocaleDateString()}</mark>}
+							{x.games_per_day === 1 && <>{x.date.toLocaleDateString()}</>}
+						</td>
+						<td>{x.opponent}</td>
+						<td>{x.sets_won}</td>
+						<td>{x.sets_lost}</td>
+						<td>{x.dinner_location}</td>
+					</tr>
+				))
+			}
+		</tbody>
+		<tfoot>
+			<mark>highlighted</mark> date means multiple games on that date
+		</tfoot>
+	</table>
+	<a href="/2025-volleyball-data.csv" download="volleyball-data.csv">CSV Download</a>
+</Layout>
