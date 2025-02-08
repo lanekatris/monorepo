@@ -1,6 +1,5 @@
 ---
 pubDate: 2024-08-04
-date: 2024-08-04
 slug: disc-golf-streak
 title: Determining Disc Golf Streaks
 tags:

@@ -9,17 +9,41 @@ const blog = defineCollection({
 		pattern: '**/*.{md,mdx}',
 		base: 'src/content/blog'
 	}),
-	schema: z.object({
-		title: z.string(),
-		description: z.string().optional(),
-		pubDate: z.coerce.date(),
-		updatedDate: z.coerce.date().optional(),
-		heroImage: z.string().optional(),
-		tags: z.string().array().optional(),
-		obsidianLink: z.string().optional(),
-		obsidianType: obsidianType.optional(),
-		draft: z.boolean().optional()
-	})
+	schema: z
+		.object({
+			title: z.string(),
+			description: z.string().optional(),
+			pubDate: z.coerce.date(),
+			updatedDate: z.coerce.date().optional(),
+			heroImage: z.string().optional(),
+			tags: z
+				.enum([
+					'goal',
+					'project',
+					'disc-golf',
+					'sql',
+					'climb',
+					'truck',
+					'rpi',
+					'dad',
+					'adventure',
+					'iot',
+					'hardware',
+					'notebook',
+					'edc',
+					'music',
+					'spotify',
+					'homelab',
+					'volleyball'
+				])
+				.array()
+				.optional(),
+			obsidianLink: z.string().optional(),
+			obsidianType: obsidianType.optional(),
+			draft: z.boolean().optional(),
+			slug: z.string().optional()
+		})
+		.strict()
 })
 
 const notes = defineCollection({
