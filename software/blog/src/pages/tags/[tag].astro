@@ -1,7 +1,8 @@
 ---
 import Layout from '../../layouts/BlogPost.astro'
-import { getCollection } from 'astro:content'
+import { getCollection, z } from 'astro:content'
 import FormattedDate from '../../components/FormattedDate.astro'
+import { type TAG_TYPE } from '../../content.config'
 
 export async function getStaticPaths({}) {
 	const allPosts = await getCollection('blog')
@@ -9,33 +10,23 @@ export async function getStaticPaths({}) {
 		(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
 	)
 
-	const allNotes = await getCollection('notes')
-
-	const allTags = new Set<string>()
+	const allTags = new Set<TAG_TYPE>()
 	sortedPosts.map((post) => {
 		post.data.tags && post.data.tags.map((tag) => allTags.add(tag))
 	})
-	allNotes.map((note) => {
-		note.data.tags &&
-			note.data.tags.map((tag) => {
-				allTags.add(tag)
-			})
-	})
 
-	return Array.from(allTags).map((tag) => {
+	return Array.from(allTags).map((tag: TAG_TYPE) => {
 		const filteredPosts = sortedPosts.filter((post) => post.data.tags?.includes(tag))
-		const filteredNotes = allNotes.filter((note) => note.data.tags?.includes(tag))
 		return {
 			params: { tag },
 			props: {
-				posts: filteredPosts,
-				notes: filteredNotes
+				posts: filteredPosts
 			}
 		}
 	})
 }
 
-const { posts, notes } = Astro.props
+const { posts } = Astro.props
 const { tag } = Astro.params
 
 let title = tag
@@ -59,17 +50,5 @@ let description = 'Posts with tag #' + tag
 				))
 		}
 		{posts.length === 0 ? <dt>No posts with tag {tag}</dt> : null}
-	</dl>
-	<h1>Notes</h1>
-	<dl>
-		{
-			notes.map((post) => (
-				<dt>
-					<small>{post.id}</small>
-					<a href={`/notes/${post.id}/`}>{post.data.title}</a>
-				</dt>
-			))
-		}
-		{notes.length === 0 ? <dt>No notes with tag {tag}</dt> : null}
 	</dl>
 </Layout>

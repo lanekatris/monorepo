@@ -4,6 +4,28 @@ import { neon } from '@neondatabase/serverless'
 
 export const obsidianType = z.enum(['adventure'])
 
+const tags = z.enum([
+	'goal',
+	'project',
+	'disc-golf',
+	'sql',
+	'climb',
+	'truck',
+	'rpi',
+	'dad',
+	'adventure',
+	'iot',
+	'hardware',
+	'notebook',
+	'edc',
+	'music',
+	'spotify',
+	'homelab',
+	'volleyball',
+	'movie'
+])
+
+export type TAG_TYPE = z.infer<typeof tags>
 const blog = defineCollection({
 	loader: glob({
 		pattern: '**/*.{md,mdx}',
@@ -16,45 +38,13 @@ const blog = defineCollection({
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			heroImage: z.string().optional(),
-			tags: z
-				.enum([
-					'goal',
-					'project',
-					'disc-golf',
-					'sql',
-					'climb',
-					'truck',
-					'rpi',
-					'dad',
-					'adventure',
-					'iot',
-					'hardware',
-					'notebook',
-					'edc',
-					'music',
-					'spotify',
-					'homelab',
-					'volleyball'
-				])
-				.array()
-				.optional(),
+			tags: tags.array().optional(),
 			obsidianLink: z.string().optional(),
 			obsidianType: obsidianType.optional(),
 			draft: z.boolean().optional(),
 			slug: z.string().optional()
 		})
 		.strict()
-})
-
-const notes = defineCollection({
-	loader: glob({
-		pattern: '**/*.{md,mdx}',
-		base: 'src/content/notes'
-	}),
-	schema: z.object({
-		title: z.string(),
-		tags: z.string().array().optional()
-	})
 })
 
 const discGolfCourses = defineCollection({
@@ -119,4 +109,4 @@ const ticks = defineCollection({
 	})
 })
 
-export const collections = { blog, discGolfCourses, discs, ticks, notes }
+export const collections = { blog, discGolfCourses, discs, ticks }

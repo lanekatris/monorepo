@@ -2,13 +2,10 @@
 import { getCollection } from 'astro:content'
 import Layout from '../../layouts/BlogPost.astro'
 const allPosts = await getCollection('blog')
-const allNotes = await getCollection('notes')
 
 const postTags = allPosts.map((tag) => tag.data.tags).flat()
 
-const notesTags = allNotes.map((x) => x.data.tags).flat()
-
-const allTags = postTags.concat(notesTags)
+const allTags = postTags
 
 type TagsCount = Record<string, number>
 
