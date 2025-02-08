@@ -61,23 +61,30 @@ fs.writeFileSync(filePath, csvData)
 		</thead>
 		<tbody>
 			{
-				d.map((x) => (
-					<tr>
-						<td>
-							{x.games_per_day > 1 && <mark>{x.date.toLocaleDateString()}</mark>}
-							{x.games_per_day === 1 && <>{x.date.toLocaleDateString()}</>}
-						</td>
-						<td>{x.opponent}</td>
-						<td>{x.sets_won}</td>
-						<td>{x.sets_lost}</td>
-						<td>{x.dinner_location}</td>
-					</tr>
-				))
+				d.map((x) => {
+					const highlight = x.games_per_day > 1 && x.date > new Date()
+
+					return (
+						<tr>
+							<td class:list={[{ highlight: highlight }]}>{x.date.toLocaleDateString()}</td>
+							<td>{x.opponent}</td>
+							<td>{x.sets_won}</td>
+							<td>{x.sets_lost}</td>
+							<td>{x.dinner_location}</td>
+						</tr>
+					)
+				})
 			}
 		</tbody>
 		<tfoot>
-			<mark>highlighted</mark> date means multiple games on that date
+			<span class="highlight">blue date</span> means multiple games on that date
 		</tfoot>
 	</table>
 	<a href="/2025-volleyball-data.csv" download="volleyball-data.csv">CSV Download</a>
 </Layout>
+
+<style>
+	.highlight {
+		color: var(--primary-color);
+	}
+</style>
