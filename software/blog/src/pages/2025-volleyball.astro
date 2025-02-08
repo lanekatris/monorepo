@@ -3,9 +3,10 @@ import Layout from '../layouts/BlogPost.astro'
 import { sql } from '../content.config'
 import fs from 'fs'
 import path from 'path'
+import ical, { ICalCalendarMethod } from 'ical-generator'
 
 const d =
-	await sql`select date,opponent,sets_won::int,sets_lost::int,dinner_location,count(*) over (partition by date)::int games_per_day from noco.volleyball order by date`
+	await sql`select date,time,opponent,sets_won::int,sets_lost::int,dinner_location,count(*) over (partition by date)::int games_per_day from noco.volleyball order by date`
 
 console.log(d[0])
 const winCount = d.reduce((acc, x) => acc + x.sets_won, 0)
@@ -28,6 +29,39 @@ function convertToCSV(jsonData) {
 const csvData = convertToCSV(d)
 const filePath = path.join('public', '2025-volleyball-data.csv')
 fs.writeFileSync(filePath, csvData)
+
+// generate ical
+const calendar = ical({ name: 'Volleyball Schedule' })
+calendar.method(ICalCalendarMethod.REQUEST)
+console.log(d[0])
+
+d.forEach((entry) => {
+	const justTime = +entry.time.split(':')[0]
+	const start = new Date(entry.date)
+	start.setHours(justTime)
+
+	const end = new Date(start)
+	end.setHours(end.getHours() + 1)
+
+	calendar.createEvent({
+		start,
+		end,
+		summary: 'Volleyball Game'
+	})
+
+	// console.log({
+	// 	justTime,
+	//
+	// 	// start: new Date(entry.date).setHours(justTime)
+	// 	start,
+	// 	end,
+	// 	s: start.toLocaleTimeString(),
+	// 	e: end.toLocaleTimeString()
+	// })
+	// console.log(calendar.toString()
+})
+const calPath = path.join('public', '2025-volleyball.ics')
+fs.writeFileSync(calPath, calendar.toString())
 ---
 
 <Layout title="Volleyball League - 2025" pubDate={new Date('January 31 2025')}>
@@ -81,6 +115,17 @@ fs.writeFileSync(filePath, csvData)
 		</tfoot>
 	</table>
 	<a href="/2025-volleyball-data.csv" download="volleyball-data.csv">CSV Download</a>
+	<div>
+		<a href="/2025-volleyball.ics" download><code>ics</code> File</a>
+	</div>
+	<div>
+		<a
+			href="https://calendar.google.com/calendar/u/0/r?cid=aum49v2dn1agb43kc5epp2fvvmuqeqeu@import.calendar.google.com"
+			target="_blank"
+		>
+			Add to Google Calendar
+		</a>
+	</div>
 </Layout>
 
 <style>
