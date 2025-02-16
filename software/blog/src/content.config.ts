@@ -22,7 +22,8 @@ const tags = z.enum([
 	'spotify',
 	'homelab',
 	'volleyball',
-	'movie'
+	'movie',
+	'lego'
 ])
 
 export type TAG_TYPE = z.infer<typeof tags>
