@@ -18,7 +18,7 @@ const shortHash = childProcess.execSync('git rev-parse --short HEAD').toString()
 	<div>
 		&copy; {today.getFullYear()} Lane Katris
 		<a href="mailto:lanekatris@gmail.com">
-			<Image src={badgeGmail} alt="Gmail" />
+			<Image src={badgeGmail} loading="eager" alt="Gmail" />
 		</a>
 	</div>
 	<div>
@@ -33,7 +33,13 @@ const shortHash = childProcess.execSync('git rev-parse --short HEAD').toString()
 	</div>
 	<div>
 		<a href="https://astro.build"
-			><img src="/built-with-astro.svg" alt="Built with Astro" width="120" height="20" /></a
+			><img
+				src="/built-with-astro.svg"
+				loading="eager"
+				alt="Built with Astro"
+				width="120"
+				height="20"
+			/></a
 		>
 	</div>
 	<div>
@@ -41,7 +47,7 @@ const shortHash = childProcess.execSync('git rev-parse --short HEAD').toString()
 		<a href="https://notbyai.fyi" target="_blank" rel="noopener noreferrer">
 			<picture>
 				<source srcset={byHumanDark.src} media="(prefers-color-scheme: dark)" />
-				<Image src={byHuman} alt="Written by a human" />
+				<Image src={byHuman} loading="lazy" alt="Written by a human" />
 			</picture>
 		</a>
 	</div>

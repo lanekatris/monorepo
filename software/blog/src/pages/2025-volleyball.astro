@@ -100,7 +100,10 @@ fs.writeFileSync(calPath, calendar.toString())
 
 					return (
 						<tr>
-							<td class:list={[{ highlight: highlight }]}>{x.date.toLocaleDateString()}</td>
+							<td class:list={[{ highlight: highlight }]}>
+								{x.date.toLocaleDateString()}
+								{+x.time.split(':')[0] - 12}pm
+							</td>
 							<td>{x.opponent}</td>
 							<td>{x.sets_won}</td>
 							<td>{x.sets_lost}</td>
