@@ -26,6 +26,9 @@ func (e EventName) String() string {
 type EventService interface {
 	WasEventCreatedRecently(eventName string) bool
 	CreateEvent(event EventName, data string) error
+	//GetLastEventByType(event EventName) Event
+	//GormDb *gorm.DB
+	//GetGormDb() *gorm.DB
 }
 
 type MockEventService struct {

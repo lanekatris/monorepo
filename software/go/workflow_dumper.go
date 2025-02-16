@@ -128,10 +128,25 @@ func (input *WorkflowInputDumper) ProcessEvent(eventName string, data string) er
 		}
 
 		if d.Emeter.GetRealtime.PowerMw > 10000 {
-			// find last event
-			//input.EventService.
-			// if over 10k don't do anything
-			// if under 10k the washer is done, send notification
+			var event = Event{}
+			input.Db.Where("event_name = ?", "power_monitoring_outlet_v1").Order("created_at DESC").First(&event)
+
+			if event.Id == 0 || !event.Data.Valid {
+				return nil
+			}
+
+			var d2 PowerMonitoringData
+			err = json.Unmarshal([]byte(event.Data.String), &d2)
+			if err != nil {
+				return err
+			}
+
+			if d2.Emeter.GetRealtime.PowerMw < 10000 {
+				// did we send a notification recently?
+
+				// if under 10k the washer is done, send notification
+
+			}
 		}
 
 	}
