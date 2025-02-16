@@ -4,8 +4,9 @@ import { sql } from '../content.config'
 import { type ChartConfiguration } from 'chart.js'
 type Props = {
 	sql: string
+	label: string
 }
-const { sql: sqlString } = Astro.props
+const { sql: sqlString, label } = Astro.props
 
 const results = await sql(sqlString)
 
@@ -15,7 +16,7 @@ const config: ChartConfiguration = {
 		labels: results.map((x) => x['date'].toLocaleDateString()),
 		datasets: [
 			{
-				label: 'Toggled',
+				label, //: 'Toggled',
 				data: results.map((x) => x['count']),
 
 				borderColor: 'rgba(75, 192, 192, 1)',

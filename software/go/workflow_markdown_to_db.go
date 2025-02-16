@@ -24,10 +24,10 @@ type WorkflowMarkdownToDbInput struct {
 	GormDb *gorm.DB
 }
 
-type Matter struct {
-	Situps  int `yaml:situps`
-	Pushups int `yaml:pushups`
-}
+//type Matter struct {
+//	Situps  int `yaml:situps`
+//	Pushups int `yaml:pushups`
+//}
 
 func GetFilePaths(rootDir string) ([]string, error) {
 	var paths []string
@@ -79,6 +79,7 @@ func GenerateMarkdownModels(filePaths []string, rootPath string) ([]MarkdownFile
 			Pushups int      `yaml:pushups`
 			Tags    []string `yaml:tags`
 			Type    string   `yaml:type`
+			Weight  float64  `yaml:weight`
 		}
 		rest, err := frontmatter.Parse(strings.NewReader(string(contents)), &EmptyMatter)
 		if err != nil {

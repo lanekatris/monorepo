@@ -1,0 +1,7 @@
+
+# sensitive config lives in ~/.sqlmesh/config.yaml
+default_gateway: local
+
+model_defaults:
+  dialect: postgres
+  start: 2025-02-15
