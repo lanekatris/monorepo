@@ -6,7 +6,9 @@ import path from 'path'
 import ical, { ICalCalendarMethod } from 'ical-generator'
 
 const d =
-	await sql`select date,time,opponent,sets_won::int,sets_lost::int,dinner_location,count(*) over (partition by date)::int games_per_day from noco.volleyball order by date`
+	await sql`select date, time, opponent, sets_won:: int, sets_lost:: int, dinner_location, count (*) over (partition by date):: int games_per_day
+            from noco.volleyball
+            order by date`
 
 console.log(d[0])
 const winCount = d.reduce((acc, x) => acc + x.sets_won, 0)
@@ -48,23 +50,17 @@ d.forEach((entry) => {
 		end,
 		summary: 'Volleyball Game'
 	})
-
-	// console.log({
-	// 	justTime,
-	//
-	// 	// start: new Date(entry.date).setHours(justTime)
-	// 	start,
-	// 	end,
-	// 	s: start.toLocaleTimeString(),
-	// 	e: end.toLocaleTimeString()
-	// })
-	// console.log(calendar.toString()
 })
 const calPath = path.join('public', '2025-volleyball.ics')
 fs.writeFileSync(calPath, calendar.toString())
 ---
 
 <Layout title="Volleyball League - 2025" pubDate={new Date('January 31 2025')}>
+	<div class="terminal-alert">
+		I thought I'd show some stats about our volleyball league standings.
+		<br />
+		Aside: <a href="/loadouts">Gear I like to use for volleyball</a>
+	</div>
 	<h1>Stats</h1>
 	<h4>Sets Won: <code>{winCount}</code></h4>
 	<div>
@@ -81,7 +77,7 @@ fs.writeFileSync(calPath, calendar.toString())
 	</div>
 
 	<hr />
-	<!--<br />-->
+
 	<h1>Game History</h1>
 	<table>
 		<thead>

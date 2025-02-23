@@ -1,0 +1,23 @@
+---
+title: "Dog Water Bowl Sensor"
+pubDate: "2025-02-22"
+tags: [project,iot]
+draft: true
+---
+import sevenpage26 from '../../assets/notebooks/FN07-page26-27.jpg'
+import BestImage from '../../components/BestImage.astro'
+
+
+```sql
+with x as (
+    select min(created_at) m, max(created_at) ma from events where event_name = 'water_level_v1'
+)
+select ma-m from x
+```
+
+Start: 2025-01-05 16:29:04.378551 +00:00
+End: 2025-02-21 19:57:48.122789 +00:00
+
+
+0 years 0 mons 47 days 3 hours 28 mins 43.744238 secs
+

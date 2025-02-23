@@ -143,6 +143,7 @@ func (input *WorkflowInputDumper) ProcessEvent(eventName string, data string) er
 
 			if d2.Emeter.GetRealtime.PowerMw < 10000 {
 				// did we send a notification recently?
+				//input.Db.w
 
 				// if under 10k the washer is done, send notification
 

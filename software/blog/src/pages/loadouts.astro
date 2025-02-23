@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/BlogPost.astro'
+import { sql } from '../content.config'
+import Loadout, { type Props as LoadoutProps } from '../components/Loadout.astro'
+
+const gear = (await sql`select *
+                        from noco.loadout `) as LoadoutProps['gear']
+console.log(gear)
+const volleyballGear = gear.filter((x) => x.tags?.includes('volleyball'))
+const travelGear = gear.filter((x) => x.tags?.includes('travel'))
+---
+
+<Layout title="Loadouts" pubDate={new Date('2025-02-23')}>
+	<div class="terminal-alert">This page shows what gear I like to use for an activity.</div>
+	<Loadout gear={volleyballGear} title="Volleyball" />
+	<Loadout gear={travelGear} title="Car Traveling" />
+	<hr />
+	<h4>Coming Soon:</h4>
+	<ul>
+		<li>Disc Golf</li>
+		<li>Paintball</li>
+	</ul>
+</Layout>

@@ -1,0 +1,33 @@
+---
+export type Props = {
+	title: string
+	gear: {
+		title: string
+		url?: string
+		notes?: string
+		tags?: string
+	}[]
+}
+const { title, gear } = Astro.props
+---
+
+<h1>{title} ({gear.length})</h1>
+{
+	gear.map((item) => (
+		<>
+			<h4>
+				{item.title}{' '}
+				{item.url && (
+					<a target="_blank" href={item.url}>
+						Link
+					</a>
+				)}
+			</h4>
+			{item.notes && (
+				<p>
+					<small>{item.notes}</small>
+				</p>
+			)}
+		</>
+	))
+}

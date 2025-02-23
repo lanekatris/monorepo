@@ -26,7 +26,6 @@ const activitiesPerYear = await sql`
     group by year, activity
     order by year desc, activity
 `
-// console.log(activitiesPerYear)
 
 const activitiesPerYearMonth = (await sql`
     with x as (select replace(trim(split_part(file_path, file_date, 2)), '.md', '') activity,
@@ -38,7 +37,6 @@ const activitiesPerYearMonth = (await sql`
     group by year, month, month_name
     order by year desc, month
 `) as { year: number; month_name: string; count: string }[]
-console.log(activitiesPerYearMonth.filter((x) => x.year === 2025))
 
 const allMonths = [
 	'January',
@@ -83,7 +81,6 @@ Object.keys(groupedData).forEach((year, index) => {
 		pointBackgroundColor: `hsl(${(index * 60) % 360}, 70%, 50%)`
 	})
 })
-console.log(datasets)
 const config: ChartConfiguration = {
 	type: 'line',
 	data: {
@@ -127,7 +124,6 @@ const config: ChartConfiguration = {
 }
 
 const coursesPerYearImageSmall = renderGraph(500, 800, config)
-// console.log(coursesPerYearImageSmall.toString())
 ---
 
 <Layout title="Fitness" pubDate={new Date('January 18 2025')}>
@@ -136,27 +132,31 @@ const coursesPerYearImageSmall = renderGraph(500, 800, config)
 		{coursesPerYearImageSmall}
 		<figcaption>Activities Per Month</figcaption>
 	</figure>
-	<h1>Activities Per Year</h1>
-	<table>
-		<thead>
-			<tr>
-				<td>Year</td>
-				<td>Activity</td>
-				<td>Count</td>
-			</tr>
-		</thead>
-		<tbody>
-			{
-				activitiesPerYear.map((item) => (
-					<tr>
-						<td>{item.year}</td>
-						<td>{item.activity}</td>
-						<td>{item.count}</td>
-					</tr>
-				))
-			}
-		</tbody>
-	</table>
+	<b>More</b>
+	<details>
+		<summary> Activities Per Year</summary>
+
+		<table>
+			<thead>
+				<tr>
+					<td>Year</td>
+					<td>Activity</td>
+					<td>Count</td>
+				</tr>
+			</thead>
+			<tbody>
+				{
+					activitiesPerYear.map((item) => (
+						<tr>
+							<td>{item.year}</td>
+							<td>{item.activity}</td>
+							<td>{item.count}</td>
+						</tr>
+					))
+				}
+			</tbody>
+		</table>
+	</details>
 	<h1>Body Weight</h1>
 	<figure>
 		<SimpleLineGraph
