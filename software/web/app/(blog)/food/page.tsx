@@ -22,12 +22,12 @@ export default async function FoodPage({
 }) {
   noStore();
   const session = await getServerSession();
-  if (!session) return <NotAuthorized />;
 
   const success = (await searchParams).success;
 
   async function clear(formData: FormData) {
     'use server';
+    if (!session) throw new Error('Not allowed');
 
     const id = formData.get('id');
     if (!id) throw new Error('id is required');
@@ -49,7 +49,10 @@ export default async function FoodPage({
   );
 
   const { rows }: { rows: { event_id: number }[] } =
-    await sql`select cast(data::jsonb->>'eventId' as integer) event_id from events where event_name='groceries_cleared_v1' order by created_at desc limit 1`;
+    await sql`select cast(data::jsonb->>'eventId' as integer) event_id
+              from events
+              where event_name = 'groceries_cleared_v1'
+              order by created_at desc limit 1`;
 
   const eventId = rows[0]?.event_id ?? 0;
   console.log('event id', eventId);
@@ -65,11 +68,13 @@ export default async function FoodPage({
     }[];
   } =
     await sql`select e.id, e.created_at at time zone 'EST' created_at, data::jsonb->'barcode' barcode, ng.name
-from events e
-    left join noco.grocery ng on ng.barcode = data::jsonb->>'barcode'
-where event_name = 'barcode_scanned_v1' and data::jsonb->>'barcode' != 'abc123'
-and e.id > ${eventId}
-            order by created_at desc`;
+              from events e
+                       left join noco.grocery ng on ng.barcode = data::jsonb->>'barcode'
+              where event_name = 'barcode_scanned_v1'
+                and data ::jsonb->>'barcode' != 'abc123'
+                and e.id
+                  > ${eventId}
+              order by created_at desc`;
 
   return (
     <main>
@@ -95,13 +100,17 @@ and e.id > ${eventId}
                 <a target="_blank" href={`https://www.upcindex.com/${barcode}`}>
                   UPC Index
                 </a>
-                {' | '}
-                <a
-                  target="_blank"
-                  href={`https://noco.lkat.io/dashboard/#/nc/form/fe5e017c-df15-4740-855b-5404cd282d93?barcode=${barcode}`}
-                >
-                  Add to noco
-                </a>
+                {session && (
+                  <>
+                    {' | '}
+                    <a
+                      target="_blank"
+                      href={`https://noco.lkat.io/dashboard/#/nc/form/fe5e017c-df15-4740-855b-5404cd282d93?barcode=${barcode}`}
+                    >
+                      Add to noco
+                    </a>
+                  </>
+                )}
               </>
             )}
             <div style={{ marginLeft: 10, display: 'inline' }}>
@@ -111,13 +120,15 @@ and e.id > ${eventId}
                 copiedText="Copied!"
               />
             </div>
-            <form
-              style={{ background: 'none', display: 'inline' }}
-              action={clear}
-            >
-              <input type="hidden" name="id" value={id} />
-              <SubmitButton />
-            </form>
+            {session && (
+              <form
+                style={{ background: 'none', display: 'inline' }}
+                action={clear}
+              >
+                <input type="hidden" name="id" value={id} />
+                <SubmitButton />
+              </form>
+            )}
           </li>
         ))}
       </ol>
