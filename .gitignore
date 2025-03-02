@@ -9,3 +9,4 @@ hugo.exe
 .DS_Store
 data/dg-courses-generated.db
 flyway.conf
+node_modules

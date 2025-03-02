@@ -86,6 +86,9 @@ export default async function InboxPage() {
                                          and file_path not ilike '%paid%'`;
   const invoiceCount = invoices[0].count;
 
+  const { rows: versions } = await sql`select * from models.versions`;
+  const versionsMatch = versions[0].version === versions[1].version;
+
   return (
     <div>
       {/* <div className={'flash danger'}> */}
@@ -142,6 +145,15 @@ export default async function InboxPage() {
         >
           Temporal
         </Link>
+      </div>
+
+      <div className={`flash ${versionsMatch ? 'success' : 'danger'}`}>
+        Adventure versions match: {versionsMatch.toString()}
+        {versions.map((v) => (
+          <div key={v.type}>
+            {v.type}: {v.version}
+          </div>
+        ))}
       </div>
 
       <details>
