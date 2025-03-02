@@ -3,6 +3,15 @@ import BaseHead from '../components/BaseHead.astro'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
+
+import { exec } from 'child_process'
+import { promisify } from 'util'
+
+const execAsync = promisify(exec)
+
+const { stdout: logs } = await execAsync(
+	'git log --pretty=format:"%H - %ad - %s" --date=short -n 5'
+)
 ---
 
 <!doctype html>
@@ -57,6 +66,21 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
 				<li><a href="/obsidian">Obsidian Vault Stats</a></li>
 				<li><a href="/home-wiring">Home Wiring Documentation</a></li>
 				<li><a href="/spotify-2024">Spotify Data Review</a></li>
+			</ul>
+			<b>Recent Updates</b>
+			<ul>
+				{
+					logs.split('\n').map((log, index) => (
+						<li>
+							<a
+								href={`https://github.com/lanekatris/monorepo/commit/${log.slice(0, 43).split(' ')[0]}`}
+							>
+								{log.slice(0, 7)}
+							</a>
+							{log.slice(43, -1)}
+						</li>
+					))
+				}
 			</ul>
 		</main>
 		<Footer />
