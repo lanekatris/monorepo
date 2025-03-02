@@ -89,6 +89,8 @@ export default async function InboxPage() {
   const { rows: versions } = await sql`select * from models.versions`;
   const versionsMatch = versions[0].version === versions[1].version;
 
+  const { rows: issues } = await sql`select * from models.issue`;
+
   return (
     <div>
       {/* <div className={'flash danger'}> */}
@@ -155,6 +157,12 @@ export default async function InboxPage() {
           </div>
         ))}
       </div>
+
+      {issues.map((issue) => (
+        <div key={issue} className="flash danger">
+          {issue.message}
+        </div>
+      ))}
 
       <details>
         <summary>Other...</summary>
