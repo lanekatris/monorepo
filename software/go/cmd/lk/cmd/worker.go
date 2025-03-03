@@ -122,6 +122,17 @@ func deploySchedulesV2(c client.Client) {
 				TaskQueue: shared.ServerQueue,
 			},
 		},
+		client.ScheduleOptions{
+			ID: "schedule_get_inbox",
+			Spec: client.ScheduleSpec{
+				CronExpressions: []string{"0 * * * *"},
+			},
+			Action: &client.ScheduleWorkflowAction{
+				ID:        "action_get_inbox",
+				Workflow:  shared.WorkflowInbox,
+				TaskQueue: shared.ServerQueue,
+			},
+		},
 	}
 	for _, schedule := range schedules {
 		log.Info("Creating schedule", "id", schedule.ID)
@@ -228,6 +239,10 @@ var workerCmd = &cobra.Command{
 		// Power monitor
 		w.RegisterWorkflow(shared.WorkflowPowerOutlet)
 		w.RegisterActivity(shared.GetPowerMonitoringOutletData)
+
+		// Inbox
+		w.RegisterWorkflow(shared.WorkflowInbox)
+		w.RegisterActivity(shared.GetEmailData)
 
 		// Start listening to the Task Queue
 		err = w.Run(worker.InterruptCh())

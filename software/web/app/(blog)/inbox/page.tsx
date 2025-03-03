@@ -70,15 +70,6 @@ export default async function InboxPage() {
     unreadCount: number;
   } = await fetch(process.env.GOOGLE_APPS_URL!).then((x) => x.json());
 
-  // @ts-ignore
-  const { rows: lastGymData }: { rows: { count: number } } = await sql`
-      select now() ::date - file_date::date count
-      from markdown_file_models
-      where file_path like '%/Adventures/%' and file_path like '%Indoor Climbing.md'
-      order by file_date desc limit 1
-	`;
-  const daysSinceGoingToGym = lastGymData[0].count;
-
   const { rows: invoices } = await sql`select count(*) count
                                        from markdown_file_models
                                        where file_path ilike '%invoices/%.md'
@@ -106,17 +97,17 @@ export default async function InboxPage() {
       {gmail.unreadCount === 0 && (
         <div className="flash success">Inbox Zero.</div>
       )}
-      <div
-        className={`flash ${daysSinceGoingToGym >= 7 ? 'danger' : 'success'}`}
-      >
-        Days since going to the gym: <code>{daysSinceGoingToGym}</code>{' '}
-        <a
-          href="http://server1.local:8055/namespaces/default/schedules/schedule_obsidian_files_to_db"
-          target={'_blank'}
-        >
-          Kick
-        </a>
-      </div>
+      {/*<div*/}
+      {/*  className={`flash ${daysSinceGoingToGym >= 7 ? 'danger' : 'success'}`}*/}
+      {/*>*/}
+      {/*  Days since going to the gym: <code>{daysSinceGoingToGym}</code>{' '}*/}
+      {/*  <a*/}
+      {/*    href="http://server1.local:8055/namespaces/default/schedules/schedule_obsidian_files_to_db"*/}
+      {/*    target={'_blank'}*/}
+      {/*  >*/}
+      {/*    Kick*/}
+      {/*  </a>*/}
+      {/*</div>*/}
 
       {hasUnknownBarcodes && (
         <div className="flash danger">
@@ -156,6 +147,19 @@ export default async function InboxPage() {
             {v.type}: {v.version}
           </div>
         ))}
+        <Link
+          target="_blank"
+          href="http://server1.local:8090/ui/flows/edit/dev/uploadCalendar"
+        >
+          Kestra
+        </Link>
+        <br />
+        <Link
+          target="_blank"
+          href="http://server1.local:8055/namespaces/default/schedules/schedule_obsidian_files_to_db"
+        >
+          Kick Markdown to DB
+        </Link>
       </div>
 
       {issues.map((issue) => (
