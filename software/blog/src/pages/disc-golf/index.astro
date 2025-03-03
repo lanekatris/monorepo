@@ -6,6 +6,10 @@ import { PRIMARY_COLOR } from '../../consts'
 import { type ChartConfiguration } from 'chart.js'
 import { sql } from '../../content.config'
 
+import winStreakImage from '../../../public/win-streak-green.svg'
+import badgeGmail from '../../assets/badge-gmail.png'
+import { Image } from 'astro:assets'
+
 const initial: { [key: number]: number } = {}
 
 const courses = await getCollection('discGolfCourses')
@@ -42,6 +46,8 @@ const coursesPerYearImageLarge = await renderGraph(600, 1000, coursesPerYearConf
 
 const lastUpdatedResults = await sql`select max(updated_at) last_updated
                                      from noco.disc`
+
+const rounds = await sql`select * from models.disc_golf_round order by startdate desc`
 ---
 
 <Layout title="Disc Golf" pubDate={new Date('August 08 2021')}>
@@ -69,6 +75,49 @@ const lastUpdatedResults = await sql`select max(updated_at) last_updated
 			</div>
 		))
 	}
+
+	<h1>My Rounds ({rounds.length})</h1>
+	<table style={{ marginTop: 0 }}>
+		<caption>My Udisc Rounds</caption>
+		<tfoot
+			><tr>
+				<th colspan="5">
+					Shield generated from <a
+						href="https://img.shields.io/badge/win-streak-green"
+						target="_blank">here</a
+					></th
+				>
+			</tr>
+		</tfoot>
+		<thead>
+			<tr
+				><th>Date</th>
+				<th>Course</th>
+				<th>Score</th>
+				<th>Rating</th>
+			</tr>
+		</thead>
+		<tbody>
+			{
+				rounds.map((round) => (
+					<tr>
+						<td>{round.startdate.toLocaleDateString()}</td>
+						<td>
+							{round.coursename}
+							{round.new_course && <mark>New</mark>}
+							<br />
+							<small>{round.layoutname}</small>
+						</td>
+						<td style={{ color: round['+/-'] > 0 ? 'var(--error-color)' : 'green' }}>
+							{round['+/-']} ({round.total})
+							{round.streak && <Image src={winStreakImage} alt="Win Streak" />}
+						</td>
+						<td>{round.roundrating}</td>
+					</tr>
+				))
+			}
+		</tbody>
+	</table>
 
 	<h1>US Disc Golf Courses Stats</h1>
 	<p>
