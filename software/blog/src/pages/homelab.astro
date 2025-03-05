@@ -35,7 +35,7 @@ const machines = await Promise.all([
 	getFromMinio<string>('etl', 'server1_screenfetch_result.txt', false)
 ])
 
-const eventCounts = await sql`select event_name,min(created_at)::date earliest_date, max(created_at)::date latest_date, count(*) count from events group by event_name order by max(created_at) desc`
+const eventCounts = await sql`select event_name,min(created_at)::date earliest_date, max(created_at)::date latest_date, count(*)::int count from events group by event_name order by count(*) desc`
 ---
 
 <Layout title="My Homelab" pubDate={new Date('August 08 2021')}>
@@ -67,9 +67,9 @@ I suck		 in my homelab docker-compose files and creates easy links to navigate t
 				<table>
 					<thead>
 					<tr>
-						<td>App</td>
-						<td>Ports</td>
-						<td>Links</td>
+						<th>App</th>
+						<th>Ports</th>
+						<th>Links</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -129,11 +129,11 @@ I suck		 in my homelab docker-compose files and creates easy links to navigate t
 					<thead><tr><td>Purpose</td><td>Device</td><td>Random</td></tr></thead>
 
 					<tbody>
-					<tr><td>Aquarium</td><td>Pi Pico W</td></tr>
+					<tr><td>Aquarium</td><td>Pi Pico W</td><td></td></tr>
 					<tr><td>
 						Kitchen Barcode Scanner
-					</td><td>Pi Zero W 1.1</td></tr>
-					<tr><td><a href="/blog/2024-12-15-control-panel">Control Panel</a></td><td>Pi Pico W</td></tr>
+					</td><td>Pi Zero W 1.1</td><td></td></tr>
+					<tr><td><a href="/blog/2024-12-15-control-panel">Control Panel</a></td><td>Pi Pico W</td><td></td></tr>
 					<tr><td>Dog water level</td><td>ESP32 DevkitC 1.1</td><td>Battery powered</td></tr>
 					</tbody>
 
@@ -144,8 +144,8 @@ I suck		 in my homelab docker-compose files and creates easy links to navigate t
 					<!--</ul>-->
 					<h1 id="e">My Events</h1>
 					I'll add more details about what is going on here in the future.
-					<table><thead><tr><td>Name</td>
-					<td>First Logged</td><td>Last Logged</td><td>Event Count</td></tr></thead>
+					<table><thead><tr><th>Name</th>
+					<th>First Logged</th><th>Last Logged</th><th>Event Count</th></tr></thead>
 
 					<tbody>
 					{eventCounts.map((eventCount) => <tr>
@@ -154,7 +154,7 @@ I suck		 in my homelab docker-compose files and creates easy links to navigate t
 						</td>
 						<td>{eventCount.earliest_date.toLocaleDateString()}</td>
 						<td>{eventCount.latest_date.toLocaleDateString()}</td>
-						<td>{eventCount.count}</td>
+						<td>{eventCount.count.toLocaleString()}</td>
 					</tr>)}
 					</tbody></table>
 </Layout>
