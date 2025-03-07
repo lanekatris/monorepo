@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/BlogPost.astro'
-import { getCollection, z } from 'astro:content'
+import { getCollection } from 'astro:content'
 import FormattedDate from '../../components/FormattedDate.astro'
 import { type TAG_TYPE } from '../../content.config'
 
@@ -29,7 +29,6 @@ export async function getStaticPaths({}) {
 const { posts } = Astro.props
 const { tag } = Astro.params
 
-let title = tag
 let description = 'Posts with tag #' + tag
 ---
 

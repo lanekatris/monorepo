@@ -25,8 +25,9 @@ select concat('Clean up obsidian! Root file count: ', count(*)) message from mod
 
 union
 
-select 'Digital and paper adventure calendars are out of sync' message from models.versions where type in ('obsidian_adventures', 'paper_calendar') group by version having count(distinct version) > 1
-
+(select 'Digital and paper adventure calendars are out of sync' message from models.versions
+where type in ('obsidian_adventures', 'paper_calendar')
+group by version having count(*) != 2 limit 1)
 -- union
 --
 -- select concat('Clean up emails! Count: ', data::jsonb->'unreadCount', '. Updated: ', created_at) message

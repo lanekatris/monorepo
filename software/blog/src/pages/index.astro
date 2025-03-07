@@ -70,7 +70,7 @@ const { stdout: logs } = await execAsync(
 			<b>Recent Updates</b>
 			<ul>
 				{
-					logs.split('\n').map((log, index) => (
+					logs.split('\n').map((log) => (
 						<li>
 							<a
 								href={`https://github.com/lanekatris/monorepo/commit/${log.slice(0, 43).split(' ')[0]}`}

@@ -1,11 +1,7 @@
 ---
 import Layout from '../layouts/BlogPost.astro'
-import pen from '../assets/f701-pen.png'
-import BestImage from '../components/BestImage.astro'
-import { getCollection } from 'astro:content'
 import { sql } from '../content.config'
 import { type ChartConfiguration, type ChartDataset } from 'chart.js'
-import { builders } from 'prettier/doc'
 import { renderGraph } from '../renderGraph'
 import SimpleLineGraph from '../components/SimpleLineGraph.astro'
 

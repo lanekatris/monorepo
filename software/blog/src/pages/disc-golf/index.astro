@@ -7,7 +7,6 @@ import { type ChartConfiguration } from 'chart.js'
 import { sql } from '../../content.config'
 
 import winStreakImage from '../../../public/win-streak-green.svg'
-import badgeGmail from '../../assets/badge-gmail.png'
 import { Image } from 'astro:assets'
 
 const initial: { [key: number]: number } = {}
@@ -41,8 +40,8 @@ const coursesPerYearConfig: ChartConfiguration = {
 	}
 }
 
-const coursesPerYearImageSmall = await renderGraph(400, 400, coursesPerYearConfig)
-const coursesPerYearImageLarge = await renderGraph(600, 1000, coursesPerYearConfig)
+const coursesPerYearImageSmall = renderGraph(400, 400, coursesPerYearConfig)
+const coursesPerYearImageLarge = renderGraph(600, 1000, coursesPerYearConfig)
 
 const lastUpdatedResults = await sql`select max(updated_at) last_updated
                                      from noco.disc`

@@ -7,7 +7,7 @@ import { execSync } from 'child_process'
 
 export function remarkModifiedTime() {
 	// @ts-ignore
-	return function (tree, file) {
+	return function (_, file) {
 		const filepath = file.history[0]
 		// console.log(filepath)
 		const result = execSync(`git log -1 --pretty="format:%cI" "${filepath}"`)
