@@ -24,7 +24,8 @@ const tags = z.enum([
 	'volleyball',
 	'movie',
 	'lego',
-	'website'
+	'website',
+	'data'
 ])
 
 export type TAG_TYPE = z.infer<typeof tags>
@@ -45,6 +46,21 @@ const blog = defineCollection({
 			obsidianType: obsidianType.optional(),
 			draft: z.boolean().optional(),
 			slug: z.string().optional()
+		})
+		.strict()
+})
+
+const page = defineCollection({
+	loader: glob({
+		pattern: '**/*.{md,mdx}',
+		base: 'src/content/pages'
+	}),
+	schema: z
+		.object({
+			title: z.string(),
+			pubDate: z.coerce.date(),
+			tags: tags.array().optional()
+			// relatedPages: z.array(reference('page')).optional()
 		})
 		.strict()
 })
@@ -111,4 +127,4 @@ const ticks = defineCollection({
 	})
 })
 
-export const collections = { blog, discGolfCourses, discs, ticks }
+export const collections = { blog, discGolfCourses, discs, ticks, page }

@@ -11,12 +11,10 @@ const d =
             from noco.volleyball
             order by date, time`
 
-console.log(d[0])
 const winCount = d.reduce((acc, x) => acc + x.sets_won, 0)
 const lossCount = d.reduce((acc, x) => acc + x.sets_lost, 0)
 const total = d.reduce((acc, x) => acc + (x.sets_won ?? 3) + x.sets_lost, 0)
 const completion = Math.floor(((winCount + lossCount) / total) * 100)
-console.log(completion)
 
 // @ts-ignore
 function convertToCSV(jsonData) {
@@ -36,7 +34,6 @@ fs.writeFileSync(filePath, csvData)
 // generate ical
 const calendar = ical({ name: 'Volleyball Schedule' })
 calendar.method(ICalCalendarMethod.REQUEST)
-console.log(d[0])
 
 d.forEach((entry) => {
 	const justTime = +entry.time.split(':')[0]

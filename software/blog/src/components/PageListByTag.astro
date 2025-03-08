@@ -1,0 +1,13 @@
+---
+type Props = { tag: TAG_TYPE }
+
+const { tag } = Astro.props
+import { getCollection } from 'astro:content'
+import { type TAG_TYPE } from '../content.config'
+const allPages = await getCollection('page')
+const pages = allPages.filter((page) => page.data.tags?.includes(tag))
+---
+
+<ul>
+	{pages.map((page) => <a href={page.id}>{page.data.title}</a>)}
+</ul>
