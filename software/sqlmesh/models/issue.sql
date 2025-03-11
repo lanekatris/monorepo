@@ -39,3 +39,8 @@ group by version having count(*) != 2 limit 1)
 union
 
 select concat('Clean up emails! (',unread_count,')') message from models.inbox_stat where unread_count > 0
+
+
+union
+
+select concat('Bookmark queue over 100! (',count(*),')') message from models.bookmark where collection_name = 'Inbox' group by collection_name having count(*) > 100

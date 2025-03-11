@@ -1,0 +1,99 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '../layouts/BlogPost.astro'
+const feed = await getCollection('feed')
+
+console.log(feed[0])
+
+// const map: {} = {}
+---
+
+<!--<h1>feed example</h1>-->
+<Layout title={`Feed (${feed.length})`} pubDate={new Date('August 08 2021')}>
+	<table>
+		<thead
+			><tr
+				><th>Date</th>
+
+				<th>Type</th>
+				<th>Info</th>
+			</tr></thead
+		>
+		<tbody>
+			{
+				feed.map((post) => {
+					if (post.data.type === 'scorecard' && post.data.data.scorecard) {
+						return (
+							<tr>
+								<td>
+									{post.data.date.toLocaleDateString('en-US', {
+										year: 'numeric',
+										month: '2-digit',
+										day: '2-digit'
+									})}
+								</td>
+								<td>Disc Golf Round</td>
+								<td>
+									{post.data.data.scorecard?.coursename} {post.data.data.scorecard['+/-']}
+								</td>
+							</tr>
+						)
+					}
+					if (post.data.type === 'disc' && post.data.data.disc) {
+						const { number, brand, model } = post.data.data.disc
+						return (
+							<tr>
+								<td>
+									{post.data.date.toLocaleDateString('en-US', {
+										year: 'numeric',
+										month: '2-digit',
+										day: '2-digit'
+									})}
+								</td>
+								<td>New Disc</td>
+								<td>
+									({number}) {brand} {model}
+								</td>
+							</tr>
+						)
+					}
+
+					if (post.data.type === 'adventure' && post.data.data.adventure) {
+						const { adventure_type } = post.data.data.adventure
+						return (
+							<tr>
+								<td>
+									{post.data.date.toLocaleDateString('en-US', {
+										year: 'numeric',
+										month: '2-digit',
+										day: '2-digit'
+									})}
+								</td>
+								<td>Activity</td>
+								<td>{adventure_type}</td>
+							</tr>
+						)
+					}
+
+					return <b>unknown: {post.data.type}</b>
+				})
+			}
+		</tbody>
+	</table>
+</Layout>
+
+<!--<ul>-->
+<!--	{-->
+<!--		feed.map((post) => (-->
+<!--			<li>-->
+<!--				(-->
+<!--				{post.data.date.toLocaleDateString('en-US', {-->
+<!--					year: 'numeric',-->
+<!--					month: '2-digit',-->
+<!--					day: '2-digit'-->
+<!--				})}-->
+<!--				) [Disc Golf Round] {post.data.data.scorecard?.coursename} {post.data.data.scorecard['+/-']}-->
+<!--			</li>-->
+<!--		))-->
+<!--	}-->
+<!--</ul>-->

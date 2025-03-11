@@ -1,6 +1,5 @@
 ---
-import Layout from '../layouts/BlogPost.astro'
-import { getEntry, getEntries, render, getCollection, type CollectionEntry } from 'astro:content'
+import { render, getCollection, type CollectionEntry } from 'astro:content'
 import BlogPost from '../layouts/BlogPost.astro'
 import Heading from '../components/Heading.astro'
 
@@ -15,7 +14,6 @@ export async function getStaticPaths(){
 
 type Props = CollectionEntry<'page'>
 const page = Astro.props
-console.log(page)
 
 const { Content, headings, remarkPluginFrontmatter } = await render(page)
 

@@ -7,7 +7,7 @@ with x as (
 )
 , y as (
 
-select created_at updated, data->> 'link' link, data->> 'title' title, (xx.data->>'collectionId')::int collection_id
+select (data ->> '_id')::bigint id, created_at updated, data->> 'link' link, data->> 'title' title, (xx.data->>'collectionId')::int collection_id
 from x xx
 )
 select yy.*, rc.name collection_name from y yy

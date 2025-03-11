@@ -9,5 +9,11 @@ const pages = allPages.filter((page) => page.data.tags?.includes(tag))
 ---
 
 <ul>
-	{pages.map((page) => <a href={page.id}>{page.data.title}</a>)}
+	{
+		pages.map((page) => (
+			<li>
+				<a href={page.id}>{page.data.title}</a>
+			</li>
+		))
+	}
 </ul>

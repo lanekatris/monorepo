@@ -1,0 +1,12 @@
+---
+title: "My Bookmark Stats"
+pubDate: "2025-03-07"
+tags: ["data"]
+---
+import g from '../../getBookmarkStats'
+export const {count} = await g()
+
+
+Total bookmarks: <code>{count}</code>
+
+

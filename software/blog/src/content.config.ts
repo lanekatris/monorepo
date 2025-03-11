@@ -97,6 +97,57 @@ const discs = defineCollection({
 	})
 })
 
+const scorecardZod = z.object({
+	coursename: z.string(),
+	'+/-': z.number(),
+	startdate: z.coerce.date(),
+	new_course: z.boolean(),
+	layoutname: z.string(),
+	total: z.number(),
+	streak: z.boolean(),
+	roundrating: z.number().optional().nullable()
+})
+export type Scorecard = z.infer<typeof scorecardZod>
+const FEED = z.object({
+	id: z.string(),
+	type: z.enum(['scorecard', 'disc', 'adventure']),
+	date: z.date(),
+	data: z.object({
+		scorecard: scorecardZod.optional(),
+		disc: z
+			.object({
+				brand: z.string(),
+				color: z.string().optional().nullable(),
+				model: z.string().optional().nullable(),
+				plastic: z.string().optional().nullable(),
+				number: z.number(),
+				weight: z.number().optional().nullable(),
+				price: z.number().optional().nullable()
+			})
+			.optional(),
+		adventure: z
+			.object({
+				adventure_type: z.string()
+			})
+			.optional()
+	})
+})
+
+export type FEED_TYPE = z.infer<typeof FEED>
+
+const feed = defineCollection({
+	loader: async () => {
+		const response = await sql`select *
+                               from models.feed 
+                               order by date desc`
+		const idk = response as FEED_TYPE[]
+
+		// return response.map
+		return idk
+	},
+	schema: FEED
+})
+
 const ticks = defineCollection({
 	loader: async () => {
 		const response = await sql`select *
@@ -127,4 +178,4 @@ const ticks = defineCollection({
 	})
 })
 
-export const collections = { blog, discGolfCourses, discs, ticks, page }
+export const collections = { blog, discGolfCourses, discs, ticks, page, feed }
