@@ -50,7 +50,7 @@ services:
 #      - /var/run/docker.sock:/var/run/docker.sock
 
   nocodb:
-    image: nocodb/nocodb:0.258.3
+    image: nocodb/nocodb:0.262.2
     ports:
       - "8080:8080"
     restart: unless-stopped
@@ -65,28 +65,7 @@ services:
 #    volumes:
 #      - homeassistant:/config
 #    restart: unless-stopped
-  paste:
-    image: danielszabo99/microbin
-    restart: unless-stopped
-    environment:
-      - MICROBIN_PRIVATE=false
-      - MICROBIN_PUBLIC_PATH=https://paste.lkat.io
-      - MICROBIN_QR=true
-      - MICROBIN_HIGHLIGHTSYNTAX=true
-      - MICROBIN_ADMIN_USERNAME=${MICROBIN_USERNAME}
-      - MICROBIN_ADMIN_PASSWORD=${MICROBIN_SECRET}
-      - MICROBIN_ENCRYPTION_CLIENT_SIDE=false
-      - MICROBIN_ENCRYPTION_SERVER_SIDE=true
-      - MICROBIN_TITLE=Microbin
-      - MICROBIN_QR=True
-      - MICROBIN_HIDE_FOOTER=True
-      - MICROBIN_WIDE=true
-      - MICROBIN_ENABLE_READONLY=true
-    ports:
-      - "8065:8080"
-    volumes:
-      - /home/lane/microbin:/my/microbin
-      - /home/lane/microbin/data:/app/pasta_data
+
   memos:
     image: neosmemo/memos:0.22.4
     restart: unless-stopped
@@ -126,7 +105,7 @@ services:
   kestra:
     image: kestra/kestra:latest-full
     restart: always
-    #pull_policy: always
+    pull_policy: always
     entrypoint: /bin/bash
     # Note that this is meant for development only. Refer to the documentation for production deployments of Kestra which runs without a root user.
     user: "root"
@@ -138,6 +117,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /tmp/kestra-wd:/tmp/kestra-wd
     environment:
+      SECRET_KESTRA_WEB_API_TOKEN: ${KESTRA_WEB_API_TOKEN}
       KESTRA_CONFIGURATION: |
         datasources:
           postgres:
@@ -169,3 +149,14 @@ services:
     depends_on:
       kestra-postgres:
         condition: service_started
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    ports:
+      - "13378:80"
+    volumes:
+      - /bigboy/audiobookshelf/audiobooks:/audiobooks
+      - /bigboy/audiobookshelf/podcasts:/podcasts
+      - /bigboy/audiobookshelf/config:/config
+      - /bigboy/audiobookshelf/metadata:/metadata
+    environment:
+      - TZ=America/New_York
