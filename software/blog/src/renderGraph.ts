@@ -1,6 +1,6 @@
 import type { ChartConfiguration } from 'chart.js'
 import { ChartJSNodeCanvas } from 'chartjs-node-canvas'
-import { parse, parseSync, stringify } from 'svgson'
+import { parseSync, stringify } from 'svgson'
 import { v4 as uuid } from 'uuid'
 
 export function renderGraph(height: number, width: number, config: ChartConfiguration) {

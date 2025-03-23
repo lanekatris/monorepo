@@ -1,0 +1,39 @@
+---
+import { render, getCollection, type CollectionEntry } from 'astro:content'
+import BlogPost from '../layouts/BlogPost.astro'
+import Heading from '../components/Heading.astro'
+
+export async function getStaticPaths(){
+	const allPages = await getCollection('page')
+	console.log(allPages)
+	return allPages.map((page) => ({
+		params: {page:page.id},
+		props: page
+	}))
+}
+
+type Props = CollectionEntry<'page'>
+const page = Astro.props
+
+const { Content, headings, remarkPluginFrontmatter } = await render(page)
+
+---
+
+<BlogPost {...page.data} lastModified={remarkPluginFrontmatter.lastModified}
+					shortSha={remarkPluginFrontmatter.shortHash} longSha={remarkPluginFrontmatter.longHash}>
+	{
+		headings.length > 0 && (
+			<h1>Table of Contents</h1>
+			<ol class="terminal-toc">
+				{headings.map((heading) => (
+					<li>
+						<a href={`#${heading.slug}`}>{heading.text}</a>
+					</li>
+				))}
+			</ol>
+		)
+	}
+	<Content components={{ h1: Heading }} />
+	<hr />
+	<a href="#">Back to Top</a>
+</BlogPost>
