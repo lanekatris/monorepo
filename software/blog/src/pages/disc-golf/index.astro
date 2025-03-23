@@ -8,7 +8,21 @@ import { type Scorecard, sql } from '../../content.config'
 
 import winStreakImage from '../../../public/win-streak-green.svg'
 import { Image } from 'astro:assets'
-import { isDev, tagUrl } from '../../utils'
+import { convertToCSV, isDev, tagUrl } from '../../utils'
+import { getDgptEvents } from '../../getDgptEvents'
+import fs from 'fs'
+import path from 'path'
+
+const dgptEvents = await getDgptEvents()
+console.log(dgptEvents)
+
+// Create JSON file
+const dgptJsonFilename = 'dgpt-winners.json'
+fs.writeFileSync(path.join('public', dgptJsonFilename), JSON.stringify(dgptEvents, null, 4))
+
+// Create CSV file
+const dgptCsvFilename = 'dgpt-winners.csv'
+fs.writeFileSync(path.join('public', dgptCsvFilename), convertToCSV(dgptEvents))
 
 const initial: { [key: number]: number } = {}
 
@@ -53,8 +67,6 @@ const rounds = (await getCollection('feed')).reduce((acc: Scorecard[], x) => {
 	}
 	return acc
 }, [])
-
-console.log(rounds[0])
 ---
 
 <Layout title="Disc Golf" pubDate={new Date('August 08 2021')}>
@@ -96,8 +108,8 @@ console.log(rounds[0])
 	<h1>My Rounds ({rounds.length})</h1>
 	<table style={{ marginTop: 0 }}>
 		<caption>My Udisc Rounds</caption>
-		<tfoot
-			><tr>
+		<tfoot>
+			<tr>
 				<th colspan="5">
 					Shield generated from <a
 						href="https://img.shields.io/badge/win-streak-green"
@@ -107,8 +119,8 @@ console.log(rounds[0])
 			</tr>
 		</tfoot>
 		<thead>
-			<tr
-				><th>Date</th>
+			<tr>
+				<th>Date</th>
 				<th>Course</th>
 				<th>Score</th>
 				<th>Rating</th>
@@ -170,6 +182,40 @@ console.log(rounds[0])
 						<tr>
 							<td>{year}</td>
 							<td>{stats[Number(year)]}</td>
+						</tr>
+					))
+				}
+			</tbody>
+		</table>
+	</details>
+
+	<h1>DGPT Tournament Winners</h1>
+	<details>
+		<summary>Spoiler Alert!</summary>
+
+		<a href={`/${dgptJsonFilename}`}>JSON</a> |
+		<a href={`/${dgptCsvFilename}`}>CSV</a>
+
+		<table style={{ marginTop: 0 }}>
+			<tfoot>
+				<tr>
+					<th colspan="5">
+						Sourced from DGPT <a href="https://www.dgpt.com/schedule/" target="_blank">here</a></th
+					>
+				</tr>
+			</tfoot>
+			<thead>
+				<tr>
+					<th>Event Name</th>
+					<th>Winner</th>
+				</tr>
+			</thead>
+			<tbody>
+				{
+					dgptEvents.map((entry) => (
+						<tr>
+							<td>{entry.eventName}</td>
+							<td>{entry.winners.join(', ')}</td>
 						</tr>
 					))
 				}

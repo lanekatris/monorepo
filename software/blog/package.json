@@ -18,6 +18,7 @@
     "@neondatabase/serverless": "^0.10.1",
     "astro": "^5.0.3",
     "chartjs-node-canvas": "^4.1.6",
+    "cheerio": "^1.0.0",
     "csvtojson": "^2.0.10",
     "date-fns": "^4.1.0",
     "ical-generator": "^8.1.1",

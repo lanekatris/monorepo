@@ -7,3 +7,14 @@ export function isDev() {
 export function tagUrl(tag: TAG_TYPE) {
 	return `/tags/${tag}`
 }
+
+// @ts-ignore
+export function convertToCSV(jsonData) {
+	if (!jsonData.length) return ''
+
+	const headers = Object.keys(jsonData[0]).join(',') + '\n'
+	// @ts-ignore
+	const rows = jsonData.map((row) => Object.values(row).join(',')).join('\n')
+
+	return headers + rows
+}

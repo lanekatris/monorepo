@@ -4,7 +4,7 @@ import { sql } from '../content.config'
 import fs from 'fs'
 import path from 'path'
 import ical, { ICalCalendarMethod } from 'ical-generator'
-import { isDev } from '../utils'
+import { convertToCSV, isDev } from '../utils'
 
 const d =
 	await sql`select date, time, opponent, sets_won:: int, sets_lost:: int, dinner_location, count (*) over (partition by date):: int games_per_day
@@ -15,17 +15,6 @@ const winCount = d.reduce((acc, x) => acc + x.sets_won, 0)
 const lossCount = d.reduce((acc, x) => acc + x.sets_lost, 0)
 const total = d.reduce((acc, x) => acc + (x.sets_won ?? 3) + x.sets_lost, 0)
 const completion = Math.floor(((winCount + lossCount) / total) * 100)
-
-// @ts-ignore
-function convertToCSV(jsonData) {
-	if (!jsonData.length) return ''
-
-	const headers = Object.keys(jsonData[0]).join(',') + '\n'
-	// @ts-ignore
-	const rows = jsonData.map((row) => Object.values(row).join(',')).join('\n')
-
-	return headers + rows
-}
 
 const csvData = convertToCSV(d)
 const filePath = path.join('public', '2025-volleyball-data.csv')
