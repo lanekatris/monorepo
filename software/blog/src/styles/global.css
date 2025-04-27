@@ -10,7 +10,14 @@ img {
 :root {
     /*--primary-color: #ff4f29; !* Replace with your desired color *!*/
     --primary-color: #074caa; /* Replace with your desired color */
+
+    /*yellow background*/
+    /*--background-color: rgb(249, 245, 215);*/
 }
+
+/*body {*/
+/*    background-color: rgb(249, 245, 215);*/
+/*}*/
 
 figure > svg {
     width: 100%;

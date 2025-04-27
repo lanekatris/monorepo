@@ -1,14 +1,23 @@
 ---
 import Layout from '../layouts/BlogPost.astro'
 import { parseStreamingHistory } from '../spotifyParsers'
+import { getFromMinio } from '../get-from-minio'
 
 const data = parseStreamingHistory()
+const podcastSize = await getFromMinio<string>('etl', 'podcast_dir_size.txt', false)
 ---
 
 <Layout
 	title={`My Podcasts (${data.uniquePodcasts.length})`}
 	pubDate={new Date('January 14, 2025')}
 >
+	<p>
+		<b>Update 2025-04-08:</b>
+
+		I've updated to Audiobookshelf. I plan on adding more content but here is some data:
+	</p>
+	<pre>{podcastSize.data}</pre>
+
 	<p>(Generated from Spotify, ordered by most listened to)</p>
 	<div>
 		I talk about my music data <a href="/spotify-2024">here</a>.

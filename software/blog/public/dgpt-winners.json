@@ -21,6 +21,23 @@
     },
     {
         "eventName": "2025 MVP’s Open at Austin",
-        "winners": []
+        "winners": [
+            "Niklas Anttila",
+            "Holyn Handley"
+        ]
+    },
+    {
+        "eventName": "2025 MVP Music City Open",
+        "winners": [
+            "Niklas Anttila",
+            "Kristin Lätt"
+        ]
+    },
+    {
+        "eventName": "GRIPeq 43rd Kansas City Wide Open",
+        "winners": [
+            "Gannon Buhr",
+            "Ali Smith"
+        ]
     }
 ]

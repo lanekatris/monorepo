@@ -77,7 +77,7 @@ I suck		 in my homelab docker-compose files and creates easy links to navigate t
 						.filter((name) => file.fileContents.services[name].ports)
 						.map((name) => (
 							<tr>
-								<td>{name}</td>
+								<td>{name} ({file.fileContents.services[name].image.split(':')[1] ?? <mark>No Tag</mark>})</td>
 								<td>
 									{file.fileContents.services[name].ports?.map((port) => (
 										<div>{port}</div>
@@ -87,9 +87,10 @@ I suck		 in my homelab docker-compose files and creates easy links to navigate t
 
 									{file.fileContents.services[name].ports?.map((port) => (
 										<div>
-											<a target={'_blank'} href={`http://server1.local:${port.split(':')[0]}`}>
+										<a target={'_blank'} href={`http://server1.local:${port.split(':')[0]}`}>
 												DNS
 											</a>
+											|
 											<a target={'_blank'} href={`http://192.168.86.100:${port.split(':')[0]}`}>
 												IP
 											</a>

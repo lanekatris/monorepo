@@ -93,7 +93,8 @@ const discs = defineCollection({
 		status: z.string().optional().nullable(),
 		brand: z.string().optional().nullable(),
 		model: z.string().optional().nullable(),
-		color: z.string().optional().nullable()
+		color: z.string().optional().nullable(),
+		notes: z.string().optional().nullable()
 	})
 })
 
@@ -138,7 +139,7 @@ export type FEED_TYPE = z.infer<typeof FEED>
 const feed = defineCollection({
 	loader: async () => {
 		const response = await sql`select *
-                               from models.feed 
+                               from models.feed
                                order by date desc`
 		const idk = response as FEED_TYPE[]
 

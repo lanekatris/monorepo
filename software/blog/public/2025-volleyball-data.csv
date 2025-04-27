@@ -1,10 +1,11 @@
-date,time,opponent,sets_won,sets_lost,dinner_location,games_per_day
-Mon Jan 27 2025 00:00:00 GMT-0500 (Eastern Standard Time),18:00:00,12 - We Showed Up,1,2,Gran Ranchero,2
-Mon Jan 27 2025 00:00:00 GMT-0500 (Eastern Standard Time),19:00:00,10 - Prime Time,1,2,Gran Ranchero,2
-Tue Feb 11 2025 00:00:00 GMT-0500 (Eastern Standard Time),18:00:00,08 - Perry & Associates,1,2,Cheddars,1
-Tue Feb 25 2025 00:00:00 GMT-0500 (Eastern Standard Time),19:00:00,13 - South Parkersburg Baptist Church,1,2,Buffalo Wild Wings,2
-Tue Feb 25 2025 00:00:00 GMT-0500 (Eastern Standard Time),20:00:00,09 - League Splitters,2,1,Buffalo Wild Wings,2
-Tue Mar 04 2025 00:00:00 GMT-0500 (Eastern Standard Time),18:00:00,10 - Prime Time,1,2,,1
-Tue Mar 11 2025 00:00:00 GMT-0400 (Eastern Daylight Time),18:00:00,12 - We Showed Up,1,2,Star of India,1
-Tue Mar 25 2025 00:00:00 GMT-0400 (Eastern Daylight Time),18:00:00,13 - South Parkersburg Baptist Church,,,,2
-Tue Mar 25 2025 00:00:00 GMT-0400 (Eastern Daylight Time),19:00:00,08 - Perry & Associates,,,,2
+date,time,opponent,sets_won,sets_lost,dinner_location,is_tournament,games_per_day
+Mon Jan 27 2025 00:00:00 GMT-0500 (Eastern Standard Time),18:00:00,12 - We Showed Up,1,2,Gran Ranchero,false,2
+Mon Jan 27 2025 00:00:00 GMT-0500 (Eastern Standard Time),19:00:00,10 - Prime Time,1,2,Gran Ranchero,false,2
+Tue Feb 11 2025 00:00:00 GMT-0500 (Eastern Standard Time),18:00:00,08 - Perry & Associates,1,2,Cheddars,false,1
+Tue Feb 25 2025 00:00:00 GMT-0500 (Eastern Standard Time),19:00:00,13 - South Parkersburg Baptist Church,1,2,Buffalo Wild Wings,false,2
+Tue Feb 25 2025 00:00:00 GMT-0500 (Eastern Standard Time),20:00:00,09 - League Splitters,2,1,Buffalo Wild Wings,false,2
+Tue Mar 04 2025 00:00:00 GMT-0500 (Eastern Standard Time),18:00:00,10 - Prime Time,1,2,,false,1
+Tue Mar 11 2025 00:00:00 GMT-0400 (Eastern Daylight Time),18:00:00,12 - We Showed Up,1,2,Star of India,false,1
+Tue Mar 25 2025 00:00:00 GMT-0400 (Eastern Daylight Time),18:00:00,13 - South Parkersburg Baptist Church,3,0,Tokyo,false,2
+Tue Mar 25 2025 00:00:00 GMT-0400 (Eastern Daylight Time),19:00:00,08 - Perry & Associates,2,1,Tokyo,false,2
+Tue Apr 08 2025 00:00:00 GMT-0400 (Eastern Daylight Time),18:00:00,10 - Prime Time,1,2,Tokyo,true,1

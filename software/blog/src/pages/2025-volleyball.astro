@@ -7,7 +7,7 @@ import ical, { ICalCalendarMethod } from 'ical-generator'
 import { convertToCSV, isDev } from '../utils'
 
 const d =
-	await sql`select date, time, opponent, sets_won:: int, sets_lost:: int, dinner_location, count (*) over (partition by date):: int games_per_day
+	await sql`select date, time, opponent, sets_won:: int, sets_lost:: int, dinner_location, is_tournament, count (*) over (partition by date):: int games_per_day
             from noco.volleyball
             order by date, time`
 
@@ -48,7 +48,17 @@ fs.writeFileSync(calPath, calendar.toString())
 		<br />
 		Aside: <a href="/loadouts">Gear I like to use for volleyball</a>
 	</div>
-	<h1>Stats</h1>
+
+	<h1>Tournament</h1>
+	<p>
+		We lost our first single elimination tournament and that's all she wrote. We gave it a valiant effort and I think next season we'll give it a good run. We started not knowing certain rules, so it has been really fun.
+	</p>
+	<!--Everybody makes it to the single elimination tournament. Here is how we did:-->
+	<!--<ol>-->
+	<!--	<li></li>-->
+	<!--</ol>-->
+
+	<h1>Season Stats</h1>
 	<h4>Sets Won: <code>{winCount}</code></h4>
 	<div>
 		<h4>Sets Lost: <code>{lossCount}</code></h4>
@@ -65,7 +75,7 @@ fs.writeFileSync(calPath, calendar.toString())
 
 	<hr />
 
-	<h1>Game History</h1>
+	<h1>Season Game History</h1>
 
 	<table>
 		<thead>
@@ -88,7 +98,9 @@ fs.writeFileSync(calPath, calendar.toString())
 								{x.date.toLocaleDateString()}
 								{+x.time.split(':')[0] - 12}pm
 							</td>
-							<td>{x.opponent}</td>
+							<td>
+								{x.is_tournament ? <mark>{x.opponent}</mark>: x.opponent}
+								</td>
 							<td>{x.sets_won}</td>
 							<td>{x.sets_lost}</td>
 							<td>{x.dinner_location}</td>
@@ -99,6 +111,9 @@ fs.writeFileSync(calPath, calendar.toString())
 		</tbody>
 		<tfoot>
 			<span class="highlight">blue date</span> means multiple games on that date
+			<br />
+			<mark>highlighted</mark>
+			means tournament
 			{
 				isDev() && (
 					<>
