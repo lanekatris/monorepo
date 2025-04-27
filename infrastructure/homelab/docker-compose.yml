@@ -67,8 +67,8 @@ services:
       - "8080:8080"
     restart: unless-stopped
     volumes:
-      - /home/lane/nocodb:/usr/app/data/  
-#  homeassistant:
+      - /bigboy/nocodb:/usr/app/data/
+  #  homeassistant:
 #    image: ghcr.io/home-assistant/home-assistant:stable
 #    environment:
 #      - TZ=US/Eastern
@@ -84,7 +84,7 @@ services:
     ports:
       - "5230:5230"
     volumes:
-      - /home/lane/memos:/var/opt/memos
+        - /bigboy/memos:/var/opt/memos
   minio:
     image: quay.io/minio/minio
     restart: unless-stopped
