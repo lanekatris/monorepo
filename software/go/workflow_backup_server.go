@@ -17,7 +17,9 @@ func WorkflowBackupServer(ctx workflow.Context) error {
 	logger := workflow.GetLogger(ctx)
 
 	pathsToBackup := []string{"/bigboy/temp", "/bigboy/nocodb", "/bigboy/memos",
-		"/bigboy/immich", "/bigboy/minio", "/bigboy/miniflux", "/bigboy/obsidian"}
+		"/bigboy/immich", "/bigboy/minio", "/bigboy/miniflux", "/bigboy/obsidian", "/bigboy/gitea",
+		"/bigboy/audiobookshelf/metadata", "/bigboy/audiobookshelf/config", "/bigboy/audiobookshelf/audiobooks",
+	}
 
 	for i, pathToBackup := range pathsToBackup {
 		logger.Info(strconv.Itoa(i) + "/" + strconv.Itoa(len(pathsToBackup)) + " Backing up folder " + pathToBackup)
