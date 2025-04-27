@@ -1,10 +1,11 @@
-// import weatherData from './weather-data.json';
 import places from './places.json';
 import { format, isWeekend } from 'date-fns';
 import { getServerSession } from 'next-auth';
 import { NotAuthorized } from '../feed/notAuthorized';
 import React from 'react';
-import { WeatherData } from './types';
+import { WeatherData, wmoWeatherCodes, wmoWeatherEmojiMap } from './types';
+import uvImage from './uv-index.png';
+import Image from 'next/image';
 
 export default async function RecommendPage() {
   const session = await getServerSession();
@@ -12,15 +13,20 @@ export default async function RecommendPage() {
 
   const coordinates = Object.keys(places).map((x) => x.split(','));
 
+  // https://api.open-meteo.com/v1/forecast?latitude=38.0529&longitude=-81.104&daily=temperature_2m_max,uv_index_max,uv_index_clear_sky_max,precipitation_probability_max,wind_speed_10m_max,wind_speed_10m_mean,precipitation_probability_mean,precipitation_hours&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch
   const urls = coordinates.map(
     ([lat, long]) =>
-      `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&daily=temperature_2m_max&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York`
+      // `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&daily=temperature_2m_max&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York`
+
+      `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&past_days=0&daily=temperature_2m_max,uv_index_max,weather_code,uv_index_clear_sky_max,precipitation_probability_max,wind_speed_10m_max,wind_speed_10m_mean,precipitation_probability_mean,precipitation_hours&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch`
   );
   console.log(urls);
 
   const weatherData: WeatherData[] = await Promise.all(
     urls.map((url) => fetch(url).then((x) => x.json()))
   );
+
+  console.log(weatherData[0]);
 
   const indexes = weatherData[0].daily.time;
 
@@ -48,6 +54,9 @@ export default async function RecommendPage() {
   return (
     <main>
       <h1>Adventure Recommender</h1>
+      <p>
+        <a href="https://withinhours.com/">Within Hours of xx</a>
+      </p>
       <h3>Forecasts</h3>
       <a href="https://www.windy.com/-Temperature-temp">Windy.com</a> (Visual
       Forecasts)
@@ -57,11 +66,7 @@ export default async function RecommendPage() {
           <br />
           Red numbers are the highest temperature at a location for that day.
           <br />
-          Source of data{' '}
-          <a href="https://open-meteo.com/en/docs#latitude=38.0529&longitude=-81.104&hourly=&daily=temperature_2m_max&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York">
-            here
-          </a>
-          .
+          Source of data <a href={urls[0]}>here</a>.
         </caption>
         <thead>
           <tr>
@@ -86,34 +91,65 @@ export default async function RecommendPage() {
             <tr key={`${d.latitude}-${d.longitude}`}>
               {/*@ts-ignore*/}
               <td>{places[`${d.latitude},${d.longitude}`]}</td>
-              {d.daily.temperature_2m_max.map((temp, i) => {
-                const { location, temperature } = warmestPerDay[indexes[i]];
-                const isWarmest =
-                  d.latitude === location.latitude &&
-                  d.longitude === location.longitude;
-                const wknd = isWeekend(new Date(indexes[i]));
+              {d.daily.temperature_2m_max
+                // .filter((x, i) => new Date(indexes[i]) >= new Date())
+                .map((temp, i) => {
+                  const { location, temperature } = warmestPerDay[indexes[i]];
+                  const isWarmest =
+                    d.latitude === location.latitude &&
+                    d.longitude === location.longitude;
+                  const wknd = isWeekend(new Date(indexes[i]));
 
-                return (
-                  <td
-                    key={`${d.latitude}-${d.longitude}-${temp}`}
-                    className={[
-                      isWarmest ? 'danger' : '',
-                      wknd ? 'bg-attention' : ''
-                    ].join(' ')}
-                    // style={{
-                    //   fontWeight:
-                    //       ? 'bold'
-                    //       : 'normal'
-                    // }}
-                  >
-                    {temp}
-                  </td>
-                );
-              })}
+                  const uvMax = Math.round(d.daily.uv_index_max[i]);
+                  const uvClearSkyMax = Math.round(
+                    d.daily.uv_index_clear_sky_max[i]
+                  );
+
+                  const rainAvg = d.daily.precipitation_probability_mean[i];
+                  const rainMax = d.daily.precipitation_probability_max[i];
+
+                  const windAvg = Math.round(d.daily.wind_speed_10m_mean[i]);
+                  const windMax = Math.round(d.daily.wind_speed_10m_max[i]);
+
+                  const code = wmoWeatherEmojiMap.get(d.daily.weather_code[i]);
+
+                  return (
+                    <td
+                      key={`${d.latitude}-${d.longitude}-${temp}`}
+                      className={[
+                        isWarmest ? 'danger' : '',
+                        wknd ? 'bg-attention' : ''
+                      ].join(' ')}
+                      // style={{
+                      //   fontWeight:
+                      //       ? 'bold'
+                      //       : 'normal'
+                      // }}
+                    >
+                      <span style={{ fontSize: '1.4em' }}>{code?.emoji}</span>
+                      <br />
+                      <small>
+                        {temp}°F
+                        <br />
+                        ☀️ {uvMax}/{uvClearSkyMax}
+                        <br />☔ {rainAvg}/{rainMax}%
+                        <br />
+                        🌬️ {windAvg}/{windMax}mph
+                      </small>
+                    </td>
+                  );
+                })}
             </tr>
           ))}
         </tbody>
       </table>
+      <Image
+        src={uvImage}
+        alt="Source: https://www.myuv.com.au/understanding-uv/"
+      />
+      <a href="https://www.myuv.com.au/understanding-uv/">
+        Source: https://www.myuv.com.au/understanding-uv/
+      </a>
     </main>
   );
 }
