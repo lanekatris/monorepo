@@ -100,6 +100,17 @@ func deploySchedulesV2(c client.Client) {
 				Args:      createBackupArgs("server1"),
 			},
 		},
+		{
+			ID: "schedule_podcast",
+			Spec: client.ScheduleSpec{
+				CronExpressions: []string{"@daily"},
+			},
+			Action: &client.ScheduleWorkflowAction{
+				ID:        "action_schedule_podcast",
+				Workflow:  shared.WorkflowPodcasts,
+				TaskQueue: "server",
+			},
+		},
 		client.ScheduleOptions{
 			ID: "schedule_build_climb_rest",
 			Spec: client.ScheduleSpec{
@@ -243,6 +254,9 @@ var workerCmd = &cobra.Command{
 		// Inbox
 		w.RegisterWorkflow(shared.WorkflowInbox)
 		w.RegisterActivity(shared.GetEmailData)
+
+		// Podcast
+		w.RegisterWorkflow(shared.WorkflowPodcasts)
 
 		// Start listening to the Task Queue
 		err = w.Run(worker.InterruptCh())

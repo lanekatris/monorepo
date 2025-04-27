@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func WorkflowGetOsInfo(ctx workflow.Context, filePrefix string) (info string, err error) {
+func WorkflowPodcasts(ctx workflow.Context) (info string, err error) {
 	ao := workflow.ActivityOptions{
 		StartToCloseTimeout: 8 * time.Hour,
 	}
@@ -13,19 +13,18 @@ func WorkflowGetOsInfo(ctx workflow.Context, filePrefix string) (info string, er
 
 	var result string
 	var o = ExecOnHostArgs{
-		Name: "screenfetch",
-		Args: []string{"-N"},
+		Name: "du",
+		Args: []string{"-h", "--max-depth=1", "/bigboy/audiobookshelf"},
 	}
 	err = workflow.ExecuteActivity(ctx, ExecOnHost, o).Get(ctx, &result)
 	if err != nil {
 		return "", err
 	}
 
-	err = workflow.ExecuteActivity(ctx, KvPut, filePrefix+"_screenfetch_result.txt", result).Get(ctx, nil)
+	err = workflow.ExecuteActivity(ctx, KvPut, "podcast_dir_size.txt", result).Get(ctx, nil)
 	if err != nil {
 		return "", err
 	}
 
 	return result, nil
-
 }
