@@ -1,6 +1,8 @@
 import { defineCollection, z } from 'astro:content'
 import { glob, file } from 'astro/loaders'
 import { neon } from '@neondatabase/serverless'
+import { feedLoader } from '@ascorbic/feed-loader'
+import type { AudiobookshelfResponse, Session } from './audiobookshelf-types'
 
 export const obsidianType = z.enum(['adventure'])
 
@@ -111,10 +113,11 @@ const scorecardZod = z.object({
 export type Scorecard = z.infer<typeof scorecardZod>
 const FEED = z.object({
 	id: z.string(),
-	type: z.enum(['scorecard', 'disc', 'adventure']),
+	type: z.enum(['scorecard', 'disc', 'adventure', 'podcast-completed', 'memo']),
 	date: z.date(),
 	data: z.object({
 		scorecard: scorecardZod.optional(),
+		memo: z.object({ html: z.string() }).optional(),
 		disc: z
 			.object({
 				brand: z.string(),
@@ -130,6 +133,12 @@ const FEED = z.object({
 			.object({
 				adventure_type: z.string()
 			})
+			.optional(),
+		podcast: z
+			.object({
+				displayTitle: z.string(),
+				displayAuthor: z.string()
+			})
 			.optional()
 	})
 })
@@ -143,8 +152,45 @@ const feed = defineCollection({
                                order by date desc`
 		const idk = response as FEED_TYPE[]
 
-		// return response.map
-		return idk
+		const sessionsResponse = await fetch(
+			'http://server1.local:13378/api/sessions?itemsPerPage=10000&user=7e4b6e43-1722-4bb0-adde-9a572f945388',
+			{
+				headers: {
+					Authorization: import.meta.env.AUDIOBOOKSHELF_KEY
+				}
+			}
+		)
+		console.log('sessions response', sessionsResponse.ok)
+		const sessionsData: AudiobookshelfResponse = await sessionsResponse.json()
+
+		const sessions = sessionsData.sessions.reduce((map, session) => {
+			if (session.mediaType === 'book') return map
+
+			if (!map.has(session.displayTitle)) {
+				map.set(session.displayTitle, session)
+			}
+			return map
+		}, new Map<string, Session>())
+
+		const sessionsAsFeed: FEED_TYPE[] = Array.from(sessions.values()).map((session) => ({
+			id: session.libraryItemId,
+			type: 'podcast-completed',
+			date: new Date(session.date),
+			data: {
+				podcast: {
+					displayTitle: session.displayTitle,
+					displayAuthor: session.displayAuthor
+				}
+			}
+		}))
+
+		console.log(idk[0], sessionsAsFeed[0])
+
+		const all = [...idk, ...sessionsAsFeed]
+		// no point, doesn't work
+		// all.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+
+		return all
 	},
 	schema: FEED
 })
@@ -179,4 +225,10 @@ const ticks = defineCollection({
 	})
 })
 
-export const collections = { blog, discGolfCourses, discs, ticks, page, feed }
+const memos = defineCollection({
+	loader: feedLoader({
+		url: 'https://memo.lkat.io/u/Lane/rss.xml'
+	})
+})
+
+export const collections = { blog, discGolfCourses, discs, ticks, page, feed, memos }

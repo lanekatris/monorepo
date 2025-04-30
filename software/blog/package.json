@@ -11,6 +11,7 @@
     "deploy": "npm run build && npx wrangler pages deploy dist"
   },
   "dependencies": {
+    "@ascorbic/feed-loader": "^1.0.4",
     "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "^4.0.1",
     "@astrojs/rss": "^4.0.10",

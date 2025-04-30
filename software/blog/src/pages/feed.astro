@@ -1,83 +1,146 @@
 ---
 import { getCollection } from 'astro:content'
 import Layout from '../layouts/BlogPost.astro'
-const feed = await getCollection('feed')
+import type { FEED_TYPE } from '../content.config'
 
-console.log(feed[0])
+// Not sure why I have to sort here and it doesn't work from the collection
+const rawFeed = await getCollection('feed')
+const memos = await getCollection('memos')
+
+const memosAsFeed: FEED_TYPE[] = memos.map((memo) => {
+	const a: FEED_TYPE = {
+		id: memo.id,
+		type: 'memo',
+		date: memo.data.date!,
+		data: {
+			memo: {
+				html: memo.rendered?.html!
+			}
+		}
+	}
+	return a
+})
+// console.log(memosAsFeed)
+// console.log(rawFeed[0])
+console.log(memos[0])
+const feed = rawFeed.map(x => x.data).concat(memosAsFeed)
+feed.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+
+// console.log(feed.map((x) => x.data.date))
+// console.log(memos[0])
+// console.log(feed.filter((x) => !x.data.type)[0])
 
 // const map: {} = {}
+
+// console.log(Array.from(sessions).values())
 ---
 
-<!--<h1>feed example</h1>-->
 <Layout title={`Feed (${feed.length})`} pubDate={new Date('August 08 2021')}>
 	<table>
-		<thead
-			><tr
-				><th>Date</th>
-
-				<th>Type</th>
-				<th>Info</th>
-			</tr></thead
-		>
+		<thead>
+		<tr>
+			<th>Date</th>
+			<th>Type</th>
+			<th>Info</th>
+		</tr>
+		</thead>
 		<tbody>
-			{
-				feed.map((post) => {
-					if (post.data.type === 'scorecard' && post.data.data.scorecard) {
-						return (
-							<tr>
-								<td>
-									{post.data.date.toLocaleDateString('en-US', {
-										year: 'numeric',
-										month: '2-digit',
-										day: '2-digit'
-									})}
-								</td>
-								<td>Disc Golf Round</td>
-								<td>
-									{post.data.data.scorecard?.coursename} {post.data.data.scorecard['+/-']}
-								</td>
-							</tr>
-						)
-					}
-					if (post.data.type === 'disc' && post.data.data.disc) {
-						const { number, brand, model } = post.data.data.disc
-						return (
-							<tr>
-								<td>
-									{post.data.date.toLocaleDateString('en-US', {
-										year: 'numeric',
-										month: '2-digit',
-										day: '2-digit'
-									})}
-								</td>
-								<td>New Disc</td>
-								<td>
-									({number}) {brand} {model}
-								</td>
-							</tr>
-						)
-					}
+		{
+			feed.map((post) => {
+				if (post.type === 'memo') {
+					return (
+						<tr>
+							<td>
+								{post.date.toLocaleDateString('en-US', {
+									year: 'numeric',
+									month: '2-digit',
+									day: '2-digit'
+								})}
+							</td>
+							<td>Memo</td>
+							<!--<td>{post.data.data.memo.html}</td>-->
+							<td>
 
-					if (post.data.type === 'adventure' && post.data.data.adventure) {
-						const { adventure_type } = post.data.data.adventure
-						return (
-							<tr>
-								<td>
-									{post.data.date.toLocaleDateString('en-US', {
-										year: 'numeric',
-										month: '2-digit',
-										day: '2-digit'
-									})}
-								</td>
-								<td>Activity</td>
-								<td>{adventure_type}</td>
-							</tr>
-						)
-					}
+								<Fragment set:html={post.data.memo?.html} />
+							</td>
+						</tr>
+					)
+				}
+				if (post.type === 'podcast-completed' && post.data.podcast) {
+					return (
+						<tr>
+							<td>
+								{post.date.toLocaleDateString('en-US', {
+									year: 'numeric',
+									month: '2-digit',
+									day: '2-digit'
+								})}
+							</td>
+							<td>Podcast Completed</td>
+							<td>
+								{post.data.podcast?.displayTitle}
+								<br />
+								<small>{post.data.podcast?.displayAuthor}</small>
+							</td>
+						</tr>
+					)
+				}
+				if (post.type === 'scorecard' && post.data.scorecard) {
+					return (
+						<tr>
+							<td>
+								{post.date.toLocaleDateString('en-US', {
+									year: 'numeric',
+									month: '2-digit',
+									day: '2-digit'
+								})}
+							</td>
+							<td>Disc Golf Round</td>
+							<td>
+								{post.data.scorecard?.coursename} {post.data.scorecard['+/-']}
+							</td>
+						</tr>
+					)
+				}
+				if (post.type === 'disc' && post.data.disc) {
+					const { number, brand, model } = post.data.disc
+					return (
+						<tr>
+							<td>
+								{post.date.toLocaleDateString('en-US', {
+									year: 'numeric',
+									month: '2-digit',
+									day: '2-digit'
+								})}
+							</td>
+							<td>New Disc</td>
+							<td>
+								({number}) {brand} {model}
+							</td>
+						</tr>
+					)
+				}
 
-					return <b>unknown: {post.data.type}</b>
-				})
-			}
+				if (post.type === 'adventure' && post.data.adventure) {
+					const { adventure_type } = post.data.adventure
+					return (
+						<tr>
+							<td>
+								{post.date.toLocaleDateString('en-US', {
+									year: 'numeric',
+									month: '2-digit',
+									day: '2-digit'
+								})}
+							</td>
+							<td>Activity</td>
+							<td>{adventure_type}</td>
+						</tr>
+					)
+				}
+
+				return <b>unknown: {post.type}</b>
+			})
+		}
 		</tbody>
 	</table>
 </Layout>
