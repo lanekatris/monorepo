@@ -5,7 +5,9 @@ import { getFromMinio } from '../get-from-minio'
 import { sql } from '../content.config'
 
 interface DockerComposeFile {
-	services: { [k: string]: { ports?: string[] } }
+	services: { [k: string]: { ports?: string[]
+	image:string
+	} }
 }
 
 const urls = [
