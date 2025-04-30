@@ -1,4 +1,5 @@
-FROM ubuntu:24.04
+#FROM ubuntu:24.04
+FROM docker:dind
 
 RUN apt update && apt install -y openssh-server sudo #git
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config

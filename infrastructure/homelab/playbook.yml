@@ -11,8 +11,7 @@
           - ranger
           - git
           - gpg
-#          - ansible
-#          - sshpass
+          - restic
     - name: Get monorepo
       ansible.builtin.git:
         repo: https://github.com/lanekatris/monorepo.git
@@ -37,3 +36,18 @@
         name: docker-ce
         state: latest
         update_cache: true
+
+    - name: Add user to docker group
+      become: true
+      ansible.builtin.user:
+        name: lane
+        groups: docker
+        append: yes
+
+    - name: Create usememos dir
+      become: true
+      ansible.builtin.file:
+        path: /bigboy/memos
+        state: directory
+        owner: lane
+        group: lane
