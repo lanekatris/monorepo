@@ -17,9 +17,11 @@ type EventFileType =
   | 'pool'
   | 'zoo'
   | 'fishing'
-  | 'movie-theater';
+  | 'movie-theater'
+  | 'pickleball';
 
 const ma: { [k in EventFileType]: string } = {
+  pickleball: 'Pickleball',
   'movie-theater': 'Movie Theater',
   fishing: 'Fishing',
   zoo: 'Zoo',
