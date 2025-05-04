@@ -2,27 +2,75 @@
 import Layout from '../layouts/BlogPost.astro'
 import { parseStreamingHistory } from '../spotifyParsers'
 import { getFromMinio } from '../get-from-minio'
+import fs from 'fs'
+import path from 'path'
+import { type AudiobookshelfLibraryResponse } from '../audiobookshelf-library-types'
 
 const data = parseStreamingHistory()
 const podcastSize = await getFromMinio<string>('etl', 'podcast_dir_size.txt', false)
+const jsonPodcastResponse = await fetch(
+	`http://server1.local:13378/api/libraries/44107d15-b5cf-45fc-99ab-63ee6da4878e/items?token=${process.env.AUDIOBOOKSHELF_KEY!.replace('Bearer ', '')}`
+)
+const jsonPodcasts: AudiobookshelfLibraryResponse = await jsonPodcastResponse.json()
+
+export const jsonPodcastFilePath = path.join('public', 'podcasts.json')
+fs.writeFileSync(jsonPodcastFilePath, JSON.stringify(jsonPodcasts, null, 2))
+
+const opmlPodcastsResponse = await fetch(
+	`http://server1.local:13378/api/libraries/44107d15-b5cf-45fc-99ab-63ee6da4878e/opml?token=${process.env.AUDIOBOOKSHELF_KEY!.replace('Bearer ', '')}`
+)
+const opmlPodcasts = await opmlPodcastsResponse.text()
+
+const opmlPodcastsFilePath = path.join('public', 'podcasts.opml')
+fs.writeFileSync(opmlPodcastsFilePath, opmlPodcasts)
 ---
 
 <Layout
-	title={`My Podcasts (${data.uniquePodcasts.length})`}
+	title={`My Podcasts (${jsonPodcasts.results.length})`}
 	pubDate={new Date('January 14, 2025')}
 >
+	<h1>My current podcasts</h1>
 	<p>
 		<b>Update 2025-04-08:</b>
 
-		I've updated to Audiobookshelf. I plan on adding more content but here is some data:
+		I've updated to Audiobookshelf which is my now preferred way to consume podcasts.
 	</p>
-	<pre>{podcastSize.data}</pre>
 
-	<p>(Generated from Spotify, ordered by most listened to)</p>
-	<div>
-		I talk about my music data <a href="/spotify-2024">here</a>.
-	</div>
+	<pre>{podcastSize.data}(Updated: {podcastSize.stats.lastModified.toLocaleDateString()})</pre>
+
+	<b> Files </b>
+	(View Other <a href="/data">data</a>)
 	<ul>
-		{data.uniquePodcasts.map((podcast) => <li>{podcast.name}</li>)}
+		<li>
+			<a href={`/podcasts.json`}>podcasts.json (Audiobookshelf format)</a>
+		</li>
+		<li>
+			<a href={`/podcasts.opml`}>podcasts.opml</a>
+		</li>
 	</ul>
+	<b>List</b>
+	<details>
+		<summary>Podcast List (No Order)</summary>
+		{
+			jsonPodcasts.results.map((podcast) => (
+				<div class="terminal-alert">
+					{podcast.media.metadata.title}
+					<br />
+					<small>{podcast.media.metadata.author}</small>
+				</div>
+			))
+		}
+	</details>
+	<hr />
+	<h1>Old Spotify Podcast Data</h1>
+	<details>
+		<summary> Generated from Spotify, ordered by most listened to</summary>
+
+		<div>
+			I talk about my music data <a href="/spotify-2024">here</a>.
+		</div>
+		<ul>
+			{data.uniquePodcasts.map((podcast) => <li>{podcast.name}</li>)}
+		</ul>
+	</details>
 </Layout>

@@ -1,0 +1,29 @@
+---
+import { FILE_URLS } from '../utils'
+import Layout from '../layouts/BlogPost.astro'
+---
+
+<Layout title={`Data Files`} pubDate={new Date('May 3, 2025')}>
+	<table>
+		<thead>
+			<tr>
+				<th>Updated</th>
+				<th>Download</th>
+				<th>Page(s)</th>
+				<th>Notes</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>91/91/2222</td>
+				<td>
+					<a href={FILE_URLS.PODCAST_JSON}>podcasts.json</a>
+				</td>
+				<td>
+					<a href="/podroll">/podroll</a>
+				</td>
+				<td> It is using this Audiobookshelf api: TODO. There is a subarray of the data.</td>
+			</tr>
+		</tbody>
+	</table>
+</Layout>

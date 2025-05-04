@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content'
 import Layout from '../layouts/BlogPost.astro'
 import type { FEED_TYPE } from '../content.config'
+import { isDev } from '../utils'
 
 // Not sure why I have to sort here and it doesn't work from the collection
 const rawFeed = await getCollection('feed')
@@ -36,6 +37,10 @@ feed.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 ---
 
 <Layout title={`Feed (${feed.length})`} pubDate={new Date('August 08 2021')}>
+	{isDev() &&
+		<a href="http://server1.local:8055/namespaces/default/schedules/schedule_obsidian_files_to_db" target="_blank">Sync
+			.MD->SQL</a>
+	}
 	<table>
 		<thead>
 		<tr>

@@ -18,3 +18,7 @@ export function convertToCSV(jsonData) {
 
 	return headers + rows
 }
+
+export const FILE_URLS = {
+	PODCAST_JSON: '/podcasts.json'
+}

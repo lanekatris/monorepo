@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:ollama
+    restart: unless-stopped
+    ports:
+      - "3010:8080"
+    volumes:
+      - /media/lane/Old_School_HDD/ollama:/root/.ollama
+      - /media/lane/Old_School_HDD/open-webui:/app/backend/data
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities:
+                - gpu
