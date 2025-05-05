@@ -1,5 +1,5 @@
 ---
-import { FILE_URLS } from '../utils'
+import { FILE_URLS, FILES, getFileDownloadPath } from '../utils'
 import Layout from '../layouts/BlogPost.astro'
 ---
 
@@ -7,23 +7,28 @@ import Layout from '../layouts/BlogPost.astro'
 	<table>
 		<thead>
 			<tr>
-				<th>Updated</th>
+				<!--<th>Updated</th>-->
 				<th>Download</th>
 				<th>Page(s)</th>
 				<th>Notes</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>91/91/2222</td>
-				<td>
-					<a href={FILE_URLS.PODCAST_JSON}>podcasts.json</a>
-				</td>
-				<td>
-					<a href="/podroll">/podroll</a>
-				</td>
-				<td> It is using this Audiobookshelf api: TODO. There is a subarray of the data.</td>
-			</tr>
+			{
+				FILES.map(
+					(file) => (<tr>
+						<!--<td>todo</td>-->
+						<td style="min-width:250px">
+							<a href={getFileDownloadPath(file.filename)}>{file.filename}</a>
+						</td>
+						<td>
+							{file.pages.map((page) => (<a href={page}>{page}</a>))}
+						</td>
+						<td>{file.notes}</td>
+					</tr>)
+				)
+			}
+
 		</tbody>
 	</table>
 </Layout>
