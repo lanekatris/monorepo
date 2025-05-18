@@ -1,0 +1,27 @@
+<button class="btn btn-default btn-ghost">Toggle CSS</button>
+
+<style>
+	button {
+		padding: 5px 5px;
+	}
+</style>
+
+<script is:inline>
+	function toggleCSS() {
+		const link = document.getElementById('main-css')
+		if (link.disabled) {
+			link.disabled = false
+			localStorage.setItem('cssEnabled', 'true')
+		} else {
+			link.disabled = true
+			localStorage.setItem('cssEnabled', 'false')
+		}
+	}
+
+	const setting = localStorage.getItem('cssEnabled')
+	if (setting === 'false') {
+		document.getElementById('main-css').disabled = true
+	}
+
+	document.querySelector('button').addEventListener('click', toggleCSS)
+</script>

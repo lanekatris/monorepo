@@ -1,5 +1,6 @@
 ---
 import { SITE_TITLE } from '../consts'
+import CssToggle from './CssToggle.astro'
 ---
 
 <header>
@@ -17,6 +18,9 @@ import { SITE_TITLE } from '../consts'
 						<a href="/rss.xml" style="display:flex;"
 							><img alt="rss" src="/images/rss_2_0.png" />
 						</a>
+					</li>
+					<li>
+						<CssToggle />
 					</li>
 				</ul>
 			</nav>
