@@ -134,3 +134,6 @@ type PowerMonitoringData struct {
 		} `json:"get_next_action"`
 	} `json:"anti_theft"`
 }
+type WaterLevelData struct {
+	Data int `json:"data"`
+}

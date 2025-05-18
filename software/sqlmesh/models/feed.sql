@@ -15,6 +15,16 @@ select concat('disc-', d.id)                   id,
                   coalesce(d.created, d.created_at::date) date,
                   jsonb_build_object('disc', d.*)          data
            from noco.disc d
+
+
+union
+select concat('lost-disc-', d.id)                   id,
+       'lost-disc'                                  type,
+       d."LostDate" date,
+                  jsonb_build_object('disc', d.*)          data
+from noco.disc d where d."LostDate" is not null
+
+
 union
 select
     concat('adventure-', a.id),

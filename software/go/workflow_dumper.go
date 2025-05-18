@@ -6,6 +6,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/charmbracelet/log"
+	"go.temporal.io/api/enums/v1"
+	"go.temporal.io/sdk/temporal"
 	"go.temporal.io/sdk/workflow"
 	"gorm.io/gorm"
 	"os/exec"
@@ -29,10 +31,6 @@ func (input *WorkflowInputDumper) DumpEvent(eventName string, data string) error
 type ToggleSwitchedData struct {
 	Value    int    `json:"value"`
 	SwitchId string `json:"switch_id"`
-}
-
-type WaterLevelData struct {
-	Data int `json:"data"`
 }
 
 func (input *WorkflowInputDumper) ProcessEvent(eventName string, data string) error {
@@ -144,6 +142,11 @@ func (input *WorkflowInputDumper) ProcessEvent(eventName string, data string) er
 			if d2.Emeter.GetRealtime.PowerMw < 10000 {
 				// did we send a notification recently?
 				//input.Db.w
+				createdRecently := input.EventService.WasEventCreatedRecently("email_washer_sent_v1")
+				if createdRecently {
+					log.Info("Email already sent about washing maching")
+					return nil
+				}
 
 				// if under 10k the washer is done, send notification
 
@@ -170,6 +173,24 @@ func WorkflowDumper(ctx workflow.Context, eventName string, data string) error {
 	}
 
 	err = workflow.ExecuteActivity(ctx, activities.DumpEvent, eventName, data).Get(ctx, nil)
+	if err != nil {
+		return err
+	}
+
+	childOptions := workflow.ChildWorkflowOptions{
+		WorkflowID:        "log-event-dumper",
+		TaskQueue:         GreetingTaskQueue,
+		ParentClosePolicy: enums.PARENT_CLOSE_POLICY_ABANDON,
+		WorkflowIDReusePolicy: enums.WORKFLOW_ID_REUSE_POLICY_ALLOW_DUPLICATE,
+	}
+
+	childCtx := workflow.WithChildOptions(ctx, childOptions)
+
+	err = workflow.ExecuteChildWorkflow(childCtx, WorkflowLogger, eventName).GetChildWorkflowExecution().Get(childCtx, nil)
+	if temporal.IsWorkflowExecutionAlreadyStartedError(err) {
+		return nil
+	}
+
 	return err
 }
 
@@ -177,4 +198,15 @@ type WorkflowInputDumper struct {
 	Db           *gorm.DB
 	EmailClient  EmailClient
 	EventService EventService
+}
+
+func WorkflowLogger(ctx workflow.Context, eventName string) error {
+	options := workflow.ActivityOptions{
+		StartToCloseTimeout: time.Minute * 1,
+	}
+
+	ctx = workflow.WithActivityOptions(ctx, options)
+
+	log.Info("Event Logged", "name", eventName)
+	return nil
 }

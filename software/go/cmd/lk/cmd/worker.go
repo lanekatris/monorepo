@@ -258,6 +258,9 @@ var workerCmd = &cobra.Command{
 		// Podcast
 		w.RegisterWorkflow(shared.WorkflowPodcasts)
 
+		// Playing around
+		w.RegisterWorkflow(shared.WorkflowLogger)
+
 		// Start listening to the Task Queue
 		err = w.Run(worker.InterruptCh())
 		if err != nil {

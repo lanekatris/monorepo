@@ -60,6 +60,11 @@ export default async function RecommendPage() {
       <h3>Forecasts</h3>
       <a href="https://www.windy.com/-Temperature-temp">Windy.com</a> (Visual
       Forecasts)
+      <p>
+        <a href="https://weather.roessner.tech/home?cityId=j57akdytvcqw46xejgzmp4shpn79sbzz">
+          Ripley weather
+        </a>
+      </p>
       <table>
         <caption>
           Weekend is highlighted yellow since weekends are the best.
