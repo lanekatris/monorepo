@@ -1,0 +1,43 @@
+---
+title: "Switched from Spotify to Audiobookshelf"
+pubDate: "2025-05-10"
+tags: [audiobookshelf,spotify]
+---
+import sevenpage26 from '../../assets/notebooks/FN07-page26-27.jpg'
+import BestImage from '../../components/BestImage.astro'
+
+# Why podcasts?
+
+Sometimes I'm not in the mood to listen to music - I want something more stimulating to listen to.
+
+It helps pass the time driving.
+
+If I'm working and the task is a bit mundane, podcasts help keep the mind stimulated.
+
+# Why Spotify in the first place?
+
+I pay for Spotify premium for music with no ads so keeping podcasts in the same app seemed like a no-brainer.
+
+# What's wrong with Spotify?
+
+Main issue: I can't get my podcast listen history from their api, only their "takeout" offers this data. You can get your song listening history.
+
+I want to be reminded of podcasts I listen to, and only getting this data every few months or yearly wasn't going to cut it.
+
+# Audiobookshelf
+
+This is great, I run it from my docker compose and map its data directory to my host.
+
+The mobile app works great on Android; which I access the Audiobookshelf server via Tailscale.
+
+My Astro site gets realtime podcast listening history.
+
+It has an OPML export out of the box.
+
+The "feed" of new podcasts is better than Spotify.
+
+It is easier to see partially listened to podcasts and Audiobookshelf shows more of them.
+
+# Conclusion
+
+I like access to my data, and it is fun to self-host (when things work). Audiobookshelf looks good and exposes data which really hits the nail on the head for me.

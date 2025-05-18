@@ -2,7 +2,9 @@
 import { getCollection } from 'astro:content'
 import Layout from '../layouts/BlogPost.astro'
 import type { FEED_TYPE } from '../content.config'
-import { isDev } from '../utils'
+import { getFileDownloadPath, isDev } from '../utils'
+import path from 'path'
+import fs from 'fs'
 
 // Not sure why I have to sort here and it doesn't work from the collection
 const rawFeed = await getCollection('feed')
@@ -21,26 +23,37 @@ const memosAsFeed: FEED_TYPE[] = memos.map((memo) => {
 	}
 	return a
 })
-// console.log(memosAsFeed)
-// console.log(rawFeed[0])
-console.log(memos[0])
 const feed = rawFeed.map(x => x.data).concat(memosAsFeed)
 feed.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
-// console.log(feed.map((x) => x.data.date))
-// console.log(memos[0])
-// console.log(feed.filter((x) => !x.data.type)[0])
-
-// const map: {} = {}
-
-// console.log(Array.from(sessions).values())
+const feedJsonFilename = 'feed.json'
+fs.writeFileSync(path.join('public', feedJsonFilename), JSON.stringify(feed, null, 2))
 ---
 
 <Layout title={`Feed (${feed.length})`} pubDate={new Date('August 08 2021')}>
-	{isDev() &&
-		<a href="http://server1.local:8055/namespaces/default/schedules/schedule_obsidian_files_to_db" target="_blank">Sync
-			.MD->SQL</a>
-	}
+	<p>This page is a one stop shop for my interesting events. TODO: Add blog posts.</p>
+	<ul>
+		<li>
+
+			{isDev() &&
+				<>
+					<a href="http://server1.local:8055/namespaces/default/schedules/schedule_obsidian_files_to_db"
+						 target="_blank">Sync
+						.MD->SQL</a>
+					<br>
+				</>
+			}
+		</li>
+		<li>
+
+			<a href={getFileDownloadPath(feedJsonFilename)}>{feedJsonFilename}</a>
+		</li>
+		<li>
+
+			<a href="/data">/data</a>
+		</li>
+	</ul>
+	<br>
 	<table>
 		<thead>
 		<tr>
@@ -108,7 +121,7 @@ feed.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 					)
 				}
 				if (post.type === 'disc' && post.data.disc) {
-					const { number, brand, model } = post.data.disc
+					const { number, brand, model, plastic } = post.data.disc
 					return (
 						<tr>
 							<td>
@@ -120,7 +133,27 @@ feed.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 							</td>
 							<td>New Disc</td>
 							<td>
-								({number}) {brand} {model}
+								({number}) {brand} {plastic} {model}
+							</td>
+						</tr>
+					)
+				}
+
+
+				if (post.type === 'lost-disc' && post.data.disc) {
+					const { number, brand, model, plastic } = post.data.disc
+					return (
+						<tr>
+							<td>
+								{post.date.toLocaleDateString('en-US', {
+									year: 'numeric',
+									month: '2-digit',
+									day: '2-digit'
+								})}
+							</td>
+							<td style="color: var(--error-color)">Lost Disc</td>
+							<td>
+								({number}) {brand} {plastic} {model}
 							</td>
 						</tr>
 					)

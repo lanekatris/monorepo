@@ -27,6 +27,12 @@ export const FILE_URLS = {
 // todo: validate the pages as subpages and zod valdiates
 export const FILES = [
 	{
+		type: 'blog_rss',
+		filename: 'rss.xml',
+		pages: [],
+		notes: 'Blog RSS feed for this site'
+	},
+	{
 		type: 'podcast_json',
 		filename: 'podcasts.json',
 		pages: ['/podroll'],
@@ -61,6 +67,11 @@ export const FILES = [
 		type: 'dgpt-winners-csv',
 		filename: 'dgpt-winners.csv',
 		pages: ['/disc-golf']
+	},
+	{
+		type: 'feed-json',
+		filename: 'feed.json',
+		pages: ['/feed']
 	}
 ]
 

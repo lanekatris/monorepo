@@ -1,0 +1,116 @@
+---
+title: "OpenCV + Calendar EDC"
+pubDate: "2025-05-14"
+tags: [edc]
+---
+import calendar from '../../assets/edc/calendar-highlights.jpg'
+import BestImage from '../../components/BestImage.astro'
+
+<BestImage image={calendar} alt="A calendar with highlights for days with activities" />
+
+# My Setup
+
+I track outdoor activities via Obsidian and show them [here](/fitness). Since I changed my EDC to include a notebook [here](/blog/2025-01-18-edc-v1) and I thought it would
+feel nice to have a paper example too - as paper feels, and is, real.
+
+The value of the paper is I can take 2-3 minutes in the morning, sit down, look out the window, scratch off the day, provide any notes,
+mark if there was an activity, and finally make a tally mark. It is calming, not that I'm not calm, but it adds some nice regiment to my day.
+
+# Problem
+
+I now have the problem of my digital and paper calanders of activities being out of sync.
+
+I care because they are supposed to match! As in, they don't have different data.
+
+How could I take a picture of my calendar and get insights from the picture to know if I'm in sync or not?
+
+OpenCV seemed like the tool for the job, to evaluate images.
+
+I tried looking for crossed out numbers at first, that didn't make sense.
+
+I tried counting tally marks, that was pretty inconsistent.
+
+I landed on: could OpenCV detect highlighter marks and count them? For days with activities I put a highlighter within that day.
+
+# Solution
+
+What I need to do:
+
+1. Upload an image
+1. Process it against OpenCV
+1. Persist the month and count
+1. Report to myself when they are out of sync
+
+I already have Kestra stood up, thought I might as well use it as it can take parameters, like images, which is pretty cool!
+
+Disclaimer: I did use ChatGPT to get things rolling.
+
+Here is my workflow in Kestra:
+
+```yaml
+id: uploadCalendar
+namespace: dev
+labels:
+  - key: type
+    value: upload
+inputs:
+  - id: my-file
+    type: FILE
+tasks:
+  - id: go
+    type: io.kestra.plugin.scripts.python.Script
+    taskRunner:
+      type: io.kestra.plugin.scripts.runner.docker.Docker
+    containerImage: jupyter/scipy-notebook
+    beforeCommands:
+      - pip install opencv-python
+    warningOnStdErr: false
+    inputFiles:
+      file.tmp: "{{ inputs['my-file'] }}"
+    script: |
+      import cv2
+      import numpy as np
+      import requests
+
+      # Load the image
+      image = cv2.imread("file.tmp")
+
+      # Convert to HSV color space
+      hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
+      # Define color range for green highlighter (adjust if needed)
+      lower_green = np.array([40, 50, 50])   # Lower bound of green
+      upper_green = np.array([80, 255, 255]) # Upper bound of green
+
+      # Create a mask for the green highlights
+      mask = cv2.inRange(hsv, lower_green, upper_green)
+
+      # Find contours in the mask
+      contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+      # Draw contours and count them
+      highlight_count = 0
+      for contour in contours:
+          area = cv2.contourArea(contour)
+          if area > 500:  # Filter small noise (adjust as needed)
+              highlight_count += 1
+              cv2.drawContours(image, [contour], -1, (0, 0, 255), 2)  # Draw detected highlights in red
+
+      # Display results
+      print(f"Detected Green Highlighter Strips: {highlight_count}")
+      url = "http://192.168.86.100:3333/api/dump/calendar_processed_v1?token={{ secret('KESTRA_WEB_API_TOKEN') }}"
+      print(url)
+      data = {'highlight_count': highlight_count}
+      r = requests.post(url, json = data)
+      print(f"Response: {r.reason}")
+```
+
+# Takeaways
+
+1. Pretty awesome you can have file inputs in Kestra, especially images
+1. It was a pain to get OpenCV installed with all its dependencies, so I finally found a container that had what was needed
+1. The persistence is arbitrary
+1. I couldn't get secrets to work. I'm showing one being used, but I have my api key hardcoded in the real yaml. It was pretty frustrating
+1. This all works from my mobile phone! I just navigate to the web page I have bookmarked
+
+To reduce friction, I can choose execute the workflow, choose the file input, and choose take image. So no need to find an image from my gallery, just take it ad-hoc.

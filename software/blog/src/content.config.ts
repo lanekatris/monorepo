@@ -27,7 +27,9 @@ const tags = z.enum([
 	'movie',
 	'lego',
 	'website',
-	'data'
+	'data',
+	'audiobookshelf',
+	'obsidian'
 ])
 
 export type TAG_TYPE = z.infer<typeof tags>
@@ -79,8 +81,8 @@ export const sql = neon(import.meta.env.DATABASE_URL)
 const discs = defineCollection({
 	loader: async () => {
 		const response = await sql`select *
-                               from noco.disc
-                               order by number desc`
+															 from noco.disc
+															 order by number desc`
 		const idk = response as { number: string }[]
 		const f = idk.map((x) => ({
 			...x,
@@ -111,24 +113,26 @@ const scorecardZod = z.object({
 	roundrating: z.number().optional().nullable()
 })
 export type Scorecard = z.infer<typeof scorecardZod>
+
+const discZod = z.object({
+	brand: z.string(),
+	color: z.string().optional().nullable(),
+	model: z.string().optional().nullable(),
+	plastic: z.string().optional().nullable(),
+	number: z.number(),
+	weight: z.number().optional().nullable(),
+	price: z.number().optional().nullable()
+})
+
 const FEED = z.object({
 	id: z.string(),
-	type: z.enum(['scorecard', 'disc', 'adventure', 'podcast-completed', 'memo']),
+	type: z.enum(['scorecard', 'disc', 'adventure', 'podcast-completed', 'memo', 'lost-disc']),
 	date: z.date(),
 	data: z.object({
 		scorecard: scorecardZod.optional(),
 		memo: z.object({ html: z.string() }).optional(),
-		disc: z
-			.object({
-				brand: z.string(),
-				color: z.string().optional().nullable(),
-				model: z.string().optional().nullable(),
-				plastic: z.string().optional().nullable(),
-				number: z.number(),
-				weight: z.number().optional().nullable(),
-				price: z.number().optional().nullable()
-			})
-			.optional(),
+		disc: discZod.optional(),
+		lostDisc: discZod.optional(),
 		adventure: z
 			.object({
 				adventure_type: z.string()
@@ -148,8 +152,8 @@ export type FEED_TYPE = z.infer<typeof FEED>
 const feed = defineCollection({
 	loader: async () => {
 		const response = await sql`select *
-                               from models.feed
-                               order by date desc`
+															 from models.feed
+															 order by date desc`
 		const idk = response as FEED_TYPE[]
 
 		const sessionsResponse = await fetch(
@@ -198,8 +202,8 @@ const feed = defineCollection({
 const ticks = defineCollection({
 	loader: async () => {
 		const response = await sql`select *
-                               from kestra.ticks
-                               order by "Date" desc`
+															 from kestra.ticks
+															 order by "Date" desc`
 		return response.map((x) => ({
 			...x,
 			id: x['id'].toString()
