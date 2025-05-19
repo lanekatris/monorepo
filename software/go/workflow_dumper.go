@@ -178,15 +178,15 @@ func WorkflowDumper(ctx workflow.Context, eventName string, data string) error {
 	}
 
 	childOptions := workflow.ChildWorkflowOptions{
-		WorkflowID:        "log-event-dumper",
-		TaskQueue:         GreetingTaskQueue,
-		ParentClosePolicy: enums.PARENT_CLOSE_POLICY_ABANDON,
+		WorkflowID:            "log-event-dumper",
+		TaskQueue:             GreetingTaskQueue,
+		ParentClosePolicy:     enums.PARENT_CLOSE_POLICY_ABANDON,
 		WorkflowIDReusePolicy: enums.WORKFLOW_ID_REUSE_POLICY_ALLOW_DUPLICATE,
 	}
 
 	childCtx := workflow.WithChildOptions(ctx, childOptions)
 
-	err = workflow.ExecuteChildWorkflow(childCtx, WorkflowLogger, eventName).GetChildWorkflowExecution().Get(childCtx, nil)
+	err = workflow.ExecuteChildWorkflow(childCtx, WorkflowLogger, eventName, data).GetChildWorkflowExecution().Get(childCtx, nil)
 	if temporal.IsWorkflowExecutionAlreadyStartedError(err) {
 		return nil
 	}
@@ -200,13 +200,25 @@ type WorkflowInputDumper struct {
 	EventService EventService
 }
 
-func WorkflowLogger(ctx workflow.Context, eventName string) error {
+func WorkflowLogger(ctx workflow.Context, eventName string, data string) error {
 	options := workflow.ActivityOptions{
 		StartToCloseTimeout: time.Minute * 1,
 	}
 
 	ctx = workflow.WithActivityOptions(ctx, options)
 
-	log.Info("Event Logged", "name", eventName)
+	if eventName == "twitch_stream_online_v1" {
+		var d StreamData
+		err := json.Unmarshal([]byte(data), &d)
+		if err != nil {
+			return err
+		}
+
+		log.Info("Twitch stream online", "name", d.UserName)
+
+	} else {
+		log.Info("Event Logged", "name", eventName)
+	}
+
 	return nil
 }

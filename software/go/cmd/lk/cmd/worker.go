@@ -144,6 +144,17 @@ func deploySchedulesV2(c client.Client) {
 				TaskQueue: shared.ServerQueue,
 			},
 		},
+		{
+			ID: "schedule_twitch",
+			Spec: client.ScheduleSpec{
+				CronExpressions: []string{"*/30 * * * *"},
+			},
+			Action: &client.ScheduleWorkflowAction{
+				ID:        "action_twitch",
+				Workflow:  shared.WorkflowTwitch,
+				TaskQueue: shared.ServerQueue,
+			},
+		},
 	}
 	for _, schedule := range schedules {
 		log.Info("Creating schedule", "id", schedule.ID)
@@ -260,6 +271,11 @@ var workerCmd = &cobra.Command{
 
 		// Playing around
 		w.RegisterWorkflow(shared.WorkflowLogger)
+
+		w.RegisterWorkflow(shared.WorkflowTwitch)
+		w.RegisterActivity(shared.KvGetString)
+		w.RegisterActivity(shared.GetTwitchToken)
+		w.RegisterActivity(shared.GetStreamByUserID)
 
 		// Start listening to the Task Queue
 		err = w.Run(worker.InterruptCh())
