@@ -70,7 +70,7 @@ const page = defineCollection({
 })
 
 const discGolfCourses = defineCollection({
-	loader: file('src/data/courses.json'),
+	loader: file('public/courses.json'),
 	schema: z.object({
 		yearEstablished: z.number(),
 		name: z.string()

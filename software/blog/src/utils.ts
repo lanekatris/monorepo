@@ -1,4 +1,6 @@
 import { type TAG_TYPE } from './content.config.ts'
+import path from 'path'
+import fs from 'fs'
 
 export function isDev() {
 	return process.env.NODE_ENV === 'development'
@@ -22,6 +24,8 @@ export function convertToCSV(jsonData) {
 export const FILE_URLS = {
 	PODCAST_JSON: '/podcasts.json'
 }
+
+export type DownloadableFile = 'ticks.json'
 
 // todo: load from directory
 // todo: validate the pages as subpages and zod valdiates
@@ -72,9 +76,30 @@ export const FILES = [
 		type: 'feed-json',
 		filename: 'feed.json',
 		pages: ['/feed']
+	},
+	{
+		type: 'ticks.json',
+		filename: 'ticks.json',
+		pages: ['/ticks']
+	},
+	{
+		type: 'courses.json',
+		filename: 'courses.json',
+		pages: ['/disc-golf'],
+		notes: `Updated on 2025-05-18. 7,474 unique courses vs 8,085 mentioned on the website.`
+	},
+	{
+		type: 'courses.csv',
+		filename: 'courses.csv',
+		pages: ['/disc-golf'],
+		notes: `Updated on 2025-05-18. 7,474 unique courses vs 8,085 mentioned on the website.`
 	}
 ]
 
 export function getFileDownloadPath(fileName: string) {
 	return `/${fileName}`
+}
+
+export function createADownloadableJsonFile(fileName: DownloadableFile, data: any) {
+	fs.writeFileSync(path.join('public', fileName), JSON.stringify(data, null, 2))
 }

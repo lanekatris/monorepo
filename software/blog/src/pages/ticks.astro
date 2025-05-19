@@ -1,14 +1,22 @@
 ---
 import Layout from '../layouts/BlogPost.astro'
 import { getCollection } from 'astro:content'
+import { createADownloadableJsonFile, getFileDownloadPath } from '../utils'
 
 const URL = 'https://www.mountainproject.com/user/7079884/lane-katris/tick-export'
 
 const ticks = await getCollection('ticks')
+createADownloadableJsonFile(
+	'ticks.json',
+	ticks.map((x) => x.data)
+)
 ---
 
 <Layout title="My Climb Ticks" pubDate={new Date('November 11 2024')}>
 	<p>This data is sourced from Mountain Project <a href={URL} target="_blank">here</a>.</p>
+	<a href={getFileDownloadPath('ticks.json')}>ticks.json</a>
+	<br />
+	<a href="/data">/data</a>
 	<table>
 		<thead>
 			<tr>

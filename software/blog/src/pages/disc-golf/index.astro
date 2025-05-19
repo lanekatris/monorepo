@@ -8,7 +8,7 @@ import { type Scorecard, sql } from '../../content.config'
 
 import winStreakImage from '../../../public/win-streak-green.svg'
 import { Image } from 'astro:assets'
-import { convertToCSV, isDev, tagUrl } from '../../utils'
+import { convertToCSV, getFileDownloadPath, isDev, tagUrl } from '../../utils'
 import { getDgptEvents } from '../../getDgptEvents'
 import fs from 'fs'
 import path from 'path'
@@ -180,10 +180,14 @@ const rounds = (await getCollection('feed')).reduce((acc: Scorecard[], x) => {
 
 	<h1>US Disc Golf Courses Stats</h1>
 	<p>
-		{courses.length.toLocaleString()} courses according to <a
+		{courses.length.toLocaleString()} unique courses according to <a
 			href="https://www.pdga.com/course-directory/advanced?order=field_course_year_established&sort=desc&page=1"
 			>pdga.com</a
 		>
+		<ul>
+	<li><a href={getFileDownloadPath("courses.json")}>courses.json</a></li>
+	<li><a href={getFileDownloadPath('courses.csv')}>courses.csv</a></li>
+</ul>
 	</p>
 
 	<h3>New Courses Per Year</h3>
