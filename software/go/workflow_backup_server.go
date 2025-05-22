@@ -37,7 +37,6 @@ func WorkflowBackupServer(ctx workflow.Context) error {
 }
 
 func BackupFolder(folderToBackup string) (string, error) {
-	//return ExecOnHost("restic", "backup", folderToBackup)
 	cmd := exec.Command("restic", "backup", folderToBackup)
 	var out bytes.Buffer
 	var stderr bytes.Buffer

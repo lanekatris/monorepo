@@ -27,21 +27,20 @@ func WorkflowTwitch(ctx workflow.Context) error {
 	}
 
 	// get token
+	//var token string
+	//err := workflow.ExecuteActivity(ctx, KvGetString, "twitch-token").Get(ctx, &token)
+	//if err != nil {
+	//	return err
+	//}
+
+	//if token == "" {
 	var token string
-	err := workflow.ExecuteActivity(ctx, KvGetString, "twitch-token").Get(ctx, &token)
+	err := workflow.ExecuteActivity(ctx, GetTwitchToken, clientId, secret).Get(ctx, &token)
 	if err != nil {
 		return err
 	}
-
-	if token == "" {
-		var newToken string
-		err := workflow.ExecuteActivity(ctx, GetTwitchToken, clientId, secret).Get(ctx, &newToken)
-		if err != nil {
-			return err
-		}
-		token = newToken
-
-	}
+	//token = token
+	//}
 
 	twitchStreams := [4]string{"headshotchick", "theprimeagen", "beardedblevins", "ninja"}
 
@@ -55,7 +54,7 @@ func WorkflowTwitch(ctx workflow.Context) error {
 
 		if stream == nil {
 			log.Info("stream not live")
-			return nil
+			continue
 		}
 
 		stringStream, err := json.Marshal(stream)

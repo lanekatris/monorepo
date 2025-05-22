@@ -36,13 +36,10 @@ func SetupViper() {
 	viper.AddConfigPath("$HOME")
 	viper.AddConfigPath("/config")
 	viper.AutomaticEnv()
-	//err := viper.ReadInConfig()
-	//if err != nil {
-	//	panic(err)
-	//}
+
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
-			// create it
+
 			log.Info("No config file found")
 			//viper.Set(cmd.InboxApiKeyConfig, "")
 			//viper.Set(cmd.PostgresApiKeyConfig, "")
