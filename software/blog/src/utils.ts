@@ -86,13 +86,13 @@ export const FILES = [
 		type: 'courses.json',
 		filename: 'courses.json',
 		pages: ['/disc-golf'],
-		notes: `Updated on 2025-05-18. 7,474 unique courses vs 8,085 mentioned on the website.`
+		notes: `Updated on 2025-05-18. 7,474 unique courses vs 8,085 mentioned on the website. Took 4.43 minutes to generate.`
 	},
 	{
 		type: 'courses.csv',
 		filename: 'courses.csv',
 		pages: ['/disc-golf'],
-		notes: `Updated on 2025-05-18. 7,474 unique courses vs 8,085 mentioned on the website.`
+		notes: `Updated on 2025-05-18. 7,474 unique courses vs 8,085 mentioned on the website. Took 4.43 minutes to generate.`
 	}
 ]
 

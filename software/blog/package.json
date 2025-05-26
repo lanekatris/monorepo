@@ -18,6 +18,7 @@
     "@astrojs/sitemap": "^3.4.0",
     "@neondatabase/serverless": "^0.10.1",
     "astro": "^5.7.13",
+    "astro-pagefind": "^1.8.3",
     "chartjs-node-canvas": "^4.1.6",
     "cheerio": "^1.0.0",
     "csvtojson": "^2.0.10",

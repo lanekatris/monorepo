@@ -1,6 +1,7 @@
 import { sql } from '@vercel/postgres';
 import React from 'react';
 import { unstable_noStore as noStore } from 'next/cache';
+import Autolinker from 'autolinker';
 
 export default async function InboxRawPage() {
   noStore();
@@ -28,7 +29,10 @@ export default async function InboxRawPage() {
   return (
     <>
       {issues.map((issue) => (
-        <div key={issue.message}>{issue.message}</div>
+        <div
+          key={issue.message}
+          dangerouslySetInnerHTML={{ __html: Autolinker.link(issue.message) }}
+        ></div>
       ))}
       <div>=============</div>
 

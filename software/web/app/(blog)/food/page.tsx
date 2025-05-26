@@ -48,15 +48,6 @@ export default async function FoodPage({
     (x) => x.data.raindrop?.collectionId === RAINDROP_COLLECTION_RECIPES
   );
 
-  const { rows }: { rows: { event_id: number }[] } =
-    await sql`select cast(data::jsonb->>'eventId' as integer) event_id
-              from events
-              where event_name = 'groceries_cleared_v1'
-              order by created_at desc limit 1`;
-
-  const eventId = rows[0]?.event_id ?? 0;
-  console.log('event id', eventId);
-
   const {
     rows: cartItems
   }: {
@@ -66,15 +57,9 @@ export default async function FoodPage({
       barcode: string;
       name: string | undefined;
     }[];
-  } =
-    await sql`select e.id, e.created_at at time zone 'EST' created_at, data::jsonb->'barcode' barcode, ng.name
-              from events e
-                       left join noco.grocery ng on ng.barcode = data::jsonb->>'barcode'
-              where event_name = 'barcode_scanned_v1'
-                and data ::jsonb->>'barcode' != 'abc123'
-                and e.id
-                  > ${eventId}
-              order by created_at desc`;
+  } = await sql`select *
+                from models.groceries
+                where in_cart = true`;
 
   return (
     <main>

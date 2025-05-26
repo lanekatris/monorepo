@@ -19,15 +19,6 @@ var kickCmd = &cobra.Command{
 	Long:  `A a`,
 	Args:  cobra.MatchAll(cobra.ExactArgs(1), cobra.OnlyValidArgs),
 	Run: func(cmd *cobra.Command, args []string) {
-		log.Warn("I don't think this should have ran")
-		return
-	},
-}
-
-var kickMarkdownCmd = &cobra.Command{
-	Use: "deploy-markdown",
-	//Args: cobra.MinimumNArgs(1),
-	Run: func(cmd *cobra.Command, args []string) {
 		log.Info("Creating temporal client...")
 		cc, err := client.Dial(client.Options{
 			HostPort: "192.168.86.100:7233",
@@ -40,24 +31,42 @@ var kickMarkdownCmd = &cobra.Command{
 		defer cc.Close()
 
 		options := client.StartWorkflowOptions{
-			ID:        "cli-kick-deploy-markdown",
+			ID:        "cli-kick-workflow",
 			TaskQueue: "server",
 		}
 
 		log.Info("Executing workflow...")
-		we, err := cc.ExecuteWorkflow(context.Background(), options, shared.WorkflowMarkdownToDb)
-		if err != nil {
-			log.Error("unable to complete Workflow", err)
-			os.Exit(1)
+		if args[0] == "twitch" {
+			we, err := cc.ExecuteWorkflow(context.Background(), options, shared.WorkflowTwitch)
+			if err != nil {
+				log.Error("unable to complete Workflow", err)
+				os.Exit(1)
+			}
+
+			err = we.Get(context.Background(), nil)
+			if err != nil {
+				log.Error("unable to complete Workflow2222", err)
+				os.Exit(1)
+			}
+		} else {
+			log.Warn("Unknown workflow type: " + args[0])
 		}
 
-		err = we.Get(context.Background(), nil)
-		if err != nil {
-			log.Error("unable to complete Workflow2222", err)
-			os.Exit(1)
-		}
+		//we, err := cc.ExecuteWorkflow(context.Background(), options, shared.WorkflowMarkdownToDb)
+		//if err != nil {
+		//	log.Error("unable to complete Workflow", err)
+		//	os.Exit(1)
+		//}
+
 		log.Info("Workflow finished.")
 		//log.Info("Kick success", "workflow", arg)
+	},
+}
+
+var kickMarkdownCmd = &cobra.Command{
+	Use: "deploy-markdown",
+	//Args: cobra.MinimumNArgs(1),
+	Run: func(cmd *cobra.Command, args []string) {
 	},
 }
 

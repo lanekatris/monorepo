@@ -17,6 +17,8 @@ import React from 'react';
 
 import { NotAuthorized } from '../../(blog)/feed/notAuthorized';
 import { createEvent } from '../../../lib/createEvent';
+import { getTemporalClient } from '../../../lib/getTemporalClient';
+import { nanoid } from 'nanoid';
 
 export const dynamic = 'force-dynamic';
 
@@ -54,7 +56,9 @@ export default async function AdminPage({
     if (!id) throw new Error('id is required');
     if (!url || typeof url !== 'string') throw new Error('url is required');
 
-    await sql`update noco.url set clicks = clicks + 1 where id = ${+id}`;
+    await sql`update noco.url
+              set clicks = clicks + 1
+              where id = ${+id}`;
 
     // THIS IS F**KING CRITICAL FOR DATA TO UPDATE AS EXPECTED
     revalidatePath('/admin');
@@ -71,14 +75,33 @@ export default async function AdminPage({
     redirect('/admin?success=true');
   }
 
+  async function goToSleep() {
+    'use server';
+    const client = await getTemporalClient();
+    // If my computer is already turned off or the worker isn't running I don't want to fire up, and then it gets put to sleep
+    await client.workflow.start('WorkflowSleep', {
+      workflowId: `gotosleep-${nanoid()}`,
+      taskQueue: 'GREETING_TASK_QUEUE',
+      workflowExecutionTimeout: '1m',
+      retry: {
+        maximumAttempts: 1
+      }
+    });
+    redirect('/admin?success=true');
+  }
+
   const {
     rows: urls
   }: {
     rows: Array<Url>;
-  } = await sql`select * from noco.url order by clicks desc`;
+  } = await sql`select *
+                from noco.url
+                order by clicks desc`;
 
   const { rows: maintenances }: { rows: Array<Maintenance> } =
-    await sql`select * from noco.maintenance order by "Date" desc`;
+    await sql`select *
+              from noco.maintenance
+              order by "Date" desc`;
 
   const grouped = groupBy(maintenances, 'Property');
 
@@ -92,13 +115,16 @@ export default async function AdminPage({
       Tags: string;
       id: number;
     }[];
-  } = await sql`select * from noco.purchases order by "Date" desc`;
+  } = await sql`select *
+                from noco.purchases
+                order by "Date" desc`;
 
   const success = (await searchParams).success;
   console.log('success', success);
 
   const { rows: events }: { rows: { name: string; value: string }[] } =
-    await sql`select * from noco.config`;
+    await sql`select *
+              from noco.config`;
   return (
     <Container maxWidth="sm">
       {/*<Breadcrumbs>*/}
@@ -134,6 +160,13 @@ export default async function AdminPage({
             </form>
           </li>
         ))}
+        <li>
+          <form action={goToSleep}>
+            <Button variant="plain" type="submit" size="sm">
+              Go to sleep
+            </Button>
+          </form>
+        </li>
       </ul>
 
       <Typography level="h4">Events</Typography>

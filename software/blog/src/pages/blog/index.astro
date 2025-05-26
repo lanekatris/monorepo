@@ -6,9 +6,58 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts'
 import { getCollection } from 'astro:content'
 import FormattedDate from '../../components/FormattedDate.astro'
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-)
+export interface Memo {
+	uid: number
+	name: string
+	rowStatus: string
+	creatorId: number
+	createdTs: number
+	updatedTs: number
+	displayTime: string
+	content: string
+	visibility: string
+	pinned: boolean
+	creatorName: string
+	creatorUsername: string
+	_date: Date
+	snippet: string
+	resources: {
+		filename: string
+		type: string
+		name: string
+	}[]
+}
+const posts = (await getCollection('blog')).map(x => ({
+	date: x.data.pubDate,
+	title: x.data.title,
+	id: x.id,
+	draft: x.data.draft,
+	url: `/blog/${x.id}/`
+}))
+
+
+// const memos = await getCollection('memos')
+
+const response = await fetch('http://192.168.86.100:5230/api/v1/memos?pageSize=1000', {
+	headers: { authorization: `Bearer ${import.meta.env.MEMOS_API_KEY}` }
+})
+const rawMemos: { memos: Memo[] } = await response.json()
+
+const memos = rawMemos.memos.map((x) => ({
+	// ...x,
+	// _date: new Date(x.displayTime) //new Date(x.displayTs * 1000),
+	date: new Date(x.displayTime),
+	title: x.snippet,
+	id: x.uid,
+	draft: false,
+	url: `https://memo.lkat.io/${x.name}`
+}))
+
+const list = [...posts,...memos] //posts.concat(memos)
+
+list.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+
+// console.log(memos[0])
 ---
 
 <!doctype html>
@@ -20,17 +69,23 @@ const posts = (await getCollection('blog')).sort(
 <Header />
 <main>
 	<section>
-		<h1>Blog Index ({posts.filter(x => !x.data.draft).length})</h1>
+		<h1>Blog Index ({list.filter(x => !x.draft).length})</h1>
 		<a href="/tags">All Tags</a>
+		<!--<dl>-->
+		<!--	{-->
+		<!--		memos.map(memo =>-->
+		<!--			<dt>{memo.snippet}</dt>)-->
+		<!--	}-->
+		<!--</dl>-->
 		<dl>
 			{
-				posts.filter(x => !x.data.draft).map((post) => (
-					<dt>
+				list.filter(x => !x.draft).map((post) => (
+					<dt class="terminal-alert">
 						<small>
-							<FormattedDate date={post.data.pubDate} />
+							<FormattedDate date={post.date} />
 						</small>
-						<a href={`/blog/${post.id}/`}>
-							{post.data.title}
+						<a href={post.url}>
+							{post.title}
 						</a>
 						<!--<br />-->
 						<!--{post.data.tags && <small class="muted">-->
@@ -43,7 +98,7 @@ const posts = (await getCollection('blog')).sort(
 		</dl>
 	</section>
 	<section>
-		<div class="terminal-alert">I have <code>{posts.filter(x => x.data.draft).length}</code> <b>draft</b> blog post(s).
+		<div class="terminal-alert">I have <code>{posts.filter(x => x.draft).length}</code> <b>draft</b> blog post(s).
 		</div>
 	</section>
 </main>

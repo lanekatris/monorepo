@@ -4,6 +4,7 @@ import mdx from '@astrojs/mdx'
 // import wikiLinkPlugin from "@portaljs/remark-wiki-link";
 import sitemap from '@astrojs/sitemap'
 import { execSync } from 'child_process'
+import pagefind from 'astro-pagefind'
 
 export function remarkModifiedTime() {
 	// @ts-ignore
@@ -24,7 +25,7 @@ export function remarkModifiedTime() {
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://lanekatris.com',
-	integrations: [mdx({ remarkPlugins: [remarkModifiedTime] }), sitemap()],
+	integrations: [mdx({ remarkPlugins: [remarkModifiedTime] }), sitemap(), pagefind()],
 	markdown: {
 		// shikiConfig: {
 		// 	theme: 'dracula'
