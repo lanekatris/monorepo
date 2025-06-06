@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/BlogPost.astro'
+import BestImage from '../../components/BestImage.astro'
+import img from '../../assets/potomac_camp_2016.jpg'
+import img2 from '../../assets/potomac_camp_2018.jpg'
+import img4 from '../../assets/potomac_camp_2021.jpg'
+import img3 from '../../assets/potomac_camp_2024_2.jpeg'
+---
+
+<Layout title="The Trough Campsite" pubDate={new Date('May 30, 2025')}>
+	<BestImage image={img} alt="2015 Camp Trip" />
+
+	<details>
+		<summary>More Pictures of Camp</summary>
+		<BestImage image={img2} alt="2018 Couples Camp Trip" />
+		<BestImage image={img4} alt="2021 Camp Trip" />
+		<BestImage image={img3} alt="2024 Camp Trip" />
+	</details>
+
+	<h1>Notebooks</h1>
+	TODO
+</Layout>

@@ -38,11 +38,15 @@ const machines = await Promise.all([
 ])
 
 const eventCounts = await sql`select event_name,min(created_at)::date earliest_date, max(created_at)::date latest_date, count(*)::int count from events group by event_name order by count(*) desc`
+const obsidianCounts = await sql`select * from models.obsidian_tags order by tag`
 ---
 
 <Layout title="My Homelab" pubDate={new Date('August 08 2021')}>
 	<ol class="terminal-toc">
 		{
+			<li>
+				<a href="#new">New Computer Setup</a>
+			</li>
 				<li>
 					<a href={`#dc`}>Docker Compose Files</a>
 				</li>
@@ -52,6 +56,10 @@ const eventCounts = await sql`select event_name,min(created_at)::date earliest_d
 		}
 	</ol>
 
+	<h1 id="new">New Computer Setup</h1>
+	<ul>
+		<li><a href="https://minio.lkat.io/browser/fresh-os-install" target="_blank">Install Files</a></li>
+	</ul>
 	<h1 id="dc">Docker Compose Files</h1>
 	<p>
 I suck		 in my homelab docker-compose files and creates easy links to navigate to them if
@@ -159,5 +167,13 @@ I suck		 in my homelab docker-compose files and creates easy links to navigate t
 						<td>{eventCount.latest_date.toLocaleDateString()}</td>
 						<td>{eventCount.count.toLocaleString()}</td>
 					</tr>)}
+					{obsidianCounts.map(o=> <tr>
+						<td>{o.tag}</td>
+						<td>{o.min_date?.toLocaleDateString()}</td>
+						<td>{o.max_date?.toLocaleDateString()}</td>
+						<td>{o.count}</td>
+
+					</tr>)}
 					</tbody></table>
+
 </Layout>
