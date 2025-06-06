@@ -35,87 +35,33 @@ export interface DailyUnits {
 export const wmoWeatherEmojiMap: Map<
   number,
   { description: string; emoji: string }
-> = new Map([
+> = new Map<number, { description: string; emoji: string }>([
   [0, { description: 'Clear sky', emoji: '☀️' }],
-  [1, { description: 'Partly cloudy', emoji: '🌤️' }],
-  [2, { description: 'Partly cloudy (scattered clouds)', emoji: '⛅' }],
-  [3, { description: 'Overcast (broken clouds)', emoji: '🌥️' }],
-  [4, { description: 'Overcast', emoji: '☁️' }],
-  [5, { description: 'Fog or thick haze', emoji: '🌫️' }],
-  [10, { description: 'Mist', emoji: '🌁' }],
-  [11, { description: 'Shallow fog', emoji: '🌫️' }],
-  [12, { description: 'Patches of fog', emoji: '🌫️' }],
-  [18, { description: 'Squalls', emoji: '💨' }],
-  [20, { description: 'Drizzle', emoji: '🌦️' }],
-  [21, { description: 'Freezing drizzle', emoji: '❄️🌧️' }],
-  [22, { description: 'Rain', emoji: '🌧️' }],
-  [23, { description: 'Freezing rain', emoji: '❄️🌧️' }],
-  [24, { description: 'Rain showers', emoji: '🌦️' }],
-  [25, { description: 'Snow', emoji: '🌨️' }],
-  [26, { description: 'Snow showers', emoji: '🌨️' }],
-  [27, { description: 'Snow grains', emoji: '🌨️' }],
-  [28, { description: 'Ice pellets', emoji: '🧊' }],
-  [29, { description: 'Hail', emoji: '🌩️🧊' }],
-  [30, { description: 'Thunderstorm (dry)', emoji: '🌩️' }],
-  [31, { description: 'Thunderstorm with rain', emoji: '⛈️' }],
-  [32, { description: 'Thunderstorm with hail', emoji: '⛈️🧊' }],
-  [33, { description: 'Thunderstorm with snow', emoji: '🌩️🌨️' }],
-  [40, { description: 'Reduced visibility by dust/sand', emoji: '🌪️' }],
-  [41, { description: 'Blowing snow', emoji: '🌬️❄️' }],
-  [42, { description: 'Drifting snow', emoji: '🌨️💨' }],
-  [43, { description: 'Duststorm', emoji: '🌪️' }],
-  [44, { description: 'Sandstorm', emoji: '🌪️' }],
-  [45, { description: 'Severe duststorm', emoji: '🌪️🔥' }],
-  [46, { description: 'Severe sandstorm', emoji: '🌪️🔥' }],
-  [50, { description: 'Light drizzle', emoji: '🌦️' }],
-  [51, { description: 'Moderate drizzle', emoji: '🌧️' }],
-  [52, { description: 'Heavy drizzle', emoji: '🌧️' }],
-  [53, { description: 'Light rain', emoji: '🌧️' }],
-  [54, { description: 'Moderate rain', emoji: '🌧️' }],
-  [55, { description: 'Heavy rain', emoji: '🌧️🌧️' }],
-  [56, { description: 'Light snow', emoji: '🌨️' }],
-  [57, { description: 'Moderate snow', emoji: '🌨️' }],
-  [58, { description: 'Heavy snow', emoji: '❄️❄️' }],
-  [59, { description: 'Rain and snow', emoji: '🌧️❄️' }],
-  [60, { description: 'Showers, slight', emoji: '🌦️' }],
-  [61, { description: 'Showers, moderate', emoji: '🌧️' }],
-  [62, { description: 'Showers, heavy', emoji: '🌧️🌧️' }],
-  [63, { description: 'Thunderstorm, slight', emoji: '🌩️' }],
-  [64, { description: 'Thunderstorm, moderate', emoji: '⛈️' }],
-  [65, { description: 'Thunderstorm, heavy', emoji: '🌩️🌩️' }],
-  [66, { description: 'Thunderstorm with hail, slight', emoji: '🌩️🧊' }],
-  [67, { description: 'Thunderstorm with hail, moderate', emoji: '⛈️🧊' }],
-  [68, { description: 'Thunderstorm with hail, heavy', emoji: '⛈️🧊🧊' }],
-  [70, { description: 'Light snow grains', emoji: '❄️' }],
-  [71, { description: 'Moderate snow grains', emoji: '🌨️' }],
-  [72, { description: 'Heavy snow grains', emoji: '🌨️❄️' }],
-  [73, { description: 'Light ice pellets', emoji: '🧊' }],
-  [74, { description: 'Moderate ice pellets', emoji: '🧊🧊' }],
-  [75, { description: 'Heavy ice pellets', emoji: '🧊🧊🧊' }],
-  [76, { description: 'Light hail', emoji: '🌩️🧊' }],
-  [77, { description: 'Moderate hail', emoji: '⛈️🧊' }],
-  [78, { description: 'Heavy hail', emoji: '⛈️🧊🧊' }],
-  [79, { description: 'Thunderstorm with snow and hail', emoji: '🌩️❄️🧊' }],
-  [80, { description: 'Unspecified precipitation', emoji: '🌧️❓' }],
-  [81, { description: 'Rain shower, slight', emoji: '🌦️' }],
-  [82, { description: 'Rain shower, moderate or heavy', emoji: '🌧️🌧️' }],
-  [83, { description: 'Snow shower, slight', emoji: '🌨️' }],
-  [84, { description: 'Snow shower, moderate or heavy', emoji: '❄️❄️' }],
-  [85, { description: 'Hail shower, slight', emoji: '🌦️🧊' }],
-  [86, { description: 'Hail shower, moderate or heavy', emoji: '🌧️🧊🧊' }],
-  [87, { description: 'Drifting snow, light', emoji: '🌨️💨' }],
-  [88, { description: 'Drifting snow, moderate or heavy', emoji: '🌨️💨💨' }],
-  [89, { description: 'Blowing snow, light', emoji: '❄️💨' }],
-  [90, { description: 'Blowing snow, moderate or heavy', emoji: '❄️💨💨' }],
-  [91, { description: 'Thunderstorm, no precipitation', emoji: '🌩️' }],
-  [92, { description: 'Thunderstorm, with precipitation', emoji: '⛈️' }],
-  [93, { description: 'Dust or sand raised by wind', emoji: '💨🌪️' }],
-  [94, { description: 'Duststorm or sandstorm in sight', emoji: '🌪️👀' }],
-  [95, { description: 'Thunderstorm, slight/moderate', emoji: '🌩️' }],
-  [96, { description: 'Thunderstorm with hail, slight', emoji: '🌩️🧊' }],
-  [97, { description: 'Thunderstorm, heavy', emoji: '⛈️⛈️' }],
-  [98, { description: 'Thunderstorm with hail, moderate', emoji: '⛈️🧊🧊' }],
-  [99, { description: 'Thunderstorm with hail, heavy', emoji: '⛈️🧊🧊🧊' }]
+  [1, { description: 'Mostly clear', emoji: '🌤️' }],
+  [2, { description: 'Partly cloudy', emoji: '⛅' }],
+  [3, { description: 'Overcast', emoji: '☁️' }],
+  [45, { description: 'Fog', emoji: '🌫️' }],
+  [48, { description: 'Depositing rime fog', emoji: '🌁' }],
+  [51, { description: 'Light drizzle', emoji: '🌦️' }],
+  [53, { description: 'Moderate drizzle', emoji: '🌧️' }],
+  [55, { description: 'Dense drizzle', emoji: '🌧️' }],
+  [61, { description: 'Slight rain', emoji: '🌦️' }],
+  [63, { description: 'Moderate rain', emoji: '🌧️' }],
+  [65, { description: 'Heavy rain', emoji: '🌧️' }],
+  [66, { description: 'Freezing rain (light)', emoji: '🌨️' }],
+  [67, { description: 'Freezing rain (heavy)', emoji: '🌨️' }],
+  [71, { description: 'Light snow', emoji: '❄️' }],
+  [73, { description: 'Moderate snow', emoji: '❄️' }],
+  [75, { description: 'Heavy snow', emoji: '❄️' }],
+  [77, { description: 'Snow grains', emoji: '🌨️' }],
+  [80, { description: 'Slight rain showers', emoji: '🌦️' }],
+  [81, { description: 'Moderate rain showers', emoji: '🌧️' }],
+  [82, { description: 'Violent rain showers', emoji: '⛈️' }],
+  [85, { description: 'Slight snow showers', emoji: '❄️' }],
+  [86, { description: 'Heavy snow showers', emoji: '❄️' }],
+  [95, { description: 'Thunderstorm (slight to moderate)', emoji: '⛈️' }],
+  [96, { description: 'Thunderstorm with hail (slight)', emoji: '🌩️' }],
+  [99, { description: 'Thunderstorm with hail (heavy)', emoji: '🌩️' }]
 ]);
 
 export const wmoWeatherCodes: Map<number, string> = new Map([
@@ -200,3 +146,31 @@ export const wmoWeatherCodes: Map<number, string> = new Map([
   [98, 'Thunderstorm with hail, moderate'],
   [99, 'Thunderstorm with hail, heavy']
 ]);
+export const weatherEmojisV2: Record<number, string> = {
+  0: '☀️', // Clear sky
+  1: '🌤️', // Mostly clear
+  2: '⛅', // Partly cloudy
+  3: '☁️', // Overcast
+  45: '🌫️', // Fog
+  48: '🌁', // Depositing rime fog
+  51: '🌦️', // Light drizzle
+  53: '🌧️', // Moderate drizzle
+  55: '🌧️', // Dense drizzle
+  61: '🌦️', // Slight rain
+  63: '🌧️', // Moderate rain
+  65: '🌧️', // Heavy rain
+  66: '🌨️', // Freezing rain (light)
+  67: '🌨️', // Freezing rain (heavy)
+  71: '❄️', // Light snow
+  73: '❄️', // Moderate snow
+  75: '❄️', // Heavy snow
+  77: '🌨️', // Snow grains
+  80: '🌦️', // Slight rain showers
+  81: '🌧️', // Moderate rain showers
+  82: '⛈️', // Violent rain showers
+  85: '❄️', // Slight snow showers
+  86: '❄️', // Heavy snow showers
+  95: '⛈️', // Thunderstorm (slight to moderate)
+  96: '🌩️', // Thunderstorm with hail (slight)
+  99: '🌩️' // Thunderstorm with hail (heavy)
+};

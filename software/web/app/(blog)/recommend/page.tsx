@@ -117,6 +117,7 @@ export default async function RecommendPage() {
                   const windMax = Math.round(d.daily.wind_speed_10m_max[i]);
 
                   const code = wmoWeatherEmojiMap.get(d.daily.weather_code[i]);
+                  // const code =
 
                   return (
                     <td
@@ -134,7 +135,7 @@ export default async function RecommendPage() {
                       <span style={{ fontSize: '1.4em' }}>{code?.emoji}</span>
                       <br />
                       <small>
-                        {temp}°F
+                        {Math.round(temp)}°F
                         <br />
                         ☀️ {uvMax}/{uvClearSkyMax}
                         <br />☔ {rainAvg}/{rainMax}%
