@@ -79,7 +79,7 @@ services:
 #    restart: unless-stopped
 
   memos:
-    image: neosmemo/memos:0.22.4
+    image: neosmemo/memos:0.24.3
     restart: unless-stopped
     ports:
       - "5230:5230"
@@ -162,7 +162,8 @@ services:
       kestra-postgres:
         condition: service_started
   audiobookshelf:
-    image: ghcr.io/advplyr/audiobookshelf:2.20.0
+    image: ghcr.io/advplyr/audiobookshelf:2.23.0
+    restart: always
     ports:
       - "13378:80"
     volumes:
@@ -188,3 +189,16 @@ services:
     ports:
       - "3000:3000"
       - "222:22"
+  mazanoke:
+    restart: always
+    container_name: mazanoke
+    image: ghcr.io/civilblur/mazanoke:latest
+    ports:
+      - "3474:80"
+  it-tools:
+    restart: always
+    container_name: it-tools
+    image: corentinth/it-tools:latest
+    ports:
+      - "3500:80"
+
