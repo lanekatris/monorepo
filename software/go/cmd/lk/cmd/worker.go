@@ -225,15 +225,8 @@ var workerCmd = &cobra.Command{
 		//w.RegisterActivity(temporalstuff.SendFitnessEmailActivity)
 		//w.RegisterActivity(temporalstuff.LoadAndPersistObsidianThemeFile)
 
-		db, err := shared.GetDb()
-		shared.HandleError(err)
 		gormDb, err := shared.GetGormDb()
 		shared.HandleError(err)
-
-		var activities = &shared.ObsidianAdventuresActivityInput{Db: db, GormDb: gormDb}
-
-		w.RegisterWorkflow(shared.LoadObsidianAdventuresWorkflow)
-		w.RegisterActivity(activities)
 
 		minifluxDb, err := shared.GetMinifluxDb()
 		shared.HandleError(err)
