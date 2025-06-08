@@ -12,6 +12,7 @@ import (
 	"go.temporal.io/sdk/client"
 	"go.temporal.io/sdk/worker"
 	"shared"
+	db2 "shared/db"
 )
 
 func createBackupArgs(prefix string) []interface{} {
@@ -166,6 +167,17 @@ func deploySchedulesV2(c client.Client) {
 				TaskQueue: shared.ServerQueue,
 			},
 		},
+		{
+			ID: "schedule_vitamins",
+			Spec: client.ScheduleSpec{
+				CronExpressions: []string{"0 21 * * *"}, // every day at 9pm
+			},
+			Action: &client.ScheduleWorkflowAction{
+				ID:        "action_vitamins",
+				Workflow:  shared.WorkflowVitamins,
+				TaskQueue: shared.GreetingTaskQueue,
+			},
+		},
 	}
 	for _, schedule := range schedules {
 		log.Info("Creating schedule", "id", schedule.ID)
@@ -182,7 +194,7 @@ var workerCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		log.Info("Connecting to temporal...")
 		c, err := client.Dial(client.Options{
-			HostPort: "192.168.86.100:7233",
+			HostPort: "100.99.14.109:7233",
 		})
 		if err != nil {
 			log.Fatalf("unable to create Temporal client", err)
@@ -254,12 +266,19 @@ var workerCmd = &cobra.Command{
 			panic("Config not found: " + shared.ResendApiKeyConfig)
 		}
 
+		pgxConn, err := shared.GetPgxDb()
+		shared.HandleError(err)
+
+		// trying out sqlc generated queries, seems interesting
+		queries := db2.New(pgxConn)
+
 		var dumperActivities = &shared.WorkflowInputDumper{
 			Db:          gormDb,
 			EmailClient: shared.NewResendClient(connStr),
 			EventService: &shared.DbEventService{
 				Db: gormDb,
 			},
+			Queries: queries,
 		}
 		w.RegisterWorkflow(shared.WorkflowDumper)
 		w.RegisterActivity(dumperActivities)
@@ -291,6 +310,8 @@ var workerCmd = &cobra.Command{
 		w.RegisterWorkflow(shared.WorkflowSleep)
 
 		w.RegisterWorkflow(shared.WorkflowClimb)
+
+		w.RegisterWorkflow(shared.WorkflowVitamins)
 
 		// Start listening to the Task Queue
 		err = w.Run(worker.InterruptCh())

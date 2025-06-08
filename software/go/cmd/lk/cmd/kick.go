@@ -21,7 +21,7 @@ var kickCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		log.Info("Creating temporal client...")
 		cc, err := client.Dial(client.Options{
-			HostPort: "192.168.86.100:7233",
+			HostPort: "100.99.14.109:7233",
 		})
 		if err != nil {
 			log.Error("unable to create Temporal client", err)

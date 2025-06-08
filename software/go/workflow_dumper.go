@@ -2,18 +2,36 @@ package shared
 
 import (
 	"bytes"
+	"context"
 	"database/sql"
 	"encoding/json"
 	"fmt"
 	"github.com/charmbracelet/log"
 	"github.com/google/uuid"
+	"github.com/jackc/pgx/v5/pgtype"
 	"go.temporal.io/api/enums/v1"
 	"go.temporal.io/sdk/temporal"
 	"go.temporal.io/sdk/workflow"
 	"gorm.io/gorm"
 	"os/exec"
+	"shared/db"
 	"time"
 )
+
+func (input *WorkflowInputDumper) SendEmail(to string, subject string, body string) error {
+	err := input.EmailClient.SendEmail(to, subject, body)
+	return err
+}
+
+func (input *WorkflowInputDumper) DidDoTagToday(ctx context.Context, tagName string) (bool, error) {
+	yes, err := input.Queries.HasTakenVitaminsToday(ctx, pgtype.Text{
+		String: tagName,
+	})
+	if err != nil {
+		return false, err
+	}
+	return yes > 0, nil
+}
 
 func (input *WorkflowInputDumper) DumpEvent(eventName string, data string) error {
 	var e = Event{
@@ -154,6 +172,10 @@ func (input *WorkflowInputDumper) ProcessEvent(eventName string, data string) er
 				}
 
 				// if under 10k the washer is done, send notification
+				err = input.EmailClient.SendEmail("lanekatris@gmail.com", "Move clothes to washer", "Move clothes to washer")
+				if err != nil {
+					return err
+				}
 
 			}
 		}
@@ -172,12 +194,7 @@ func WorkflowDumper(ctx workflow.Context, eventName string, data string) error {
 
 	var activities *WorkflowInputDumper
 
-	err := workflow.ExecuteActivity(ctx, activities.ProcessEvent, eventName, data).Get(ctx, nil)
-	if err != nil {
-		return err
-	}
-
-	err = workflow.ExecuteActivity(ctx, activities.DumpEvent, eventName, data).Get(ctx, nil)
+	err := workflow.ExecuteActivity(ctx, activities.DumpEvent, eventName, data).Get(ctx, nil)
 	if err != nil {
 		return err
 	}
@@ -235,27 +252,5 @@ type WorkflowInputDumper struct {
 	Db           *gorm.DB
 	EmailClient  EmailClient
 	EventService EventService
-}
-
-func WorkflowLogger(ctx workflow.Context, eventName string, data string) error {
-	options := workflow.ActivityOptions{
-		StartToCloseTimeout: time.Minute * 1,
-	}
-
-	ctx = workflow.WithActivityOptions(ctx, options)
-
-	if eventName == "twitch_stream_online_v1" {
-		var d StreamData
-		err := json.Unmarshal([]byte(data), &d)
-		if err != nil {
-			return err
-		}
-
-		log.Info("Twitch stream online", "name", d.UserName)
-
-	} else {
-		log.Info("Event Logged", "name", eventName)
-	}
-
-	return nil
+	Queries      *dbgenerated.Queries
 }

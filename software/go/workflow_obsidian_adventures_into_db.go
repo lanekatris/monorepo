@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"errors"
 	"github.com/adrg/frontmatter"
+	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/lib/pq"
 	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
@@ -27,6 +28,24 @@ type AdventureFile struct {
 	FileContents string
 	Tags         []string
 	Path         string
+}
+
+func GetPgxDb() (*pgxpool.Pool, error) {
+	SetupViper()
+	var connStr = viper.GetString(PostgresApiKeyConfig)
+	if connStr == "" {
+		return nil, errors.New("config not found: " + PostgresApiKeyConfig)
+	}
+
+	ctx := context.Background()
+
+	// Use pool as it reconnects automatically
+	cfg, err := pgxpool.ParseConfig(connStr)
+	if err != nil {
+		return nil, err
+	}
+
+	return pgxpool.NewWithConfig(ctx, cfg)
 }
 
 func GetDb() (*sql.DB, error) {
