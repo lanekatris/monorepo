@@ -20,7 +20,7 @@ func WorkflowPowerOutlet(ctx workflow.Context) error {
 		return err
 	}
 
-	var activities *WorkflowInputDumper
+	var activities *SharedActivities
 	err = workflow.ExecuteActivity(ctx, activities.DumpEvent, "power_monitoring_outlet_v1", response).Get(ctx, nil)
 
 	return err

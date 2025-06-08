@@ -272,7 +272,7 @@ var workerCmd = &cobra.Command{
 		// trying out sqlc generated queries, seems interesting
 		queries := db2.New(pgxConn)
 
-		var dumperActivities = &shared.WorkflowInputDumper{
+		var dumperActivities = &shared.SharedActivities{
 			Db:          gormDb,
 			EmailClient: shared.NewResendClient(connStr),
 			EventService: &shared.DbEventService{

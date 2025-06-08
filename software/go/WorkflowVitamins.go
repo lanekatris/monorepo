@@ -13,7 +13,7 @@ func WorkflowVitamins(ctx workflow.Context) error {
 
 	ctx = workflow.WithActivityOptions(ctx, options)
 
-	var activities *WorkflowInputDumper
+	var activities *SharedActivities
 
 	var diddoit bool
 	err := workflow.ExecuteActivity(ctx, activities.DidDoTagToday, "vitamins-v2").Get(ctx, &diddoit)

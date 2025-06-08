@@ -49,7 +49,7 @@ func WorkflowClimb(ctx workflow.Context) error {
 		return err
 	}
 
-	var activities *WorkflowInputDumper
+	var activities *SharedActivities
 	err = workflow.ExecuteActivity(ctx, activities.DumpEvent, "climb_ticks_v1", string(jsonData)).Get(ctx, nil)
 
 	return nil

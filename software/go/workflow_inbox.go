@@ -41,7 +41,7 @@ func WorkflowInbox(ctx workflow.Context) error {
 		return err
 	}
 
-	var activities *WorkflowInputDumper
+	var activities *SharedActivities
 	err = workflow.ExecuteActivity(ctx, activities.DumpEvent, "inbox_data_received_v1", data).Get(ctx, nil)
 	return err
 

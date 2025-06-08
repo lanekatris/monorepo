@@ -18,7 +18,7 @@ func TestProcesEvent(t *testing.T) {
 
 	emailClient := MockEmailClient{}
 	eventQueries := MockEventService{}
-	var dumper = WorkflowInputDumper{
+	var dumper = SharedActivities{
 		EmailClient:  &emailClient,
 		EventService: &eventQueries,
 	}

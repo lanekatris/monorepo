@@ -251,7 +251,7 @@ to quickly create a Cobra application.`,
 			//if connStr == "" {
 			//	panic("Config not found: " + shared.ResendApiKeyConfig)
 			//}
-			//dumper := shared.WorkflowInputDumper{
+			//dumper := shared.SharedActivities{
 			//	Db:          db,
 			//	EmailClient: shared.NewResendClient(connStr),
 			//	EventService: &shared.DbEventService{
