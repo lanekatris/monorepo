@@ -105,19 +105,19 @@ export default async function AdminPage({
 
   const grouped = groupBy(maintenances, 'Property');
 
-  const {
-    rows: purchases
-  }: {
-    rows: {
-      title: string;
-      Date: Date;
-      Cost: number;
-      Tags: string;
-      id: number;
-    }[];
-  } = await sql`select *
-                from noco.purchases
-                order by "Date" desc`;
+  // const {
+  //   rows: purchases
+  // }: {
+  //   rows: {
+  //     title: string;
+  //     Date: Date;
+  //     Cost: number;
+  //     Tags: string;
+  //     id: number;
+  //   }[];
+  // } = await sql`select *
+  //               from noco.purchases
+  //               order by "Date" desc`;
 
   const success = (await searchParams).success;
   console.log('success', success);
@@ -127,13 +127,6 @@ export default async function AdminPage({
               from noco.config`;
   return (
     <Container maxWidth="sm">
-      {/*<Breadcrumbs>*/}
-      {/*  <Link color="neutral" href="/">*/}
-      {/*    Home*/}
-      {/*  </Link>*/}
-      {/*  <Typography>Admin Dashboard</Typography>*/}
-      {/*</Breadcrumbs>*/}
-
       <ul
         style={{
           backgroundColor: '#ffffce',
@@ -229,21 +222,21 @@ export default async function AdminPage({
         ))}
       </ul>
 
-      <Typography level="h4">Purchases </Typography>
-      <ul
-        style={{
-          backgroundColor: '#ffffce',
-          paddingTop: '20px',
-          paddingBottom: '20px'
-        }}
-      >
-        {purchases.map(({ id, title, Date, Tags, Cost }) => (
-          <li key={id}>
-            {Date.toLocaleDateString()} ::
-            {title} :: {Cost} :: {Tags}
-          </li>
-        ))}
-      </ul>
+      {/*<Typography level="h4">Purchases </Typography>*/}
+      {/*<ul*/}
+      {/*  style={{*/}
+      {/*    backgroundColor: '#ffffce',*/}
+      {/*    paddingTop: '20px',*/}
+      {/*    paddingBottom: '20px'*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  {purchases.map(({ id, title, Date, Tags, Cost }) => (*/}
+      {/*    <li key={id}>*/}
+      {/*      {Date.toLocaleDateString()} ::*/}
+      {/*      {title} :: {Cost} :: {Tags}*/}
+      {/*    </li>*/}
+      {/*  ))}*/}
+      {/*</ul>*/}
     </Container>
   );
 }
