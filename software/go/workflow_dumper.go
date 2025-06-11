@@ -63,6 +63,18 @@ func WorkflowDumper(ctx workflow.Context, eventName string, data string) error {
 				return err
 			}
 
+		} else if neotrellisData.ButtonId == 8 {
+			//// Turn on elgato light
+			//err = turnOnElgatoLight()
+			//if err != nil {
+			//	return err
+			//}
+
+			err := workflow.ExecuteActivity(ctx, ToggleElgatoLight).Get(ctx, nil)
+			if err != nil {
+				return err
+			}
+
 		} else {
 			log.Info("Not mapped", "event_id", neotrellisData.ButtonId)
 		}

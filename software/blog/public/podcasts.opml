@@ -51,5 +51,6 @@ LI: https://www.linkedin.com/in/stevenbartlett-123" language="en"/>
         <outline type="rss" text="The Launch 🚀" title="The Launch 🚀" xmlUrl="https://serve.podhome.fm/rss/04b078f9-b3e8-4363-a576-98e668231306" description="Let’s warm up for the week together with the best stories and clips that set the stage for the rest of your week." language="en"/>
         <outline type="rss" text="Work, Life, and RV Podcast" title="Work, Life, and RV Podcast" xmlUrl="https://worklifeandrv.com/episodes?format=rss" description="A podcast about living and working full-time from a tiny home that goes down the road." language="en"/>
         <outline type="rss" text="Dialectic" title="Dialectic" xmlUrl="https://anchor.fm/s/fda12bf8/podcast/rss" description="Conversational portraits of original people, across technology, media, business, and creativity. By Jackson Dahl." language="en"/>
+        <outline type="rss" text="Front-End Fire" title="Front-End Fire" xmlUrl="https://feeds.buzzsprout.com/2226499.rss" description="A weekly show that helps you stay up to date on the latest and greatest in the front-end world."/>
     </body>
 </opml>

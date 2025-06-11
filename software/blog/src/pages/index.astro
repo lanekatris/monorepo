@@ -6,12 +6,15 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
 
 import { exec } from 'child_process'
 import { promisify } from 'util'
+import getFeed from '../getFeed'
 
 const execAsync = promisify(exec)
 
 const { stdout: logs } = await execAsync(
 	'git log --pretty=format:"%H - %ad - %s" --date=short -n 5'
 )
+
+const feed = (await getFeed()).slice(0, 5)
 ---
 
 <!doctype html>
@@ -65,7 +68,18 @@ const { stdout: logs } = await execAsync(
 				<li><a href="/home-wiring">Home Wiring Documentation</a></li>
 				<li><a href="/spotify-2024">Spotify Data Review</a></li>
 			</ul>
-			<b>Recent Updates</b>
+			<b>Recent Feed Items</b>
+			<a href="/feed">/feed</a>
+			<ul>
+				{
+					feed.map((feed) => (
+						<li>
+							{feed.date?.toLocaleDateString()} {feed.type}
+						</li>
+					))
+				}
+			</ul>
+			<b>Recent Commits</b>
 			<ul>
 				{
 					logs.split('\n').map((log) => (

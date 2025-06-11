@@ -306,6 +306,8 @@ var workerCmd = &cobra.Command{
 
 		w.RegisterWorkflow(shared.WorkflowVitamins)
 
+		w.RegisterActivity(shared.ToggleElgatoLight)
+
 		// Start listening to the Task Queue
 		err = w.Run(worker.InterruptCh())
 		if err != nil {
