@@ -126,7 +126,7 @@ func deploySchedulesV2(c client.Client) {
 		client.ScheduleOptions{
 			ID: "schedule_get_washer_power",
 			Spec: client.ScheduleSpec{
-				CronExpressions: []string{"*/10 * * * *"},
+				CronExpressions: []string{"*/30 * * * *"}, // Every 30 minutes
 			},
 			Action: &client.ScheduleWorkflowAction{
 				ID:        "action_get_washer_power",
@@ -170,12 +170,12 @@ func deploySchedulesV2(c client.Client) {
 		{
 			ID: "schedule_vitamins",
 			Spec: client.ScheduleSpec{
-				CronExpressions: []string{"0 21 * * *"}, // every day at 9pm
+				CronExpressions: []string{"0 1 * * *"}, // every day at 9pm (1 (instead of 2) UTC because temporal is being weird about 9pm...)
 			},
 			Action: &client.ScheduleWorkflowAction{
 				ID:        "action_vitamins",
 				Workflow:  shared.WorkflowVitamins,
-				TaskQueue: shared.GreetingTaskQueue,
+				TaskQueue: shared.ServerQueue,
 			},
 		},
 	}

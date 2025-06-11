@@ -28,7 +28,11 @@ func WorkflowDumper(ctx workflow.Context, eventName string, data string) error {
 
 	var activities *SharedActivities
 
-	err := workflow.ExecuteActivity(ctx, activities.DumpEvent, eventName, data).Get(ctx, nil)
+	err := workflow.ExecuteActivity(ctx, activities.ProcessEvent, eventName, data).Get(ctx, nil)
+	if err != nil {
+		return err
+	}
+	err = workflow.ExecuteActivity(ctx, activities.DumpEvent, eventName, data).Get(ctx, nil)
 	if err != nil {
 		return err
 	}
