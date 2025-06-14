@@ -1,0 +1,17 @@
+{
+  "version": "1",
+  "backupPaths": [
+    "/bigboy/temp",
+    "/bigboy/nocodb",
+    "/bigboy/memos",
+    "/bigboy/immich",
+    "/bigboy/minio",
+    "/bigboy/miniflux",
+    "/bigboy/obsidian",
+    "/bigboy/gitea",
+    "/bigboy/audiobookshelf/metadata",
+    "/bigboy/audiobookshelf/config",
+    "/bigboy/audiobookshelf/audiobooks",
+    "/bigboy/metabase"
+  ]
+}

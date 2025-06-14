@@ -3,6 +3,7 @@ import yaml from 'js-yaml'
 import Layout from '../layouts/BlogPost.astro'
 import { getFromMinio } from '../get-from-minio'
 import { sql } from '../content.config'
+import { getCollection } from 'astro:content'
 
 interface DockerComposeFile {
 	services: { [k: string]: { ports?: string[]
@@ -39,6 +40,9 @@ const machines = await Promise.all([
 
 const eventCounts = await sql`select event_name,min(created_at)::date earliest_date, max(created_at)::date latest_date, count(*)::int count from events group by event_name order by count(*) desc`
 const obsidianCounts = await sql`select * from models.obsidian_tags order by tag`
+
+const pages = await getCollection('page')
+console.log(pages)
 ---
 
 <Layout title="My Homelab" pubDate={new Date('August 08 2021')}>
@@ -161,6 +165,7 @@ I suck		 in my homelab docker-compose files and creates easy links to navigate t
 					<tbody>
 					{eventCounts.map((eventCount) => <tr>
 						<td>
+							{pages.some(x => x.id === eventCount.event_name) ? <a href={eventCount.event_name}>{eventCount.event_name}</a>:'not here'}
 							{eventCount.event_name || 'Bad Data...'}
 						</td>
 						<td>{eventCount.earliest_date.toLocaleDateString()}</td>

@@ -5,6 +5,7 @@ import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import { execSync } from 'child_process'
 import pagefind from 'astro-pagefind'
+import remarkWikiLink from 'remark-wiki-link'
 
 export function remarkModifiedTime() {
 	// @ts-ignore
@@ -31,6 +32,6 @@ export default defineConfig({
 		// 	theme: 'dracula'
 		// }
 		syntaxHighlight: false,
-		remarkPlugins: [remarkModifiedTime]
+		remarkPlugins: [remarkModifiedTime, [remarkWikiLink, { pageResolver: name => [name],hrefTemplate: permalink => `/${permalink}`}]]
 	}
 })

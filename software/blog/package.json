@@ -30,6 +30,7 @@
     "marked": "^15.0.4",
     "minio": "^8.0.2",
     "opml": "^0.5.6",
+    "remark-wiki-link": "^2.0.1",
     "sanitize-html": "^2.13.1",
     "svgson": "^5.3.1",
     "typescript": "^5.6.3",

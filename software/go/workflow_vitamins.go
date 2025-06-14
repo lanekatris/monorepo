@@ -15,13 +15,13 @@ func WorkflowVitamins(ctx workflow.Context) error {
 
 	var activities *SharedActivities
 
-	var diddoit bool
-	err := workflow.ExecuteActivity(ctx, activities.DidDoTagToday, "vitamins-v2").Get(ctx, &diddoit)
+	var didTakeVitamins bool
+	err := workflow.ExecuteActivity(ctx, activities.DidDoTagToday, "vitamins-v2").Get(ctx, &didTakeVitamins)
 	if err != nil {
 		return err
 	}
 
-	if diddoit == false {
+	if didTakeVitamins == false {
 		log.Info("sending email")
 		err := workflow.ExecuteActivity(ctx, activities.SendEmail, "lanekatris@gmail.com", "Take your vitamins", "Take your vitamins").Get(ctx, nil)
 		if err != nil {

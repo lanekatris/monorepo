@@ -157,14 +157,13 @@ const feed = defineCollection({
 		const idk = response as FEED_TYPE[]
 
 		const sessionsResponse = await fetch(
-			'http://server1.local:13378/api/sessions?itemsPerPage=10000&user=7e4b6e43-1722-4bb0-adde-9a572f945388',
+			'http://100.99.14.109:13378/api/sessions?itemsPerPage=10000&user=7e4b6e43-1722-4bb0-adde-9a572f945388',
 			{
 				headers: {
 					Authorization: import.meta.env.AUDIOBOOKSHELF_KEY
 				}
 			}
 		)
-		console.log('sessions response', sessionsResponse.ok)
 		const sessionsData: AudiobookshelfResponse = await sessionsResponse.json()
 
 		const sessions = sessionsData.sessions.reduce((map, session) => {

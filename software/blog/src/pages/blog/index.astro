@@ -38,7 +38,7 @@ const posts = (await getCollection('blog')).map(x => ({
 
 // const memos = await getCollection('memos')
 
-const response = await fetch('http://192.168.86.100:5230/api/v1/memos?pageSize=1000', {
+const response = await fetch('http://100.99.14.109:5230/api/v1/memos?pageSize=1000', {
 	headers: { authorization: `Bearer ${import.meta.env.MEMOS_API_KEY}` }
 })
 const rawMemos: { memos: Memo[] } = await response.json()

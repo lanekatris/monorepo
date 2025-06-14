@@ -2,7 +2,7 @@ import * as Minio from "minio";
 import type { BucketItemStat } from "minio";
 
 const minioClient = new Minio.Client({
-  endPoint: "192.168.86.100", // e.g., 'play.min.io'
+  endPoint: "100.99.14.109", // e.g., 'play.min.io'
   port: 9000, // e.g., 9000
   useSSL: false, // Set to false if not using SSL
   accessKey: import.meta.env.MINIO_A, // process.env.MINIO_A!,

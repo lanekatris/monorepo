@@ -3,11 +3,11 @@ package temporalstuff
 import (
 	"context"
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/lipgloss/table"
 	"github.com/charmbracelet/log"
-	"github.com/goccy/go-json"
 	"github.com/spf13/viper"
 	"go.temporal.io/sdk/workflow"
 	"io/fs"

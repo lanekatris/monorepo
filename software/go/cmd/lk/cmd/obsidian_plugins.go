@@ -4,8 +4,8 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
-	"github.com/goccy/go-json"
 	"time"
 
 	"github.com/atsushinee/go-markdown-generator/doc"

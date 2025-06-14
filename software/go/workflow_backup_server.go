@@ -9,6 +9,10 @@ import (
 	"time"
 )
 
+func GetGlobalConfig() {
+	
+}
+
 func WorkflowBackupServer(ctx workflow.Context) error {
 	ao := workflow.ActivityOptions{
 		StartToCloseTimeout: 8 * time.Hour,

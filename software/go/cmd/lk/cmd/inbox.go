@@ -4,7 +4,7 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"github.com/goccy/go-json"
+	"encoding/json"
 	"github.com/spf13/viper"
 	"os"
 

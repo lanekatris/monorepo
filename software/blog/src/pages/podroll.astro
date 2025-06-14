@@ -9,7 +9,7 @@ import { type AudiobookshelfLibraryResponse } from '../audiobookshelf-library-ty
 const data = parseStreamingHistory()
 const podcastSize = await getFromMinio<string>('etl', 'podcast_dir_size.txt', false)
 const jsonPodcastResponse = await fetch(
-	`http://server1.local:13378/api/libraries/44107d15-b5cf-45fc-99ab-63ee6da4878e/items?token=${process.env.AUDIOBOOKSHELF_KEY!.replace('Bearer ', '')}`
+	`http://100.99.14.109:13378/api/libraries/44107d15-b5cf-45fc-99ab-63ee6da4878e/items?token=${process.env.AUDIOBOOKSHELF_KEY!.replace('Bearer ', '')}`
 )
 const jsonPodcasts: AudiobookshelfLibraryResponse = await jsonPodcastResponse.json()
 
@@ -17,7 +17,7 @@ export const jsonPodcastFilePath = path.join('public', 'podcasts.json')
 fs.writeFileSync(jsonPodcastFilePath, JSON.stringify(jsonPodcasts, null, 2))
 
 const opmlPodcastsResponse = await fetch(
-	`http://server1.local:13378/api/libraries/44107d15-b5cf-45fc-99ab-63ee6da4878e/opml?token=${process.env.AUDIOBOOKSHELF_KEY!.replace('Bearer ', '')}`
+	`http://100.99.14.109:13378/api/libraries/44107d15-b5cf-45fc-99ab-63ee6da4878e/opml?token=${process.env.AUDIOBOOKSHELF_KEY!.replace('Bearer ', '')}`
 )
 const opmlPodcasts = await opmlPodcastsResponse.text()
 
