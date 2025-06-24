@@ -12,7 +12,7 @@ import (
 )
 
 const hasTakenVitaminsToday = `-- name: HasTakenVitaminsToday :one
-select count(*) from models.obsidian_tags where tag = $1 and max_date = (now() AT TIME ZONE 'EST')::date
+select count(*) AS count from models.obsidian_tags where tag = $1 and max_date = (now() AT TIME ZONE 'EST')::date
 `
 
 func (q *Queries) HasTakenVitaminsToday(ctx context.Context, tag pgtype.Text) (int64, error) {

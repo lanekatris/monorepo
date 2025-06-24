@@ -48,6 +48,19 @@ var kickCmd = &cobra.Command{
 				log.Error("unable to complete Workflow2222", err)
 				os.Exit(1)
 			}
+		} else if args[0] == "vitamins" {
+
+			we, err := cc.ExecuteWorkflow(context.Background(), options, shared.WorkflowVitamins)
+			if err != nil {
+				log.Error("unable to complete Workflow", err)
+				os.Exit(1)
+			}
+
+			err = we.Get(context.Background(), nil)
+			if err != nil {
+				log.Error("unable to complete Workflow3333", err)
+				os.Exit(1)
+			}
 		} else {
 			log.Warn("Unknown workflow type: " + args[0])
 		}

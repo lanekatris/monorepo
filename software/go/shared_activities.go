@@ -28,6 +28,7 @@ func (input *SharedActivities) SendEmail(to string, subject string, body string)
 func (input *SharedActivities) DidDoTagToday(ctx context.Context, tagName string) (bool, error) {
 	yes, err := input.Queries.HasTakenVitaminsToday(ctx, pgtype.Text{
 		String: tagName,
+		Valid:  true,
 	})
 	if err != nil {
 		return false, err
