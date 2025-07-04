@@ -21,7 +21,7 @@ select 'Go to the gym!' message where not exists (
 
 union
 
-select concat('Clean up obsidian! Root file count: ', count(*)) message from models.obsidian_file where in_root having count(*) > 50
+select concat('Clean up obsidian! Root file count: ', count(*), ' (50 max)') message from models.obsidian_file where in_root having count(*) > 50
 
 union
 

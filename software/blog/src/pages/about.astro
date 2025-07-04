@@ -3,6 +3,9 @@ import Layout from '../layouts/BlogPost.astro'
 import BestImage from '../components/BestImage.astro'
 import aboutImage from '../assets/me-dg-cart-troy-sunglasses.jpg'
 import fireTower from '../assets/fire-tower.jpg'
+import getFeed from '../getFeed'
+
+const feed = await getFeed()
 ---
 
 <Layout
@@ -28,16 +31,20 @@ import fireTower from '../assets/fire-tower.jpg'
 		basketball, etc. The vast majority of my activities are disc golf related.
 	</p>
 
-	<h1>West Virginia</h1>
-	<BestImage
-		image={fireTower}
-		width={400}
-		alt="Atop a fire tower in Monongahela National Forest - June 2024"
-	/>
-	<br />
-	<p>
-		I live in West Virginia. Although it may be a poor state and folks confuse it with &quot;western
-		virginia&quot;... it is a beautiful place. Also, not a bad place to raise your children. To be
-		fair though: I dream of Colorado a plenty.
-	</p>
+	<h1>Last 5 Podcasts Listened To</h1>
+
+	<p>I was listening to the Modern Wisdom Podcast, I forget which episode</p>
+
+	<!--<h1>West Virginia</h1>-->
+	<!--<BestImage-->
+	<!--	image={fireTower}-->
+	<!--	width={400}-->
+	<!--	alt="Atop a fire tower in Monongahela National Forest - June 2024"-->
+	<!--/>-->
+	<!--<br />-->
+	<!--<p>-->
+	<!--	I live in West Virginia. Although it may be a poor state and folks confuse it with &quot;western-->
+	<!--	virginia&quot;... it is a beautiful place. Also, not a bad place to raise your children. To be-->
+	<!--	fair though: I dream of Colorado a plenty.-->
+	<!--</p>-->
 </Layout>

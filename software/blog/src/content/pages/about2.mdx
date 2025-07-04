@@ -1,0 +1,37 @@
+---
+pubDate: "2025-06-27"
+title: "About Me"
+---
+import getFeed from '../../getFeed.js'
+import BestImage from '../../components/BestImage.astro'
+import aboutImage from '../../assets/me-dg-cart-troy-sunglasses.jpg'
+export const feed = await getFeed()
+
+
+# Professional
+
+
+
+I&apos;m a software engineer. I care about delivering a product that gives value. Taking
+requirements and architecting solutions from a full stack perspective is my bread and butter.
+I&apos;m always trying to learn and be open minded.
+
+<a href="https://gitconnected.com/lanekatris/resume" target="_blank"> Resume </a>
+
+# Fun
+
+You may gather that I like [disc golf](/disc-golf):
+<BestImage image={aboutImage} width={400} alt="Lane and his son playing disc golf" />
+
+I also enjoy ultimate frisbee, rock climbing, paintball,
+basketball, etc. The vast majority of my activities are disc golf related.
+
+# Last 5 Podcasts Listened To
+
+I was listening to the [Modern Wisdom podcast](https://chriswillx.com/podcast/), I forget which episode, which mentioned:
+
+> You can find out a lot about someone by seeing their last 5 podcasts...
+
+So I thought I'd show this metric since it is an easy filter from my [feed](/feed):
+
+{feed.filter(x => x.type === 'podcast-completed').slice(0,5).map(x => <li>{x.data.podcast.displayTitle}</li>)}

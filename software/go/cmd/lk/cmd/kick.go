@@ -5,87 +5,106 @@ package cmd
 
 import (
 	"context"
+	"fmt"
 	"github.com/charmbracelet/log"
 	"github.com/spf13/cobra"
+	"go.temporal.io/api/workflowservice/v1"
 	"go.temporal.io/sdk/client"
-	"os"
 	"shared"
 )
 
-// kickCmd represents the kick command
+func GetTemporalClient() (client.Client, error) {
+
+	return client.Dial(client.Options{
+		HostPort: "100.99.14.109:7233",
+	})
+
+}
+
 var kickCmd = &cobra.Command{
 	Use:   "kick",
 	Short: "A brief description of your command",
 	Long:  `A a`,
 	Args:  cobra.MatchAll(cobra.ExactArgs(1), cobra.OnlyValidArgs),
+}
+
+var kickTwitchCmd = &cobra.Command{
+	Use: "twitch",
 	Run: func(cmd *cobra.Command, args []string) {
-		log.Info("Creating temporal client...")
-		cc, err := client.Dial(client.Options{
-			HostPort: "100.99.14.109:7233",
-		})
-		if err != nil {
-			log.Error("unable to create Temporal client", err)
-			os.Exit(1)
-
-		}
-		defer cc.Close()
-
-		options := client.StartWorkflowOptions{
-			ID:        "cli-kick-workflow",
-			TaskQueue: "server",
-		}
-
-		log.Info("Executing workflow...")
-		if args[0] == "twitch" {
-			we, err := cc.ExecuteWorkflow(context.Background(), options, shared.WorkflowTwitch)
-			if err != nil {
-				log.Error("unable to complete Workflow", err)
-				os.Exit(1)
-			}
-
-			err = we.Get(context.Background(), nil)
-			if err != nil {
-				log.Error("unable to complete Workflow2222", err)
-				os.Exit(1)
-			}
-		} else if args[0] == "vitamins" {
-
-			we, err := cc.ExecuteWorkflow(context.Background(), options, shared.WorkflowVitamins)
-			if err != nil {
-				log.Error("unable to complete Workflow", err)
-				os.Exit(1)
-			}
-
-			err = we.Get(context.Background(), nil)
-			if err != nil {
-				log.Error("unable to complete Workflow3333", err)
-				os.Exit(1)
-			}
-		} else {
-			log.Warn("Unknown workflow type: " + args[0])
-		}
-
-		//we, err := cc.ExecuteWorkflow(context.Background(), options, shared.WorkflowMarkdownToDb)
-		//if err != nil {
-		//	log.Error("unable to complete Workflow", err)
-		//	os.Exit(1)
-		//}
-
-		log.Info("Workflow finished.")
-		//log.Info("Kick success", "workflow", arg)
+		err := invokeKickWorkflow(shared.WorkflowTwitch)
+		shared.HandleErrorExit(err)
+		log.Info("Success")
 	},
 }
 
-var kickMarkdownCmd = &cobra.Command{
-	Use: "deploy-markdown",
-	//Args: cobra.MinimumNArgs(1),
+var kickVitaminsCmd = &cobra.Command{
+	Use: "vitamins",
 	Run: func(cmd *cobra.Command, args []string) {
+		err := invokeKickWorkflow(shared.WorkflowVitamins)
+		shared.HandleErrorExit(err)
+		log.Info("Success")
+	},
+}
+
+var kickObsidianCmd = &cobra.Command{
+	Use: "obsidian",
+	Run: func(cmd *cobra.Command, args []string) {
+
+		err := invokeKickWorkflow(shared.WorkflowMarkdownToDb)
+		shared.HandleErrorExit(err)
+		log.Info("Success")
+
+	},
+}
+
+func invokeKickWorkflow(hi interface{}) error {
+	cc, err := GetTemporalClient()
+	if err != nil {
+		return err
+	}
+	options := client.StartWorkflowOptions{
+		ID:        "cli-kick-workflow",
+		TaskQueue: "server",
+	}
+	_, err = cc.ExecuteWorkflow(context.Background(), options, hi)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+var temporalWorkflowsCmd = &cobra.Command{
+	Use: "temporal",
+	Run: func(cmd *cobra.Command, args []string) {
+		cc, err := GetTemporalClient()
+		shared.HandleErrorExit(err)
+		//cc.GetWorkflowHistory(),
+		grpcClient := cc.WorkflowService()
+		req := &workflowservice.ListWorkflowExecutionsRequest{
+			Namespace: "default", PageSize: 5, // Query: "OrderBy DESC",
+		}
+
+		resp, err := grpcClient.ListWorkflowExecutions(context.Background(), req)
+		shared.HandleErrorExit(err)
+		for i, exec := range resp.Executions {
+			fmt.Printf("%d. WorkflowID: %s | RunID: %s | Type: %s | StartTime: %v | Status: %s\n",
+				i+1,
+				exec.Execution.WorkflowId,
+				exec.Execution.RunId,
+				exec.Type.Name,
+				exec.StartTime,
+				exec.Status,
+			)
+		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(kickCmd)
-	kickCmd.AddCommand(kickMarkdownCmd)
+	kickCmd.AddCommand(kickTwitchCmd)
+	kickCmd.AddCommand(kickVitaminsCmd)
+	kickCmd.AddCommand(kickObsidianCmd)
+	kickCmd.AddCommand(temporalWorkflowsCmd)
 
 	// Here you will define your flags and configuration settings.
 

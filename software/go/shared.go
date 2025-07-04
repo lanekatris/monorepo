@@ -3,6 +3,7 @@ package shared
 import (
 	"github.com/charmbracelet/log"
 	"github.com/spf13/viper"
+	"os"
 	"runtime"
 )
 
@@ -16,6 +17,13 @@ var ResendApiKeyConfig = "resend_api_key"
 func HandleError(err error) {
 	if err != nil {
 		panic(err)
+	}
+}
+
+func HandleErrorExit(err error) {
+	if err != nil {
+		log.Error("Failure!!!", err)
+		os.Exit(1)
 	}
 }
 

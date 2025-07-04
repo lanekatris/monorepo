@@ -10,7 +10,7 @@ import (
 )
 
 func GetGlobalConfig() {
-	
+
 }
 
 func WorkflowBackupServer(ctx workflow.Context) error {
@@ -23,6 +23,8 @@ func WorkflowBackupServer(ctx workflow.Context) error {
 	pathsToBackup := []string{"/bigboy/temp", "/bigboy/nocodb", "/bigboy/memos",
 		"/bigboy/immich", "/bigboy/minio", "/bigboy/miniflux", "/bigboy/obsidian", "/bigboy/gitea",
 		"/bigboy/audiobookshelf/metadata", "/bigboy/audiobookshelf/config", "/bigboy/audiobookshelf/audiobooks",
+		"/bigboy/old_videos/config",
+		"/bigboy/old_videos/data",
 	}
 
 	for i, pathToBackup := range pathsToBackup {

@@ -4,6 +4,8 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"context"
+	"github.com/charmbracelet/fang"
 	"github.com/spf13/cobra"
 	"os"
 	"strings"
@@ -32,30 +34,30 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
-	Run: func(cmd *cobra.Command, args []string) {
-		//log.Info("ahh")
-		//err := beeep.Notify("Title", "Message body", "C:\\Users\\looni\\OneDrive\\Pictures\\Camera Roll\\393146857_2402553829927542_4045854401555263033_n.jpg")
-		//if err != nil {
-		//	panic(err)
-		//}
-
-		//temporalstuff.GetFitnessIdk()
-		//directoryPath2 := shared.GetPath("/home/lane/Documents/lkat-vault", "C:\\Users\\looni\\vault1")
-		//idk := fitness.GetFitnessActivities(directoryPath2)
-		//log.Info(idk)
-
-		//fitness.PersistFitnessActivities(idk)
-		//var connStr = viper.GetString("POSTGRES_CONN")
-		//if connStr == "" {
-		//	return nil, errors.New("config not found: " + "POSTGRES_CONN")
-		//}
-		//
-		//db, err := gorm.Open(postgres.Open(connStr), &gorm.Config{})
-		//shared.HandleError(err)
-		//
-		//db.Create(Obsidi)
-
-	},
+	//Run: func(cmd *cobra.Command, args []string) {
+	//	//log.Info("ahh")
+	//	//err := beeep.Notify("Title", "Message body", "C:\\Users\\looni\\OneDrive\\Pictures\\Camera Roll\\393146857_2402553829927542_4045854401555263033_n.jpg")
+	//	//if err != nil {
+	//	//	panic(err)
+	//	//}
+	//
+	//	//temporalstuff.GetFitnessIdk()
+	//	//directoryPath2 := shared.GetPath("/home/lane/Documents/lkat-vault", "C:\\Users\\looni\\vault1")
+	//	//idk := fitness.GetFitnessActivities(directoryPath2)
+	//	//log.Info(idk)
+	//
+	//	//fitness.PersistFitnessActivities(idk)
+	//	//var connStr = viper.GetString("POSTGRES_CONN")
+	//	//if connStr == "" {
+	//	//	return nil, errors.New("config not found: " + "POSTGRES_CONN")
+	//	//}
+	//	//
+	//	//db, err := gorm.Open(postgres.Open(connStr), &gorm.Config{})
+	//	//shared.HandleError(err)
+	//	//
+	//	//db.Create(Obsidi)
+	//
+	//},
 }
 
 func prependZeros(original string, totalLength int) string {
@@ -71,8 +73,13 @@ func prependZeros(original string, totalLength int) string {
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
-	err := rootCmd.Execute()
-	if err != nil {
+	//err := rootCmd.Execute()
+	//if err != nil {
+	//	os.Exit(1)
+	//}
+
+	//cmd :=
+	if err := fang.Execute(context.Background(), rootCmd); err != nil {
 		os.Exit(1)
 	}
 }
