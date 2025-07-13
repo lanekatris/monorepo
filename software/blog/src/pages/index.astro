@@ -33,7 +33,7 @@ const feed = (await getFeed()).slice(0, 5)
 				I&apos;m married, have a son, and am a big fan of{' '}
 				<a href="/disc-golf">Disc Golf</a> and <a href="/ticks">Rock Climbing</a>.
 			</p>
-			<b>Pages</b>
+			<h4>Pages</h4>
 			<p>Here are a few links to start with:</p>
 			<ul>
 				<li><a href="/feed">/feed</a></li>
@@ -69,32 +69,32 @@ const feed = (await getFeed()).slice(0, 5)
 				<li><a href="/home-wiring">Home Wiring Documentation</a></li>
 				<li><a href="/spotify-2024">Spotify Data Review</a></li>
 			</ul>
-			<b>Recent Feed Items</b>
-			<a href="/feed">/feed</a>
-			<ul>
-				{
-					feed.map((feed) => (
-						<li>
-							{feed.date?.toLocaleDateString()} {feed.type}
-						</li>
-					))
-				}
-			</ul>
-			<b>Recent Commits</b>
-			<ul>
-				{
-					logs.split('\n').map((log) => (
-						<li>
-							<a
-								href={`https://github.com/lanekatris/monorepo/commit/${log.slice(0, 43).split(' ')[0]}`}
-							>
-								{log.slice(0, 7)}
-							</a>
-							{log.slice(43, -1)}
-						</li>
-					))
-				}
-			</ul>
+			<!--<b>Recent Feed Items</b>-->
+			<!--<a href="/feed">/feed</a>-->
+			<!--<ul>-->
+			<!--	{-->
+			<!--		feed.map((feed) => (-->
+			<!--			<li>-->
+			<!--				{feed.date?.toLocaleDateString()} {feed.type}-->
+			<!--			</li>-->
+			<!--		))-->
+			<!--	}-->
+			<!--</ul>-->
+			<!--<b>Recent Commits</b>-->
+			<!--<ul>-->
+			<!--	{-->
+			<!--		logs.split('\n').map((log) => (-->
+			<!--			<li>-->
+			<!--				<a-->
+			<!--					href={`https://github.com/lanekatris/monorepo/commit/${log.slice(0, 43).split(' ')[0]}`}-->
+			<!--				>-->
+			<!--					{log.slice(0, 7)}-->
+			<!--				</a>-->
+			<!--				{log.slice(43, -1)}-->
+			<!--			</li>-->
+			<!--		))-->
+			<!--	}-->
+			<!--</ul>-->
 		</main>
 		<Footer />
 	</body>

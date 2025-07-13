@@ -1,0 +1,112 @@
+:root {
+    --bg: #f9f5d7;
+    --text: #3c3836;
+    --muted: #7c6f64;
+    --accent: #076678;
+    --accent-soft: #427b58;
+    --highlight: #fabd2f;
+    --badge-bg: #d79921;
+    --code-bg: #ebdbb2;
+    --border: #d5c4a1;
+    --note: #b16286;
+
+    --heading-pink: #d33682; /* Warm Gruvbox-style magenta */
+    --font-serif: 'Crimson Pro', serif;
+    --font-sans: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-serif);
+    font-size: 1.3rem; /* Increase base size */
+    line-height: 1.8; /* More breathing room */
+    padding: 1rem 2rem; /* More comfortable padding */
+    max-width: 65ch; /* A little wider for larger font */
+    margin: auto;
+}
+
+h1, h2, h3, h4 {
+    color: var(--heading-pink);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+h1 {
+    color: var(--heading-pink);
+    font-size: 2rem;
+}
+
+h2 {
+    color: var(--accent); /* fallback to gruvbox teal */
+    font-size: 1.5rem;
+}
+
+h3 {
+    color: var(--accent-soft);
+    font-size: 1.25rem;
+}
+
+.tag {
+    font-family: var(--font-sans);
+    font-weight: 600;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+}
+
+a:hover {
+    color: var(--accent-soft);
+}
+
+time, .timestamp {
+    font-size: 0.875rem;
+    color: var(--muted);
+}
+
+.tag {
+    background-color: var(--badge-bg);
+    color: var(--bg);
+    padding: 0.2em 0.5em;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-right: 0.5em;
+}
+
+.note {
+    font-style: italic;
+    color: var(--note);
+}
+
+blockquote {
+    background: var(--code-bg);
+    border-left: 4px solid var(--border);
+    padding: 1em;
+    margin: 1em 0;
+    color: var(--muted);
+    font-style: italic;
+}
+
+ul {
+    list-style-type: disc;
+    padding-left: 1.5em;
+    margin-bottom: 1em;
+}
+
+/*ul li::before {*/
+/*    content: "♪ ";*/
+/*    color: var(--accent-soft);*/
+/*    font-weight: bold;*/
+/*    margin-right: 0.5em;*/
+/*}*/
+
+hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+}

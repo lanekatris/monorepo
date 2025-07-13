@@ -3,6 +3,7 @@ import { glob, file } from 'astro/loaders'
 import { neon } from '@neondatabase/serverless'
 import { feedLoader } from '@ascorbic/feed-loader'
 import type { AudiobookshelfResponse, Session } from './audiobookshelf-types'
+import { getDgptEvents } from './getDgptEvents.ts'
 
 export const obsidianType = z.enum(['adventure'])
 
@@ -40,9 +41,9 @@ const blog = defineCollection({
 	}),
 	schema: z
 		.object({
-			title: z.string(),
+			title: z.string().optional(),
 			description: z.string().optional(),
-			pubDate: z.coerce.date(),
+			pubDate: z.coerce.date().optional(),
 			updatedDate: z.coerce.date().optional(),
 			heroImage: z.string().optional(),
 			tags: tags.array().optional(),
@@ -187,7 +188,7 @@ const feed = defineCollection({
 			}
 		}))
 
-		console.log(idk[0], sessionsAsFeed[0])
+		// console.log(idk[0], sessionsAsFeed[0])
 
 		const all = [...idk, ...sessionsAsFeed]
 		// no point, doesn't work
@@ -228,10 +229,16 @@ const ticks = defineCollection({
 	})
 })
 
+const dgptEvents = defineCollection({
+	loader: () => {
+		return getDgptEvents()
+	}
+})
+
 const memos = defineCollection({
 	loader: feedLoader({
 		url: 'https://memo.lkat.io/u/Lane/rss.xml'
 	})
 })
 
-export const collections = { blog, discGolfCourses, discs, ticks, page, feed, memos }
+export const collections = { dgptEvents, blog, discGolfCourses, discs, ticks, page, feed, memos }

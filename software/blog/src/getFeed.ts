@@ -19,7 +19,7 @@ export default async function getFeed() {
 		}
 		return a
 	})
-	console.log('memo', memosAsFeed[0])
+	// console.log('memo', memosAsFeed[0])
 	const feed = rawFeed.map((x) => x.data).concat(memosAsFeed)
 	feed.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 

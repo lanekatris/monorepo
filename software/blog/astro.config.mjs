@@ -32,6 +32,9 @@ export default defineConfig({
 		// 	theme: 'dracula'
 		// }
 		syntaxHighlight: false,
-		remarkPlugins: [remarkModifiedTime, [remarkWikiLink, { pageResolver: name => [name],hrefTemplate: permalink => `/${permalink}`}]]
+		remarkPlugins: [
+			remarkModifiedTime
+			// [remarkWikiLink, { pageResolver: name => [name],hrefTemplate: permalink => `/${permalink}`}]
+		]
 	}
 })

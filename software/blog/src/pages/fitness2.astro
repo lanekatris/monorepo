@@ -1,5 +1,5 @@
 ---
-import Layout from '../../layouts/BlogPost.astro'
+import Layout from '../layouts/BlogPost.astro'
 const activitiesByDay = [
 	{
 		date: '2025-06-25',
@@ -78,75 +78,47 @@ const activitiesByDay = [
 // 		penalty: penalty > 0 ? `(-${penalty} penalty)` : null
 // 	}
 // })
-
-let runningTotal = 0
-const daysWithTotals = []
-
-for (let i = 0; i < activitiesByDay.length; i++) {
-	const day = activitiesByDay[i]
-	const rawTotal = day.activities.reduce((sum, a) => sum + a.points, 0)
-
-	// Check previous day's total
-	const prevDay = activitiesByDay[i + 1]
-	const prevTotal = prevDay ? prevDay.activities.reduce((sum, a) => sum + a.points, 0) : null
-
-	// If previous day was 0 points, apply -5 penalty
-	const penalty = prevTotal === 0 ? 5 : 0
-	const adjustedTotal = rawTotal - penalty
-
-	runningTotal += adjustedTotal
-
-	const prevRunningTotal = i === 0 ? null : daysWithTotals[i - 1].runningTotal
-	const delta =
-		prevRunningTotal === null
-			? null
-			: runningTotal > prevRunningTotal
-				? '↑'
-				: runningTotal < prevRunningTotal
-					? '↓'
-					: '–'
-
-	daysWithTotals.push({
-		...day,
-		rawTotal,
-		adjustedTotal,
-		penalty: penalty > 0 ? `(-${penalty} penalty)` : null,
-		runningTotal,
-		delta
-	})
-}
+//
+// let runningTotal = 0
+// const daysWithTotals = []
+//
+// for (let i = 0; i < activitiesByDay.length; i++) {
+// 	const day = activitiesByDay[i]
+// 	const rawTotal = day.activities.reduce((sum, a) => sum + a.points, 0)
+//
+// 	// Check previous day's total
+// 	const prevDay = activitiesByDay[i + 1]
+// 	const prevTotal = prevDay ? prevDay.activities.reduce((sum, a) => sum + a.points, 0) : null
+//
+// 	// If previous day was 0 points, apply -5 penalty
+// 	const penalty = prevTotal === 0 ? 5 : 0
+// 	const adjustedTotal = rawTotal - penalty
+//
+// 	runningTotal += adjustedTotal
+//
+// 	const prevRunningTotal = i === 0 ? null : daysWithTotals[i - 1].runningTotal
+// 	const delta =
+// 		prevRunningTotal === null
+// 			? null
+// 			: runningTotal > prevRunningTotal
+// 				? '↑'
+// 				: runningTotal < prevRunningTotal
+// 					? '↓'
+// 					: '–'
+//
+// 	daysWithTotals.push({
+// 		...day,
+// 		rawTotal,
+// 		adjustedTotal,
+// 		penalty: penalty > 0 ? `(-${penalty} penalty)` : null,
+// 		runningTotal,
+// 		delta
+// 	})
+// }
 ---
 
 <Layout title="Fitness 2" pubDate={new Date('January 18 2025')}>
-	<ol>
-		{
-			daysWithTotals.map((day) => (
-				<li>
-					<div>
-						<strong>{day.date}</strong>
-					</div>
-					<div>
-						Raw Total: {day.rawTotal}
-						{day.penalty && <span style="color: red; margin-left: 0.5rem;">{day.penalty}</span>}
-					</div>
-					<div>
-						Running Total: {day.runningTotal}
-						{day.delta && <span class="delta">{day.delta}</span>}
-					</div>
-					<ul>
-						{day.activities.map((act) => (
-							<li>
-								{act.name} (+{act.points})
-							</li>
-						))}
-						{day.activities.length === 0 && <li>No activity</li>}
-					</ul>
-				</li>
-			))
-		}
-	</ol>
-	<!--<h1>Fitness Feed</h1>-->
-	<!--<ul>-->
+	<!--<ol>-->
 	<!--	{-->
 	<!--		daysWithTotals.map((day) => (-->
 	<!--			<li>-->
@@ -154,18 +126,23 @@ for (let i = 0; i < activitiesByDay.length; i++) {
 	<!--					<strong>{day.date}</strong>-->
 	<!--				</div>-->
 	<!--				<div>-->
-	<!--					Total Points: {day.total}-->
+	<!--					Raw Total: {day.rawTotal}-->
+	<!--					{day.penalty && <span style="color: red; margin-left: 0.5rem;">{day.penalty}</span>}-->
+	<!--				</div>-->
+	<!--				<div>-->
+	<!--					Running Total: {day.runningTotal}-->
 	<!--					{day.delta && <span class="delta">{day.delta}</span>}-->
 	<!--				</div>-->
 	<!--				<ul>-->
 	<!--					{day.activities.map((act) => (-->
 	<!--						<li>-->
-	<!--							{act.thing} (+{act.points})-->
+	<!--							{act.name} (+{act.points})-->
 	<!--						</li>-->
 	<!--					))}-->
+	<!--					{day.activities.length === 0 && <li>No activity</li>}-->
 	<!--				</ul>-->
 	<!--			</li>-->
 	<!--		))-->
 	<!--	}-->
-	<!--</ul>-->
+	<!--</ol>-->
 </Layout>

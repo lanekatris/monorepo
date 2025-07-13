@@ -47,7 +47,7 @@ const formattedObsidianLink = formatObsidianLink(obsidianType, obsidianLink)
 					<div class="">
 						<h1 style="padding-bottom:0">{title}</h1>
 						<div>
-							<FormattedDate date={pubDate} />
+							{pubDate && <FormattedDate date={pubDate} />}
 							{
 								longSha && (
 									<a href={`https://github.com/lanekatris/monorepo/commit/${longSha}`}>

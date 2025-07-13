@@ -1,11 +1,13 @@
 [
     {
+        "id": "2025 All-Star Challenge",
         "eventName": "2025 All-Star Challenge",
         "winners": [
             "Gannon Buhr"
         ]
     },
     {
+        "id": "2025 Discraft Supreme Flight Open",
         "eventName": "2025 Discraft Supreme Flight Open",
         "winners": [
             "Ezra Robinson",
@@ -13,6 +15,7 @@
         ]
     },
     {
+        "id": "2025 Prodigy presents the Waco Annual Charity Open",
         "eventName": "2025 Prodigy presents the Waco Annual Charity Open",
         "winners": [
             "Adam Hammes",
@@ -20,6 +23,7 @@
         ]
     },
     {
+        "id": "2025 MVP’s Open at Austin",
         "eventName": "2025 MVP’s Open at Austin",
         "winners": [
             "Niklas Anttila",
@@ -27,6 +31,7 @@
         ]
     },
     {
+        "id": "2025 MVP Music City Open",
         "eventName": "2025 MVP Music City Open",
         "winners": [
             "Niklas Anttila",
@@ -34,6 +39,7 @@
         ]
     },
     {
+        "id": "GRIPeq 43rd Kansas City Wide Open",
         "eventName": "GRIPeq 43rd Kansas City Wide Open",
         "winners": [
             "Gannon Buhr",
@@ -41,6 +47,7 @@
         ]
     },
     {
+        "id": "2025 PDGA Champions Cup",
         "eventName": "2025 PDGA Champions Cup",
         "winners": [
             "Isaac Robinson",
@@ -48,6 +55,7 @@
         ]
     },
     {
+        "id": "2025 Discraft’s Cascade Challenge",
         "eventName": "2025 Discraft’s Cascade Challenge",
         "winners": [
             "Anthony Barela",
@@ -55,6 +63,7 @@
         ]
     },
     {
+        "id": "2025 Konopiště Open",
         "eventName": "2025 Konopiště Open",
         "winners": [
             "Mauri Villmann",
@@ -62,6 +71,7 @@
         ]
     },
     {
+        "id": "2025 Northwest Disc Golf Championship",
         "eventName": "2025 Northwest Disc Golf Championship",
         "winners": [
             "Gannon Buhr",
@@ -69,6 +79,7 @@
         ]
     },
     {
+        "id": "2025 Ale Open",
         "eventName": "2025 Ale Open",
         "winners": [
             "Niklas Anttila",
@@ -76,6 +87,7 @@
         ]
     },
     {
+        "id": "2025 Preserve Championship",
         "eventName": "2025 Preserve Championship",
         "winners": [
             "Gannon Buhr",
@@ -83,8 +95,38 @@
         ]
     },
     {
+        "id": "2025 United States Women’s Disc Golf Championship",
         "eventName": "2025 United States Women’s Disc Golf Championship",
         "winners": [
+            "Eveliina Salonen"
+        ]
+    },
+    {
+        "id": "2025 European Disc Golf Championship",
+        "eventName": "2025 European Disc Golf Championship",
+        "winners": [
+            "Aapo Karhi",
+            "Amanda Lennartsson"
+        ]
+    },
+    {
+        "id": "2025 Discmania Challenge",
+        "eventName": "2025 Discmania Challenge",
+        "winners": [
+            "Ezra Aderhold",
+            "Cadence Burge"
+        ]
+    },
+    {
+        "id": "2025 PDGA Masters Disc Golf World Championships",
+        "eventName": "2025 PDGA Masters Disc Golf World Championships",
+        "winners": []
+    },
+    {
+        "id": "2025 PCS Open",
+        "eventName": "2025 PCS Open",
+        "winners": [
+            "Adam Hammes",
             "Eveliina Salonen"
         ]
     }

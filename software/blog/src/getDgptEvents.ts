@@ -3,6 +3,7 @@ import * as cheerio from 'cheerio'
 // import { DGPT_RESPONSE } from './pages/disc-golf/dgpt-response.ts'
 
 interface DgptEvent {
+	id: string
 	eventName: string
 	winners: string[]
 }
@@ -41,6 +42,7 @@ export async function getDgptEvents() {
 			})
 
 		dgptEvents.push({
+			id: eventName,
 			eventName,
 			winners: players
 		})

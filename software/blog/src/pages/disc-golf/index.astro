@@ -13,8 +13,8 @@ import { getDgptEvents } from '../../getDgptEvents'
 import fs from 'fs'
 import path from 'path'
 
-const dgptEvents = await getDgptEvents()
-console.log(dgptEvents)
+// const dgptEvents = await getDgptEvents()
+const dgptEvents = (await getCollection('dgptEvents')).map(x => x.data)
 
 // Create JSON file
 const dgptJsonFilename = 'dgpt-winners.json'

@@ -5,6 +5,8 @@ import Footer from '../../components/Footer.astro'
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts'
 import { getCollection } from 'astro:content'
 import FormattedDate from '../../components/FormattedDate.astro'
+import BlogLine from '../../components/BlogLine.astro'
+import * as changeCase from 'change-case'
 
 export interface Memo {
 	uid: number
@@ -27,81 +29,79 @@ export interface Memo {
 		name: string
 	}[]
 }
-const posts = (await getCollection('blog')).map(x => ({
+console.log('derka', (await getCollection('blog'))[0])
+const posts = (await getCollection('blog')).map((x) => ({
 	date: x.data.pubDate,
-	title: x.data.title,
+	title: x.data.title ?? changeCase.capitalCase(x.id),
 	id: x.id,
 	draft: x.data.draft,
 	url: `/blog/${x.id}/`
 }))
 
-
 // const memos = await getCollection('memos')
 
-const response = await fetch('http://100.99.14.109:5230/api/v1/memos?pageSize=1000', {
-	headers: { authorization: `Bearer ${import.meta.env.MEMOS_API_KEY}` }
-})
-const rawMemos: { memos: Memo[] } = await response.json()
+// const response = await fetch('http://100.99.14.109:5230/api/v1/memos?pageSize=1000', {
+// 	headers: { authorization: `Bearer ${import.meta.env.MEMOS_API_KEY}` }
+// })
+// const rawMemos: { memos: Memo[] } = await response.json()
+//
+// const memos = rawMemos.memos.map((x) => ({
+// 	// ...x,
+// 	// _date: new Date(x.displayTime) //new Date(x.displayTs * 1000),
+// 	date: new Date(x.displayTime),
+// 	title: x.snippet,
+// 	id: x.uid,
+// 	draft: false,
+// 	url: `https://memo.lkat.io/${x.name}`
+// }))
 
-const memos = rawMemos.memos.map((x) => ({
-	// ...x,
-	// _date: new Date(x.displayTime) //new Date(x.displayTs * 1000),
-	date: new Date(x.displayTime),
-	title: x.snippet,
-	id: x.uid,
-	draft: false,
-	url: `https://memo.lkat.io/${x.name}`
-}))
-
-const list = [...posts,...memos] //posts.concat(memos)
+// const list = [...posts,...memos] //posts.concat(memos)
+const list = [...posts] //posts.concat(memos)
 
 list.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
 // console.log(memos[0])
+
+const nonDraftPosts = list.filter((x) => !x.draft)
 ---
 
 <!doctype html>
 <html lang="en">
-<head>
-	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-</head>
-<body class="container">
-<Header />
-<main>
-	<section>
-		<h1>Blog Index ({list.filter(x => !x.draft).length})</h1>
-		<a href="/tags">All Tags</a>
-		<!--<dl>-->
-		<!--	{-->
-		<!--		memos.map(memo =>-->
-		<!--			<dt>{memo.snippet}</dt>)-->
-		<!--	}-->
-		<!--</dl>-->
-		<dl>
-			{
-				list.filter(x => !x.draft).map((post) => (
-					<dt class="terminal-alert">
-						<small>
-							<FormattedDate date={post.date} />
-						</small>
-						<a href={post.url}>
-							{post.title}
-						</a>
-						<!--<br />-->
-						<!--{post.data.tags && <small class="muted">-->
-
-						<!--	{post.data.tags?.map((tag) => <span>#{tag}</span>)}-->
-						<!--</small>}-->
-					</dt>
-				))
-			}
-		</dl>
-	</section>
-	<section>
-		<div class="terminal-alert">I have <code>{posts.filter(x => x.draft).length}</code> <b>draft</b> blog post(s).
-		</div>
-	</section>
-</main>
-<Footer />
-</body>
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body class="container">
+		<Header />
+		<main>
+			<section>
+				<h1>Blog Index ({nonDraftPosts.length})</h1>
+				<a href="/tags">All Tags</a>
+				<a href="/rss.xml">Rss</a>
+				<!--<dl>-->
+				<!--	{-->
+				<!--		memos.map(memo =>-->
+				<!--			<dt>{memo.snippet}</dt>)-->
+				<!--	}-->
+				<!--</dl>-->
+				<h2>Newest Posts</h2>
+				<dl>
+					{nonDraftPosts.slice(0, 5).map((post) => <BlogLine post={post} />)}
+				</dl>
+				<details>
+					<summary> View All Blog Posts</summary>
+					<dl>
+						{nonDraftPosts.slice(5, nonDraftPosts.length).map((post) => <BlogLine post={post} />)}
+					</dl>
+				</details>
+			</section>
+			<br />
+			<section>
+				<div class="terminal-alert">
+					I have <code>{posts.filter((x) => x.draft).length}</code>
+					<b>draft</b> blog post(s).
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
 </html>

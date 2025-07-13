@@ -63,6 +63,11 @@ export const FILES = [
 		pages: ['/blogroll']
 	},
 	{
+		type: 'disc-golf-api',
+		filename: 'disc-golf.json',
+		pages: ['/disc-golf']
+	},
+	{
 		type: 'dgpt-winners-json',
 		filename: 'dgpt-winners.json',
 		pages: ['/disc-golf']

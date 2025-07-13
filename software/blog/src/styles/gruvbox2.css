@@ -1,0 +1,142 @@
+/* gruvbox-water.css */
+
+:root {
+    --bg: #f9f5d7;
+    --bg-alt: #fbf1c7;
+    --text: #3c3836;
+    --text-muted: #7c6f64;
+    --heading: #d33682;
+    --link: #076678;
+    --link-hover: #427b58;
+    --border: #d5c4a1;
+    --code-bg: #ebdbb2;
+    --accent-bg: #d79921;
+    --accent-fg: #f9f5d7;
+
+    --font-sans: "Inter", system-ui, sans-serif;
+    --font-serif: "Crimson Pro", serif;
+    --font-mono: "Fira Code", monospace;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Fira+Code&family=Inter:wght@400;600&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.75;
+    margin: 0 auto;
+    max-width: 65ch;
+    padding: 2rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    color: var(--heading);
+    margin-top: 2rem;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.6rem;
+}
+
+h3 {
+    font-size: 1.3rem;
+}
+
+p, ul, ol, blockquote {
+    margin-bottom: 1.5rem;
+}
+
+a {
+    color: var(--link);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+}
+
+a:hover {
+    color: var(--link-hover);
+}
+
+blockquote {
+    background: var(--code-bg);
+    border-left: 4px solid var(--border);
+    padding: 1rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+code, pre {
+    font-family: var(--font-mono);
+    background: var(--code-bg);
+    color: var(--text);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+}
+
+pre {
+    padding: 1em;
+    overflow-x: auto;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+}
+
+ul, ol {
+    padding-left: 1.5em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+th, td {
+    border: 1px solid var(--border);
+    padding: 0.5em 1em;
+    text-align: left;
+}
+
+button, input, select, textarea {
+    font: inherit;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 0.5em 0.75em;
+    border-radius: 4px;
+}
+
+button:hover,
+input:hover,
+select:hover,
+textarea:hover {
+    border-color: var(--link);
+}
+
+.tag {
+    display: inline-block;
+    background: var(--accent-bg);
+    color: var(--accent-fg);
+    padding: 0.2em 0.5em;
+    font-size: 0.9rem;
+    border-radius: 3px;
+    margin-right: 0.4em;
+}
+
+time {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
