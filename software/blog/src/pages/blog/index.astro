@@ -29,12 +29,13 @@ export interface Memo {
 		name: string
 	}[]
 }
-console.log('derka', (await getCollection('blog'))[0])
+// console.log('derka', (await getCollection('blog'))[0].rendered.metadata)
 const posts = (await getCollection('blog')).map((x) => ({
-	date: x.data.pubDate,
+	// @ts-ignore
+	date: x.data.pubDate ?? new Date(x.rendered.metadata.frontmatter.lastModified),
 	title: x.data.title ?? changeCase.capitalCase(x.id),
 	id: x.id,
-	draft: x.data.draft,
+	draft: x.data.draft || false,
 	url: `/blog/${x.id}/`
 }))
 
