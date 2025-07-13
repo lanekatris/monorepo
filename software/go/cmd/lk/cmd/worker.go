@@ -170,7 +170,7 @@ func deploySchedulesV2(c client.Client) {
 		{
 			ID: "schedule_vitamins",
 			Spec: client.ScheduleSpec{
-				CronExpressions: []string{"0 1 * * *"}, // every day at 9pm (1 (instead of 2) UTC because temporal is being weird about 9pm...)
+				CronExpressions: []string{"0 0 * * *"}, // every day at 8pm (1 (instead of 2) UTC because temporal is being weird about 8pm...)
 			},
 			Action: &client.ScheduleWorkflowAction{
 				ID:        "action_vitamins",

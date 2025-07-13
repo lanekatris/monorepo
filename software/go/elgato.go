@@ -19,7 +19,7 @@ type LightResponse struct {
 	Lights         []Light `json:"lights"`
 }
 
-var elgatoUrl = "http://192.168.86.249:9123/elgato/lights"
+var elgatoUrl = "http://192.168.4.39:9123/elgato/lights"
 
 func ToggleElgatoLight() error {
 	data, err := getElgatoLight()
@@ -88,7 +88,7 @@ func turnOnElgatoLight(onOrOff int) error {
 	}
 
 	// Make the PUT request
-	req, err := http.NewRequest("PUT", "http://192.168.86.249:9123/elgato/lights", bytes.NewBuffer(jsonData))
+	req, err := http.NewRequest("PUT", elgatoUrl, bytes.NewBuffer(jsonData))
 	if err != nil {
 		return err
 	}

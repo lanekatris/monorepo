@@ -49,11 +49,19 @@ var kickVitaminsCmd = &cobra.Command{
 var kickObsidianCmd = &cobra.Command{
 	Use: "obsidian",
 	Run: func(cmd *cobra.Command, args []string) {
-
 		err := invokeKickWorkflow(shared.WorkflowMarkdownToDb)
 		shared.HandleErrorExit(err)
 		log.Info("Success")
 
+	},
+}
+
+var kickInboxCmd = &cobra.Command{
+	Use: "inbox",
+	Run: func(cmd *cobra.Command, args []string) {
+		err := invokeKickWorkflow(shared.WorkflowInbox)
+		shared.HandleErrorExit(err)
+		log.Info("Success")
 	},
 }
 
@@ -105,6 +113,7 @@ func init() {
 	kickCmd.AddCommand(kickVitaminsCmd)
 	kickCmd.AddCommand(kickObsidianCmd)
 	kickCmd.AddCommand(temporalWorkflowsCmd)
+	kickCmd.AddCommand(kickInboxCmd)
 
 	// Here you will define your flags and configuration settings.
 
