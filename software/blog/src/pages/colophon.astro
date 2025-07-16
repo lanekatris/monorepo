@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/BlogPost.astro'
+import { Image } from 'astro:assets'
+import childProcess from 'child_process'
+const today = new Date()
+import byHuman from '../assets/Written-By-Human-Not-By-AI-Badge-white.svg'
+import byHumanDark from '../assets/Written-By-Human-Not-By-AI-Badge-black.svg'
+
+const hash = childProcess.execSync('git rev-parse  HEAD').toString().trim()
+const shortHash = childProcess.execSync('git rev-parse --short HEAD').toString().trim()
+---
+
+<Layout title="colophon">
+	<div>
+		Version: <a href={`https://github.com/lanekatris/monorepo/commit/${hash}`}>{shortHash}</a>
+	</div>
+	<div>
+		Last Published:
+		<code
+			>{today.toLocaleDateString()}
+			{today.toLocaleTimeString()}</code
+		>
+	</div>
+	<div>
+		I was using this theme: <a href="https://terminalcss.xyz/" target="_blank">TerminalXYZ Theme</a>
+		(changes often)
+	</div>
+	<div>
+		<a href="https://astro.build"
+			><img
+				src="/built-with-astro.svg"
+				loading="eager"
+				alt="Built with Astro"
+				width="120"
+				height="20"
+			/></a
+		>
+	</div>
+	<div>
+		<!--https://stackoverflow.com/questions/55787167/how-to-change-image-source-based-on-css-prefers-color-scheme-->
+		<a href="https://notbyai.fyi" target="_blank" rel="noopener noreferrer">
+			<picture>
+				<source srcset={byHumanDark.src} media="(prefers-color-scheme: dark)" />
+				<Image src={byHuman} loading="lazy" alt="Written by a human" />
+			</picture>
+		</a>
+	</div>
+</Layout>

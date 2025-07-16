@@ -14,3 +14,7 @@ my [work](work).
 <br/>
 
 Check out what I'm up to [now](now) or my [blog](blog).
+
+<br/>
+
+_Yes, the CSS is either non-existent, ugly, or changes all the time... [colophon](colophon.astro)_

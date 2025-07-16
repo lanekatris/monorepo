@@ -10,6 +10,10 @@ type Props = CollectionEntry<'blog'>['data'] & {
 	lastModified?: string
 	shortSha?: string
 	longSha?: string
+	content?: {
+		title?: string
+	}
+	file?: string
 }
 
 const {
