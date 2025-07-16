@@ -3,13 +3,15 @@ import Layout from '../layouts/BlogPost.astro'
 import pen from '../assets/f701-pen.png'
 import BestImage from '../components/BestImage.astro'
 import { getCollection } from 'astro:content'
+import getBlogPosts from '../getBlogPosts'
 
-const posts = (await getCollection('blog'))
-	.filter((post) => post.data.tags?.includes('edc'))
-	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-// todo: sort
-// link to the article
-console.log(posts)
+// const posts = (await getCollection('blog'))
+// 	.filter((post) => post.data.tags?.includes('edc'))
+// 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+// // todo: sort
+// // link to the article
+// console.log(posts)
+const posts = (await getBlogPosts()).filter((post) => post.data.tags?.includes('edc'))
 ---
 
 <Layout title="My EDC" pubDate={new Date('January 04 2025')}>

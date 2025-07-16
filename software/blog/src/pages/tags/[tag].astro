@@ -3,12 +3,14 @@ import Layout from '../../layouts/BlogPost.astro'
 import { getCollection } from 'astro:content'
 import FormattedDate from '../../components/FormattedDate.astro'
 import { type TAG_TYPE } from '../../content.config'
+import getBlogPosts from '../../getBlogPosts'
 
 export async function getStaticPaths({}) {
-	const allPosts = await getCollection('blog')
-	const sortedPosts = allPosts.sort(
-		(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
-	)
+	// const allPosts = await getCollection('blog')
+	// const sortedPosts = allPosts.sort(
+	// 	(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+	// )
+	const sortedPosts = await getBlogPosts()
 
 	const allTags = new Set<TAG_TYPE>()
 	sortedPosts.map((post) => {
@@ -42,7 +44,7 @@ let description = 'Posts with tag #' + tag
 				.map((post) => (
 					<dt>
 						<small>
-							<FormattedDate date={post.data.pubDate} />
+							<FormattedDate date={post.date} />
 						</small>
 						<a href={`/blog/${post.id}/`}>{post.data.title}</a>
 					</dt>

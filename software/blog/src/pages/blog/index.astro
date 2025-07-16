@@ -7,6 +7,7 @@ import { getCollection } from 'astro:content'
 import FormattedDate from '../../components/FormattedDate.astro'
 import BlogLine from '../../components/BlogLine.astro'
 import * as changeCase from 'change-case'
+import getBlogPosts from '../../getBlogPosts'
 
 export interface Memo {
 	uid: number
@@ -30,14 +31,15 @@ export interface Memo {
 	}[]
 }
 // console.log('derka', (await getCollection('blog'))[0].rendered.metadata)
-const posts = (await getCollection('blog')).map((x) => ({
-	// @ts-ignore
-	date: x.data.pubDate ?? new Date(x.rendered.metadata.frontmatter.lastModified),
-	title: x.data.title ?? changeCase.capitalCase(x.id),
-	id: x.id,
-	draft: x.data.draft || false,
-	url: `/blog/${x.id}/`
-}))
+// const posts = (await getCollection('blog')).map((x) => ({
+// 	// @ts-ignore
+// 	date: x.data.pubDate ?? new Date(x.rendered.metadata.frontmatter.lastModified),
+// 	title: x.data.title ?? changeCase.capitalCase(x.id),
+// 	id: x.id,
+// 	draft: x.data.draft || false,
+// 	url: `/blog/${x.id}/`
+// }))
+const posts = await getBlogPosts()
 
 // const memos = await getCollection('memos')
 
@@ -69,7 +71,7 @@ const nonDraftPosts = list.filter((x) => !x.draft)
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title="Blog" description={SITE_DESCRIPTION} />
 	</head>
 	<body class="container">
 		<Header />

@@ -22,21 +22,26 @@ const {
 	obsidianType,
 	lastModified,
 	shortSha,
-	longSha
+	longSha,
+	content
 } = Astro.props
+const defaultTitle = Astro.props.file
+	? Astro.props.file.split('/')[Astro.props.file.split('/').length - 1].replace('.md', '')
+	: 'TODO'
+// console.log('aaa', Astro.props)
 
 const formattedObsidianLink = formatObsidianLink(obsidianType, obsidianLink)
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title ?? content?.title ?? defaultTitle} description={description} />
 
-		<style>
-			.title h1 {
-				margin-bottom: 0;
-			}
-		</style>
+		<!--<style>-->
+		<!--	.title h1 {-->
+		<!--		margin-bottom: 0;-->
+		<!--	}-->
+		<!--</style>-->
 	</head>
 
 	<body class="container">
@@ -46,25 +51,25 @@ const formattedObsidianLink = formatObsidianLink(obsidianType, obsidianLink)
 				<div class="">
 					<div class="">
 						<h1 style="padding-bottom:0">{title}</h1>
-						<div>
-							{pubDate && <FormattedDate date={pubDate} />}
-							{
-								longSha && (
-									<a href={`https://github.com/lanekatris/monorepo/commit/${longSha}`}>
-										{shortSha}
-									</a>
-								)
-							}
-							{
-								lastModified && (
-									<div class="last-updated-on">
-										Updated:
-										<time>{lastModified.split('T')[0]}</time>
-									</div>
-								)
-							}
-							{formattedObsidianLink && <a href={formattedObsidianLink}>Obsidian Link</a>}
-						</div>
+						<!--<div>-->
+						<!--	{pubDate && <FormattedDate date={pubDate} />}-->
+						<!--	{-->
+						<!--		longSha && (-->
+						<!--			<a href={`https://github.com/lanekatris/monorepo/commit/${longSha}`}>-->
+						<!--				{shortSha}-->
+						<!--			</a>-->
+						<!--		)-->
+						<!--	}-->
+						<!--	{-->
+						<!--		lastModified && (-->
+						<!--			<div class="last-updated-on">-->
+						<!--				Updated:-->
+						<!--				<time>{lastModified.split('T')[0]}</time>-->
+						<!--			</div>-->
+						<!--		)-->
+						<!--	}-->
+						<!--	{formattedObsidianLink && <a href={frmattedObsidianLink}>Obsidian Link</a>}-->
+						<!--</div>-->
 						{
 							tags.length > 0 && (
 								<div>
@@ -78,7 +83,7 @@ const formattedObsidianLink = formatObsidianLink(obsidianType, obsidianLink)
 						}
 					</div>
 					<!--<hr style="margin-top:05px;margin-bottom:10px;" />-->
-					<hr />
+					<!--<hr />-->
 					<!--<br />-->
 					<slot />
 				</div>

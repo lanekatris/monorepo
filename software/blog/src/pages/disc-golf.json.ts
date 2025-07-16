@@ -1,6 +1,7 @@
 import { getCollection } from 'astro:content'
 import { type Scorecard, sql } from '../content.config.ts'
 import dgptWinners from '../../public/dgpt-winners.json'
+import getBlogPosts from '../getBlogPosts.ts'
 
 export async function GET() {
 	const discs = await getCollection('discs') //, (x) => x.data.status === 'In Bag')
@@ -11,10 +12,11 @@ export async function GET() {
 		return acc
 	}, [])
 
-	const allPosts = await getCollection('blog')
-	const sortedPosts = allPosts.sort(
-		(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
-	)
+	// const allPosts = await getCollection('blog')
+	// const sortedPosts = allPosts.sort(
+	// 	(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+	// )
+	const sortedPosts = await getBlogPosts()
 
 	const filteredPosts = sortedPosts.filter((post) => post.data.tags?.includes('disc-golf'))
 
