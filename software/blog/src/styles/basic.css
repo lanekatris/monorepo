@@ -1,0 +1,27 @@
+body {
+    /*font-family: sans-serif;*/
+    /*padding: 1em;*/
+    transition: background 0.3s, color 0.3s;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+
+    a {
+        cursor: pointer;
+        color: #ff2e88;
+        text-decoration: none;
+        border-bottom: 1px solid #ff2e88;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
