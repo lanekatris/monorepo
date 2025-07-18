@@ -24,10 +24,12 @@ export function remarkModifiedTime() {
 	}
 }
 
+const buildMode = process.env.BUILD_MODE || 'static'
+
 // https://astro.build/config
 export default defineConfig({
-	output: 'server',
-	adapter: node({ mode: 'standalone' }),
+	output: buildMode === 'static' ? 'static' : 'server',
+	adapter: buildMode === 'static' ? undefined : node({ mode: 'standalone' }),
 	site: 'https://lanekatris.com',
 	integrations: [mdx({ remarkPlugins: [remarkModifiedTime] }), sitemap(), pagefind()],
 	markdown: {
