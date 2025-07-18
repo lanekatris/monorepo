@@ -12,6 +12,8 @@ export async function GET() {
 		return acc
 	}, [])
 
+	const uniqueCourses = Array.from(new Set(rounds.map((x) => x.coursename)))
+
 	// const allPosts = await getCollection('blog')
 	// const sortedPosts = allPosts.sort(
 	// 	(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
@@ -31,6 +33,7 @@ export async function GET() {
 				version: '2025.06',
 				pdgaNumber: 236863,
 				karma: idk[0].count,
+				uniqueCoursesPlayed: uniqueCourses.length,
 				links: [
 					{
 						name: 'PDGA',

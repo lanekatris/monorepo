@@ -5,6 +5,7 @@ import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import { execSync } from 'child_process'
 import pagefind from 'astro-pagefind'
+import node from '@astrojs/node'
 import remarkWikiLink from 'remark-wiki-link'
 
 export function remarkModifiedTime() {
@@ -25,6 +26,8 @@ export function remarkModifiedTime() {
 
 // https://astro.build/config
 export default defineConfig({
+	output: 'server',
+	adapter: node({ mode: 'standalone' }),
 	site: 'https://lanekatris.com',
 	integrations: [mdx({ remarkPlugins: [remarkModifiedTime] }), sitemap(), pagefind()],
 	markdown: {

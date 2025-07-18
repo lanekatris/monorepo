@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  blog:
+    build:
+      context: .
+      dockerfile: ./blog.Dockerfile
+    ports:
+      - "4321:4321"
+    working_dir: /app
+    # yes i'm copying .env, DONT DEPLOY TO PUBLIC CONTAINER REGISTRY
+#    env_file: software/blog/.env
+#    environment:
+#      NODE_ENV: production

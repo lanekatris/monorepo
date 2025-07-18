@@ -9,9 +9,12 @@ A good place to start is more [about me](about).
 
 I like exposing different kinds of [data](data) and compiling data about [disc golf](disc-golf).
 
-I like taking productivity tools like [obsidian](obsidian) and I write public notes, [posts](blog), and xxxx.
+I like taking productivity tools like [obsidian](/obsidian) and I write public notes, [posts](/blog),
+and [links](/links).
 
 I'm into [#edc](edc) as I get older and like to pull data from various sources and have my own [timeline/feed](feed).
+
+Potentially morbid, but I do like to be reminded of [when I'll die](/time) to appreciate time with my kiddo.
 
 <hr/>
 

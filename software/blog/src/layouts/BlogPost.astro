@@ -48,51 +48,53 @@ const formattedObsidianLink = formatObsidianLink(obsidianType, obsidianLink)
 		<!--</style>-->
 	</head>
 
-	<body class="container">
-		<Header />
-		<main>
-			<article>
-				<div class="">
+	<body>
+		<div class="wrapper">
+			<Header />
+			<main>
+				<article>
 					<div class="">
-						<h1 style="padding-bottom:0">{title}</h1>
-						<!--<div>-->
-						<!--	{pubDate && <FormattedDate date={pubDate} />}-->
-						<!--	{-->
-						<!--		longSha && (-->
-						<!--			<a href={`https://github.com/lanekatris/monorepo/commit/${longSha}`}>-->
-						<!--				{shortSha}-->
-						<!--			</a>-->
-						<!--		)-->
-						<!--	}-->
-						<!--	{-->
-						<!--		lastModified && (-->
-						<!--			<div class="last-updated-on">-->
-						<!--				Updated:-->
-						<!--				<time>{lastModified.split('T')[0]}</time>-->
-						<!--			</div>-->
-						<!--		)-->
-						<!--	}-->
-						<!--	{formattedObsidianLink && <a href={frmattedObsidianLink}>Obsidian Link</a>}-->
-						<!--</div>-->
-						{
-							tags.length > 0 && (
-								<div>
-									{tags.map((tag) => (
-										<a href={`/tags/${tag}`} style="margin-right:5px">
-											#{tag}
-										</a>
-									))}
-								</div>
-							)
-						}
+						<div class="">
+							<h1 style="padding-bottom:0">{title}</h1>
+							<!--<div>-->
+							<!--	{pubDate && <FormattedDate date={pubDate} />}-->
+							<!--	{-->
+							<!--		longSha && (-->
+							<!--			<a href={`https://github.com/lanekatris/monorepo/commit/${longSha}`}>-->
+							<!--				{shortSha}-->
+							<!--			</a>-->
+							<!--		)-->
+							<!--	}-->
+							<!--	{-->
+							<!--		lastModified && (-->
+							<!--			<div class="last-updated-on">-->
+							<!--				Updated:-->
+							<!--				<time>{lastModified.split('T')[0]}</time>-->
+							<!--			</div>-->
+							<!--		)-->
+							<!--	}-->
+							<!--	{formattedObsidianLink && <a href={frmattedObsidianLink}>Obsidian Link</a>}-->
+							<!--</div>-->
+							{
+								tags.length > 0 && (
+									<div>
+										{tags.map((tag) => (
+											<a href={`/tags/${tag}`} style="margin-right:5px">
+												#{tag}
+											</a>
+										))}
+									</div>
+								)
+							}
+						</div>
+						<!--<hr style="margin-top:05px;margin-bottom:10px;" />-->
+						<!--<hr />-->
+						<!--<br />-->
+						<slot />
 					</div>
-					<!--<hr style="margin-top:05px;margin-bottom:10px;" />-->
-					<!--<hr />-->
-					<!--<br />-->
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
+				</article>
+			</main>
+			<Footer />
+		</div>
 	</body>
 </html>

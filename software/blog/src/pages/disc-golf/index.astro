@@ -67,6 +67,8 @@ const rounds = (await getCollection('feed')).reduce((acc: Scorecard[], x) => {
 	}
 	return acc
 }, [])
+
+const uniqueCourses = Array.from(new Set(rounds.map(x => x.coursename)))
 ---
 
 <Layout title="Disc Golf" pubDate={new Date('August 08 2021')}>
@@ -179,6 +181,15 @@ const rounds = (await getCollection('feed')).reduce((acc: Scorecard[], x) => {
 				}
 			</tbody>
 		</table>
+	</details>
+
+	<h1>Unique Courses I've Played ({uniqueCourses.length})</h1>
+	<details><summary>Click to expand courses</summary>
+
+		<ol>
+			{uniqueCourses.map((course) => <li>{course}</li>)}
+		</ol>
+
 	</details>
 
 	<h1>US Disc Golf Courses Stats</h1>

@@ -1,0 +1,15 @@
+---
+import { sql } from '../content.config'
+
+type Issue = {
+	message: string
+}
+
+// Not using content collection since I want this refreshing on each page load
+const issues = (await sql`select *
+													from models.issue `) as Issue[]
+---
+
+<ol>
+	{issues.map((issue) => <li>{issue.message}</li>)}
+</ol>

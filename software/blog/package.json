@@ -14,6 +14,7 @@
     "@ascorbic/feed-loader": "^1.0.4",
     "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "^4.2.6",
+    "@astrojs/node": "^9.3.0",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.4.0",
     "@neondatabase/serverless": "^0.10.1",

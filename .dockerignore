@@ -1,0 +1,5 @@
+software/blog/node_modules
+software/blog/dist
+#software/blog/.env
+software/blog/.wrangler
+software/blog/.vscode

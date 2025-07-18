@@ -1,11 +1,11 @@
 ---
 import { getCollection } from 'astro:content'
-import Layout from '../layouts/BlogPost.astro'
-import type { FEED_TYPE } from '../content.config'
-import { getFileDownloadPath, isDev } from '../utils'
+import Layout from '../../layouts/BlogPost.astro'
+import type { FEED_TYPE } from '../../content.config'
+import { getFileDownloadPath, isDev } from '../../utils'
 import path from 'path'
 import fs from 'fs'
-import getFeed from '../getFeed'
+import getFeed from '../../getFeed'
 
 const feed = await getFeed()
 
