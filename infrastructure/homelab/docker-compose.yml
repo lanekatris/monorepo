@@ -202,3 +202,13 @@ services:
     ports:
       - "3500:80"
 
+  metabase:
+    restart: always
+    container_name: metabase
+    image: metabase/metabase:v0.55.3.1
+    environment:
+      - MB_DB_FILE=/metabase-data/metabase.db
+    volumes:
+      - /bigboy/metabase:/metabase-data
+    ports:
+      - "3600:3000"
