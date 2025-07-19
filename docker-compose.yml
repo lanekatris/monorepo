@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: ./blog.Dockerfile
+    image: server1:5000/blog
+    pull_policy: always
     ports:
       - "4321:4321"
     working_dir: /app

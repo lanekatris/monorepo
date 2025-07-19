@@ -212,3 +212,10 @@ services:
       - /bigboy/metabase:/metabase-data
     ports:
       - "3600:3000"
+  registry:
+    image: registry:2
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - /bigboy/docker-registry:/var/lib/registry
