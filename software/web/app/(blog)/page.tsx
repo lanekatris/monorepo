@@ -1,10 +1,8 @@
 import Link from 'next/link';
-import { getRecentTemporalWorkflows } from '../../lib/getRecentTemporalWorkflows';
 import { GiAquarium } from 'react-icons/gi';
 import { getAquariumTemp } from '../../lib/getAquariumTemp';
 
 export default async function Homev2Page() {
-  const workflows = await getRecentTemporalWorkflows();
   const { temperatureF, lastUpdated } = await getAquariumTemp();
 
   return (
@@ -32,24 +30,6 @@ export default async function Homev2Page() {
         Temporal History{' - '}
         <a href="http://server1.local:8055/namespaces/default/workflows">UI</a>
       </h2>
-      <table>
-        <thead>
-          <tr>
-            <td>Status</td>
-            <td>Workflow ID</td>
-          </tr>
-        </thead>
-        <tbody>
-          {workflows.map((workflow) => (
-            <tr key={workflow.runId}>
-              <td>
-                <var>{workflow.status.name}</var>
-              </td>
-              <td>{workflow.workflowId}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </main>
   );
 }
