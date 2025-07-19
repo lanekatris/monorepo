@@ -43,7 +43,7 @@ select concat('Clean up emails! (',unread_count,')') message from models.inbox_s
 
 union
 
-select concat('Bookmark queue over 100! (',count(*),') https://app.raindrop.io/my/36282268') message from models.bookmark where collection_name = 'Inbox' group by collection_name having count(*) > 100
+select concat('Bookmark queue over 242! (',count(*),') https://app.raindrop.io/my/36282268') message from models.bookmark where collection_name = 'Inbox' group by collection_name having count(*) > 242
 
 union
 
