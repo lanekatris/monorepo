@@ -6,32 +6,32 @@ import { renderGraph } from '../renderGraph'
 import SimpleLineGraph from '../components/SimpleLineGraph.astro'
 
 const activitiesPerYear = await sql`
-    with x as (select *
-               from markdown_file_models
-               where file_path
-        ilike '%/adventures/%')
-       , y as (
+	with x as (select *
+						 from markdown_file_models
+						 where file_path
+		ilike '%/adventures/%')
+		 , y as (
 
-    select file_date, date_part('year', file_date:: date) as year, file_path, replace(trim (split_part(file_path, file_date, 2)), '.md', '') activity
-    from x
-    order by file_date desc
-        )
+	select file_date, date_part('year', file_date:: date) as year, file_path, replace(trim (split_part(file_path, file_date, 2)), '.md', '') activity
+	from x
+	order by file_date desc
+		)
 
-    select year, activity, count (*)
-    from y
-    group by year, activity
-    order by year desc, activity
+	select year, activity, count (*)
+	from y
+	group by year, activity
+	order by year desc, activity
 `
 
 const activitiesPerYearMonth = (await sql`
-    with x as (select replace(trim(split_part(file_path, file_date, 2)), '.md', '') activity,
-                      date_part('year', file_date::date) as year, date_part('month', file_date:: date) as month, to_char(file_date:: date, 'Month') as month_name
-    from markdown_file_models
-    where file_path ilike '%/adventures/%')
-    select year, trim (month_name) month_name, count (*)
-    from x
-    group by year, month, month_name
-    order by year desc, month
+	with x as (select replace(trim(split_part(file_path, file_date, 2)), '.md', '') activity,
+										date_part('year', file_date::date) as year, date_part('month', file_date:: date) as month, to_char(file_date:: date, 'Month') as month_name
+	from markdown_file_models
+	where file_path ilike '%/adventures/%')
+	select year, trim (month_name) month_name, count (*)
+	from x
+	group by year, month, month_name
+	order by year desc, month
 `) as { year: number; month_name: string; count: string }[]
 
 const allMonths = [
@@ -123,6 +123,8 @@ const coursesPerYearImageSmall = renderGraph(500, 800, config)
 ---
 
 <Layout title="Fitness" pubDate={new Date('January 18 2025')}>
+	I'm lookng into <a href="/fitness-points">fitness points</a> to help keep myself accountable and feel
+	accomplished.
 	<h1>Activities Per Month</h1>
 	<figure>
 		{coursesPerYearImageSmall}

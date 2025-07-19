@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/BlogPost.astro'
+import { sql } from '../content.config'
+
+const rows = await sql`select *
+											 from models.fitness_points
+											 order by ddd desc`
+---
+
+<Layout title="Fitness Points">
+	{
+		rows.map((row: any) => (
+			<div>
+				<div>
+					<strong>{row.ddd.toLocaleDateString()}</strong>
+				</div>
+				{row.daily_total} Penalty: {row.penalty} Points(Running: {row.running_total})
+			</div>
+		))
+	}
+</Layout>
