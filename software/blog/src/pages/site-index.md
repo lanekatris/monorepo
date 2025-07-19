@@ -7,6 +7,8 @@ title: Site Index
 
 A good place to start is more [about me](about).
 
+I do care about [fitness](/fitness), more about that [here](#sports).
+
 I like exposing different kinds of [data](data) and compiling data about [disc golf](disc-golf).
 
 I like taking productivity tools like [obsidian](/obsidian) and I write public notes, [posts](/blog),
