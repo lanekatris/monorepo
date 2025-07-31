@@ -35,7 +35,8 @@ body {
 
 @media (prefers-color-scheme: light) {
     body {
-        background-color: #ffffff;
+        /*background-color: #ffffff;*/
+        background-color: #f9f5d7;
         color: #000000;
     }
 }

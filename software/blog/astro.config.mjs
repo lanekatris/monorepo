@@ -7,6 +7,7 @@ import { execSync } from 'child_process'
 import pagefind from 'astro-pagefind'
 import node from '@astrojs/node'
 import remarkWikiLink from 'remark-wiki-link'
+import remarkImageResize from './src/remarkImageResize.js'
 
 export function remarkModifiedTime() {
 	// @ts-ignore
@@ -38,7 +39,8 @@ export default defineConfig({
 		// }
 		syntaxHighlight: false,
 		remarkPlugins: [
-			remarkModifiedTime
+			remarkModifiedTime,
+			remarkImageResize
 			// [remarkWikiLink, { pageResolver: name => [name],hrefTemplate: permalink => `/${permalink}`}]
 		]
 	}
