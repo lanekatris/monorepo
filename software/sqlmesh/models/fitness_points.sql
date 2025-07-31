@@ -3,6 +3,8 @@ MODEL
       name models.fitness_points
 );
 
+@DEF(penalty, 1);
+
       -- You can use sqlmesh diff with the seed csv to see the data changing
 with activities as (
 --     select '2025-06-25'::date as a, 'vitamins' as type, 1 as b
@@ -39,8 +41,8 @@ with_penalty as (
 ),
 adjusted as (
     select *,
-           case when prev_day_total = 0 then -1 else 0 end as penalty,
-           daily_total + case when prev_day_total = 0 then -1 else 0 end as adjusted_total
+           case when prev_day_total = 0 then @penalty else 0 end as penalty,
+           daily_total + case when prev_day_total = 0 then @penalty else 0 end as adjusted_total
     from with_penalty
 )
 select *,

@@ -6,7 +6,7 @@ Environment="AWS_ACCESS_KEY_ID=xxxxxx"
 Environment="AWS_SECRET_ACCESS_KEY=xxxxxx"
 Environment="RESTIC_PASSWORD=xxxxxxxx"
 Environment="RESTIC_REPOSITORY=xxxxxxxxxxx"
-ExecStart=/bin/bash -c '/home/lane/lk worker'
+ExecStart=/bin/bash -c '/home/lane/bin/lk worker'
 Restart=always
 RestartSec=5
 

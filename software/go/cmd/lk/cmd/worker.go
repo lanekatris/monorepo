@@ -167,17 +167,18 @@ func deploySchedulesV2(c client.Client) {
 				TaskQueue: shared.ServerQueue,
 			},
 		},
-		{
-			ID: "schedule_vitamins",
-			Spec: client.ScheduleSpec{
-				CronExpressions: []string{"0 0 * * *"}, // every day at 8pm (1 (instead of 2) UTC because temporal is being weird about 8pm...)
-			},
-			Action: &client.ScheduleWorkflowAction{
-				ID:        "action_vitamins",
-				Workflow:  shared.WorkflowVitamins,
-				TaskQueue: shared.ServerQueue,
-			},
-		},
+		// I'm to the point this isn't being useful
+		//{
+		//	ID: "schedule_vitamins",
+		//	Spec: client.ScheduleSpec{
+		//		CronExpressions: []string{"0 0 * * *"}, // every day at 8pm (1 (instead of 2) UTC because temporal is being weird about 8pm...)
+		//	},
+		//	Action: &client.ScheduleWorkflowAction{
+		//		ID:        "action_vitamins",
+		//		Workflow:  shared.WorkflowVitamins,
+		//		TaskQueue: shared.ServerQueue,
+		//	},
+		//},
 	}
 	for _, schedule := range schedules {
 		log.Info("Creating schedule", "id", schedule.ID)
