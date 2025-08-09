@@ -29,6 +29,7 @@ pkgs.mkShell {
       pixman
       cairo
       pango
+      postgresql.pg_config
 #      libcairo2-dev
 #      libpango1.0-dev
 #      libjpeg-dev

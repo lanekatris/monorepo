@@ -4,11 +4,35 @@
 
 { config, pkgs, ... }:
 
-{
+let
+#  lk = import ../../software/go/lk-build.nix;
+#    lk = import ../../software/go/lk-build.nix { inherit pkgs; };
+in {
+
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+#      ./lk.nix
+#        ../../software/go/lk-build.nix
     ];
+
+#  systemd.services.lk = {
+#    description = "LK Go Service";
+#    wantedBy = [ "multi-user.target" ];
+#    after = [ "network.target" ];
+#
+#    serviceConfig = {
+#      ExecStart = "${lk}/bin/lk";
+#      Restart = "always";
+#      RestartSec = 5;
+##      WorkingDirectory = "/var/lib/lk"; # optional, depends on your app
+##      User = "lk";                      # optional, create this user if needed
+#    };
+#    };
+nix.settings.experimental-features = [ "nix-command" ];
+
+
 
 services.tailscale.enable = true;
   # Bootloader.
@@ -50,11 +74,32 @@ services.tailscale.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+# I'm not sure if this worked, the config is valid though
+services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
+    [org.gnome.settings-daemon.plugins.power]
+    sleep-inactive-ac-type='nothing'
+    sleep-inactive-battery-type='nothing'
+  '';
+
+# This might have done it...
+  systemd.targets.sleep.enable = false;
+    systemd.targets.suspend.enable = false;
+    systemd.targets.hibernate.enable = false;
+    systemd.targets.hybrid-sleep.enable = false;
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
+
+
+  # Sleep
+#  services.xserver.enableAutomaticBrightnessLowering = false;
+
+#  services.xserver.disableScreenLock = true;
+#  systemd.sleep = false;
+
 #  services.gnome = {
 #      core-utilities.enable = true;
 #    };
@@ -109,12 +154,17 @@ google-chrome
 pkgs.jetbrains.webstorm
 pkgs.jetbrains.goland
 pkgs.jetbrains.datagrip
+pkgs.jetbrains.rider
 pkgs.vscode
+code-cursor
 obsidian
 spotify
 discord
 oterm # for ollama/open-qqwebui
 citrix_workspace
+screenfetch
+inkscape
+#lk
 #pkgs.ollama
 #   (pkgs.ollama.override {
 #      acceleration = "cuda";
@@ -123,6 +173,21 @@ citrix_workspace
 #    pkgs.dconf
 #    gnomeExtensions.forge
   ];
+#
+# dconf.settings = {
+#      "org/gnome/settings-daemon/plugins/power" = {
+#        # Set to 'nothing' to prevent suspend when inactive on AC power
+#        sleep-inactive-ac-type = "nothing";
+#        # Set the timeout in seconds (e.g., 0 for never)
+#        sleep-inactive-ac-timeout = 0;
+#      };
+#    };
+## This didn't work, it is still jacked up after coming out of sleep
+#   systemd.services."systemd-suspend" = {
+#      serviceConfig = {
+#        Environment=''"SYSTEMD_SLEEP_FREEZE_USER_SESSIONS=false"'';
+#      };
+#    };
 
    programs._1password.enable = true;
     programs._1password-gui = {
@@ -173,9 +238,11 @@ citrix_workspace
 #        };
 #      };
 
-  virtualisation.docker = {
-    enable = true;
-  };
+virtualisation.docker.enable = true;
+
+  virtualisation.docker.extraOptions = ''
+    --insecure-registry=server1:5000
+  '';
   # Enable OpenGL
   hardware.graphics = {
     enable = true;
@@ -241,5 +308,30 @@ citrix_workspace
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
+
+
+
+#  services.lk = import ../../software/go;
+##      pkgs.lk.override {
+##        installPhase = ''
+##          mkdir -p ${config.system.packagesDir}
+##          # Copy your Go app's binary into the packages directory
+##          cp lk /home/lane/goapp_binary
+##          chmod +x /home/lane/goapp_binary
+##        '';
+##      };
+#
+#    systemd.services.lk = {
+#      description = "My Go App Service";
+#      after = [ "network-online.target" ];
+#      requires = [ "network-online.target" ];
+#      wantedBy = [ "multi-user.target" ];
+#      path = "/home/lane/goapp_binary"; # Adjust path
+#      script = ''
+#        /home/lane/goapp_binary
+#      '';
+#    };
+
+
 
 }
