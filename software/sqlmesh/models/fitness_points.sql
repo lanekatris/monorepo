@@ -3,7 +3,7 @@ MODEL
       name models.fitness_points
 );
 
-@DEF(penalty, 1);
+@DEF(penalty, -5);
 
       -- You can use sqlmesh diff with the seed csv to see the data changing
 with activities as (

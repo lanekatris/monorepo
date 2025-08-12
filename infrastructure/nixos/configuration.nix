@@ -30,7 +30,7 @@ in {
 ##      User = "lk";                      # optional, create this user if needed
 #    };
 #    };
-nix.settings.experimental-features = [ "nix-command" ];
+nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
 
 
@@ -151,6 +151,7 @@ services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
   git
 vim
 google-chrome
+chromium
 pkgs.jetbrains.webstorm
 pkgs.jetbrains.goland
 pkgs.jetbrains.datagrip
@@ -160,10 +161,12 @@ code-cursor
 obsidian
 spotify
 discord
+slack
 oterm # for ollama/open-qqwebui
 citrix_workspace
 screenfetch
 inkscape
+flameshot
 #lk
 #pkgs.ollama
 #   (pkgs.ollama.override {

@@ -11,3 +11,4 @@ data/dg-courses-generated.db
 flyway.conf
 node_modules
 /software/embedded/settings.toml
+.venv

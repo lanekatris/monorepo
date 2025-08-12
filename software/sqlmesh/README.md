@@ -1,3 +1,10 @@
+# New Way
+```
+nix develop
+sqlmesh plan
+```
+
+# Old Way
 ```
 nix shell ......
 

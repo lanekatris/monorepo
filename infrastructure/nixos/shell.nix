@@ -3,7 +3,6 @@
 pkgs.mkShell {
   buildInputs = with pkgs; [
       go
-      python311
 
 
   # all for nodejs and npm install / node-gyp
