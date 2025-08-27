@@ -2,11 +2,11 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
-#  lk = import ../../software/go/lk-build.nix;
-#    lk = import ../../software/go/lk-build.nix { inherit pkgs; };
+  # Import your Go flake using absolute path
+#  goFlake = builtins.getFlake "path:/home/lane/git/monorepo/software/go";
 in {
 
 
@@ -17,19 +17,49 @@ in {
 #        ../../software/go/lk-build.nix
     ];
 
+  # LK Go Service
 #  systemd.services.lk = {
 #    description = "LK Go Service";
 #    wantedBy = [ "multi-user.target" ];
 #    after = [ "network.target" ];
 #
 #    serviceConfig = {
-#      ExecStart = "${lk}/bin/lk";
+#      ExecStart = "${goFlake.packages.${pkgs.system}.default}/bin/lk";
 #      Restart = "always";
 #      RestartSec = 5;
-##      WorkingDirectory = "/var/lib/lk"; # optional, depends on your app
-##      User = "lk";                      # optional, create this user if needed
+#      WorkingDirectory = "/var/lib/lk";
+#      User = "lk";
+#      Group = "lk";
+#
+#      # Environment variables (you can add more as needed)
+#      Environment = [
+#        "GOPATH=/home/lane/.go"
+#        "GOCACHE=/home/lane/.cache/go-build"
+#        "GOMODCACHE=/home/lane/.cache/go-mod"
+#      ];
+#
+#      # Security settings
+#      NoNewPrivileges = true;
+#      ProtectSystem = "strict";
+#      ProtectHome = true;
+#      ReadWritePaths = "/var/lib/lk /home/lane/.go /home/lane/.cache";
 #    };
-#    };
+#  };
+#
+#  # Create the lk user and group
+#  users.users.lk = {
+#    isSystemUser = true;
+#    group = "lk";
+#    home = "/var/lib/lk";
+#    createHome = true;
+#  };
+#
+#  users.groups.lk = {};
+#
+#  # Create the data directory
+#  systemd.tmpfiles.rules = [
+#    "d /var/lib/lk 0755 lk lk -"
+#  ];
 nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
 
@@ -167,6 +197,19 @@ citrix_workspace
 screenfetch
 inkscape
 flameshot
+yt-dlp
+pkgs.gnomeExtensions.pop-shell
+#    pkgs.gnomeExtensions.pop-shell-shortcuts
+#pkgs.gnomeExtensionsApp
+    gnome-tweaks
+    brave
+
+    # nvim stuff
+    ripgrep
+    fd
+    neovim
+    transmission-gtk
+    ranger
 #lk
 #pkgs.ollama
 #   (pkgs.ollama.override {
@@ -231,7 +274,27 @@ flameshot
 
 #    programs.gnome-shell-extensions.enable = true;
 #    services.dbus.packages = with pkgs; [ dconf ];
-#    programs.dconf.enable = true;
+    programs.dconf.enable = true;
+
+      programs.dconf.profiles.user.databases = [
+        {
+          settings = {
+            "org/gnome/shell" = {
+              enabled-extensions = [
+                "pop-shell@system76.com"
+              ];
+            };
+            "org/gnome/shell/extensions/pop-shell" = {
+              tile-by-default = true;
+              gap-inner = "<int32 2>";
+              gap-outer = "<int32 2>";
+              smart-gaps = true;
+              show-title = true;
+              stacking-with-mouse = true;
+            };
+          };
+        }
+      ];
 #    dconf.settings = {
 #    "org/gnome/desktop/interface" = {
 #          clock-format = "12h";
@@ -334,7 +397,6 @@ virtualisation.docker.enable = true;
 #        /home/lane/goapp_binary
 #      '';
 #    };
-
 
 
 }
