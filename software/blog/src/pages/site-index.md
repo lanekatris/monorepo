@@ -5,7 +5,7 @@ title: Site Index
 
 # Site Index for Humans
 
-A good place to start is more [about me](/about).
+A good place to start is my [feed](/feed) (not RSS related) or [about me](/about) my [blog](/blog) / digital garden.
 
 I do care about [fitness](/fitness), more about that [here](#sports).
 

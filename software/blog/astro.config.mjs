@@ -40,8 +40,8 @@ export default defineConfig({
 		syntaxHighlight: false,
 		remarkPlugins: [
 			remarkModifiedTime,
-			remarkImageResize
-			// [remarkWikiLink, { pageResolver: name => [name],hrefTemplate: permalink => `/${permalink}`}]
+			remarkImageResize,
+			[remarkWikiLink, { pageResolver: name => [ name],hrefTemplate: permalink => `/${permalink}`}]
 		]
 	}
 })
