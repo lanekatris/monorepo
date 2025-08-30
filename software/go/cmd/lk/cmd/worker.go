@@ -43,22 +43,22 @@ func deploySchedulesV2(c client.Client) {
 
 	// Create schedules
 	var schedules = []client.ScheduleOptions{
-		client.ScheduleOptions{
-			ID: "schedule_miniflux_to_s3",
-			Spec: client.ScheduleSpec{
-				CronExpressions: []string{"0 */12 * * *"},
-			},
-			Action: &client.ScheduleWorkflowAction{
-				ID:        "action_miniflux_to_s3",
-				Workflow:  shared.WorkflowMinifluxToS3,
-				TaskQueue: "server",
-			},
-		},
+		//client.ScheduleOptions{
+		//	ID: "schedule_miniflux_to_s3",
+		//	Spec: client.ScheduleSpec{
+		//		CronExpressions: []string{"0 */12 * * *"},
+		//	},
+		//	Action: &client.ScheduleWorkflowAction{
+		//		ID:        "action_miniflux_to_s3",
+		//		Workflow:  shared.WorkflowMinifluxToS3,
+		//		TaskQueue: "server",
+		//	},
+		//},
 		client.ScheduleOptions{
 			ID: "schedule_obsidian_files_to_db",
 			Spec: client.ScheduleSpec{
 				// Every 12 hours
-				CronExpressions: []string{"0 */2 * * *"}, // https://crontab.guru/#0_*/12_*_*_*
+				CronExpressions: []string{"0 */12 * * *"}, // https://crontab.guru/#0_*/12_*_*_*
 			},
 			Action: &client.ScheduleWorkflowAction{
 				ID:        "action_obsidian_files_to_db",
@@ -123,17 +123,17 @@ func deploySchedulesV2(c client.Client) {
 				TaskQueue: "server",
 			},
 		},
-		client.ScheduleOptions{
-			ID: "schedule_get_washer_power",
-			Spec: client.ScheduleSpec{
-				CronExpressions: []string{"*/30 * * * *"}, // Every 30 minutes
-			},
-			Action: &client.ScheduleWorkflowAction{
-				ID:        "action_get_washer_power",
-				Workflow:  shared.WorkflowPowerOutlet,
-				TaskQueue: shared.ServerQueue,
-			},
-		},
+		//client.ScheduleOptions{
+		//	ID: "schedule_get_washer_power",
+		//	Spec: client.ScheduleSpec{
+		//		CronExpressions: []string{"*/30 * * * *"}, // Every 30 minutes
+		//	},
+		//	Action: &client.ScheduleWorkflowAction{
+		//		ID:        "action_get_washer_power",
+		//		Workflow:  shared.WorkflowPowerOutlet,
+		//		TaskQueue: shared.ServerQueue,
+		//	},
+		//},
 		client.ScheduleOptions{
 			ID: "schedule_get_inbox",
 			Spec: client.ScheduleSpec{
@@ -145,17 +145,17 @@ func deploySchedulesV2(c client.Client) {
 				TaskQueue: shared.ServerQueue,
 			},
 		},
-		{
-			ID: "schedule_twitch",
-			Spec: client.ScheduleSpec{
-				CronExpressions: []string{"*/30 * * * *"},
-			},
-			Action: &client.ScheduleWorkflowAction{
-				ID:        "action_twitch",
-				Workflow:  shared.WorkflowTwitch,
-				TaskQueue: shared.ServerQueue,
-			},
-		},
+		//{
+		//	ID: "schedule_twitch",
+		//	Spec: client.ScheduleSpec{
+		//		CronExpressions: []string{"*/30 * * * *"},
+		//	},
+		//	Action: &client.ScheduleWorkflowAction{
+		//		ID:        "action_twitch",
+		//		Workflow:  shared.WorkflowTwitch,
+		//		TaskQueue: shared.ServerQueue,
+		//	},
+		//},
 		{
 			ID: "schedule_climb",
 			Spec: client.ScheduleSpec{
