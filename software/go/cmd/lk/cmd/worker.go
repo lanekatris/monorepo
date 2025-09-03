@@ -15,17 +15,6 @@ import (
 	db2 "shared/db"
 )
 
-func createBackupArgs(prefix string) []interface{} {
-	strSlice := []string{prefix}
-	interfaceSlice := make([]interface{}, len(strSlice))
-
-	for i, v := range strSlice {
-		interfaceSlice[i] = v
-	}
-
-	return interfaceSlice
-}
-
 func deploySchedulesV2(c client.Client) {
 	list, err := c.ScheduleClient().List(context.Background(), client.ScheduleListOptions{})
 	shared.HandleError(err)
@@ -40,6 +29,11 @@ func deploySchedulesV2(c client.Client) {
 		err = handle.Delete(context.Background())
 		shared.HandleError(err)
 	}
+
+	var screenFetchParams = []interface{}{shared.ExecOnHostArgs{
+		Name: "screenfetch",
+		Args: []string{"-N"},
+	}}
 
 	// Create schedules
 	var schedules = []client.ScheduleOptions{
@@ -84,9 +78,11 @@ func deploySchedulesV2(c client.Client) {
 			},
 			Action: &client.ScheduleWorkflowAction{
 				ID:        "action_os_info_linux_desktop",
-				Workflow:  shared.WorkflowGetOsInfo,
+				Workflow:  shared.WorkflowGetOsInfoV2,
 				TaskQueue: shared.GreetingTaskQueue,
-				Args:      createBackupArgs("linux_desktop"),
+				//Args:      createBackupArgs("linux_desktop"),
+				//Args: []interface{}{screenFetchParams},
+				Args: screenFetchParams,
 			},
 		},
 		client.ScheduleOptions{
@@ -96,11 +92,28 @@ func deploySchedulesV2(c client.Client) {
 			},
 			Action: &client.ScheduleWorkflowAction{
 				ID:        "action_os_info_server1",
-				Workflow:  shared.WorkflowGetOsInfo,
+				Workflow:  shared.WorkflowGetOsInfoV2,
 				TaskQueue: "server",
-				Args:      createBackupArgs("server1"),
+				Args:      screenFetchParams,
 			},
 		},
+
+		client.ScheduleOptions{
+			ID: "schedule_os_info_windows",
+			Spec: client.ScheduleSpec{
+				CronExpressions: []string{"0 3 * * 0"},
+			},
+			Action: &client.ScheduleWorkflowAction{
+				ID:        "action_os_info_windows",
+				Workflow:  shared.WorkflowGetOsInfoV2,
+				TaskQueue: "windows",
+				Args: []interface{}{shared.ExecOnHostArgs{
+					Name: "powershell",
+					Args: []string{"-command", "get-computerinfo | select-object WindowsProductName, CsTotalPhysicalMemory,CsModel,CsManufacturer,CsProcessors | convertto-json"},
+				}},
+			},
+		},
+
 		{
 			ID: "schedule_podcast",
 			Spec: client.ScheduleSpec{
@@ -251,7 +264,7 @@ var workerCmd = &cobra.Command{
 		//w.RegisterActivity(shared.GenerateMarkdownModels)
 		//w.RegisterActivity(shared.InsertMultipleIntoDb)
 
-		w.RegisterWorkflow(shared.WorkflowGetOsInfo)
+		w.RegisterWorkflow(shared.WorkflowGetOsInfoV2)
 		w.RegisterActivity(shared.ExecOnHost)
 		w.RegisterActivity(shared.KvPut)
 
