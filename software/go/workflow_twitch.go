@@ -3,10 +3,11 @@ package shared
 import (
 	"encoding/json"
 	"errors"
+	"time"
+
 	"github.com/charmbracelet/log"
 	"github.com/spf13/viper"
 	"go.temporal.io/sdk/workflow"
-	"time"
 )
 
 func WorkflowTwitch(ctx workflow.Context) error {
@@ -31,7 +32,7 @@ func WorkflowTwitch(ctx workflow.Context) error {
 		return err
 	}
 
-	twitchStreams := []string{"headshotchick", "theprimeagen", "beardedblevins", "ninja", "sweeettails"}
+	twitchStreams := []string{"headshotchick", "theprimeagen", "beardedblevins", "ninja", "sweeettails", "kitboga"}
 
 	for _, twitchStream := range twitchStreams {
 		var stream *StreamData
