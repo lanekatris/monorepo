@@ -6,6 +6,17 @@ networks:
     external: false
 
 services:
+  watcher:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command:
+      - --monitor-only
+      - --interval=86400 # once a day
+        #- --interval=300 # 5min
+      - --notification-url=generic+http://web:3000/api/dump/watchtower_v1?token=${WEB_API_TOKEN}
   search:
     image: searxng/searxng
     restart: unless-stopped

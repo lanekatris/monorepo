@@ -1,7 +1,7 @@
 services:
   miniflux:
     restart: unless-stopped
-    image: miniflux/miniflux:latest
+    image: miniflux/miniflux:2.2.12
     ports:
       - "8663:8080"
     depends_on:
@@ -14,6 +14,7 @@ services:
       - ADMIN_USERNAME=admin
       - ADMIN_PASSWORD=test123
       - POLLING_FREQUENCY=1440 # 1 Day
+      - LOG_LEVEL=debug
   db:
     image: postgres:15
     restart: unless-stopped
