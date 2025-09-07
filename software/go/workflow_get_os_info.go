@@ -5,27 +5,21 @@ import (
 	"time"
 )
 
-func WorkflowGetOsInfo(ctx workflow.Context, filePrefix string) (info string, err error) {
+func WorkflowGetOsInfoV2(ctx workflow.Context, o ExecOnHostArgs) (info string, err error) {
 	ao := workflow.ActivityOptions{
 		StartToCloseTimeout: 8 * time.Hour,
 	}
 	ctx = workflow.WithActivityOptions(ctx, ao)
 
 	var result string
-	var o = ExecOnHostArgs{
-		Name: "screenfetch",
-		Args: []string{"-N"},
-	}
 	err = workflow.ExecuteActivity(ctx, ExecOnHost, o).Get(ctx, &result)
 	if err != nil {
 		return "", err
 	}
 
-	err = workflow.ExecuteActivity(ctx, KvPut, filePrefix+"_screenfetch_result.txt", result).Get(ctx, nil)
-	if err != nil {
-		return "", err
-	}
+	var activities *SharedActivities
+	err = workflow.ExecuteActivity(ctx, activities.DumpEvent, "os_info_v1", result).Get(ctx, nil)
 
-	return result, nil
+	return result, err
 
 }

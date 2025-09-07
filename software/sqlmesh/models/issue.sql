@@ -21,11 +21,11 @@ select 'Go to the gym!' message where not exists (
 
 union
 
-select concat('Clean up obsidian! Root file count: ', count(*), ' (50 max)') message from models.obsidian_file where in_root having count(*) > 50
+select concat('Clean up obsidian! Root file count: ', count(*), ' (50 max) http://server1:8055/namespaces/default/schedules/schedule_obsidian_files_to_db') message from models.obsidian_file where in_root having count(*) > 50
 
 union
 
-(select 'Digital and paper adventure calendars are out of sync' message from models.versions
+(select 'Digital and paper adventure calendars are out of sync http://server1:8055/namespaces/default/schedules/schedule_obsidian_files_to_db' message from models.versions
 where type in ('obsidian_adventures', 'paper_calendar')
 group by version having count(*) != 2 limit 1)
 -- union
@@ -38,12 +38,12 @@ group by version having count(*) != 2 limit 1)
 
 union
 
-select concat('Clean up emails! (',unread_count,')') message from models.inbox_stat where unread_count > 0
+select concat('Clean up emails! (',unread_count,') http://server1:8055/namespaces/default/schedules/schedule_get_inbox') message from models.inbox_stat where unread_count > 0
 
 
 union
 
-select concat('Bookmark queue over 100! (',count(*),') https://app.raindrop.io/my/36282268') message from models.bookmark where collection_name = 'Inbox' group by collection_name having count(*) > 100
+select concat('Bookmark queue over 242! (',count(*),') https://app.raindrop.io/my/36282268') message from models.bookmark where collection_name = 'Inbox' group by collection_name having count(*) > 242
 
 union
 

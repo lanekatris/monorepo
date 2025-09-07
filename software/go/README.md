@@ -1,3 +1,9 @@
+# Nix
+
+```
+nix develop
+```
+
 Add a new command with cobra
 
 ```

@@ -1,15 +1,16 @@
 ---
+// import DOMPurify from 'dompurify';
 import { sql } from '../content.config'
+import {marked} from 'marked'
 
 type Issue = {
 	message: string
 }
 
 // Not using content collection since I want this refreshing on each page load
-const issues = (await sql`select *
-													from models.issue `) as Issue[]
+const issues = (await sql`select * from models.issue `) as Issue[]
 ---
 
-<ol>
-	{issues.map((issue) => <li>{issue.message}</li>)}
-</ol>
+<!--<ol>-->
+	{issues.map((issue) => <div set:html={marked(issue.message)}></div>)}
+<!--</ol>-->

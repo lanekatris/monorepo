@@ -10,7 +10,7 @@ export default async function getBlogPosts() {
 		draft: x.data.draft || false,
 		id: x.id,
 
-		url: `/blog/${x.id}/`
+		url: `/${x.id}/`
 	}))
 
 	posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())

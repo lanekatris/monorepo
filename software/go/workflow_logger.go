@@ -21,7 +21,8 @@ func WorkflowLogger(ctx workflow.Context, eventName string, data string) error {
 			return err
 		}
 
-		log.Info("Twitch stream online", "name", d.UserName)
+		twitchURL := "https://twitch.tv/" + d.UserName
+		log.Info("Twitch stream online", "name", d.UserName, "url", twitchURL)
 
 	} else {
 		log.Info("Event Logged", "name", eventName)

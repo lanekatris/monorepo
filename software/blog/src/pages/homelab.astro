@@ -4,6 +4,7 @@ import Layout from '../layouts/BlogPost.astro'
 import { getFromMinio } from '../get-from-minio'
 import { sql } from '../content.config'
 import { getCollection } from 'astro:content'
+import { getRecentTemporalWorkflows } from '../getRecentTemporalWorkflows'
 
 interface DockerComposeFile {
 	services: { [k: string]: { ports?: string[]
@@ -42,7 +43,12 @@ const eventCounts = await sql`select event_name,min(created_at)::date earliest_d
 const obsidianCounts = await sql`select * from models.obsidian_tags order by tag`
 
 const pages = await getCollection('page')
-console.log(pages)
+// console.log(pages)
+
+
+
+const workflows = await getRecentTemporalWorkflows();
+console.log(workflows)
 ---
 
 <Layout title="My Homelab" pubDate={new Date('August 08 2021')}>
@@ -64,6 +70,26 @@ console.log(pages)
 	<ul>
 		<li><a href="https://minio.lkat.io/browser/fresh-os-install" target="_blank">Install Files</a></li>
 	</ul>
+
+	<h1>Recent Temporal Invocations</h1>
+	<table>
+		<thead>
+		<tr>
+			<td>Status</td>
+			<td>Workflow ID</td>
+		</tr>
+		</thead>
+		<tbody>
+		{workflows.map((workflow) => (
+			<tr >
+				<td>
+					<var>{workflow.status.name}</var>
+				</td>
+				<td>{workflow.workflowId}</td>
+			</tr>
+		))}
+		</tbody>
+	</table>
 	<h1 id="dc">Docker Compose Files</h1>
 	<p>
 I suck		 in my homelab docker-compose files and creates easy links to navigate to them if

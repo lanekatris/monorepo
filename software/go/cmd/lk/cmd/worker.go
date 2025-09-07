@@ -15,17 +15,6 @@ import (
 	db2 "shared/db"
 )
 
-func createBackupArgs(prefix string) []interface{} {
-	strSlice := []string{prefix}
-	interfaceSlice := make([]interface{}, len(strSlice))
-
-	for i, v := range strSlice {
-		interfaceSlice[i] = v
-	}
-
-	return interfaceSlice
-}
-
 func deploySchedulesV2(c client.Client) {
 	list, err := c.ScheduleClient().List(context.Background(), client.ScheduleListOptions{})
 	shared.HandleError(err)
@@ -41,24 +30,29 @@ func deploySchedulesV2(c client.Client) {
 		shared.HandleError(err)
 	}
 
+	var screenFetchParams = []interface{}{shared.ExecOnHostArgs{
+		Name: "screenfetch",
+		Args: []string{"-N"},
+	}}
+
 	// Create schedules
 	var schedules = []client.ScheduleOptions{
-		client.ScheduleOptions{
-			ID: "schedule_miniflux_to_s3",
-			Spec: client.ScheduleSpec{
-				CronExpressions: []string{"0 */12 * * *"},
-			},
-			Action: &client.ScheduleWorkflowAction{
-				ID:        "action_miniflux_to_s3",
-				Workflow:  shared.WorkflowMinifluxToS3,
-				TaskQueue: "server",
-			},
-		},
+		//client.ScheduleOptions{
+		//	ID: "schedule_miniflux_to_s3",
+		//	Spec: client.ScheduleSpec{
+		//		CronExpressions: []string{"0 */12 * * *"},
+		//	},
+		//	Action: &client.ScheduleWorkflowAction{
+		//		ID:        "action_miniflux_to_s3",
+		//		Workflow:  shared.WorkflowMinifluxToS3,
+		//		TaskQueue: "server",
+		//	},
+		//},
 		client.ScheduleOptions{
 			ID: "schedule_obsidian_files_to_db",
 			Spec: client.ScheduleSpec{
 				// Every 12 hours
-				CronExpressions: []string{"0 */2 * * *"}, // https://crontab.guru/#0_*/12_*_*_*
+				CronExpressions: []string{"0 */12 * * *"}, // https://crontab.guru/#0_*/12_*_*_*
 			},
 			Action: &client.ScheduleWorkflowAction{
 				ID:        "action_obsidian_files_to_db",
@@ -84,9 +78,11 @@ func deploySchedulesV2(c client.Client) {
 			},
 			Action: &client.ScheduleWorkflowAction{
 				ID:        "action_os_info_linux_desktop",
-				Workflow:  shared.WorkflowGetOsInfo,
+				Workflow:  shared.WorkflowGetOsInfoV2,
 				TaskQueue: shared.GreetingTaskQueue,
-				Args:      createBackupArgs("linux_desktop"),
+				//Args:      createBackupArgs("linux_desktop"),
+				//Args: []interface{}{screenFetchParams},
+				Args: screenFetchParams,
 			},
 		},
 		client.ScheduleOptions{
@@ -96,11 +92,28 @@ func deploySchedulesV2(c client.Client) {
 			},
 			Action: &client.ScheduleWorkflowAction{
 				ID:        "action_os_info_server1",
-				Workflow:  shared.WorkflowGetOsInfo,
+				Workflow:  shared.WorkflowGetOsInfoV2,
 				TaskQueue: "server",
-				Args:      createBackupArgs("server1"),
+				Args:      screenFetchParams,
 			},
 		},
+
+		client.ScheduleOptions{
+			ID: "schedule_os_info_windows",
+			Spec: client.ScheduleSpec{
+				CronExpressions: []string{"0 3 * * 0"},
+			},
+			Action: &client.ScheduleWorkflowAction{
+				ID:        "action_os_info_windows",
+				Workflow:  shared.WorkflowGetOsInfoV2,
+				TaskQueue: "windows",
+				Args: []interface{}{shared.ExecOnHostArgs{
+					Name: "powershell",
+					Args: []string{"-command", "get-computerinfo | select-object WindowsProductName, CsTotalPhysicalMemory,CsModel,CsManufacturer,CsProcessors | convertto-json"},
+				}},
+			},
+		},
+
 		{
 			ID: "schedule_podcast",
 			Spec: client.ScheduleSpec{
@@ -123,17 +136,17 @@ func deploySchedulesV2(c client.Client) {
 				TaskQueue: "server",
 			},
 		},
-		client.ScheduleOptions{
-			ID: "schedule_get_washer_power",
-			Spec: client.ScheduleSpec{
-				CronExpressions: []string{"*/30 * * * *"}, // Every 30 minutes
-			},
-			Action: &client.ScheduleWorkflowAction{
-				ID:        "action_get_washer_power",
-				Workflow:  shared.WorkflowPowerOutlet,
-				TaskQueue: shared.ServerQueue,
-			},
-		},
+		//client.ScheduleOptions{
+		//	ID: "schedule_get_washer_power",
+		//	Spec: client.ScheduleSpec{
+		//		CronExpressions: []string{"*/30 * * * *"}, // Every 30 minutes
+		//	},
+		//	Action: &client.ScheduleWorkflowAction{
+		//		ID:        "action_get_washer_power",
+		//		Workflow:  shared.WorkflowPowerOutlet,
+		//		TaskQueue: shared.ServerQueue,
+		//	},
+		//},
 		client.ScheduleOptions{
 			ID: "schedule_get_inbox",
 			Spec: client.ScheduleSpec{
@@ -145,17 +158,17 @@ func deploySchedulesV2(c client.Client) {
 				TaskQueue: shared.ServerQueue,
 			},
 		},
-		{
-			ID: "schedule_twitch",
-			Spec: client.ScheduleSpec{
-				CronExpressions: []string{"*/30 * * * *"},
-			},
-			Action: &client.ScheduleWorkflowAction{
-				ID:        "action_twitch",
-				Workflow:  shared.WorkflowTwitch,
-				TaskQueue: shared.ServerQueue,
-			},
-		},
+		//{
+		//	ID: "schedule_twitch",
+		//	Spec: client.ScheduleSpec{
+		//		CronExpressions: []string{"*/30 * * * *"},
+		//	},
+		//	Action: &client.ScheduleWorkflowAction{
+		//		ID:        "action_twitch",
+		//		Workflow:  shared.WorkflowTwitch,
+		//		TaskQueue: shared.ServerQueue,
+		//	},
+		//},
 		{
 			ID: "schedule_climb",
 			Spec: client.ScheduleSpec{
@@ -167,17 +180,18 @@ func deploySchedulesV2(c client.Client) {
 				TaskQueue: shared.ServerQueue,
 			},
 		},
-		{
-			ID: "schedule_vitamins",
-			Spec: client.ScheduleSpec{
-				CronExpressions: []string{"0 0 * * *"}, // every day at 8pm (1 (instead of 2) UTC because temporal is being weird about 8pm...)
-			},
-			Action: &client.ScheduleWorkflowAction{
-				ID:        "action_vitamins",
-				Workflow:  shared.WorkflowVitamins,
-				TaskQueue: shared.ServerQueue,
-			},
-		},
+		// I'm to the point this isn't being useful
+		//{
+		//	ID: "schedule_vitamins",
+		//	Spec: client.ScheduleSpec{
+		//		CronExpressions: []string{"0 0 * * *"}, // every day at 8pm (1 (instead of 2) UTC because temporal is being weird about 8pm...)
+		//	},
+		//	Action: &client.ScheduleWorkflowAction{
+		//		ID:        "action_vitamins",
+		//		Workflow:  shared.WorkflowVitamins,
+		//		TaskQueue: shared.ServerQueue,
+		//	},
+		//},
 	}
 	for _, schedule := range schedules {
 		log.Info("Creating schedule", "id", schedule.ID)
@@ -250,7 +264,7 @@ var workerCmd = &cobra.Command{
 		//w.RegisterActivity(shared.GenerateMarkdownModels)
 		//w.RegisterActivity(shared.InsertMultipleIntoDb)
 
-		w.RegisterWorkflow(shared.WorkflowGetOsInfo)
+		w.RegisterWorkflow(shared.WorkflowGetOsInfoV2)
 		w.RegisterActivity(shared.ExecOnHost)
 		w.RegisterActivity(shared.KvPut)
 

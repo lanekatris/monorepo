@@ -3,11 +3,11 @@ package shared
 import (
 	"encoding/json"
 	"errors"
+	"time"
+
 	"github.com/charmbracelet/log"
 	"github.com/spf13/viper"
-	"go.temporal.io/api/enums/v1"
 	"go.temporal.io/sdk/workflow"
-	"time"
 )
 
 func WorkflowTwitch(ctx workflow.Context) error {
@@ -26,23 +26,13 @@ func WorkflowTwitch(ctx workflow.Context) error {
 		return errors.New("twitch_client_id is empty")
 	}
 
-	// get token
-	//var token string
-	//err := workflow.ExecuteActivity(ctx, KvGetString, "twitch-token").Get(ctx, &token)
-	//if err != nil {
-	//	return err
-	//}
-
-	//if token == "" {
 	var token string
 	err := workflow.ExecuteActivity(ctx, GetTwitchToken, clientId, secret).Get(ctx, &token)
 	if err != nil {
 		return err
 	}
-	//token = token
-	//}
 
-	twitchStreams := [4]string{"headshotchick", "theprimeagen", "beardedblevins", "ninja"}
+	twitchStreams := []string{"headshotchick", "theprimeagen", "beardedblevins", "ninja", "sweeettails", "kitboga"}
 
 	for _, twitchStream := range twitchStreams {
 		var stream *StreamData
@@ -62,17 +52,10 @@ func WorkflowTwitch(ctx workflow.Context) error {
 			return err
 		}
 
-		childOptions := workflow.ChildWorkflowOptions{
-			WorkflowID:        "dump-from-twitch",
-			TaskQueue:         ServerQueue,
-			ParentClosePolicy: enums.PARENT_CLOSE_POLICY_TERMINATE,
-		}
-		ctx = workflow.WithChildOptions(ctx, childOptions)
+		var activities *SharedActivities
+		err = workflow.ExecuteActivity(ctx, activities.DumpEvent, "twitch_stream_online_v1", string(stringStream)).Get(ctx, nil)
 
-		err = workflow.ExecuteChildWorkflow(ctx, WorkflowDumper, "twitch_stream_online_v1", string(stringStream)).Get(ctx, nil)
-		if err != nil {
-			return err
-		}
+		return err
 	}
 
 	return err
