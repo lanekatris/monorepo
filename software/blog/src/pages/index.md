@@ -3,17 +3,27 @@ layout: '../layouts/BlogPost.astro'
 title: Home
 ---
 
-I'm Lane Katris ([about](about)).
+# Me
 
-Married, [dad](https://troykatris.com) and play some [sports](site-index#sports).
+I'm Lane Katris ([about](about)) - Married, [dad](https://troykatris.com) and play some [sports](site-index#sports).
 
-I work at [HD Supply](https://www.linkedin.com/company/hd-supply) as a senior full stack engineer. More about
-my [work](work).
 
-<br/>
+I work at [HD Supply](https://www.linkedin.com/company/hd-supply) as a senior full stack engineer. More about my [work](work).
 
-Check out what I'm up to [now](/now) or my [site index for humans](/site-index) to see what to check out on this site.
+# Get Started
 
-<br/>
+- [Blog](/blog)
+- What I'm up to [now](/now)
+- [site index for humangs](/site-index)
 
-_Yes, the CSS is either non-existent, ugly, or changes all the time... [colophon](colophon)_
+[//]: # ()
+[//]: # (<br/>)
+
+[//]: # ()
+[//]: # (Check out what I'm up to [now]&#40;/now&#41; or my [site index for humans]&#40;/site-index&#41; to see what to check out on this site.)
+
+[//]: # ()
+[//]: # (<br/>)
+
+[//]: # ()
+[//]: # (_Yes, the CSS is either non-existent, ugly, or changes all the time... [colophon]&#40;colophon&#41;_)

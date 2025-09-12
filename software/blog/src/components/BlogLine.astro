@@ -18,7 +18,7 @@ const { post } = Astro.props
 	<small>
 		{post.date && <FormattedDate date={post.date} />}
 	</small>
-	<a href={post.url}>
+	<a href={post.url.split('/').filter(x=>x).at(-1)}>
 		{post.title}
 	</a>
 </dt>

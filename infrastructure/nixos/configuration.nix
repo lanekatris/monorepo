@@ -183,6 +183,7 @@ vim
 google-chrome
 chromium
 pkgs.jetbrains.webstorm
+nodejs_22
 pkgs.jetbrains.goland
 pkgs.jetbrains.datagrip
 pkgs.jetbrains.rider
