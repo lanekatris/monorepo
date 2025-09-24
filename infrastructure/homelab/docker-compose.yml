@@ -16,7 +16,7 @@ services:
       - --monitor-only
       - --interval=86400 # once a day
         #- --interval=300 # 5min
-      - --notification-url=generic+http://web:3000/api/dump/watchtower_v1?token=${WEB_API_TOKEN}
+      - --notification-url=generic+http://web:3000/api/dump/watchtower_v1?token=${WEB_API_TOKEN}&headers=Content-Type=application/json
   search:
     image: searxng/searxng
     restart: unless-stopped
