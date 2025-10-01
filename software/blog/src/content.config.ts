@@ -1,6 +1,6 @@
 import { defineCollection, z } from 'astro:content'
 import { glob, file } from 'astro/loaders'
-import { neon } from '@neondatabase/serverless'
+// import { neon } from '@neondatabase/serverless'
 import { feedLoader } from '@ascorbic/feed-loader'
 import type { AudiobookshelfResponse, Session } from './audiobookshelf-types'
 import { getDgptEvents } from './getDgptEvents.ts'

@@ -1,5 +1,12 @@
-import { neon } from "@neondatabase/serverless";
+// import { neon } from "@neondatabase/serverless";
+//
+// const db = neon(import.meta.env.DATABASE_URL);
+//
+// export default db;
 
-const db = neon(import.meta.env.DATABASE_URL);
+import pg from 'pg'
 
-export default db;
+const client = new pg.Client(import.meta.env.DATABASE_URL)
+
+await client.connect()
+export default client;

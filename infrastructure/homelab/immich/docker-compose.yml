@@ -9,19 +9,6 @@
 name: immich
 
 services:
-  immichframe:
-    container_name: immichframe
-    image: ghcr.io/immichframe/immichframe:latest
-    restart: on-failure
-    ports:
-      - "2383:8080"
-    environment:
-      TZ: "America/New_York"
-      ImmichServerUrl: http://192.168.86.100:2283
-      ApiKey: ${FRAME_API_KEY}
-      Albums: "13fabba8-aa2a-4d6e-937f-cf17fb52aace"
-      Interval: 15
-      RefreshAlbumPeopleInterval: 1
   immich-server:
     container_name: immich_server
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}

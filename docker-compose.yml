@@ -7,6 +7,7 @@ services:
       dockerfile: ./blog.Dockerfile
     image: server1:5000/blog
     pull_policy: always
+    restart: unless-stopped
     ports:
       - "4321:4321"
     working_dir: /app
