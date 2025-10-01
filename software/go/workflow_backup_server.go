@@ -3,10 +3,11 @@ package shared
 import (
 	"bytes"
 	"fmt"
-	"go.temporal.io/sdk/workflow"
 	"os/exec"
 	"strconv"
 	"time"
+
+	"go.temporal.io/sdk/workflow"
 )
 
 func GetGlobalConfig() {
@@ -25,6 +26,7 @@ func WorkflowBackupServer(ctx workflow.Context) error {
 		"/bigboy/audiobookshelf/metadata", "/bigboy/audiobookshelf/config", "/bigboy/audiobookshelf/audiobooks",
 		"/bigboy/old_videos/config",
 		"/bigboy/old_videos/data",
+		"/bigboy/postgres-backup",
 	}
 
 	for i, pathToBackup := range pathsToBackup {
