@@ -212,6 +212,10 @@ pkgs.gnomeExtensions.pop-shell
     transmission-gtk
     ranger
     zoxide
+    wezterm
+    vlc
+    lazygit
+    backblaze-b2
 #lk
 #pkgs.ollama
 #   (pkgs.ollama.override {
