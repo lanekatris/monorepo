@@ -6,6 +6,12 @@ networks:
     external: false
 
 services:
+        #  astro:
+        #    image: myregistry/blog
+        #    container_name: astro
+        #    restart: unless-stopped
+        #    ports:
+        #      - "4321:4321"
   watcher:
     image: containrrr/watchtower
     container_name: watchtower
@@ -73,7 +79,7 @@ services:
 #      - /var/run/docker.sock:/var/run/docker.sock
 
   nocodb:
-    image: nocodb/nocodb:0.262.2
+    image: nocodb/nocodb:0.264.9
     ports:
       - "8080:8080"
     restart: unless-stopped
@@ -108,6 +114,59 @@ services:
       - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
     volumes:
       - /bigboy/minio:/data
+
+  postgrest:
+    image: postgrest/postgrest:v12.2.0
+    restart: always
+    depends_on:
+      - mydb
+    environment:
+      PGRST_DB_SCHEMA: models
+      PGRST_DB_URI: postgres://lkat:${MY_POSTGRES_PASSWORD}@mydb:5432/neondb
+      PGRST_DB_ANON_ROLE: web_anon
+      PGRST_SERVER_PORT: 3000
+    ports:
+      - "3033:3000"
+
+
+  mydb:
+    image: postgres:18
+    restart: always
+    # https://forums.docker.com/t/mysterious-docker-issue-with-postgres/149898/3
+    volumes:
+      - /bigboy/postgres:/var/lib/postgresql/18/docker
+    environment:
+      POSTGRES_DB: public
+      POSTGRES_USER: lkat
+      POSTGRES_PASSWORD: ${MY_POSTGRES_PASSWORD}
+    ports:
+      - "5234:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+
+
+  mydbbackup:
+        container_name: my_db_dumper
+        restart: always
+        image: prodrigestivill/postgres-backup-local:18
+        user: postgres:postgres
+        environment:
+                POSTGRES_HOST: mydb 
+                POSTGRES_USER: lkat
+                POSTGRES_PASSWORD: ${MY_POSTGRES_PASSWORD}
+                POSTGRES_DB: neondb
+                SCHEDULE: "@daily"
+                POSTGRES_EXTRA_OPTS: '--clean --if-exists'
+                BACKUP_DIR: /db_dumps
+                BACKUP_ON_START: "TRUE"
+        volumes:
+                #- /bigboy/postgres/db_dumps:/db_dumps
+                - /bigboy/postgres-backup:/db_dumps
+        depends_on:
+                - mydb
 
 
   kestra-postgres:
@@ -223,10 +282,10 @@ services:
       - /bigboy/metabase:/metabase-data
     ports:
       - "3600:3000"
-  registry:
-    image: registry:2
-    restart: always
-    ports:
-      - "5000:5000"
-    volumes:
-      - /bigboy/docker-registry:/var/lib/registry
+        # registry:
+        #   image: registry:2
+        #   restart: always
+        #   ports:
+        #     - "5000:5000"
+        #   volumes:
+        #     - /bigboy/docker-registry:/var/lib/registry
