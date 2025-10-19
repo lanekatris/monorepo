@@ -105,17 +105,17 @@ services.tailscale.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
 # I'm not sure if this worked, the config is valid though
-services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
-    [org.gnome.settings-daemon.plugins.power]
-    sleep-inactive-ac-type='nothing'
-    sleep-inactive-battery-type='nothing'
-  '';
-
-# This might have done it...
-  systemd.targets.sleep.enable = false;
-    systemd.targets.suspend.enable = false;
-    systemd.targets.hibernate.enable = false;
-    systemd.targets.hybrid-sleep.enable = false;
+#services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
+#    [org.gnome.settings-daemon.plugins.power]
+#    sleep-inactive-ac-type='nothing'
+#    sleep-inactive-battery-type='nothing'
+#  '';
+#
+## This might have done it..
+#  systemd.targets.sleep.enable = false;
+#    systemd.targets.suspend.enable = false;
+#    systemd.targets.hibernate.enable = false;
+#    systemd.targets.hybrid-sleep.enable = false;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -168,7 +168,7 @@ services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
   };
 
   # Install firefox.
-  programs.firefox.enable = true;
+#  programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -183,6 +183,7 @@ vim
 google-chrome
 chromium
 pkgs.jetbrains.webstorm
+nodejs_22
 pkgs.jetbrains.goland
 pkgs.jetbrains.datagrip
 pkgs.jetbrains.rider
@@ -210,6 +211,7 @@ pkgs.gnomeExtensions.pop-shell
     neovim
     transmission-gtk
     ranger
+    zoxide
 #lk
 #pkgs.ollama
 #   (pkgs.ollama.override {
@@ -304,6 +306,11 @@ pkgs.gnomeExtensions.pop-shell
 #        };
 #      };
 
+              nixpkgs.config.permittedInsecurePackages = [
+                "libsoup-2.74.3"
+              ];
+
+
 virtualisation.docker.enable = true;
 
   virtualisation.docker.extraOptions = ''
@@ -326,7 +333,7 @@ virtualisation.docker.enable = true;
     # Enable this if you have graphical corruption issues or application crashes after waking
     # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
     # of just the bare essentials.
-    powerManagement.enable = false;
+    powerManagement.enable = true;
 
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).

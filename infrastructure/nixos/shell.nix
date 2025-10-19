@@ -6,7 +6,7 @@ pkgs.mkShell {
 
 
   # all for nodejs and npm install / node-gyp
-      nodejs
+      nodejs_22
       nodePackages.node-gyp
 
       # Native build dependencies for node-gyp
@@ -34,6 +34,9 @@ pkgs.mkShell {
 #      libjpeg-dev
 #      libgif-dev
 #      librsvg2-dev
+
+
+deno
    ];
 
     shellHook = ''

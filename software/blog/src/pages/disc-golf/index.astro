@@ -4,7 +4,8 @@ import { getCollection } from 'astro:content'
 import { renderGraph } from '../../renderGraph'
 import { NOCO_DISCS, PRIMARY_COLOR } from '../../consts'
 import { type ChartConfiguration } from 'chart.js'
-import { type Scorecard, sql } from '../../content.config'
+import { type Scorecard  } from '../../content.config'
+import {query} from '../../../db.ts'
 
 import winStreakImage from '../../../public/win-streak-green.svg'
 import { Image } from 'astro:assets'
@@ -58,8 +59,9 @@ const coursesPerYearConfig: ChartConfiguration = {
 const coursesPerYearImageSmall = renderGraph(400, 400, coursesPerYearConfig)
 const coursesPerYearImageLarge = renderGraph(600, 1000, coursesPerYearConfig)
 
-const lastUpdatedResults = await sql`select max(updated_at) last_updated
-                                     from noco.disc`
+const lastUpdatedResults = await query(`select max(updated_at) last_updated
+                                     from noco.disc`)
+console.log('derka', lastUpdatedResults)
 
 const rounds = (await getCollection('feed')).reduce((acc: Scorecard[], x) => {
 	if (x.data.type === 'scorecard' && x.data.data.scorecard) {

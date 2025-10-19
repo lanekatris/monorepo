@@ -41,7 +41,9 @@ export default defineConfig({
 		remarkPlugins: [
 			remarkModifiedTime,
 			remarkImageResize,
-			[remarkWikiLink, { pageResolver: name => [ name],hrefTemplate: permalink => `/${permalink}`}]
+			[remarkWikiLink, { pageResolver: name => [  name],hrefTemplate: permalink => {
+					return `/${permalink.replace(/ /g, '-').toLowerCase()}`;
+				}}]
 		]
 	}
 })
