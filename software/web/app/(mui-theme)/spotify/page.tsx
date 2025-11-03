@@ -12,7 +12,7 @@ import {
   Chip,
   Alert
 } from '@mui/joy';
-import { sql } from '@vercel/postgres';
+import { sql } from '../../../lib/db';
 
 interface TotalListening {
   total_milliseconds: string;

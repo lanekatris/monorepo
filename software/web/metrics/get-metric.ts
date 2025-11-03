@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { QueryResult } from '@vercel/postgres';
+import { QueryResult } from '../lib/db';
 
 export interface Result {
   visited: boolean;

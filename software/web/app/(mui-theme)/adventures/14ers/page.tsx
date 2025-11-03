@@ -7,7 +7,7 @@ import {
   Typography
 } from '@mui/joy';
 import React from 'react';
-import { sql } from '@vercel/postgres';
+import { sql } from '../../../../lib/db';
 import { getMetric } from '../../../../metrics/get-metric';
 import { MetricCard } from '../../../../metrics/MetricCard';
 

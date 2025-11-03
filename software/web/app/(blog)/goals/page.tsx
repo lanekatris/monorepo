@@ -1,6 +1,6 @@
 import { MetricCardV2 } from '../../../metrics/MetricCardV2';
 import { getMetric } from '../../../metrics/get-metric';
-import { sql } from '@vercel/postgres';
+import { sql } from '../../../lib/db';
 
 const config = [
   {

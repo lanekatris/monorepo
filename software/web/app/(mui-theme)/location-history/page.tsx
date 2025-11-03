@@ -8,7 +8,7 @@ import {
 } from '@mui/joy';
 import LocationsList from './LocationsList';
 import Link from 'next/link';
-import { sql } from '@vercel/postgres';
+import { sql } from '../../../lib/db';
 import { getServerSession } from 'next-auth';
 import React from 'react';
 

@@ -11,7 +11,7 @@ import {
   ListItemContent,
   Typography
 } from '@mui/joy';
-import { sql } from '@vercel/postgres';
+import { sql } from '../../../lib/db';
 import { useMemo } from 'react';
 import { differenceInDays, formatRelative } from 'date-fns';
 import FitnessChart from './ChartIdk';

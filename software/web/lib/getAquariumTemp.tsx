@@ -1,4 +1,4 @@
-import { sql } from '@vercel/postgres';
+import { sql } from './db';
 
 export async function getAquariumTemp(): Promise<{
   temperatureF: number;

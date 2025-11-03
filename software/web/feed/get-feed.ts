@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { sql } from '@vercel/postgres';
+import { sql } from '../lib/db';
 
 // import bookmarks from '../app/search/raindrop-export.json';
 import { Raindrop } from './raindrop';
@@ -79,7 +79,7 @@ order by date desc
 
 export async function getPicMemos() {
   const { data: rawMemos } = await axios.get<{ memos: Memo[] }>(
-    'http://192.168.86.100:5230/api/v1/memos?filter=tag_search == ["pic"]',
+    'http://server1:5230/api/v1/memos?filter=tag_search == ["pic"]',
     {
       headers: {
         authorization: `Bearer ${process.env.MEMOS_API_KEY}`
@@ -93,7 +93,7 @@ export async function getPicMemos() {
 export async function getMemos() {
   console.time('memos');
   const { data: rawMemos } = await axios.get<{ memos: Memo[] }>(
-    'http://192.168.86.100:5230/api/v1/memos',
+    'http://server1:5230/api/v1/memos',
     {
       headers: {
         authorization: `Bearer ${process.env.MEMOS_API_KEY}`

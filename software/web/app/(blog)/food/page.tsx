@@ -3,7 +3,7 @@ import {
   RAINDROP_COLLECTION_RECIPES
 } from '../../../feed/get-feed';
 import { RaindropFeedItem } from '../feed/page';
-import { sql } from '@vercel/postgres';
+import { sql } from '../../../lib/db';
 import { getServerSession } from 'next-auth';
 import { NotAuthorized } from '../feed/notAuthorized';
 import React from 'react';

@@ -150,7 +150,7 @@ func deploySchedulesV2(c client.Client) {
 		client.ScheduleOptions{
 			ID: "schedule_get_inbox",
 			Spec: client.ScheduleSpec{
-				CronExpressions: []string{"0 * * * *"},
+				CronExpressions: []string{"0 */12 * * *"},
 			},
 			Action: &client.ScheduleWorkflowAction{
 				ID:        "action_get_inbox",

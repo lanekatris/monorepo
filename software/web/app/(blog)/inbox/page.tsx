@@ -9,7 +9,7 @@ import {
   Typography
 } from '@mui/joy';
 import { NEXT_ADVENTURE } from '../../../nextAdventure';
-import { sql } from '@vercel/postgres';
+import { sql } from '../../../lib/db';
 import { getRaindrops } from '../../../feed/get-feed';
 import { getServerSession } from 'next-auth';
 import React from 'react';

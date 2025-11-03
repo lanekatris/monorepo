@@ -1,7 +1,7 @@
 import { Breadcrumbs, Container, Input, Link, Typography } from '@mui/joy';
 import Fuse from 'fuse.js';
 
-import { sql } from '@vercel/postgres';
+import { sql } from '../../../lib/db';
 
 import bookmarks from './raindrop-export.json';
 import { Podcast } from '../spotify/page';

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { getMetric } from '../../metrics/get-metric';
-import { sql } from '@vercel/postgres';
+import { sql } from '../../lib/db';
 import {
   Alert,
   Box,

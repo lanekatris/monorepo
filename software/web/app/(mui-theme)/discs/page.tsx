@@ -14,7 +14,7 @@ import {
   Typography
 } from '@mui/joy';
 // @ts-ignore
-import { sql } from '@vercel/postgres';
+import { sql } from '../../../lib/db';
 import { Pie, ResponsiveContainer } from 'recharts';
 import { groupBy } from 'lodash';
 import { formatRelative } from 'date-fns';

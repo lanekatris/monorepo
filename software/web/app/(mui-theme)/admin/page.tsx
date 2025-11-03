@@ -7,7 +7,7 @@ import {
   Typography
 } from '@mui/joy';
 import NextLink from 'next/link';
-import { sql } from '@vercel/postgres';
+import { sql } from '../../../lib/db';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { groupBy } from 'lodash';

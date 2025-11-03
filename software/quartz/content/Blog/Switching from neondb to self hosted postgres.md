@@ -28,3 +28,6 @@ I HARD deleted my neondb project. No fear brother. Take a step, new mentality.
 
 Astrojs, i’m using neon serverless driver! This doesn’t work without: https://neon.com/guides/local-development-with-neon
 
+
+2025-10-01
+I just need to change permissions on the backuper, not postgres:18

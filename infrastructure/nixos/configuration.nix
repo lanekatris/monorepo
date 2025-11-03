@@ -62,7 +62,7 @@ in {
 #  ];
 nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-
+hardware.keyboard.zsa.enable = true;
 
 services.tailscale.enable = true;
   # Bootloader.
@@ -135,8 +135,19 @@ services.tailscale.enable = true;
 #    };
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+services.avahi = {
+  enable = true;
+  nssmdns4 = true;
+  openFirewall = true;
+};
 
+services.printing = {
+  enable = true;
+  drivers = with pkgs; [
+    cups-filters
+    cups-browsed
+  ];
+};
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -172,7 +183,6 @@ services.tailscale.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -197,7 +207,8 @@ oterm # for ollama/open-qqwebui
 citrix_workspace
 screenfetch
 inkscape
-flameshot
+#flameshot
+(flameshot.override { enableWlrSupport = true; })
 yt-dlp
 pkgs.gnomeExtensions.pop-shell
 #    pkgs.gnomeExtensions.pop-shell-shortcuts
@@ -209,6 +220,7 @@ pkgs.gnomeExtensions.pop-shell
     ripgrep
     fd
     neovim
+    gcc #treesitter wants it
     transmission-gtk
     ranger
     zoxide
@@ -216,6 +228,11 @@ pkgs.gnomeExtensions.pop-shell
     vlc
     lazygit
     backblaze-b2
+    cursor-cli
+    davinci-resolve
+    # openshot-qt
+    # blender
+  losslesscut-bin
 #lk
 #pkgs.ollama
 #   (pkgs.ollama.override {
