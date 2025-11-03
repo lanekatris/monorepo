@@ -1,5 +1,8 @@
 package shared
 
+type ObsidianQueueItemAdded struct {
+	message string
+}
 type PowerMonitoringData struct {
 	Time struct {
 		GetTime struct {
