@@ -1,0 +1,20 @@
+
+---
+const url = 'http://server1:3033'
+
+
+const r = await fetch(url)
+const rr = await r.json();
+---
+
+
+<h1>Data Models</h1>
+
+
+<ul>
+  {Object.keys(rr.paths).map(key => {
+
+  return <li><a href={`${url}${key}`}>{key}</a></li>
+
+  })}
+  </ul>

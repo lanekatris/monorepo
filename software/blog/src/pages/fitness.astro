@@ -1,11 +1,11 @@
 ---
 import Layout from '../layouts/BlogPost.astro'
-import { sql } from '../content.config'
 import { type ChartConfiguration, type ChartDataset } from 'chart.js'
 import { renderGraph } from '../renderGraph'
 import SimpleLineGraph from '../components/SimpleLineGraph.astro'
+import { query } from '../../db.ts'
 
-const activitiesPerYear = await sql`
+const activitiesPerYear = await query(`
 	with x as (select *
 						 from markdown_file_models
 						 where file_path
@@ -21,9 +21,9 @@ const activitiesPerYear = await sql`
 	from y
 	group by year, activity
 	order by year desc, activity
-`
+`)
 
-const activitiesPerYearMonth = (await sql`
+const activitiesPerYearMonth = (await query(`
 	with x as (select replace(trim(split_part(file_path, file_date, 2)), '.md', '') activity,
 										date_part('year', file_date::date) as year, date_part('month', file_date:: date) as month, to_char(file_date:: date, 'Month') as month_name
 	from markdown_file_models
@@ -32,7 +32,7 @@ const activitiesPerYearMonth = (await sql`
 	from x
 	group by year, month, month_name
 	order by year desc, month
-`) as { year: number; month_name: string; count: string }[]
+`)) as { year: number; month_name: string; count: string }[]
 
 const allMonths = [
 	'January',

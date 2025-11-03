@@ -1,7 +1,8 @@
 import { getCollection } from 'astro:content'
-import { type Scorecard, sql } from '../content.config.ts'
+import { type Scorecard } from '../content.config.ts'
 import dgptWinners from '../../public/dgpt-winners.json'
 import getBlogPosts from '../getBlogPosts.ts'
+import { query } from '../../db.ts'
 
 export async function GET() {
 	const discs = await getCollection('discs') //, (x) => x.data.status === 'In Bag')
@@ -22,9 +23,9 @@ export async function GET() {
 
 	const filteredPosts = sortedPosts.filter((post) => post.data.tags?.includes('disc-golf'))
 
-	const idk = await sql`select count::int
-												from models.obsidian_tags
-												where tag = 'disc-found'`
+	const idk = await query(`select count::int
+												from models.obsidian_tags_summary
+												where tag = 'disc-found'`)
 
 	return new Response(
 		JSON.stringify(

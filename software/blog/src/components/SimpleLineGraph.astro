@@ -1,14 +1,15 @@
 ---
 import { renderGraph } from '../renderGraph'
-import { sql } from '../content.config'
+// import { sql } from '../content.config'
 import { type ChartConfiguration } from 'chart.js'
+import { query } from '../../db.ts'
 type Props = {
 	sql: string
 	label: string
 }
 const { sql: sqlString, label } = Astro.props
 
-const results = await sql(sqlString)
+const results = await query(sqlString)
 
 const config: ChartConfiguration = {
 	type: 'line',

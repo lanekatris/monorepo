@@ -59,7 +59,7 @@ const coursesPerYearConfig: ChartConfiguration = {
 const coursesPerYearImageSmall = renderGraph(400, 400, coursesPerYearConfig)
 const coursesPerYearImageLarge = renderGraph(600, 1000, coursesPerYearConfig)
 
-const lastUpdatedResults = await query(`select max(updated_at) last_updated
+const lastUpdatedResults = await query<Date>(`select max(updated_at) last_updated
                                      from noco.disc`)
 console.log('derka', lastUpdatedResults)
 

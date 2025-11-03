@@ -12,8 +12,8 @@ const pool = new Pool({
 })
 
 // await client.connect()
-export async function query(text: any, params?: any) {
-	const res = await pool.query(text, params);
-	return res.rows;
+export async function query<T>(text: string, params?: any[]): Promise<T[]> {
+	const {rows} = await pool.query(text, params);
+	return rows;
 }
 // export default client;

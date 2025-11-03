@@ -15,7 +15,9 @@ export async function getFromMinio<T>(
   isJson: boolean = true,
 ): Promise<{
   data: T;
-  stats: BucketItemStat;
+  stats: BucketItemStat & {
+		filename: string
+	};
 }> {
   try {
     const stream = await minioClient.getObject(bucketName, objectName);
@@ -29,7 +31,7 @@ export async function getFromMinio<T>(
     return new Promise((resolve, reject) => {
       stream.on("end", () => {
         try {
-          resolve(isJson ? { data: JSON.parse(data), stats } : { data, stats });
+          resolve(isJson ? { data: JSON.parse(data), stats: {...stats,filename: objectName} } : { data, stats: {...stats, filename: objectName} });
         } catch (error) {
           reject(new Error("Error parsing JSON"));
         }

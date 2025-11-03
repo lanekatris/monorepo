@@ -1,151 +1,152 @@
----
-import Layout from '../layouts/BlogPost.astro'
-import { sql } from '../content.config'
-import fs from 'fs'
-import path from 'path'
-import ical, { ICalCalendarMethod } from 'ical-generator'
-import { convertToCSV, isDev } from '../utils'
-
-const d =
-	await sql`select date, time, opponent, sets_won:: int, sets_lost:: int, dinner_location, is_tournament, count (*) over (partition by date):: int games_per_day
-            from noco.volleyball
-            order by date, time`
-
-const winCount = d.reduce((acc, x) => acc + x.sets_won, 0)
-const lossCount = d.reduce((acc, x) => acc + x.sets_lost, 0)
-const total = d.reduce((acc, x) => acc + (x.sets_won ?? 3) + x.sets_lost, 0)
-const completion = Math.floor(((winCount + lossCount) / total) * 100)
-
-const csvData = convertToCSV(d)
-const filePath = path.join('public', '2025-volleyball-data.csv')
-fs.writeFileSync(filePath, csvData)
-
-// generate ical
-const calendar = ical({ name: 'Volleyball Schedule' })
-calendar.method(ICalCalendarMethod.REQUEST)
-
-d.forEach((entry) => {
-	const justTime = +entry.time.split(':')[0]
-	const start = new Date(entry.date)
-	start.setHours(justTime)
-
-	const end = new Date(start)
-	end.setHours(end.getHours() + 1)
-
-	calendar.createEvent({
-		start,
-		end,
-		summary: 'Volleyball Game'
-	})
-})
-const calPath = path.join('public', '2025-volleyball.ics')
-fs.writeFileSync(calPath, calendar.toString())
----
-
-<Layout title="Volleyball League - 2025" pubDate={new Date('January 31 2025')}>
-	<div class="terminal-alert">
-		I thought I'd show some stats about our volleyball league standings.
-		<br />
-		Aside: <a href="/loadouts">Gear I like to use for volleyball</a>
-	</div>
-
-	<h1>Tournament</h1>
-	<p>
-		We lost our first single elimination tournament and that's all she wrote. We gave it a valiant effort and I think next season we'll give it a good run. We started not knowing certain rules, so it has been really fun.
-	</p>
-	<!--Everybody makes it to the single elimination tournament. Here is how we did:-->
-	<!--<ol>-->
-	<!--	<li></li>-->
-	<!--</ol>-->
-
-	<h1>Season Stats</h1>
-	<h4>Sets Won: <code>{winCount}</code></h4>
-	<div>
-		<h4>Sets Lost: <code>{lossCount}</code></h4>
-	</div>
-	<h4>Total Sets: <code>{total}</code></h4>
-	<div class="progress-bar progress-bar-show-percent">
-		<div
-			class="progress-bar-filled"
-			style={`width: ${completion}%`}
-			data-filled={`Season Completion ${completion}%`}
-		>
-		</div>
-	</div>
-
-	<hr />
-
-	<h1>Season Game History</h1>
-
-	<table>
-		<thead>
-			<tr>
-				<th>Date</th>
-				<th>Opponent</th>
-				<th>Sets Won</th>
-				<th>Sets Lost</th>
-				<th>Dinner</th>
-			</tr>
-		</thead>
-		<tbody>
-			{
-				d.map((x) => {
-					const highlight = x.games_per_day > 1 && x.date > new Date()
-
-					return (
-						<tr>
-							<td class:list={[{ highlight: highlight }]}>
-								{x.date.toLocaleDateString()}
-								{+x.time.split(':')[0] - 12}pm
-							</td>
-							<td>
-								{x.is_tournament ? <mark>{x.opponent}</mark>: x.opponent}
-								</td>
-							<td>{x.sets_won}</td>
-							<td>{x.sets_lost}</td>
-							<td>{x.dinner_location}</td>
-						</tr>
-					)
-				})
-			}
-		</tbody>
-		<tfoot>
-			<span class="highlight">blue date</span> means multiple games on that date
-			<br />
-			<mark>highlighted</mark>
-			means tournament
-			{
-				isDev() && (
-					<>
-						<br />
-						<br />
-						<a
-							href="https://noco.lkat.io/dashboard/#/nc/p_egch5370h5zwqh/m8kn4b1fjv03w6x"
-							target="_blank"
-						>
-							Update Table (Noco)
-						</a>
-					</>
-				)
-			}
-		</tfoot>
-	</table>
-	<a href="/2025-volleyball-data.csv" download="volleyball-data.csv">CSV Download</a>
-	<div>
-		<a href="/2025-volleyball.ics" download><code>ics</code> File</a>
-	</div>
-	<div>
-		<a
-			href="https://calendar.google.com/calendar/u/0/r?cid=aum49v2dn1agb43kc5epp2fvvmuqeqeu@import.calendar.google.com"
-			target="_blank"
-		>
-			Add to Google Calendar
-		</a>
-	</div>
-</Layout>
-
-<style>
-	.highlight {
-		color: var(--primary-color);
-	}
-</style>
+// ---
+// import Layout from '../layouts/BlogPost.astro'
+// // import { sql } from '../content.config'
+// import fs from 'fs'
+// import path from 'path'
+// import ical, { ICalCalendarMethod } from 'ical-generator'
+// import { convertToCSV, isDev } from '../utils'
+// import { query } from '../../db.ts'
+//
+// const d =
+// 	await query(`select date, time, opponent, sets_won:: int, sets_lost:: int, dinner_location, is_tournament, count (*) over (partition by date):: int games_per_day
+//             from noco.volleyball
+//             order by date, time`)
+//
+// const winCount = d.reduce((acc, x) => acc + x.sets_won, 0)
+// const lossCount = d.reduce((acc, x) => acc + x.sets_lost, 0)
+// const total = d.reduce((acc, x) => acc + (x.sets_won ?? 3) + x.sets_lost, 0)
+// const completion = Math.floor(((winCount + lossCount) / total) * 100)
+//
+// const csvData = convertToCSV(d)
+// const filePath = path.join('public', '2025-volleyball-data.csv')
+// fs.writeFileSync(filePath, csvData)
+//
+// // generate ical
+// const calendar = ical({ name: 'Volleyball Schedule' })
+// calendar.method(ICalCalendarMethod.REQUEST)
+//
+// d.forEach((entry) => {
+// 	const justTime = +entry.time.split(':')[0]
+// 	const start = new Date(entry.date)
+// 	start.setHours(justTime)
+//
+// 	const end = new Date(start)
+// 	end.setHours(end.getHours() + 1)
+//
+// 	calendar.createEvent({
+// 		start,
+// 		end,
+// 		summary: 'Volleyball Game'
+// 	})
+// })
+// const calPath = path.join('public', '2025-volleyball.ics')
+// fs.writeFileSync(calPath, calendar.toString())
+// ---
+//
+// <Layout title="Volleyball League - 2025" pubDate={new Date('January 31 2025')}>
+// 	<div class="terminal-alert">
+// 		I thought I'd show some stats about our volleyball league standings.
+// 		<br />
+// 		Aside: <a href="/loadouts">Gear I like to use for volleyball</a>
+// 	</div>
+//
+// 	<h1>Tournament</h1>
+// 	<p>
+// 		We lost our first single elimination tournament and that's all she wrote. We gave it a valiant effort and I think next season we'll give it a good run. We started not knowing certain rules, so it has been really fun.
+// 	</p>
+// 	<!--Everybody makes it to the single elimination tournament. Here is how we did:-->
+// 	<!--<ol>-->
+// 	<!--	<li></li>-->
+// 	<!--</ol>-->
+//
+// 	<h1>Season Stats</h1>
+// 	<h4>Sets Won: <code>{winCount}</code></h4>
+// 	<div>
+// 		<h4>Sets Lost: <code>{lossCount}</code></h4>
+// 	</div>
+// 	<h4>Total Sets: <code>{total}</code></h4>
+// 	<div class="progress-bar progress-bar-show-percent">
+// 		<div
+// 			class="progress-bar-filled"
+// 			style={`width: ${completion}%`}
+// 			data-filled={`Season Completion ${completion}%`}
+// 		>
+// 		</div>
+// 	</div>
+//
+// 	<hr />
+//
+// 	<h1>Season Game History</h1>
+//
+// 	<table>
+// 		<thead>
+// 			<tr>
+// 				<th>Date</th>
+// 				<th>Opponent</th>
+// 				<th>Sets Won</th>
+// 				<th>Sets Lost</th>
+// 				<th>Dinner</th>
+// 			</tr>
+// 		</thead>
+// 		<tbody>
+// 			{
+// 				d.map((x) => {
+// 					const highlight = x.games_per_day > 1 && x.date > new Date()
+//
+// 					return (
+// 						<tr>
+// 							<td class:list={[{ highlight: highlight }]}>
+// 								{x.date.toLocaleDateString()}
+// 								{+x.time.split(':')[0] - 12}pm
+// 							</td>
+// 							<td>
+// 								{x.is_tournament ? <mark>{x.opponent}</mark>: x.opponent}
+// 								</td>
+// 							<td>{x.sets_won}</td>
+// 							<td>{x.sets_lost}</td>
+// 							<td>{x.dinner_location}</td>
+// 						</tr>
+// 					)
+// 				})
+// 			}
+// 		</tbody>
+// 		<tfoot>
+// 			<span class="highlight">blue date</span> means multiple games on that date
+// 			<br />
+// 			<mark>highlighted</mark>
+// 			means tournament
+// 			{
+// 				isDev() && (
+// 					<>
+// 						<br />
+// 						<br />
+// 						<a
+// 							href="https://noco.lkat.io/dashboard/#/nc/p_egch5370h5zwqh/m8kn4b1fjv03w6x"
+// 							target="_blank"
+// 						>
+// 							Update Table (Noco)
+// 						</a>
+// 					</>
+// 				)
+// 			}
+// 		</tfoot>
+// 	</table>
+// 	<a href="/2025-volleyball-data.csv" download="volleyball-data.csv">CSV Download</a>
+// 	<div>
+// 		<a href="/2025-volleyball.ics" download><code>ics</code> File</a>
+// 	</div>
+// 	<div>
+// 		<a
+// 			href="https://calendar.google.com/calendar/u/0/r?cid=aum49v2dn1agb43kc5epp2fvvmuqeqeu@import.calendar.google.com"
+// 			target="_blank"
+// 		>
+// 			Add to Google Calendar
+// 		</a>
+// 	</div>
+// </Layout>
+//
+// <style>
+// 	.highlight {
+// 		color: var(--primary-color);
+// 	}
+// </style>

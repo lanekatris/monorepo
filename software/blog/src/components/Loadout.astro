@@ -1,12 +1,14 @@
 ---
+export type Gear = {
+
+	title: string
+	url?: string
+	notes?: string
+	tags?: string
+}
 export type Props = {
 	title: string
-	gear: {
-		title: string
-		url?: string
-		notes?: string
-		tags?: string
-	}[]
+	gear: Gear[]
 }
 const { title, gear } = Astro.props
 ---

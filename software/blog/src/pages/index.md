@@ -14,7 +14,8 @@ I work at [HD Supply](https://www.linkedin.com/company/hd-supply) as a senior fu
 
 - [Blog](/blog)
 - What I'm up to [now](/now)
-- [site index for humangs](/site-index)
+- [site index for humans](/site-index)
+- [Data Models (LAN only)](/postgrest)
 
 [//]: # ()
 [//]: # (<br/>)

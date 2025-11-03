@@ -1,0 +1,29 @@
+---
+import { getFromMinio } from '../../get-from-minio.ts'
+export async function getStaticPaths({}){
+
+	const machines = await Promise.all([
+		getFromMinio<string>('etl', 'linux_desktop_screenfetch_result.txt', false),
+		getFromMinio<string>('etl', 'server1_screenfetch_result.txt', false)
+	])
+	// return [{
+	// 	params: {filename}
+	// }]
+	return machines.map(machine => {
+		return {
+			params: {
+				filename: machine.stats.filename
+			},props: {
+				filecontents: machine.data
+			}
+		}
+	})
+
+}
+
+const {filecontents} = Astro.props
+const {filename} = Astro.params
+---
+<pre>
+	{filecontents}
+</pre>

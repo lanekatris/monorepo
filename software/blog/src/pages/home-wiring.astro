@@ -1,11 +1,11 @@
 ---
 // textDecoration: 'underline', //; /* Mimic hyperlink style */
 import Layout from '../layouts/BlogPost.astro'
-import { sql } from '../content.config'
+import { query } from '../../db.ts'
 
-const outlets = await sql`select *
+const outlets = await query(`select *
                           from noco.home_electric
-                          order by outlet`
+                          order by outlet`)
 ---
 
 <Layout title="WIP Home Wiring" pubDate={outlets[0].updated_at}>

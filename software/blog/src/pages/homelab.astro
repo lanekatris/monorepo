@@ -2,14 +2,21 @@
 import yaml from 'js-yaml'
 import Layout from '../layouts/BlogPost.astro'
 import { getFromMinio } from '../get-from-minio'
-import { sql } from '../content.config'
 import { getCollection } from 'astro:content'
 import { getRecentTemporalWorkflows } from '../getRecentTemporalWorkflows'
+import { query } from '../../db.ts'
 
 interface DockerComposeFile {
 	services: { [k: string]: { ports?: string[]
 	image:string
 	} }
+}
+
+interface EventCount {
+	event_name: string;
+	earliest_date: Date;
+	latest_date: Date;
+	count: number;
 }
 
 const urls = [
@@ -39,8 +46,8 @@ const machines = await Promise.all([
 	getFromMinio<string>('etl', 'server1_screenfetch_result.txt', false)
 ])
 
-const eventCounts = await sql`select event_name,min(created_at)::date earliest_date, max(created_at)::date latest_date, count(*)::int count from events group by event_name order by count(*) desc`
-const obsidianCounts = await sql`select * from models.obsidian_tags order by tag`
+const eventCounts = await query(`select event_name,min(created_at)::date earliest_date, max(created_at)::date latest_date, count(*)::int count from events group by event_name order by count(*) desc`) as EventCount[]
+const obsidianCounts = await query(`select * from models.obsidian_tags order by tag`)
 
 const pages = await getCollection('page')
 // console.log(pages)
