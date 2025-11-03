@@ -5,12 +5,8 @@ package cmd
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
-	"github.com/charmbracelet/log"
-	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
-	"go.temporal.io/sdk/client"
-	"google.golang.org/grpc"
 	"io/ioutil"
 	"net"
 	"net/http"
@@ -19,6 +15,14 @@ import (
 	"runtime"
 	"shared"
 	"shared/pkg/pb"
+	"strings"
+
+	"github.com/charmbracelet/log"
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
+	"go.temporal.io/sdk/client"
+	"google.golang.org/grpc"
 
 	"github.com/spf13/cobra"
 )
@@ -68,6 +72,9 @@ to quickly create a Cobra application.`,
 
 		r := gin.Default()
 		r.Use(cors.Default())
+
+		r.LoadHTMLGlob("templates/*")
+
 		r.GET("/", func(c *gin.Context) {
 			c.String(200, "Welcome to lkat API!")
 		})
@@ -182,7 +189,7 @@ to quickly create a Cobra application.`,
 
 		r.GET("/deploy-markdown", func(c *gin.Context) {
 			cc, err := client.Dial(client.Options{
-				HostPort: "192.168.86.100:7233",
+				HostPort: "100.99.14.109:7233",
 			})
 			if err != nil {
 				log.Error("unable to create Temporal client", err)
@@ -267,7 +274,7 @@ to quickly create a Cobra application.`,
 			//}
 			//err = dumper.ProcessEvent("water_level_v1", string(stringified))
 			//if err != nil {
-			//	log.Error(err)
+			//	log.Error(err) e
 			//	return
 			//}
 			//err = dumper.DumpEvent("water_level_v1", string(stringified))
@@ -285,6 +292,56 @@ to quickly create a Cobra application.`,
 			})
 		})
 
+		r.GET("/obsidian-queue", func(c *gin.Context) {
+			// c.HTML(http.StatusOK, "obsidian-queue.tmpl", gin.H{
+			// 	"hi": "ok",
+			// })
+			// c.HTML(http.StatusOK, "obsidian-queue.tmpl", nil)
+			c.File("./public/obsidian-queue.html")
+		})
+
+		r.POST("/obsidian-queue", func(c *gin.Context) {
+			message := c.PostForm("message")
+
+			if strings.TrimSpace(message) == "" {
+				c.String(http.StatusInternalServerError, "you gave me null "+message)
+				return
+			}
+
+			cc, err := client.Dial(client.Options{
+				HostPort: "100.99.14.109:7233",
+			})
+			if err != nil {
+				log.Error("unable to create Temporal client", err)
+				return
+
+			}
+			defer cc.Close()
+
+			options := client.StartWorkflowOptions{
+				//ID:        "obsidian-theme-workflow",
+				ID:        "obsidian-queue-" + uuid.NewString(),
+				TaskQueue: "server",
+			}
+
+			stringified, err := json.Marshal(shared.ObsidianQueueItemAdded{
+				Message: message,
+			})
+			if err != nil {
+				c.String(http.StatusInternalServerError, "failed stringifying")
+				return
+			}
+
+			_, err = cc.ExecuteWorkflow(context.Background(), options, shared.WorkflowDumper, "obsidian_queue_item_added_v1", string(stringified))
+			if err != nil {
+				log.Error("unable to complete Workflow", err)
+				return
+			}
+
+			c.Redirect(http.StatusSeeOther, "/obsidian-queue")
+
+		})
+
 		go r.Run() // listen and serve on 0.0.0.0:8080
 
 		lis, err := net.Listen("tcp", ":8081")
@@ -293,7 +350,7 @@ to quickly create a Cobra application.`,
 			panic(err)
 		}
 
-		fmt.Println("Firing up grpc...")
+		// fmt.Println("Firing up grpc...")
 
 		//s := Server{}
 		//s := grpc.NewServer()

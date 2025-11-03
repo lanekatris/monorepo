@@ -6,11 +6,13 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"os"
+	"os/exec"
+	"shared/db"
+
 	"github.com/charmbracelet/log"
 	"github.com/jackc/pgx/v5/pgtype"
 	"gorm.io/gorm"
-	"os/exec"
-	"shared/db"
 )
 
 type SharedActivities struct {
@@ -176,17 +178,13 @@ func (input *SharedActivities) ProcessEvent(eventName string, data string) error
 
 	}
 
-	if eventName == "obsidian_queue_item_added_v1" {
-		var d ObsidianQueueItemAdded
-
-		var err = json.Unmarshal([]byte(data), &d)
-		if err != nil {
-			return err
-		}
-
-		// todo: work with files or use the obsiddian rest api
-
-	}
-
 	return nil
+}
+
+func fileExists(path string) bool {
+	_, err := os.Stat(path)
+	if os.IsNotExist(err) {
+		return false
+	}
+	return err == nil
 }
