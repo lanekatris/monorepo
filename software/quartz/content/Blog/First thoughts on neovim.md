@@ -1,0 +1,2 @@
+sidekick.nvim
+vim scroll

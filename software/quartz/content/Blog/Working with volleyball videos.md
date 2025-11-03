@@ -16,3 +16,8 @@ i plugged in for power as batteries suck
 http://localhost:8080/c/2a16cbc5-c004-444e-a01f-6e3e7e27994a
 http://server1:8096/web/#/list.html?parentId=8711f3e21f48b269fef7c4da5ad02b94&serverId=07fb4f533a9c48f0bc272cdd9e32eb78
 https://tailscale.com/kb/1223/funnel
+
+I used [b2 backblaze](https://www.backblaze.com/docs/cloud-storage-use-the-b2-sync-command-with-the-cli) cli to copy to a public bucket
+List the files: `backblaze-b2 ls b2://volleyball-test/2025-10-13`
+
+[Free music](https://freemusicarchive.org/music/charts/this-week) for videos
