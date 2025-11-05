@@ -56,8 +56,8 @@ func WorkflowDumper(ctx workflow.Context, eventName string, data string) error {
 		p := path.Join("/bigboy/obsidian/config/vault/lkat-vault", filename+".md")
 
 		// Is it there yet?
-		for i := range 5 {
-			log.Info("Running iteration", "count", i, "path", p)
+		for {
+			log.Info("Running iteration", "path", p)
 
 			if fileExists(p) == false {
 				log.Info("File doesn't exist, sleeping: " + p)

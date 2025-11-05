@@ -73,7 +73,7 @@ to quickly create a Cobra application.`,
 		r := gin.Default()
 		r.Use(cors.Default())
 
-		r.LoadHTMLGlob("templates/*")
+		// r.LoadHTMLGlob("templates/*")
 
 		r.GET("/", func(c *gin.Context) {
 			c.String(200, "Welcome to lkat API!")

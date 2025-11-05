@@ -1,3 +1,7 @@
+---
+tags:
+  - volleyball
+---
 We've been doing this league for years. We started these leagues as well:
 - [[2025 Winter Parkersburg Volleyball League]]
 - [[Got new volleyball shoes]]
