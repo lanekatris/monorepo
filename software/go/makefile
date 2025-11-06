@@ -19,3 +19,12 @@ deploy-service: deploy-local
 	sudo systemctl daemon-reexec
 	sudo systemctl daemon-reload
 	sudo systemctl enable lk.service
+
+deploy-docker:
+	docker build -t loonison101/lk:main .
+	docker push loonison101/lk:main
+	ssh -t lane@100.99.14.109 '\
+		cd /home/lane/monorepo/infrastructure/homelab && \
+		sudo docker compose pull lkat && \
+		sudo docker compose up -d lkat \
+	'

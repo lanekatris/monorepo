@@ -3,15 +3,21 @@
 <head>
   <meta charset="utf-8">
   <title>Obsidian Queue</title>
+<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
 </head>
 <body>
 
 <h1>Obsidian Queue</h1>
 
 <form method="POST">
-<textarea autofocus name="message" ></textarea>
+<textarea autofocus name="message" rows="7" ></textarea>
 
 <button type="submit">Save</button>
 </form>
+<style>
+button:active::after {
+  content: " ⏳";
+}
+</style>
 </body>
 </html>
