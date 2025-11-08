@@ -1,68 +1,18 @@
 package cmd
 
 import (
-	"bufio"
 	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
+	"shared"
 	"sort"
-	"strconv"
 	"strings"
 	"time"
 
-	progress "github.com/charmbracelet/bubbles/progress"
-	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/log"
 	"github.com/spf13/cobra"
 )
-
-// Bubble Tea progress model
-
-type progressModel struct {
-	label   string
-	bar     progress.Model
-	percent float64
-}
-
-type tickMsg struct{}
-
-type progressUpdate struct {
-	percent float64
-	label   string
-}
-
-func newProgressModel(label string) tea.Model {
-	m := progressModel{
-		label: label,
-		bar:   progress.New(progress.WithDefaultGradient(), progress.WithWidth(40)),
-	}
-	return m
-}
-
-func (m progressModel) Init() tea.Cmd {
-	return tea.Tick(time.Millisecond*250, func(time.Time) tea.Msg { return tickMsg{} })
-}
-
-func (m progressModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	switch v := msg.(type) {
-	case tickMsg:
-		// keep UI alive
-		return m, tea.Tick(time.Millisecond*250, func(time.Time) tea.Msg { return tickMsg{} })
-	case progressUpdate:
-		m.percent = v.percent
-		m.label = v.label
-		cmd := m.bar.SetPercent(m.percent)
-		return m, cmd
-	case tea.QuitMsg:
-		return m, nil
-	default:
-		return m, nil
-	}
-}
-
-func (m progressModel) View() string {
-	return m.label + "\n" + m.bar.View()
-}
 
 var videoCmd = &cobra.Command{
 	Use:  "video",
@@ -220,56 +170,16 @@ var videoCmd = &cobra.Command{
 		outputPath := filepath.Join(dirPath, "output.mp4")
 		if _, err := os.Stat(outputPath); os.IsNotExist(err) {
 
-			// shared.ExecOnHost()
+			log.Info("Creating output.mp4...")
 
 			// Prepare ffmpeg command with progress to stdout
 			cmd := exec.Command("nix-shell", "-p", "ffmpeg", "--run", "ffmpeg -hide_banner -nostats -progress pipe:1 -f concat -safe 0 -i file_list.txt -c copy output.mp4")
 			cmd.Dir = dirPath
 
-			stdout, _ := cmd.StdoutPipe()
-			cmd.Stderr = nil
+			err := cmd.Run()
+			shared.HandleError(err)
 
-			p := tea.NewProgram(newProgressModel("Concatenating videos..."))
-			updates := make(chan progressUpdate, 10)
-			done := make(chan error, 1)
-
-			// parse ffmpeg -progress lines
-			go func() {
-				scanner := bufio.NewScanner(stdout)
-				var lastOutTimeUs int64
-				for scanner.Scan() {
-					line := scanner.Text()
-					// Example lines: out_time_ms=123456, progress=continue, speed=...
-					if strings.HasPrefix(line, "out_time_ms=") {
-						val := strings.TrimPrefix(line, "out_time_ms=")
-						if ms, err := strconv.ParseInt(val, 10, 64); err == nil {
-							lastOutTimeUs = ms
-							// We don't know total, but we can animate percent by modulo
-							percent := float64((lastOutTimeUs/1000)%100000) / 100000.0
-							updates <- progressUpdate{percent: percent, label: "Concatenating videos..."}
-						}
-					}
-				}
-			}()
-
-			go func() { _ = p.Start() }()
-			go func() { done <- cmd.Run() }()
-
-			// forward updates to Bubble Tea
-			go func() {
-				for u := range updates {
-					p.Send(u)
-				}
-			}()
-
-			err := <-done
-			p.Quit()
-			close(updates)
-			if err != nil {
-				println("Error running ffmpeg via nix-shell:", err.Error())
-				return
-			}
-			println("Created:", outputPath)
+			log.Info("Created", "newFile", outputPath)
 		} else if err == nil {
 			println("output.mp4 already exists, skipping ffmpeg")
 		} else {

@@ -46,7 +46,7 @@ const machines = await Promise.all([
 	getFromMinio<string>('etl', 'server1_screenfetch_result.txt', false)
 ])
 
-const eventCounts = await query(`select event_name,min(created_at)::date earliest_date, max(created_at)::date latest_date, count(*)::int count from events group by event_name order by count(*) desc`) as EventCount[]
+// const eventCounts = await query(`select event_name,min(created_at)::date earliest_date, max(created_at)::date latest_date, count(*)::int count from events group by event_name order by count(*) desc`) as EventCount[]
 const obsidianCounts = await query(`select * from models.obsidian_tags order by tag`)
 
 const pages = await getCollection('page')
@@ -69,7 +69,6 @@ console.log(workflows)
 				</li>
 			<li><a href="#mm">My Machines</a></li>
 			<li><a href="#iot">My IoT Devices</a></li>
-			<li><a href="#e">My Events</a></li>
 		}
 	</ol>
 
@@ -190,28 +189,28 @@ I suck		 in my homelab docker-compose files and creates easy links to navigate t
 					<!--	<li>Aquarium Pi Pico W</li>-->
 					<!--	<li>Kitchen Barcode Scanner </li>-->
 					<!--</ul>-->
-					<h1 id="e">My Events</h1>
-					I'll add more details about what is going on here in the future.
-					<table><thead><tr><th>Name</th>
-					<th>First Logged</th><th>Last Logged</th><th>Event Count</th></tr></thead>
-
-					<tbody>
-					{eventCounts.map((eventCount) => <tr>
-						<td>
-							{pages.some(x => x.id === eventCount.event_name) ? <a href={eventCount.event_name}>{eventCount.event_name}</a>:'not here'}
-							{eventCount.event_name || 'Bad Data...'}
-						</td>
-						<td>{eventCount.earliest_date.toLocaleDateString()}</td>
-						<td>{eventCount.latest_date.toLocaleDateString()}</td>
-						<td>{eventCount.count.toLocaleString()}</td>
-					</tr>)}
-					{obsidianCounts.map(o=> <tr>
-						<td>{o.tag}</td>
-						<td>{o.min_date?.toLocaleDateString()}</td>
-						<td>{o.max_date?.toLocaleDateString()}</td>
-						<td>{o.count}</td>
-
-					</tr>)}
-					</tbody></table>
+					<!-- <h1 id="e">My Events</h1> -->
+					<!-- I'll add more details about what is going on here in the future. -->
+					<!-- <table><thead><tr><th>Name</th> -->
+					<!-- <th>First Logged</th><th>Last Logged</th><th>Event Count</th></tr></thead> -->
+					<!---->
+					<!-- <tbody> -->
+					<!-- {eventCounts.map((eventCount) => <tr> -->
+					<!-- 	<td> -->
+					<!-- 		{pages.some(x => x.id === eventCount.event_name) ? <a href={eventCount.event_name}>{eventCount.event_name}</a>:'not here'} -->
+					<!-- 		{eventCount.event_name || 'Bad Data...'} -->
+					<!-- 	</td> -->
+					<!-- 	<td>{eventCount.earliest_date.toLocaleDateString()}</td> -->
+					<!-- 	<td>{eventCount.latest_date.toLocaleDateString()}</td> -->
+					<!-- 	<td>{eventCount.count.toLocaleString()}</td> -->
+					<!-- </tr>)} -->
+					<!-- {obsidianCounts.map(o=> <tr> -->
+					<!-- 	<td>{o.tag}</td> -->
+					<!-- 	<td>{o.min_date?.toLocaleDateString()}</td> -->
+					<!-- 	<td>{o.max_date?.toLocaleDateString()}</td> -->
+					<!-- 	<td>{o.count}</td> -->
+					<!---->
+					<!-- </tr>)} -->
+					<!-- </tbody></table> -->
 
 </Layout>
