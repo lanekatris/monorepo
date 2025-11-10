@@ -4,11 +4,12 @@ tags:
 ---
 We've been doing this league for years. We started these leagues as well:
 - [[2025 Winter Parkersburg Volleyball League]]
-- [[Got new volleyball shoes]]
+- [[My Volleyball Gear]] | [[Got new volleyball shoes]]
 
 # Videos
 [[Working with volleyball videos]]
 
+- 2025-11-03: Cancelled due to Parkersburg league
 - 2025-10-28: https://youtu.be/F-PTII1d_eg
 - [[2025-10-20 Volleyball]]: Cancelled due to Parkersburg league
 - [[2025-10-13 Volleyball]]: https://youtu.be/al1BXm7igYs
