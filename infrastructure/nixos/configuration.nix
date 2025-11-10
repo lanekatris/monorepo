@@ -233,6 +233,10 @@ pkgs.gnomeExtensions.pop-shell
     # openshot-qt
     # blender
   losslesscut-bin
+
+direnv
+nix-direnv
+
 #lk
 #pkgs.ollama
 #   (pkgs.ollama.override {
@@ -375,6 +379,10 @@ virtualisation.docker.enable = true;
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
+
+  environment.extraInit = ''
+    export PATH=$PATH:/home/lane/bin
+  '';
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
