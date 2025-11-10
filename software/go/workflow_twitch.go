@@ -32,7 +32,7 @@ func WorkflowTwitch(ctx workflow.Context) error {
 		return err
 	}
 
-	twitchStreams := []string{"headshotchick", "theprimeagen", "beardedblevins", "ninja", "sweeettails", "kitboga"}
+	twitchStreams := []string{"headshotchick", "theprimeagen", "beardedblevins", "ninja", "sweeettails", "kitboga", "DomeZ"}
 
 	for _, twitchStream := range twitchStreams {
 		var stream *StreamData

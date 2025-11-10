@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"shared"
 	"sort"
@@ -173,10 +172,12 @@ var videoCmd = &cobra.Command{
 			log.Info("Creating output.mp4...")
 
 			// Prepare ffmpeg command with progress to stdout
-			cmd := exec.Command("nix-shell", "-p", "ffmpeg", "--run", "ffmpeg -hide_banner -nostats -progress pipe:1 -f concat -safe 0 -i file_list.txt -c copy output.mp4")
-			cmd.Dir = dirPath
+			_, err := shared.ExecOnHost(shared.ExecOnHostArgs{
+				Name:      "nix-shell",
+				Args:      []string{"-p", "ffmpeg", "--run", "ffmpeg -hide_banner -nostats -progress pipe:1 -f concat -safe 0 -i file_list.txt -c copy output.mp4"},
+				Directory: dirPath,
+			})
 
-			err := cmd.Run()
 			shared.HandleError(err)
 
 			log.Info("Created", "newFile", outputPath)

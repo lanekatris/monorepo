@@ -1,8 +1,10 @@
 package shared
 
 import (
+	"bufio"
 	"bytes"
 	"fmt"
+	"os"
 	"os/exec"
 	"strconv"
 	"time"
@@ -61,22 +63,59 @@ func BackupFolder(folderToBackup string) (string, error) {
 }
 
 type ExecOnHostArgs struct {
-	Name string
-	Args []string
+	Name      string
+	Args      []string
+	Directory string
 }
+
+// func ExecOnHost(input ExecOnHostArgs) (string, error) {
+// 	cmd := exec.Command(input.Name, input.Args...)
+// 	var out bytes.Buffer
+// 	var stderr bytes.Buffer
+// 	cmd.Stdout = &out
+// 	cmd.Stderr = &stderr
+//
+// 	err := cmd.Run()
+//
+// 	if err != nil {
+// 		fmt.Println(fmt.Sprint(err) + ": " + stderr.String())
+// 		return "", err
+// 	}
+// 	return out.String(), nil
+// }
 
 func ExecOnHost(input ExecOnHostArgs) (string, error) {
 	cmd := exec.Command(input.Name, input.Args...)
-	var out bytes.Buffer
-	var stderr bytes.Buffer
-	cmd.Stdout = &out
-	cmd.Stderr = &stderr
+	// cmd.Path = input.Path
+	cmd.Dir = input.Directory
 
-	err := cmd.Run()
+	stdoutPipe, _ := cmd.StdoutPipe()
+	stderrPipe, _ := cmd.StderrPipe()
 
-	if err != nil {
-		fmt.Println(fmt.Sprint(err) + ": " + stderr.String())
+	if err := cmd.Start(); err != nil {
 		return "", err
 	}
-	return out.String(), nil
+
+	var buf bytes.Buffer
+
+	go func() {
+		scanner := bufio.NewScanner(stdoutPipe)
+		for scanner.Scan() {
+			line := scanner.Text()
+			fmt.Println(line)            // stream live
+			buf.WriteString(line + "\n") // capture
+		}
+	}()
+
+	go func() {
+		scanner := bufio.NewScanner(stderrPipe)
+		for scanner.Scan() {
+			line := scanner.Text()
+			fmt.Fprintln(os.Stderr, line) // stream live errors
+			buf.WriteString(line + "\n")
+		}
+	}()
+
+	err := cmd.Wait()
+	return buf.String(), err
 }

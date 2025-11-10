@@ -107,6 +107,32 @@ var temporalWorkflowsCmd = &cobra.Command{
 	},
 }
 
+var blogCopy = &cobra.Command{
+	Use: "blog-copy",
+	Run: func(cmd *cobra.Command, args []string) {
+		output, err := shared.ExecOnHost(shared.ExecOnHostArgs{
+			// name, args
+			Name: "sh",
+			Args: []string{"/home/lane/git/monorepo/software/quartz/copy-markdown.sh"},
+		})
+		log.Info("Done", "result", output)
+		shared.HandleError(err)
+	},
+}
+
+var blogDeploy = &cobra.Command{
+	Use: "blog-deploy",
+	Run: func(cmd *cobra.Command, args []string) {
+		output, err := shared.ExecOnHost(shared.ExecOnHostArgs{
+			// name, args
+			Name: "make",
+			Args: []string{"-C", "/home/lane/git/monorepo/software/quartz", "deploy"},
+		})
+		log.Info("Done", "result", output)
+		shared.HandleError(err)
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(kickCmd)
 	kickCmd.AddCommand(kickTwitchCmd)
@@ -114,6 +140,8 @@ func init() {
 	kickCmd.AddCommand(kickObsidianCmd)
 	kickCmd.AddCommand(temporalWorkflowsCmd)
 	kickCmd.AddCommand(kickInboxCmd)
+	kickCmd.AddCommand(blogCopy)
+	kickCmd.AddCommand(blogDeploy)
 
 	// Here you will define your flags and configuration settings.
 

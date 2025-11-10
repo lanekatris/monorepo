@@ -8,10 +8,10 @@ deploy-server:
 
 deploy-local:
 	go build cmd/lk/main.go
-	sudo systemctl stop lk.service
+	# sudo systemctl stop lk.service
 	cp ./main ~/bin/lk
-	sudo systemctl start lk.service
-	journalctl -u lk.service -f
+	# sudo systemctl start lk.service
+	# journalctl -u lk.service -f
 
 deploy-service: deploy-local
 	sudo cp ./lk.service /etc/systemd/system/
