@@ -10,6 +10,22 @@
       ./hardware-configuration.nix
     ];
 
+systemd.services.lk-worker = {
+  description = "The LK worker service";
+
+# Config is in /config/.lk.yaml
+  serviceConfig = {
+    ExecStart ="/home/lane/lk worker";
+    Restart = "always";
+    RestartSec = 5;
+  };
+
+  wantedBy = [ "multi-user.target" ];
+};
+
+
+
+
   # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
@@ -66,7 +82,7 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
 git
-cloudflared
+#cloudflared
   ];
 
 virtualisation.docker.enable = true;

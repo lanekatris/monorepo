@@ -12,6 +12,16 @@ services:
         #    restart: unless-stopped
         #    ports:
         #      - "4321:4321"
+        #
+        #
+        #
+  cloudflare-tunnel:
+    image: cloudflare/cloudflared:latest # Or a specific version
+    container_name: cloudflare-tunnel
+    restart: unless-stopped
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN} # Load from .env
+    command: tunnel run
   watcher:
     image: containrrr/watchtower
     container_name: watchtower

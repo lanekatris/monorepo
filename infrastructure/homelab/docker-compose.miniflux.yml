@@ -1,7 +1,7 @@
 services:
   miniflux:
     restart: unless-stopped
-    image: miniflux/miniflux:2.2.12
+    image: miniflux/miniflux:2.2.14
     ports:
       - "8663:8080"
     depends_on:
@@ -16,14 +16,14 @@ services:
       - POLLING_FREQUENCY=1440 # 1 Day
       - LOG_LEVEL=debug
   db:
-    image: postgres:15
+    image: postgres:17-alpine
     restart: unless-stopped
     environment:
       - POSTGRES_USER=miniflux
       - POSTGRES_PASSWORD=secret
       - POSTGRES_DB=miniflux
     volumes:
-      - miniflux-db:/var/lib/postgresql/data
+      - /bigboy/miniflux/db:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "miniflux"]
       interval: 10s
@@ -48,5 +48,3 @@ services:
                 - /bigboy/miniflux/db_dumps:/db_dumps
         depends_on:
                 - db
-volumes:
-  miniflux-db:
