@@ -16,7 +16,7 @@ import (
 func GetTemporalClient() (client.Client, error) {
 
 	return client.Dial(client.Options{
-		HostPort: "100.99.14.109:7233",
+		HostPort: shared.TemporalAddress, // "100.99.14.109:7233",
 	})
 
 }

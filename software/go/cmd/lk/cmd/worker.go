@@ -208,7 +208,7 @@ var workerCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		log.Info("Connecting to temporal...")
 		c, err := client.Dial(client.Options{
-			HostPort: "100.99.14.109:7233",
+			HostPort: shared.TemporalAddress, // "100.99.14.109:7233",
 		})
 		if err != nil {
 			log.Fatalf("unable to create Temporal client", err)

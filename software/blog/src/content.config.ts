@@ -87,7 +87,7 @@ const discs = defineCollection({
 		const response = await query(`select *
 															 from noco.disc
 															 order by number desc`)
-		console.log('aaaaaaaaaaaaaaaaaaaa',response)
+		// console.log('aaaaaaaaaaaaaaaaaaaa',response)
 		const idk = response as { number: string }[]
 		const f = idk.map((x) => ({
 			...x,
@@ -162,7 +162,7 @@ const feed = defineCollection({
 		const idk = response as FEED_TYPE[]
 
 		const sessionsResponse = await fetch(
-			'http://100.99.14.109:13378/api/sessions?itemsPerPage=10000&user=7e4b6e43-1722-4bb0-adde-9a572f945388',
+			'http://server1:13378/api/sessions?itemsPerPage=10000&user=7e4b6e43-1722-4bb0-adde-9a572f945388',
 			{
 				headers: {
 					Authorization: import.meta.env.AUDIOBOOKSHELF_KEY
@@ -241,7 +241,7 @@ const dgptEvents = defineCollection({
 
 const memos = defineCollection({
 	loader: feedLoader({
-		url: 'https://memo.lkat.io/u/Lane/rss.xml'
+		url: 'http://server1:5230/u/Lane/rss.xml'
 	})
 })
 

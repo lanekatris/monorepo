@@ -2,9 +2,9 @@
 
 deploy-server:
 	export CGO_ENABLED=0; export GOOS=linux;export GOARCH=amd64; go build cmd/lk/main.go
-	ssh -t lane@100.99.14.109 "sudo systemctl stop lk.service"
-	scp ./main lane@100.99.14.109:/home/lane/lk
-	ssh -t lane@100.99.14.109 "sudo systemctl start lk.service"
+	ssh -t lane@server1 "sudo systemctl stop lk-worker.service"
+	scp ./main lane@server1:/home/lane/lk
+	ssh -t lane@server1 "sudo systemctl start lk-worker.service"
 
 deploy-local:
 	go build cmd/lk/main.go
@@ -23,7 +23,7 @@ deploy-service: deploy-local
 deploy-docker:
 	docker build -t loonison101/lk:main .
 	docker push loonison101/lk:main
-	ssh -t lane@100.99.14.109 '\
+	ssh -t lane@100.97.86.67 '\
 		cd /home/lane/monorepo/infrastructure/homelab && \
 		sudo docker compose pull lkat && \
 		sudo docker compose up -d lkat \
