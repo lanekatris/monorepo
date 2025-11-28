@@ -4,6 +4,8 @@
 networks:
   gitea:
     external: false
+  shared:
+    external: true
 
 services:
         #  astro:
@@ -15,6 +17,14 @@ services:
         #
         #
         #
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - shared
   cloudflare-tunnel:
     image: cloudflare/cloudflared:latest # Or a specific version
     container_name: cloudflare-tunnel
@@ -269,18 +279,6 @@ services:
     ports:
       - "3000:3000"
       - "222:22"
-  mazanoke:
-    restart: always
-    container_name: mazanoke
-    image: ghcr.io/civilblur/mazanoke:latest
-    ports:
-      - "3474:80"
-  it-tools:
-    restart: always
-    container_name: it-tools
-    image: corentinth/it-tools:latest
-    ports:
-      - "3500:80"
 
   metabase:
     restart: always
