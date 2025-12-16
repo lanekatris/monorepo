@@ -25,6 +25,6 @@ deploy-docker:
 	docker push loonison101/lk:main
 	ssh -t lane@100.97.86.67 '\
 		cd /home/lane/monorepo/infrastructure/homelab && \
-		sudo docker compose pull lkat && \
-		sudo docker compose up -d lkat \
+		 docker compose pull lkat && \
+		 docker compose up -d lkat \
 	'

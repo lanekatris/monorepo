@@ -1,0 +1,40 @@
+instance_class: dagster.core.instance.DagsterInstance
+local_artifact_storage:
+  module: dagster._core.storage.root
+  class: LocalArtifactStorage
+  config:
+    base_dir: /dagster/artifacts  # folder for intermediate files
+
+run_storage:
+  module: dagster._core.storage.runs
+  class: SqlRunStorage
+  config:
+    postgres_db:
+      username: dagster
+      password: dagster
+      db_name: dagster
+      host: postgres
+      port: 5432
+
+event_log_storage:
+  module: dagster._core.storage.event_log
+  class: SqlEventLogStorage
+  config:
+    postgres_db:
+      username: dagster
+      password: dagster
+      db_name: dagster
+      host: postgres
+      port: 5432
+
+schedule_storage:
+  module: dagster._core.storage.schedules
+  class: SqlScheduleStorage
+  config:
+    postgres_db:
+      username: dagster
+      password: dagster
+      db_name: dagster
+      host: postgres
+      port: 5432
+

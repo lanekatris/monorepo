@@ -2,6 +2,13 @@
 ```
 nix develop
 sqlmesh plan
+
+
+GRANT SELECT ON ALL TABLES IN SCHEMA models TO web_anon;
+
+ssh lane@server1
+cd monorepo/infrastructure/homelab
+docker compose restart postgrest
 ```
 
 # Old Way
