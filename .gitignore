@@ -12,3 +12,4 @@ flyway.conf
 node_modules
 /software/embedded/settings.toml
 .venv
+.direnv

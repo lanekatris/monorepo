@@ -239,6 +239,9 @@ pkgs.gnomeExtensions.pop-shell
     neovim
     gcc #treesitter wants it
     transmission_4-gtk
+
+
+
     ranger
     zoxide
     wezterm

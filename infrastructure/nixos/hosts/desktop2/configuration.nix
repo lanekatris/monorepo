@@ -3,24 +3,35 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { config, lib, pkgs, ... }:
-
+# let
+#   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
+# in 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      # (import "${home-manager}/nixos")
     ];
+
+    # home-manager.useUserPackages = true;
+    # home-manager.useGlobalPkgs = true;
+    # home-manager.backupFileExtension = "backup";
+    # home-manager.users.lane = import ./home.nix;
+    #
+    #
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 nixpkgs.config.allowUnfree = true; 
-  # networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "desktop2"; # Define your hostname.
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "America/New_York";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -41,11 +52,17 @@ nixpkgs.config.allowUnfree = true;
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
+environment.gnome.excludePackages = with pkgs; [geary];
+
+
+
   services.xserver.videoDrivers = [ "nvidia" ];
 hardware.nvidia = {
   modesetting.enable = true;   # REQUIRED for Wayland
   open = true;                # use proprietary driver
   powerManagement.enable = false;
+    nvidiaSettings = true;
+    powerManagement.finegrained = false;
 };
 
 # REQUIRED so GDM + Wayland can use NVIDIA
@@ -75,14 +92,39 @@ boot.blacklistedKernelModules = [ "nouveau" ];
 users.users.lane = {
   isNormalUser = true;
   extraGroups = [ "wheel" "networkmanager" ];
+    packages = with pkgs; [
+      tree
+	neovim
+obsidian
+spotify
+git
+ghostty
+google-chrome
+
+discord
+
+# nvim
+fd
+gcc
+ripgrep
+lazygit
+
+
+# ai
+# claude-code
+cursor-cli
+    ];
 };
-  # users.users.alice = {
-  #   isNormalUser = true;
-  #   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  #   packages = with pkgs; [
-  #     tree
-  #   ];
-  # };
+
+
+programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    # Certain features, including CLI integration and system authentication support,
+    # require enabling PolKit integration on some desktop environments (e.g. Plasma).
+    polkitPolicyOwners = [ "lane" ];
+  };
+
 
   # programs.firefox.enable = true;
 
@@ -90,8 +132,6 @@ users.users.lane = {
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-citrix_workspace
-  #   wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
