@@ -93,26 +93,6 @@ users.users.lane = {
   isNormalUser = true;
   extraGroups = [ "wheel" "networkmanager" ];
     packages = with pkgs; [
-      tree
-	neovim
-obsidian
-spotify
-git
-ghostty
-google-chrome
-
-discord
-
-# nvim
-fd
-gcc
-ripgrep
-lazygit
-
-
-# ai
-# claude-code
-cursor-cli
     ];
 };
 
@@ -124,6 +104,7 @@ programs._1password.enable = true;
     # require enabling PolKit integration on some desktop environments (e.g. Plasma).
     polkitPolicyOwners = [ "lane" ];
   };
+services.tailscale.enable = true;
 
 
   # programs.firefox.enable = true;

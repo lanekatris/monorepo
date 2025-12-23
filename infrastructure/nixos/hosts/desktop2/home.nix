@@ -1,6 +1,10 @@
 {config,pkgs,...}:
 
 {
+  imports = [
+  ./neovim.nix
+  ];
+                 
     home.username = "lane";
     home.homeDirectory = "/home/lane";
     home.stateVersion = "25.11";
@@ -17,4 +21,25 @@
         enable = true;
         nix-direnv.enable = true;
       };
+
+      home.packages = with pkgs; [
+
+      tree          
+	neovim         
+obsidian
+spotify
+git
+ghostty
+google-chrome
+
+discord
+
+
+
+# ai
+cursor-cli
+
+
+bambu-studio
+      ];
   }
