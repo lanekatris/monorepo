@@ -41,5 +41,6 @@ cursor-cli
 
 
 bambu-studio
+pkgs.jetbrains.webstorm
       ];
   }
