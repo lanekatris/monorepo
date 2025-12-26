@@ -55,12 +55,16 @@ nixpkgs.config.allowUnfree = true;
 environment.gnome.excludePackages = with pkgs; [geary];
 
 
+# opengl
+  hardware.graphics = {
+    enable = true;
+  };
 
   services.xserver.videoDrivers = [ "nvidia" ];
-hardware.nvidia = {
+hardware.nvidia = { 
   modesetting.enable = true;   # REQUIRED for Wayland
   open = true;                # use proprietary driver
-  powerManagement.enable = false;
+  powerManagement.enable = true; # THIS FIXES COOMING OUT OF SLEEP
     nvidiaSettings = true;
     powerManagement.finegrained = false;
 };
@@ -87,11 +91,12 @@ boot.blacklistedKernelModules = [ "nouveau" ];
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
+virtualisation.docker.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
 users.users.lane = {
   isNormalUser = true;
-  extraGroups = [ "wheel" "networkmanager" ];
+  extraGroups = [ "wheel" "networkmanager" "docker" ];
     packages = with pkgs; [
     ];
 };
@@ -107,6 +112,31 @@ programs._1password.enable = true;
 services.tailscale.enable = true;
 
 
+services.flatpak.enable = true;
+# services.flatpak.extraPortals = ["gtk"];
+
+    programs.dconf.enable = true;
+
+      programs.dconf.profiles.user.databases = [
+        {
+          settings = {
+            "org/gnome/shell" = {
+              enabled-extensions = [
+                "pop-shell@system76.com"
+              ];
+            };
+            "org/gnome/shell/extensions/pop-shell" = {
+              tile-by-default = true;
+              gap-inner = "<int32 2>";
+              gap-outer = "<int32 2>";
+              smart-gaps = true;
+              show-title = true;
+              stacking-with-mouse = true;
+            };
+          };
+        }
+      ];
+
   # programs.firefox.enable = true;
 
   # List packages installed in system profile.
@@ -114,6 +144,9 @@ services.tailscale.enable = true;
   environment.systemPackages = with pkgs; [
   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   ];
+
+  programs.ssh.startAgent = false;
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

@@ -15,6 +15,7 @@
           };
         bashrcExtra = ''
           eval "$(direnv hook bash)"
+          export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
         '';
       };
     programs.direnv = {
@@ -40,7 +41,15 @@ discord
 cursor-cli
 
 
-bambu-studio
+# bambu-studio
 pkgs.jetbrains.webstorm
+
+
+
+
+pkgs.gnomeExtensions.pop-shell
+#    pkgs.gnomeExtensions.pop-shell-shortcuts
+#pkgs.gnomeExtensionsApp
+    gnome-tweaks
       ];
   }
