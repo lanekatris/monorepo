@@ -15,11 +15,10 @@ systemd.services.lk-worker = {
 
 # Config is in /config/.lk.yaml
   serviceConfig = {
-    ExecStart ="/home/lane/lk worker";
-    Restart = "always";
-    RestartSec = 5;
+	  ExecStart ="/home/lane/lk worker";
+	  Restart = "always";
+	  RestartSec = 5;
   };
-
   wantedBy = [ "multi-user.target" ];
 };
 
@@ -87,9 +86,13 @@ tree
 ranger
 neovim
 htop
+
+lazydocker
   ];
 
+
 virtualisation.docker.enable = true;
+programs._1password.enable = true;
 services.tailscale.enable = true;
 fileSystems."/bigboy" = {
 	device = "bigboy";
