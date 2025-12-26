@@ -21,20 +21,15 @@ select 'Go to the gym!' message where not exists (
 
 union
 
-select concat('Clean up obsidian! Root file count: ', count(*), ' (50 max) http://server1:8055/namespaces/default/schedules/schedule_obsidian_files_to_db') message from models.obsidian_file where in_root having count(*) > 50
+select concat('Clean up obsidian! Root file count: ', count(*), ' (110 max) http://server1:8055/namespaces/default/schedules/schedule_obsidian_files_to_db') message from models.obsidian_file where in_root having count(*) > 110
 
-union
 
-(select 'Digital and paper adventure calendars are out of sync http://server1:8055/namespaces/default/schedules/schedule_obsidian_files_to_db' message from models.versions
-where type in ('obsidian_adventures', 'paper_calendar')
-group by version having count(*) != 2 limit 1)
+-- kestra is broken and i won't decide what i'm doing for an orchestrator so quit bugging me
 -- union
 --
--- select concat('Clean up emails! Count: ', data::jsonb->'unreadCount', '. Updated: ', created_at) message
--- from public.events where event_name= 'inbox_data_received_v1'
---               and (data::jsonb->'unreadCount')::int > 0
--- order by created_at desc limit 1
---
+-- (select 'Digital and paper adventure calendars are out of sync http://server1:8055/namespaces/default/schedules/schedule_obsidian_files_to_db' message from models.versions
+-- where type in ('obsidian_adventures', 'paper_calendar')
+-- group by version having count(*) != 2 limit 1)
 
 union
 
@@ -43,7 +38,7 @@ select concat('Clean up emails! (',unread_count,') http://server1:8055/namespace
 
 union
 
-select concat('Bookmark queue over 242! (',count(*),') https://app.raindrop.io/my/36282268') message from models.bookmark where collection_name = 'Inbox' group by collection_name having count(*) > 242
+select concat('Bookmark queue over 272! (',count(*),') https://app.raindrop.io/my/36282268') message from models.bookmark where collection_name = 'Inbox' group by collection_name having count(*) > 272
 
 union
 

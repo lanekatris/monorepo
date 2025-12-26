@@ -1,5 +1,11 @@
 # Lane's Monorepo
 
+setup windows
+- https://www.lazyvim.org/installation
+```
+winget -i ./winget.json
+```
+
 # 2025-07-18
 
 ## Blog

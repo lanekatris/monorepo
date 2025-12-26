@@ -7,15 +7,29 @@
 let
   # Import your Go flake using absolute path
 #  goFlake = builtins.getFlake "path:/home/lane/git/monorepo/software/go";
+   # home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz;
+
 in {
 
 
   imports =
     [ # Include the results of the hardware scan.
+      # (import "${home-manager}/nixos")
       ./hardware-configuration.nix
 #      ./lk.nix
 #        ../../software/go/lk-build.nix
     ];
+
+
+# home manager
+# home-manager.users.lane = {pkgs, ... }: {
+#     home.packages = [pkgs.atool];
+#     programs.bash.enable = true;
+#     home.stateVersion = "25.05"; # Did you read the comment?
+#     home.enableNixpkgsReleaseCheck = false;
+#   };
+
+    # end home manager
 
   # LK Go Service
 #  systemd.services.lk = {
@@ -183,6 +197,8 @@ services.printing = {
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+# This is for citrix_workspace and that is it
+  # nixpkgs.config.allowBroken = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -204,7 +220,7 @@ spotify
 discord
 slack
 oterm # for ollama/open-qqwebui
-citrix_workspace
+# citrix_workspace
 screenfetch
 inkscape
 #flameshot
@@ -215,13 +231,14 @@ pkgs.gnomeExtensions.pop-shell
 #pkgs.gnomeExtensionsApp
     gnome-tweaks
     brave
+    unzip
 
     # nvim stuff
     ripgrep
     fd
     neovim
     gcc #treesitter wants it
-    transmission-gtk
+    transmission_4-gtk
     ranger
     zoxide
     wezterm
@@ -234,8 +251,12 @@ pkgs.gnomeExtensions.pop-shell
     # blender
   losslesscut-bin
 
+# This is neat, if you enter a directory you get automatic nix-shell.nix depenencies, if you leave it, they all unload
 direnv
 nix-direnv
+
+insomnia
+ # amazon-ecr-credential-helper
 
 #lk
 #pkgs.ollama

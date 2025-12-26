@@ -10,6 +10,7 @@ tags:
 [[My Volleyball Gear]] | [[Got new volleyball shoes]]
 
 # Tournament
+#todo move pic below and use tags in the data to say istournament
 ![[577467531_1198425405470780_1829887543737151435_n.jpg|400]]
 
 
@@ -28,6 +29,8 @@ tags:
 | 2025-10-28 6pm | [[2025 Fall - 10 Prime]]            | 3        | 0         | [Youtube](https://youtu.be/STGxfZ27jDk)                | Tokyo         |
 | 2025-11-03 8pm | [[2025 Fall - 13 We Showed Up]]     | 0        | 3         | N/A                                                    | Gran Ranchero |
 | 2025-11-04 6pm | [[2025 Fall - 11 Can You Dig It]]   | 3        | 0         | [Youtube](https://youtu.be/ynC-RBhkFdA)                | Cheddars      |
+| 2025-11-11 6pm | [[2025 Fall - 09 League Splitters]] | 2        | 0         |                                                        | Tokyo         |
+| 2025-11-17 8pm |                                     |          |           |                                                        |               |
 # Team Name: Set Flix & Chill
 
 # Schedule

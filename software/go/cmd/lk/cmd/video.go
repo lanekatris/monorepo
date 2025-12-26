@@ -40,7 +40,8 @@ var videoCmd = &cobra.Command{
 
 		// If directory is empty, copy files from GoPro directory
 		if len(files) == 0 {
-			goproPath := "/run/media/lane/disk/DCIM/101GOPRO"
+			// goproPath := "/run/media/lane/disk/DCIM/101GOPRO" // hero 5  
+			goproPath := "/run/media/lane/disk/DCIM/100GOPRO" // hero 5  
 			println("Directory is empty, copying files from GoPro directory:", goproPath)
 
 			// Check if GoPro directory exists
@@ -57,15 +58,16 @@ var videoCmd = &cobra.Command{
 			}
 
 			// Copy all files from GoPro directory
-			for _, file := range goproFiles {
+			for i, file := range goproFiles {
 				if file.IsDir() {
 					continue // Skip subdirectories
 				}
+				
 
 				sourcePath := filepath.Join(goproPath, file.Name())
 				destPath := filepath.Join(dirPath, file.Name())
 
-				println("Copying:", file.Name())
+				log.Info("Copying",  "file", file.Name(),"current", i+1, "total", len(goproFiles))
 
 				// Copy file
 				if err := copyFile(sourcePath, destPath); err != nil {

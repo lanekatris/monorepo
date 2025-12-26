@@ -1,0 +1,8 @@
+[32m2025-11-27 08:34:09 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 8d991f64-c658-40ef-bf9b-1f50bc1968cb - 44700 - LOGS_CAPTURED - Started capturing logs in process (pid: 44700).
+[32m2025-11-27 08:34:09 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 8d991f64-c658-40ef-bf9b-1f50bc1968cb - 44700 - water_level - STEP_START - Started execution of step "water_level".
+[32m2025-11-27 08:34:09 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 8d991f64-c658-40ef-bf9b-1f50bc1968cb - 44700 - water_level - ASSET_MATERIALIZATION - idk man
+[32m2025-11-27 08:34:09 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 8d991f64-c658-40ef-bf9b-1f50bc1968cb - 44700 - water_level - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+[32m2025-11-27 08:34:09 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 8d991f64-c658-40ef-bf9b-1f50bc1968cb - water_level - Writing file at: /home/lane/git/monorepo/software/dagster/dagster-quickstart/.tmp_dagster_home_vqktskzy/storage/water_level using PickledObjectFilesystemIOManager...
+[32m2025-11-27 08:34:09 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 8d991f64-c658-40ef-bf9b-1f50bc1968cb - 44700 - water_level - ASSET_MATERIALIZATION - Materialized value water_level.
+[32m2025-11-27 08:34:09 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 8d991f64-c658-40ef-bf9b-1f50bc1968cb - 44700 - water_level - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+[32m2025-11-27 08:34:10 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 8d991f64-c658-40ef-bf9b-1f50bc1968cb - 44700 - water_level - STEP_SUCCESS - Finished execution of step "water_level" in 903ms.

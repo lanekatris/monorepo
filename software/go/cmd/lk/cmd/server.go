@@ -189,7 +189,7 @@ to quickly create a Cobra application.`,
 
 		r.GET("/deploy-markdown", func(c *gin.Context) {
 			cc, err := client.Dial(client.Options{
-				HostPort: "100.99.14.109:7233",
+				HostPort: shared.TemporalAddress, // "100.99.14.109:7233",
 			})
 			if err != nil {
 				log.Error("unable to create Temporal client", err)
@@ -292,6 +292,53 @@ to quickly create a Cobra application.`,
 			})
 		})
 
+		r.POST("/dump/:type", func(c *gin.Context) {
+			// Read raw body as text
+			body, err := c.GetRawData()
+			if err != nil {
+				c.JSON(http.StatusBadRequest, gin.H{
+					"error": "Unable to read body",
+				})
+				return
+			}
+
+			eventType := c.Param("type")
+			if eventType == "" {
+				c.JSON(http.StatusBadRequest, gin.H{
+					"error": "Type is required",
+				})
+				return
+			}
+
+			// Your logic (replicates createEvent(type, data))
+			cc, err := client.Dial(client.Options{
+				HostPort: shared.TemporalAddress,
+			})
+			if err != nil {
+				log.Error("unable to create Temporal client", err)
+				return
+
+			}
+			defer cc.Close()
+
+			options := client.StartWorkflowOptions{
+				//ID:        "obsidian-theme-workflow",
+				ID:        "obsidian-queue-" + uuid.NewString(),
+				TaskQueue: "server",
+			}
+
+			_, err = cc.ExecuteWorkflow(context.Background(), options, shared.WorkflowDumper, eventType, string(body))
+			if err != nil {
+				log.Error("unable to complete Workflow", err)
+				return
+			}
+
+			c.JSON(http.StatusOK, gin.H{
+				"success": true,
+			})
+
+		})
+
 		r.GET("/obsidian-queue", func(c *gin.Context) {
 			// c.HTML(http.StatusOK, "obsidian-queue.tmpl", gin.H{
 			// 	"hi": "ok",
@@ -309,7 +356,7 @@ to quickly create a Cobra application.`,
 			}
 
 			cc, err := client.Dial(client.Options{
-				HostPort: "100.99.14.109:7233",
+				HostPort: shared.TemporalAddress,
 			})
 			if err != nil {
 				log.Error("unable to create Temporal client", err)
@@ -342,7 +389,12 @@ to quickly create a Cobra application.`,
 
 		})
 
-		go r.Run() // listen and serve on 0.0.0.0:8080
+		port := os.Getenv("PORT")
+		if port == "" {
+			port = "8080" // default
+		}
+
+		go r.Run(":" + port) // listen and serve on 0.0.0.0:8080
 
 		lis, err := net.Listen("tcp", ":8081")
 		if err != nil {

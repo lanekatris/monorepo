@@ -98,6 +98,26 @@ func WorkflowDumper(ctx workflow.Context, eventName string, data string) error {
 
 	}
 
+	if eventName == "computer_sleep_requested_v1" {
+			childOptions := workflow.ChildWorkflowOptions{
+				WorkflowID:               "sleep-requested" + uuid.New().String(),
+				TaskQueue:                GreetingTaskQueue,
+				ParentClosePolicy:        enums.PARENT_CLOSE_POLICY_ABANDON,
+				WorkflowExecutionTimeout: time.Minute,
+				RetryPolicy: &temporal.RetryPolicy{
+					MaximumAttempts: 1,
+				},
+			}
+
+			childCtx := workflow.WithChildOptions(ctx, childOptions)
+
+			err = workflow.ExecuteChildWorkflow(childCtx, WorkflowSleep).GetChildWorkflowExecution().Get(childCtx, nil)
+
+			if err != nil {
+				return err
+			}
+	}
+
 	// This is here since it needs access to the "workflow" object
 	if eventName == "neotrellis_v1" {
 		var neotrellisData NeotrellisData
