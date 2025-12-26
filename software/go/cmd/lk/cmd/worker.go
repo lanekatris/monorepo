@@ -231,7 +231,7 @@ var workerCmd = &cobra.Command{
 		if queueName == "" {
 			queueName = shared.GreetingTaskQueue
 		}
-		fmt.Println("using queue name:", queueName)
+		fmt.Println("temporal_queue_name:", queueName)
 		w := worker.New(c, queueName, worker.Options{})
 		//w.RegisterWorkflow(temporalstuff.SendFitnessEmailWorkflow)
 		//w.RegisterWorkflow(temporalstuff.ObsidianThemeWorkflow)

@@ -15,7 +15,7 @@ COPY temporalstuff temporalstuff/
 COPY fitness/ fitness/
 COPY public/ public/
 COPY db/ db/
-COPY templates/ templates/
+# COPY templates/ templates/
 COPY public/ public/
 COPY *.go .
 
@@ -31,7 +31,7 @@ FROM gcr.io/distroless/base-debian11 AS build-release-stage
 WORKDIR /
 
 COPY --from=build-stage /lk /lk
-COPY --from=build-stage /app/templates /templates
+# COPY --from=build-stage /app/templates /templates
 COPY --from=build-stage /app/public /public
 
 EXPOSE 8080
