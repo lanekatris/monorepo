@@ -26,12 +26,15 @@ services:
     networks:
       - shared
   cloudflare-tunnel:
-    image: cloudflare/cloudflared:latest # Or a specific version
+    image: cloudflare/cloudflared:2025.11.1 # Or a specific version
     container_name: cloudflare-tunnel
     restart: unless-stopped
     environment:
-      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN} # Load from .env
-    command: tunnel run
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
+    command: 
+      - tunnel
+      - run 
+      - 76cfa84f-a555-49ca-807c-45494daead1b
   watcher:
     image: containrrr/watchtower
     container_name: watchtower
