@@ -12,7 +12,35 @@
     in
     {
       devShells.${system}.default = pkgs.mkShell {
-        packages = [ pkgs.go ];
+        packages = with pkgs; [ pkgs.go 
+
+
+        pkgs.nodejs
+
+# everything below here is for astro to build...
+      nodePackages.node-gyp
+
+      # Native build dependencies for node-gyp
+      python3
+      gcc
+      gnumake
+
+      # Often needed by native modules
+      pkg-config
+      libsecret
+      openssl
+
+      # Optional: some node modules expect these
+      automake
+      autoconf
+
+
+#      build-essential
+      pixman
+      cairo
+      pango
+      postgresql.pg_config
+        ];
       };
     };
 }
