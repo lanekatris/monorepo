@@ -23,7 +23,7 @@ deploy-service: deploy-local
 deploy-docker:
 	docker build -t loonison101/lk:main .
 	docker push loonison101/lk:main
-	ssh -t lane@100.97.86.67 '\
+	ssh -t lane@100.97.2.90 '\
 		cd /home/lane/monorepo/infrastructure/homelab && \
 		 docker compose pull lkat && \
 		 docker compose up -d lkat \

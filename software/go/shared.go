@@ -14,7 +14,7 @@ const PostgresApiKeyConfig = "POSTGRES_CONN"
 
 var ResendApiKeyConfig = "resend_api_key"
 
-var TemporalAddress = "100.97.86.67:7233"
+var TemporalAddress = "100.97.2.90:7233"
 
 func HandleError(err error) {
 	if err != nil {
