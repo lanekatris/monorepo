@@ -19,43 +19,26 @@ interface EventCount {
 	count: number;
 }
 
-const urls = [
-	'https://raw.githubusercontent.com/lanekatris/monorepo/refs/heads/main/infrastructure/homelab/docker-compose.yml',
-	'https://raw.githubusercontent.com/lanekatris/monorepo/refs/heads/main/infrastructure/homelab/docker-compose.miniflux.yml',
-	'https://raw.githubusercontent.com/lanekatris/monorepo/refs/heads/main/infrastructure/homelab/docker-compose.n8n.yml',
-	'https://raw.githubusercontent.com/lanekatris/monorepo/refs/heads/main/infrastructure/homelab/immich/docker-compose.yml',
-	'https://raw.githubusercontent.com/lanekatris/monorepo/refs/heads/main/infrastructure/homelab/windmill/docker-compose.yml'
-]
-
-const files = await Promise.all(
-	urls.map(async (url) => {
-		const response = await fetch(url)
-		const contents = await response.text()
-		const json = (await yaml.load(contents)) as DockerComposeFile
-
-		return {
-			url,
-			fileName: url.split('/').slice(-2).join('/'),
-			fileContents: json
-		}
-	})
-)
 
 const machines = await Promise.all([
 	getFromMinio<string>('etl', 'linux_desktop_screenfetch_result.txt', false),
 	getFromMinio<string>('etl', 'server1_screenfetch_result.txt', false)
 ])
 
-// const eventCounts = await query(`select event_name,min(created_at)::date earliest_date, max(created_at)::date latest_date, count(*)::int count from events group by event_name order by count(*) desc`) as EventCount[]
-const obsidianCounts = await query(`select * from models.obsidian_tags order by tag`)
 
-const pages = await getCollection('page')
+const hmm = await getFromMinio<string>('public', 'homelab-service-urls.json', true)
+console.log('hmm',hmm)
+
+// const eventCounts = await query(`select event_name,min(created_at)::date earliest_date, max(created_at)::date latest_date, count(*)::int count from events group by event_name order by count(*) desc`) as EventCount[]
+// const obsidianCounts = await query(`select * from models.obsidian_tags order by tag`)
+//
+// const pages = await getCollection('page')
 // console.log(pages)
 
 
 
-const workflows = await getRecentTemporalWorkflows();
-console.log(workflows)
+// const workflows = await getRecentTemporalWorkflows();
+// console.log(workflows)
 ---
 
 <Layout title="My Homelab" pubDate={new Date('August 08 2021')}>
@@ -77,40 +60,29 @@ console.log(workflows)
 		<li><a href="https://minio.lkat.io/browser/fresh-os-install" target="_blank">Install Files</a></li>
 	</ul>
 
-	<h1>Recent Temporal Invocations</h1>
-	<table>
-		<thead>
-		<tr>
-			<td>Status</td>
-			<td>Workflow ID</td>
-		</tr>
-		</thead>
-		<tbody>
-		{workflows.map((workflow) => (
-			<tr >
-				<td>
-					<var>{workflow.status.name}</var>
-				</td>
-				<td>{workflow.workflowId}</td>
-			</tr>
-		))}
-		</tbody>
-	</table>
-	<h1 id="dc">Docker Compose Files</h1>
-	<p>
-I suck		 in my homelab docker-compose files and creates easy links to navigate to them if
-		they expose any ports.
-	</p>
-	{
-		files.map((file) => (
-			<div>
-				<h3>
-					<a target={'_blank'} href={file.url}>
-						{file.fileName}
-					</a>
-				</h3>
+	<!-- <h1>Recent Temporal Invocations</h1> -->
+	<!-- <table> -->
+	<!-- 	<thead> -->
+	<!-- 	<tr> -->
+	<!-- 		<td>Status</td> -->
+	<!-- 		<td>Workflow ID</td> -->
+	<!-- 	</tr> -->
+	<!-- 	</thead> -->
+	<!-- 	<tbody> -->
+	<!-- 	{workflows.map((workflow) => ( -->
+	<!-- 		<tr > -->
+	<!-- 			<td> -->
+	<!-- 				<var>{workflow.status.name}</var> -->
+	<!-- 			</td> -->
+	<!-- 			<td>{workflow.workflowId}</td> -->
+	<!-- 		</tr> -->
+	<!-- 	))} -->
+	<!-- 	</tbody> -->
+	<!-- </table> -->
 
-				<table>
+
+  <h1>My Services</h1>
+  <table>
 					<thead>
 					<tr>
 						<th>App</th>
@@ -118,41 +90,23 @@ I suck		 in my homelab docker-compose files and creates easy links to navigate t
 						<th>Links</th>
 					</tr>
 					</thead>
-					<tbody>
-					{Object.keys(file.fileContents.services)
-						.filter((name) => file.fileContents.services[name].ports)
-						.map((name) => (
-							<tr>
-								<td>{name} ({file.fileContents.services[name].image.split(':')[1] ?? <mark>No Tag</mark>})</td>
-								<td>
-									{file.fileContents.services[name].ports?.map((port) => (
-										<div>{port}</div>
-									))}
-								</td>
-								<td>
 
-									{file.fileContents.services[name].ports?.map((port) => (
-										<div>
-										<a target={'_blank'} href={`http://server1.local:${port.split(':')[0]}`}>
-												DNS
-											</a>
-											|
-											<a target={'_blank'} href={`http://192.168.86.100:${port.split(':')[0]}`}>
-												IP
-											</a>
-											<a target={'_blank'} href={`http://100.99.14.109:${port.split(':')[0]}`}>
-												Tailscale
-											</a>
-										</div>
-									))}
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
-			</div>
-		))
-	}
+					<tbody>
+
+  {
+  hmm.data.map(td => 
+    <tr>
+    <td>{td.service}</td>
+    <td>{td.port}</td>
+    <td>
+      <a href={td.dnsUrl}>DNS</a> | 
+      <a href={td.tailscaleUrl}>IP Tailscale</a></td>
+  </tr>)
+  }
+            </tbody>
+          </table>
+
+
 
 	<h1 id="mm">My Machines</h1>
 	<p>

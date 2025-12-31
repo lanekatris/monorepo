@@ -3,6 +3,7 @@ import { getRssOpml } from '../getRssOpml'
 // @ts-ignore
 import opml from 'opml'
 
+import { getFromMinio } from '../get-from-minio'
 import Layout from '../layouts/BlogPost.astro'
 
 interface OpmlResponse {
@@ -20,7 +21,12 @@ interface OpmlResponse {
 }
 
 async function parseOpml(): Promise<OpmlResponse> {
-	const xml = await getRssOpml()
+	// const xml = await getRssOpml()
+	//  const r = await fetch(``)
+const hmm = await getFromMinio<string>('public', 'miniflux-export-opml.xml', false)
+const xml = hmm.data
+
+
 	return new Promise<OpmlResponse>((resolve, reject) => {
 		opml.parse(xml, function (err: Error, result: any) {
 			if (err) return reject(err)
