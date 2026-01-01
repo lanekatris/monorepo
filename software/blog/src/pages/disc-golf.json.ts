@@ -26,6 +26,7 @@ export async function GET() {
 	const idk = await query(`select count::int
 												from models.obsidian_tags_summary
 												where tag = 'disc-found'`)
+                        console.log('idk is ',idk)
 
 	return new Response(
 		JSON.stringify(
@@ -33,7 +34,7 @@ export async function GET() {
 				name: 'Disc golf service entry api',
 				version: '2025.06',
 				pdgaNumber: 236863,
-				karma: idk[0].count,
+				karma: idk[0]?.count,
 				uniqueCoursesPlayed: uniqueCourses.length,
 				links: [
 					{

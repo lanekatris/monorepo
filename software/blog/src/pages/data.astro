@@ -1,6 +1,34 @@
 ---
 import { FILE_URLS, FILES, getFileDownloadPath } from '../utils'
 import Layout from '../layouts/BlogPost.astro'
+
+
+
+	// const bucketFiles = await getFromMinio<string>('public', 'linux_desktop_screenfetch_result.txt', false),
+  const bucketFilesResponse = await fetch('http://server1:9000/public/bucket-file-list.json')
+  const bucketFiles = await bucketFilesResponse.json()
+
+  console.log(bucketFiles[0])
+
+
+   function formatBytes(
+  bytes: number,
+  decimals = 1
+): string {
+  if (!bytes || bytes === 0) return "0 B";
+
+  const k = 1024;
+  const dm = Math.max(decimals, 0);
+  const sizes = ["B", "KB", "MB", "GB", "TB"];
+
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+  const value = bytes / Math.pow(k, i);
+
+  return `${value.toFixed(dm)} ${sizes[i]}`;
+}
+
+  
 ---
 
 <Layout title={`Data Files`} pubDate={new Date('May 3, 2025')}>
@@ -14,6 +42,14 @@ import Layout from '../layouts/BlogPost.astro'
 			</tr>
 		</thead>
 		<tbody>
+      {
+      bucketFiles.map(f => <tr>
+        <td><a href={f.downloadUrl}>{f.key}</a></td>
+        <td></td>
+        <td>{formatBytes(f.size)} | Updated: {f.lastModified.split('T')[0]}</td>
+        </tr>)
+      }
+      <tr><td>-------------</td></tr>
 			{
 				FILES.map(
 					(file) => (<tr>
