@@ -99,23 +99,23 @@ func WorkflowDumper(ctx workflow.Context, eventName string, data string) error {
 	}
 
 	if eventName == "computer_sleep_requested_v1" {
-			childOptions := workflow.ChildWorkflowOptions{
-				WorkflowID:               "sleep-requested" + uuid.New().String(),
-				TaskQueue:                GreetingTaskQueue,
-				ParentClosePolicy:        enums.PARENT_CLOSE_POLICY_ABANDON,
-				WorkflowExecutionTimeout: time.Minute,
-				RetryPolicy: &temporal.RetryPolicy{
-					MaximumAttempts: 1,
-				},
-			}
+		childOptions := workflow.ChildWorkflowOptions{
+			WorkflowID:               "sleep-requested" + uuid.New().String(),
+			TaskQueue:                GreetingTaskQueue,
+			ParentClosePolicy:        enums.PARENT_CLOSE_POLICY_ABANDON,
+			WorkflowExecutionTimeout: time.Minute,
+			RetryPolicy: &temporal.RetryPolicy{
+				MaximumAttempts: 1,
+			},
+		}
 
-			childCtx := workflow.WithChildOptions(ctx, childOptions)
+		childCtx := workflow.WithChildOptions(ctx, childOptions)
 
-			err = workflow.ExecuteChildWorkflow(childCtx, WorkflowSleep).GetChildWorkflowExecution().Get(childCtx, nil)
+		err = workflow.ExecuteChildWorkflow(childCtx, WorkflowSleep).GetChildWorkflowExecution().Get(childCtx, nil)
 
-			if err != nil {
-				return err
-			}
+		if err != nil {
+			return err
+		}
 	}
 
 	// This is here since it needs access to the "workflow" object
@@ -161,20 +161,6 @@ func WorkflowDumper(ctx workflow.Context, eventName string, data string) error {
 			log.Info("Not mapped", "event_id", neotrellisData.ButtonId)
 		}
 
-	}
-
-	childOptions := workflow.ChildWorkflowOptions{
-		WorkflowID:            "log-event-dumper",
-		TaskQueue:             GreetingTaskQueue,
-		ParentClosePolicy:     enums.PARENT_CLOSE_POLICY_ABANDON,
-		WorkflowIDReusePolicy: enums.WORKFLOW_ID_REUSE_POLICY_ALLOW_DUPLICATE,
-	}
-
-	childCtx := workflow.WithChildOptions(ctx, childOptions)
-
-	err = workflow.ExecuteChildWorkflow(childCtx, WorkflowLogger, eventName, data).GetChildWorkflowExecution().Get(childCtx, nil)
-	if temporal.IsWorkflowExecutionAlreadyStartedError(err) {
-		return nil
 	}
 
 	return err

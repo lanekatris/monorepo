@@ -307,7 +307,6 @@ var workerCmd = &cobra.Command{
 		w.RegisterWorkflow(shared.WorkflowPodcasts)
 
 		// Playing around
-		w.RegisterWorkflow(shared.WorkflowLogger)
 
 		w.RegisterWorkflow(shared.WorkflowTwitch)
 		w.RegisterActivity(shared.KvGetString)

@@ -37,7 +37,7 @@ func GetMinifluxDb() (*sql.DB, error) {
 
 func GetMinioClient() *minio.Client {
 	SetupViper()
-	endpoint := "100.97.86.67:9000"
+	endpoint := "100.97.2.90:9000"
 	accessKeyID := viper.GetString("MINIO_ACCESS_KEY")
 	secretAccessKey := viper.GetString("MINIO_SECRET")
 

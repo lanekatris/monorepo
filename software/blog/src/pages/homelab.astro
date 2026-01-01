@@ -81,7 +81,7 @@ console.log('hmm',hmm)
 	<!-- </table> -->
 
 
-  <h1>My Services</h1>
+  <h1>My Services {hmm.data.length}</h1>
   <table>
 					<thead>
 					<tr>
@@ -99,8 +99,8 @@ console.log('hmm',hmm)
     <td>{td.service}</td>
     <td>{td.port}</td>
     <td>
-      <a href={td.dnsUrl}>DNS</a> | 
-      <a href={td.tailscaleUrl}>IP Tailscale</a></td>
+      <a target="_blank" href={td.dnsUrl}>DNS</a> | 
+      <a target="_blank" href={td.tailscaleUrl}>IP Tailscale</a></td>
   </tr>)
   }
             </tbody>
