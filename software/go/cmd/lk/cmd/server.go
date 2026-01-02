@@ -322,8 +322,6 @@ to quickly create a Cobra application.`,
 			defer cc.Close()
 
 			options := client.StartWorkflowOptions{
-				//ID:        "obsidian-theme-workflow",
-				// ID:        "obsidian-queue-" + uuid.NewString(),
 				ID:        eventType + "-" + uuid.NewString(),
 				TaskQueue: "server",
 			}
