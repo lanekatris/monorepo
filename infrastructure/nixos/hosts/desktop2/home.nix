@@ -26,7 +26,10 @@
       home.packages = with pkgs; [
 
       tree          
+      screenfetch
+      
 	neovim         
+  htop
 obsidian
 spotify
 git
@@ -35,6 +38,7 @@ google-chrome
 
 discord
 
+pkgs.jetbrains.datagrip
 
 
 # ai

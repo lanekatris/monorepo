@@ -49,8 +49,10 @@ def blink(event):
         print(f"you pressed {event.number}")
         try:
             print("Sending HTTP request...")
-            url = "http://192.168.86.100:3333/api/dump/neotrellis_v1?token=XXXXXXXXXX"
-            headers = { "Content-Type": "application/json" }
+            url = "https://api.lkat.io/dump/neotrellis_v1"
+
+            headers = { "Content-Type": "application/json", "CF-Access-Client-Id": "xxx", "CF-Access-Client-Secret": "xxx" }
+
             data = json.dumps({"buttonId": event.number})
 
             response = requests.post(url, headers=headers, data=data)

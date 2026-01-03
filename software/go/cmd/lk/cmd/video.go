@@ -21,7 +21,8 @@ var videoCmd = &cobra.Command{
 		dirPath := args[0]
 		start := time.Now()
 		defer func() {
-			fmt.Println("Total time:", time.Since(start))
+			// fmt.Println("Total time:", time.Since(start))
+			log.Info("Done", "TotalTime", time.Since(start).String())
 		}()
 
 		// Create the target directory if it doesn't exist
@@ -29,7 +30,7 @@ var videoCmd = &cobra.Command{
 			println("Error creating target directory:", err.Error())
 			return
 		}
-		println("Target directory created or already exists:", dirPath)
+		log.Info("Target directory created/skipped")
 
 		// Check if directory is empty
 		files, err := os.ReadDir(dirPath)
@@ -40,34 +41,34 @@ var videoCmd = &cobra.Command{
 
 		// If directory is empty, copy files from GoPro directory
 		if len(files) == 0 {
-			// goproPath := "/run/media/lane/disk/DCIM/101GOPRO" // hero 5  
-			goproPath := "/run/media/lane/disk/DCIM/100GOPRO" // hero 5  
-			println("Directory is empty, copying files from GoPro directory:", goproPath)
+			// goproPath := "/run/media/lane/disk/DCIM/101GOPRO" // hero 5
+			goproPath := "/run/media/lane/disk/DCIM/101GOPRO" // hero 5
+			log.Info("Target directory empty, copying...")
 
 			// Check if GoPro directory exists
 			if _, err := os.Stat(goproPath); os.IsNotExist(err) {
-				println("GoPro directory does not exist:", goproPath)
+				log.Error("GoPro directory does not exist:", goproPath)
 				return
 			}
 
 			// Read GoPro directory contents
 			goproFiles, err := os.ReadDir(goproPath)
 			if err != nil {
-				println("Error reading GoPro directory:", err.Error())
+				log.Error("Error reading GoPro directory:", err.Error())
 				return
 			}
 
 			// Copy all files from GoPro directory
 			for i, file := range goproFiles {
 				if file.IsDir() {
+					log.Debug("Skipped", "directory", file.Name())
 					continue // Skip subdirectories
 				}
-				
 
 				sourcePath := filepath.Join(goproPath, file.Name())
 				destPath := filepath.Join(dirPath, file.Name())
 
-				log.Info("Copying",  "file", file.Name(),"current", i+1, "total", len(goproFiles))
+				log.Info("Copying", "file", file.Name(), "current", i+1, "total", len(goproFiles))
 
 				// Copy file
 				if err := copyFile(sourcePath, destPath); err != nil {
@@ -75,7 +76,7 @@ var videoCmd = &cobra.Command{
 					continue
 				}
 			}
-			println("Finished copying files from GoPro directory")
+			log.Info("Finished copying files from GoPro directory")
 
 			// Re-read directory contents after copying
 			files, err = os.ReadDir(dirPath)
@@ -84,7 +85,7 @@ var videoCmd = &cobra.Command{
 				return
 			}
 		} else {
-			println("Directory is not empty, proceeding with existing files")
+			log.Info("Directory is not empty, proceeding with existing files")
 		}
 
 		// Create nonvideofiles folder if it doesn't exist
@@ -92,9 +93,9 @@ var videoCmd = &cobra.Command{
 			println("Error creating nonvideofiles folder:", err.Error())
 			return
 		}
-		println("nonvideofiles folder created or already exists")
+		log.Info("Directory exists/created", "name", "nonvideofiles")
 
-		// Move non-mp4 files (except file_list.txt) to nonvideofiles folder
+		// Move non-MP4 files (except file_list.txt) to nonvideofiles folder
 		for _, file := range files {
 			if file.IsDir() {
 				continue // Skip directories
@@ -102,7 +103,7 @@ var videoCmd = &cobra.Command{
 
 			fileName := filepath.Base(file.Name())
 
-			// Skip file_list.txt and mp4 files
+			// Skip file_list.txt and MP4 files
 			if fileName == "file_list.txt" || strings.HasSuffix(strings.ToLower(fileName), ".mp4") {
 				continue
 			}
@@ -110,8 +111,8 @@ var videoCmd = &cobra.Command{
 			// Copy the file to nonvideofiles folder
 			sourcePath := filepath.Join(dirPath, fileName)
 			destPath := filepath.Join(dirPath, "nonvideofiles", fileName)
-			println("sourcepath", sourcePath)
-			println("destfile", destPath)
+			// println("sourcepath", sourcePath)
+			// println("destfile", destPath)
 
 			// Copy file
 			err = os.Rename(sourcePath, destPath)
@@ -119,20 +120,10 @@ var videoCmd = &cobra.Command{
 				fmt.Println("Error moving file:", err)
 				return
 			}
-			// if err := copyFile(sourcePath, destPath); err != nil {
-			// 	println("Error copying file", fileName, ":", err.Error())
-			// } else {
-			// 	// Delete original file after successful copy
-			// 	if err := os.Remove(sourcePath); err != nil {
-			// 		println("Error deleting original file", fileName, ":", err.Error())
-			// 	} else {
-			// 		println("Moved:", fileName)
-			// 	}
-			// }
 		}
 
 		// Build file_list.txt with sorted MP4 filenames in concat demuxer format
-		var mp4Files []string
+		var MP4Files []string
 		for _, file := range files {
 			if file.IsDir() {
 				continue
@@ -143,19 +134,19 @@ var videoCmd = &cobra.Command{
 				continue
 			}
 			if strings.HasSuffix(lower, ".mp4") {
-				mp4Files = append(mp4Files, filepath.Base(name))
+				MP4Files = append(MP4Files, filepath.Base(name))
 			}
 		}
-		sort.Strings(mp4Files)
+		sort.Strings(MP4Files)
 
 		var builder strings.Builder
-		for _, name := range mp4Files {
+		for _, name := range MP4Files {
 			escaped := strings.ReplaceAll(name, "'", "'\\''")
 			fmt.Fprintf(&builder, "file '%s'\n", escaped)
 		}
 		listPath := filepath.Join(dirPath, "file_list.txt")
 		if _, statErr := os.Stat(listPath); statErr == nil {
-			println("file_list.txt already exists, skipping generation")
+			log.Info("file_list.txt already exists, skipping generation")
 		} else if os.IsNotExist(statErr) {
 			if err := os.WriteFile(listPath, []byte(builder.String()), 0644); err != nil {
 				println("Error writing file_list.txt:", err.Error())
@@ -167,16 +158,16 @@ var videoCmd = &cobra.Command{
 			return
 		}
 
-		// If output.mp4 does not exist, run ffmpeg to concatenate
-		outputPath := filepath.Join(dirPath, "output.mp4")
+		// If output.MP4 does not exist, run ffmpeg to concatenate
+		outputPath := filepath.Join(dirPath, "output.MP4")
 		if _, err := os.Stat(outputPath); os.IsNotExist(err) {
 
-			log.Info("Creating output.mp4...")
+			log.Info("Creating output.MP4...")
 
 			// Prepare ffmpeg command with progress to stdout
 			_, err := shared.ExecOnHost(shared.ExecOnHostArgs{
 				Name:      "nix-shell",
-				Args:      []string{"-p", "ffmpeg", "--run", "ffmpeg -hide_banner -nostats -progress pipe:1 -f concat -safe 0 -i file_list.txt -c copy output.mp4"},
+				Args:      []string{"-p", "ffmpeg", "--run", "ffmpeg -hide_banner -nostats -progress pipe:1 -f concat -safe 0 -i file_list.txt -c copy output.MP4"},
 				Directory: dirPath,
 			})
 
@@ -184,14 +175,12 @@ var videoCmd = &cobra.Command{
 
 			log.Info("Created", "newFile", outputPath)
 		} else if err == nil {
-			println("output.mp4 already exists, skipping ffmpeg")
+			log.Info("output.MP4 already exists, skipping ffmpeg")
 		} else {
-			println("Error checking output.mp4:", err.Error())
+			println("Error checking output.MP4:", err.Error())
 		}
 	},
 }
-
-//var processCmd = &cobra.Command{Use: ""}
 
 // copyFile copies a file from src to dst
 func copyFile(src, dst string) error {
