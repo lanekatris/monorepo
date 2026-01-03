@@ -23,7 +23,11 @@
 {"PackageIdentifier":  "sharkdp.fd"},
 {"PackageIdentifier":  "OpenJS.NodeJS"},
 {"PackageIdentifier":  "MartinStorsjo.LLVM-MinGW.MSVCRT"},
-{"PackageIdentifier":  "Spotify.Spotify"}
+{"PackageIdentifier":  "Spotify.Spotify"},
+
+{"PackageIdentifier":  "Brave.Brave"},
+{"PackageIdentifier":  "Ollama.Ollama"}
+
 			],
 			"SourceDetails" : 
 			{
