@@ -52,12 +52,13 @@ func WorkflowDumper(ctx workflow.Context, eventName string, data string) error {
 		}
 
 		filename := time.Now().Format("2006-01-02")
-		// p := path.Join("/home/lane/Documents/lkat-vault", filename+".md")
 		p := path.Join("/bigboy/obsidian/config/vault/lkat-vault", filename+".md")
 
 		// Is it there yet?
 		for {
 			log.Info("Running iteration", "path", p)
+			filename = time.Now().Format("2006-01-02")
+			p = path.Join("/bigboy/obsidian/config/vault/lkat-vault", filename+".md")
 
 			if fileExists(p) == false {
 				log.Info("File doesn't exist, sleeping: " + p)

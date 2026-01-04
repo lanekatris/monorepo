@@ -275,6 +275,7 @@ services:
     restart: always
     networks:
       - gitea
+      - shared
     volumes:
       - /bigboy/gitea:/data
       - /etc/timezone:/etc/timezone:ro
