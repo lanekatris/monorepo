@@ -26,7 +26,9 @@
 {"PackageIdentifier":  "Spotify.Spotify"},
 
 {"PackageIdentifier":  "Brave.Brave"},
-{"PackageIdentifier":  "Ollama.Ollama"}
+{"PackageIdentifier":  "Ollama.Ollama"},
+{"PackageIdentifier":  "GnuWin32.Make"}
+
 
 			],
 			"SourceDetails" : 
