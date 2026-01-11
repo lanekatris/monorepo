@@ -3,9 +3,28 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { config, lib, pkgs, ... }:
-# let
-#   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
-# in 
+let
+  # Build the Go program
+  # Using builtins.path to reference the Go source relative to this file
+  # This works in pure evaluation mode (required for flakes)
+  # Path: from infrastructure/nixos/hosts/desktop2/configuration.nix
+  #       up 4 levels to monorepo root, then into software/go
+  lk = pkgs.buildGoModule {
+    pname = "lk";
+    version = "0.1.0";
+    src = lib.cleanSource (builtins.path {
+      path = ../../../../software/go;
+      name = "lk-source";
+    });
+    vendorHash = "sha256-RrJrbxqWg/eg3FwA8mwTC4jRftMrlxlo3eB176eNi7E="; # Let Nix calculate the hash automatically
+    subPackages = [ "cmd/lk" ];
+    modRoot = ".";
+    buildFlags = [ 
+      "-ldflags=-s -w"
+      "-mod=mod"
+    ];
+  };
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -142,7 +161,8 @@ services.flatpak.enable = true;
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    screenfetch # Required by lk-worker service
   ];
 
   programs.ssh.startAgent = false;
@@ -160,6 +180,54 @@ services.flatpak.enable = true;
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+
+  # LK Go program daemon service
+  systemd.services.lk-worker = {
+    description = "LK Temporal Worker Service";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+    
+    # Make screenfetch and other system binaries available
+    path = with pkgs; [
+      screenfetch
+      coreutils
+      findutils
+      gnugrep
+      gnused
+      systemd
+    ];
+    
+    serviceConfig = {
+      Type = "simple";
+      User = "lane";
+      Group = "users";
+      ExecStart = "${lk}/bin/lk worker";
+      Restart = "always";
+      RestartSec = 5;
+      StandardOutput = "journal";
+      StandardError = "journal";
+      
+      # Set PATH to include NixOS system paths
+      # This ensures system binaries like screenfetch are found
+      Environment = [
+        "PATH=/run/wrappers/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/bin:/bin"
+      ];
+      
+      # Environment variables (add as needed)
+      # Environment = [
+      #   "TEMPORAL_ADDRESS=100.97.2.90:7233"
+      #   "TEMPORAL_QUEUE_NAME=server"
+      # ];
+      
+      # Working directory
+      WorkingDirectory = "/home/lane";
+      
+      # Security settings
+      PrivateTmp = false; # Allow access to /tmp if needed
+      ProtectSystem = false; # Allow access to system directories if needed
+      ProtectHome = false; # Allow access to home directory for config file
+    };
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
