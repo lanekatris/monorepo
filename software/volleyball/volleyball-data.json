@@ -1,0 +1,329 @@
+{
+  "leagues": [
+    {
+      "name": "Parkersburg - Pro",
+      "slug": "parkersburg-pro",
+      "seasons": [
+        {
+          "name": "Spring 2026",
+          "description": "Our first involvement in the pro league",
+          "games": []
+        }
+      ]
+    },
+    {
+      "name": "Parkersburg - Rec",
+      "slug": "parkersburg-rec",
+      "seasons": [
+        {
+          "name": "Spring 2026",
+          "description": "Let's see how far we get this season.",
+          "games":[]
+        },
+        {
+          "name": "Winter 2025",
+          "description": "This is our second season playing in this league. Below is our game history.",
+          "games": [
+            {
+              "version": "v1",
+              "date": "2025-09-29 6pm",
+              "opponent": "We Showed Up",
+              "win": 2,
+              "loss": 1,
+              "videoUrl": null,
+              "dinner": "Flannigans"
+            },
+            {
+              "version": "v1",
+              "date": "2025-09-30 6pm",
+              "opponent": "Can You Dig It",
+              "win": 3,
+              "loss": 0,
+              "videoUrl": null,
+              "dinner": "Cheddars"
+            },
+            {
+              "version": "v1",
+              "date": "2025-10-06 7pm",
+              "opponent": "League Splitters",
+              "win": 1,
+              "loss": 2,
+              "videoUrl": null,
+              "dinner": "Tokyo"
+            },
+            {
+              "version": "v1",
+              "date": "2025-10-20 6pm",
+              "opponent": "Chris Long",
+              "win": 3,
+              "loss": 0,
+              "videoUrl": "https://www.youtube.com/watch?v=HdQ0kdo2jcY",
+              "dinner": "Boat House"
+            },
+            {
+              "version": "v1",
+              "date": "2025-10-28 6pm",
+              "opponent": "Prime",
+              "win": 3,
+              "loss": 0,
+              "videoUrl": "https://youtu.be/STGxfZ27jDk",
+              "dinner": "Tokyo"
+            },
+            {
+              "version": "v1",
+              "date": "2025-11-03 8pm",
+              "opponent": "We Showed Up",
+              "win": 0,
+              "loss": 3,
+              "videoUrl": null,
+              "dinner": "Gran Ranchero"
+            },
+            {
+              "version": "v1",
+              "date": "2025-11-04 6pm",
+              "opponent": "Can You Dig It",
+              "win": 3,
+              "loss": 0,
+              "videoUrl": "https://youtu.be/ynC-RBhkFdA",
+              "dinner": "Cheddars"
+            },
+            {
+              "version": "v1",
+              "date": "2025-11-11 6pm",
+              "opponent": "League Splitters",
+              "win": 2,
+              "loss": 0,
+              "videoUrl": "https://youtu.be/QC79F_Hy2qU",
+              "dinner": "Tokyo"
+            },
+            {
+              "version": "v1",
+              "date": "2025-11-17 8pm",
+              "opponent": "We Showed Up",
+              "win": 0,
+              "loss": 2,
+              "videoUrl": "https://youtu.be/2j0hbBhIrMc",
+              "dinner": "Firehouse"
+            }
+          ]
+        },
+        {
+          "name": "Spring 2025",
+          "description": "This was our first season. We didn’t know all the rules.",
+          "games": [
+            {
+              "version": "v1",
+              "date": "2025-01-27 6pm",
+              "opponent": "We Showed Up",
+              "win": 1,
+              "loss": 2,
+              "videoUrl": null,
+              "dinner": "Gran Ranchero"
+            },
+            {
+              "version": "v1",
+              "date": "2025-01-27 7pm",
+              "opponent": "Prime Time",
+              "win": 1,
+              "loss": 2,
+              "videoUrl": null,
+              "dinner": "Gran Ranchero"
+            },
+            {
+              "version": "v1",
+              "date": "2025-02-11 6pm",
+              "opponent": "Perry & Associates",
+              "win": 1,
+              "loss": 2,
+              "videoUrl": null,
+              "dinner": "Cheddars"
+            },
+            {
+              "version": "v1",
+              "date": "2025-02-25 7pm",
+              "opponent": "South Parkersburg Baptist Church",
+              "win": 1,
+              "loss": 2,
+              "videoUrl": null,
+              "dinner": "Buffalo Wild Wings"
+            },
+            {
+              "version": "v1",
+              "date": "2025-02-25 8pm",
+              "opponent": "League Splitters",
+              "win": 2,
+              "loss": 1,
+              "videoUrl": null,
+              "dinner": "Buffalo Wild Wings"
+            },
+            {
+              "version": "v1",
+              "date": "2025-03-04 6pm",
+              "opponent": "Prime Time",
+              "win": 1,
+              "loss": 2,
+              "videoUrl": null,
+              "dinner": null
+            },
+            {
+              "version": "v1",
+              "date": "2025-03-11 6pm",
+              "opponent": "We Showed Up",
+              "win": 1,
+              "loss": 2,
+              "videoUrl": null,
+              "dinner": "Star of India"
+            },
+            {
+              "version": "v1",
+              "date": "2025-03-25 6pm",
+              "opponent": "South Parkersburg Baptist Church",
+              "win": 3,
+              "loss": 0,
+              "videoUrl": null,
+              "dinner": "Tokyo"
+            },
+            {
+              "version": "v1",
+              "date": "2025-03-25 7pm",
+              "opponent": "Perry & Associates",
+              "win": 2,
+              "loss": 1,
+              "videoUrl": null,
+              "dinner": "Tokyo"
+            },
+            {
+              "version": "v1",
+              "date": "2025-04-08 7pm",
+              "opponent": "Prime Time",
+              "win": 1,
+              "loss": 2,
+              "videoUrl": null,
+              "dinner": "Tokyo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ripley",
+      "slug": "ripley",
+      "description": "We have been playing for a few years from outside sand to an indoors gym.",
+      "seasons": [
+        {
+          "name": "All",
+          "games": [
+            {
+              "version": "v1",
+              "date": "2025-12-29",
+              "videoUrl": null,
+              "note": null
+            },
+            {
+              "version": "v1",
+              "date": "2025-12-22",
+              "videoUrl": "https://youtu.be/VuiwpfVDOcQ",
+              "note": null
+            },
+            {
+              "version": "v1",
+              "date": "2025-12-15",
+              "videoUrl": null,
+              "note": null
+            },
+            {
+              "version": "v1",
+              "date": "2025-12-08",
+              "videoUrl": "https://youtu.be/UtxvlHVsh20",
+              "note": null
+            },
+            {
+              "version": "v1",
+              "date": "2025-12-01",
+              "videoUrl": "https://youtu.be/G60GsxDwKuo",
+              "note": null
+            },
+            {
+              "version": "v1",
+              "date": "2025-11-24",
+              "videoUrl": "https://youtu.be/1qBa1hRUVUg",
+              "note": null
+            },
+            {
+              "version": "v1",
+              "date": "2025-11-17",
+              "videoUrl": null,
+              "note": null
+            },
+            {
+              "version": "v1",
+              "date": "2025-11-10",
+              "videoUrl": "https://youtu.be/bWvTqprDJGc",
+              "note": null
+            },
+            {
+              "version": "v1",
+              "date": "2025-11-03",
+              "videoUrl": null,
+              "note": "Cancelled due to Parkersburg league"
+            },
+            {
+              "version": "v1",
+              "date": "2025-10-28",
+              "videoUrl": "https://youtu.be/F-PTII1d_eg",
+              "note": null
+            },
+            {
+              "version": "v1",
+              "date": "2025-10-20",
+              "videoUrl": null,
+              "note": "Cancelled due to Parkersburg league"
+            },
+            {
+              "version": "v1",
+              "date": "2025-10-13",
+              "videoUrl": "https://youtu.be/al1BXm7igYs",
+              "note": null
+            },
+            {
+              "version": "v1",
+              "date": "2025-10-06",
+              "videoUrl": null,
+              "note": "Cancelled due to Parkersburg league"
+            },
+            {
+              "version": "v1",
+              "date": "2025-09-29",
+              "videoUrl": null,
+              "note": "Cancelled due to Parkersburg league"
+            },
+            {
+              "version": "v1",
+              "date": "2025-09-22",
+              "videoUrl": "https://youtu.be/IgxtyXCBkxo",
+              "note": null
+            },
+            {
+              "version": "v1",
+              "date": "2025-09-15",
+              "videoUrl": "https://youtu.be/XaOS_9rLLfc",
+              "note": null
+            },
+            {
+              "version": "v1",
+              "date": "2025-09-08",
+              "videoUrl": "https://youtu.be/4RVjE3_k0Mc",
+              "note": null
+            },
+            {
+              "version": "v1",
+              "date": "2025-09-01",
+              "videoUrl": null,
+              "note": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

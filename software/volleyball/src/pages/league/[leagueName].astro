@@ -1,0 +1,144 @@
+---
+import Layout from '../../layouts/default.astro';
+import volleyballData from '../../../volleyball-data.json';
+
+// Get the league name from the URL parameter
+export async function getStaticPaths() {
+	return volleyballData.leagues.map((league) => {
+		return {
+			params: { leagueName: league.slug },
+			props: { league },
+		};
+	});
+}
+
+interface Props {
+	league: typeof volleyballData.leagues[0];
+}
+
+const { league } = Astro.props;
+
+// Helper function to determine if a game has Parkersburg-style properties
+function isParkersburgGame(game: any): boolean {
+	return 'opponent' in game && 'win' in game && 'loss' in game;
+}
+
+// Calculate win percentage for a season
+function calculateWinPercentage(games: any[]): { wins: number; total: number; percentage: number } | null {
+	if (games.length === 0) return null;
+	
+	// Check if this is a Parkersburg-style game
+	if (!isParkersburgGame(games[0])) return null;
+	
+	let totalWins = 0;
+	let totalGames = 0;
+	
+	games.forEach((game) => {
+		if ('win' in game && 'loss' in game) {
+			totalWins += game.win;
+			totalGames += game.win + game.loss;
+		}
+	});
+	
+	if (totalGames === 0) return null;
+	
+	const percentage = Math.round((totalWins / totalGames) * 100);
+	
+	return { wins: totalWins, total: totalGames, percentage };
+}
+
+---
+
+<Layout>
+	<h1>{league.name} League</h1>
+
+	{league.description && (
+		<article>
+			<p>{league.description}</p>
+		</article>
+	)}
+
+	{league.seasons.map((season) => (
+		<div>
+			<h3>{season.name} Games</h3>
+			
+			{season.description && (
+				<article>
+					<p>{season.description}</p>
+				</article>
+			)}
+
+
+			{(() => {
+				const stats = calculateWinPercentage(season.games);
+				return stats ? (
+					<blockquote>
+						{stats.percentage}% Win Percentage - {stats.wins} of {stats.total} won
+					</blockquote>
+				) : null;
+			})()}
+
+			{season.games.length === 0 ? (
+				<p>No games yet. Coming soon.</p>
+			) : isParkersburgGame(season.games[0]) ? (
+				// Parkersburg-style table with opponent, win/loss, video, dinner
+				<table>
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Opponent</th>
+							<th>Win/Loss</th>
+							<th>Video</th>
+							<th>Dinner</th>
+						</tr>
+					</thead>
+					<tbody>
+						{season.games.map((game) => (
+							<tr >
+								<td>{game.date}</td>
+								<td>{game.opponent}</td>
+								<td>{game.win}–{game.loss}</td>
+								<td>
+									{game.videoUrl ? (
+										<a href={game.videoUrl}>Youtube</a>
+									) : (
+										'N/A'
+									)}
+								</td>
+								<td>{game.dinner || ''}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			) : (
+				// Ripley-style table with just date and video
+				<table>
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Video</th>
+						</tr>
+					</thead>
+					<tbody>
+						{season.games.map((game) => (
+							<tr >
+								<td>{game.date}</td>
+								<td>
+									{game.note ? (
+										game.note
+									) : game.videoUrl ? (
+										<a href={game.videoUrl}>Youtube</a>
+									) : (
+										'N/A'
+									)}
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			)}
+			
+      <!-- <hr /> -->
+		</div>
+	))}
+</Layout>

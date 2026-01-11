@@ -9,6 +9,11 @@
 		<title>WV Volleyball</title>
 	</head>
 	<body>
+		{Astro.url.pathname !== '/' && (
+			<nav>
+				<a href="/">Home</a>
+			</nav>
+		)}
     <slot/>
 	</body>
 </html>

@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/default.astro';
+import volleyballData from '../../volleyball-data.json';
+import { Image } from 'astro:assets';
+import spikeOverflowImage from '../assets/spike-overflow.png';
+---
+
+<Layout>
+	<h1>WV Volleyball</h1>
+	
+	<p>
+		<Image src={spikeOverflowImage} alt="Spike Overflow logo" width={300} />
+	</p>
+	
+	<p>We have {volleyballData.leagues.length} leagues we play in:</p>
+	
+	<ul>
+		{volleyballData.leagues.map((league) => (
+			<li>
+				<a href={`/league/${league.slug}`}>
+					{league.name}
+				</a>
+			</li>
+		))}
+	</ul>
+	
+	<p>Some team name ideas:</p>
+	<ul>
+		<li><a href="https://alwaysin.team">Always In</a></li>
+		<li><a href="https://spikeoverflow.dev">Spike Overflow</a></li>
+		<li><a href="https://ripcity.team">Rip City</a></li>
+	</ul>
+</Layout>
