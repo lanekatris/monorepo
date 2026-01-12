@@ -17,6 +17,7 @@ interface Props {
 }
 
 const { league } = Astro.props;
+const pageTitle = `${league.name} League - WV Volleyball`;
 
 // Helper function to determine if a game has Parkersburg-style properties
 function isParkersburgGame(game: any): boolean {
@@ -49,7 +50,7 @@ function calculateWinPercentage(games: any[]): { wins: number; total: number; pe
 
 ---
 
-<Layout>
+<Layout title={pageTitle}>
 	<h1>{league.name} League</h1>
 
 	{league.description && (
