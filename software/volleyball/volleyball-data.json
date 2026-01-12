@@ -215,6 +215,12 @@
           "games": [
             {
               "version": "v1",
+              "date": "2026-01-05",
+              "videoUrl": "https://youtu.be/2vaaJt3fklM",
+              "note": null
+            },
+            {
+              "version": "v1",
               "date": "2025-12-29",
               "videoUrl": null,
               "note": null
