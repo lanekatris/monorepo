@@ -7,7 +7,96 @@
         {
           "name": "Spring 2026",
           "description": "Our first involvement in the pro league",
-          "games": []
+          "games": [
+            {
+    "version": "v1",
+    "season": "winter 2026",
+    "league": "Parkersburg - Competitive",
+    "date": "2026-01-19 8pm",
+    "opponent": "Spike Wazowski",
+    "win": null,
+    "loss": null,
+    "videoUrl": null,
+    "dinner": null
+  },
+  {
+    "version": "v1",
+    "season": "winter 2026",
+    "league": "Parkersburg - Competitive",
+    "date": "2026-02-02 8pm",
+    "opponent": "Dig It",
+    "win": null,
+    "loss": null,
+    "videoUrl": null,
+    "dinner": null
+  },
+  {
+    "version": "v1",
+    "season": "winter 2026",
+    "league": "Parkersburg - Competitive",
+    "date": "2026-02-09 8pm",
+    "opponent": "Cross Spikers",
+    "win": null,
+    "loss": null,
+    "videoUrl": null,
+    "dinner": null
+  },
+  {
+    "version": "v1",
+    "season": "winter 2026",
+    "league": "Parkersburg - Competitive",
+    "date": "2026-02-17 8pm",
+    "opponent": "Somebody",
+    "win": null,
+    "loss": null,
+    "videoUrl": null,
+    "dinner": null
+  },
+  {
+    "version": "v1",
+    "season": "winter 2026",
+    "league": "Parkersburg - Competitive",
+    "date": "2026-03-02 8pm",
+    "opponent": "Honey Badgers",
+    "win": null,
+    "loss": null,
+    "videoUrl": null,
+    "dinner": null
+  },
+  {
+    "version": "v1",
+    "season": "winter 2026",
+    "league": "Parkersburg - Competitive",
+    "date": "2026-03-10 8pm",
+    "opponent": "Hughes Your Daddy",
+    "win": null,
+    "loss": null,
+    "videoUrl": null,
+    "dinner": null
+  },
+  {
+    "version": "v1",
+    "season": "winter 2026",
+    "league": "Parkersburg - Competitive",
+    "date": "2026-03-23 8pm",
+    "opponent": "Cross Spikers",
+    "win": null,
+    "loss": null,
+    "videoUrl": null,
+    "dinner": null
+  },
+  {
+    "version": "v1",
+    "season": "winter 2026",
+    "league": "Parkersburg - Competitive",
+    "date": "2026-03-24 8pm",
+    "opponent": "Spike Wazowski",
+    "win": null,
+    "loss": null,
+    "videoUrl": null,
+    "dinner": null
+  }
+          ]
         }
       ]
     },
@@ -18,7 +107,96 @@
         {
           "name": "Spring 2026",
           "description": "Let's see how far we get this season.",
-          "games":[]
+          "games":[
+              {
+    "version": "v1",
+    "season": "winter 2026",
+    "league": "Parkersburg - Rec",
+    "date": "2026-01-20 7pm",
+    "opponent": "Prime Time",
+    "win": null,
+    "loss": null,
+    "videoUrl": null,
+    "dinner": null
+  },
+  {
+    "version": "v1",
+    "season": "winter 2026",
+    "league": "Parkersburg - Rec",
+    "date": "2026-01-27 6pm",
+    "opponent": "South Parkersburg Baptist Church",
+    "win": null,
+    "loss": null,
+    "videoUrl": null,
+    "dinner": null
+  },
+  {
+    "version": "v1",
+    "season": "winter 2026",
+    "league": "Parkersburg - Rec",
+    "date": "2026-01-27 7pm",
+    "opponent": "Mission Unblockable",
+    "win": null,
+    "loss": null,
+    "videoUrl": null,
+    "dinner": null
+  },
+  {
+    "version": "v1",
+    "season": "winter 2026",
+    "league": "Parkersburg - Rec",
+    "date": "2026-02-10 7pm",
+    "opponent": "Perry & Associates",
+    "win": null,
+    "loss": null,
+    "videoUrl": null,
+    "dinner": null
+  },
+  {
+    "version": "v1",
+    "season": "winter 2026",
+    "league": "Parkersburg - Rec",
+    "date": "2026-02-10 8pm",
+    "opponent": "League Splitters",
+    "win": null,
+    "loss": null,
+    "videoUrl": null,
+    "dinner": null
+  },
+  {
+    "version": "v1",
+    "season": "winter 2026",
+    "league": "Parkersburg - Rec",
+    "date": "2026-03-03 8pm",
+    "opponent": "Average Joes",
+    "win": null,
+    "loss": null,
+    "videoUrl": null,
+    "dinner": null
+  },
+  {
+    "version": "v1",
+    "season": "winter 2026",
+    "league": "Parkersburg - Rec",
+    "date": "2026-03-10 6pm",
+    "opponent": "We Showed Up",
+    "win": null,
+    "loss": null,
+    "videoUrl": null,
+    "dinner": null
+  },
+  {
+    "version": "v1",
+    "season": "winter 2026",
+    "league": "Parkersburg - Rec",
+    "date": "2026-03-24 7pm",
+    "opponent": "Prime Time",
+    "win": null,
+    "loss": null,
+    "videoUrl": null,
+    "dinner": null
+  }
+          ]
         },
         {
           "name": "Winter 2025",
