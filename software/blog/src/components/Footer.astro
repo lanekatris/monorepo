@@ -11,7 +11,13 @@ const shortHash = childProcess.execSync('git rev-parse --short HEAD').toString()
 ---
 
 <!--<footer>--><!--	&lt;!&ndash;<hr />&ndash;&gt;--><!--	&lt;!&ndash;<div><a href="#">Top</a></div>&ndash;&gt;--><!--	&lt;!&ndash;<div>&ndash;&gt;--><!--	&lt;!&ndash;	&copy; {today.getFullYear()} Lane Katris&ndash;&gt;--><!--	&lt;!&ndash;	<a href="mailto:lanekatris@gmail.com">&ndash;&gt;--><!--	&lt;!&ndash;		<Image src={badgeGmail} loading="eager" alt="Gmail" />&ndash;&gt;--><!--	&lt;!&ndash;	</a>&ndash;&gt;--><!--	&lt;!&ndash;</div>&ndash;&gt;--><!--	&lt;!&ndash;<div>&ndash;&gt;--><!--	&lt;!&ndash;	Version: <a href={`https://github.com/lanekatris/monorepo/commit/${hash}`}>{shortHash}</a> Last Published:&ndash;&gt;--><!--	&lt;!&ndash;	<code&ndash;&gt;--><!--	&lt;!&ndash;		>{today.toLocaleDateString()}&ndash;&gt;--><!--	&lt;!&ndash;		{today.toLocaleTimeString()}</code&ndash;&gt;--><!--	&lt;!&ndash;	>&ndash;&gt;--><!--	&lt;!&ndash;</div>&ndash;&gt;--><!--	&lt;!&ndash;<div>&ndash;&gt;--><!--	&lt;!&ndash;	<a href="https://terminalcss.xyz/" target="_blank">TerminalXYZ Theme</a>&ndash;&gt;--><!--	&lt;!&ndash;</div>&ndash;&gt;--><!--	&lt;!&ndash;<div>&ndash;&gt;--><!--	&lt;!&ndash;	<a href="https://astro.build"&ndash;&gt;--><!--	&lt;!&ndash;		><img&ndash;&gt;--><!--	&lt;!&ndash;			src="/built-with-astro.svg"&ndash;&gt;--><!--	&lt;!&ndash;			loading="eager"&ndash;&gt;--><!--	&lt;!&ndash;			alt="Built with Astro"&ndash;&gt;--><!--	&lt;!&ndash;			width="120"&ndash;&gt;--><!--	&lt;!&ndash;			height="20"&ndash;&gt;--><!--	&lt;!&ndash;		/></a&ndash;&gt;--><!--	&lt;!&ndash;	>&ndash;&gt;--><!--	&lt;!&ndash;</div>&ndash;&gt;--><!--	&lt;!&ndash;<div>&ndash;&gt;--><!--	&lt;!&ndash;	&lt;!&ndash;https://stackoverflow.com/questions/55787167/how-to-change-image-source-based-on-css-prefers-color-scheme&ndash;&gt;&ndash;&gt;--><!--	&lt;!&ndash;	<a href="https://notbyai.fyi" target="_blank" rel="noopener noreferrer">&ndash;&gt;--><!--	&lt;!&ndash;		<picture>&ndash;&gt;--><!--	&lt;!&ndash;			<source srcset={byHumanDark.src} media="(prefers-color-scheme: dark)" />&ndash;&gt;--><!--	&lt;!&ndash;			<Image src={byHuman} loading="lazy" alt="Written by a human" />&ndash;&gt;--><!--	&lt;!&ndash;		</picture>&ndash;&gt;--><!--	&lt;!&ndash;	</a>&ndash;&gt;--><!--	&lt;!&ndash;</div>&ndash;&gt;--><!--</footer>&lt;!&ndash;<style>&ndash;&gt;&lt;!&ndash;	footer {&ndash;&gt;&lt;!&ndash;		padding-bottom: 12em;&ndash;&gt;&lt;!&ndash;	}&ndash;&gt;&lt;!&ndash;</style>&ndash;&gt;-->
-<footer>🕸💍<a href="https://levibutcher.com/">-></a>
+<footer>
+  <div title="Webring">
+
+    <a href="https://isaacvidrine.com"><-</a> 🕸💍<a href="https://levibutcher.com/">-></a> 
+<a href="https://afreeland.com/">-></a>
+
+  </div>
 
     <br/>
     Yes, the CSS is either non-existent, ugly, or changes all the time... <a href="/colophon">colophon</a>
@@ -19,6 +25,7 @@ const shortHash = childProcess.execSync('git rev-parse --short HEAD').toString()
 
 <style>
 	footer {
-		text-align: center;
+    text-align: center;
+    margin-bottom: 1em;
 	}
 </style>

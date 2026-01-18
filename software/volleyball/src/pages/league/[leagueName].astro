@@ -81,6 +81,23 @@ function calculateWinPercentage(games: any[]): { wins: number; total: number; pe
 				) : null;
 			})()}
 
+      {season.calendar && 
+
+
+      <div>Add Calendar 📅:
+      <!-- <a href={season.calendar} download="schedule.ics">Add to your calendar</a> -->
+      <a  href={`webcal://${season.calendar}`}>
+  🍎 Apple
+</a>
+
+|
+<!-- Android / Google -->
+<a href={`https://${season.calendar}`} download="schedule.ics">
+  🤖 Android
+</a>
+</div>
+      } 
+
 			{season.games.length === 0 ? (
 				<p>No games yet. Coming soon.</p>
 			) : isParkersburgGame(season.games[0]) ? (
@@ -141,22 +158,6 @@ function calculateWinPercentage(games: any[]): { wins: number; total: number; pe
 				</table>
 			)}
 			
-      {season.calendar && 
-
-
-      <div>Add Calendar 📅:
-      <!-- <a href={season.calendar} download="schedule.ics">Add to your calendar</a> -->
-      <a  href={`webcal://${season.calendar}`}>
-  🍎 Apple
-</a>
-
-|
-<!-- Android / Google -->
-<a href={`https://${season.calendar}`} download="schedule.ics">
-  🤖 Android
-</a>
-</div>
-      } 
 		</div>
 	))}
 </Layout>
