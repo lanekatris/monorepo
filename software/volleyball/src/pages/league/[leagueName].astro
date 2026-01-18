@@ -63,11 +63,13 @@ function calculateWinPercentage(games: any[]): { wins: number; total: number; pe
 		<div>
 			<h3>{season.name} Games</h3>
 			
+
 			{season.description && (
 				<article>
 					<p>{season.description}</p>
 				</article>
 			)}
+
 
 
 			{(() => {
@@ -139,7 +141,22 @@ function calculateWinPercentage(games: any[]): { wins: number; total: number; pe
 				</table>
 			)}
 			
-      <!-- <hr /> -->
+      {season.calendar && 
+
+
+      <div>Add Calendar 📅:
+      <!-- <a href={season.calendar} download="schedule.ics">Add to your calendar</a> -->
+      <a  href={`webcal://${season.calendar}`}>
+  🍎 Apple
+</a>
+
+|
+<!-- Android / Google -->
+<a href={`https://${season.calendar}`} download="schedule.ics">
+  🤖 Android
+</a>
+</div>
+      } 
 		</div>
 	))}
 </Layout>

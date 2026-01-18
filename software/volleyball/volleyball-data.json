@@ -7,6 +7,7 @@
         {
           "name": "Spring 2026",
           "description": "Our first involvement in the pro league",
+          "calendar":"data.lanekatris.com/volleyball/parkersburg-pro-spring-2026-v1.ics",
           "games": [
             {
     "version": "v1",
@@ -107,6 +108,7 @@
         {
           "name": "Spring 2026",
           "description": "Let's see how far we get this season.",
+          "calendar":"data.lanekatris.com/volleyball/parkersburg-rec-spring-2026-v1.ics",
           "games":[
               {
     "version": "v1",
@@ -201,6 +203,7 @@
         {
           "name": "Winter 2025",
           "description": "This is our second season playing in this league. Below is our game history.",
+          "calendar":"data.lanekatris.com/volleyball/parkersburg-rec-winter-2025-v1.ics",
           "games": [
             {
               "version": "v1",
@@ -288,6 +291,7 @@
         {
           "name": "Spring 2025",
           "description": "This was our first season. We didn’t know all the rules.",
+          "calendar":"data.lanekatris.com/volleyball/parkersburg-rec-spring-2025-v1.ics",
           "games": [
             {
               "version": "v1",
@@ -391,6 +395,7 @@
         {
           "name": "All",
 
+          "calendar":"data.lanekatris.com/volleyball/ripley-all-v1.ics",
           "games": [
   {
     "version": "v1",

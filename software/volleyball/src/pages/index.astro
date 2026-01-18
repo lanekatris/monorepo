@@ -11,8 +11,13 @@ import spikeOverflowImage from '../assets/spike-overflow.png';
 	<p>
 		<Image src={spikeOverflowImage} alt="Spike Overflow logo" width={300} />
 	</p>
-	
-	<p>We have {volleyballData.leagues.length} leagues we play in:</p>
+
+  <article>
+  <p>Click the leagues below to see when we play. You can add to your calendar as well.
+  <br/>
+We have {volleyballData.leagues.length} leagues we play in:
+  </p>
+
 	
 	<ul>
 		{volleyballData.leagues.map((league) => (
@@ -23,11 +28,17 @@ import spikeOverflowImage from '../assets/spike-overflow.png';
 			</li>
 		))}
 	</ul>
+  </article>
 	
-	<p>Some team name ideas:</p>
+  <article>
+  <p>
+This website is hosted at the URLs below.
+<br/>
+  Some team name ideas:</p>
 	<ul>
 		<li><a href="https://alwaysin.team">Always In</a></li>
 		<li><a href="https://spikeoverflow.dev">Spike Overflow</a></li>
 		<li><a href="https://ripcity.team">Rip City</a></li>
 	</ul>
+  </article>
 </Layout>
