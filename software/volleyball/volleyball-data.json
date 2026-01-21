@@ -116,10 +116,10 @@
     "league": "Parkersburg - Rec",
     "date": "2026-01-20 7pm",
     "opponent": "Prime Time",
-    "win": null,
-    "loss": null,
-    "videoUrl": null,
-    "dinner": null
+    "win": 3,
+    "loss": 0,
+    "videoUrl": "https://youtu.be/uZaUYdhTv6k",
+    "dinner": "Texas Roadhouse"
   },
   {
     "version": "v1",
@@ -397,6 +397,15 @@
 
           "calendar":"data.lanekatris.com/volleyball/ripley-all-v1.ics",
           "games": [
+
+
+  {
+    "version": "v1",
+    "date": "2026-01-19 6pm",
+    "videoUrl": "https://youtu.be/sd8DSIdhN70",
+    "note": null
+  },
+
   {
     "version": "v1",
     "date": "2026-01-12 6pm",
