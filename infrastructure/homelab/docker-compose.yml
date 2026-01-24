@@ -283,6 +283,8 @@ services:
     ports:
       - "3000:3000"
       - "222:22"
+    labels:
+      - internal.url: "https://audio.loonison.com"
 
   metabase:
     restart: always
