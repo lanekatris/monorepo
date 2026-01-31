@@ -117,15 +117,13 @@ function calculateWinPercentage(games: any[]): { wins: number; total: number; pe
 							<tr >
 								<td>{game.date}</td>
 								<td>{game.opponent}</td>
-								<td>{game.win}–{game.loss}{game.note || ''}</td>
+								<td>{game.win}–{game.loss}</td>
 								<td>
 									{game.videoUrl ? (
 										<a href={game.videoUrl}>Youtube</a>
-									) : (
-										'N/A'
-									)}
+									) : ''}
 								</td>
-                <td>{game.dinner || ''}</td>
+                <td>{game.dinner || ''}{game.note || ''}</td>
 							</tr>
 						))}
 					</tbody>
@@ -149,7 +147,7 @@ function calculateWinPercentage(games: any[]): { wins: number; total: number; pe
 									) : game.videoUrl ? (
 										<a href={game.videoUrl}>Youtube</a>
 									) : (
-										'N/A'
+										''
 									)}
 								</td>
 							</tr>
