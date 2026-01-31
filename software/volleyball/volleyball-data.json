@@ -19,7 +19,7 @@
     "loss": null,
     "videoUrl": null,
     "dinner": "N/A",
-    "note": "Didn't Play"
+    "note": "Didn't play as it was on a Monday"
   },
   {
     "version": "v1",
@@ -131,7 +131,8 @@
     "win": null,
     "loss": null,
     "videoUrl": null,
-    "dinner": null
+    "dinner": null,
+    "note": "Cancelled due to weather"
   },
   {
     "version": "v1",
@@ -142,7 +143,8 @@
     "win": null,
     "loss": null,
     "videoUrl": null,
-    "dinner": null
+    "dinner": null,
+    "note": "Cancelled due to weather"
   },
   {
     "version": "v1",
@@ -399,6 +401,12 @@
           "calendar":"data.lanekatris.com/volleyball/ripley-all-v1.ics",
           "games": [
 
+  {
+    "version": "v1",
+    "date": "2026-01-26 6pm",
+    "videoUrl": null,
+    "note": "Cancelled due to weather"
+  },
 
   {
     "version": "v1",
