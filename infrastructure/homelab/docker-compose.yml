@@ -266,6 +266,8 @@ services:
       - /bigboy/audiobookshelf/metadata:/metadata
     environment:
       - TZ=America/New_York
+    labels:
+      - internal.url: "https://audio.loonison.com"
   gitea:
     image: docker.gitea.com/gitea:1.23.5
     container_name: gitea
@@ -283,8 +285,6 @@ services:
     ports:
       - "3000:3000"
       - "222:22"
-    labels:
-      - internal.url: "https://audio.loonison.com"
 
   metabase:
     restart: always

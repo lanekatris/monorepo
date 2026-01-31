@@ -13,7 +13,7 @@
       "ctimeMs": 1742176859113,
       "birthtimeMs": 1742176859113,
       "addedAt": 1742176859122,
-      "updatedAt": 1768712401769,
+      "updatedAt": 1769835602372,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -40,16 +40,16 @@
         },
         "coverPath": "/podcasts/The Joe Rogan Experience/cover.jpg",
         "tags": [],
-        "numEpisodes": 157,
+        "numEpisodes": 163,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712401423,
+        "lastEpisodeCheck": 1769835601984,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 21405471430
+        "size": 22221138996
       },
-      "numFiles": 158,
-      "size": 21405471430
+      "numFiles": 164,
+      "size": 22221138996
     },
     {
       "id": "e3e0f59d-74de-4c67-9a07-6307a778c5bd",
@@ -64,7 +64,7 @@
       "ctimeMs": 1742177455764,
       "birthtimeMs": 1742177455764,
       "addedAt": 1742177455834,
-      "updatedAt": 1768712404931,
+      "updatedAt": 1769835617016,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -91,16 +91,16 @@
         },
         "coverPath": "/podcasts/Changelog Master Feed/cover.jpg",
         "tags": [],
-        "numEpisodes": 131,
+        "numEpisodes": 137,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712404383,
+        "lastEpisodeCheck": 1769835604612,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 9679106663
+        "size": 10158047141
       },
-      "numFiles": 132,
-      "size": 9679106663
+      "numFiles": 138,
+      "size": 10158047141
     },
     {
       "id": "fc6275ef-3c2d-4ca7-bde9-c51c08af43ee",
@@ -115,7 +115,7 @@
       "ctimeMs": 1742212558731,
       "birthtimeMs": 1742212558731,
       "addedAt": 1742212558743,
-      "updatedAt": 1768712412910,
+      "updatedAt": 1769835606306,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -143,16 +143,16 @@
         },
         "coverPath": "/podcasts/Cup o' Go/cover.jpg",
         "tags": [],
-        "numEpisodes": 39,
+        "numEpisodes": 41,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712405952,
+        "lastEpisodeCheck": 1769835605588,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 1751713700
+        "size": 1845606747
       },
-      "numFiles": 40,
-      "size": 1751713700
+      "numFiles": 42,
+      "size": 1845606747
     },
     {
       "id": "4dde5cce-1673-4fdb-aff7-1316281c67f3",
@@ -167,7 +167,7 @@
       "ctimeMs": 1742213203514,
       "birthtimeMs": 1742213203514,
       "addedAt": 1742213203519,
-      "updatedAt": 1768712407829,
+      "updatedAt": 1769835607347,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -197,16 +197,16 @@
         },
         "coverPath": "/podcasts/First Date with Lauren Compton/cover.jpg",
         "tags": [],
-        "numEpisodes": 45,
+        "numEpisodes": 47,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712407328,
+        "lastEpisodeCheck": 1769835606966,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 2493258268
+        "size": 2773411739
       },
-      "numFiles": 46,
-      "size": 2493258268
+      "numFiles": 48,
+      "size": 2773411739
     },
     {
       "id": "7dcc06b8-d882-49c3-977a-054a4318fbf2",
@@ -221,7 +221,7 @@
       "ctimeMs": 1742213347653,
       "birthtimeMs": 1742213347653,
       "addedAt": 1742213347662,
-      "updatedAt": 1768712408536,
+      "updatedAt": 1769835608555,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -249,16 +249,16 @@
         },
         "coverPath": "/podcasts/The ADULT TIME Podcast/cover.jpg",
         "tags": [],
-        "numEpisodes": 21,
+        "numEpisodes": 22,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712408339,
+        "lastEpisodeCheck": 1769835608230,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 1519305233
+        "size": 1582031449
       },
-      "numFiles": 22,
-      "size": 1519305233
+      "numFiles": 23,
+      "size": 1582031449
     },
     {
       "id": "3bc411c5-98ec-4feb-9d4b-19e9ac42beea",
@@ -273,7 +273,7 @@
       "ctimeMs": 1742213512773,
       "birthtimeMs": 1742213512773,
       "addedAt": 1742213512783,
-      "updatedAt": 1768712409637,
+      "updatedAt": 1769835609647,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -302,16 +302,16 @@
         },
         "coverPath": "/podcasts/Software Engineering Daily/cover.jpg",
         "tags": [],
-        "numEpisodes": 86,
+        "numEpisodes": 90,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712409322,
+        "lastEpisodeCheck": 1769835609488,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 4324459816
+        "size": 4617995619
       },
-      "numFiles": 87,
-      "size": 4324459816
+      "numFiles": 91,
+      "size": 4617995619
     },
     {
       "id": "833547d9-5ce7-420d-bd6a-f53f34839ee5",
@@ -326,7 +326,7 @@
       "ctimeMs": 1742213537945,
       "birthtimeMs": 1742213537945,
       "addedAt": 1742213537952,
-      "updatedAt": 1768712410921,
+      "updatedAt": 1769835610284,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -356,7 +356,7 @@
         "numEpisodes": 3,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712410526,
+        "lastEpisodeCheck": 1769835610072,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
         "size": 0
@@ -377,7 +377,7 @@
       "ctimeMs": 1742213571801,
       "birthtimeMs": 1742213571801,
       "addedAt": 1742213571809,
-      "updatedAt": 1768712412052,
+      "updatedAt": 1769835611374,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -408,7 +408,7 @@
         "numEpisodes": 0,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712411667,
+        "lastEpisodeCheck": 1769835611147,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
         "size": 0
@@ -429,7 +429,7 @@
       "ctimeMs": 1742213601977,
       "birthtimeMs": 1742213601977,
       "addedAt": 1742213601986,
-      "updatedAt": 1768712413374,
+      "updatedAt": 1769835612969,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -456,16 +456,16 @@
         },
         "coverPath": "/podcasts/This Past Weekend w Theo Von/cover.jpg",
         "tags": [],
-        "numEpisodes": 70,
+        "numEpisodes": 72,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712412904,
+        "lastEpisodeCheck": 1769835612334,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 9572461602
+        "size": 9970390524
       },
-      "numFiles": 71,
-      "size": 9572461602
+      "numFiles": 73,
+      "size": 9970390524
     },
     {
       "id": "26f9c373-3c81-45f5-b8d5-b3769d8a0a64",
@@ -480,7 +480,7 @@
       "ctimeMs": 1742213626453,
       "birthtimeMs": 1742213626453,
       "addedAt": 1742213626461,
-      "updatedAt": 1768712414486,
+      "updatedAt": 1769835615166,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -510,7 +510,7 @@
         "numEpisodes": 28,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712414260,
+        "lastEpisodeCheck": 1769835613755,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
         "size": 2706297615
@@ -531,7 +531,7 @@
       "ctimeMs": 1742213652845,
       "birthtimeMs": 1742213652845,
       "addedAt": 1742213652854,
-      "updatedAt": 1768712415867,
+      "updatedAt": 1769835615959,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -560,16 +560,16 @@
         },
         "coverPath": "/podcasts/Thoughtworks Technology Podcast/cover.jpg",
         "tags": [],
-        "numEpisodes": 22,
+        "numEpisodes": 23,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712415220,
+        "lastEpisodeCheck": 1769835615801,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 1155928271
+        "size": 1210610314
       },
-      "numFiles": 23,
-      "size": 1155928271
+      "numFiles": 24,
+      "size": 1210610314
     },
     {
       "id": "c53a076a-3cba-46a6-953d-f89963c8889a",
@@ -584,7 +584,7 @@
       "ctimeMs": 1742213696009,
       "birthtimeMs": 1742213696009,
       "addedAt": 1742213696017,
-      "updatedAt": 1768712424038,
+      "updatedAt": 1769835616649,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -615,7 +615,7 @@
         "numEpisodes": 3,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712423840,
+        "lastEpisodeCheck": 1769835616514,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
         "size": 75154412
@@ -636,7 +636,7 @@
       "ctimeMs": 1742224461276,
       "birthtimeMs": 1742224461276,
       "addedAt": 1742224461284,
-      "updatedAt": 1768712424550,
+      "updatedAt": 1769835617283,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -663,16 +663,16 @@
         },
         "coverPath": "/podcasts/Fallthrough/cover.jpg",
         "tags": [],
-        "numEpisodes": 58,
+        "numEpisodes": 59,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712424356,
+        "lastEpisodeCheck": 1769835616973,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 5061005976
+        "size": 5112087286
       },
-      "numFiles": 59,
-      "size": 5061005976
+      "numFiles": 60,
+      "size": 5112087286
     },
     {
       "id": "21baf71d-e4da-4989-9c24-a19064b10b15",
@@ -687,7 +687,7 @@
       "ctimeMs": 1742665446181,
       "birthtimeMs": 1742665446181,
       "addedAt": 1742665446228,
-      "updatedAt": 1768712425174,
+      "updatedAt": 1769835618096,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -719,7 +719,7 @@
         "numEpisodes": 6,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712425037,
+        "lastEpisodeCheck": 1769835617910,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
         "size": 343046655
@@ -740,7 +740,7 @@
       "ctimeMs": 1742736719698,
       "birthtimeMs": 1742736719698,
       "addedAt": 1742736719761,
-      "updatedAt": 1768712426508,
+      "updatedAt": 1769835622958,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -771,7 +771,7 @@
         "numEpisodes": 29,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712426360,
+        "lastEpisodeCheck": 1769835622799,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
         "size": 4696126369
@@ -792,7 +792,7 @@
       "ctimeMs": 1742736865846,
       "birthtimeMs": 1742736865846,
       "addedAt": 1742736865851,
-      "updatedAt": 1768712427853,
+      "updatedAt": 1769835624010,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -820,16 +820,16 @@
         },
         "coverPath": "/podcasts/Embedded/cover.jpg",
         "tags": [],
-        "numEpisodes": 22,
+        "numEpisodes": 23,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712427668,
+        "lastEpisodeCheck": 1769835623702,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 1107675166
+        "size": 1155804239
       },
-      "numFiles": 23,
-      "size": 1107675166
+      "numFiles": 24,
+      "size": 1155804239
     },
     {
       "id": "edb32335-83f3-4035-85f8-7acf2d846829",
@@ -844,7 +844,7 @@
       "ctimeMs": 1742736928046,
       "birthtimeMs": 1742736928046,
       "addedAt": 1742736928052,
-      "updatedAt": 1768712428621,
+      "updatedAt": 1769835625077,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -871,16 +871,16 @@
         },
         "coverPath": "/podcasts/PodRocket - A web development podcast from LogRocket/cover.jpg",
         "tags": [],
-        "numEpisodes": 51,
+        "numEpisodes": 53,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712428460,
+        "lastEpisodeCheck": 1769835624935,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 3985887071
+        "size": 4142894606
       },
-      "numFiles": 52,
-      "size": 3985887071
+      "numFiles": 54,
+      "size": 4142894606
     },
     {
       "id": "446cff0c-67ad-4134-a841-2366e6e82a9f",
@@ -895,7 +895,7 @@
       "ctimeMs": 1742757592810,
       "birthtimeMs": 1742757592810,
       "addedAt": 1742757592820,
-      "updatedAt": 1768712429144,
+      "updatedAt": 1769835625602,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -926,7 +926,7 @@
         "numEpisodes": 8,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712429004,
+        "lastEpisodeCheck": 1769835625482,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
         "size": 1432676063
@@ -947,7 +947,7 @@
       "ctimeMs": 1742996346940,
       "birthtimeMs": 1742996346940,
       "addedAt": 1742996347002,
-      "updatedAt": 1768712429766,
+      "updatedAt": 1769835626270,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -976,16 +976,16 @@
         },
         "coverPath": "/podcasts/The Engineering Leadership Podcast/cover.jpg",
         "tags": [],
-        "numEpisodes": 37,
+        "numEpisodes": 39,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712429609,
+        "lastEpisodeCheck": 1769835626138,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 1488612068
+        "size": 1570135239
       },
-      "numFiles": 38,
-      "size": 1488612068
+      "numFiles": 40,
+      "size": 1570135239
     },
     {
       "id": "50864492-f0b5-4af2-9c81-71c1b2b03320",
@@ -1000,7 +1000,7 @@
       "ctimeMs": 1742996482556,
       "birthtimeMs": 1742996482556,
       "addedAt": 1742996482564,
-      "updatedAt": 1768712431501,
+      "updatedAt": 1769835627960,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1029,16 +1029,16 @@
         },
         "coverPath": "/podcasts/The Art of Manliness/cover.jpg",
         "tags": [],
-        "numEpisodes": 43,
+        "numEpisodes": 45,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712431251,
+        "lastEpisodeCheck": 1769835627820,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 2344255593
+        "size": 2459918152
       },
-      "numFiles": 44,
-      "size": 2344255593
+      "numFiles": 46,
+      "size": 2459918152
     },
     {
       "id": "6867a280-c5c1-4c79-b8b0-9282a99acd89",
@@ -1053,7 +1053,7 @@
       "ctimeMs": 1742996628483,
       "birthtimeMs": 1742996628483,
       "addedAt": 1742996628495,
-      "updatedAt": 1768712432246,
+      "updatedAt": 1769835630797,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1080,16 +1080,16 @@
         },
         "coverPath": "/podcasts/Dev Interrupted/cover.jpg",
         "tags": [],
-        "numEpisodes": 43,
+        "numEpisodes": 47,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712432070,
+        "lastEpisodeCheck": 1769835628603,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 1573596538
+        "size": 1668874839
       },
-      "numFiles": 44,
-      "size": 1573596538
+      "numFiles": 48,
+      "size": 1668874839
     },
     {
       "id": "a5710fed-4c4c-46ba-90c8-1a4d7ce3dd08",
@@ -1104,7 +1104,7 @@
       "ctimeMs": 1744375103116,
       "birthtimeMs": 1744375103116,
       "addedAt": 1744375103456,
-      "updatedAt": 1768737600926,
+      "updatedAt": 1769889600663,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1134,7 +1134,7 @@
         "numEpisodes": 5,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 * * * *",
-        "lastEpisodeCheck": 1768737600756,
+        "lastEpisodeCheck": 1769889600397,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
         "size": 1094166994
@@ -1155,7 +1155,7 @@
       "ctimeMs": 1745700593416,
       "birthtimeMs": 1745700593416,
       "addedAt": 1745700593440,
-      "updatedAt": 1768737601460,
+      "updatedAt": 1769889601175,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1185,7 +1185,7 @@
         "numEpisodes": 6,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 * * * *",
-        "lastEpisodeCheck": 1768737601316,
+        "lastEpisodeCheck": 1769889600994,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
         "size": 0
@@ -1206,7 +1206,7 @@
       "ctimeMs": 1745700723592,
       "birthtimeMs": 1745700723592,
       "addedAt": 1745700723616,
-      "updatedAt": 1768737601928,
+      "updatedAt": 1769889601698,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1234,16 +1234,16 @@
         },
         "coverPath": "/podcasts/Fork Around And Find Out/cover.jpg",
         "tags": [],
-        "numEpisodes": 26,
+        "numEpisodes": 27,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 * * * *",
-        "lastEpisodeCheck": 1768737601757,
+        "lastEpisodeCheck": 1769889601496,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 2395802232
+        "size": 2453913001
       },
-      "numFiles": 27,
-      "size": 2395802232
+      "numFiles": 28,
+      "size": 2453913001
     },
     {
       "id": "3c72c65f-072e-44b5-bef7-2587b7e61b78",
@@ -1258,7 +1258,7 @@
       "ctimeMs": 1748790009926,
       "birthtimeMs": 1748790009510,
       "addedAt": 1748790009526,
-      "updatedAt": 1768712433269,
+      "updatedAt": 1769835629861,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1287,16 +1287,16 @@
         },
         "coverPath": "/podcasts/LINUX Unplugged/cover.jpg",
         "tags": [],
-        "numEpisodes": 38,
+        "numEpisodes": 40,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712433121,
+        "lastEpisodeCheck": 1769835629695,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 2748797727
+        "size": 2870902656
       },
-      "numFiles": 39,
-      "size": 2748797727
+      "numFiles": 41,
+      "size": 2870902656
     },
     {
       "id": "3ce720e2-7d77-4d2e-afbe-7a5b908bc7a7",
@@ -1311,7 +1311,7 @@
       "ctimeMs": 1748791519948,
       "birthtimeMs": 1748791519564,
       "addedAt": 1748791519572,
-      "updatedAt": 1768712433936,
+      "updatedAt": 1769835630307,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1342,7 +1342,7 @@
         "numEpisodes": 5,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712433677,
+        "lastEpisodeCheck": 1769835630127,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
         "size": 297071244
@@ -1363,7 +1363,7 @@
       "ctimeMs": 1748853252574,
       "birthtimeMs": 1748853252182,
       "addedAt": 1748853252191,
-      "updatedAt": 1768712434426,
+      "updatedAt": 1769835630997,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1390,16 +1390,16 @@
         },
         "coverPath": "/podcasts/The Launch 🚀/cover.jpg",
         "tags": [],
-        "numEpisodes": 31,
+        "numEpisodes": 33,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712434283,
+        "lastEpisodeCheck": 1769835630732,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 2722681678
+        "size": 2848405794
       },
-      "numFiles": 32,
-      "size": 2722681678
+      "numFiles": 34,
+      "size": 2848405794
     },
     {
       "id": "6eb06a95-2985-45f4-b5ef-a8f5062a8a59",
@@ -1414,7 +1414,7 @@
       "ctimeMs": 1748853537974,
       "birthtimeMs": 1748853537610,
       "addedAt": 1748853537616,
-      "updatedAt": 1768712434983,
+      "updatedAt": 1769835632065,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1444,7 +1444,7 @@
         "numEpisodes": 4,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712434845,
+        "lastEpisodeCheck": 1769835631658,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
         "size": 124914520
@@ -1465,7 +1465,7 @@
       "ctimeMs": 1749226136041,
       "birthtimeMs": 1749226135653,
       "addedAt": 1749226135686,
-      "updatedAt": 1768712435428,
+      "updatedAt": 1769835632588,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1492,16 +1492,16 @@
         },
         "coverPath": "/podcasts/Dialectic/cover.jpg",
         "tags": [],
-        "numEpisodes": 22,
+        "numEpisodes": 24,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712435285,
+        "lastEpisodeCheck": 1769835632449,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 2831731362
+        "size": 3079982770
       },
-      "numFiles": 23,
-      "size": 2831731362
+      "numFiles": 25,
+      "size": 3079982770
     },
     {
       "id": "c221b22b-4a24-4b55-947b-a41ce1c65e11",
@@ -1516,7 +1516,7 @@
       "ctimeMs": 1749257724452,
       "birthtimeMs": 1749257724040,
       "addedAt": 1749257724075,
-      "updatedAt": 1768737602614,
+      "updatedAt": 1769889602510,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1543,16 +1543,16 @@
         },
         "coverPath": "/podcasts/Front-End Fire/cover.jpg",
         "tags": [],
-        "numEpisodes": 30,
+        "numEpisodes": 32,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 * * * *",
-        "lastEpisodeCheck": 1768737602451,
+        "lastEpisodeCheck": 1769889602373,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 1021922702
+        "size": 1092559095
       },
-      "numFiles": 31,
-      "size": 1021922702
+      "numFiles": 33,
+      "size": 1092559095
     },
     {
       "id": "efb7002f-5a9e-4bb7-a65c-ba3a8fc744df",
@@ -1567,7 +1567,7 @@
       "ctimeMs": 1750958629515,
       "birthtimeMs": 1750958629119,
       "addedAt": 1750958629142,
-      "updatedAt": 1768737603618,
+      "updatedAt": 1769889603411,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1595,16 +1595,16 @@
         },
         "coverPath": "/podcasts/Modern Wisdom/cover.jpg",
         "tags": [],
-        "numEpisodes": 96,
+        "numEpisodes": 102,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 * * * *",
-        "lastEpisodeCheck": 1768737603477,
+        "lastEpisodeCheck": 1769889603274,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 16034512321
+        "size": 17616753629
       },
-      "numFiles": 97,
-      "size": 16034512321
+      "numFiles": 103,
+      "size": 17616753629
     },
     {
       "id": "b9ff5100-8a5a-46f2-8aa5-8b0007015bc7",
@@ -1619,7 +1619,7 @@
       "ctimeMs": 1754061823814,
       "birthtimeMs": 1754061823410,
       "addedAt": 1754061823457,
-      "updatedAt": 1768737604241,
+      "updatedAt": 1769889604101,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1647,16 +1647,16 @@
         },
         "coverPath": "/podcasts/Hanselminutes with Scott Hanselman/cover.jpg",
         "tags": [],
-        "numEpisodes": 31,
+        "numEpisodes": 32,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 * * * *",
-        "lastEpisodeCheck": 1768737604079,
+        "lastEpisodeCheck": 1769889603967,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 1038871318
+        "size": 1070170060
       },
-      "numFiles": 32,
-      "size": 1038871318
+      "numFiles": 33,
+      "size": 1070170060
     },
     {
       "id": "33b93c47-4dfa-4815-9999-20d79bd104c8",
@@ -1671,7 +1671,7 @@
       "ctimeMs": 1755798349407,
       "birthtimeMs": 1755798348959,
       "addedAt": 1755798348999,
-      "updatedAt": 1768737604643,
+      "updatedAt": 1769889604568,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1700,16 +1700,16 @@
         },
         "coverPath": "/podcasts/All Birdies No Bogeys Podcast/cover.jpg",
         "tags": [],
-        "numEpisodes": 24,
+        "numEpisodes": 26,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 * * * *",
-        "lastEpisodeCheck": 1768737604509,
+        "lastEpisodeCheck": 1769889604434,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 1941520775
+        "size": 2084081613
       },
-      "numFiles": 25,
-      "size": 1941520775
+      "numFiles": 27,
+      "size": 2084081613
     },
     {
       "id": "f90ffb29-a6e9-4a04-8b29-3722a5fa73c6",
@@ -1724,7 +1724,7 @@
       "ctimeMs": 1756489500749,
       "birthtimeMs": 1756489500361,
       "addedAt": 1756489500379,
-      "updatedAt": 1768737605198,
+      "updatedAt": 1769889605080,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1756,7 +1756,7 @@
         "numEpisodes": 11,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 * * * *",
-        "lastEpisodeCheck": 1768737605004,
+        "lastEpisodeCheck": 1769889604923,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
         "size": 783038069
@@ -1777,7 +1777,7 @@
       "ctimeMs": 1756979396368,
       "birthtimeMs": 1756979384760,
       "addedAt": 1756979384809,
-      "updatedAt": 1768737605855,
+      "updatedAt": 1769889605725,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1806,7 +1806,7 @@
         "numEpisodes": 5,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 * * * *",
-        "lastEpisodeCheck": 1768737605678,
+        "lastEpisodeCheck": 1769889605562,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
         "size": 311267029
@@ -1827,7 +1827,7 @@
       "ctimeMs": 1757684236901,
       "birthtimeMs": 1757684236453,
       "addedAt": 1757684236483,
-      "updatedAt": 1768737607145,
+      "updatedAt": 1769889607659,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1854,16 +1854,16 @@
         },
         "coverPath": "/podcasts/Syntax - Tasty Web Development Treats/cover.jpg",
         "tags": [],
-        "numEpisodes": 38,
+        "numEpisodes": 42,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 * * * *",
-        "lastEpisodeCheck": 1768737606943,
+        "lastEpisodeCheck": 1769889607525,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 2967205866
+        "size": 3399537934
       },
-      "numFiles": 39,
-      "size": 2967205866
+      "numFiles": 43,
+      "size": 3399537934
     },
     {
       "id": "4153b4cd-9aef-4a9b-b6f1-13863299e08a",
@@ -1878,7 +1878,7 @@
       "ctimeMs": 1765466794704,
       "birthtimeMs": 0,
       "addedAt": 1765466794077,
-      "updatedAt": 1768712436096,
+      "updatedAt": 1769835633256,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1905,16 +1905,16 @@
         },
         "coverPath": "/podcasts/Tech Lead Journal/cover.jpg",
         "tags": [],
-        "numEpisodes": 3,
+        "numEpisodes": 5,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 0 * * *",
-        "lastEpisodeCheck": 1768712435936,
+        "lastEpisodeCheck": 1769835633096,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
-        "size": 194010754
+        "size": 345417456
       },
-      "numFiles": 4,
-      "size": 194010754
+      "numFiles": 6,
+      "size": 345417456
     },
     {
       "id": "aa2d0870-f215-4f92-b7c9-72a8a604e11d",
@@ -1929,7 +1929,7 @@
       "ctimeMs": 1767025489949,
       "birthtimeMs": 0,
       "addedAt": 1767025489231,
-      "updatedAt": 1768737607724,
+      "updatedAt": 1769889608251,
       "isMissing": false,
       "isInvalid": false,
       "mediaType": "podcast",
@@ -1961,7 +1961,7 @@
         "numEpisodes": 5,
         "autoDownloadEpisodes": true,
         "autoDownloadSchedule": "0 * * * *",
-        "lastEpisodeCheck": 1768737607484,
+        "lastEpisodeCheck": 1769889608066,
         "maxEpisodesToKeep": 0,
         "maxNewEpisodesToDownload": 3,
         "size": 199748985
