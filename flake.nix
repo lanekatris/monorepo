@@ -11,6 +11,12 @@
       pkgs = import nixpkgs { inherit system; };
     in
     {
+      apps.${system}.default = {
+        type = "app";
+        program = "${pkgs.writeShellScriptBin "my-tool" ''
+          ${./hello.sh}
+        ''}/bin/my-tool";
+      };
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [ pkgs.go 
 
