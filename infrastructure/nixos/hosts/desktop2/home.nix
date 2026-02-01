@@ -1,57 +1,52 @@
-{config,pkgs,...}:
+{ config, pkgs, ... }:
 
 {
   imports = [
   ];
-                 
-    home.username = "lane";
-    home.homeDirectory = "/home/lane";
-    home.stateVersion = "25.11";
-    programs.bash = {
-        enable = true;
-        shellAliases = {
-            btw = "echo ftw brother flake style";
-          };
-        bashrcExtra = ''
-          eval "$(direnv hook bash)"
-          export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
-        '';
-      };
-    programs.direnv = {
-        enable = true;
-        nix-direnv.enable = true;
-      };
 
-      home.packages = with pkgs; [
+  home.username = "lane";
+  home.homeDirectory = "/home/lane";
+  home.stateVersion = "25.11";
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+      btw = "echo ftw brother flake style";
+    };
+    bashrcExtra = ''
+      eval "$(direnv hook bash)"
+      export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
+    '';
+  };
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 
-      tree          
-      screenfetch
-      
-  htop
-obsidian
-spotify
-git
-ghostty
-google-chrome
+  home.packages = with pkgs; [
 
-discord
+    tree
+    screenfetch
 
-pkgs.jetbrains.datagrip
+    htop
+    obsidian
+    spotify
+    git
+    ghostty
+    google-chrome
 
+    discord
 
-# ai
-cursor-cli
+    pkgs.jetbrains.datagrip
 
+    # ai
+    cursor-cli
 
-# bambu-studio
-pkgs.jetbrains.webstorm
+    # bambu-studio <== this comes from flatpak
+    pkgs.jetbrains.webstorm
 
-
-#neovim
-
-pkgs.gnomeExtensions.pop-shell
-#    pkgs.gnomeExtensions.pop-shell-shortcuts
-#pkgs.gnomeExtensionsApp
+    pkgs.gnomeExtensions.pop-shell
+    #    pkgs.gnomeExtensions.pop-shell-shortcuts
+    #pkgs.gnomeExtensionsApp
     gnome-tweaks
-      ];
-  }
+  ];
+}

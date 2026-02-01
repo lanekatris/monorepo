@@ -1,40 +1,39 @@
 { pkgs, ... }:
 {
   config.vim = {
+    globals = {
+      leader = " ";
+    };
 
     extraPackages = with pkgs; [
-      alejandra
+      alejandra # nix code formatter
       lazygit
     ];
 
     theme = {
       enable = true;
-      name = "tokyonight";
-      style = "night";
+      name = "gruvbox";
+      style = "light";
     };
+
     telescope.enable = true; # fuzzy finder
-    globals = {
-      leader = " ";
+    autocomplete.nvim-cmp.enable = true; # completion engine, not too familiar
+    filetree.neo-tree.enable = true;
+    binds = {
+      whichKey = {
+        enable = true;
+      };
     };
 
-    # plugins = {
-    #   neo-tree = {
-    #     enable = true;
-    #   };
-    # };
-
-    # terminal.enable = true;
-    # lazygit.enable = true;
     terminal = {
-
       toggleterm = {
         enable = true;
-        # mappings.open = "[[<C-_>]]";
         lazygit = {
           enable = true;
         };
       };
     };
+
     languages = {
       enableLSP = true;
       enableTreesitter = true;
@@ -112,24 +111,6 @@
         action = "<C-w>j";
         desc = "Move from code buffer to terminal";
       }
-      #                        {
-      #   mode = "n";
-      #   key = "<C-_>";
-      #   action = ":ToggleTerm<CR>";
-      #   desc = "Toggle terminal";
-      # }
     ];
-
-    filetree.neo-tree.enable = true;
-
-    binds = {
-
-      whichKey = {
-        enable = true;
-
-        # Optional: LazyVim-like tuning
-      };
-    };
-
   };
 }
