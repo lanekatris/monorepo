@@ -39,11 +39,11 @@
         nvf.nixosModules.default
 
         # Put nvf-built Neovim on PATH
-        ({ pkgs, ... }: {
-          environment.systemPackages = [
-            myNeovim
-          ];
-        })
+        # ({ pkgs, ... }: {
+        #   environment.systemPackages = [
+        #     myNeovim
+        #   ];
+        # })
 
         # Home Manager
         home-manager.nixosModules.home-manager {
@@ -54,6 +54,11 @@
             backupFileExtension = "backup";
           };
         }
+
+
+                                        {
+                                                  environment.systemPackages = [myNeovim];
+                                        }
       ];
     };
   };
