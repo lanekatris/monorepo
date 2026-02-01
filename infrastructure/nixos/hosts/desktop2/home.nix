@@ -2,7 +2,6 @@
 
 {
   imports = [
-  ./neovim.nix
   ];
                  
     home.username = "lane";
@@ -28,7 +27,6 @@
       tree          
       screenfetch
       
-	neovim         
   htop
 obsidian
 spotify
@@ -49,7 +47,7 @@ cursor-cli
 pkgs.jetbrains.webstorm
 
 
-
+#neovim
 
 pkgs.gnomeExtensions.pop-shell
 #    pkgs.gnomeExtensions.pop-shell-shortcuts
