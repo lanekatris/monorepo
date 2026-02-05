@@ -10,3 +10,9 @@ sudo ln -s /home/lane/monorepo/infrastructure/nixos/hosts/desktop2/hardware-conf
 sudo nixos-rebuild switch
 
 ```
+
+# Neovim
+
+```
+nix run .
+```

@@ -8,12 +8,13 @@
     extraPackages = with pkgs; [
       alejandra # nix code formatter
       lazygit
+      ripgrep
     ];
 
     theme = {
       enable = true;
-      name = "gruvbox";
-      style = "light";
+      name = "tokyonight";
+      style = "night";
     };
 
     telescope.enable = true; # fuzzy finder
@@ -24,6 +25,7 @@
         enable = true;
       };
     };
+
 
     terminal = {
       toggleterm = {
@@ -39,6 +41,11 @@
       enableTreesitter = true;
 
       nix.enable = true;
+json = {
+                                enable = true;
+                                format.enable = true;
+                                #                                format.type = "prettier";
+                        };
     };
 
     lsp = {
@@ -111,6 +118,41 @@
         action = "<C-w>j";
         desc = "Move from code buffer to terminal";
       }
+
+                        {
+    mode = "n";
+    key = "qq";
+    action = ":qa<CR>";
+    desc = "Quit all";
+  }
+
+
+
+                          # Search group
+  {
+    mode = "n";
+    key = "<leader>sg";
+    action = ":Telescope live_grep<CR>";
+    desc = "Grep (project)";
+  }
+  {
+    mode = "n";
+    key = "<leader>sf";
+    action = ":Telescope find_files<CR>";
+    desc = "Find files";
+  }
+  {
+    mode = "n";
+    key = "<leader>sb";
+    action = ":Telescope buffers<CR>";
+    desc = "Buffers";
+  }
+  {
+    mode = "n";
+    key = "<leader>sh";
+    action = ":Telescope help_tags<CR>";
+    desc = "Help";
+  }
     ];
   };
 }
