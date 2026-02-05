@@ -42,7 +42,7 @@ var videoCmd = &cobra.Command{
 		// If directory is empty, copy files from GoPro directory
 		if len(files) == 0 {
 			// goproPath := "/run/media/lane/disk/DCIM/101GOPRO" // hero 5
-			goproPath := "/run/media/lane/disk/DCIM/101GOPRO" // hero 5
+			goproPath := "/run/media/lane/gopro-sd-1/DCIM/101GOPRO" // hero 5
 			log.Info("Target directory empty, copying...")
 
 			// Check if GoPro directory exists
