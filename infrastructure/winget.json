@@ -1,34 +1,13 @@
-{
-	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
-	"CreationDate" : "2025-12-12T06:38:18.467-00:00",
-	"Sources" : 
-	[
-		{
-			"Packages" : 
-			[
-				
-				{
-					"PackageIdentifier" : "Valve.Steam"
-				},
-{"PackageIdentifier": "Obsidian.Obsidian"},
-{"PackageIdentifier": "Tailscale.Tailscale"},
-{"PackageIdentifier": "wez.wezterm"},
-{"PackageIdentifier": "Citrix.Workspace"},
-{"PackageIdentifier": "Discord.Discord"},
-{"PackageIdentifier": "AgileBits.1Password"},
-{"PackageIdentifier": "Git.Git"},
-{"PackageIdentifier": "Neovim.Neovim"}, 
-{"PackageIdentifier": "BurntSushi.ripgrep.GNU"},
-{"PackageIdentifier":   "JesseDuffield.lazygit"},
-{"PackageIdentifier":  "sharkdp.fd"},
-{"PackageIdentifier":  "OpenJS.NodeJS"},
-{"PackageIdentifier":  "MartinStorsjo.LLVM-MinGW.MSVCRT"},
+MSVCRT"},
 {"PackageIdentifier":  "Spotify.Spotify"},
 
 {"PackageIdentifier":  "Brave.Brave"},
 {"PackageIdentifier":  "Ollama.Ollama"},
 {"PackageIdentifier":  "GnuWin32.Make"}
-
+winget install -e --id JetBrains.Toolbox
+winget install -e --id Bambulab.Bambustudio
+winget install -e --id Alacritty.Alacritty
+winget install -e --id DEVCOM.JetBrainsMonoNerdFont
 
 			],
 			"SourceDetails" : 
