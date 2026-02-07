@@ -14,10 +14,29 @@
     theme = {
       enable = true;
       name = "tokyonight";
-      style = "night";
+      style = "day";
     };
 
-    telescope.enable = true; # fuzzy finder
+
+telescope = {
+  enable = true;
+  extensions = [
+    {
+      name = "frecency";
+      # This is the crucial part you were missing:
+      packages = [ pkgs.vimPlugins.telescope-frecency-nvim ]; 
+      
+      # Optional: You can add configuration for the extension here
+      # setupOpts = {
+      #   show_scores = true;
+      #   auto_validate = true;
+      #   # db_root = "path/to/db"; 
+      # };
+    }
+  ];
+};
+
+    # telescope.enable = true; # fuzzy finder
     autocomplete.nvim-cmp.enable = true; # completion engine, not too familiar
     filetree.neo-tree.enable = true;
     binds = {
@@ -40,12 +59,13 @@
       enableLSP = true;
       enableTreesitter = true;
 
+                        go.enable = true;
       nix.enable = true;
-json = {
-                                enable = true;
-                                format.enable = true;
-                                #                                format.type = "prettier";
-                        };
+      json = {
+        enable = true;
+        format.enable = true;
+        #                                format.type = "prettier";
+      };
     };
 
     lsp = {
@@ -119,40 +139,45 @@ json = {
         desc = "Move from code buffer to terminal";
       }
 
-                        {
-    mode = "n";
-    key = "qq";
-    action = ":qa<CR>";
-    desc = "Quit all";
-  }
+      {
+        mode = "n";
+        key = "qq";
+        action = ":qa<CR>";
+        desc = "Quit all";
+      }
 
+      # Search group
+      {
+        mode = "n";
+        key = "<leader>sg";
+        action = ":Telescope live_grep<CR>";
+        desc = "Grep (project)";
+      }
+      {
+        mode = "n";
+        key = "<leader>sf";
+        action = ":Telescope find_files<CR>";
+        desc = "Find files";
+      }
+      {
+        mode = "n";
+        key = "<leader>sb";
+        action = ":Telescope buffers<CR>";
+        desc = "Buffers";
+      }
+      {
+        mode = "n";
+        key = "<leader>sh";
+        action = ":Telescope help_tags<CR>";
+        desc = "Help";
+      }
 
-
-                          # Search group
-  {
-    mode = "n";
-    key = "<leader>sg";
-    action = ":Telescope live_grep<CR>";
-    desc = "Grep (project)";
-  }
-  {
-    mode = "n";
-    key = "<leader>sf";
-    action = ":Telescope find_files<CR>";
-    desc = "Find files";
-  }
-  {
-    mode = "n";
-    key = "<leader>sb";
-    action = ":Telescope buffers<CR>";
-    desc = "Buffers";
-  }
-  {
-    mode = "n";
-    key = "<leader>sh";
-    action = ":Telescope help_tags<CR>";
-    desc = "Help";
-  }
+      {
+        mode = "n";
+        key = "<leader>b";
+        action = ":b#<CR>";
+        desc = "Previous buffer";
+      }
     ];
   };
 }
